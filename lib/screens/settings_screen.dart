@@ -140,12 +140,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (callback == null) {
       return;
     }
+    final NavigatorState navigator = Navigator.of(context);
+    navigator.push(
+      PageRouteBuilder<void>(
+        opaque: true,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (_, _, _) => const _LocaleSwitchLoadingScreen(),
+      ),
+    );
     try {
       await callback(code);
+      await Future.delayed(const Duration(milliseconds: 1200));
     } catch (error) {
       if (mounted) {
         _showError(error);
       }
+    } finally {
+      navigator.pop();
     }
   }
 
@@ -506,6 +518,29 @@ class _HeartEasterEggState extends State<_HeartEasterEgg> with SingleTickerProvi
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+/// Full-screen Material loader shown while the app language switches, so the
+/// UI text doesn't visibly jump-cut from one language to another. Blocks the
+/// back gesture/button so it can't be dismissed before the switch completes.
+class _LocaleSwitchLoadingScreen extends StatelessWidget {
+  const _LocaleSwitchLoadingScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            year2023: false,
+            strokeWidth: 6,
+            constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+          ),
+        ),
       ),
     );
   }

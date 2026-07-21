@@ -1,0 +1,1448 @@
+import 'quiz_data.dart';
+
+const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
+  'Esther#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'Why was Queen Vashti removed from her position?',
+      options: <String>[
+        'She refused to appear before the king and his guests',
+        'She plotted against the king',
+        'She fell ill',
+        'She left the palace',
+      ],
+      correctIndex: 0,
+      explanation: 'Her refusal leads to her disgrace (Esther 1).',
+    ),
+    QuizQuestion(
+      text: 'Who did Mordecai raise, and who became queen?',
+      options: <String>['Esther, his cousin', 'His daughter', 'His sister', 'A foreign slave'],
+      correctIndex: 0,
+      explanation: 'Esther is chosen as the new queen (Esther 2).',
+    ),
+    QuizQuestion(
+      text: 'Why did Haman want to exterminate all the Jews of the empire?',
+      options: <String>[
+        'Mordecai refused to bow down to him',
+        'The Jews owed him a debt',
+        'The king had ordered him to',
+        'A war had just broken out',
+      ],
+      correctIndex: 0,
+      explanation: 'Haman\'s anger turns into a genocidal plot (Esther 3).',
+    ),
+  ],
+  'Esther#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What famous words does Mordecai say to Esther to convince her to act?',
+      options: <String>[
+        '"Who knows but that it was for a time such as this..."',
+        '"Flee while there is still time"',
+        '"This is not our problem"',
+        '"The king will never listen to you"',
+      ],
+      correctIndex: 0,
+      explanation: 'This appeal moves Esther to intervene (Esther 4).',
+    ),
+    QuizQuestion(
+      text: 'What happened when the king could not sleep?',
+      options: <String>[
+        'He discovered that Mordecai had never been rewarded',
+        'He summoned Esther at once',
+        'He had Haman executed on the spot',
+        'He canceled his decree',
+      ],
+      correctIndex: 0,
+      explanation: 'This providential detail turns the situation around (Esther 6).',
+    ),
+    QuizQuestion(
+      text: 'How did Esther expose Haman\'s plot?',
+      options: <String>[
+        'At a second banquet, before the king',
+        'Through an anonymous letter',
+        'Publicly before the whole nation',
+        'Through a servant',
+      ],
+      correctIndex: 0,
+      explanation: 'Haman is exposed and executed (Esther 7).',
+    ),
+  ],
+  'Esther#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'How did the new decree counter Haman\'s decree?',
+      options: <String>[
+        'It allowed the Jews to defend themselves',
+        'It completely canceled the first decree',
+        'It exiled all the Persians',
+        'It changed nothing',
+      ],
+      correctIndex: 0,
+      explanation: 'An irrevocable decree had to be countered by another (Esther 8).',
+    ),
+    QuizQuestion(
+      text: 'What festival was established to commemorate this deliverance?',
+      options: <String>['Purim', 'Passover', 'Tabernacles', 'The Jubilee'],
+      correctIndex: 0,
+      explanation: 'Purim still celebrates this event today (Esther 9).',
+    ),
+    QuizQuestion(
+      text: 'What position did Mordecai eventually hold?',
+      options: <String>[
+        'A high position, second only to the king',
+        'He was exiled',
+        'He remained a simple official',
+        'He left Persia',
+      ],
+      correctIndex: 0,
+      explanation: 'Mordecai works for the good of his people (Esther 10).',
+    ),
+  ],
+  'Job#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What challenge does Satan raise with God concerning Job?',
+      options: <String>[
+        'Job would only serve God for personal gain',
+        'Job does not really exist',
+        'Job is already unfaithful',
+        'Job wants to abandon his family',
+      ],
+      correctIndex: 0,
+      explanation: 'Satan questions Job\'s motivation (Job 1).',
+    ),
+    QuizQuestion(
+      text: 'How did Job react after losing everything?',
+      options: <String>[
+        'He did not sin or accuse God of wrongdoing',
+        'He cursed God',
+        'He sought revenge',
+        'He abandoned his faith',
+      ],
+      correctIndex: 0,
+      explanation: 'His integrity remains intact despite the trial (Job 1).',
+    ),
+    QuizQuestion(
+      text: 'What does Job\'s wife advise after his illness?',
+      options: <String>[
+        'To curse God and die',
+        'To consult a doctor',
+        'To flee far from home',
+        'To wait patiently in silence',
+      ],
+      correctIndex: 0,
+      explanation: 'Job refuses this desperate advice (Job 2).',
+    ),
+  ],
+  'Job#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What is Bildad\'s main argument in his first speech?',
+      options: <String>[
+        'The wisdom of the ancestors proves that God is just',
+        'God does not exist',
+        'Job is innocent',
+        'Suffering has no cause',
+      ],
+      correctIndex: 0,
+      explanation: 'Bildad relies on tradition (Job 8).',
+    ),
+    QuizQuestion(
+      text: 'What does Job deeply long for in his reply to Bildad?',
+      options: <String>[
+        'A mediator between him and God',
+        'Money to pay his debts',
+        'Revenge against his friends',
+        'A new flock immediately',
+      ],
+      correctIndex: 0,
+      explanation: 'Job longs to plead his case fairly (Job 9).',
+    ),
+    QuizQuestion(
+      text: 'What does Zophar advise Job in his first speech?',
+      options: <String>[
+        'To repent of a hidden sin',
+        'To leave his family',
+        'To consult another wise man',
+        'To remain silent forever',
+      ],
+      correctIndex: 0,
+      explanation: 'Zophar assumes Job is hiding a fault (Job 11).',
+    ),
+  ],
+  'Job#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What famous statement does Job make despite his suffering?',
+      options: <String>[
+        '"I know that my redeemer is alive"',
+        '"God has abandoned me forever"',
+        '"Life has no meaning"',
+        '"I would rather die now"',
+      ],
+      correctIndex: 0,
+      explanation: 'This declaration of hope marks Job 19.',
+    ),
+    QuizQuestion(
+      text: 'What observation does Job make about the fate of the wicked?',
+      options: <String>[
+        'They often seem to prosper despite their conduct',
+        'They are always punished immediately',
+        'They do not really exist',
+        'They always end up poor',
+      ],
+      correctIndex: 0,
+      explanation: 'Job questions his friends\' simplistic theory (Job 21).',
+    ),
+    QuizQuestion(
+      text: 'How does Job describe the treatment he receives from his friends in these chapters?',
+      options: <String>[
+        'He feels abandoned and misunderstood by them',
+        'He thanks them warmly',
+        'He agrees with all their arguments',
+        'He does not mention them at all',
+      ],
+      correctIndex: 0,
+      explanation: 'Job expresses his distress at their lack of compassion (Job 16-17).',
+    ),
+  ],
+  'Job#3': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What exactly does Eliphaz accuse Job of in his third speech?',
+      options: <String>[
+        'Specific sins, such as oppressing the poor',
+        'Robbing a temple',
+        'Disowning his family',
+        'Lying to the king',
+      ],
+      correctIndex: 0,
+      explanation: 'Eliphaz\'s accusations grow more specific, without proof (Job 22).',
+    ),
+    QuizQuestion(
+      text: 'What does Job strongly desire in his reply?',
+      options: <String>[
+        'To present his case directly before God',
+        'To flee far from his family',
+        'To obtain wealth',
+        'To take revenge on his friends',
+      ],
+      correctIndex: 0,
+      explanation: 'Job seeks a fair hearing (Job 23).',
+    ),
+    QuizQuestion(
+      text: 'What central theme does Job develop in chapter 28?',
+      options: <String>[
+        'The incomparable value of wisdom',
+        'Mining for wealth',
+        'The geography of the desert',
+        'The laws of sacrifice',
+      ],
+      correctIndex: 0,
+      explanation: 'This poem celebrates wisdom, more precious than gold (Job 28).',
+    ),
+  ],
+  'Job#4': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Job recall when speaking of his past days?',
+      options: <String>[
+        'The respect and honor he once received',
+        'His humble origins',
+        'A life of constant war',
+        'His childhood abroad',
+      ],
+      correctIndex: 0,
+      explanation: 'Job contrasts his honored past with his current situation (Job 29).',
+    ),
+    QuizQuestion(
+      text: 'What does Job declare in his final oath of innocence?',
+      options: <String>[
+        'He affirms he committed none of the faults listed',
+        'He confesses to several sins',
+        'He refuses to answer',
+        'He accuses God directly',
+      ],
+      correctIndex: 0,
+      explanation: 'Job closes his defense with a sweeping oath (Job 31).',
+    ),
+    QuizQuestion(
+      text: 'Who is Elihu, who speaks after the three friends?',
+      options: <String>[
+        'A young man who considers himself wise',
+        'An angel sent by God',
+        'A fourth, older friend',
+        'Job\'s son',
+      ],
+      correctIndex: 0,
+      explanation: 'Elihu steps in because the elders have not convinced Job (Job 32).',
+    ),
+  ],
+  'Job#5': <QuizQuestion>[
+    QuizQuestion(
+      text: 'Where does Jehovah finally speak to Job from?',
+      options: <String>[
+        'Out of a windstorm',
+        'A dream',
+        'A visible angel',
+        'He never answered',
+      ],
+      correctIndex: 0,
+      explanation: 'God finally answers, but with questions (Job 38).',
+    ),
+    QuizQuestion(
+      text: 'What do Jehovah\'s questions to Job mainly concern?',
+      options: <String>[
+        'Creation and mastery over the natural world',
+        'Job\'s hidden sins',
+        'The politics of nations',
+        'Temple rituals',
+      ],
+      correctIndex: 0,
+      explanation: 'God shows the vastness of his creative wisdom (Job 38-41).',
+    ),
+    QuizQuestion(
+      text: 'How does Job\'s story conclude?',
+      options: <String>[
+        'Job humbly repents, and God restores double his possessions',
+        'Job dies in poverty',
+        'Job curses God to the end',
+        'His friends are rewarded in his place',
+      ],
+      correctIndex: 0,
+      explanation: 'Jehovah blesses Job more than before (Job 42).',
+    ),
+  ],
+  'Psalms#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Psalm 1 compare the happy man who meditates on God\'s law to?',
+      options: <String>[
+        'A tree planted by streams of water',
+        'A solid rock',
+        'A bird in flight',
+        'A lit lamp',
+      ],
+      correctIndex: 0,
+      explanation: 'The image of the fruitful tree opens the book (Psalm 1).',
+    ),
+    QuizQuestion(
+      text: 'What does Psalm 19 celebrate in its first part?',
+      options: <String>[
+        'The glory of God displayed in the heavens',
+        'A king\'s victory',
+        'The building of the temple',
+        'A battle won',
+      ],
+      correctIndex: 0,
+      explanation: '"The heavens declare the glory of God" (Psalm 19:1).',
+    ),
+    QuizQuestion(
+      text: 'What question does Psalm 8 ask when faced with the vastness of creation?',
+      options: <String>[
+        'What is man that you remember him?',
+        'Why is the sea so vast?',
+        'Where is the garden of Eden located?',
+        'How many stars exist?',
+      ],
+      correctIndex: 0,
+      explanation: 'The psalmist marvels at the place given to man (Psalm 8:4).',
+    ),
+  ],
+  'Psalms#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'How does Psalm 23 describe Jehovah?',
+      options: <String>[
+        'As a shepherd who cares for his sheep',
+        'As a stern judge',
+        'As a distant king',
+        'As a vengeful warrior',
+      ],
+      correctIndex: 0,
+      explanation: '"Jehovah is my shepherd" (Psalm 23:1).',
+    ),
+    QuizQuestion(
+      text: 'What prophetic words from Psalm 22 did Jesus quote on the torture stake?',
+      options: <String>[
+        '"My God, my God, why have you forsaken me?"',
+        '"I have come to judge"',
+        '"Behold my servant"',
+        '"The kingdom is near"',
+      ],
+      correctIndex: 0,
+      explanation: 'This quotation links this psalm to Christ\'s suffering (Psalm 22:1).',
+    ),
+    QuizQuestion(
+      text: 'What does Psalm 34 declare about Jehovah\'s goodness?',
+      options: <String>[
+        'Taste and see that Jehovah is good',
+        'His goodness remains hidden',
+        'It concerns only the priests',
+        'It is limited to Israel',
+      ],
+      correctIndex: 0,
+      explanation: 'An invitation to experience God\'s goodness (Psalm 34:8).',
+    ),
+  ],
+  'Psalms#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What moving prayer did David compose after his sin with Bathsheba?',
+      options: <String>[
+        'Psalm 51, asking for a pure heart',
+        'A song of military victory',
+        'A prophecy about Babylon',
+        'A coronation song',
+      ],
+      correctIndex: 0,
+      explanation: '"Create in me a pure heart, O God" (Psalm 51:10).',
+    ),
+    QuizQuestion(
+      text: 'What does the psalmist compare his deep longing for God to in Psalm 42?',
+      options: <String>[
+        'A deer panting for streams of water',
+        'A hungry lion',
+        'A caged bird',
+        'A hurried merchant',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of intense spiritual thirst (Psalm 42:1).',
+    ),
+    QuizQuestion(
+      text: 'What central statement does Psalm 46 make?',
+      options: <String>[
+        'God is our refuge and strength',
+        'The nations will always live in peace',
+        'The temple will never be destroyed',
+        'The king is our only hope',
+      ],
+      correctIndex: 0,
+      explanation: '"God is our refuge and strength" (Psalm 46:1).',
+    ),
+  ],
+  'Psalms#3': <QuizQuestion>[
+    QuizQuestion(
+      text: 'For whom is Psalm 72 a prayer of blessing concerning a just and prosperous reign?',
+      options: <String>[
+        'For the king (Solomon, and prophetically the Messiah)',
+        'For the priests alone',
+        'For the enemy nations',
+        'For the prophets',
+      ],
+      correctIndex: 0,
+      explanation: 'This messianic psalm describes a lasting reign of peace (Psalm 72).',
+    ),
+    QuizQuestion(
+      text: 'What dilemma troubles Asaph in Psalm 73?',
+      options: <String>[
+        'The apparent prosperity of the wicked',
+        'The poverty of the temple',
+        'The lack of rain',
+        'The silence of the prophets',
+      ],
+      correctIndex: 0,
+      explanation: 'Asaph resolves this trouble by entering God\'s sanctuary (Psalm 73:17).',
+    ),
+    QuizQuestion(
+      text: 'What image describes God\'s powerful march in Psalm 68?',
+      options: <String>[
+        'He rides through the desert for his people',
+        'He remains permanently hidden',
+        'He sails the seas only',
+        'He fights alone without intervening',
+      ],
+      correctIndex: 0,
+      explanation: 'Poetic language of divine power (Psalm 68).',
+    ),
+  ],
+  'Psalms#4': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Moses ask God in Psalm 90 concerning the shortness of life?',
+      options: <String>[
+        'To teach us to count our days wisely',
+        'To indefinitely prolong human life',
+        'To erase the memory of death',
+        'To speed up time',
+      ],
+      correctIndex: 0,
+      explanation: '"Teach us to count our days rightly" (Psalm 90:12).',
+    ),
+    QuizQuestion(
+      text: 'What promise of protection does Psalm 91 offer?',
+      options: <String>[
+        'Whoever dwells in the shelter of the Most High is protected',
+        'No promise is made',
+        'Only kings are protected',
+        'Protection depends on sacrifices',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of refuge under divine wings (Psalm 91).',
+    ),
+    QuizQuestion(
+      text: 'What does Psalm 84 say about God\'s dwelling place?',
+      options: <String>[
+        'That it is infinitely desirable and beloved',
+        'That it is threatening',
+        'That it will soon be destroyed',
+        'That it is reserved for kings',
+      ],
+      correctIndex: 0,
+      explanation: '"How lovely are your dwelling places!" (Psalm 84:1).',
+    ),
+  ],
+  'Psalms#5': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What invitation opens Psalm 100?',
+      options: <String>[
+        'Shout joyfully and come in with thanksgiving',
+        'Keep total silence',
+        'Flee far from the temple',
+        'Weep over your sins',
+      ],
+      correctIndex: 0,
+      explanation: 'A joyful call to collective praise (Psalm 100).',
+    ),
+    QuizQuestion(
+      text: 'What does Psalm 103 recall about God\'s forgiveness?',
+      options: <String>[
+        'He forgives all our faults, as a father shows compassion',
+        'He never forgives',
+        'Forgiveness depends on daily sacrifice',
+        'Only the priests are forgiven',
+      ],
+      correctIndex: 0,
+      explanation: 'A tender image of fatherly compassion (Psalm 103:13).',
+    ),
+    QuizQuestion(
+      text: 'What words from Psalm 110 are applied to Christ in the Greek Scriptures?',
+      options: <String>[
+        '"Sit at my right hand"',
+        '"You will be king of Babylon"',
+        '"Return to Egypt"',
+        '"Build my temple"',
+      ],
+      correctIndex: 0,
+      explanation: 'Jesus himself quotes this verse (Psalm 110:1).',
+    ),
+  ],
+  'Psalms#6': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What is the main subject of Psalm 119, the longest chapter in the Bible?',
+      options: <String>[
+        'Love for God\'s law and word',
+        'A historic battle',
+        'The building of the temple',
+        'A journey to Egypt',
+      ],
+      correctIndex: 0,
+      explanation: 'Each section meditates on the divine law (Psalm 119).',
+    ),
+    QuizQuestion(
+      text: 'Where does the psalmist say his help comes from in Psalm 121?',
+      options: <String>[
+        'From Jehovah, creator of heaven and earth',
+        'From the mountains themselves',
+        'From the king\'s army',
+        'From the temple priests',
+      ],
+      correctIndex: 0,
+      explanation: '"I lift up my eyes to the mountains... my help comes from Jehovah" (Psalm 121).',
+    ),
+    QuizQuestion(
+      text: 'What does Psalm 127 remind us about human plans?',
+      options: <String>[
+        'Without Jehovah, the builders labor in vain',
+        'Success depends only on effort',
+        'Chance alone decides',
+        'Children are not a blessing',
+      ],
+      correctIndex: 0,
+      explanation: '"Unless Jehovah builds the house..." (Psalm 127:1).',
+    ),
+  ],
+  'Psalms#7': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What heartbreaking scene opens Psalm 137?',
+      options: <String>[
+        'The exiles weeping by the rivers of Babylon',
+        'A coronation feast',
+        'A victorious battle',
+        'The building of the temple',
+      ],
+      correctIndex: 0,
+      explanation: '"By the rivers of Babylon, we sat down and wept" (Psalm 137:1).',
+    ),
+    QuizQuestion(
+      text: 'How does Psalm 145 describe Jehovah?',
+      options: <String>[
+        'Great and worthy of boundless praise',
+        'Distant and indifferent',
+        'Stern only',
+        'Silent toward his people',
+      ],
+      correctIndex: 0,
+      explanation: 'A psalm of generous praise (Psalm 145:3).',
+    ),
+    QuizQuestion(
+      text: 'What call concludes the very last psalm, Psalm 150?',
+      options: <String>[
+        'Let everything that breathes praise Yah',
+        'Let everything fall silent forever',
+        'Let only kings praise God',
+        'Let music be forbidden',
+      ],
+      correctIndex: 0,
+      explanation: 'The book ends with a universal call to praise (Psalm 150:6).',
+    ),
+  ],
+  'Proverbs#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'According to Proverbs 1, what is the beginning of knowledge?',
+      options: <String>[
+        'The fear of Jehovah',
+        'Wealth',
+        'Experience alone',
+        'Formal education',
+      ],
+      correctIndex: 0,
+      explanation: 'This foundational principle opens the book (Proverbs 1:7).',
+    ),
+    QuizQuestion(
+      text: 'What does Proverbs 3 advise about trust?',
+      options: <String>[
+        'Trust in Jehovah with all your heart',
+        'Rely only on your own understanding',
+        'Avoid every important decision',
+        'Follow the opinion of the majority',
+      ],
+      correctIndex: 0,
+      explanation: '"Trust in Jehovah with all your heart" (Proverbs 3:5).',
+    ),
+    QuizQuestion(
+      text: 'How is wisdom personified in Proverbs 8?',
+      options: <String>[
+        'As a voice calling out publicly to people',
+        'As a treasure mentioned but unseen',
+        'As a silent king',
+        'As a closed book',
+      ],
+      correctIndex: 0,
+      explanation: 'Wisdom cries out in the public squares (Proverbs 8).',
+    ),
+  ],
+  'Proverbs#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Proverbs 15 say about how to respond to anger?',
+      options: <String>[
+        'A gentle answer turns away wrath',
+        'One must always respond forcefully',
+        'Silence is always preferable',
+        'Anger must be completely ignored',
+      ],
+      correctIndex: 0,
+      explanation: '"A gentle answer turns away wrath" (Proverbs 15:1).',
+    ),
+    QuizQuestion(
+      text: 'What does Proverbs 16 say about our plans and Jehovah?',
+      options: <String>[
+        'Commit your works to Jehovah and your plans will succeed',
+        'Human plans depend only on ourselves',
+        'Jehovah ignores our daily decisions',
+        'It is better to plan nothing',
+      ],
+      correctIndex: 0,
+      explanation: '"Commit your works to Jehovah" (Proverbs 16:3).',
+    ),
+    QuizQuestion(
+      text: 'What does the wise woman who builds her house in Proverbs 14 represent?',
+      options: <String>[
+        'Practical wisdom that builds up and preserves',
+        'A foreign queen',
+        'A simple worker',
+        'A minor character of no significance',
+      ],
+      correctIndex: 0,
+      explanation: 'The image illustrates the constructive effect of wisdom (Proverbs 14:1).',
+    ),
+  ],
+  'Proverbs#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Proverbs 18 say about the power of the tongue?',
+      options: <String>[
+        'Death and life are in the power of the tongue',
+        'It has no real influence',
+        'It concerns only rulers',
+        'It is always harmless',
+      ],
+      correctIndex: 0,
+      explanation: 'A powerful image of the impact of words (Proverbs 18:21).',
+    ),
+    QuizQuestion(
+      text: 'What does Proverbs 19 say about kindness to the poor?',
+      options: <String>[
+        'It is like lending to Jehovah himself',
+        'It is a waste of time',
+        'It concerns only the rich',
+        'It weakens society',
+      ],
+      correctIndex: 0,
+      explanation: '"Whoever shows favor to the lowly lends to Jehovah" (Proverbs 19:17).',
+    ),
+    QuizQuestion(
+      text: 'According to Proverbs 22, what is better than great wealth?',
+      options: <String>[
+        'A good reputation',
+        'A great palace',
+        'A powerful army',
+        'A vast territory',
+      ],
+      correctIndex: 0,
+      explanation: '"A good name is more desirable than great wealth" (Proverbs 22:1).',
+    ),
+  ],
+  'Proverbs#3': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Proverbs 27 say about how one friend affects another?',
+      options: <String>[
+        'Iron sharpens iron, so one person sharpens another',
+        'Friends have no influence at all',
+        'It is better to stay alone',
+        'Friends weaken one\'s character',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of positive mutual influence (Proverbs 27:17).',
+    ),
+    QuizQuestion(
+      text: 'What does Proverbs 29 say about the absence of spiritual direction?',
+      options: <String>[
+        'Where there is no vision, the people cast off restraint',
+        'The people always thrive on their own',
+        'Visions are of no importance',
+        'The people prefer having no rules',
+      ],
+      correctIndex: 0,
+      explanation: 'A warning about the lack of guidance (Proverbs 29:18).',
+    ),
+    QuizQuestion(
+      text: 'What does the final poem of Proverbs 31 celebrate?',
+      options: <String>[
+        'The capable and virtuous woman',
+        'A king\'s wealth',
+        'A military victory',
+        'The building of a palace',
+      ],
+      correctIndex: 0,
+      explanation: 'An acrostic poem praises the excellent wife (Proverbs 31).',
+    ),
+  ],
+  'Ecclesiastes#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What recurring observation opens the book of Ecclesiastes?',
+      options: <String>[
+        'Everything is vapor (futility) under the sun',
+        'Everything is perfectly stable',
+        'Wealth solves everything',
+        'Nothing ever changes',
+      ],
+      correctIndex: 0,
+      explanation: 'This theme structures the whole book (Ecclesiastes 1:2).',
+    ),
+    QuizQuestion(
+      text: 'What did Solomon discover after pursuing pleasure, projects, and wisdom?',
+      options: <String>[
+        'All of it, without God, remains futile',
+        'Pleasure alone is enough for happiness',
+        'Work always guarantees satisfaction',
+        'Human wisdom solves everything',
+      ],
+      correctIndex: 0,
+      explanation: 'His personal experience illustrates futility without God (Ecclesiastes 2).',
+    ),
+    QuizQuestion(
+      text: 'What does the famous passage about "a time for everything" point out?',
+      options: <String>[
+        'There is a fitting season for everything',
+        'Time has no importance at all',
+        'Everything must be done immediately',
+        'The past does not matter',
+      ],
+      correctIndex: 0,
+      explanation: 'This rhythmic poem opens Ecclesiastes 3.',
+    ),
+  ],
+  'Ecclesiastes#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Ecclesiastes 5 advise about vows made to God?',
+      options: <String>[
+        'Better not to vow than to vow and not fulfill it',
+        'One should make many vows',
+        'Vows have no value',
+        'Only priests can make vows',
+      ],
+      correctIndex: 0,
+      explanation: 'Caution in speech toward God is emphasized (Ecclesiastes 5:4, 5).',
+    ),
+    QuizQuestion(
+      text: 'What does Ecclesiastes 7 say about reputation?',
+      options: <String>[
+        'A good name is better than fine perfumed oil',
+        'Reputation has no value',
+        'Only wealth matters',
+        'A name never survives',
+      ],
+      correctIndex: 0,
+      explanation: 'A judgment on the value of integrity (Ecclesiastes 7:1).',
+    ),
+    QuizQuestion(
+      text: 'What does Ecclesiastes 8 recommend regarding established authority?',
+      options: <String>[
+        'Obey wisely, without rushing to challenge it',
+        'Always defy the rulers',
+        'Ignore the law completely',
+        'Flee all civic responsibility',
+      ],
+      correctIndex: 0,
+      explanation: 'Practical caution is advised (Ecclesiastes 8).',
+    ),
+  ],
+  'Ecclesiastes#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Ecclesiastes 9 recall about our daily activities?',
+      options: <String>[
+        'Do your work with all your might, as long as you live',
+        'Work has no value',
+        'It is better to remain idle',
+        'Only the rich should work',
+      ],
+      correctIndex: 0,
+      explanation: 'A call to full engagement in life (Ecclesiastes 9:10).',
+    ),
+    QuizQuestion(
+      text: 'What does Ecclesiastes 11 advise about generosity?',
+      options: <String>[
+        'Cast your bread upon the waters, for it will return',
+        'Keep all your resources for yourself',
+        'Generosity is always useless',
+        'One must wait for certainty before acting',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of generous and confident investment (Ecclesiastes 11:1).',
+    ),
+    QuizQuestion(
+      text: 'What is the final conclusion of the book of Ecclesiastes?',
+      options: <String>[
+        'Fear God and keep his commandments',
+        'Seek pleasure alone',
+        'Nothing really has meaning',
+        'Wealth is the ultimate goal',
+      ],
+      correctIndex: 0,
+      explanation: 'This conclusion sums up the whole book (Ecclesiastes 12:13).',
+    ),
+  ],
+  'Song of Solomon#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What feeling dominates the opening of the Song of Solomon?',
+      options: <String>[
+        'A passionate love between the Shulammite and her beloved',
+        'A family conflict',
+        'A business negotiation',
+        'A royal judgment',
+      ],
+      correctIndex: 0,
+      explanation: 'The book celebrates sincere married love (Song of Solomon 1).',
+    ),
+    QuizQuestion(
+      text: 'What does the Shulammite do in her dream in chapter 3?',
+      options: <String>[
+        'She searches for her beloved throughout the city',
+        'She flees to a distant land',
+        'She marries another man',
+        'She completely forgets her love',
+      ],
+      correctIndex: 0,
+      explanation: 'Her devotion remains faithful even in the dream (Song of Solomon 3).',
+    ),
+    QuizQuestion(
+      text: 'How does the Shulammite express her exclusive devotion?',
+      options: <String>[
+        '"I am my beloved\'s, and my beloved is mine"',
+        '"I prefer wealth to love"',
+        '"Love does not matter to me"',
+        '"I will remain alone forever"',
+      ],
+      correctIndex: 0,
+      explanation: 'This phrase recurs like a refrain (Song of Solomon 2:16).',
+    ),
+  ],
+  'Song of Solomon#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'How does the beloved describe the Shulammite\'s beauty in chapter 4?',
+      options: <String>[
+        'Through a series of glowing poetic images',
+        'Coldly and distantly',
+        'By comparing her to an enemy',
+        'He does not describe her at all',
+      ],
+      correctIndex: 0,
+      explanation: 'A detailed poem of praise is devoted to her (Song of Solomon 4).',
+    ),
+    QuizQuestion(
+      text: 'What happens when the beloved comes knocking at her door in chapter 5?',
+      options: <String>[
+        'She is slow to open, and he has already left',
+        'She opens immediately with joy',
+        'She refuses to see him',
+        'He never came at all',
+      ],
+      correctIndex: 0,
+      explanation: 'This missed moment creates poignant regret (Song of Solomon 5).',
+    ),
+    QuizQuestion(
+      text: 'To whom does the Shulammite describe her beloved after this episode?',
+      options: <String>[
+        'To the daughters of Jerusalem',
+        'To her mother only',
+        'To King Solomon',
+        'To no one, she stays silent',
+      ],
+      correctIndex: 0,
+      explanation: 'Her enthusiastic description follows (Song of Solomon 5).',
+    ),
+  ],
+  'Song of Solomon#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What famous statement about love is found in chapter 8?',
+      options: <String>[
+        'Love is as strong as death',
+        'Love is bought with money',
+        'Love does not matter',
+        'Love never lasts',
+      ],
+      correctIndex: 0,
+      explanation: '"Many waters cannot extinguish love" (Song of Solomon 8:6, 7).',
+    ),
+    QuizQuestion(
+      text: 'What do the "many waters" unable to extinguish love symbolize?',
+      options: <String>[
+        'Trials that cannot destroy a true love',
+        'A literal flood',
+        'The wealth of the kingdom',
+        'The power of the king',
+      ],
+      correctIndex: 0,
+      explanation: 'A powerful metaphor for the resilience of love (Song of Solomon 8).',
+    ),
+    QuizQuestion(
+      text: 'What tone dominates the end of the Song of Solomon?',
+      options: <String>[
+        'The celebration of a faithful, shared love',
+        'A definitive breakup',
+        'A harsh judgment',
+        'A warning of war',
+      ],
+      correctIndex: 0,
+      explanation: 'The book concludes on a note of fulfilled love (Song of Solomon 8).',
+    ),
+  ],
+  'Isaiah#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Isaiah 2 promise for the future concerning war?',
+      options: <String>[
+        'The nations will beat their swords into plowshares',
+        'Wars will become more frequent',
+        'A single empire will dominate forever',
+        'No change is predicted',
+      ],
+      correctIndex: 0,
+      explanation: 'A vision of universal peace (Isaiah 2:4).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah see during his vision of prophetic commissioning?',
+      options: <String>[
+        'Jehovah on a lofty throne, surrounded by seraphs',
+        'A heavenly battle',
+        'A silent desert',
+        'Only a city in ruins',
+      ],
+      correctIndex: 0,
+      explanation: 'A burning coal touches his lips, purifying his mouth (Isaiah 6).',
+    ),
+    QuizQuestion(
+      text: 'What sign does Isaiah announce to King Ahaz in chapter 7?',
+      options: <String>[
+        'A young woman will conceive a son, Immanuel',
+        'An immediate military victory',
+        'The total destruction of Judah',
+        'A prolonged famine',
+      ],
+      correctIndex: 0,
+      explanation: '"Immanuel" means "God with us" (Isaiah 7:14).',
+    ),
+  ],
+  'Isaiah#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What famous messianic prophecy is found in Isaiah 9?',
+      options: <String>[
+        'A child is born, the government upon his shoulder',
+        'A foreign king will rule forever',
+        'The temple will be rebuilt immediately',
+        'Peace will never come',
+      ],
+      correctIndex: 0,
+      explanation: 'This passage announces a reign of peace (Isaiah 9:6, 7).',
+    ),
+    QuizQuestion(
+      text: 'What peaceful image illustrates Isaiah 11 concerning the future reign?',
+      options: <String>[
+        'The wolf will dwell with the lamb',
+        'Lions will dominate mankind',
+        'The deserts will remain barren',
+        'The nations will remain divided',
+      ],
+      correctIndex: 0,
+      explanation: 'Complete harmony is promised (Isaiah 11:6).',
+    ),
+    QuizQuestion(
+      text: 'How does Isaiah 14 describe the proud fall of the king of Babylon?',
+      options: <String>[
+        'As a shining star fallen from the sky',
+        'As a king triumphant forever',
+        'As a faithful ally of Israel',
+        'As a mere merchant',
+      ],
+      correctIndex: 0,
+      explanation: 'A striking image of downfall (Isaiah 14:12).',
+    ),
+  ],
+  'Isaiah#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What symbolic act does Isaiah perform against Egypt and Cush?',
+      options: <String>[
+        'Walking barefoot and without an outer garment',
+        'Burning his clothes',
+        'Fasting for a year',
+        'Building an altar',
+      ],
+      correctIndex: 0,
+      explanation: 'This sign illustrates the shame of the coming captivity (Isaiah 20).',
+    ),
+    QuizQuestion(
+      text: 'What universal judgment does Isaiah 24 announce?',
+      options: <String>[
+        'The whole earth will be shaken and devastated',
+        'Only one nation will be judged',
+        'No judgment will take place',
+        'The judgment will concern only kings',
+      ],
+      correctIndex: 0,
+      explanation: 'A worldwide scope is described (Isaiah 24).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah 25 promise concerning death?',
+      options: <String>[
+        'Jehovah will swallow up death forever',
+        'Death will remain unconquered',
+        'Only the rich will escape it',
+        'Nothing is said about death',
+      ],
+      correctIndex: 0,
+      explanation: 'An extraordinary hope is expressed (Isaiah 25:8).',
+    ),
+  ],
+  'Isaiah#3': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Isaiah 26 promise to the one whose mind relies on God?',
+      options: <String>[
+        'Perfect peace',
+        'Immediate wealth',
+        'An invincible army',
+        'Guaranteed long life',
+      ],
+      correctIndex: 0,
+      explanation: '"You will keep in perfect peace" (Isaiah 26:3).',
+    ),
+    QuizQuestion(
+      text: 'What precious stone does Jehovah lay in Zion according to Isaiah 28?',
+      options: <String>[
+        'A cornerstone, a tested foundation',
+        'A common pebble',
+        'A cursed stone',
+        'No stone is mentioned',
+      ],
+      correctIndex: 0,
+      explanation: 'A messianic image of a sure foundation (Isaiah 28:16).',
+    ),
+    QuizQuestion(
+      text: 'Against whom does Isaiah warn the people concerning a military alliance?',
+      options: <String>[
+        'Against trusting Egypt rather than Jehovah',
+        'Against an alliance with Babylon only',
+        'Against all foreign trade',
+        'Against the local priests',
+      ],
+      correctIndex: 0,
+      explanation: 'Seeking help from Egypt is criticized (Isaiah 30-31).',
+    ),
+  ],
+  'Isaiah#4': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What will the desert become according to the promise of Isaiah 35?',
+      options: <String>[
+        'It will blossom like a rose',
+        'It will remain barren forever',
+        'It will become a sea',
+        'It will be abandoned for good',
+      ],
+      correctIndex: 0,
+      explanation: 'A joyful transformation is promised (Isaiah 35:1).',
+    ),
+    QuizQuestion(
+      text: 'How did Jehovah respond to Hezekiah\'s prayer against Sennacherib?',
+      options: <String>[
+        'An angel struck down the Assyrian army in a single night',
+        'Hezekiah had to surrender',
+        'A famine weakened Judah',
+        'No response came at all',
+      ],
+      correctIndex: 0,
+      explanation: 'A spectacular deliverance follows the prayer (Isaiah 37).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah 40 recall about human nature compared to God?',
+      options: <String>[
+        'All flesh is like grass that withers',
+        'Man is eternal by nature',
+        'God depends on man',
+        'God\'s word often changes',
+      ],
+      correctIndex: 0,
+      explanation: '"The word of our God endures forever" (Isaiah 40:8).',
+    ),
+  ],
+  'Isaiah#5': <QuizQuestion>[
+    QuizQuestion(
+      text: 'How does Isaiah 42 describe the gentleness of Jehovah\'s servant?',
+      options: <String>[
+        'He will not break a bruised reed',
+        'He will destroy everything in his path',
+        'He will ignore the weak',
+        'He will act with systematic violence',
+      ],
+      correctIndex: 0,
+      explanation: 'Remarkable gentleness characterizes this servant (Isaiah 42:3).',
+    ),
+    QuizQuestion(
+      text: 'What foreign king is named in advance by Isaiah as Israel\'s liberator?',
+      options: <String>['Cyrus', 'Nebuchadnezzar', 'Darius', 'Xerxes'],
+      correctIndex: 0,
+      explanation: 'A remarkable prophecy names Cyrus (Isaiah 44-45).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah 48 say about the people\'s past attitude toward God\'s commandments?',
+      options: <String>[
+        'If only they had paid attention sooner',
+        'They always obeyed perfectly',
+        'The commandments did not matter',
+        'God never asked anything of them',
+      ],
+      correctIndex: 0,
+      explanation: 'A regret is expressed over their failure to listen (Isaiah 48:18).',
+    ),
+  ],
+  'Isaiah#6': <QuizQuestion>[
+    QuizQuestion(
+      text: 'How does Isaiah 53 describe the suffering of Jehovah\'s servant?',
+      options: <String>[
+        'He was pierced because of our transgressions',
+        'He lived without ever suffering',
+        'He reigned immediately without trial',
+        'He was honored from birth',
+      ],
+      correctIndex: 0,
+      explanation: 'A central chapter on redemptive suffering (Isaiah 53:5).',
+    ),
+    QuizQuestion(
+      text: 'What free invitation is extended in Isaiah 55?',
+      options: <String>[
+        'Come, buy wine and milk without money',
+        'Pay dearly to obtain wisdom',
+        'Only the rich may come',
+        'No invitation is given',
+      ],
+      correctIndex: 0,
+      explanation: 'A generous, universal offer (Isaiah 55:1).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah 58 define as a true "fast" in God\'s eyes?',
+      options: <String>[
+        'Sharing your bread with the hungry and setting the oppressed free',
+        'Abstaining only from food',
+        'Wearing special clothing',
+        'Remaining silent all day',
+      ],
+      correctIndex: 0,
+      explanation: 'True fasting is shown through acts of righteousness (Isaiah 58:6, 7).',
+    ),
+  ],
+  'Isaiah#7': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What image of hope opens Isaiah 60 for Zion?',
+      options: <String>[
+        'Arise, shine, for your light has come',
+        'Remain in darkness forever',
+        'Flee far from your city',
+        'Wait without hope',
+      ],
+      correctIndex: 0,
+      explanation: 'A radiant call to restoration (Isaiah 60:1).',
+    ),
+    QuizQuestion(
+      text: 'What statement from Isaiah 61 did Jesus read in the synagogue at Nazareth?',
+      options: <String>[
+        '"The spirit of the Sovereign Lord is upon me"',
+        '"I will come to judge the whole world"',
+        '"The temple will be destroyed"',
+        '"No one will be saved"',
+      ],
+      correctIndex: 0,
+      explanation: 'Jesus applies this passage to himself (Luke 4, quoting Isaiah 61:1).',
+    ),
+    QuizQuestion(
+      text: 'What does Isaiah 65 promise concerning the future of creation?',
+      options: <String>[
+        'New heavens and a new earth',
+        'Final destruction with no restoration',
+        'A kingdom limited to a single nation',
+        'The end of all animal life',
+      ],
+      correctIndex: 0,
+      explanation: 'A promise of hope concludes the book (Isaiah 65:17).',
+    ),
+  ],
+  'Jeremiah#0': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Jehovah tell Jeremiah about his calling before he was even born?',
+      options: <String>[
+        '"Before I formed you in the womb I knew you"',
+        'He chose him only in adulthood',
+        'Jeremiah volunteered himself',
+        'No particular calling is mentioned',
+      ],
+      correctIndex: 0,
+      explanation: 'A prophetic calling established even before his birth (Jeremiah 1:5).',
+    ),
+    QuizQuestion(
+      text: 'What does Jehovah compare Israel\'s unfaithfulness to in chapter 2?',
+      options: <String>[
+        'To a wife who has forgotten her husband',
+        'To a faithful king',
+        'To an exemplary servant',
+        'To a nation that is always loyal',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of relational abandonment (Jeremiah 2).',
+    ),
+    QuizQuestion(
+      text: 'What false confidence does Jeremiah denounce in chapter 7?',
+      options: <String>[
+        'Repeating "this is the temple of Jehovah" like a magic formula',
+        'Excessive trust in Jeremiah himself',
+        'Trust in the army alone',
+        'Trust in foreign prophets',
+      ],
+      correctIndex: 0,
+      explanation: 'The people wrongly believe the temple protects them automatically (Jeremiah 7).',
+    ),
+  ],
+  'Jeremiah#1': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What famous question does Jeremiah ask in chapter 12?',
+      options: <String>[
+        'Why does the way of the wicked prosper?',
+        'Why is Babylon so weak?',
+        'Why is the temple empty?',
+        'Why are the priests absent?',
+      ],
+      correctIndex: 0,
+      explanation: 'Jeremiah voices a sincere complaint (Jeremiah 12:1).',
+    ),
+    QuizQuestion(
+      text: 'What does the ruined linen belt symbolize in Jeremiah 13?',
+      options: <String>[
+        'The corruption of Judah\'s pride',
+        'The people\'s regained wealth',
+        'A solid alliance with Egypt',
+        'The purity of the priesthood',
+      ],
+      correctIndex: 0,
+      explanation: 'A visual sign of moral decay (Jeremiah 13).',
+    ),
+    QuizQuestion(
+      text: 'What does Jeremiah 17 reveal about the human heart?',
+      options: <String>[
+        'It is deceptive more than anything else',
+        'It is naturally good',
+        'It never changes',
+        'It is of no importance to God',
+      ],
+      correctIndex: 0,
+      explanation: 'A frank assessment of human nature (Jeremiah 17:9).',
+    ),
+  ],
+  'Jeremiah#2': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What illustration does Jehovah give Jeremiah at the potter\'s house?',
+      options: <String>[
+        'Like clay in the potter\'s hand, Israel is in God\'s hand',
+        'The potter symbolizes a foreign king',
+        'The clay represents wealth',
+        'No spiritual lesson is drawn from it',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of divine sovereignty (Jeremiah 18).',
+    ),
+    QuizQuestion(
+      text: 'How was Jeremiah treated after prophesying against Jerusalem?',
+      options: <String>[
+        'He was beaten and put in stocks by Pashhur',
+        'He was publicly honored',
+        'He was appointed high priest',
+        'He was sent as an ambassador',
+      ],
+      correctIndex: 0,
+      explanation: 'Jeremiah suffers for his faithful message (Jeremiah 20).',
+    ),
+    QuizQuestion(
+      text: 'What choice does Jeremiah offer the besieged people in chapter 21?',
+      options: <String>[
+        'Surrender to Babylon (life) or resist (death)',
+        'Flee to Egypt immediately',
+        'Attack Babylon first',
+        'Negotiate with Assyria',
+      ],
+      correctIndex: 0,
+      explanation: 'A difficult but clear choice is presented (Jeremiah 21).',
+    ),
+  ],
+  'Jeremiah#3': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Jeremiah 23 promise concerning a future righteous king?',
+      options: <String>[
+        'A "righteous branch" will reign with wisdom',
+        'No righteous king will ever come',
+        'The false shepherds will reign forever',
+        'The kingdom will disappear with no successor',
+      ],
+      correctIndex: 0,
+      explanation: 'A messianic promise contrasts with the bad shepherds (Jeremiah 23:5).',
+    ),
+    QuizQuestion(
+      text: 'How many years of captivity in Babylon does Jeremiah announce?',
+      options: <String>['70 years', '7 years', '40 years', '400 years'],
+      correctIndex: 0,
+      explanation: 'This precise length is prophesied (Jeremiah 25:11).',
+    ),
+    QuizQuestion(
+      text: 'What does Jeremiah advise the exiles in Babylon in his letter?',
+      options: <String>[
+        'Build houses and seek the peace of the city',
+        'Revolt immediately',
+        'Refuse all work',
+        'Ignore the local authorities',
+      ],
+      correctIndex: 0,
+      explanation: 'Realistic advice for living in exile (Jeremiah 29).',
+    ),
+  ],
+  'Jeremiah#4': <QuizQuestion>[
+    QuizQuestion(
+      text: 'What does Jehovah promise in the famous prophecy of the new covenant?',
+      options: <String>[
+        'His law will be written on the hearts of the people',
+        'A new temple will be built immediately',
+        'No future covenant is planned',
+        'The priesthood will be abolished with no replacement',
+      ],
+      correctIndex: 0,
+      explanation: 'An inward, personal covenant is announced (Jeremiah 31:33).',
+    ),
+    QuizQuestion(
+      text: 'What symbolic act does Jeremiah perform in the middle of the crisis, buying a field?',
+      options: <String>[
+        'He expresses his faith in a future restoration',
+        'He seeks to enrich himself',
+        'He flees the besieged city',
+        'He negotiates with Babylon',
+      ],
+      correctIndex: 0,
+      explanation: 'This purchase testifies to hope despite the siege (Jeremiah 32).',
+    ),
+    QuizQuestion(
+      text: 'What example of faithfulness do the Rechabites offer to Judah?',
+      options: <String>[
+        'Their strict obedience to their ancestor\'s command',
+        'Their abundant wealth',
+        'Their military power',
+        'Their alliance with Egypt',
+      ],
+      correctIndex: 0,
+      explanation: 'Their faithfulness contrasts with Judah\'s unfaithfulness (Jeremiah 35).',
+    ),
+  ],
+  'Jeremiah#5': <QuizQuestion>[
+    QuizQuestion(
+      text: 'Who rescued Jeremiah after he was thrown into a muddy cistern?',
+      options: <String>['Ebed-melech', 'Baruch', 'Gedaliah', 'Ishmael'],
+      correctIndex: 0,
+      explanation: 'This Ethiopian intervenes courageously (Jeremiah 38).',
+    ),
+    QuizQuestion(
+      text: 'Who was appointed governor after the fall of Jerusalem, then assassinated?',
+      options: <String>['Gedaliah', 'Zedekiah', 'Ishmael', 'Baruch'],
+      correctIndex: 0,
+      explanation: 'His assassination triggers further turmoil (Jeremiah 40-41).',
+    ),
+    QuizQuestion(
+      text: 'What does the remnant of the people do despite Jeremiah\'s warning to stay in the land?',
+      options: <String>[
+        'They flee to Egypt, taking Jeremiah with them',
+        'They fully submit to the prophet\'s advice',
+        'They attack Babylon',
+        'They scatter toward Assyria',
+      ],
+      correctIndex: 0,
+      explanation: 'Their disobedience worsens their situation (Jeremiah 43).',
+    ),
+  ],
+  'Jeremiah#6': <QuizQuestion>[
+    QuizQuestion(
+      text: 'Against which nations do the final chapters of Jeremiah pronounce judgments?',
+      options: <String>[
+        'Egypt, the Philistines, Moab, Ammon, Babylon, and others',
+        'Only Israel',
+        'No foreign nation',
+        'Only Judah',
+      ],
+      correctIndex: 0,
+      explanation: 'A series of oracles against the nations concludes the book (Jeremiah 46-51).',
+    ),
+    QuizQuestion(
+      text: 'What symbolic sign accompanies the prophecy against Babylon delivered to Seraiah?',
+      options: <String>[
+        'The scroll is thrown into the Euphrates to sink',
+        'It is publicly burned',
+        'It is read before the king of Babylon',
+        'It is hidden in the temple',
+      ],
+      correctIndex: 0,
+      explanation: 'An image of Babylon\'s final downfall (Jeremiah 51).',
+    ),
+    QuizQuestion(
+      text: 'How does the book of Jeremiah end historically?',
+      options: <String>[
+        'With Jehoiachin\'s release from prison in Babylon',
+        'With the immediate return of the whole people',
+        'With the rebuilding of the temple',
+        'With a military victory for Judah',
+      ],
+      correctIndex: 0,
+      explanation: 'A historical epilogue closes the book (Jeremiah 52).',
+    ),
+  ],
+};
+
+const Map<String, List<QuizQuestion>> extraQuizzesEnC3 = <String, List<QuizQuestion>>{
+  // No entries for these books in _extraQuizzes (flagship books only).
+};

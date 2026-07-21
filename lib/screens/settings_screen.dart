@@ -144,9 +144,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     navigator.push(
       PageRouteBuilder<void>(
         opaque: true,
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
+        transitionDuration: const Duration(milliseconds: 220),
+        reverseTransitionDuration: const Duration(milliseconds: 220),
         pageBuilder: (_, _, _) => const _LocaleSwitchLoadingScreen(),
+        transitionsBuilder: (_, Animation<double> animation, _, Widget child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     );
     try {

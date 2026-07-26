@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jwstreak/bible_data.dart';
-import 'package:jwstreak/quiz_data.dart';
+import 'package:jwstreak/quiz/quiz_data.dart';
 import 'package:jwstreak/services/answer_validator.dart';
 
 void main() {

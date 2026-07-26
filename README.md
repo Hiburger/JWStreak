@@ -36,6 +36,31 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 - `dynamic_color` : optional Material You palette
 - `flutter_markdown`, `pdf`, `share_plus` : note sharing 
 
+## Project Layout
+
+```
+lib/
+  main.dart              app entry point
+  app_constants.dart     jw.org / wol.jw.org locale codes, defaults
+  bible_data.dart        the 66 books and their chapter counts
+  achievements_data.dart achievement definitions
+  quiz/                  quiz content: quiz_data.dart (French source) plus
+                         quiz_data_<lang>.dart aggregators and their
+                         quiz_data_<lang>_c1..c8.dart chapter files
+  l10n/                  .arb translations + generated AppLocalizations
+  screens/  services/  widgets/  theme/
+assets/                  only what ships in the app (icons, bundled font)
+tool/icons/              icon pipeline, not shipped: process_icon.py turns the
+                         source art into assets/icon.png, then
+                         generate_launcher_icons.py writes the Android mipmaps
+test/                    widget and content tests
+docs/                    the privacy policy served by GitHub Pages
+```
+
+A language is only fully supported once it has both an `.arb` file and a
+complete set of `quiz/` chapter files; any checkpoint a language does not
+override falls back to the French source automatically.
+
 ## Local Execution
 
 > Prerequisites: Flutter SDK installed + Android SDK configured.
@@ -130,6 +155,33 @@ Absolument ! L'application fonctionne **en parfaite harmonie avec le contenu et 
 - `url_launcher` : lien profond JW Library, repli web jw.org
 - `dynamic_color` : palette Material You optionnelle
 - `flutter_markdown`, `pdf`, `share_plus` : partage de notes
+
+## Organisation du projet
+
+```
+lib/
+  main.dart              point d'entrée de l'app
+  app_constants.dart     codes de langue jw.org / wol.jw.org, valeurs par défaut
+  bible_data.dart        les 66 livres et leur nombre de chapitres
+  achievements_data.dart définition des succès
+  quiz/                  contenu des quiz : quiz_data.dart (source française),
+                         les agrégateurs quiz_data_<langue>.dart et leurs
+                         fichiers de chapitres quiz_data_<langue>_c1..c8.dart
+  l10n/                  traductions .arb + AppLocalizations généré
+  screens/  services/  widgets/  theme/
+assets/                  uniquement ce qui est embarqué (icônes, police)
+tool/icons/              chaîne de génération des icônes, non embarquée :
+                         process_icon.py produit assets/icon.png à partir de
+                         l'art source, puis generate_launcher_icons.py écrit
+                         les mipmaps Android
+test/                    tests de widgets et de contenu
+docs/                    la politique de confidentialité servie par GitHub Pages
+```
+
+Une langue n'est pleinement prise en charge qu'une fois qu'elle possède à la
+fois un fichier `.arb` et un jeu complet de fichiers de chapitres dans `quiz/` ;
+tout point d'étape qu'une langue ne redéfinit pas retombe automatiquement sur
+la source française.
 
 ## Exécution locale
 

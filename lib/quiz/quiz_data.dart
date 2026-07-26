@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'bible_data.dart';
-import 'l10n/app_localizations.dart';
+import '../bible_data.dart';
+import '../l10n/app_localizations.dart';
 import 'quiz_data_de.dart';
 import 'quiz_data_en.dart';
 import 'quiz_data_es.dart';

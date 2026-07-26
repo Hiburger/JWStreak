@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import '../quiz_data.dart';
+import '../quiz/quiz_data.dart';
 import '../services/answer_validator.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:jwstreak/l10n/app_localizations.dart';
-import 'package:jwstreak/quiz_data.dart';
+import 'package:jwstreak/quiz/quiz_data.dart';
 import 'package:jwstreak/screens/quiz_screen.dart';
 
 Future<void> _pump(WidgetTester tester, List<QuizQuestion> questions, {

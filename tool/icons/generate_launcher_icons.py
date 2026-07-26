@@ -1,10 +1,18 @@
 from PIL import Image
 import os
+from pathlib import Path
 
-RES = "../android/app/src/main/res"
+# Paths are resolved from this file, not the shell's working directory, so the
+# script can be run from anywhere: `python tool/icons/generate_launcher_icons.py`
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
 
-full = Image.open("icon.png").convert("RGBA")
-fg_art = Image.open("icon_foreground_art.png").convert("RGBA")
+RES = str(ROOT / "android/app/src/main/res")
+
+# icon.png is a shipped asset (see pubspec.yaml); the foreground art is an
+# intermediate produced by process_icon.py and lives next to this script.
+full = Image.open(ROOT / "assets/icon.png").convert("RGBA")
+fg_art = Image.open(HERE / "icon_foreground_art.png").convert("RGBA")
 
 # Legacy launcher icon sizes (square, includes the rounded purple shape).
 legacy_sizes = {

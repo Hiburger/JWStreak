@@ -1,8 +1,14 @@
 from PIL import Image, ImageFilter
 from collections import deque
 import os
+from pathlib import Path
 
-SRC = "icon_source_raw.png"
+# Paths are resolved from this file, not the shell's working directory, so the
+# script can be run from anywhere: `python tool/icons/process_icon.py`
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+
+SRC = HERE / "icon_source_raw.png"
 
 im = Image.open(SRC).convert("RGBA")
 w, h = im.size
@@ -105,7 +111,9 @@ recentered = square_only_cropped.copy()
 x = (sq_w - new_w) // 2
 y = (sq_h - new_h) // 2
 recentered.alpha_composite(art_resized, (x, y))
-recentered.save("icon.png")
+# icon.png is shipped with the app (declared in pubspec.yaml); the foreground
+# art is only an input for generate_launcher_icons.py, so it stays in tool/.
+recentered.save(ROOT / "assets/icon.png")
 
-fg_cropped.save("icon_foreground_art.png")
+fg_cropped.save(HERE / "icon_foreground_art.png")
 print("recentered icon saved:", recentered.size, "art placed at", (x, y), (new_w, new_h))

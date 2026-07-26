@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import '../quiz_data.dart';
+import '../quiz/quiz_data.dart';
 import '../services/local_db_service.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import 'quiz_screen.dart';

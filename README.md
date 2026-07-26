@@ -97,7 +97,7 @@ Hiiiii if you have something to say please do at contact@olynthe.org
 # JW Streak
 
 Salut ! 
-JW Streak (JWS) est une application Flutter conviviale (Android, Material 3 Expressive) qui aide à maintenir une habitude de lecture quotidienne de la Bible, avec des quiz, un système de série, des succès et des notes personnelles. Tout cela **100% local, aucun compte ou serveur requis**. Bien que j'aie créé JWS pour les Témoins de Jéhovah, tout le monde peut l'utiliser et en profiter.
+JW Streak (JWS) est une application Flutter conviviale (Android, Material 3 Expressive) qui aide à maintenir une habitude de lecture quotidienne de la Bible, avec des quiz, un système de série, des succès et des notes personnelles. Tout cela **100% local, aucun compte ou serveur requis**. Bien que j'ai créé JWS pour les Témoins de Jéhovah, tout le monde peut l'utiliser et en profiter.
 
 ## Est-ce sûr pour ma foi ?
 

@@ -22,6 +22,7 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 
 ## Privacy
 
+- First things first, you can find JWS's privacy policy at jws.olynthe.org
 - No data leaves the device: no account, no backend, no tracking or analytics.
 - All data (readings, notes, settings, streaks) is stored locally in a cute SQLite db.
 - No fonts or resources are loaded from a server at runtime ; everything is embedded in the APK.

@@ -44,6 +44,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       options: <String>['Saul', 'David', 'Jonathan', 'Abner'],
       correctIndex: 0,
       explanation: 'Samuel anoints Saul privately (1 Samuel 9-10).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: "Why did Samuel announce Saul's rejection as king?",
@@ -78,6 +79,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'David refuses the armor and uses his sling (1 Samuel 17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sword', 'shield', 'spear'],
     ),
     QuizQuestion(
       text: 'What feeling drove Saul to want to kill David after his victory?',
@@ -92,6 +95,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           "Jonathan warns David using an agreed-upon signal (1 Samuel 20).",
+      type: QuizAnswerType.freeText,
     ),
   ],
   '1 Samuel#3': <QuizQuestion>[
@@ -116,6 +120,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Abigail calms David with provisions (1 Samuel 25).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Where do Saul and Jonathan die in the final battle of the '
@@ -150,6 +155,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'David takes the stronghold of Zion (2 Samuel 5).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What promise does Jehovah make to David through the prophet '
@@ -164,6 +170,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'The Davidic covenant promises an everlasting dynasty '
           '(2 Samuel 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['temple', 'throne', 'covenant'],
     ),
   ],
   '2 Samuel#1': <QuizQuestion>[
@@ -174,6 +182,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'David has Uriah killed to hide his sin (2 Samuel 11).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'How did the prophet Nathan confront David about his sin?',
@@ -194,6 +203,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           "Absalom's rebellion begins (2 Samuel 15).",
+      type: QuizAnswerType.freeText,
     ),
   ],
   '2 Samuel#2': <QuizQuestion>[
@@ -235,6 +245,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'The census displeases God, and a plague follows '
           '(2 Samuel 24).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['plague', 'altar', 'Joab'],
     ),
   ],
   '1 Kings#0': <QuizQuestion>[
@@ -245,6 +257,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           "Adonijah proclaims himself king without David's consent "
           '(1 Kings 1).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What does Solomon ask Jehovah for at the very start of his '
@@ -265,6 +278,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Hiram supplies cedar wood and craftsmen (1 Kings 5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Hiram'],
     ),
   ],
   '1 Kings#1': <QuizQuestion>[
@@ -279,6 +294,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'The cloud of glory fills the house (1 Kings 8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['cloud', 'ark', 'priests'],
     ),
     QuizQuestion(
       text: "Why did Solomon's kingdom eventually weaken spiritually?",
@@ -316,6 +333,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'Elijah announces there will be neither rain nor dew '
           '(1 Kings 17).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What happened during the contest on Mount Carmel?',
@@ -328,6 +346,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           "Jehovah answers with fire before all Israel (1 Kings 18).",
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Baal', 'altar', 'water'],
     ),
     QuizQuestion(
       text: 'Why did Ahab and Jezebel have Naboth killed?',
@@ -483,6 +503,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A memorable Passover is celebrated (2 Kings 23).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Passover'],
     ),
     QuizQuestion(
       text: 'How does the book of Kings end?',
@@ -517,6 +539,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           "Judah's genealogy includes the house of David "
           '(1 Chronicles 2-3).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Which tribes settled east of the Jordan according to these '
@@ -571,6 +594,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'David defeats the Philistines several times '
           '(1 Chronicles 14).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Philistines'],
     ),
   ],
   '1 Chronicles#2': <QuizQuestion>[
@@ -586,6 +611,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'This psalm of praise is entrusted to Asaph '
           '(1 Chronicles 16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lament', 'psalm', 'trumpet'],
     ),
     QuizQuestion(
       text: 'Why was David unable to build the temple himself?',
@@ -667,6 +694,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'His request pleases God, who also gives him riches '
           '(2 Chronicles 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riches', 'honor', 'temple'],
     ),
     QuizQuestion(
       text: 'What happened when the temple was dedicated?',
@@ -706,6 +735,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'She is impressed by his wisdom and wealth (2 Chronicles 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Solomon', 'Egypt', 'Tyre'],
     ),
     QuizQuestion(
       text: 'Why did the kingdom divide under Rehoboam?',
@@ -745,6 +776,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'He consults physicians instead of God (2 Chronicles 16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['eyes', 'hands', 'leprosy'],
     ),
     QuizQuestion(
       text: 'Why was Jehoshaphat rebuked by a prophet?',
@@ -810,6 +843,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'Hezekiah undertakes a great religious reform '
           '(2 Chronicles 29).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['altar', 'Passover', 'gates'],
     ),
   ],
   '2 Chronicles#4': <QuizQuestion>[
@@ -821,6 +856,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'This Passover gathers Judah and part of Israel '
           '(2 Chronicles 30).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Passover', 'the Passover'],
     ),
     QuizQuestion(
       text: 'What happened after Manasseh repented in captivity?',
@@ -857,6 +894,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Cyrus issues a liberating decree (Ezra 1).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Cyrus'],
     ),
     QuizQuestion(
       text: 'What did the exiles do as soon as they returned, even '
@@ -914,6 +953,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'Their messages spur the construction forward again '
           '(Ezra 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Ezra', 'Nehemiah', 'Daniel'],
     ),
     QuizQuestion(
       text: 'Who arrived later from Babylon with an additional group of '
@@ -922,6 +963,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Ezra arrives during the reign of Artaxerxes (Ezra 7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ezra'],
     ),
   ],
   'Ezra#2': <QuizQuestion>[
@@ -988,6 +1031,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC2 = <String, List<QuizQu
       explanation:
           'The king agrees and provides him with resources '
           '(Nehemiah 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['temple', 'king', 'Jerusalem'],
     ),
     QuizQuestion(
       text: 'How did the builders respond to mockery and threats?',

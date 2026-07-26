@@ -39,6 +39,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A detailed warning is given (2 Peter 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['angels', 'Noah', 'Sodom'],
     ),
     QuizQuestion(
       text: 'What historical examples does 2 Peter 2 cite as a warning?',
@@ -125,6 +127,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An essential test of genuine faith (1 John 3:11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['hate', 'world', 'truth'],
     ),
   ],
   '1 John#2': <QuizQuestion>[
@@ -134,6 +138,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A central declaration of the letter (1 John 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['light', 'spirit', 'truth'],
     ),
     QuizQuestion(
       text: 'What does 1 John 5 say conquers the world?',
@@ -163,6 +169,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A constant reminder of brotherly love (2 John 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['truth', 'antichrist', 'walk'],
     ),
   ],
   '3 John#0': <QuizQuestion>[
@@ -177,6 +185,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'His generosity is held up as an example (3 John 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Diotrephes', 'truth', 'letter'],
     ),
     QuizQuestion(
       text: 'What behavior does Diotrephes display in this letter?',
@@ -216,6 +226,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Examples of past judgment (Jude 1:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Egypt', 'Cain', 'Korah'],
     ),
   ],
   'Revelation#0': <QuizQuestion>[
@@ -231,6 +243,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       explanation:
           'An impressive vision opens the book '
           '(Revelation 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['throne', 'scroll', 'stars'],
     ),
     QuizQuestion(
       text: 'How many congregations are the letters in chapters 2-3 '
@@ -240,6 +254,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       explanation:
           'Seven personalized messages are given (Revelation '
           '2-3).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Who alone is found worthy to open the sealed scroll in '
@@ -288,6 +303,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A final stage of divine judgment (Revelation 15:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['seals', 'trumpets', 'plagues'],
     ),
   ],
   'Revelation#2': <QuizQuestion>[
@@ -304,6 +321,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       explanation:
           'Her fall is described amid lamentation '
           '(Revelation 18).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Babylon', 'harlot', 'beast'],
     ),
     QuizQuestion(
       text: 'What happens to Satan at the start of Revelation 20?',

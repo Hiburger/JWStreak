@@ -24,6 +24,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Ester viene scelta come nuova regina (Ester 2).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ester'],
     ),
     QuizQuestion(
       text: 'Perché Aman voleva sterminare tutti gli ebrei dell’impero?',
@@ -90,12 +92,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           'Un decreto irrevocabile doveva essere contrastato da un altro '
           'decreto (Ester 8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fuggire', 'tacere', 'pagare'],
     ),
     QuizQuestion(
       text: 'Quale festa fu istituita per commemorare questa liberazione?',
       options: <String>['Purim', 'La Pasqua', 'Le Capanne', 'Il Giubileo'],
       correctIndex: 0,
       explanation: 'Purim celebra ancora oggi questo evento (Ester 9).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quale posizione ricoprì infine Mardocheo?',
@@ -143,6 +148,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Giobbe rifiuta questo consiglio disperato (Giobbe 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['benedire', 'pregare', 'vivere'],
     ),
   ],
   'Job#1': <QuizQuestion>[
@@ -170,6 +177,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Giobbe aspira a perorare la propria causa in modo equo (Giobbe 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['amico', 'giudice', 'testimone'],
     ),
     QuizQuestion(
       text: 'Che cosa consiglia Zofar a Giobbe nel suo primo discorso?',
@@ -181,6 +190,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Zofar suppone che Giobbe nasconda una colpa (Giobbe 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sacrificio', 'digiuno', 'silenzio'],
     ),
   ],
   'Job#2': <QuizQuestion>[
@@ -263,6 +274,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           'Questo poema celebra la sapienza, più preziosa dell’oro '
           '(Giobbe 28).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ricchezza', 'oro', 'forza'],
     ),
   ],
   'Job#4': <QuizQuestion>[
@@ -317,6 +330,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Dio risponde finalmente, ma con delle domande (Giobbe 38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['nube', 'fuoco', 'silenzio'],
     ),
     QuizQuestion(
       text: 'Su che cosa vertono principalmente le domande di Geova a '
@@ -493,6 +508,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           'Asaf risolve questo turbamento entrando nel santuario di Dio '
           '(Salmo 73:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['giusti', 'ricchezza', 'tempio'],
     ),
     QuizQuestion(
       text: 'Quale immagine descrive la potente marcia di Dio nel '
@@ -621,6 +638,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: '«Se Geova non costruisce la casa...» (Salmo 127:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['casa', 'città', 'vigilanti'],
     ),
   ],
   'Psalms#7': <QuizQuestion>[
@@ -674,6 +693,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Questo principio fondamentale apre il libro (Proverbi 1:7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sapienza', 'ricchezza', 'stoltezza'],
     ),
     QuizQuestion(
       text: 'Che cosa consiglia Proverbi 3 riguardo alla fiducia?',
@@ -712,6 +733,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           '«Una risposta gentile calma il furore» (Proverbi 15:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['parola', 'collera', 'silenzio'],
     ),
     QuizQuestion(
       text: 'Che cosa dice Proverbi 16 riguardo ai nostri progetti e a '
@@ -766,6 +789,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           '«Chi ha pietà del povero fa un prestito a Geova» '
           '(Proverbi 19:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ricchezza', 'elemosina', 'debito'],
     ),
     QuizQuestion(
       text: 'Secondo Proverbi 22, che cosa vale più di una grande '
@@ -780,6 +805,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           '«Una buona reputazione vale più di grandi ricchezze» '
           '(Proverbi 22:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ricchezza', 'argento', 'oro'],
     ),
   ],
   'Proverbs#3': <QuizQuestion>[
@@ -819,6 +846,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Un acrostico loda la donna valorosa (Proverbi 31).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sapienza', 'marito', 'casa'],
     ),
   ],
   'Ecclesiastes#0': <QuizQuestion>[
@@ -1019,6 +1048,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Segue la sua entusiastica descrizione (Cantico 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Sulammita', 'amato', 'vigna'],
     ),
   ],
   'Song of Solomon#2': <QuizQuestion>[
@@ -1035,6 +1066,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           '«Le grandi acque non possono spegnere l’amore» '
           '(Cantico 8:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['acque', 'fuoco', 'vento'],
     ),
     QuizQuestion(
       text: 'Che cosa simboleggiano le «grandi acque» incapaci di '
@@ -1124,6 +1157,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: 'Viene promessa un’armonia totale (Isaia 11:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['leone', 'pastore', 'deserto'],
     ),
     QuizQuestion(
       text: 'Come descrive Isaia 14 la caduta superba del re di '
@@ -1151,6 +1186,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       explanation:
           'Questo segno illustra la vergogna della cattività che verrà '
           '(Isaia 20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sandali', 'deserto', 'catene'],
     ),
     QuizQuestion(
       text: 'Quale giudizio universale annuncia Isaia 24?',
@@ -1174,6 +1211,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Viene espressa una straordinaria speranza (Isaia 25:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['vita', 'tomba', 'lacrime'],
     ),
   ],
   'Isaiah#3': <QuizQuestion>[
@@ -1188,6 +1227,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       ],
       correctIndex: 0,
       explanation: '«Tu conserverai in perfetta pace» (Isaia 26:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['guerra', 'gioia', 'forza'],
     ),
     QuizQuestion(
       text: 'Quale pietra preziosa pone Geova in Sion secondo Isaia 28?',
@@ -1200,6 +1241,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Un’immagine messianica di fondamento sicuro (Isaia 28:16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Sion', 'tempio', 'muro'],
     ),
     QuizQuestion(
       text: 'Contro chi mette in guardia Isaia il popolo riguardo a '
@@ -1228,6 +1271,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Viene promessa una gioiosa trasformazione (Isaia 35:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['deserto', 'acqua', 'giglio'],
     ),
     QuizQuestion(
       text: 'Come rispose Geova alla preghiera di Ezechia di fronte a '
@@ -1268,6 +1313,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Una notevole mitezza caratterizza questo servitore (Isaia 42:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lucignolo', 'fumante', 'servitore'],
     ),
     QuizQuestion(
       text: 'Quale re straniero viene nominato in anticipo da Isaia come '
@@ -1275,6 +1322,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       options: <String>['Ciro', 'Nabucodonosor', 'Dario', 'Serse'],
       correctIndex: 0,
       explanation: 'Una notevole profezia nomina Ciro (Isaia 44-45).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Che cosa dice Isaia 48 riguardo all’atteggiamento passato '
@@ -1370,6 +1418,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Una promessa di speranza conclude il libro (Isaia 65:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Sion', 'luce', 'mare'],
     ),
   ],
   'Jeremiah#0': <QuizQuestion>[
@@ -1437,6 +1487,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Un segno visivo di decadenza morale (Geremia 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['cintura', 'lino', 'Eufrate'],
     ),
     QuizQuestion(
       text: 'Che cosa rivela Geremia 17 riguardo al cuore umano?',
@@ -1513,6 +1565,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Questa durata precisa viene profetizzata (Geremia 25:11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['settanta anni', '70'],
     ),
     QuizQuestion(
       text: 'Che cosa consiglia Geremia agli esiliati a Babilonia nella '
@@ -1577,6 +1631,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Questo etiope interviene coraggiosamente (Geremia 38).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ebed Melec'],
     ),
     QuizQuestion(
       text: 'Chi fu nominato governatore dopo la caduta di Gerusalemme, '
@@ -1585,6 +1641,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC3 =
       correctIndex: 0,
       explanation:
           'Il suo assassinio provoca nuovi disordini (Geremia 40-41).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Che cosa fa il resto del popolo nonostante l’avvertimento '

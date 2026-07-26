@@ -8,6 +8,8 @@ import '../l10n/app_localizations.dart';
 import '../quiz_data.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
+import '../widgets/freeze_earned_dialog.dart';
+import '../widgets/message_dialog.dart';
 import 'checkpoint_screen.dart';
 import 'quiz_screen.dart';
 
@@ -453,13 +455,10 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
 
   Future<void> _openCheckpoint(Checkpoint cp) async {
     if (!_isCheckpointUnlocked(cp)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.bibleUnlockHint(
-              localizedCheckpointTitle(context, cp),
-            ),
-          ),
+      showMessageDialog(
+        context,
+        message: AppLocalizations.of(context)!.bibleUnlockHint(
+          localizedCheckpointTitle(context, cp),
         ),
       );
       return;
@@ -474,19 +473,19 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
   }
 
   Future<void> _openInJwLibrary(int chapter) async {
+    final String languageCode = Localizations.localeOf(context).languageCode;
     try {
       await _deepLinkService.openReference(
         book: widget.book.id,
         chapter: chapter,
+        languageCode: languageCode,
       );
     } catch (error) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.bibleErrorGeneric('$error'),
-            ),
-          ),
+        showMessageDialog(
+          context,
+          message: AppLocalizations.of(context)!.bibleErrorGeneric('$error'),
+          isError: true,
         );
       }
     }
@@ -654,6 +653,7 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
       widget.book,
       languageCode: Localizations.localeOf(context).languageCode,
     );
+    bool freezeEarned = false;
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (_) => QuizScreen(
@@ -661,15 +661,21 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
             context,
           )!.bibleFullQuizTitle(localizedBookName(context, widget.book)),
           questions: questions,
-          onCompleted: (int score, int total) => widget.dbService
-              .saveQuizResult(
-                quizId: '${widget.book.id}#full',
-                score: score,
-                total: total,
-              ),
+          onCompleted: (int score, int total) async {
+            freezeEarned = await widget.dbService.saveQuizResult(
+              quizId: '${widget.book.id}#full',
+              score: score,
+              total: total,
+            );
+          },
         ),
       ),
     );
+    // Shown after returning from the quiz's own score screen, rather than
+    // stacked on top of it, so the user sees their result first.
+    if (freezeEarned && mounted) {
+      await showFreezeEarnedDialog(context);
+    }
   }
 }
 
@@ -860,7 +866,9 @@ class _CheckpointRow extends StatelessWidget {
       final String suffix = reflectionAnswered
           ? ''
           : AppLocalizations.of(context)!.bibleReflectionToWriteSuffix;
-      final String date = DateFormat('dd/MM à HH:mm').format(result!.passedAt);
+      final String date =
+          '${DateFormat('dd/MM').format(result!.passedAt)} · '
+          '${DateFormat('HH:mm').format(result!.passedAt)}';
       return Text(
         AppLocalizations.of(context)!.bibleCheckpointScoreDate(
           result!.score,
@@ -1012,36 +1020,38 @@ class _QuizGridCellState extends State<_QuizGridCell>
       return cell;
     }
 
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (BuildContext context, Widget? child) {
-        final double angle = controller.value * 2 * math.pi;
-        final double pulse = 0.5 + 0.5 * math.sin(controller.value * 2 * math.pi);
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: SweepGradient(
-              transform: GradientRotation(angle),
-              colors: const <Color>[
-                Colors.amber,
-                Color(0xFFFFD54F),
-                Colors.orangeAccent,
-                Colors.amber,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (BuildContext context, Widget? child) {
+          final double angle = controller.value * 2 * math.pi;
+          final double pulse = 0.5 + 0.5 * math.sin(controller.value * 2 * math.pi);
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: SweepGradient(
+                transform: GradientRotation(angle),
+                colors: const <Color>[
+                  Colors.amber,
+                  Color(0xFFFFD54F),
+                  Colors.orangeAccent,
+                  Colors.amber,
+                ],
+              ),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.amber.withValues(alpha: 0.35 + 0.3 * pulse),
+                  blurRadius: 8 + 6 * pulse,
+                  spreadRadius: 0.5 + 1.5 * pulse,
+                ),
               ],
             ),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.amber.withValues(alpha: 0.35 + 0.3 * pulse),
-                blurRadius: 8 + 6 * pulse,
-                spreadRadius: 0.5 + 1.5 * pulse,
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(2),
-          child: child,
-        );
-      },
-      child: cell,
+            padding: const EdgeInsets.all(2),
+            child: child,
+          );
+        },
+        child: cell,
+      ),
     );
   }
 }

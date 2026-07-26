@@ -100,6 +100,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'La hambruna del sitio se describe con realismo '
           '(Lamentaciones 4).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sed', 'espada', 'sitio'],
     ),
     QuizQuestion(
       text: '¿Qué pide la oración final del capítulo 5?',
@@ -149,6 +151,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Una señal simbólica de asimilación del mensaje '
           '(Ezequiel 3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['comerlo', 'comer el rollo'],
     ),
     QuizQuestion(
       text: '¿Qué idolatría secreta ve Ezequiel practicada en el '
@@ -191,6 +195,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una señal grave de juicio inminente (Ezequiel 10-11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gloria', 'carro', 'querubines'],
     ),
     QuizQuestion(
       text: '¿Con qué se compara a Jerusalén en la parábola del '
@@ -277,6 +283,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Una imagen marítima ilustra su gloria pasada '
           '(Ezequiel 27).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ciudad', 'cedro', 'león'],
     ),
     QuizQuestion(
       text: '¿Con qué se compara a Egipto en el juicio que le '
@@ -333,6 +341,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Un solo pueblo reunido bajo un solo pastor (Ezequiel '
           '37:19).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Egipto', 'Babilonia', 'huesos'],
     ),
   ],
   'Ezekiel#5': <QuizQuestion>[
@@ -349,6 +359,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Un retorno simbólico de la presencia divina (Ezequiel '
           '43).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['río', 'altar', 'puerta'],
     ),
     QuizQuestion(
       text: '¿Qué produce el río que sale del templo según '
@@ -411,6 +423,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un milagro demuestra la protección divina (Daniel 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['leones', 'estatua', 'rey'],
     ),
   ],
   'Daniel#1': <QuizQuestion>[
@@ -524,6 +538,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           '«Mi pueblo perece por falta de conocimiento» '
           '(Oseas 4:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['justicia', 'misericordia', 'sacrificio'],
     ),
   ],
   'Hosea#1': <QuizQuestion>[
@@ -543,6 +559,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una imagen de las consecuencias de la infidelidad (Oseas 8:7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['tempestad', 'torbellino'],
     ),
   ],
   'Hosea#2': <QuizQuestion>[
@@ -580,6 +598,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se describe una plaga sin precedentes (Joel 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sequía', 'granizo', 'guerra'],
     ),
     QuizQuestion(
       text: '¿Qué llamado hace Joel ante este desastre?',
@@ -614,6 +634,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Citada en Hechos 2 durante Pentecostés (Joel 2:28).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fuego', 'lluvia', 'sueños'],
     ),
   ],
   'Joel#2': <QuizQuestion>[
@@ -623,6 +645,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Allí se anuncia un juicio colectivo (Joel 3:14).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jezreel', 'Sion', 'Jerusalén'],
     ),
     QuizQuestion(
       text: '¿Qué promete Joel 3 a Judá después del juicio de las '
@@ -696,6 +720,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'La imagen prueba la rectitud de un muro (Amós 7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['plomada'],
     ),
     QuizQuestion(
       text: '¿Qué promete Amós 9 pese al juicio anunciado?',
@@ -718,6 +744,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Edom es juzgado por su violencia contra su hermano '
           'Jacob (Abdías 1).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: '¿Qué afirmación concluye el libro de Abdías?',
@@ -757,6 +784,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un suceso extraordinario lo salva (Jonás 1:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tormenta', 'barco', 'marineros'],
     ),
   ],
   'Jonah#1': <QuizQuestion>[
@@ -766,6 +795,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una oración de angustia y reconocimiento (Jonás 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['duerme', 'canta', 'huye'],
     ),
     QuizQuestion(
       text: '¿Cómo reaccionó Nínive al mensaje de Jonás?',
@@ -816,6 +847,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Las dos capitales son el blanco (Miqueas 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Nínive', 'Babilonia', 'Belén'],
     ),
     QuizQuestion(
       text: '¿Qué abuso social denuncia Miqueas 2?',
@@ -842,6 +875,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una profecía mesiánica precisa (Miqueas 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jerusalén', 'Nazaret', 'Sion'],
     ),
     QuizQuestion(
       text: '¿Qué visión de paz comparte Miqueas 4, semejante a la '
@@ -904,6 +939,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un consuelo para los fieles (Nahúm 1:7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['enemigos', 'Nínive', 'naciones'],
     ),
   ],
   'Nahum#1': <QuizQuestion>[
@@ -931,6 +968,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un juicio severo por su violencia (Nahúm 3:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Nínive', 'ramera', 'fortaleza'],
     ),
     QuizQuestion(
       text: '¿Cuál es el desenlace final anunciado para Nínive?',
@@ -981,6 +1020,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Una declaración retomada más tarde en las Escrituras '
           'Griegas (Habacuc 2:4).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fe', 'caldeos', 'visión'],
     ),
     QuizQuestion(
       text: '¿Qué llenará toda la tierra según Habacuc 2?',
@@ -1043,6 +1084,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'El juicio comienza por el pueblo de Dios '
           '(Sofonías 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Moab', 'Amón', 'Nínive'],
     ),
   ],
   'Zephaniah#1': <QuizQuestion>[
@@ -1052,6 +1095,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un llamado urgente al arrepentimiento (Sofonías 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['orgullo', 'juicio', 'ídolos'],
     ),
     QuizQuestion(
       text: '¿Qué naciones son también juzgadas en este capítulo?',
@@ -1087,6 +1132,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Una esperanza de restauración para los fieles '
           '(Sofonías 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['juzgado', 'disperso', 'humilde'],
     ),
   ],
   'Haggai#0': <QuizQuestion>[
@@ -1131,6 +1178,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Ocho visiones nocturnas estructuran estos capítulos '
           '(Zacarías 1-5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sueños', 'parábolas', 'señales'],
     ),
     QuizQuestion(
       text: '¿Qué simboliza la purificación del sumo sacerdote Josué '
@@ -1191,6 +1240,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Este detalle se retoma en los relatos evangélicos '
           '(Zacarías 11:12, 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['oro', 'pastor', 'cayado'],
     ),
     QuizQuestion(
       text: '¿Cómo concluye el libro de Zacarías respecto al futuro?',
@@ -1220,6 +1271,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Se denuncia el desprecio hacia las ofrendas '
           '(Malaquías 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['diezmos', 'incienso', 'pan'],
     ),
     QuizQuestion(
       text: '¿Cómo ilustra Malaquías 1 el amor de Jehová por su '
@@ -1262,6 +1315,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una profecía vinculada a Juan el Bautista (Malaquías 3:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Elías', 'profeta', 'sacerdote'],
     ),
   ],
   'Malachi#2': <QuizQuestion>[
@@ -1285,6 +1340,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       explanation:
           'Esta profecía se relaciona con Juan el Bautista en los '
           'Evangelios (Malaquías 4:5).',
+      type: QuizAnswerType.freeText,
     ),
   ],
 };

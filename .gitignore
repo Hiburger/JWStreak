@@ -18,6 +18,9 @@ migrate_working_dir/
 *.iws
 .idea/
 
+# Local AI-assistant state (no project source lives here)
+.claude/
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
@@ -43,3 +46,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Release signing key — never commit this. Losing it means future releases
+# can no longer be signed as an update to the same app; back it up somewhere
+# safe outside git (password manager, encrypted drive).
+/android/key.properties
+/android/app/keystore/

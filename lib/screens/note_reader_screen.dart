@@ -6,6 +6,7 @@ import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
+import '../widgets/message_dialog.dart';
 import 'notes_screen.dart';
 
 class NoteReaderScreen extends StatefulWidget {
@@ -139,12 +140,10 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
   }
 
   void _showError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          AppLocalizations.of(context)!.noteReaderError(error.toString()),
-        ),
-      ),
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.noteReaderError(error.toString()),
+      isError: true,
     );
   }
 
@@ -234,7 +233,8 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
                         ),
                         Text(
                           AppLocalizations.of(context)!.noteReaderUpdatedAt(
-                            DateFormat('dd/MM/yyyy à HH:mm').format(note.updatedAt),
+                            '${DateFormat('dd/MM/yyyy').format(note.updatedAt)} · '
+                            '${DateFormat('HH:mm').format(note.updatedAt)}',
                           ),
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: colorScheme.onSurfaceVariant,

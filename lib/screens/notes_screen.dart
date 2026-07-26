@@ -5,6 +5,7 @@ import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../widgets/markdown_editing_controller.dart';
+import '../widgets/message_dialog.dart';
 
 /// Note editor. With [noteId] it edits an existing note; without it,
 /// it creates a new note linked to [book]/[chapter].
@@ -90,13 +91,10 @@ class _NotesScreenState extends State<NotesScreen> {
     }
 
     if (title.isEmpty) {
+      // The inline errorText below already surfaces this; no need to also
+      // interrupt with a dialog.
       setState(
         () => _titleError = AppLocalizations.of(context)!.noteEditorTitleErrorHint,
-      );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.noteEditorTitleRequired),
-        ),
       );
       return;
     }
@@ -123,11 +121,6 @@ class _NotesScreenState extends State<NotesScreen> {
       if (!mounted) {
         return;
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.noteEditorSavedSnackbar),
-        ),
-      );
       Navigator.of(context).pop(true);
     } catch (error) {
       if (mounted) {
@@ -143,12 +136,10 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   void _showError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          AppLocalizations.of(context)!.noteEditorErrorSnackbar(error.toString()),
-        ),
-      ),
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.noteEditorErrorSnackbar(error.toString()),
+      isError: true,
     );
   }
 

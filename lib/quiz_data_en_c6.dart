@@ -111,6 +111,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'A sacred image highlights their collective responsibility '
           '(1 Corinthians 3:16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['body', 'spirit', 'stone'],
     ),
   ],
   '1 Corinthians#1': <QuizQuestion>[
@@ -163,6 +165,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Without love, all else is worthless (1 Corinthians 13).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
@@ -193,6 +196,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'An image of humility and divine power '
           '(2 Corinthians 4:7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gold', 'vessel', 'light'],
     ),
   ],
   '2 Corinthians#1': <QuizQuestion>[
@@ -203,6 +208,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'The central message of reconciliation (2 Corinthians '
           '5:20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ambassadors', 'Christ', 'peace'],
     ),
     QuizQuestion(
       text: 'What principle does Paul teach about generous giving in '
@@ -330,6 +337,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A call to brotherly mutual support (Galatians 6:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['law', 'spirit', 'flesh'],
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
@@ -546,6 +555,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'A warning against false teachings '
           '(Colossians 2:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['circumcision', 'angels', 'wisdom'],
     ),
     QuizQuestion(
       text: 'What must Christians "put on" according to Colossians 3?',
@@ -603,6 +614,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'Their faith became a recognized model '
           '(1 Thessalonians 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['burden', 'shame', 'model'],
     ),
     QuizQuestion(
       text: 'How does Paul describe his ministry among them?',
@@ -640,6 +653,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'Their steadfastness deeply comforts him '
           '(1 Thessalonians 3:8, 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sorrow', 'fear', 'peace'],
     ),
   ],
   '1 Thessalonians#2': <QuizQuestion>[
@@ -665,6 +680,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC6 = <String, List<QuizQu
       explanation:
           'An image of a sudden, unexpected arrival '
           '(1 Thessalonians 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['trumpet', 'cloud', 'bride'],
     ),
   ],
 };

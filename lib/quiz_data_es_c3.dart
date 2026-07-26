@@ -18,6 +18,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       options: <String>['A Ester, su prima', 'A su hija', 'A su hermana', 'A una esclava extranjera'],
       correctIndex: 0,
       explanation: 'Ester es elegida como la nueva reina (Ester 2).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ester'],
     ),
     QuizQuestion(
       text: '¿Por qué quería Amán exterminar a todos los judíos del imperio?',
@@ -77,12 +79,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Un decreto irrevocable debía ser contrarrestado por otro (Ester 8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Amán', 'anillo', 'provincias'],
     ),
     QuizQuestion(
       text: '¿Qué fiesta se instituyó para conmemorar esta liberación?',
       options: <String>['El Purim', 'La Pascua', 'Los Tabernáculos', 'El Jubileo'],
       correctIndex: 0,
       explanation: 'El Purim sigue celebrando este acontecimiento hasta hoy (Ester 9).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Purim'],
     ),
     QuizQuestion(
       text: '¿Qué posición ocupó finalmente Mardoqueo?',
@@ -129,6 +135,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Job rechaza este consejo desesperado (Job 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['bendecir', 'callar', 'esperar'],
     ),
   ],
   'Job#1': <QuizQuestion>[
@@ -153,6 +161,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Job anhela presentar su causa de manera justa (Job 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['amigo', 'juez', 'testigo'],
     ),
     QuizQuestion(
       text: '¿Qué le aconseja Sofar a Job en su primer discurso?',
@@ -223,6 +233,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Job busca una audiencia justa (Job 23).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['amigos', 'silencio', 'juicio'],
     ),
     QuizQuestion(
       text: '¿Qué tema central desarrolla Job en el capítulo 28?',
@@ -282,6 +294,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Dios finalmente responde, pero mediante preguntas (Job 38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['nube', 'zarza', 'sueño'],
     ),
     QuizQuestion(
       text: '¿Sobre qué tratan principalmente las preguntas de Jehová a Job?',
@@ -412,6 +426,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '«Dios es para nosotros un refugio y una fuerza» (Salmo 46:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['torre', 'escudo', 'roca'],
     ),
   ],
   'Psalms#3': <QuizQuestion>[
@@ -600,6 +616,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Este principio fundamental abre el libro (Proverbios 1:7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sabiduría', 'disciplina', 'necio'],
     ),
     QuizQuestion(
       text: '¿Qué aconseja Proverbios 3 respecto a la confianza?',
@@ -611,6 +629,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '«Confía en Jehová de todo tu corazón» (Proverbios 3:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['entendimiento', 'sendas', 'sabiduría'],
     ),
     QuizQuestion(
       text: '¿Cómo se personifica la sabiduría en Proverbios 8?',
@@ -635,6 +655,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '«La respuesta suave aparta el furor» (Proverbios 15:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lengua', 'necio', 'ira'],
     ),
     QuizQuestion(
       text: '¿Qué dice Proverbios 16 sobre nuestros planes y Jehová?',
@@ -692,6 +714,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '«Vale más una buena reputación que grandes riquezas» (Proverbios 22:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riqueza', 'oro', 'plata'],
     ),
   ],
   'Proverbs#3': <QuizQuestion>[
@@ -727,6 +751,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Un acróstico alaba a la mujer excelente (Proverbios 31).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['necia', 'perezosa', 'rey'],
     ),
   ],
   'Ecclesiastes#0': <QuizQuestion>[
@@ -902,6 +928,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'A continuación viene su descripción entusiasta (Cantar 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pastores', 'guardias', 'amado'],
     ),
   ],
   'Song of Solomon#2': <QuizQuestion>[
@@ -996,6 +1024,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Se promete una armonía total (Isaías 11:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['león', 'oso', 'pastor'],
     ),
     QuizQuestion(
       text: '¿Cómo describe Isaías 14 la orgullosa caída del rey de Babilonia?',
@@ -1020,6 +1050,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Esta señal ilustra la vergüenza del cautiverio venidero (Isaías 20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['saco', 'ceniza', 'Egipto'],
     ),
     QuizQuestion(
       text: '¿Qué juicio universal anuncia Isaías 24?',
@@ -1055,6 +1087,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '«Lo guardarás en paz perfecta» (Isaías 26:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gozo', 'justicia', 'refugio'],
     ),
     QuizQuestion(
       text: '¿Qué piedra preciosa coloca Jehová en Sion según Isaías 28?',
@@ -1090,6 +1124,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Se promete una transformación gozosa (Isaías 35:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['desierto', 'agua', 'arena'],
     ),
     QuizQuestion(
       text: '¿Cómo respondió Jehová a la oración de Ezequías frente a Senaquerib?',
@@ -1131,6 +1167,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       options: <String>['Ciro', 'Nabucodonosor', 'Darío', 'Jerjes'],
       correctIndex: 0,
       explanation: 'Una notable profecía nombra a Ciro (Isaías 44-45).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: '¿Qué dice Isaías 48 sobre la actitud pasada del pueblo hacia los mandamientos de Dios?',
@@ -1212,6 +1249,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Una promesa de esperanza concluye el libro (Isaías 65:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['mar', 'templo', 'ciudad'],
     ),
   ],
   'Jeremiah#0': <QuizQuestion>[
@@ -1336,6 +1375,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       options: <String>['70 años', '7 años', '40 años', '400 años'],
       correctIndex: 0,
       explanation: 'Esta duración precisa es profetizada (Jeremías 25:11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['setenta años', 'setenta'],
     ),
     QuizQuestion(
       text: '¿Qué les aconseja Jeremías a los exiliados en Babilonia en su carta?',
@@ -1390,12 +1431,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       options: <String>['Ebed-mélec', 'Baruc', 'Gedalías', 'Ismael'],
       correctIndex: 0,
       explanation: 'Este etíope interviene con valentía (Jeremías 38).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: '¿Quién fue nombrado gobernador después de la caída de Jerusalén, y luego asesinado?',
       options: <String>['Gedalías', 'Sedequías', 'Ismael', 'Baruc'],
       correctIndex: 0,
       explanation: 'Su asesinato provoca nuevos disturbios (Jeremías 40-41).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: '¿Qué hace el resto del pueblo a pesar de la advertencia de Jeremías de permanecer en el país?',

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:vibration/vibration.dart';
 
 import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
+import '../services/deep_link_service.dart';
+import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../theme/theme_preference.dart';
+import '../widgets/message_dialog.dart';
+import '../widgets/tap_easter_egg.dart';
 
 /// A selectable UI language. The [name] is always shown in its own
 /// language (endonym), regardless of the app's current locale — this is
@@ -22,6 +25,8 @@ class _AppLanguage {
 const List<_AppLanguage> _kAppLanguages = <_AppLanguage>[
   _AppLanguage('en', 'English (US)'),
   _AppLanguage('fr', 'Français'),
+  _AppLanguage('de', 'Deutsch'),
+  _AppLanguage('pl', 'Polski'),
   _AppLanguage('it', 'Italiano'),
   _AppLanguage('es', 'Español'),
   _AppLanguage('pt', 'Português'),
@@ -34,7 +39,7 @@ class SettingsScreen extends StatefulWidget {
     required this.currentThemePreference,
     required this.onThemePreferenceChanged,
     required this.notificationService,
-    this.useDynamicColor = true,
+    this.useDynamicColor = false,
     this.onUseDynamicColorChanged,
     this.currentLocaleCode,
     this.onLocaleChanged,
@@ -46,6 +51,7 @@ class SettingsScreen extends StatefulWidget {
   final NotificationService notificationService;
   final bool useDynamicColor;
   final Future<void> Function(bool value)? onUseDynamicColorChanged;
+
   /// null means "follow system language".
   final String? currentLocaleCode;
   final Future<void> Function(String? code)? onLocaleChanged;
@@ -63,6 +69,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isCheckingPermissions = true;
   String _version = '...';
 
+  // Bible target: true = open chapters in the JW Library app (default),
+  // false = open on jw.org in a browser.
+  bool _openInJwLibrary = true;
+  final DeepLinkService _deepLinkService = DeepLinkService();
+
+  // Secret: tap the version row 7 times (the classic Android "developer
+  // options" gag) for a little wink — there's no real hidden mode here.
+  static const int _versionTapsToTrigger = 7;
+  static const Duration _versionTapWindow = Duration(milliseconds: 1500);
+  int _versionTapCount = 0;
+  DateTime? _versionLastTap;
+
+  void _handleVersionTap() {
+    final DateTime now = DateTime.now();
+    if (_versionLastTap == null ||
+        now.difference(_versionLastTap!) > _versionTapWindow) {
+      _versionTapCount = 0;
+    }
+    _versionLastTap = now;
+    _versionTapCount++;
+
+    if (_versionTapCount >= _versionTapsToTrigger) {
+      _versionTapCount = 0;
+      _versionLastTap = null;
+      LocalDbService().markEasterEggFound('version');
+      _showVersionEasterEggDialog();
+    }
+  }
+
+  Future<void> _showVersionEasterEggDialog() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        icon: const Text('🕵️', style: TextStyle(fontSize: 40)),
+        title: Text(l10n.easterEggVersionTitle),
+        content: Text(l10n.easterEggVersionBody),
+        actions: <Widget>[
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.easterEggVersionButton),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Opens Flutter's built-in Material license page, which lists the
+  /// open-source licenses of every bundled dependency. The app's own GPLv3
+  /// terms are shown as the legalese under the app name.
+  void _showLicenses() {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    showLicensePage(
+      context: context,
+      applicationName: 'JW Streak',
+      applicationVersion: _version,
+      applicationLegalese: l10n.settingsLicenseLegalese,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -79,6 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           .areNotificationsEnabled();
       final bool exactAlarmsAllowed = await widget.notificationService
           .canScheduleExactAlarms();
+      final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
       if (!mounted) {
         return;
       }
@@ -86,6 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _version = '${packageInfo.version} (${packageInfo.buildNumber})';
         _notificationsEnabled = notificationsEnabled;
         _exactAlarmsAllowed = exactAlarmsAllowed;
+        _openInJwLibrary = !openOnWeb;
         _isCheckingPermissions = false;
       });
     } catch (error) {
@@ -131,6 +199,71 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  /// Switches the Bible-opening target. When the user turns the switch toward
+  /// JW Library but the app isn't installed, we don't apply the change and
+  /// instead offer a link to install it.
+  Future<void> _changeBibleTarget(bool wantJwLibrary) async {
+    if (wantJwLibrary && !await _deepLinkService.isJwLibraryInstalled()) {
+      if (mounted) {
+        await _showJwLibraryRequiredDialog();
+      }
+      return;
+    }
+    setState(() {
+      _openInJwLibrary = wantJwLibrary;
+    });
+    try {
+      await LocalDbService().saveOpenBibleOnWeb(!wantJwLibrary);
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+    }
+  }
+
+  /// Clears the "tour already seen" flag and returns to the home screen,
+  /// which re-checks the flag on resume and replays the walkthrough there.
+  Future<void> _replayGuidedTour() async {
+    final NavigatorState navigator = Navigator.of(context);
+    try {
+      await LocalDbService().resetGuidedTour();
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+      return;
+    }
+    navigator.pop();
+  }
+
+  Future<void> _showJwLibraryRequiredDialog() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    await showDialog<void>(
+      context: context,
+      builder: (BuildContext dialogContext) => AlertDialog(
+        icon: Icon(Icons.menu_book_outlined, color: cs.primary),
+        content: Text(
+          l10n.settingsBibleTargetJwLibraryMissing,
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.of(dialogContext).pop();
+              _openExternal(Uri.parse(kJwLibraryPlayStoreUrl));
+            },
+            child: Text(l10n.settingsBibleTargetInstall),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _changeLocale(String? code) async {
     setState(() {
       _selectedLocaleCode = code;
@@ -173,15 +306,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       setState(() {
         _notificationsEnabled = granted;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            granted
-                ? AppLocalizations.of(context)!.settingsNotifGranted
-                : AppLocalizations.of(context)!.settingsNotifDenied,
-          ),
-        ),
-      );
     } catch (error) {
       if (!mounted) {
         return;
@@ -200,15 +324,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       setState(() {
         _exactAlarmsAllowed = granted;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            granted
-                ? AppLocalizations.of(context)!.settingsAlarmsGranted
-                : AppLocalizations.of(context)!.settingsAlarmsDenied,
-          ),
-        ),
-      );
     } catch (error) {
       if (!mounted) {
         return;
@@ -228,10 +343,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _showError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.settingsError(error.toString())),
-      ),
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.settingsError(error.toString()),
+      isError: true,
     );
   }
 
@@ -246,7 +361,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
-          Text(l10n.settingsAppearance, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            l10n.settingsAppearance,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           Card.filled(
             child: Padding(
@@ -281,8 +399,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : _changeUseDynamicColor,
             ),
           ),
+          const SizedBox(height: 8),
+          Card.filled(
+            child: SwitchListTile(
+              secondary: Icon(
+                _openInJwLibrary
+                    ? Icons.menu_book_outlined
+                    : Icons.language_outlined,
+              ),
+              title: Text(l10n.settingsBibleTargetTitle),
+              subtitle: Text(
+                _openInJwLibrary
+                    ? l10n.settingsBibleTargetJwLibrary
+                    : l10n.settingsBibleTargetWeb,
+              ),
+              value: _openInJwLibrary,
+              onChanged: _changeBibleTarget,
+            ),
+          ),
           const SizedBox(height: 16),
-          Text(l10n.settingsLanguage, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            l10n.settingsLanguage,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           Card.filled(
             child: Padding(
@@ -305,14 +444,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          Text(l10n.settingsPermissions, style: Theme.of(context).textTheme.titleMedium),
+          Card.filled(
+            child: ListTile(
+              leading: const Icon(Icons.explore_outlined),
+              title: Text(l10n.settingsReplayTour),
+              subtitle: Text(l10n.settingsReplayTourSubtitle),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: _replayGuidedTour,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            l10n.settingsPermissions,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           Card.filled(
             child: ListTile(
               leading: Icon(
                 notificationsEnabled ? Icons.check_circle : Icons.warning_amber,
                 size: 32,
-                color: notificationsEnabled ? Colors.lightGreen : Colors.redAccent,
+                color: notificationsEnabled
+                    ? Colors.lightGreen
+                    : Colors.redAccent,
               ),
               title: Text(l10n.settingsNotifPermTitle),
               subtitle: Text(
@@ -332,9 +486,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Card.filled(
             child: ListTile(
               leading: Icon(
-                exactAlarmsAllowed
-                    ? Icons.check_circle
-                    : Icons.warning_amber,
+                exactAlarmsAllowed ? Icons.check_circle : Icons.warning_amber,
                 size: 32,
                 color: exactAlarmsAllowed
                     ? Colors.lightGreen
@@ -355,7 +507,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          Text(l10n.settingsInfo, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            l10n.settingsInfo,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           Card.filled(
             child: Column(
@@ -364,6 +519,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.info_outline),
                   title: Text(l10n.settingsVersionLabel),
                   subtitle: Text(_version),
+                  onTap: _handleVersionTap,
                 ),
                 ListTile(
                   leading: const Icon(Icons.code_outlined),
@@ -375,6 +531,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.edit_outlined),
                   title: Text(l10n.settingsLicense),
                   subtitle: const Text('GNU GPLv3'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: _showLicenses,
                 ),
                 ListTile(
                   leading: const Icon(Icons.waving_hand),
@@ -400,10 +558,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 32),
-          const Spacer(),
           const Padding(
             padding: EdgeInsets.only(bottom: 24),
-            child: _HeartEasterEgg(),
+            child: Center(child: _HeartEasterEgg()),
           ),
         ],
       ),
@@ -411,115 +568,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-class _HeartEasterEgg extends StatefulWidget {
+class _HeartEasterEgg extends StatelessWidget {
   const _HeartEasterEgg();
 
   @override
-  State<_HeartEasterEgg> createState() => _HeartEasterEggState();
-}
-
-class _HeartEasterEggState extends State<_HeartEasterEgg> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _shakeAnimation;
-
-  final NotificationService _notifications = NotificationService();
-
-  // Fire the message after this many quick consecutive taps; the counter
-  // resets if the user pauses longer than [_tapWindow].
-  static const int _tapsToTrigger = 8;
-  static const Duration _tapWindow = Duration(milliseconds: 1500);
-  int _tapCount = 0;
-  DateTime? _lastTap;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _shakeAnimation = TweenSequence<double>(
-      <TweenSequenceItem<double>>[
-        TweenSequenceItem<double>(
-          tween: Tween<double>(begin: 0, end: -0.15),
-          weight: 1,
-        ),
-        TweenSequenceItem<double>(
-          tween: Tween<double>(begin: -0.15, end: 0.15),
-          weight: 1,
-        ),
-        TweenSequenceItem<double>(
-          tween: Tween<double>(begin: 0.15, end: -0.15),
-          weight: 1,
-        ),
-        TweenSequenceItem<double>(
-          tween: Tween<double>(begin: -0.15, end: 0.15),
-          weight: 1,
-        ),
-        TweenSequenceItem<double>(
-          tween: Tween<double>(begin: 0.15, end: 0),
-          weight: 1,
-        ),
-      ],
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  Future<void> _onTap() async {
-    _controller.reset();
-    _controller.forward();
-
-    final bool hasVibrator = await Vibration.hasVibrator();
-    if (hasVibrator) {
-      await Vibration.vibrate(duration: 50);
-    }
-
-    _registerTap();
-  }
-
-  void _registerTap() {
-    final DateTime now = DateTime.now();
-    if (_lastTap == null || now.difference(_lastTap!) > _tapWindow) {
-      _tapCount = 0;
-    }
-    _lastTap = now;
-    _tapCount++;
-
-    if (_tapCount >= _tapsToTrigger) {
-      _tapCount = 0;
-      _lastTap = null;
-      _notifications.showInstantMessage(
-        title: 'JW Streak 💛',
-        body: 'Moi aussi je t’aime :)',
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _onTap,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (BuildContext context, Widget? child) {
-          return Transform.rotate(
-            angle: _shakeAnimation.value,
-            child: Icon(
-              Icons.favorite,
-              size: 64,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          );
-        },
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    return TapEasterEgg(
+      onTriggered: () {
+        LocalDbService().markEasterEggFound('heart');
+        NotificationService().showInstantMessage(
+          title: 'JW Streak 💛',
+          body: l10n.easterEggHeartBody,
+        );
+      },
+      child: Icon(
+        Icons.favorite,
+        size: 64,
+        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }

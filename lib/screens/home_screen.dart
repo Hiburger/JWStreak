@@ -1,10 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz_data.dart';
@@ -12,6 +10,11 @@ import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../theme/theme_preference.dart';
+import '../widgets/freeze_earned_dialog.dart';
+import '../widgets/guided_tour.dart';
+import '../widgets/message_dialog.dart';
+import '../widgets/tap_easter_egg.dart';
+import 'achievements_screen.dart';
 import 'bible_browser_screen.dart';
 import 'checkpoint_screen.dart';
 import 'notes_library_screen.dart';
@@ -26,7 +29,7 @@ class HomeScreen extends StatefulWidget {
     this.skipBootstrap = false,
     this.currentThemePreference = ThemePreference.system,
     this.onThemePreferenceChanged,
-    this.useDynamicColor = true,
+    this.useDynamicColor = false,
     this.onUseDynamicColorChanged,
     this.currentLocaleCode,
     this.onLocaleChanged,
@@ -37,6 +40,7 @@ class HomeScreen extends StatefulWidget {
   final Future<void> Function(ThemePreference value)? onThemePreferenceChanged;
   final bool useDynamicColor;
   final Future<void> Function(bool value)? onUseDynamicColorChanged;
+
   /// null means "follow system language".
   final String? currentLocaleCode;
   final Future<void> Function(String? code)? onLocaleChanged;
@@ -67,6 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
   int _totalStars = 0;
   bool _isLoading = true;
 
+  // Targets for the guided tour. Adding a step is just: declare a key here,
+  // attach it below, and add one entry to _tourSteps().
+  final GlobalKey _tourStreakKey = GlobalKey();
+  final GlobalKey _tourReadingKey = GlobalKey();
+  final GlobalKey _tourBrowseKey = GlobalKey();
+  final GlobalKey _tourProgressKey = GlobalKey();
+  final GlobalKey _tourQuickActionsKey = GlobalKey();
+  final GlobalKey _tourAchievementsKey = GlobalKey();
+  final GlobalKey _tourNotesKey = GlobalKey();
+  final GlobalKey _tourSettingsKey = GlobalKey();
+  bool _isTourRunning = false;
+
   @override
   void initState() {
     super.initState();
@@ -86,6 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       await _notificationService.handleAppLaunchNotification();
       await _refreshDashboard();
+      await _ensureExactAlarmPermission();
+      await _maybeShowGuidedTour();
     } catch (error) {
       if (!mounted) {
         return;
@@ -94,6 +112,86 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  /// Steps of the home-screen walkthrough, in the order they're shown.
+  List<TourStep> _tourSteps(AppLocalizations l10n) => <TourStep>[
+    // Corner radii match each target's own decoration (see _StreakHero,
+    // _ContinueReadingCard/_AllReadCard, _BrowseBibleTile, _ProgressCard,
+    // _QuickActionTile) so the highlight traces the actual shape instead of
+    // a generic box.
+    TourStep(
+      targetKey: _tourStreakKey,
+      title: l10n.tourStreakTitle,
+      body: l10n.tourStreakBody,
+      cornerRadius: 28,
+    ),
+    TourStep(
+      targetKey: _tourReadingKey,
+      title: l10n.tourReadingTitle,
+      body: l10n.tourReadingBody,
+      cornerRadius: 18,
+    ),
+    TourStep(
+      targetKey: _tourBrowseKey,
+      title: l10n.tourBrowseTitle,
+      body: l10n.tourBrowseBody,
+      cornerRadius: 16,
+    ),
+    TourStep(
+      targetKey: _tourProgressKey,
+      title: l10n.tourProgressTitle,
+      body: l10n.tourProgressBody,
+      cornerRadius: 16,
+    ),
+    TourStep(
+      targetKey: _tourQuickActionsKey,
+      title: l10n.tourQuickActionsTitle,
+      body: l10n.tourQuickActionsBody,
+      cornerRadius: 14,
+    ),
+    TourStep(
+      targetKey: _tourAchievementsKey,
+      title: l10n.tourAchievementsTitle,
+      body: l10n.tourAchievementsBody,
+      shape: TourHighlightShape.circle,
+    ),
+    TourStep(
+      targetKey: _tourNotesKey,
+      title: l10n.tourNotesTitle,
+      body: l10n.tourNotesBody,
+      shape: TourHighlightShape.circle,
+    ),
+    TourStep(
+      targetKey: _tourSettingsKey,
+      title: l10n.tourSettingsTitle,
+      body: l10n.tourSettingsBody,
+      shape: TourHighlightShape.circle,
+    ),
+  ];
+
+  /// Runs the walkthrough once, right after onboarding. The settings screen
+  /// can clear the flag to let the user replay it.
+  Future<void> _maybeShowGuidedTour() async {
+    if (_isTourRunning || await _dbService.isGuidedTourDone() || !mounted) {
+      return;
+    }
+    _isTourRunning = true;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    try {
+      await showGuidedTour(
+        context,
+        steps: _tourSteps(l10n),
+        labels: TourLabels(
+          skip: l10n.tourSkip,
+          next: l10n.tourNext,
+          done: l10n.tourDone,
+        ),
+      );
+      await _dbService.setGuidedTourDone();
+    } finally {
+      _isTourRunning = false;
     }
   }
 
@@ -113,20 +211,31 @@ class _HomeScreenState extends State<HomeScreen> {
       (int a, int b) => a + b,
     );
     final Set<String> frozenDays = await _dbService.getFrozenDays();
+    await _dbService.syncAchievements();
+
+    if (!mounted) {
+      return;
+    }
 
     // Keep the OS schedule in sync with the stored reminders.
+    final AppLocalizations notifL10n = AppLocalizations.of(context)!;
     await _notificationService.cancelAllReminders();
     for (final Reminder reminder in reminders) {
       await _notificationService.scheduleReminder(
         id: reminder.id,
         time: TimeOfDay(hour: reminder.hour, minute: reminder.minute),
+        title: notifL10n.notifReminderTitle,
+        body: notifL10n.notifReminderBody,
       );
     }
 
     // Evening warning if the streak is still inactive today; cancelled as
     // soon as the user is active again.
     if (streakState.count > 0 && !streakState.activeToday) {
-      await _notificationService.scheduleStreakRiskCheck();
+      await _notificationService.scheduleStreakRiskCheck(
+        title: notifL10n.notifStreakRiskTitle,
+        body: notifL10n.notifStreakRiskBody,
+      );
     } else {
       await _notificationService.cancelStreakRiskCheck();
     }
@@ -151,11 +260,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (streakState.justLost && mounted) {
       await _dbService.acknowledgeStreakLoss();
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context)!.homeStreakLostMessage),
-            duration: const Duration(seconds: 5),
-          ),
+        await showMessageDialog(
+          context,
+          message: AppLocalizations.of(context)!.homeStreakLostMessage,
         );
       }
     }
@@ -231,6 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await _deepLinkService.openReference(
       book: payload.book,
       chapter: payload.chapter,
+      languageCode: Localizations.localeOf(context).languageCode,
     );
   }
 
@@ -242,23 +350,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _markChapterRead(String book, int chapter) async {
+    // No confirmation toast needed: the dashboard (next chapter, progress
+    // bars, streak) refreshes immediately and already shows the change.
     await _runAction(() async {
       await _dbService.markChapterRead(book: book, chapter: chapter);
     });
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.homeChapterMarkedRead(
-            displayReference(context, book, chapter),
-          )),
-        ),
-      );
-    }
   }
 
   Future<void> _openChapter(String book, int chapter) async {
+    final String languageCode = Localizations.localeOf(context).languageCode;
     await _runAction(() async {
-      await _deepLinkService.openReference(book: book, chapter: chapter);
+      await _deepLinkService.openReference(
+        book: book,
+        chapter: chapter,
+        languageCode: languageCode,
+      );
     });
   }
 
@@ -299,7 +405,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Checkpoint? _pendingQuizCheckpoint() {
     final String languageCode = Localizations.localeOf(context).languageCode;
     for (final BibleBook book in kBibleBooks) {
-      for (final Checkpoint cp in checkpointsForBook(book, languageCode: languageCode)) {
+      for (final Checkpoint cp in checkpointsForBook(
+        book,
+        languageCode: languageCode,
+      )) {
         if (!cp.hasQuiz) {
           continue;
         }
@@ -314,8 +423,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _openCheckpoint(Checkpoint cp) async {
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
-        builder: (_) =>
-            CheckpointScreen(dbService: _dbService, checkpoint: cp),
+        builder: (_) => CheckpointScreen(dbService: _dbService, checkpoint: cp),
       ),
     );
     await _refreshDashboard();
@@ -331,9 +439,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     if (questions.length < 3) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.homeReviewQuizLocked)),
-      );
+      showMessageDialog(context, message: l10n.homeReviewQuizLocked);
       return;
     }
     bool earned = false;
@@ -352,20 +458,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
     await _refreshDashboard();
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            earned ? l10n.homeReviewQuizEarned : l10n.homeReviewQuizFailed,
-          ),
-        ),
-      );
+    if (!mounted) {
+      return;
+    }
+    if (earned) {
+      await showFreezeEarnedDialog(context, message: l10n.homeReviewQuizEarned);
+    } else {
+      await showMessageDialog(context, message: l10n.homeReviewQuizFailed);
     }
   }
 
   Future<void> _openDailyTextLink() async {
+    final String languageCode = Localizations.localeOf(context).languageCode;
     await _runAction(() async {
-      await _deepLinkService.openDailyText();
+      await _deepLinkService.openDailyText(languageCode: languageCode);
     });
   }
 
@@ -379,6 +485,14 @@ class _HomeScreenState extends State<HomeScreen> {
     if (changed == true) {
       await _refreshDashboard();
     }
+  }
+
+  Future<void> _openAchievements() async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => AchievementsScreen(dbService: _dbService),
+      ),
+    );
   }
 
   Future<void> _openNotesLibrary() async {
@@ -411,11 +525,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+    if (!mounted) {
+      return;
+    }
+    // Settings can clear the tour flag ("replay the guided tour"), so re-check
+    // it once we're back on the home screen the tour actually points at.
+    await _maybeShowGuidedTour();
   }
 
   void _showError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context)!.homeGenericError(error.toString()))),
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.homeGenericError(error.toString()),
+      isError: true,
     );
   }
 
@@ -441,7 +563,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           'JW Streak',
-          style: GoogleFonts.plusJakartaSans(
+          style: const TextStyle(
+            fontFamily: 'PlusJakartaSans',
             fontSize: 28,
             fontWeight: FontWeight.bold,
             letterSpacing: -0.5,
@@ -449,11 +572,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: <Widget>[
           IconButton(
+            key: _tourAchievementsKey,
+            onPressed: _openAchievements,
+            icon: const Icon(Icons.emoji_events_outlined),
+            tooltip: l10n.homeAchievementsTooltip,
+          ),
+          IconButton(
+            key: _tourNotesKey,
             onPressed: _openNotesLibrary,
             icon: const Icon(Icons.library_books_outlined),
             tooltip: l10n.homeNotesLibraryTooltip,
           ),
           IconButton(
+            key: _tourSettingsKey,
             onPressed: _openSettings,
             icon: const Icon(Icons.settings_outlined),
             tooltip: l10n.homeSettingsTooltip,
@@ -464,6 +595,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: <Widget>[
           _StreakHero(
+            key: _tourStreakKey,
             streak: _streak,
             freezes: _streakState.freezes,
             readToday: readToday,
@@ -484,6 +616,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               if (nextChapter != null)
                 _ContinueReadingCard(
+                  key: _tourReadingKey,
                   reference:
                       '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
                   onOpen: () =>
@@ -494,17 +627,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 )
               else
-                const _AllReadCard(),
+                _AllReadCard(key: _tourReadingKey),
               if (pendingCheckpoint != null)
                 _CheckpointBanner(
                   checkpoint: pendingCheckpoint,
                   onTap: () => _openCheckpoint(pendingCheckpoint),
                 ),
-              _BrowseBibleTile(
-                chaptersRead: chaptersRead,
-                totalChapters: kTotalBibleChapters,
-                onTap: _openBibleBrowser,
-              ),
+              _BrowseBibleTile(key: _tourBrowseKey, onTap: _openBibleBrowser),
             ],
           ),
           const SizedBox(height: 20),
@@ -512,6 +641,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: l10n.homeSectionProgressTitle,
             children: <Widget>[
               _ProgressCard(
+                key: _tourProgressKey,
                 streak: _streak,
                 totalReadings: _totalReadings,
                 totalStars: _totalStars,
@@ -527,6 +657,7 @@ class _HomeScreenState extends State<HomeScreen> {
           _SectionHeader(title: l10n.homeSectionQuickActions),
           const SizedBox(height: 12),
           _QuickActions(
+            key: _tourQuickActionsKey,
             onOpenDailyText: _openDailyTextLink,
             onWriteNote: _openNotesEditor,
             onReadNotes: _openNotesLibrary,
@@ -546,6 +677,7 @@ class _ChapterRef {
 
 class _StreakHero extends StatelessWidget {
   const _StreakHero({
+    super.key,
     required this.streak,
     required this.freezes,
     required this.readToday,
@@ -629,14 +761,11 @@ class _StreakHero extends StatelessWidget {
                   ],
                 ),
               ),
-              _StreakFireBadge(streak: streak),
+              _StreakFireEasterEgg(streak: streak),
             ],
           ),
           const SizedBox(height: 18),
-          _HeroReminderButton(
-            label: reminderLabel,
-            onTap: onConfigureReminder,
-          ),
+          _HeroReminderButton(label: reminderLabel, onTap: onConfigureReminder),
         ],
       ),
     );
@@ -696,7 +825,7 @@ class _FreezePill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.ac_unit_rounded, size: 16, color: cs.onPrimaryContainer),
+          Icon(Icons.whatshot_rounded, size: 16, color: cs.onPrimaryContainer),
           const SizedBox(width: 6),
           Text(
             '$freezes',
@@ -795,6 +924,38 @@ class _HeroReminderButton extends StatelessWidget {
   }
 }
 
+/// Wraps [_StreakFireBadge] with the tap-easter-egg gesture: tickling the
+/// flame makes it pop off a little burst of sparks instead of yet another
+/// notification.
+class _StreakFireEasterEgg extends StatefulWidget {
+  const _StreakFireEasterEgg({required this.streak});
+
+  final int streak;
+
+  @override
+  State<_StreakFireEasterEgg> createState() => _StreakFireEasterEggState();
+}
+
+class _StreakFireEasterEggState extends State<_StreakFireEasterEgg> {
+  // Purely a display prank — never touches the real stored streak. Resets
+  // to normal on the next app launch since it's just in-memory State.
+  bool _pranked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final int displayedStreak = _pranked
+        ? (widget.streak <= 0 ? -100 : 0)
+        : widget.streak;
+    return TapEasterEgg(
+      onTriggered: () {
+        LocalDbService().markEasterEggFound('flame');
+        setState(() => _pranked = true);
+      },
+      child: _StreakFireBadge(streak: displayedStreak),
+    );
+  }
+}
+
 class _StreakFireBadge extends StatefulWidget {
   const _StreakFireBadge({required this.streak});
 
@@ -837,69 +998,80 @@ class _StreakFireBadgeState extends State<_StreakFireBadge>
           SizedBox(
             width: 108,
             height: 108,
-            child: AnimatedBuilder(
-              animation: _controller,
-              builder: (BuildContext context, Widget? child) {
-                final double t = _controller.value * 2 * math.pi;
-                // Frequencies must be integer multiples of the base loop so
-                // every sine wave lands back exactly where it started when
-                // the controller wraps from 1.0 to 0.0 — otherwise the loop
-                // restart shows a visible jump.
-                final double glow = 0.5 + 0.5 * math.sin(t * 2);
-                final double scale =
-                    1.0 + 0.05 * math.sin(t * 3) + 0.02 * math.sin(t * 5 + 0.6);
-                final double skew = 0.05 * math.sin(t * 2 + 1.0);
-                final double bob = 1.5 * math.sin(t * 3 + 0.5);
+            // Isolates this perpetually-animating subtree so it doesn't
+            // force repaints of the rest of the (potentially long) home
+            // screen list around it.
+            child: RepaintBoundary(
+              child: AnimatedBuilder(
+                animation: _controller,
+                // The flame's shader + icon never actually change — only the
+                // Transform wrapping them does — so it's passed as `child`
+                // instead of being rebuilt on every one of the ~60 ticks/sec.
+                child: ShaderMask(
+                  shaderCallback: (Rect rect) {
+                    return const LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: <Color>[
+                        Colors.deepOrange,
+                        Colors.orange,
+                        Colors.amber,
+                      ],
+                    ).createShader(rect);
+                  },
+                  child: const Icon(
+                    Icons.local_fire_department_rounded,
+                    size: 92,
+                    color: Colors.white,
+                  ),
+                ),
+                builder: (BuildContext context, Widget? child) {
+                  final double t = _controller.value * 2 * math.pi;
+                  // Frequencies must be integer multiples of the base loop so
+                  // every sine wave lands back exactly where it started when
+                  // the controller wraps from 1.0 to 0.0 — otherwise the loop
+                  // restart shows a visible jump.
+                  final double glow = 0.5 + 0.5 * math.sin(t * 2);
+                  final double scale =
+                      1.0 +
+                      0.05 * math.sin(t * 3) +
+                      0.02 * math.sin(t * 5 + 0.6);
+                  final double skew = 0.05 * math.sin(t * 2 + 1.0);
+                  final double bob = 1.5 * math.sin(t * 3 + 0.5);
 
-                return Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    // Soft glow behind the flame.
-                    Container(
-                      width: 80 + 18 * glow,
-                      height: 80 + 18 * glow,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: RadialGradient(
-                          colors: <Color>[
-                            Colors.deepOrange.withValues(alpha: 0.35 * glow),
-                            Colors.deepOrange.withValues(alpha: 0),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Single flame, warm gradient from base to tip.
-                    Transform.translate(
-                      offset: Offset(0, bob),
-                      child: Transform(
-                        alignment: Alignment.bottomCenter,
-                        transform: Matrix4.identity()
-                          ..setEntry(3, 2, 0.001)
-                          ..rotateZ(skew)
-                          ..scaleByDouble(scale, scale, 1, 1),
-                        child: ShaderMask(
-                          shaderCallback: (Rect rect) {
-                            return const LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: <Color>[
-                                Colors.deepOrange,
-                                Colors.orange,
-                                Colors.amber,
-                              ],
-                            ).createShader(rect);
-                          },
-                          child: const Icon(
-                            Icons.local_fire_department_rounded,
-                            size: 92,
-                            color: Colors.white,
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      // Soft glow behind the flame.
+                      Container(
+                        width: 80 + 18 * glow,
+                        height: 80 + 18 * glow,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: RadialGradient(
+                            colors: <Color>[
+                              Colors.deepOrange.withValues(alpha: 0.35 * glow),
+                              Colors.deepOrange.withValues(alpha: 0),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                      // Single flame, warm gradient from base to tip.
+                      Transform.translate(
+                        offset: Offset(0, bob),
+                        child: Transform(
+                          alignment: Alignment.bottomCenter,
+                          transform: Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateZ(skew)
+                            ..scaleByDouble(scale, scale, 1, 1),
+                          child: child,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
           const SizedBox(height: 4),
@@ -999,6 +1171,7 @@ class _SectionCard extends StatelessWidget {
 
 class _ContinueReadingCard extends StatelessWidget {
   const _ContinueReadingCard({
+    super.key,
     required this.reference,
     required this.onOpen,
     required this.onMarkRead,
@@ -1093,7 +1266,7 @@ class _ContinueReadingCard extends StatelessWidget {
 }
 
 class _AllReadCard extends StatelessWidget {
-  const _AllReadCard();
+  const _AllReadCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1182,7 +1355,7 @@ class _StreakAtRiskBanner extends StatelessWidget {
               width: double.infinity,
               child: FilledButton.tonalIcon(
                 onPressed: onEarnFreeze,
-                icon: const Icon(Icons.ac_unit_rounded, size: 18),
+                icon: const Icon(Icons.whatshot_rounded, size: 18),
                 label: Text(l10n.homeEarnFreezeButton),
               ),
             ),
@@ -1282,49 +1455,49 @@ class _CheckpointBannerState extends State<_CheckpointBanner>
       ),
     );
 
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (BuildContext context, Widget? child) {
-        final double angle = _controller.value * 2 * math.pi;
-        final double pulse = 0.5 + 0.5 * math.sin(_controller.value * 2 * math.pi);
-        return Container(
-          padding: const EdgeInsets.all(2.5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: SweepGradient(
-              transform: GradientRotation(angle),
-              colors: const <Color>[
-                Colors.amber,
-                Color(0xFFFFD54F), // light amber
-                Colors.orangeAccent,
-                Colors.amber,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (BuildContext context, Widget? child) {
+          final double angle = _controller.value * 2 * math.pi;
+          final double pulse =
+              0.5 + 0.5 * math.sin(_controller.value * 2 * math.pi);
+          return Container(
+            padding: const EdgeInsets.all(2.5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              gradient: SweepGradient(
+                transform: GradientRotation(angle),
+                colors: const <Color>[
+                  Colors.amber,
+                  Color(0xFFFFD54F), // light amber
+                  Colors.orangeAccent,
+                  Colors.amber,
+                ],
+              ),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.amber.withValues(alpha: 0.35 + 0.3 * pulse),
+                  blurRadius: 14 + 10 * pulse,
+                  spreadRadius: 1 + 2 * pulse,
+                ),
               ],
             ),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.amber.withValues(alpha: 0.35 + 0.3 * pulse),
-                blurRadius: 14 + 10 * pulse,
-                spreadRadius: 1 + 2 * pulse,
-              ),
-            ],
-          ),
-          child: child,
-        );
-      },
-      child: card,
+            child: child,
+          );
+        },
+        child: card,
+      ),
     );
   }
 }
 
+// Deliberately no progress bar / chapter count here — that's already shown
+// by _BibleProgressIndicator in the Progress section below, so repeating it
+// here would just be a duplicate of the same numbers.
 class _BrowseBibleTile extends StatelessWidget {
-  const _BrowseBibleTile({
-    required this.chaptersRead,
-    required this.totalChapters,
-    required this.onTap,
-  });
+  const _BrowseBibleTile({super.key, required this.onTap});
 
-  final int chaptersRead;
-  final int totalChapters;
   final VoidCallback onTap;
 
   @override
@@ -1332,8 +1505,9 @@ class _BrowseBibleTile extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    return Material(
-      color: cs.secondaryContainer.withValues(alpha: 0.35),
+    return Card.filled(
+      margin: EdgeInsets.zero,
+      color: cs.tertiaryContainer.withValues(alpha: 0.55),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: cs.outlineVariant),
@@ -1342,56 +1516,25 @@ class _BrowseBibleTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           child: Row(
             children: <Widget>[
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: cs.secondaryContainer,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(
-                  Icons.menu_book_outlined,
-                  color: cs.onSecondaryContainer,
-                  size: 22,
-                ),
+              Icon(
+                Icons.travel_explore_rounded,
+                color: cs.onTertiaryContainer,
+                size: 24,
               ),
               const SizedBox(width: 14),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      l10n.homeBrowseBible,
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(999),
-                      child: LinearProgressIndicator(
-                        value: totalChapters == 0
-                            ? 0
-                            : chaptersRead / totalChapters,
-                        minHeight: 5,
-                        backgroundColor: cs.surfaceContainerHighest,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      l10n.homeChaptersReadCount(chaptersRead, totalChapters),
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: cs.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  l10n.homeBrowseBible,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: cs.onTertiaryContainer,
+                  ),
                 ),
               ),
-              const SizedBox(width: 8),
-              Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
+              Icon(Icons.chevron_right, color: cs.onTertiaryContainer),
             ],
           ),
         ),
@@ -1402,6 +1545,7 @@ class _BrowseBibleTile extends StatelessWidget {
 
 class _ProgressCard extends StatelessWidget {
   const _ProgressCard({
+    super.key,
     required this.streak,
     required this.totalReadings,
     required this.totalStars,
@@ -1439,7 +1583,9 @@ class _ProgressCard extends StatelessWidget {
               child: _StatTile(
                 icon: Icons.local_fire_department_rounded,
                 value: '$streak',
-                label: streak > 1 ? l10n.homeStatStreakDaysPlural : l10n.homeStatStreakDaySingular,
+                label: streak > 1
+                    ? l10n.homeStatStreakDaysPlural
+                    : l10n.homeStatStreakDaySingular,
                 color: cs.tertiary,
               ),
             ),
@@ -1448,7 +1594,9 @@ class _ProgressCard extends StatelessWidget {
               child: _StatTile(
                 icon: Icons.menu_book_rounded,
                 value: '$totalReadings',
-                label: totalReadings > 1 ? l10n.homeStatReadingsPlural : l10n.homeStatReadingSingular,
+                label: totalReadings > 1
+                    ? l10n.homeStatReadingsPlural
+                    : l10n.homeStatReadingSingular,
                 color: cs.primary,
               ),
             ),
@@ -1457,7 +1605,9 @@ class _ProgressCard extends StatelessWidget {
               child: _StatTile(
                 icon: Icons.star_rounded,
                 value: '$totalStars',
-                label: totalStars > 1 ? l10n.homeStatStarsPlural : l10n.homeStatStarSingular,
+                label: totalStars > 1
+                    ? l10n.homeStatStarsPlural
+                    : l10n.homeStatStarSingular,
                 color: Colors.amber,
               ),
             ),
@@ -1478,7 +1628,9 @@ class _ProgressCard extends StatelessWidget {
         if (lastReadAt != null) ...<Widget>[
           const SizedBox(height: 12),
           Text(
-            l10n.homeLastReadAt(DateFormat('dd/MM/yyyy HH:mm').format(lastReadAt!)),
+            l10n.homeLastReadAt(
+              DateFormat('dd/MM/yyyy HH:mm').format(lastReadAt!),
+            ),
             style: theme.textTheme.bodySmall?.copyWith(
               color: cs.onSurfaceVariant,
             ),
@@ -1551,12 +1703,18 @@ class _BibleProgressIndicator extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: LinearProgressIndicator(
-              value: progress,
-              minHeight: 8,
-              backgroundColor: cs.surfaceContainerHighest,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: cs.outlineVariant),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 8,
+                backgroundColor: cs.surfaceContainerHighest,
+              ),
             ),
           ),
           const SizedBox(height: 6),
@@ -1629,6 +1787,7 @@ class _StatTile extends StatelessWidget {
 
 class _QuickActions extends StatelessWidget {
   const _QuickActions({
+    super.key,
     required this.onOpenDailyText,
     required this.onWriteNote,
     required this.onReadNotes,
@@ -1734,7 +1893,10 @@ class _QuickActionTile extends StatelessWidget {
 }
 
 class _MiniReadingCalendar extends StatelessWidget {
-  const _MiniReadingCalendar({required this.readDays, required this.frozenDays});
+  const _MiniReadingCalendar({
+    required this.readDays,
+    required this.frozenDays,
+  });
 
   final List<DateTime> readDays;
   final Set<String> frozenDays;
@@ -1893,7 +2055,7 @@ class _DayCell extends StatelessWidget {
         child: done
             ? Icon(Icons.check_rounded, size: 16, color: fg)
             : frozen
-            ? Icon(Icons.ac_unit_rounded, size: 15, color: fg)
+            ? Icon(Icons.whatshot_rounded, size: 15, color: fg)
             : Text(
                 '${day.day}',
                 style: theme.textTheme.labelMedium?.copyWith(

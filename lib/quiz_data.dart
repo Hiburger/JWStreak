@@ -2,26 +2,78 @@ import 'package:flutter/widgets.dart';
 
 import 'bible_data.dart';
 import 'l10n/app_localizations.dart';
+import 'quiz_data_de.dart';
 import 'quiz_data_en.dart';
 import 'quiz_data_es.dart';
 import 'quiz_data_it.dart';
+import 'quiz_data_pl.dart';
 import 'quiz_data_pt.dart';
 import 'quiz_data_ru.dart';
 import 'quiz_data_zh.dart';
 
-/// A single multiple-choice question.
+/// How the user answers a [QuizQuestion].
+enum QuizAnswerType {
+  /// Pick one of [QuizQuestion.options] (the historical, default behaviour).
+  multipleChoice,
+
+  /// Type the answer freely. Checked against [QuizQuestion.acceptedAnswers]
+  /// by an `AnswerValidator` (accent/case/typo tolerant), never by `==`.
+  freeText,
+
+  /// Rebuild the answer by tapping scrambled word chips. Active recall
+  /// without a keyboard — the accessible equivalent of [freeText] for
+  /// languages where typing is awkward (Chinese IME, Russian inflections).
+  wordBank,
+}
+
+/// A single quiz question. Defaults to [QuizAnswerType.multipleChoice] so the
+/// several thousand existing authored `const` entries keep working untouched;
+/// only questions that opt into a richer [type] need the extra fields.
 class QuizQuestion {
   const QuizQuestion({
     required this.text,
     required this.options,
     required this.correctIndex,
     required this.explanation,
+    this.type = QuizAnswerType.multipleChoice,
+    this.acceptedAnswers = const <String>[],
+    this.wordBankDistractors = const <String>[],
+    this.wordBankSegments = const <String>[],
   });
 
   final String text;
   final List<String> options;
   final int correctIndex;
   final String explanation;
+
+  final QuizAnswerType type;
+
+  /// Answers accepted for [QuizAnswerType.freeText], in addition to
+  /// [correctAnswer]. Use it for synonyms and, in inflected languages, for
+  /// the grammatical forms a user might reasonably type.
+  final List<String> acceptedAnswers;
+
+  /// Extra decoy words mixed into the chips for [QuizAnswerType.wordBank].
+  /// The words of [correctAnswer] are always included automatically.
+  final List<String> wordBankDistractors;
+
+  /// Explicit chips the answer breaks into, for [QuizAnswerType.wordBank].
+  /// Defaults to splitting [correctAnswer] on whitespace, which is wrong for
+  /// Chinese (written without spaces) — those questions list their segments
+  /// here so the bank offers real words rather than one giant chip.
+  final List<String> wordBankSegments;
+
+  /// The canonical correct answer text (option at [correctIndex]).
+  String get correctAnswer =>
+      correctIndex >= 0 && correctIndex < options.length
+      ? options[correctIndex]
+      : '';
+
+  /// Every string that counts as correct for a typed answer.
+  List<String> get allAcceptedAnswers => <String>[
+    correctAnswer,
+    ...acceptedAnswers,
+  ];
 }
 
 /// A checkpoint reached at the end of a book segment. Always carries a
@@ -102,12 +154,15 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Adam et Ève', 'Caïn et Abel', 'Noé et sa femme', 'Abraham et Sara'],
           correctIndex: 0,
           explanation: 'Adam et Ève sont les premiers humains (Genèse 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Caïn', 'Noé', 'Sara'],
         ),
         QuizQuestion(
           text: 'Qui a tué son frère Abel ?',
           options: <String>['Caïn', 'Seth', 'Noé', 'Cham'],
           correctIndex: 0,
           explanation: 'Caïn tue son frère Abel par jalousie (Genèse 4).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Pourquoi Dieu a-t-il amené le Déluge ?',
@@ -131,6 +186,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'L’arc-en-ciel est le signe de l’alliance (Genèse 9).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['arc-en-ciel'],
         ),
         QuizQuestion(
           text: 'Comment s’appelait la tour que les hommes ont voulu '
@@ -139,6 +196,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'À Babel, Dieu confond leur langage (Genèse 11).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Sion', 'David', 'ville'],
         ),
         QuizQuestion(
           text: 'Qui Dieu a-t-il appelé à quitter Our ?',
@@ -198,6 +257,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La Pâque commémore la protection des Israélites lors de la '
               'dernière plaie (Exode 12).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Pâque'],
         ),
         QuizQuestion(
           text: 'Comment Dieu a-t-il ouvert un passage pour Israël ?',
@@ -217,6 +278,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['La manne', 'Du pain d’orge', 'Des figues', 'Du miel'],
           correctIndex: 0,
           explanation: 'La manne apparaît chaque matin (Exode 16).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['manne'],
         ),
       ],
       'Exodus#2': <QuizQuestion>[
@@ -228,12 +291,16 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Jéthro suggère de nommer des chefs pour juger les affaires '
               'courantes (Exode 18).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Jéthro'],
         ),
         QuizQuestion(
           text: 'Où Dieu a-t-il donné les Dix Commandements ?',
           options: <String>['Au mont Sinaï', 'Au mont Nébo', 'À Cadès', 'À Béthel'],
           correctIndex: 0,
           explanation: 'La loi est donnée au mont Sinaï (Exode 19-20).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Horeb', 'Nébo', 'désert'],
         ),
         QuizQuestion(
           text: 'Quel commandement interdit de désirer les biens d’autrui ?',
@@ -256,6 +323,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Dieu donne des plans détaillés pour le tabernacle (Exode 25).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['tabernacle'],
         ),
         QuizQuestion(
           text: 'Qu’a fabriqué le peuple pendant l’absence de Moïse sur la '
@@ -275,6 +344,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La nuée couvre la tente de réunion et la gloire de Jéhovah '
               'la remplit (Exode 40).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['nuée', 'la nuée'],
         ),
         QuizQuestion(
           text: 'Qui a fini par tailler de nouvelles tables de pierre après '
@@ -294,6 +365,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jean le Baptiste prépare le chemin de Jésus (Matthieu 3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Jésus', 'Pierre', 'prophète'],
         ),
         QuizQuestion(
           text: 'Combien de temps Jésus a-t-il jeûné avant d’être tenté par '
@@ -302,6 +375,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus jeûne 40 jours et 40 nuits (Matthieu 4).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['quarante jours', '40'],
         ),
         QuizQuestion(
           text: 'Selon le Sermon sur la montagne, qui est déclaré heureux ?',
@@ -325,6 +400,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus multiplie 5 pains et 2 poissons (Matthieu 14).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['sept', 'douze', 'paniers'],
         ),
         QuizQuestion(
           text: 'Qu’a fait Pierre en voyant Jésus marcher sur l’eau ?',
@@ -346,6 +423,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La danseuse, à l’instigation de sa mère, réclame la tête de '
               'Jean (Matthieu 14).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['fille d’Hérodiade'],
         ),
       ],
       'Matthew#2': <QuizQuestion>[
@@ -381,6 +460,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Jésus entre monté sur un ânon, selon la prophétie '
               '(Matthieu 21).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['ânon', 'un âne'],
         ),
       ],
       'Matthew#3': <QuizQuestion>[
@@ -403,6 +484,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Judas Iscariote', 'Pierre', 'Thomas', 'Barabbas'],
           correctIndex: 0,
           explanation: 'Judas trahit Jésus (Matthieu 26).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Judas'],
         ),
         QuizQuestion(
           text: 'Que s’est-il passé le troisième jour après la mort de '
@@ -415,6 +498,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           ],
           correctIndex: 0,
           explanation: 'Jésus ressuscite le troisième jour (Matthieu 28).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['mort', 'tombeau', 'ange'],
         ),
       ],
       'John#0': <QuizQuestion>[
@@ -442,6 +527,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus change l’eau en vin lors d’un mariage (Jean 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['pain', 'Cana', 'noces'],
         ),
         QuizQuestion(
           text: 'Que doit faire, selon Jésus, une personne pour « voir le '
@@ -450,6 +537,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus l’explique à Nicodème (Jean 3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['esprit', 'royaume', 'eau'],
         ),
       ],
       'John#1': <QuizQuestion>[
@@ -460,6 +549,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Jésus se présente comme le bon berger qui donne sa vie pour '
               'ses brebis (Jean 10).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['porte', 'pasteur', 'brebis'],
         ),
         QuizQuestion(
           text: 'Qui Jésus a-t-il ramené à la vie après quatre jours dans '
@@ -467,6 +558,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Lazare', 'Jaïrus', 'Le fils de la veuve', 'Un centurion'],
           correctIndex: 0,
           explanation: 'Jésus ressuscite Lazare (Jean 11).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Qu’a fait Jésus pour ses apôtres avant le dernier repas, '
@@ -488,6 +580,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Un cep et ses sarments', 'Un berger et son troupeau', 'Un roi et ses sujets', 'Un père et ses enfants'],
           correctIndex: 0,
           explanation: 'Jésus est le cep, ses disciples les sarments (Jean 15).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['vigne', 'fruit', 'branche'],
         ),
         QuizQuestion(
           text: 'Qui a coupé l’oreille d’un homme lors de l’arrestation de '
@@ -495,6 +589,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Pierre', 'Jean', 'Jacques', 'André'],
           correctIndex: 0,
           explanation: 'Pierre frappe Malchus avec une épée (Jean 18).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Simon Pierre'],
         ),
         QuizQuestion(
           text: 'Qui a d’abord douté de la résurrection avant de toucher '
@@ -517,6 +613,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'L’holocauste est intégralement consumé sur l’autel '
               '(Lévitique 1).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['holocauste'],
         ),
         QuizQuestion(
           text: 'Combien de sortes d’offrandes principales sont décrites '
@@ -526,6 +624,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Holocauste, offrande de céréales, de communion, pour le '
               'péché et de culpabilité (Lévitique 1-7).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['5'],
         ),
         QuizQuestion(
           text: 'Qui devait apporter les offrandes à l’entrée de la tente '
@@ -568,6 +668,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Les animaux purs ruminent et ont le sabot fendu '
               '(Lévitique 11).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['écailles', 'nageoires', 'pur'],
         ),
         QuizQuestion(
           text: 'Quelle affection cutanée est examinée en détail par les '
@@ -577,6 +679,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Les prêtres examinent les signes de lèpre sur la peau, les '
               'vêtements et les maisons (Lévitique 13-14).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['lèpre'],
         ),
       ],
       'Leviticus#2': <QuizQuestion>[
@@ -606,6 +710,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Lévitique 19:18 est cité plus tard par Jésus lui-même.',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Jéhovah', 'cœur', 'sainteté'],
         ),
         QuizQuestion(
           text: 'Que devait-on éviter selon Lévitique 17 concernant la '
@@ -619,6 +725,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'La consommation de sang est interdite (Lévitique 17).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['graisse', 'viande', 'manger'],
         ),
       ],
       'Leviticus#3': <QuizQuestion>[
@@ -685,6 +793,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Les Lévites reçoivent des tâches précises pour le '
               'tabernacle (Nombres 3-4).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Lévites'],
         ),
         QuizQuestion(
           text: 'Que devait faire une personne ayant fait le vœu de '
@@ -715,6 +825,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               '70 anciens reçoivent l’esprit pour partager la '
               'responsabilité (Nombres 11).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['soixante-dix anciens', '70'],
         ),
         QuizQuestion(
           text: 'Que sont devenus Miriam et Aaron après avoir critiqué '
@@ -727,6 +839,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           ],
           correctIndex: 0,
           explanation: 'Miriam devient lépreuse sept jours (Nombres 12).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Aaron', 'Moïse', 'nuée'],
         ),
         QuizQuestion(
           text: 'Combien d’espions ont donné un rapport encourageant sur '
@@ -746,6 +860,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La rébellion de Koré est engloutie par la terre '
               '(Nombres 16).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Aaron', 'Moïse', 'Datan'],
         ),
         QuizQuestion(
           text: 'Quel signe a confirmé le choix d’Aaron comme grand '
@@ -758,6 +874,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           ],
           correctIndex: 0,
           explanation: 'Le bâton d’Aaron bourgeonne et fleurit (Nombres 17).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Aaron', 'amandes', 'encensoir'],
         ),
         QuizQuestion(
           text: 'Pourquoi Moïse n’a-t-il pas pu entrer dans la Terre '
@@ -782,6 +900,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Balaam est appelé à maudire Israël mais le bénit '
               '(Nombres 23-24).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Qui a agi avec zèle pour arrêter le fléau lors de '
@@ -790,6 +909,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Phinéas intervient et le fléau s’arrête (Nombres 25).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Qui Moïse a-t-il désigné comme son successeur ?',
@@ -807,6 +927,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Madian', 'Édom', 'Moab entier', 'Égypte'],
           correctIndex: 0,
           explanation: 'La guerre contre Madian est relatée (Nombres 31).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['les Madianites'],
         ),
         QuizQuestion(
           text: 'Quelles tribus ont demandé à s’installer à l’est du '
@@ -905,6 +1027,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Le veau d’or illustre la rébellion passée '
               '(Deutéronome 9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['manne', 'serpent', 'orgueil'],
         ),
         QuizQuestion(
           text: 'Où les Israélites devaient-ils apporter leurs '
@@ -946,6 +1070,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Cette prophétie est appliquée au Christ dans les Écritures '
               'grecques (Deutéronome 18).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['roi', 'Moïse', 'Messie'],
         ),
         QuizQuestion(
           text: 'Combien de témoins étaient nécessaires pour établir une '
@@ -954,6 +1080,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'La loi exige plusieurs témoins (Deutéronome 19).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['2 ou 3'],
         ),
       ],
       'Deuteronomy#3': <QuizQuestion>[
@@ -970,6 +1098,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La déclaration des prémices rappelle la sortie d’Égypte '
               '(Deutéronome 26).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['dîme', 'sacrifice', 'holocauste'],
         ),
         QuizQuestion(
           text: 'Que devaient faire les Israélites en entrant à Canaan, '
@@ -1040,6 +1170,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Moïse contemple le pays du haut du Nebo avant de mourir '
               '(Deutéronome 34).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Sinaï', 'Horeb', 'Ébal'],
         ),
       ],
       'Joshua#0': <QuizQuestion>[
@@ -1055,12 +1187,15 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jéhovah encourage Josué à plusieurs reprises (Josué 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['crains', 'faible', 'Jéhovah'],
         ),
         QuizQuestion(
           text: 'Qui a caché les espions israélites à Jéricho ?',
           options: <String>['Rahab', 'Une prophétesse', 'Le roi lui-même', 'Personne'],
           correctIndex: 0,
           explanation: 'Rahab cache les espions sur son toit (Josué 2).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Comment les murailles de Jéricho sont-elles tombées ?',
@@ -1103,6 +1238,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Jéhovah combat pour Israël et le soleil s’arrête '
               '(Josué 10).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lune', 'grêle', 'nuit'],
         ),
         QuizQuestion(
           text: 'Quelle part de terre Caleb a-t-il réclamée à 85 ans ?',
@@ -1110,6 +1247,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Caleb reste fidèle et reçoit Hébron (Josué 14).',
+          type: QuizAnswerType.freeText,
         ),
       ],
       'Joshua#2': <QuizQuestion>[
@@ -1120,6 +1258,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'La tente de réunion est établie à Silo (Josué 18).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Silo'],
         ),
         QuizQuestion(
           text: 'Pourquoi les tribus de l’est ont-elles élevé un autel '
@@ -1168,6 +1308,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Débora et Baraq mènent Israël à la victoire (Juges 4).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Barak'],
         ),
         QuizQuestion(
           text: 'Comment Guédéon a-t-il réduit son armée à 300 hommes ?',
@@ -1234,6 +1376,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           ],
           correctIndex: 0,
           explanation: 'Samson frappe avec une mâchoire d’âne (Juges 15).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['épée', 'fronde', 'lion'],
         ),
         QuizQuestion(
           text: 'Qui a livré le secret de la force de Samson aux '
@@ -1243,6 +1387,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Delila découvre que sa force vient de ses cheveux '
               '(Juges 16).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Dalila'],
         ),
         QuizQuestion(
           text: 'Quelle phrase résume l’état d’Israël à la fin du livre ?',
@@ -1294,6 +1440,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Élimélek, puis ses deux fils, meurent à Moab (Ruth 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Bethléhem', 'famine', 'Naomi'],
         ),
       ],
       'Ruth#1': <QuizQuestion>[
@@ -1354,6 +1502,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Obed', 'David', 'Isaï', 'Salomon'],
           correctIndex: 0,
           explanation: 'Obed devient le grand-père de David (Ruth 4).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Pourquoi le livre de Ruth se termine-t-il avec une '
@@ -1415,6 +1564,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           options: <String>['Saül', 'David', 'Jonathan', 'Abner'],
           correctIndex: 0,
           explanation: 'Samuel oint Saül discrètement (1 Samuel 9-10).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Pourquoi Samuel a-t-il annoncé le rejet de Saül comme '
@@ -1453,6 +1603,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'David refuse l’armure et utilise sa fronde '
               '(1 Samuel 17).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['épée', 'lance', 'bouclier'],
         ),
         QuizQuestion(
           text: 'Quel sentiment a poussé Saül à vouloir tuer David après '
@@ -1462,6 +1614,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Les chants de louange pour David rendent Saül jaloux '
               '(1 Samuel 18).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['jalousie'],
         ),
         QuizQuestion(
           text: 'Qui a aidé David à échapper à Saül en le prévenant du '
@@ -1495,6 +1649,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Abigaïl apaise David avec des provisions (1 Samuel 25).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Qui Saül et Jonathan meurent-ils dans la bataille finale '
@@ -1531,6 +1686,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'David prend la forteresse de Sion (2 Samuel 5).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Quelle promesse Jéhovah fait-il à David par '
@@ -1545,6 +1701,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'L’alliance davidique promet une dynastie éternelle '
               '(2 Samuel 7).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Nathan', 'trône', 'maison'],
         ),
       ],
       '2 Samuel#1': <QuizQuestion>[
@@ -1556,6 +1714,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'David fait tuer Urie pour cacher son péché '
               '(2 Samuel 11).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Bethsabée'],
         ),
         QuizQuestion(
           text: 'Comment le prophète Nathan a-t-il confronté David sur '
@@ -1578,6 +1738,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'La rébellion d’Absalom commence (2 Samuel 15).',
+          type: QuizAnswerType.freeText,
         ),
       ],
       '2 Samuel#2': <QuizQuestion>[
@@ -1620,6 +1781,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Le recensement déplaît à Dieu et une peste s’ensuit '
               '(2 Samuel 24).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['peste', 'ange', 'autel'],
         ),
       ],
       '1 Kings#0': <QuizQuestion>[
@@ -1631,6 +1794,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Adonija se proclame roi sans l’accord de David '
               '(1 Rois 1).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Que demande Salomon à Jéhovah au tout début de son '
@@ -1654,6 +1818,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Hiram fournit du bois de cèdre et des artisans '
               '(1 Rois 5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Salomon', 'Sidon', 'cèdres'],
         ),
       ],
       '1 Kings#1': <QuizQuestion>[
@@ -1707,6 +1873,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Élie annonce l’absence de pluie ni rosée '
               '(1 Rois 17).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Que s’est-il passé lors du défi sur le mont Carmel ?',
@@ -1748,6 +1915,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Élisée voit Élie emporté par un tourbillon '
               '(2 Rois 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['char', 'Élisée', 'Jourdain'],
         ),
         QuizQuestion(
           text: 'Quel miracle Élisée a-t-il accompli pour la femme '
@@ -1805,6 +1974,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Jéhu exécute le jugement annoncé contre la maison '
               'd’Achab (2 Rois 9-10).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Élisée', 'Baal', 'Samarie'],
         ),
         QuizQuestion(
           text: 'Comment le jeune Joas a-t-il été protégé avant de '
@@ -1885,6 +2056,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une Pâque mémorable est célébrée (2 Rois 23).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Pâque'],
         ),
         QuizQuestion(
           text: 'Comment le livre des Rois se termine-t-il ?',
@@ -1920,6 +2093,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La généalogie de Juda inclut la maison de David '
               '(1 Chroniques 2-3).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['la tribu de Juda'],
         ),
         QuizQuestion(
           text: 'Quelles tribus se sont établies à l’est du Jourdain '
@@ -1976,6 +2151,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'David bat les Philistins à plusieurs reprises '
               '(1 Chroniques 14).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Philistins'],
         ),
       ],
       '1 Chronicles#2': <QuizQuestion>[
@@ -2047,6 +2224,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Asaph, Héman et Yedoutoun dirigent la musique sacrée '
               '(1 Chroniques 25).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Lévites', 'portiers', 'temple'],
         ),
         QuizQuestion(
           text: 'Quelle a été la dernière grande action publique de '
@@ -2119,6 +2298,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Elle est impressionnée par sa sagesse et sa richesse '
               '(2 Chroniques 9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Salomon', 'Égypte', 'or'],
         ),
         QuizQuestion(
           text: 'Pourquoi le royaume s’est-il divisé sous Roboam ?',
@@ -2160,6 +2341,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Il consulte les médecins plutôt que Dieu '
               '(2 Chroniques 16).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lèpre', 'mains', 'yeux'],
         ),
         QuizQuestion(
           text: 'Pourquoi Josaphat a-t-il été réprimandé par un '
@@ -2229,6 +2412,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Ézéchias entreprend une grande réforme religieuse '
               '(2 Chroniques 29).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Pâque', 'idoles', 'autel'],
         ),
       ],
       '2 Chronicles#4': <QuizQuestion>[
@@ -2240,6 +2425,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Cette Pâque rassemble Juda et une partie d’Israël '
               '(2 Chroniques 30).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['temple', 'Tabernacles', 'jeûne'],
         ),
         QuizQuestion(
           text: 'Que s’est-il passé après que Manassé se soit repenti en '
@@ -2278,6 +2465,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Cyrus publie un décret libérateur (Esdras 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Darius', 'Babylone', 'Artaxerxès'],
         ),
         QuizQuestion(
           text: 'Qu’ont fait les exilés dès leur retour, avant même '
@@ -2333,6 +2522,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Leurs messages relancent la construction (Esdras 5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Esdras', 'Néhémie', 'Malachie'],
         ),
         QuizQuestion(
           text: 'Qui est arrivé plus tard de Babylone avec un groupe '
@@ -2341,6 +2532,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Esdras arrive sous le règne d’Artaxerxès (Esdras 7).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Esdras'],
         ),
       ],
       'Ezra#2': <QuizQuestion>[
@@ -2397,6 +2590,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Sa douleur le pousse à agir (Néhémie 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['muraille', 'roi', 'vin'],
         ),
         QuizQuestion(
           text: 'Qu’a demandé Néhémie au roi Artaxerxès ?',
@@ -2447,6 +2642,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un exploit malgré une forte opposition (Néhémie 6).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['cinquante-deux jours', '52'],
         ),
         QuizQuestion(
           text: 'Que s’est-il passé lorsqu’Esdras a lu la Loi '
@@ -2525,6 +2722,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Esther est choisie comme nouvelle reine (Esther 2).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Esther'],
         ),
         QuizQuestion(
           text: 'Pourquoi Haman voulait-il exterminer tous les Juifs de '
@@ -2603,6 +2802,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Pourim célèbre encore aujourd’hui cet événement '
               '(Esther 9).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Purim'],
         ),
         QuizQuestion(
           text: 'Quelle position Mardochée a-t-il finalement occupée ?',
@@ -2653,6 +2854,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Job refuse ce conseil désespéré (Job 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['bénir', 'vivre', 'patience'],
         ),
       ],
       'Job#1': <QuizQuestion>[
@@ -2680,6 +2883,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Job aspire à plaider sa cause équitablement (Job 9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['ami', 'juge', 'arbitre'],
         ),
         QuizQuestion(
           text: 'Que conseille Tsophar à Job dans son premier discours ?',
@@ -2775,6 +2980,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Ce poème célèbre la sagesse, plus précieuse que l’or '
               '(Job 28).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['or', 'argent', 'pierres'],
         ),
       ],
       'Job#4': <QuizQuestion>[
@@ -2830,6 +3037,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Dieu répond enfin, mais par des questions (Job 38).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['nuée', 'feu', 'vent'],
         ),
         QuizQuestion(
           text: 'Sur quoi portent principalement les questions de '
@@ -3011,6 +3220,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Asaph résout ce trouble en entrant au sanctuaire de Dieu '
               '(Psaume 73:17).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['justes', 'sanctuaire', 'fin'],
         ),
         QuizQuestion(
           text: 'Quelle image décrit la marche puissante de Dieu dans le '
@@ -3202,6 +3413,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Ce principe fondamental ouvre le livre (Proverbes 1:7).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['sagesse', 'connaissance', 'discipline'],
         ),
         QuizQuestion(
           text: 'Que conseille Proverbes 3 au sujet de la confiance ?',
@@ -3242,6 +3455,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               '« Une réponse douce calme la fureur » (Proverbes 15:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['parole', 'colère', 'dure'],
         ),
         QuizQuestion(
           text: 'Que dit Proverbes 16 sur nos projets et Jéhovah ?',
@@ -3296,6 +3511,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               '« Qui a pitié du pauvre prête à Jéhovah » (Proverbes '
               '19:17).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['pauvre', 'bonté', 'récompense'],
         ),
         QuizQuestion(
           text: 'Selon Proverbes 22, que vaut-il mieux qu’une grande '
@@ -3310,6 +3527,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               '« Une bonne réputation vaut mieux que de grandes '
               'richesses » (Proverbes 22:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['richesse', 'or', 'argent'],
         ),
       ],
       'Proverbs#3': <QuizQuestion>[
@@ -3351,6 +3570,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un acrostiche loue la femme vaillante (Proverbes 31).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['sagesse', 'maison', 'enfants'],
         ),
       ],
       'Ecclesiastes#0': <QuizQuestion>[
@@ -3476,6 +3697,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Cette conclusion résume tout le livre (Ecclésiaste '
               '12:13).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['vanité', 'soleil', 'sagesse'],
         ),
       ],
       'Song of Solomon#0': <QuizQuestion>[
@@ -3558,6 +3781,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Sa description enthousiaste suit (Cantique 5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Shulamite', 'vignes', 'berger'],
         ),
       ],
       'Song of Solomon#2': <QuizQuestion>[
@@ -3574,6 +3799,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               '« De grandes eaux ne peuvent éteindre l’amour » '
               '(Cantique 8:6, 7).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['eaux', 'flamme', 'jalousie'],
         ),
         QuizQuestion(
           text: 'Que symbolisent les « grandes eaux » incapables '
@@ -3670,6 +3897,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une harmonie totale est promise (Ésaïe 11:6).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lion', 'veau', 'enfant'],
         ),
         QuizQuestion(
           text: 'Comment Ésaïe 14 décrit-il la chute orgueilleuse du '
@@ -3724,6 +3953,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une espérance extraordinaire est exprimée (Ésaïe '
               '25:8).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['larmes', 'montagne', 'festin'],
         ),
       ],
       'Isaiah#3': <QuizQuestion>[
@@ -3739,6 +3970,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               '« Tu garderas dans une paix parfaite » (Ésaïe 26:3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['confiance', 'esprit', 'rocher'],
         ),
         QuizQuestion(
           text: 'Quelle pierre précieuse Jéhovah pose-t-il en Sion selon '
@@ -3752,6 +3985,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une image messianique de fondement sûr (Ésaïe 28:16).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Sion', 'rocher', 'refuge'],
         ),
         QuizQuestion(
           text: 'Contre qui Ésaïe met-il en garde le peuple concernant '
@@ -3779,6 +4014,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une transformation joyeuse est promise (Ésaïe 35:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['désert', 'eau', 'joie'],
         ),
         QuizQuestion(
           text: 'Comment Jéhovah a-t-il répondu à la prière '
@@ -3831,6 +4068,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une prophétie remarquable nomme Cyrus (Ésaïe 44-45).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Que dit Ésaïe 48 sur l’attitude passée du peuple '
@@ -3901,6 +4139,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un appel lumineux à la restauration (Ésaïe 60:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Sion', 'gloire', 'ténèbres'],
         ),
         QuizQuestion(
           text: 'Quelle déclaration d’Ésaïe 61 Jésus a-t-il lue dans la '
@@ -4000,6 +4240,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un signe visuel de décadence morale (Jérémie 13).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['ceinture', 'lin', 'Euphrate'],
         ),
         QuizQuestion(
           text: 'Que révèle Jérémie 17 sur le cœur humain ?',
@@ -4079,6 +4321,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Cette durée précise est prophétisée (Jérémie 25:11).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['soixante-dix ans', '70'],
         ),
         QuizQuestion(
           text: 'Que conseille Jérémie aux exilés à Babylone dans sa '
@@ -4145,6 +4389,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Cet Éthiopien intervient courageusement (Jérémie 38).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Qui a été nommé gouverneur après la chute de '
@@ -4154,6 +4399,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Son assassinat provoque de nouveaux troubles '
               '(Jérémie 40-41).',
+          type: QuizAnswerType.freeText,
         ),
         QuizQuestion(
           text: 'Que fait le reste du peuple malgré l’avertissement de '
@@ -4297,6 +4543,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une patience confiante est encouragée '
               '(Lamentations 3:25, 26).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['bontés', 'matin', 'joug'],
         ),
       ],
       'Lamentations#2': <QuizQuestion>[
@@ -4313,6 +4561,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'La famine du siège est décrite avec réalisme '
               '(Lamentations 4).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['siège', 'épée', 'ruine'],
         ),
         QuizQuestion(
           text: 'Que demande la prière finale du chapitre 5 ?',
@@ -4364,6 +4614,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un signe symbolique d’assimilation du message '
               '(Ézékiel 3).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['manger', 'manger le rouleau'],
         ),
         QuizQuestion(
           text: 'Quelle idolâtrie secrète Ézékiel voit-il pratiquée dans '
@@ -4492,6 +4744,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une image maritime illustre sa gloire passée '
               '(Ézékiel 27).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Tyr', 'île', 'marchands'],
         ),
         QuizQuestion(
           text: 'À quoi l’Égypte est-elle comparée dans le jugement qui '
@@ -4505,6 +4759,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une image de grandeur suivie de chute (Ézékiel 31).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['navire', 'Tyr', 'fleuve'],
         ),
       ],
       'Ezekiel#4': <QuizQuestion>[
@@ -4520,6 +4776,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Sa responsabilité d’avertisseur est définie (Ézékiel '
               '33).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['berger', 'prophète', 'sentinelle'],
         ),
         QuizQuestion(
           text: 'Que voit Ézékiel dans la célèbre vision de la vallée '
@@ -4548,6 +4806,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un seul peuple réuni sous un seul berger (Ézékiel '
               '37:19).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['bâtons', 'David', 'berger'],
         ),
       ],
       'Ezekiel#5': <QuizQuestion>[
@@ -4564,6 +4824,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un retour symbolique de la présence divine (Ézékiel '
               '43).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['temple', 'porte', 'orient'],
         ),
         QuizQuestion(
           text: 'Que produit le fleuve qui sort du temple selon '
@@ -4614,6 +4876,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un royaume final établi par Dieu surpasse tous les '
               'autres (Daniel 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['statue', 'fer', 'argile'],
         ),
         QuizQuestion(
           text: 'Que s’est-il passé quand Shadrak, Méshak et '
@@ -4727,6 +4991,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Le mariage d’Osée illustre la relation Dieu-Israël '
               '(Osée 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['prophète', 'Israël', 'enfants'],
         ),
         QuizQuestion(
           text: 'Quel manque Jéhovah reproche-t-il à son peuple au '
@@ -4759,6 +5025,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une image des conséquences de l’infidélité (Osée 8:7).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['tempête'],
         ),
       ],
       'Hosea#2': <QuizQuestion>[
@@ -4796,6 +5064,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un fléau sans précédent est décrit (Joël 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['famine', 'feu', 'vigne'],
         ),
         QuizQuestion(
           text: 'Quel appel Joël lance-t-il face à ce désastre ?',
@@ -4839,6 +5109,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un jugement collectif y est annoncé (Joël 3:14).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Josaphat', 'nations', 'jugement'],
         ),
         QuizQuestion(
           text: 'Que promet Joël 3 à Juda après le jugement des '
@@ -4912,6 +5184,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'L’image teste la droiture d’un mur (Amos 7).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['corbeille', 'sauterelles', 'mur'],
         ),
         QuizQuestion(
           text: 'Que promet Amos 9 malgré le jugement annoncé ?',
@@ -4934,6 +5208,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Édom est jugé pour sa violence envers son frère '
               'Jacob (Abdias 1).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['les Édomites'],
         ),
         QuizQuestion(
           text: 'Quelle affirmation conclut le livre d’Abdias ?',
@@ -4982,6 +5258,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une prière de détresse et de reconnaissance (Jonas 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['poisson', 'Ninive', 'mer'],
         ),
         QuizQuestion(
           text: 'Comment Ninive a-t-elle réagi au message de Jonas ?',
@@ -5032,6 +5310,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Les deux capitales sont visées (Michée 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Bethléhem', 'Sion', 'Juda'],
         ),
         QuizQuestion(
           text: 'Quel abus social Michée 2 dénonce-t-il ?',
@@ -5058,6 +5338,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une prophétie messianique précise (Michée 5:2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Jérusalem', 'Sion', 'Égypte'],
         ),
         QuizQuestion(
           text: 'Quelle vision de paix Michée 4 partage-t-il, semblable '
@@ -5113,6 +5395,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un équilibre entre patience et puissance (Nahum 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Ninive', 'colère', 'refuge'],
         ),
         QuizQuestion(
           text: 'À qui Nahum offre-t-il du réconfort malgré le jugement '
@@ -5148,6 +5432,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un jugement sévère pour sa violence (Nahum 3:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Ninive', 'lion', 'riche'],
         ),
         QuizQuestion(
           text: 'Quelle est l’issue finale annoncée pour Ninive ?',
@@ -5199,6 +5485,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une déclaration reprise plus tard dans les Écritures '
               'grecques (Habacuc 2:4).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['méchant', 'orgueil', 'vision'],
         ),
         QuizQuestion(
           text: 'Que remplira toute la terre selon Habacuc 2 ?',
@@ -5261,6 +5549,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Le jugement commence par le peuple de Dieu '
               '(Sophonie 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Ninive', 'Moab', 'Assyrie'],
         ),
       ],
       'Zephaniah#1': <QuizQuestion>[
@@ -5270,6 +5560,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un appel urgent à la repentance (Sophonie 2:3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['justice', 'jugement', 'colère'],
         ),
         QuizQuestion(
           text: 'Quelles nations sont aussi jugées dans ce chapitre ?',
@@ -5305,6 +5597,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un espoir de restauration pour les fidèles '
               '(Sophonie 3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['reste', 'nations', 'chants'],
         ),
       ],
       'Haggai#0': <QuizQuestion>[
@@ -5350,6 +5644,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Huit visions nocturnes structurent ces chapitres '
               '(Zacharie 1-5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['chevaux', 'chandelier', 'rouleau'],
         ),
         QuizQuestion(
           text: 'Que symbolise la purification de Josué le grand '
@@ -5380,6 +5676,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une prophétie accomplie lors de l’entrée triomphale de '
               'Jésus (Zacharie 9:9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['cheval', 'char', 'roi'],
         ),
         QuizQuestion(
           text: 'Que répond Zacharie 7-8 à la question sur le jeûne '
@@ -5410,6 +5708,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Ce détail est repris dans les récits évangéliques '
               '(Zacharie 11:12, 13).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['berger', 'potier', 'bâtons'],
         ),
         QuizQuestion(
           text: 'Comment le livre de Zacharie se conclut-il '
@@ -5454,6 +5754,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un contraste souligne la faveur accordée à Jacob '
               '(Malachie 1:2, 3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Abraham', 'Isaac', 'Édom'],
         ),
       ],
       'Malachi#1': <QuizQuestion>[
@@ -5482,6 +5784,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une prophétie liée à Jean le Baptiste (Malachie 3:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['dîme', 'Élie', 'alliance'],
         ),
       ],
       'Malachi#2': <QuizQuestion>[
@@ -5505,6 +5809,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Cette prophétie est reliée à Jean le Baptiste dans les '
               'Évangiles (Malachie 4:5).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['le prophète Élie'],
         ),
       ],
       'Mark#0': <QuizQuestion>[
@@ -5514,6 +5820,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jean baptise et annonce la venue de Jésus (Marc 1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Élie', 'Jésus', 'prophète'],
         ),
         QuizQuestion(
           text: 'Comment Jésus a-t-il montré son autorité en guérissant '
@@ -5562,6 +5870,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus apparaît glorieux avec Moïse et Élie (Marc 9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Moïse', 'Élie', 'nuée'],
         ),
         QuizQuestion(
           text: 'Comment Jésus entre-t-il à Jérusalem en Marc 11 ?',
@@ -5596,6 +5906,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Le pain et le vin symbolisent son sacrifice (Marc 14).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Pâque', 'pain', 'vin'],
         ),
         QuizQuestion(
           text: 'Que découvrent les femmes venues au tombeau le '
@@ -5618,6 +5930,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Gabriel annonce la naissance miraculeuse (Luc 1).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Gabriel'],
         ),
         QuizQuestion(
           text: 'Qui a rendu témoignage à Jésus enfant lors de sa '
@@ -5626,6 +5940,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Deux fidèles âgés reconnaissent le Messie (Luc 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Zacharie', 'Élisabeth', 'Marie'],
         ),
         QuizQuestion(
           text: 'Quel discours célèbre Jésus prononce-t-il en Luc 6 ?',
@@ -5648,6 +5964,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un exemple de compassion envers un étranger (Luc 10).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['prêtre', 'Lévite', 'prochain'],
         ),
         QuizQuestion(
           text: 'Quelles trois paraboles Jésus raconte-t-il en Luc 15 '
@@ -5750,6 +6068,7 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Étienne est lapidé après son discours (Actes 7).',
+          type: QuizAnswerType.freeText,
         ),
       ],
       'Acts#1': <QuizQuestion>[
@@ -5788,6 +6107,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Ce nom apparaît d’abord à Antioche (Actes 11:26).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Antioche'],
         ),
       ],
       'Acts#2': <QuizQuestion>[
@@ -5825,6 +6146,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Paul s’adresse aux philosophes grecs (Actes 17).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Athènes', 'l’Aréopage'],
         ),
       ],
       'Acts#3': <QuizQuestion>[
@@ -5953,6 +6276,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un principe de respect civique est enseigné '
               '(Romains 13).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['sacrifice', 'vivant', 'conscience'],
         ),
       ],
       '1 Corinthians#0': <QuizQuestion>[
@@ -5983,6 +6308,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une image sacrée souligne la responsabilité collective '
               '(1 Corinthiens 3:16).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['corps', 'maison', 'champ'],
         ),
       ],
       '1 Corinthians#1': <QuizQuestion>[
@@ -6037,6 +6364,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Sans amour, tout le reste est vain (1 Corinthiens 13).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['amour'],
         ),
       ],
       '2 Corinthians#0': <QuizQuestion>[
@@ -6077,6 +6406,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Le message central de la réconciliation (2 Corinthiens '
               '5:20).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['ambassadeurs', 'paix', 'pardon'],
         ),
         QuizQuestion(
           text: 'Quel principe Paul enseigne-t-il sur le don généreux '
@@ -6176,6 +6507,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'La loi préparait à la venue du Messie (Galates 3:24).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['foi', 'promesse', 'Abraham'],
         ),
       ],
       'Galatians#2': <QuizQuestion>[
@@ -6205,6 +6538,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un appel à l’entraide fraternelle (Galates 6:2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['fardeau', 'loi', 'Christ'],
         ),
       ],
       'Ephesians#0': <QuizQuestion>[
@@ -6262,6 +6597,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un changement intérieur profond est demandé '
               '(Éphésiens 4:24).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['armure', 'vieille', 'mystère'],
         ),
       ],
       'Ephesians#2': <QuizQuestion>[
@@ -6519,6 +6856,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Leur constance le réconforte profondément '
               '(1 Thessaloniciens 3:8, 9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['crainte', 'tristesse', 'espérance'],
         ),
       ],
       '1 Thessalonians#2': <QuizQuestion>[
@@ -6544,6 +6883,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une image d’arrivée soudaine et inattendue '
               '(1 Thessaloniciens 5:2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['jour', 'lumière', 'sobres'],
         ),
       ],
       '2 Thessalonians#0': <QuizQuestion>[
@@ -6584,6 +6925,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un signe précurseur est annoncé (2 Thessaloniciens '
               '2:3).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['homme d’illégalité', 'l’homme de péché'],
         ),
         QuizQuestion(
           text: 'Quel encouragement Paul donne-t-il malgré cette '
@@ -6732,6 +7075,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Un encouragement à rester actif spirituellement '
               '(2 Timothée 1:6).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['don', 'mains', 'esprit'],
         ),
         QuizQuestion(
           text: 'De quoi Paul dit-il ne pas avoir honte ?',
@@ -6760,6 +7105,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une image de discipline et de sacrifice '
               '(2 Timothée 2:3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['athlète', 'cultivateur', 'vase'],
         ),
         QuizQuestion(
           text: 'Que dit 2 Timothée 3 sur l’utilité des Écritures ?',
@@ -6788,6 +7135,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un appel pressant à la fidélité (2 Timothée 4:2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['course', 'combat', 'couronne'],
         ),
         QuizQuestion(
           text: 'Comment Paul résume-t-il sa vie à la fin de cette '
@@ -6830,6 +7179,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un avertissement clair est donné (Tite 1:10, 11).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['les faux enseignants', 'faux enseignants'],
         ),
       ],
       'Titus#1': <QuizQuestion>[
@@ -6928,6 +7279,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une révélation supérieure à travers Christ (Hébreux '
               '1:1, 2).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['son Fils', 'le Fils'],
         ),
         QuizQuestion(
           text: 'Que décrit Hébreux 4 concernant la parole de Dieu ?',
@@ -6965,6 +7318,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un sacerdoce supérieur et permanent (Hébreux 7).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['l’ordre de Melchisédek'],
         ),
         QuizQuestion(
           text: 'Que rend possible la nouvelle alliance selon Hébreux '
@@ -6990,6 +7345,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une purification intérieure profonde (Hébreux 9:14).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['sang', 'sacrifice', 'alliance'],
         ),
       ],
       'Hebrews#2': <QuizQuestion>[
@@ -7005,6 +7362,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une citation clé reprise d’Habacuc (Hébreux 10:38).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['œuvres', 'loi', 'Abraham'],
         ),
         QuizQuestion(
           text: 'Quels exemples le célèbre chapitre 11 met-il en '
@@ -7042,6 +7401,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Dieu donne la sagesse généreusement (Jacques 1:5).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['sagesse'],
         ),
         QuizQuestion(
           text: 'Que dit Jacques 2 sur la relation entre la foi et les '
@@ -7099,6 +7460,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une leçon d’humilité pratique (Jacques 4:13-15).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['vapeur', 'projet', 'Seigneur'],
         ),
         QuizQuestion(
           text: 'Que doit faire une personne malade selon Jacques 5 ?',
@@ -7182,6 +7545,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une qualité essentielle à cultiver (1 Pierre 4:8).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['amour', 'troupeau', 'humilité'],
         ),
         QuizQuestion(
           text: 'Quelle attitude 1 Pierre 5 demande-t-il aux anciens '
@@ -7240,6 +7605,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un avertissement détaillé est donné (2 Pierre 2).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['anges', 'Sodome', 'déluge'],
         ),
         QuizQuestion(
           text: 'Quels exemples historiques 2 Pierre 2 cite-t-il comme '
@@ -7296,6 +7663,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une promesse de pardon sincère (1 Jean 1:9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lumière', 'ténèbres', 'sang'],
         ),
         QuizQuestion(
           text: 'Comment 1 Jean 2 nous met-il en garde contre '
@@ -7331,6 +7700,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un test essentiel de la foi authentique (1 Jean 3:11).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['justice', 'vérité', 'Dieu'],
         ),
       ],
       '1 John#2': <QuizQuestion>[
@@ -7340,6 +7711,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une déclaration centrale de la lettre (1 Jean 4:8).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lumière', 'vérité', 'esprit'],
         ),
         QuizQuestion(
           text: 'Que dit 1 Jean 5 sur ce qui triomphe du monde ?',
@@ -7371,6 +7744,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Un rappel constant de l’amour fraternel (2 Jean 1:5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['vérité', 'doctrine', 'Christ'],
         ),
       ],
       '3 John#0': <QuizQuestion>[
@@ -7386,6 +7761,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Sa générosité est mise en exemple (3 Jean 1:5).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Gaïus', 'Diotréphès', 'vérité'],
         ),
         QuizQuestion(
           text: 'Quel comportement Diotréphès manifeste-t-il dans '
@@ -7428,6 +7805,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Des exemples de jugement passé (Jude 1:6, 7).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Caïn', 'Balaam', 'Koré'],
         ),
       ],
       'Revelation#0': <QuizQuestion>[
@@ -7452,6 +7831,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Sept messages personnalisés sont donnés (Révélation '
               '2-3).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['7'],
         ),
         QuizQuestion(
           text: 'Qui seul est trouvé digne d’ouvrir le rouleau scellé '
@@ -7465,6 +7846,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Christ seul mérite cet honneur (Révélation 5:5-9).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['lion', 'trône', 'rouleau'],
         ),
       ],
       'Revelation#1': <QuizQuestion>[
@@ -7500,6 +7883,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           correctIndex: 0,
           explanation:
               'Une étape finale du jugement divin (Révélation 15:1).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['plaies', 'coupes', 'trône'],
         ),
       ],
       'Revelation#2': <QuizQuestion>[
@@ -7516,6 +7901,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Sa chute est décrite avec des lamentations '
               '(Révélation 18).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Babylone', 'bête', 'rois'],
         ),
         QuizQuestion(
           text: 'Que se passe-t-il pour Satan au début de Révélation '
@@ -7530,6 +7917,8 @@ const Map<String, List<QuizQuestion>> _authoredQuizzes =
           explanation:
               'Une période de restriction lui est imposée '
               '(Révélation 20:2, 3).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['abîme', 'dragon', 'ange'],
         ),
         QuizQuestion(
           text: 'Que promet Révélation 21-22 concernant la douleur et '
@@ -7575,6 +7964,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Le serpent la pousse à désobéir (Genèse 3).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['serpent'],
         ),
       ],
       'Genesis#1': <QuizQuestion>[
@@ -7585,6 +7976,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'La colombe montre que les eaux baissaient (Genèse 8).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['colombe'],
         ),
         QuizQuestion(
           text: 'Qui a béni Abram, étant roi de Salem et prêtre du Dieu '
@@ -7602,6 +7995,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'La circoncision marque l’alliance (Genèse 17).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['circoncision'],
         ),
         QuizQuestion(
           text: 'Comment s’appelait le fils d’Abraham et d’Agar ?',
@@ -7617,6 +8012,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Le feu détruit ces villes ; Lot est sauvé (Genèse 19).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Babel', 'Ninive', 'Ségor'],
         ),
       ],
       'Genesis#3': <QuizQuestion>[
@@ -7627,6 +8024,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Dieu arrête Abraham et fournit un bélier (Genèse 22).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Ismaël', 'bélier', 'agneau'],
         ),
         QuizQuestion(
           text: 'Contre quoi Ésaü a-t-il vendu son droit d’aînesse à '
@@ -7635,6 +8034,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Ésaü méprise son droit d’aînesse (Genèse 25).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['des lentilles', 'lentilles'],
         ),
         QuizQuestion(
           text: 'Qu’a vu Jacob en rêve à Béthel ?',
@@ -7657,6 +8058,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Le nom Israël signifie « il lutte avec Dieu » (Genèse 32).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['le nom Israël'],
         ),
         QuizQuestion(
           text: 'Combien de fils Jacob a-t-il eus, ancêtres des tribus '
@@ -7665,6 +8068,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Ses douze fils fondent les tribus d’Israël (Genèse 35).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['12'],
         ),
         QuizQuestion(
           text: 'Avec qui Jacob s’est-il réconcilié après des années de '
@@ -7695,6 +8100,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Ce cadeau attise la jalousie de ses frères (Genèse 37).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['manteau', 'robe', 'ceinture'],
         ),
         QuizQuestion(
           text: 'Qu’a interprété Joseph pour Pharaon, annonçant sept '
@@ -7703,6 +8110,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Joseph interprète les rêves de Pharaon (Genèse 41).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['rêves', 'les songes', 'des songes'],
         ),
       ],
       'Genesis#6': <QuizQuestion>[
@@ -7718,6 +8127,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Joseph pardonne et les nourrit (Genèse 45).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['il a pardonné', 'pardonné'],
         ),
         QuizQuestion(
           text: 'Où Jacob et sa famille se sont-ils installés en Égypte ?',
@@ -7725,6 +8136,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Pharaon leur donne la région de Goshen (Genèse 47).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Canaan', 'Ramsès', 'Sichem'],
         ),
         QuizQuestion(
           text: 'Comment Joseph voyait-il le mal que ses frères lui '
@@ -7748,6 +8161,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Aaron parle au peuple pour Moïse (Exode 4).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['son frère Aaron'],
         ),
         QuizQuestion(
           text: 'Par quel nom Dieu s’est-il désigné à Moïse au buisson '
@@ -7775,6 +8190,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Cette plaie décide Pharaon à libérer Israël (Exode 12).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['grenouilles', 'ténèbres', 'sauterelles'],
         ),
         QuizQuestion(
           text: 'Que devaient mettre les Israélites sur leurs portes lors '
@@ -7806,6 +8223,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Les Dix Commandements sont donnés au Sinaï (Exode 20).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['10'],
         ),
       ],
       'Exodus#3': <QuizQuestion>[
@@ -7820,6 +8239,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Les tables des commandements y sont placées (Exode 25).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['manne', 'bâton', 'encens'],
         ),
         QuizQuestion(
           text: 'Qui a fabriqué le veau d’or pendant l’absence de Moïse ?',
@@ -7895,6 +8316,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Les douze apôtres sont nommés (Matthieu 10).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['12'],
         ),
       ],
       'Matthew#2': <QuizQuestion>[
@@ -7910,6 +8333,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus enseigne un pardon sans limite (Matthieu 18:22).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['77 fois', 'soixante-dix-sept fois'],
         ),
         QuizQuestion(
           text: 'Qu’a fait Jésus en entrant dans le temple à Jérusalem ?',
@@ -7937,6 +8362,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Un signe composé est décrit (Matthieu 24).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['pestes', 'signes', 'fin'],
         ),
         QuizQuestion(
           text: 'Quelle mission Jésus a-t-il confiée à ses disciples '
@@ -7960,6 +8387,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Simon, André et d’autres le suivent (Marc 1).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['pêcheurs'],
         ),
         QuizQuestion(
           text: 'Qu’a fait Jésus pour l’homme possédé de la région de '
@@ -7983,6 +8412,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Un second miracle de multiplication (Marc 8).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['7'],
         ),
         QuizQuestion(
           text: 'Que faut-il devenir, selon Jésus, pour entrer dans le '
@@ -8013,6 +8444,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Simon est réquisitionné en chemin (Marc 15).',
+          type: QuizAnswerType.wordBank,
+          wordBankDistractors: <String>['Pierre', 'Joseph', 'Barabbas'],
         ),
       ],
       'Luke#0': <QuizQuestion>[
@@ -8022,6 +8455,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'La naissance a lieu à Bethléhem (Luc 2).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['à Bethléhem'],
         ),
         QuizQuestion(
           text: 'À qui les anges ont-ils annoncé en premier la naissance '
@@ -8040,6 +8475,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Jésus élargit la prédication (Luc 10).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['70'],
         ),
         QuizQuestion(
           text: 'Que conseille Jésus au sujet de l’inquiétude pour la '
@@ -8063,6 +8500,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Seul un Samaritain revient rendre grâce (Luc 17).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['10'],
         ),
         QuizQuestion(
           text: 'Qui a comploté et trahi Jésus pour de l’argent ?',
@@ -8080,6 +8519,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Un grand nombre répond au message (Actes 2).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['3000', 'trois mille'],
         ),
         QuizQuestion(
           text: 'Qui gardait les vêtements de ceux qui lapidaient '
@@ -8098,6 +8539,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Philippe lui explique les Écritures (Actes 8).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['l’évangélisateur Philippe'],
         ),
         QuizQuestion(
           text: 'Comment Pierre a-t-il été libéré de prison sous Hérode ?',
@@ -8122,6 +8565,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Les artisans craignaient pour leur commerce (Actes 19).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['à Éphèse'],
         ),
       ],
       'Acts#3': <QuizQuestion>[
@@ -8145,6 +8590,8 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
           correctIndex: 0,
           explanation:
               'Paul prêche même en résidence surveillée (Actes 28).',
+          type: QuizAnswerType.freeText,
+          acceptedAnswers: <String>['Rome'],
         ),
       ],
     };
@@ -8152,30 +8599,51 @@ const Map<String, List<QuizQuestion>> _extraQuizzes =
 /// Merges the French base content with a language's translated overrides
 /// (when present), falling back to French per-checkpoint for anything not
 /// yet translated in that language.
+// Merging the French base with a language's overrides copies 200+ map
+// entries; every call site (checkpointsForBook) does this once per book, and
+// callers like the home screen's "pending quiz" scan call it for all 66
+// books on every rebuild. The merged result only ever changes when the
+// language does, so cache it per language instead of rebuilding it on
+// every single call.
+final Map<String, Map<String, List<QuizQuestion>>> _authoredQuizzesCache =
+    <String, Map<String, List<QuizQuestion>>>{};
+final Map<String, Map<String, List<QuizQuestion>>> _extraQuizzesCache =
+    <String, Map<String, List<QuizQuestion>>>{};
+
 Map<String, List<QuizQuestion>> _authoredQuizzesFor(String? languageCode) {
-  final Map<String, List<QuizQuestion>> translated = switch (languageCode) {
-    'en' => authoredQuizzesEn,
-    'it' => authoredQuizzesIt,
-    'es' => authoredQuizzesEs,
-    'pt' => authoredQuizzesPt,
-    'ru' => authoredQuizzesRu,
-    'zh' => authoredQuizzesZh,
-    _ => const <String, List<QuizQuestion>>{},
-  };
-  return <String, List<QuizQuestion>>{..._authoredQuizzes, ...translated};
+  final String cacheKey = languageCode ?? '';
+  return _authoredQuizzesCache[cacheKey] ??= () {
+    final Map<String, List<QuizQuestion>> translated = switch (languageCode) {
+      'en' => authoredQuizzesEn,
+      'de' => authoredQuizzesDe,
+      'pl' => authoredQuizzesPl,
+      'it' => authoredQuizzesIt,
+      'es' => authoredQuizzesEs,
+      'pt' => authoredQuizzesPt,
+      'ru' => authoredQuizzesRu,
+      'zh' => authoredQuizzesZh,
+      _ => const <String, List<QuizQuestion>>{},
+    };
+    return <String, List<QuizQuestion>>{..._authoredQuizzes, ...translated};
+  }();
 }
 
 Map<String, List<QuizQuestion>> _extraQuizzesFor(String? languageCode) {
-  final Map<String, List<QuizQuestion>> translated = switch (languageCode) {
-    'en' => extraQuizzesEn,
-    'it' => extraQuizzesIt,
-    'es' => extraQuizzesEs,
-    'pt' => extraQuizzesPt,
-    'ru' => extraQuizzesRu,
-    'zh' => extraQuizzesZh,
-    _ => const <String, List<QuizQuestion>>{},
-  };
-  return <String, List<QuizQuestion>>{..._extraQuizzes, ...translated};
+  final String cacheKey = languageCode ?? '';
+  return _extraQuizzesCache[cacheKey] ??= () {
+    final Map<String, List<QuizQuestion>> translated = switch (languageCode) {
+      'en' => extraQuizzesEn,
+      'de' => extraQuizzesDe,
+      'pl' => extraQuizzesPl,
+      'it' => extraQuizzesIt,
+      'es' => extraQuizzesEs,
+      'pt' => extraQuizzesPt,
+      'ru' => extraQuizzesRu,
+      'zh' => extraQuizzesZh,
+      _ => const <String, List<QuizQuestion>>{},
+    };
+    return <String, List<QuizQuestion>>{..._extraQuizzes, ...translated};
+  }();
 }
 
 /// Builds the checkpoints for [book]. Pass [languageCode] (e.g. from

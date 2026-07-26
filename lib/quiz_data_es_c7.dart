@@ -26,6 +26,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se aclara una confusión (2 Tesalonicenses 2:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['carta', 'espíritu', 'apostasía'],
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[
@@ -37,6 +39,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       explanation:
           'Se anuncia una señal precursora '
           '(2 Tesalonicenses 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['apostasía', 'Satanás', 'señal'],
     ),
     QuizQuestion(
       text: '¿Qué ánimo da Pablo a pesar de este anuncio inquietante?',
@@ -94,6 +98,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       explanation:
           'Pablo quiere preservar la pureza de la enseñanza '
           '(1 Timoteo 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['genealogías', 'ley', 'maestros'],
     ),
     QuizQuestion(
       text: '¿Por quiénes pide Pablo que se hagan oraciones en '
@@ -182,6 +188,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       explanation:
           'Un estímulo a mantenerse activo espiritualmente '
           '(2 Timoteo 1:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['don', 'manos', 'espíritu'],
     ),
     QuizQuestion(
       text: '¿De qué dice Pablo no avergonzarse?',
@@ -210,6 +218,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       explanation:
           'Una imagen de disciplina y sacrificio '
           '(2 Timoteo 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['atleta', 'labrador', 'vaso'],
     ),
     QuizQuestion(
       text: '¿Qué dice 2 Timoteo 3 sobre la utilidad de las Escrituras?',
@@ -278,6 +288,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se da una advertencia clara (Tito 1:10, 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ancianos', 'cretenses', 'circuncisión'],
     ),
   ],
   'Titus#1': <QuizQuestion>[
@@ -375,6 +387,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       explanation:
           'Una revelación superior por medio de Cristo (Hebreos '
           '1:1, 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['profetas', 'ángeles', 'Moisés'],
     ),
     QuizQuestion(
       text: '¿Qué describe Hebreos 4 sobre la palabra de Dios?',
@@ -412,6 +426,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un sacerdocio superior y permanente (Hebreos 7).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: '¿Qué hace posible el nuevo pacto según Hebreos '
@@ -425,6 +440,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se instaura un pacto superior (Hebreos 8:10).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sacrificio', 'ley', 'templo'],
     ),
     QuizQuestion(
       text: '¿Qué purifica la sangre de Cristo según Hebreos 9?',
@@ -452,6 +469,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una cita clave tomada de Habacuc (Hebreos 10:38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['obras', 'ley', 'sacrificio'],
     ),
     QuizQuestion(
       text: '¿Qué ejemplos destaca el célebre capítulo 11?',
@@ -487,6 +506,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Dios da la sabiduría generosamente (Santiago 1:5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['sabiduría'],
     ),
     QuizQuestion(
       text: '¿Qué dice Santiago 2 sobre la relación entre la fe y las '
@@ -543,6 +564,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una lección de humildad práctica (Santiago 4:13-15).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riquezas', 'planes', 'vapor'],
     ),
     QuizQuestion(
       text: '¿Qué debe hacer una persona enferma según Santiago 5?',
@@ -626,6 +649,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una cualidad esencial que cultivar (1 Pedro 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['perdón', 'fe', 'esperanza'],
     ),
     QuizQuestion(
       text: '¿Qué actitud pide 1 Pedro 5 a los ancianos hacia el '

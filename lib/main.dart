@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'l10n/app_localizations.dart';
+import 'screens/features_intro_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/reminder_onboarding_screen.dart';
 import 'screens/streak_info_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'services/local_db_service.dart';
@@ -25,13 +27,20 @@ class DailyJwApp extends StatefulWidget {
 class _DailyJwAppState extends State<DailyJwApp> {
   final LocalDbService _dbService = LocalDbService();
   ThemePreference _themePreference = ThemePreference.system;
-  bool _useDynamicColor = true;
+  bool _useDynamicColor = false;
+
   /// null means "follow system language".
   String? _localeCode;
   bool _isThemeLoading = true;
   bool _showWelcome = false;
-  // 0 = welcome page, 1 = streak explanation page (only while onboarding).
+  // Onboarding pages: 0 = welcome, 1 = features, 2 = streak, 3 = reminders.
+  static const int _onboardingStepCount = 4;
   int _onboardingStep = 0;
+  final PageController _onboardingController = PageController();
+  // True only while the user is actively dragging the onboarding PageView
+  // (not during a programmatic animateToPage) — hides each page's bottom
+  // button so it doesn't compete with the swipe gesture.
+  bool _isOnboardingDragging = false;
 
   @override
   void initState() {
@@ -41,6 +50,12 @@ class _DailyJwAppState extends State<DailyJwApp> {
       return;
     }
     _loadThemePreference();
+  }
+
+  @override
+  void dispose() {
+    _onboardingController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadThemePreference() async {
@@ -68,6 +83,89 @@ class _DailyJwAppState extends State<DailyJwApp> {
         _isThemeLoading = false;
       });
     }
+  }
+
+  Future<void> _goToOnboardingStep(int step) async {
+    await _onboardingController.animateToPage(
+      step,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
+  /// Distinguishes a manual finger-drag from a programmatic `animateToPage`
+  /// scroll: [ScrollStartNotification.dragDetails] is only set for the former.
+  bool _handleOnboardingScroll(ScrollNotification notification) {
+    // ScrollStartNotification fires on a plain touch-down (Scrollable starts
+    // a "hold" to arrest any fling) even with zero finger movement, so
+    // relying on it made the button flicker away on a simple tap.
+    // ScrollUpdateNotification only fires once the scroll offset actually
+    // changes, so gating on it (with dragDetails set, i.e. driven by the
+    // user's finger rather than a programmatic animateToPage) only reacts to
+    // a genuine swipe.
+    if (notification is ScrollUpdateNotification &&
+        notification.dragDetails != null) {
+      if (!_isOnboardingDragging) {
+        setState(() => _isOnboardingDragging = true);
+      }
+    } else if (notification is ScrollEndNotification) {
+      if (_isOnboardingDragging) {
+        setState(() => _isOnboardingDragging = false);
+      }
+    }
+    return false;
+  }
+
+  Widget _buildOnboardingPageView() {
+    return NotificationListener<ScrollNotification>(
+      onNotification: _handleOnboardingScroll,
+      child: PageView(
+        key: const ValueKey<String>('onboarding-flow'),
+        controller: _onboardingController,
+        onPageChanged: (int page) => setState(() => _onboardingStep = page),
+        children: <Widget>[
+          // Each page gets its own compositing layer so dragging the
+          // PageView just repositions cached rasters instead of repainting
+          // all four pages' content on every scroll frame.
+          RepaintBoundary(
+            child: WelcomeScreen(
+              stepCount: _onboardingStepCount,
+              stepIndex: 0,
+              onContinue: () => _goToOnboardingStep(1),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+          RepaintBoundary(
+            child: FeaturesIntroScreen(
+              stepCount: _onboardingStepCount,
+              stepIndex: 1,
+              onNext: () => _goToOnboardingStep(2),
+              onBack: () => _goToOnboardingStep(0),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+          RepaintBoundary(
+            child: StreakInfoScreen(
+              stepCount: _onboardingStepCount,
+              stepIndex: 2,
+              onNext: () => _goToOnboardingStep(3),
+              onBack: () => _goToOnboardingStep(1),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+          RepaintBoundary(
+            child: ReminderOnboardingScreen(
+              dbService: _dbService,
+              stepCount: _onboardingStepCount,
+              stepIndex: 3,
+              onDone: _completeOnboarding,
+              onBack: () => _goToOnboardingStep(2),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _completeOnboarding() async {
@@ -168,32 +266,37 @@ class _DailyJwAppState extends State<DailyJwApp> {
           supportedLocales: AppLocalizations.supportedLocales,
           home: _isThemeLoading
               ? loading
-              : AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 450),
-                  switchInCurve: Curves.easeOut,
-                  switchOutCurve: Curves.easeIn,
-                  child: _showWelcome
-                      ? (_onboardingStep == 0
-                            ? WelcomeScreen(
-                                key: const ValueKey<String>('welcome'),
-                                onContinue: () async {
-                                  setState(() => _onboardingStep = 1);
-                                },
-                              )
-                            : StreakInfoScreen(
-                                key: const ValueKey<String>('streak-info'),
-                                onDone: _completeOnboarding,
-                              ))
-                      : HomeScreen(
-                          key: const ValueKey<String>('home'),
-                          skipBootstrap: widget.skipBootstrap,
-                          currentThemePreference: _themePreference,
-                          onThemePreferenceChanged: _updateThemePreference,
-                          useDynamicColor: _useDynamicColor,
-                          onUseDynamicColorChanged: _updateUseDynamicColor,
-                          currentLocaleCode: _localeCode,
-                          onLocaleChanged: _updateLocale,
-                        ),
+              : PopScope(
+                  // While onboarding, the system back gesture should step
+                  // backwards through the flow instead of exiting the app —
+                  // there's no Navigator route to pop since each step just
+                  // swaps the same `home` widget.
+                  canPop: !_showWelcome || _onboardingStep == 0,
+                  onPopInvokedWithResult: (bool didPop, Object? result) {
+                    if (didPop) {
+                      return;
+                    }
+                    if (_showWelcome && _onboardingStep > 0) {
+                      _goToOnboardingStep(_onboardingStep - 1);
+                    }
+                  },
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 450),
+                    switchInCurve: Curves.easeOut,
+                    switchOutCurve: Curves.easeIn,
+                    child: _showWelcome
+                        ? _buildOnboardingPageView()
+                        : HomeScreen(
+                            key: const ValueKey<String>('home'),
+                            skipBootstrap: widget.skipBootstrap,
+                            currentThemePreference: _themePreference,
+                            onThemePreferenceChanged: _updateThemePreference,
+                            useDynamicColor: _useDynamicColor,
+                            onUseDynamicColorChanged: _updateUseDynamicColor,
+                            currentLocaleCode: _localeCode,
+                            onLocaleChanged: _updateLocale,
+                          ),
+                  ),
                 ),
         );
       },

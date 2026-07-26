@@ -5,10 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_it.dart';
+import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
 import 'app_localizations_zh.dart';
@@ -99,10 +101,12 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
     Locale('es'),
     Locale('fr'),
     Locale('it'),
+    Locale('pl'),
     Locale('pt'),
     Locale('ru'),
     Locale('zh'),
@@ -600,35 +604,263 @@ abstract class AppLocalizations {
   /// **'Your daily Bible reading,\none day at a time.'**
   String get welcomeTagline;
 
-  /// No description provided for @welcomeFeatureReminder.
-  ///
-  /// In en, this message translates to:
-  /// **'A reminder every day, at the time you choose'**
-  String get welcomeFeatureReminder;
-
-  /// No description provided for @welcomeFeatureOpen.
-  ///
-  /// In en, this message translates to:
-  /// **'Your reading opens in one tap'**
-  String get welcomeFeatureOpen;
-
-  /// No description provided for @welcomeFeaturePrivate.
-  ///
-  /// In en, this message translates to:
-  /// **'100% private: everything stays on your device'**
-  String get welcomeFeaturePrivate;
-
   /// No description provided for @welcomeButton.
   ///
   /// In en, this message translates to:
   /// **'Welcome!'**
   String get welcomeButton;
 
+  /// No description provided for @welcomeLogoGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi!'**
+  String get welcomeLogoGreeting;
+
   /// No description provided for @welcomeFooter.
   ///
   /// In en, this message translates to:
   /// **'Free, libre, and open source'**
   String get welcomeFooter;
+
+  /// No description provided for @onbContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get onbContinue;
+
+  /// No description provided for @onbBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get onbBack;
+
+  /// No description provided for @onbFeaturesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What you can do'**
+  String get onbFeaturesTitle;
+
+  /// No description provided for @onbFeaturesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A few features to guide your daily reading.'**
+  String get onbFeaturesSubtitle;
+
+  /// No description provided for @onbFeatureReadingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided daily reading'**
+  String get onbFeatureReadingTitle;
+
+  /// No description provided for @onbFeatureReadingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'One chapter a day, at your own pace. It opens in JW Library or on jw.org — your choice in settings. Mark it as read to move forward and feed your streak.'**
+  String get onbFeatureReadingDesc;
+
+  /// No description provided for @onbFeatureQuizTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes & stars'**
+  String get onbFeatureQuizTitle;
+
+  /// No description provided for @onbFeatureQuizDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your understanding with short quizzes that unlock as you read. Answer by choosing, typing, or building words — and earn stars along the way.'**
+  String get onbFeatureQuizDesc;
+
+  /// No description provided for @onbFeatureNotesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal notes'**
+  String get onbFeatureNotesTitle;
+
+  /// No description provided for @onbFeatureNotesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Jot down your reflections as you read and find them again whenever you like. You can even export them.'**
+  String get onbFeatureNotesDesc;
+
+  /// No description provided for @onbFeaturePrivacyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'100% private'**
+  String get onbFeaturePrivacyTitle;
+
+  /// No description provided for @onbFeaturePrivacyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything stays on your phone. No data is sent anywhere, and no account is required.'**
+  String get onbFeaturePrivacyDesc;
+
+  /// No description provided for @onbReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set your first reminder'**
+  String get onbReminderTitle;
+
+  /// No description provided for @onbReminderIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'A small daily nudge is the best way to keep your streak going. Pick a calm moment of your day — you can always add more or change them later in settings.'**
+  String get onbReminderIntro;
+
+  /// No description provided for @onbReminderTip.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: link your reminder to an existing habit, like after your morning coffee or before bed.'**
+  String get onbReminderTip;
+
+  /// No description provided for @onbReminderFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get onbReminderFinish;
+
+  /// No description provided for @onbReminderSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get onbReminderSkip;
+
+  /// No description provided for @tourNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tourNext;
+
+  /// No description provided for @tourDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get tourDone;
+
+  /// No description provided for @tourSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tourSkip;
+
+  /// No description provided for @tourStreakTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your streak'**
+  String get tourStreakTitle;
+
+  /// No description provided for @tourStreakBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Grows every day you read a chapter or take a quiz. Matches cover the days you miss.'**
+  String get tourStreakBody;
+
+  /// No description provided for @tourReadingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s chapter'**
+  String get tourReadingTitle;
+
+  /// No description provided for @tourReadingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open it, then mark it as read to move on to the next one.'**
+  String get tourReadingBody;
+
+  /// No description provided for @tourBrowseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The whole Bible'**
+  String get tourBrowseTitle;
+
+  /// No description provided for @tourBrowseBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump to any book or chapter, and see what you\'ve already read.'**
+  String get tourBrowseBody;
+
+  /// No description provided for @tourProgressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get tourProgressTitle;
+
+  /// No description provided for @tourProgressBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Readings, stars and your recent activity, all in one place.'**
+  String get tourProgressBody;
+
+  /// No description provided for @tourQuickActionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick actions'**
+  String get tourQuickActionsTitle;
+
+  /// No description provided for @tourQuickActionsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The daily text and your notes, always one tap away.'**
+  String get tourQuickActionsBody;
+
+  /// No description provided for @tourAchievementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get tourAchievementsTitle;
+
+  /// No description provided for @tourAchievementsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Track the milestones you unlock as you read.'**
+  String get tourAchievementsBody;
+
+  /// No description provided for @tourNotesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your notes'**
+  String get tourNotesTitle;
+
+  /// No description provided for @tourNotesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything you\'ve written, ready to reread or export.'**
+  String get tourNotesBody;
+
+  /// No description provided for @tourSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get tourSettingsTitle;
+
+  /// No description provided for @tourSettingsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, language, reminders — and this tour, if you want to see it again.'**
+  String get tourSettingsBody;
+
+  /// No description provided for @settingsReplayTour.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay the guided tour'**
+  String get settingsReplayTour;
+
+  /// No description provided for @settingsReplayTourSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'See the home screen walkthrough again'**
+  String get settingsReplayTourSubtitle;
+
+  /// No description provided for @onbReminderPermissionMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off, so this reminder won\'t ring. Turn them on to get notified.'**
+  String get onbReminderPermissionMissing;
+
+  /// No description provided for @onbReminderPermissionEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable'**
+  String get onbReminderPermissionEnable;
 
   /// No description provided for @streakInfoTitle.
   ///
@@ -657,25 +889,25 @@ abstract class AppLocalizations {
   /// No description provided for @streakInfoRow2Title.
   ///
   /// In en, this message translates to:
-  /// **'4 freezes per month'**
+  /// **'4 matches per month'**
   String get streakInfoRow2Title;
 
   /// No description provided for @streakInfoRow2Text.
   ///
   /// In en, this message translates to:
-  /// **'A missed day automatically uses a freeze to protect your streak. They refill every month.'**
+  /// **'A missed day automatically uses a match to keep your streak\'s flame alight. They refill every month.'**
   String get streakInfoRow2Text;
 
   /// No description provided for @streakInfoRow3Title.
   ///
   /// In en, this message translates to:
-  /// **'Earn back a freeze'**
+  /// **'Earn back a match'**
   String get streakInfoRow3Title;
 
   /// No description provided for @streakInfoRow3Text.
   ///
   /// In en, this message translates to:
-  /// **'Out of freezes? Pass a review quiz (a mix of your readings) to earn one back.'**
+  /// **'Out of matches? Pass a review quiz (a mix of your readings) to earn one back.'**
   String get streakInfoRow3Text;
 
   /// No description provided for @streakInfoRow4Title.
@@ -689,12 +921,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If your streak is at risk, a warning appears and an evening reminder can nudge you.'**
   String get streakInfoRow4Text;
-
-  /// No description provided for @streakInfoButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Let\'s go!'**
-  String get streakInfoButton;
 
   /// No description provided for @settingsTitle.
   ///
@@ -725,6 +951,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Uses the app\'s brand color'**
   String get settingsDynamicColorOff;
+
+  /// No description provided for @settingsBibleTargetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the Bible with'**
+  String get settingsBibleTargetTitle;
+
+  /// No description provided for @settingsBibleTargetJwLibrary.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Library app'**
+  String get settingsBibleTargetJwLibrary;
+
+  /// No description provided for @settingsBibleTargetWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'jw.org (browser)'**
+  String get settingsBibleTargetWeb;
+
+  /// No description provided for @settingsBibleTargetJwLibraryMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The JW Library app is required to open the Bible this way. Would you like to install it?'**
+  String get settingsBibleTargetJwLibraryMissing;
+
+  /// No description provided for @settingsBibleTargetInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Install'**
+  String get settingsBibleTargetInstall;
 
   /// No description provided for @settingsLanguage.
   ///
@@ -816,6 +1072,12 @@ abstract class AppLocalizations {
   /// **'License'**
   String get settingsLicense;
 
+  /// No description provided for @settingsLicenseLegalese.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak is free software licensed under the GNU General Public License v3. The licenses below cover the open-source components it is built with.'**
+  String get settingsLicenseLegalese;
+
   /// No description provided for @settingsQuestion.
   ///
   /// In en, this message translates to:
@@ -827,30 +1089,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Made with brotherly love, from Switzerland.\nThis app is Free, Libre, and Open Source.'**
   String get settingsFooter;
-
-  /// No description provided for @settingsNotifGranted.
-  ///
-  /// In en, this message translates to:
-  /// **'Notification permission granted.'**
-  String get settingsNotifGranted;
-
-  /// No description provided for @settingsNotifDenied.
-  ///
-  /// In en, this message translates to:
-  /// **'Notification permission denied.'**
-  String get settingsNotifDenied;
-
-  /// No description provided for @settingsAlarmsGranted.
-  ///
-  /// In en, this message translates to:
-  /// **'Exact alarms allowed.'**
-  String get settingsAlarmsGranted;
-
-  /// No description provided for @settingsAlarmsDenied.
-  ///
-  /// In en, this message translates to:
-  /// **'Exact alarms not allowed.'**
-  String get settingsAlarmsDenied;
 
   /// No description provided for @settingsError.
   ///
@@ -881,12 +1119,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This reminder already exists.'**
   String get reminderAlreadyExists;
-
-  /// No description provided for @reminderAdded.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminder added at {label}.'**
-  String reminderAdded(String label);
 
   /// No description provided for @reminderTitle.
   ///
@@ -959,6 +1191,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See score'**
   String get quizSeeScore;
+
+  /// No description provided for @quizTypeAnswerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your answer'**
+  String get quizTypeAnswerHint;
+
+  /// No description provided for @quizCheckAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Check'**
+  String get quizCheckAnswer;
+
+  /// No description provided for @quizWordBankInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the words in the right order'**
+  String get quizWordBankInstruction;
+
+  /// No description provided for @quizClearAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get quizClearAnswer;
+
+  /// No description provided for @quizCorrectAnswerWas.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer: {answer}'**
+  String quizCorrectAnswerWas(String answer);
 
   /// No description provided for @quizPerfect.
   ///
@@ -1062,12 +1324,6 @@ abstract class AppLocalizations {
   /// **'Your streak reset to zero — no worries, let\'s start again together 💪'**
   String get homeStreakLostMessage;
 
-  /// No description provided for @homeChapterMarkedRead.
-  ///
-  /// In en, this message translates to:
-  /// **'{reference} marked as read.'**
-  String homeChapterMarkedRead(String reference);
-
   /// No description provided for @homeExactAlarmDialogTitle.
   ///
   /// In en, this message translates to:
@@ -1107,7 +1363,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeReviewQuizEarned.
   ///
   /// In en, this message translates to:
-  /// **'Well done! You earned back a freeze ❄️'**
+  /// **'Well done! You earned back a match 🔥'**
   String get homeReviewQuizEarned;
 
   /// No description provided for @homeReviewQuizFailed.
@@ -1269,13 +1525,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeFreezesNone.
   ///
   /// In en, this message translates to:
-  /// **'no freezes left'**
+  /// **'no matches left'**
   String get homeFreezesNone;
 
   /// No description provided for @homeFreezesRemaining.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, one{{count} freeze left} other{{count} freezes left}}'**
+  /// **'{count, plural, one{{count} match left} other{{count} matches left}}'**
   String homeFreezesRemaining(int count);
 
   /// No description provided for @homeStreakAtRiskTitle.
@@ -1293,7 +1549,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeEarnFreezeButton.
   ///
   /// In en, this message translates to:
-  /// **'Earn back a freeze (review quiz)'**
+  /// **'Earn back a match (review quiz)'**
   String get homeEarnFreezeButton;
 
   /// No description provided for @homeNewQuizUnlocked.
@@ -1637,18 +1893,6 @@ abstract class AppLocalizations {
   /// **'Add a title to save.'**
   String get noteEditorTitleErrorHint;
 
-  /// No description provided for @noteEditorTitleRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'The title is required.'**
-  String get noteEditorTitleRequired;
-
-  /// No description provided for @noteEditorSavedSnackbar.
-  ///
-  /// In en, this message translates to:
-  /// **'Note saved locally.'**
-  String get noteEditorSavedSnackbar;
-
   /// No description provided for @noteEditorErrorSnackbar.
   ///
   /// In en, this message translates to:
@@ -1739,12 +1983,6 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get notesLibraryDelete;
 
-  /// No description provided for @notesLibraryDeletedSnackbar.
-  ///
-  /// In en, this message translates to:
-  /// **'\"{title}\" deleted.'**
-  String notesLibraryDeletedSnackbar(String title);
-
   /// No description provided for @notesLibraryDeleteConfirmSingular.
   ///
   /// In en, this message translates to:
@@ -1756,18 +1994,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'These {count} notes will be permanently deleted from your device.'**
   String notesLibraryDeleteConfirmPlural(int count);
-
-  /// No description provided for @notesLibraryDeletedSingular.
-  ///
-  /// In en, this message translates to:
-  /// **'Note deleted.'**
-  String get notesLibraryDeletedSingular;
-
-  /// No description provided for @notesLibraryDeletedPlural.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} notes deleted.'**
-  String notesLibraryDeletedPlural(int count);
 
   /// No description provided for @notesLibraryErrorMessage.
   ///
@@ -1936,6 +2162,384 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This note is empty.'**
   String get noteReaderEmpty;
+
+  /// No description provided for @homeAchievementsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get homeAchievementsTooltip;
+
+  /// No description provided for @achievementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get achievementsTitle;
+
+  /// No description provided for @achievementsUnlockedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{unlocked} of {total} unlocked'**
+  String achievementsUnlockedCount(int unlocked, int total);
+
+  /// No description provided for @achievementsProgressFraction.
+  ///
+  /// In en, this message translates to:
+  /// **'{current} / {goal}'**
+  String achievementsProgressFraction(int current, int goal);
+
+  /// No description provided for @achievementsSectionReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get achievementsSectionReading;
+
+  /// No description provided for @achievementsSectionQuizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get achievementsSectionQuizzes;
+
+  /// No description provided for @achievementsSectionStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get achievementsSectionStreak;
+
+  /// No description provided for @achievementsSectionOther.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get achievementsSectionOther;
+
+  /// No description provided for @achievementFirstChapterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First Steps'**
+  String get achievementFirstChapterTitle;
+
+  /// No description provided for @achievementFirstChapterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read your first chapter.'**
+  String get achievementFirstChapterDesc;
+
+  /// No description provided for @achievementChapters10Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting Started'**
+  String get achievementChapters10Title;
+
+  /// No description provided for @achievementChapters10Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read 10 chapters.'**
+  String get achievementChapters10Desc;
+
+  /// No description provided for @achievementChapters50Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Steady Reader'**
+  String get achievementChapters50Title;
+
+  /// No description provided for @achievementChapters50Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read 50 chapters.'**
+  String get achievementChapters50Desc;
+
+  /// No description provided for @achievementChapters150Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Devoted Reader'**
+  String get achievementChapters150Title;
+
+  /// No description provided for @achievementChapters150Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read 150 chapters.'**
+  String get achievementChapters150Desc;
+
+  /// No description provided for @achievementGenesisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'In the Beginning'**
+  String get achievementGenesisTitle;
+
+  /// No description provided for @achievementGenesisDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish reading the book of Genesis.'**
+  String get achievementGenesisDesc;
+
+  /// No description provided for @achievementWholeBibleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover to Cover'**
+  String get achievementWholeBibleTitle;
+
+  /// No description provided for @achievementWholeBibleDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read every chapter of the Bible.'**
+  String get achievementWholeBibleDesc;
+
+  /// No description provided for @achievementExplorerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explorer'**
+  String get achievementExplorerTitle;
+
+  /// No description provided for @achievementExplorerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read chapters from 5 different books.'**
+  String get achievementExplorerDesc;
+
+  /// No description provided for @achievementFirstQuizTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'First Quiz'**
+  String get achievementFirstQuizTitle;
+
+  /// No description provided for @achievementFirstQuizDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your first quiz.'**
+  String get achievementFirstQuizDesc;
+
+  /// No description provided for @achievementQuizzes5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Regular'**
+  String get achievementQuizzes5Title;
+
+  /// No description provided for @achievementQuizzes5Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 5 quizzes.'**
+  String get achievementQuizzes5Desc;
+
+  /// No description provided for @achievementQuizzes25Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Master'**
+  String get achievementQuizzes25Title;
+
+  /// No description provided for @achievementQuizzes25Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 25 quizzes.'**
+  String get achievementQuizzes25Desc;
+
+  /// No description provided for @achievementPerfectQuizTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfectionist'**
+  String get achievementPerfectQuizTitle;
+
+  /// No description provided for @achievementPerfectQuizDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a perfect score on a quiz.'**
+  String get achievementPerfectQuizDesc;
+
+  /// No description provided for @achievementStars20Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Star Collector'**
+  String get achievementStars20Title;
+
+  /// No description provided for @achievementStars20Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn 20 stars.'**
+  String get achievementStars20Desc;
+
+  /// No description provided for @achievementStreak7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'One Week Strong'**
+  String get achievementStreak7Title;
+
+  /// No description provided for @achievementStreak7Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a 7-day reading streak.'**
+  String get achievementStreak7Desc;
+
+  /// No description provided for @achievementStreak30Title.
+  ///
+  /// In en, this message translates to:
+  /// **'One Month Strong'**
+  String get achievementStreak30Title;
+
+  /// No description provided for @achievementStreak30Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a 30-day reading streak.'**
+  String get achievementStreak30Desc;
+
+  /// No description provided for @achievementFirstNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Taker'**
+  String get achievementFirstNoteTitle;
+
+  /// No description provided for @achievementFirstNoteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your first note.'**
+  String get achievementFirstNoteDesc;
+
+  /// No description provided for @achievementReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay on Track'**
+  String get achievementReminderTitle;
+
+  /// No description provided for @achievementReminderDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a daily reminder.'**
+  String get achievementReminderDesc;
+
+  /// No description provided for @notifReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak · Bible reading'**
+  String get notifReminderTitle;
+
+  /// No description provided for @notifReminderBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Time for your reading. Tap to continue 📖'**
+  String get notifReminderBody;
+
+  /// No description provided for @notifStreakRiskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your streak is at risk 🔥'**
+  String get notifStreakRiskTitle;
+
+  /// No description provided for @notifStreakRiskBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t been active today yet — read a chapter or take a quiz to keep it.'**
+  String get notifStreakRiskBody;
+
+  /// No description provided for @easterEggHeartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'I love you too :)'**
+  String get easterEggHeartBody;
+
+  /// No description provided for @easterEggVersionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Secret found! 🕵️'**
+  String get easterEggVersionTitle;
+
+  /// No description provided for @easterEggVersionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Shh... you weren\'t supposed to find that. There\'s no real hidden mode here, just a little wink 😉'**
+  String get easterEggVersionBody;
+
+  /// No description provided for @easterEggVersionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ll keep quiet 🤫'**
+  String get easterEggVersionButton;
+
+  /// No description provided for @achievementQuizzes40Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Legend'**
+  String get achievementQuizzes40Title;
+
+  /// No description provided for @achievementQuizzes40Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete 40 quizzes.'**
+  String get achievementQuizzes40Desc;
+
+  /// No description provided for @achievementStars40Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Galaxy Collector'**
+  String get achievementStars40Title;
+
+  /// No description provided for @achievementStars40Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn 40 stars.'**
+  String get achievementStars40Desc;
+
+  /// No description provided for @achievementStreak180Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Six Months Strong'**
+  String get achievementStreak180Title;
+
+  /// No description provided for @achievementStreak180Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep a 180-day reading streak.'**
+  String get achievementStreak180Desc;
+
+  /// No description provided for @achievementNotes10Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Prolific Writer'**
+  String get achievementNotes10Title;
+
+  /// No description provided for @achievementNotes10Desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Write 10 notes.'**
+  String get achievementNotes10Desc;
+
+  /// No description provided for @achievementEasterEggsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Secret Hunter'**
+  String get achievementEasterEggsTitle;
+
+  /// No description provided for @achievementEasterEggsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover every hidden secret in the app.'**
+  String get achievementEasterEggsDesc;
+
+  /// No description provided for @freezeEarnedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New match earned!'**
+  String get freezeEarnedTitle;
+
+  /// No description provided for @freezeEarnedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve completed 3 new quizzes. A match keeps your streak alight if you miss a day.'**
+  String get freezeEarnedBody;
+
+  /// No description provided for @freezeEarnedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice!'**
+  String get freezeEarnedButton;
+
+  /// No description provided for @commonOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get commonOk;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get commonCancel;
 }
 
 class _AppLocalizationsDelegate
@@ -1949,10 +2553,12 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
+    'de',
     'en',
     'es',
     'fr',
     'it',
+    'pl',
     'pt',
     'ru',
     'zh',
@@ -1965,6 +2571,8 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
     case 'es':
@@ -1973,6 +2581,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsFr();
     case 'it':
       return AppLocalizationsIt();
+    case 'pl':
+      return AppLocalizationsPl();
     case 'pt':
       return AppLocalizationsPt();
     case 'ru':

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:jwstreak/l10n/app_localizations.dart';
 import 'package:jwstreak/main.dart';
 import 'package:jwstreak/screens/welcome_screen.dart';
 
@@ -10,9 +11,12 @@ void main() {
   ) async {
     await tester.pumpWidget(const DailyJwApp(skipBootstrap: true));
 
+    // skipBootstrap never loads a saved locale, so the app falls back to the
+    // test harness's default locale (en_US) — assert against English, not
+    // the French authoring-language strings.
     expect(find.text('JW Streak'), findsOneWidget);
-    expect(find.text('Marquer Genèse 1 comme lu'), findsOneWidget);
-    expect(find.text('Configurer le rappel'), findsOneWidget);
+    expect(find.text('Mark as read'), findsOneWidget);
+    expect(find.text('Set up a reminder'), findsOneWidget);
   });
 
   testWidgets('Welcome screen renders and continues on tap', (
@@ -21,7 +25,14 @@ void main() {
     bool continued = false;
     await tester.pumpWidget(
       MaterialApp(
+        // The bare MaterialApp in this test (unlike DailyJwApp) doesn't wire
+        // up localization on its own — AppLocalizations.of(context) would
+        // return null and crash on the bang in welcome_screen.dart otherwise.
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: WelcomeScreen(
+          stepCount: 4,
+          stepIndex: 0,
           onContinue: () async {
             continued = true;
           },
@@ -32,10 +43,10 @@ void main() {
     // Let the staggered entrance animations play out.
     await tester.pump(const Duration(seconds: 2));
 
-    expect(find.text('Bienvenue !'), findsOneWidget);
+    expect(find.text('Welcome!'), findsOneWidget);
     expect(find.text('JW Streak'), findsOneWidget);
 
-    await tester.tap(find.text('Bienvenue !'));
+    await tester.tap(find.text('Welcome!'));
     await tester.pump();
 
     expect(continued, isTrue);

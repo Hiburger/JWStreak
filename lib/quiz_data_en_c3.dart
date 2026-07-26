@@ -18,6 +18,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       options: <String>['Esther, his cousin', 'His daughter', 'His sister', 'A foreign slave'],
       correctIndex: 0,
       explanation: 'Esther is chosen as the new queen (Esther 2).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Esther'],
     ),
     QuizQuestion(
       text: 'Why did Haman want to exterminate all the Jews of the empire?',
@@ -83,6 +85,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       options: <String>['Purim', 'Passover', 'Tabernacles', 'The Jubilee'],
       correctIndex: 0,
       explanation: 'Purim still celebrates this event today (Esther 9).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What position did Mordecai eventually hold?',
@@ -129,6 +132,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Job refuses this desperate advice (Job 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['bless', 'pray', 'suffer'],
     ),
   ],
   'Job#1': <QuizQuestion>[
@@ -153,6 +158,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Job longs to plead his case fairly (Job 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['friend', 'judge', 'angel'],
     ),
     QuizQuestion(
       text: 'What does Zophar advise Job in his first speech?',
@@ -234,6 +241,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'This poem celebrates wisdom, more precious than gold (Job 28).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gold', 'silver', 'pearls'],
     ),
   ],
   'Job#4': <QuizQuestion>[
@@ -282,6 +291,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'God finally answers, but with questions (Job 38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fire', 'cloud', 'thunder'],
     ),
     QuizQuestion(
       text: 'What do Jehovah\'s questions to Job mainly concern?',
@@ -409,6 +420,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '"God is our refuge and strength" (Psalm 46:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['shepherd', 'rock', 'fortress'],
     ),
   ],
   'Psalms#3': <QuizQuestion>[
@@ -527,6 +540,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Each section meditates on the divine law (Psalm 119).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['temple', 'king', 'sacrifice'],
     ),
     QuizQuestion(
       text: 'Where does the psalmist say his help comes from in Psalm 121?',
@@ -584,6 +599,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'The book ends with a universal call to praise (Psalm 150:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['heavens', 'trumpet', 'sing'],
     ),
   ],
   'Proverbs#0': <QuizQuestion>[
@@ -597,6 +614,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'This foundational principle opens the book (Proverbs 1:7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['wisdom', 'knowledge', 'wealth'],
     ),
     QuizQuestion(
       text: 'What does Proverbs 3 advise about trust?',
@@ -632,6 +651,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '"A gentle answer turns away wrath" (Proverbs 15:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['harsh', 'word', 'anger'],
     ),
     QuizQuestion(
       text: 'What does Proverbs 16 say about our plans and Jehovah?',
@@ -689,6 +710,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '"A good name is more desirable than great wealth" (Proverbs 22:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riches', 'gold', 'silver'],
     ),
   ],
   'Proverbs#3': <QuizQuestion>[
@@ -724,6 +747,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'An acrostic poem praises the excellent wife (Proverbs 31).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['king', 'sluggard', 'wine'],
     ),
   ],
   'Ecclesiastes#0': <QuizQuestion>[
@@ -829,6 +854,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'This conclusion sums up the whole book (Ecclesiastes 12:13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['vanity', 'wisdom', 'riches'],
     ),
   ],
   'Song of Solomon#0': <QuizQuestion>[
@@ -899,6 +926,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Her enthusiastic description follows (Song of Solomon 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Solomon', 'vineyard', 'shepherd'],
     ),
   ],
   'Song of Solomon#2': <QuizQuestion>[
@@ -912,6 +941,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '"Many waters cannot extinguish love" (Song of Solomon 8:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fire', 'water', 'jealousy'],
     ),
     QuizQuestion(
       text: 'What do the "many waters" unable to extinguish love symbolize?',
@@ -1039,6 +1070,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'An extraordinary hope is expressed (Isaiah 25:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tears', 'veil', 'mountain'],
     ),
   ],
   'Isaiah#3': <QuizQuestion>[
@@ -1052,6 +1085,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: '"You will keep in perfect peace" (Isaiah 26:3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['peace'],
     ),
     QuizQuestion(
       text: 'What precious stone does Jehovah lay in Zion according to Isaiah 28?',
@@ -1087,6 +1122,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'A joyful transformation is promised (Isaiah 35:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['desert', 'water', 'sing'],
     ),
     QuizQuestion(
       text: 'How did Jehovah respond to Hezekiah\'s prayer against Sennacherib?',
@@ -1128,6 +1165,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       options: <String>['Cyrus', 'Nebuchadnezzar', 'Darius', 'Xerxes'],
       correctIndex: 0,
       explanation: 'A remarkable prophecy names Cyrus (Isaiah 44-45).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What does Isaiah 48 say about the people\'s past attitude toward God\'s commandments?',
@@ -1209,6 +1247,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'A promise of hope concludes the book (Isaiah 65:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jerusalem', 'light', 'glory'],
     ),
   ],
   'Jeremiah#0': <QuizQuestion>[
@@ -1268,6 +1308,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'A visual sign of moral decay (Jeremiah 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['belt', 'linen', 'river'],
     ),
     QuizQuestion(
       text: 'What does Jeremiah 17 reveal about the human heart?',
@@ -1333,6 +1375,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       options: <String>['70 years', '7 years', '40 years', '400 years'],
       correctIndex: 0,
       explanation: 'This precise length is prophesied (Jeremiah 25:11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['seventy years'],
     ),
     QuizQuestion(
       text: 'What does Jeremiah advise the exiles in Babylon in his letter?',
@@ -1387,12 +1431,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC3 = <String, List<QuizQu
       options: <String>['Ebed-melech', 'Baruch', 'Gedaliah', 'Ishmael'],
       correctIndex: 0,
       explanation: 'This Ethiopian intervenes courageously (Jeremiah 38).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Who was appointed governor after the fall of Jerusalem, then assassinated?',
       options: <String>['Gedaliah', 'Zedekiah', 'Ishmael', 'Baruch'],
       correctIndex: 0,
       explanation: 'His assassination triggers further turmoil (Jeremiah 40-41).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What does the remnant of the people do despite Jeremiah\'s warning to stay in the land?',

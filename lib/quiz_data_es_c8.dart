@@ -38,6 +38,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Se da una advertencia detallada (2 Pedro 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['burladores', 'ángeles', 'impíos'],
     ),
     QuizQuestion(
       text: '¿Qué ejemplos históricos cita 2 Pedro 2 como advertencia?',
@@ -87,6 +89,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Una promesa de perdón sincero (1 Juan 1:9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['luz', 'sangre', 'tinieblas'],
     ),
     QuizQuestion(
       text: '¿Cómo nos advierte 1 Juan 2 contra «el amor al mundo»?',
@@ -119,6 +123,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una prueba esencial de la fe auténtica (1 Juan 3:11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['obedecer', 'creer', 'servir'],
     ),
   ],
   '1 John#2': <QuizQuestion>[
@@ -127,6 +133,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       options: <String>['Dios es amor', 'Dios es distante', 'Dios es indiferente', 'Dios es únicamente severo'],
       correctIndex: 0,
       explanation: 'Una declaración central de la carta (1 Juan 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['luz', 'vida', 'verdad'],
     ),
     QuizQuestion(
       text: '¿Qué dice 1 Juan 5 sobre lo que vence al mundo?',
@@ -156,6 +164,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un recordatorio constante del amor fraternal (2 Juan 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['obedecer', 'creer', 'recibir'],
     ),
   ],
   '3 John#0': <QuizQuestion>[
@@ -169,6 +179,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Su generosidad se pone como ejemplo (3 Juan 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Diótrefes', 'Demetrio', 'verdad'],
     ),
     QuizQuestion(
       text: '¿Qué actitud manifiesta Diótrefes en esta carta?',
@@ -206,6 +218,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Ejemplos de juicio pasado (Judas 1:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Egipto', 'Caín', 'Balaam'],
     ),
   ],
   'Revelation#0': <QuizQuestion>[
@@ -228,6 +242,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se dan siete mensajes personalizados (Apocalipsis 2 y 3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
       text: '¿Quién es hallado digno de abrir el rollo sellado en '
@@ -289,6 +305,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Su caída se describe con lamentos (Apocalipsis 18).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ramera', 'bestia', 'reyes'],
     ),
     QuizQuestion(
       text: '¿Qué le sucede a Satanás al comienzo de Apocalipsis 20?',
@@ -301,6 +319,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Se le impone un período de restricción (Apocalipsis 20:2, 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['abismo', 'fuego', 'ángel'],
     ),
     QuizQuestion(
       text: '¿Qué promete Apocalipsis 21 y 22 respecto al dolor y la '

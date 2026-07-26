@@ -5,6 +5,7 @@ import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
+import '../widgets/message_dialog.dart';
 import 'note_reader_screen.dart';
 import 'notes_screen.dart';
 
@@ -133,50 +134,42 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     return confirmed ?? false;
   }
 
-  /// Swipe deletes immediately (smooth) and offers a quick undo instead of a
-  /// blocking confirmation dialog.
-  Future<void> _deleteWithUndo(NoteEntry note) async {
+  /// Confirms via dialog (same pattern as the multi-select delete below),
+  /// then deletes. Returning `false` here tells the [Dismissible] to spring
+  /// the card back into place instead of completing the swipe.
+  Future<bool> _confirmSwipeDelete(NoteEntry note) async {
+    final bool ok = await _confirmDeleteMessage(
+      AppLocalizations.of(
+        context,
+      )!.notesLibraryDeleteConfirmSingular(note.displayTitle(context)),
+    );
+    if (!ok) {
+      return false;
+    }
     try {
       await widget.dbService.deleteNote(note.id);
       _hasChanges = true;
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        _notes = _notes
-            .where((NoteEntry entry) => entry.id != note.id)
-            .toList(growable: false);
-        _selectedIds.remove(note.id);
-      });
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            content: Text(
-              AppLocalizations.of(context)!.notesLibraryDeletedSnackbar(
-                note.displayTitle(context),
-              ),
-            ),
-            action: SnackBarAction(
-              label: AppLocalizations.of(context)!.notesLibraryCancel,
-              onPressed: () async {
-                await widget.dbService.createNote(
-                  title: note.title,
-                  book: note.book,
-                  chapter: note.chapter,
-                  content: note.content,
-                );
-                await _loadNotes();
-              },
-            ),
-          ),
-        );
+      return true;
     } catch (error) {
       if (mounted) {
         _showError(error);
-        await _loadNotes();
       }
+      return false;
     }
+  }
+
+  /// Called by [Dismissible] once its swipe-away animation finishes, after
+  /// [_confirmSwipeDelete] already persisted the deletion.
+  void _removeNoteFromList(NoteEntry note) {
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _notes = _notes
+          .where((NoteEntry entry) => entry.id != note.id)
+          .toList(growable: false);
+      _selectedIds.remove(note.id);
+    });
   }
 
   Future<void> _deleteSelected() async {
@@ -200,19 +193,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
       }
       _hasChanges = true;
       _clearSelection();
+      // No confirmation toast: the notes just visibly disappear from the
+      // list, which is confirmation enough.
       await _loadNotes();
-      if (mounted) {
-        final AppLocalizations l10n = AppLocalizations.of(context)!;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              count == 1
-                  ? l10n.notesLibraryDeletedSingular
-                  : l10n.notesLibraryDeletedPlural(count),
-            ),
-          ),
-        );
-      }
     } catch (error) {
       if (mounted) {
         _showError(error);
@@ -244,12 +227,10 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   }
 
   void _showError(Object error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          AppLocalizations.of(context)!.notesLibraryErrorMessage('$error'),
-        ),
-      ),
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.notesLibraryErrorMessage('$error'),
+      isError: true,
     );
   }
 
@@ -336,7 +317,8 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                                 }
                               },
                               onLongPress: () => _toggleSelect(note),
-                              onDismissed: () => _deleteWithUndo(note),
+                              confirmDismiss: () => _confirmSwipeDelete(note),
+                              onDismissed: () => _removeNoteFromList(note),
                             );
                           },
                         ),
@@ -392,6 +374,7 @@ class _NoteCard extends StatelessWidget {
     required this.selected,
     required this.onTap,
     required this.onLongPress,
+    required this.confirmDismiss,
     required this.onDismissed,
   });
 
@@ -400,6 +383,7 @@ class _NoteCard extends StatelessWidget {
   final bool selected;
   final VoidCallback onTap;
   final VoidCallback onLongPress;
+  final Future<bool> Function() confirmDismiss;
   final VoidCallback onDismissed;
 
   @override
@@ -506,6 +490,7 @@ class _NoteCard extends StatelessWidget {
     return Dismissible(
       key: ValueKey<int>(note.id),
       direction: DismissDirection.endToStart,
+      confirmDismiss: (_) => confirmDismiss(),
       onDismissed: (_) => onDismissed(),
       background: Container(
         alignment: Alignment.centerRight,

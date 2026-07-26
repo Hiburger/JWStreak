@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -112,14 +113,16 @@ class NotificationService {
   Future<void> scheduleReminder({
     required int id,
     required TimeOfDay time,
+    required String title,
+    required String body,
   }) async {
     final tz.TZDateTime firstTrigger = _nextInstanceFor(time);
     final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
 
     await _plugin.zonedSchedule(
       _reminderBaseId + id,
-      'JW Streak · Lecture biblique',
-      'C’est l’heure de ta lecture. Touche pour continuer 📖',
+      title,
+      body,
       firstTrigger,
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -169,7 +172,10 @@ class NotificationService {
 
   /// Schedules a one-off evening warning if the streak is still inactive
   /// today. Call [cancelStreakRiskCheck] as soon as the user is active again.
-  Future<void> scheduleStreakRiskCheck() async {
+  Future<void> scheduleStreakRiskCheck({
+    required String title,
+    required String body,
+  }) async {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     final tz.TZDateTime target = tz.TZDateTime(
       tz.local,
@@ -184,9 +190,8 @@ class NotificationService {
     final AndroidScheduleMode mode = await _resolveScheduleMode();
     await _plugin.zonedSchedule(
       _streakRiskNotificationId,
-      'Ta série est en danger 🔥',
-      'Tu n’as pas encore été actif aujourd’hui — lis un chapitre ou fais '
-          'un quiz pour la garder.',
+      title,
+      body,
       target,
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -213,8 +218,8 @@ class NotificationService {
   Future<AndroidScheduleMode> _resolveScheduleMode() async {
     // Prefer exact alarms; fall back to inexact if the permission is missing.
     try {
-      final bool? canExact =
-          await _androidPlugin?.canScheduleExactNotifications();
+      final bool? canExact = await _androidPlugin
+          ?.canScheduleExactNotifications();
       if (canExact == true) {
         return AndroidScheduleMode.exactAllowWhileIdle;
       }
@@ -230,6 +235,14 @@ class NotificationService {
     return granted ?? true;
   }
 
+  /// Opens the app's system settings page. Android only shows its own
+  /// notification-permission dialog once per install — if the user declined
+  /// it, [requestNotificationPermission] silently resolves without prompting
+  /// again, so this is the only way left to let them grant it.
+  Future<void> openNotificationSettings() async {
+    await openAppSettings();
+  }
+
   Future<bool> areNotificationsEnabled() async {
     final bool? enabled = await _androidPlugin?.areNotificationsEnabled();
     return enabled ?? true;
@@ -240,8 +253,8 @@ class NotificationService {
   /// return `true`.
   Future<bool> canScheduleExactAlarms() async {
     try {
-      final bool? canExact =
-          await _androidPlugin?.canScheduleExactNotifications();
+      final bool? canExact = await _androidPlugin
+          ?.canScheduleExactNotifications();
       return canExact ?? true;
     } catch (_) {
       return true;
@@ -253,8 +266,8 @@ class NotificationService {
   Future<bool> requestExactAlarmPermission() async {
     try {
       await _androidPlugin?.requestExactAlarmsPermission();
-      final bool? canExact =
-          await _androidPlugin?.canScheduleExactNotifications();
+      final bool? canExact = await _androidPlugin
+          ?.canScheduleExactNotifications();
       return canExact ?? false;
     } catch (_) {
       return false;
@@ -304,7 +317,9 @@ class NotificationService {
     } else if (schedule.isAtSameMomentAs(now)) {
       schedule = schedule.add(const Duration(minutes: 1));
     }
-    debugPrint('NotificationService: Next trigger at ${schedule.year}-${schedule.month}-${schedule.day} ${schedule.hour}:${schedule.minute}');
+    debugPrint(
+      'NotificationService: Next trigger at ${schedule.year}-${schedule.month}-${schedule.day} ${schedule.hour}:${schedule.minute}',
+    );
     return schedule;
   }
 }

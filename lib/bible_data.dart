@@ -110,12 +110,31 @@ BibleBook? bibleBookById(String id) {
   return null;
 }
 
-/// Deep link that opens a whole chapter (verse 1) in JW Library, e.g.
-/// Genesis 1 -> jwlibrary:///finder?bible=01001001.
-String jwLibraryChapterDeepLink(int bookNumber, int chapter) {
+/// Deep link that opens a whole chapter in JW Library, e.g.
+/// Genesis 1 -> jwlibrary:///finder?bible=01001000.
+///
+/// The verse component is `000` (not `001`) on purpose: targeting an actual
+/// verse makes JW Library scroll to center it, which pushes the chapter
+/// heading off the top of the screen. `000` opens the chapter without
+/// targeting a verse, landing at the very top instead.
+///
+/// [wtlocale] is jw.org's language code (see `wtLocaleFor` in
+/// app_constants.dart). When provided, it's passed along with `prefer=lang`
+/// so JW Library opens the chapter in that language rather than whatever
+/// language the app itself is currently set to — matching JW Streak's UI
+/// language even if the user never changed JW Library's own settings.
+String jwLibraryChapterDeepLink(
+  int bookNumber,
+  int chapter, {
+  String? wtlocale,
+}) {
   final String bb = bookNumber.toString().padLeft(2, '0');
   final String ccc = chapter.toString().padLeft(3, '0');
-  return 'jwlibrary:///finder?bible=$bb${ccc}001';
+  final String bible = '$bb${ccc}000';
+  if (wtlocale == null) {
+    return 'jwlibrary:///finder?bible=$bible';
+  }
+  return 'jwlibrary:///finder?wtlocale=$wtlocale&prefer=lang&bible=$bible';
 }
 
 /// Stable key for a (book, chapter) reading, matching what the DB stores.

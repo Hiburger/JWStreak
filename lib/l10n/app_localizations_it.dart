@@ -262,21 +262,150 @@ class AppLocalizationsIt extends AppLocalizations {
       'La tua lettura biblica quotidiana,\nun giorno alla volta.';
 
   @override
-  String get welcomeFeatureReminder =>
-      'Un promemoria ogni giorno, all\'ora che scegli tu';
-
-  @override
-  String get welcomeFeatureOpen => 'La tua lettura si apre con un tocco';
-
-  @override
-  String get welcomeFeaturePrivate =>
-      '100% privato: tutto resta sul tuo dispositivo';
-
-  @override
   String get welcomeButton => 'Benvenuto!';
 
   @override
+  String get welcomeLogoGreeting => 'Ciao!';
+
+  @override
   String get welcomeFooter => 'Gratuita, libera e open source';
+
+  @override
+  String get onbContinue => 'Continua';
+
+  @override
+  String get onbBack => 'Indietro';
+
+  @override
+  String get onbFeaturesTitle => 'Cosa puoi fare';
+
+  @override
+  String get onbFeaturesSubtitle =>
+      'Alcune funzioni per accompagnare la tua lettura quotidiana.';
+
+  @override
+  String get onbFeatureReadingTitle => 'Lettura quotidiana guidata';
+
+  @override
+  String get onbFeatureReadingDesc =>
+      'Un capitolo al giorno, al tuo ritmo. Si apre in JW Library o su jw.org — scegli tu nelle impostazioni. Segnalo come letto per andare avanti e alimentare la tua serie.';
+
+  @override
+  String get onbFeatureQuizTitle => 'Quiz e stelle';
+
+  @override
+  String get onbFeatureQuizDesc =>
+      'Verifica la tua comprensione con brevi quiz che si sbloccano man mano che leggi. Rispondi scegliendo, digitando o componendo parole — e guadagna stelle.';
+
+  @override
+  String get onbFeatureNotesTitle => 'Note personali';
+
+  @override
+  String get onbFeatureNotesDesc =>
+      'Annota le tue riflessioni mentre leggi e ritrovale quando vuoi. Puoi anche esportarle.';
+
+  @override
+  String get onbFeaturePrivacyTitle => '100% privato';
+
+  @override
+  String get onbFeaturePrivacyDesc =>
+      'Tutto resta sul tuo telefono. Nessun dato viene inviato e non serve alcun account.';
+
+  @override
+  String get onbReminderTitle => 'Imposta il tuo primo promemoria';
+
+  @override
+  String get onbReminderIntro =>
+      'Un piccolo promemoria quotidiano è il modo migliore per mantenere la tua serie. Scegli un momento tranquillo della giornata — potrai sempre aggiungerne altri o modificarli dopo nelle impostazioni.';
+
+  @override
+  String get onbReminderTip =>
+      'Consiglio: collega il promemoria a un\'abitudine che hai già, come dopo il caffè del mattino o prima di dormire.';
+
+  @override
+  String get onbReminderFinish => 'Fine';
+
+  @override
+  String get onbReminderSkip => 'Forse più tardi';
+
+  @override
+  String get tourNext => 'Avanti';
+
+  @override
+  String get tourDone => 'Ho capito';
+
+  @override
+  String get tourSkip => 'Salta';
+
+  @override
+  String get tourStreakTitle => 'La tua serie';
+
+  @override
+  String get tourStreakBody =>
+      'Cresce ogni giorno in cui leggi un capitolo o fai un quiz. I fiammiferi coprono i giorni saltati.';
+
+  @override
+  String get tourReadingTitle => 'Il capitolo di oggi';
+
+  @override
+  String get tourReadingBody =>
+      'Aprilo, poi segnalo come letto per passare al successivo.';
+
+  @override
+  String get tourBrowseTitle => 'Tutta la Bibbia';
+
+  @override
+  String get tourBrowseBody =>
+      'Vai a qualsiasi libro o capitolo e vedi cosa hai già letto.';
+
+  @override
+  String get tourProgressTitle => 'I tuoi progressi';
+
+  @override
+  String get tourProgressBody =>
+      'Letture, stelle e attività recente, tutto in un unico posto.';
+
+  @override
+  String get tourQuickActionsTitle => 'Azioni rapide';
+
+  @override
+  String get tourQuickActionsBody =>
+      'Il testo del giorno e le tue note, sempre a portata di tocco.';
+
+  @override
+  String get tourAchievementsTitle => 'Obiettivi';
+
+  @override
+  String get tourAchievementsBody =>
+      'Segui i traguardi che sblocchi man mano che leggi.';
+
+  @override
+  String get tourNotesTitle => 'Le tue note';
+
+  @override
+  String get tourNotesBody =>
+      'Tutto ciò che hai scritto, pronto da rileggere o esportare.';
+
+  @override
+  String get tourSettingsTitle => 'Impostazioni';
+
+  @override
+  String get tourSettingsBody =>
+      'Tema, lingua, promemoria — e questo tour, se vuoi rivederlo.';
+
+  @override
+  String get settingsReplayTour => 'Rivedi il tour guidato';
+
+  @override
+  String get settingsReplayTourSubtitle =>
+      'Mostra di nuovo la presentazione della schermata iniziale';
+
+  @override
+  String get onbReminderPermissionMissing =>
+      'Le notifiche sono disattivate, quindi questo promemoria non suonerà. Attivale per ricevere gli avvisi.';
+
+  @override
+  String get onbReminderPermissionEnable => 'Attiva';
 
   @override
   String get streakInfoTitle => 'Mantieni viva la tua serie';
@@ -293,18 +422,18 @@ class AppLocalizationsIt extends AppLocalizations {
       'Segna un capitolo come letto OPPURE completa un quiz: entrambi contano per mantenere la tua serie.';
 
   @override
-  String get streakInfoRow2Title => '4 congelamenti al mese';
+  String get streakInfoRow2Title => '4 fiammiferi al mese';
 
   @override
   String get streakInfoRow2Text =>
-      'Un giorno saltato usa automaticamente un congelamento per proteggere la tua serie. Si ricaricano ogni mese.';
+      'Un giorno saltato usa automaticamente un fiammifero per tenere accesa la tua serie. Si ricaricano ogni mese.';
 
   @override
-  String get streakInfoRow3Title => 'Riguadagna un congelamento';
+  String get streakInfoRow3Title => 'Riguadagna un fiammifero';
 
   @override
   String get streakInfoRow3Text =>
-      'Finiti i congelamenti? Supera un quiz di ripasso (un mix delle tue letture) per riguadagnarne uno.';
+      'Finiti i fiammiferi? Supera un quiz di ripasso (un mix delle tue letture) per riguadagnarne uno.';
 
   @override
   String get streakInfoRow4Title => 'Ti avviseremo';
@@ -312,9 +441,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get streakInfoRow4Text =>
       'Se la tua serie è a rischio, appare un avviso e un promemoria serale può darti una spinta.';
-
-  @override
-  String get streakInfoButton => 'Si parte!';
 
   @override
   String get settingsTitle => 'Impostazioni';
@@ -331,6 +457,22 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsDynamicColorOff => 'Usa il colore del brand dell\'app';
+
+  @override
+  String get settingsBibleTargetTitle => 'Apri la Bibbia con';
+
+  @override
+  String get settingsBibleTargetJwLibrary => 'App JW Library';
+
+  @override
+  String get settingsBibleTargetWeb => 'jw.org (browser)';
+
+  @override
+  String get settingsBibleTargetJwLibraryMissing =>
+      'L\'app JW Library è necessaria per aprire la Bibbia in questo modo. Vuoi installarla?';
+
+  @override
+  String get settingsBibleTargetInstall => 'Installa';
 
   @override
   String get settingsLanguage => 'Lingua';
@@ -381,23 +523,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsLicense => 'Licenza';
 
   @override
+  String get settingsLicenseLegalese =>
+      'JW Streak è software libero rilasciato sotto licenza GNU General Public License v3. Le licenze qui sotto riguardano i componenti open source di cui è costituito.';
+
+  @override
   String get settingsQuestion => 'Una domanda?';
 
   @override
   String get settingsFooter =>
       'Realizzata con amore fraterno, dalla Svizzera.\nQuesta app è Gratuita, Libera e Open Source.';
-
-  @override
-  String get settingsNotifGranted => 'Permesso di notifica concesso.';
-
-  @override
-  String get settingsNotifDenied => 'Permesso di notifica negato.';
-
-  @override
-  String get settingsAlarmsGranted => 'Allarmi esatti consentiti.';
-
-  @override
-  String get settingsAlarmsDenied => 'Allarmi esatti non consentiti.';
 
   @override
   String settingsError(String error) {
@@ -415,11 +549,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get reminderAlreadyExists => 'Questo promemoria esiste già.';
-
-  @override
-  String reminderAdded(String label) {
-    return 'Promemoria aggiunto alle $label.';
-  }
 
   @override
   String get reminderTitle => 'Promemoria di lettura';
@@ -461,6 +590,23 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get quizSeeScore => 'Vedi il punteggio';
+
+  @override
+  String get quizTypeAnswerHint => 'Scrivi la tua risposta';
+
+  @override
+  String get quizCheckAnswer => 'Verifica';
+
+  @override
+  String get quizWordBankInstruction => 'Tocca le parole nell\'ordine giusto';
+
+  @override
+  String get quizClearAnswer => 'Cancella';
+
+  @override
+  String quizCorrectAnswerWas(String answer) {
+    return 'Risposta: $answer';
+  }
 
   @override
   String get quizPerfect => 'Perfetto!';
@@ -521,11 +667,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'La tua serie è tornata a zero — nessun problema, ricominciamo insieme 💪';
 
   @override
-  String homeChapterMarkedRead(String reference) {
-    return '$reference segnato come letto.';
-  }
-
-  @override
   String get homeExactAlarmDialogTitle => 'Promemoria all\'ora esatta';
 
   @override
@@ -547,7 +688,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeReviewQuizEarned =>
-      'Ben fatto! Hai riguadagnato un congelamento ❄️';
+      'Ben fatto! Hai riguadagnato un fiammifero 🔥';
 
   @override
   String get homeReviewQuizFailed =>
@@ -643,15 +784,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeToReadToday => 'Da leggere oggi';
 
   @override
-  String get homeFreezesNone => 'nessun congelamento rimasto';
+  String get homeFreezesNone => 'nessun fiammifero rimasto';
 
   @override
   String homeFreezesRemaining(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count congelamenti rimasti',
-      one: '$count congelamento rimasto',
+      other: '$count fiammiferi rimasti',
+      one: '$count fiammifero rimasto',
     );
     return '$_temp0';
   }
@@ -666,7 +807,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeEarnFreezeButton =>
-      'Riguadagna un congelamento (quiz di ripasso)';
+      'Riguadagna un fiammifero (quiz di ripasso)';
 
   @override
   String get homeNewQuizUnlocked => 'Nuovo quiz sbloccato';
@@ -865,12 +1006,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get noteEditorTitleErrorHint => 'Aggiungi un titolo per salvare.';
 
   @override
-  String get noteEditorTitleRequired => 'Il titolo è obbligatorio.';
-
-  @override
-  String get noteEditorSavedSnackbar => 'Nota salvata localmente.';
-
-  @override
   String noteEditorErrorSnackbar(String error) {
     return 'Errore: $error';
   }
@@ -919,11 +1054,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notesLibraryDelete => 'Elimina';
 
   @override
-  String notesLibraryDeletedSnackbar(String title) {
-    return '\"$title\" eliminata.';
-  }
-
-  @override
   String notesLibraryDeleteConfirmSingular(String title) {
     return '\"$title\" verrà eliminata definitivamente.';
   }
@@ -931,14 +1061,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String notesLibraryDeleteConfirmPlural(int count) {
     return 'Queste $count note verranno eliminate definitivamente dal tuo dispositivo.';
-  }
-
-  @override
-  String get notesLibraryDeletedSingular => 'Nota eliminata.';
-
-  @override
-  String notesLibraryDeletedPlural(int count) {
-    return '$count note eliminate.';
   }
 
   @override
@@ -1042,4 +1164,208 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noteReaderEmpty => 'Questa nota è vuota.';
+
+  @override
+  String get homeAchievementsTooltip => 'Obiettivi';
+
+  @override
+  String get achievementsTitle => 'Obiettivi';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked di $total sbloccati';
+  }
+
+  @override
+  String achievementsProgressFraction(int current, int goal) {
+    return '$current / $goal';
+  }
+
+  @override
+  String get achievementsSectionReading => 'Lettura';
+
+  @override
+  String get achievementsSectionQuizzes => 'Quiz';
+
+  @override
+  String get achievementsSectionStreak => 'Serie';
+
+  @override
+  String get achievementsSectionOther => 'Altro';
+
+  @override
+  String get achievementFirstChapterTitle => 'Primi passi';
+
+  @override
+  String get achievementFirstChapterDesc => 'Leggi il tuo primo capitolo.';
+
+  @override
+  String get achievementChapters10Title => 'Ben avviato';
+
+  @override
+  String get achievementChapters10Desc => 'Leggi 10 capitoli.';
+
+  @override
+  String get achievementChapters50Title => 'Lettore costante';
+
+  @override
+  String get achievementChapters50Desc => 'Leggi 50 capitoli.';
+
+  @override
+  String get achievementChapters150Title => 'Lettore devoto';
+
+  @override
+  String get achievementChapters150Desc => 'Leggi 150 capitoli.';
+
+  @override
+  String get achievementGenesisTitle => 'In principio';
+
+  @override
+  String get achievementGenesisDesc =>
+      'Termina di leggere il libro della Genesi.';
+
+  @override
+  String get achievementWholeBibleTitle => 'Dall\'inizio alla fine';
+
+  @override
+  String get achievementWholeBibleDesc =>
+      'Leggi tutti i capitoli della Bibbia.';
+
+  @override
+  String get achievementExplorerTitle => 'Esploratore';
+
+  @override
+  String get achievementExplorerDesc => 'Leggi capitoli da 5 libri diversi.';
+
+  @override
+  String get achievementFirstQuizTitle => 'Primo quiz';
+
+  @override
+  String get achievementFirstQuizDesc => 'Completa il tuo primo quiz.';
+
+  @override
+  String get achievementQuizzes5Title => 'Abituale dei quiz';
+
+  @override
+  String get achievementQuizzes5Desc => 'Completa 5 quiz.';
+
+  @override
+  String get achievementQuizzes25Title => 'Maestro dei quiz';
+
+  @override
+  String get achievementQuizzes25Desc => 'Completa 25 quiz.';
+
+  @override
+  String get achievementPerfectQuizTitle => 'Perfezionista';
+
+  @override
+  String get achievementPerfectQuizDesc =>
+      'Ottieni un punteggio perfetto in un quiz.';
+
+  @override
+  String get achievementStars20Title => 'Collezionista di stelle';
+
+  @override
+  String get achievementStars20Desc => 'Guadagna 20 stelle.';
+
+  @override
+  String get achievementStreak7Title => 'Una settimana forte';
+
+  @override
+  String get achievementStreak7Desc =>
+      'Mantieni una serie di lettura di 7 giorni.';
+
+  @override
+  String get achievementStreak30Title => 'Un mese forte';
+
+  @override
+  String get achievementStreak30Desc =>
+      'Mantieni una serie di lettura di 30 giorni.';
+
+  @override
+  String get achievementFirstNoteTitle => 'Prendi appunti';
+
+  @override
+  String get achievementFirstNoteDesc => 'Scrivi la tua prima nota.';
+
+  @override
+  String get achievementReminderTitle => 'Resta in carreggiata';
+
+  @override
+  String get achievementReminderDesc => 'Configura un promemoria giornaliero.';
+
+  @override
+  String get notifReminderTitle => 'JW Streak · Lettura biblica';
+
+  @override
+  String get notifReminderBody =>
+      'È ora della tua lettura. Tocca per continuare 📖';
+
+  @override
+  String get notifStreakRiskTitle => 'La tua serie è a rischio 🔥';
+
+  @override
+  String get notifStreakRiskBody =>
+      'Non sei stato ancora attivo oggi — leggi un capitolo o fai un quiz per mantenerla.';
+
+  @override
+  String get easterEggHeartBody => 'Anch\'io ti voglio bene :)';
+
+  @override
+  String get easterEggVersionTitle => 'Segreto scoperto! 🕵️';
+
+  @override
+  String get easterEggVersionBody =>
+      'Shh... non dovevi trovarlo. In realtà non c\'è nessuna modalità nascosta qui, solo un piccolo occhiolino 😉';
+
+  @override
+  String get easterEggVersionButton => 'Terrò il segreto 🤫';
+
+  @override
+  String get achievementQuizzes40Title => 'Leggenda dei quiz';
+
+  @override
+  String get achievementQuizzes40Desc => 'Completa 40 quiz.';
+
+  @override
+  String get achievementStars40Title => 'Collezionista di galassie';
+
+  @override
+  String get achievementStars40Desc => 'Guadagna 40 stelle.';
+
+  @override
+  String get achievementStreak180Title => 'Sei mesi forti';
+
+  @override
+  String get achievementStreak180Desc =>
+      'Mantieni una serie di lettura di 180 giorni.';
+
+  @override
+  String get achievementNotes10Title => 'Scrittore prolifico';
+
+  @override
+  String get achievementNotes10Desc => 'Scrivi 10 note.';
+
+  @override
+  String get achievementEasterEggsTitle => 'Cacciatore di segreti';
+
+  @override
+  String get achievementEasterEggsDesc =>
+      'Scopri tutti i segreti nascosti dell\'app.';
+
+  @override
+  String get freezeEarnedTitle => 'Nuovo fiammifero ottenuto!';
+
+  @override
+  String get freezeEarnedBody =>
+      'Hai completato 3 nuovi quiz. Un fiammifero tiene accesa la tua serie se salti un giorno.';
+
+  @override
+  String get freezeEarnedButton => 'Fantastico!';
+
+  @override
+  String get commonOk => 'OK';
+
+  @override
+  String get commonCancel => 'Annulla';
 }

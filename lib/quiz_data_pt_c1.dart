@@ -15,12 +15,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       options: <String>['Adão e Eva', 'Caim e Abel', 'Noé e sua esposa', 'Abraão e Sara'],
       correctIndex: 0,
       explanation: 'Adão e Eva são os primeiros seres humanos (Gênesis 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Caim', 'Noé', 'Sara'],
     ),
     QuizQuestion(
       text: 'Quem matou seu irmão Abel?',
       options: <String>['Caim', 'Sete', 'Noé', 'Cam'],
       correctIndex: 0,
       explanation: 'Caim mata seu irmão Abel por ciúme (Gênesis 4).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Por que Deus trouxe o Dilúvio?',
@@ -42,12 +45,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       options: <String>['O arco-íris', 'Uma estrela', 'Uma oliveira', 'O trovão'],
       correctIndex: 0,
       explanation: 'O arco-íris é o sinal da aliança (Gênesis 9).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['arco-íris'],
     ),
     QuizQuestion(
       text: 'Como se chamava a torre que os homens quiseram construir?',
       options: <String>['A torre de Babel', 'A torre de Sião', 'A torre de Davi', 'A torre de Ur'],
       correctIndex: 0,
       explanation: 'Em Babel, Deus confunde a língua deles (Gênesis 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Sião', 'Davi', 'Ur'],
     ),
     QuizQuestion(
       text: 'Quem Deus chamou para sair de Ur?',
@@ -80,6 +87,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Moisés é colocado num cesto de junco entre os juncos (Êxodo 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['barco', 'palácio', 'deserto'],
     ),
     QuizQuestion(
       text: 'Como Deus apareceu a Moisés no monte Horebe?',
@@ -101,6 +110,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'A Páscoa lembra a proteção dos israelitas durante a última '
           'praga (Êxodo 12).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Páscoa'],
     ),
     QuizQuestion(
       text: 'Como Deus abriu um caminho para Israel?',
@@ -119,6 +130,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       options: <String>['O maná', 'Pão de cevada', 'Figos', 'Mel'],
       correctIndex: 0,
       explanation: 'O maná aparece toda manhã (Êxodo 16).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['maná'],
     ),
   ],
   'Exodus#2': <QuizQuestion>[
@@ -129,12 +142,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Jetro sugere nomear chefes para julgar os casos do dia a dia '
           '(Êxodo 18).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Jetro'],
     ),
     QuizQuestion(
       text: 'Onde Deus deu os Dez Mandamentos?',
       options: <String>['No monte Sinai', 'No monte Nebo', 'Em Cades', 'Em Betel'],
       correctIndex: 0,
       explanation: 'A lei é dada no monte Sinai (Êxodo 19-20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Horebe', 'Nebo', 'Carmelo'],
     ),
     QuizQuestion(
       text: 'Que mandamento proíbe desejar os bens de outra pessoa?',
@@ -164,6 +181,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'O povo molda um bezerro de ouro e o adora (Êxodo 32).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pedra', 'prata', 'altar'],
     ),
   ],
   'Exodus#4': <QuizQuestion>[
@@ -175,6 +194,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'A nuvem cobre a tenda de reunião e a glória de Jeová a enche '
           '(Êxodo 40).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['nuvem'],
     ),
     QuizQuestion(
       text: 'Quem por fim talhou novas tábuas de pedra depois que Moisés '
@@ -198,6 +219,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'O holocausto é totalmente consumido sobre o altar '
           '(Levítico 1).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['holocausto'],
     ),
     QuizQuestion(
       text: 'Quantos tipos principais de ofertas são descritos nestes '
@@ -207,6 +230,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Holocausto, oferta de cereais, de comunhão, pelo pecado e pela '
           'culpa (Levítico 1-7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['5'],
     ),
     QuizQuestion(
       text: 'Quem devia trazer as ofertas à entrada da tenda de reunião?',
@@ -247,6 +272,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Os animais puros ruminam e têm o casco fendido (Levítico 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['penas', 'escamas', 'sangue'],
     ),
     QuizQuestion(
       text: 'Que afecção de pele é examinada em detalhe pelos sacerdotes '
@@ -256,6 +283,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Os sacerdotes examinam os sinais de lepra na pele, nas roupas '
           'e nas casas (Levítico 13-14).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['lepra'],
     ),
   ],
   'Leviticus#2': <QuizQuestion>[
@@ -298,6 +327,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'O consumo de sangue é proibido (Levítico 17).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['sangue', 'o sangue'],
     ),
   ],
   'Leviticus#3': <QuizQuestion>[
@@ -363,6 +394,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Os levitas recebem tarefas específicas para o tabernáculo '
           '(Números 3-4).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['levitas'],
     ),
     QuizQuestion(
       text: 'O que devia fazer uma pessoa que fizesse o voto de nazireu?',
@@ -391,6 +424,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           '70 anciãos recebem o espírito para compartilhar a '
           'responsabilidade (Números 11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['setenta anciãos', '70'],
     ),
     QuizQuestion(
       text: 'O que aconteceu com Miriã e Arão depois que criticaram '
@@ -403,6 +438,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Miriã fica leprosa por sete dias (Números 12).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Arão', 'cegueira', 'deserto'],
     ),
     QuizQuestion(
       text: 'Quantos espiões deram um relatório encorajador sobre Canaã?',
@@ -420,6 +457,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A rebelião de Corá é engolida pela terra (Números 16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Arão', 'Moisés', 'tribo'],
     ),
     QuizQuestion(
       text: 'Que sinal confirmou a escolha de Arão como sumo sacerdote?',
@@ -431,6 +470,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'A vara de Arão brota e floresce (Números 17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['bastão', 'ouro', 'serpente'],
     ),
     QuizQuestion(
       text: 'Por que Moisés não pôde entrar na Terra Prometida?',
@@ -454,6 +495,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Balaão é chamado para amaldiçoar Israel, mas o abençoa '
           '(Números 23-24).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quem agiu com zelo para deter a praga durante a apostasia de '
@@ -462,6 +504,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Fineias intervém e a praga cessa (Números 25).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quem Moisés designou como seu sucessor?',
@@ -478,6 +521,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       options: <String>['Midiã', 'Edom', 'Todo o Moabe', 'Egito'],
       correctIndex: 0,
       explanation: 'A guerra contra Midiã é relatada (Números 31).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Que tribos pediram para se estabelecer a leste do Jordão?',
@@ -573,6 +617,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'O bezerro de ouro ilustra a rebelião passada '
           '(Deuteronômio 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['serpente', 'maná', 'tábuas'],
     ),
     QuizQuestion(
       text: 'Onde os israelitas deviam levar seus sacrifícios, segundo '
@@ -622,6 +668,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A lei exige várias testemunhas (Deuteronômio 19).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['2 ou 3', 'duas'],
     ),
   ],
   'Deuteronomy#3': <QuizQuestion>[
@@ -637,6 +685,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'A declaração dos primeiros frutos lembra a saída do Egito '
           '(Deuteronômio 26).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sacrifício', 'cordeiro', 'templo'],
     ),
     QuizQuestion(
       text: 'O que os israelitas deviam fazer ao entrar em Canaã, no '
@@ -705,6 +755,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Moisés contempla a terra do alto do Nebo antes de morrer '
           '(Deuteronômio 34).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Sinai', 'Horebe', 'Carmelo'],
     ),
   ],
   'Joshua#0': <QuizQuestion>[
@@ -719,12 +771,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Jeová encoraja Josué várias vezes (Josué 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['medo', 'fiel', 'obedeça'],
     ),
     QuizQuestion(
       text: 'Quem escondeu os espiões israelitas em Jericó?',
       options: <String>['Raabe', 'Uma profetisa', 'O próprio rei', 'Ninguém'],
       correctIndex: 0,
       explanation: 'Raabe esconde os espiões em seu telhado (Josué 2).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Como caíram as muralhas de Jericó?',
@@ -766,6 +821,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Jeová luta por Israel e o sol para (Josué 10).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lua', 'fogo', 'caiu'],
     ),
     QuizQuestion(
       text: 'Que porção de terra Calebe reivindicou aos 85 anos?',
@@ -773,6 +830,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Calebe permanece fiel e recebe Hebrom (Josué 14).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   'Joshua#2': <QuizQuestion>[
@@ -782,6 +840,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A tenda de reunião é estabelecida em Siló (Josué 18).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Siló'],
     ),
     QuizQuestion(
       text: 'Por que as tribos do leste ergueram um altar perto do '
@@ -829,6 +889,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Débora e Baraque levam Israel à vitória (Juízes 4).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Como Gideão reduziu seu exército a 300 homens?',
@@ -893,6 +954,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Sansão golpeia com uma queixada de jumento (Juízes 15).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['espada', 'leão', 'corda'],
     ),
     QuizQuestion(
       text: 'Quem revelou o segredo da força de Sansão aos filisteus?',
@@ -900,6 +963,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Dalila descobre que sua força vem dos cabelos (Juízes 16).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Que frase resume a situação de Israel no fim do livro?',
@@ -952,6 +1016,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       explanation:
           'Elimeleque, e depois seus dois filhos, morrem em Moabe '
           '(Rute 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Belém', 'voltaram', 'Noemi'],
     ),
   ],
   'Ruth#1': <QuizQuestion>[
@@ -966,6 +1032,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Rute cata espigas para alimentar Noemi e a si mesma (Rute 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Boaz', 'campo', 'trigo'],
     ),
     QuizQuestion(
       text: 'Como Boaz demonstrou bondade para com Rute?',
@@ -1011,6 +1079,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC1 = <String, List<QuizQu
       options: <String>['Obede', 'Davi', 'Jessé', 'Salomão'],
       correctIndex: 0,
       explanation: 'Obede se torna o avô de Davi (Rute 4).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Por que o livro de Rute termina com uma genealogia?',
@@ -1045,6 +1114,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['A serpente', 'Caim', 'Um anjo', 'Adão'],
       correctIndex: 0,
       explanation: 'A serpente a induz a desobedecer (Gênesis 3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['serpente'],
     ),
   ],
   'Genesis#1': <QuizQuestion>[
@@ -1054,6 +1125,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'A pomba mostra que as águas estavam baixando (Gênesis 8).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['pomba'],
     ),
     QuizQuestion(
       text: 'Quem abençoou Abrão, sendo rei de Salém e sacerdote do '
@@ -1076,12 +1149,15 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Ismael', 'Isaque', 'Esaú', 'Jacó'],
       correctIndex: 0,
       explanation: 'Ismael nasce de Agar, a serva (Gênesis 16).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Que cidades Deus destruiu por causa de sua maldade?',
       options: <String>['Sodoma e Gomorra', 'Babel e Ur', 'Nínive e Tiro', 'Betel e Ai'],
       correctIndex: 0,
       explanation: 'O fogo destrói essas cidades; Ló é salvo (Gênesis 19).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Babel', 'Ur', 'Salém'],
     ),
   ],
   'Genesis#3': <QuizQuestion>[
@@ -1091,6 +1167,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Deus detém Abraão e providencia um carneiro (Gênesis 22).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jacó', 'Esaú', 'cordeiro'],
     ),
     QuizQuestion(
       text: 'Em troca de que Esaú vendeu seu direito de primogenitura '
@@ -1099,6 +1177,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Esaú despreza seu direito de primogenitura (Gênesis 25).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pão', 'ouro', 'carne'],
     ),
     QuizQuestion(
       text: 'O que Jacó viu em sonho em Betel?',
@@ -1119,6 +1199,7 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'O nome Israel significa “ele luta com Deus” (Gênesis 32).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quantos filhos Jacó teve, que se tornaram ancestrais das '
@@ -1134,6 +1215,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Os dois irmãos se reencontram em paz (Gênesis 33).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Labão', 'Raquel', 'Jacó'],
     ),
   ],
   'Genesis#5': <QuizQuestion>[
@@ -1154,6 +1237,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Esse presente atiça o ciúme de seus irmãos (Gênesis 37).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['manto', 'sandálias', 'cinto'],
     ),
     QuizQuestion(
       text: 'O que José interpretou para Faraó, anunciando sete anos '
@@ -1161,6 +1246,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Seus sonhos', 'Um livro antigo', 'As estrelas', 'Um oráculo'],
       correctIndex: 0,
       explanation: 'José interpreta os sonhos de Faraó (Gênesis 41).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['sonhos'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1170,12 +1257,16 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Ele os perdoou', 'Prendeu-os para sempre', 'Expulsou-os', 'Ignorou-os'],
       correctIndex: 0,
       explanation: 'José perdoa e os alimenta (Gênesis 45).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['puniu', 'castigou', 'Egito'],
     ),
     QuizQuestion(
       text: 'Onde Jacó e sua família se instalaram no Egito?',
       options: <String>['Na terra de Gósen', 'Em Mênfis', 'Em Tebas', 'No Sinai'],
       correctIndex: 0,
       explanation: 'Faraó lhes dá a região de Gósen (Gênesis 47).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Canaã', 'Nilo', 'Menfis'],
     ),
     QuizQuestion(
       text: 'Como José via o mal que seus irmãos lhe haviam feito?',
@@ -1195,6 +1286,7 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Arão', 'Josué', 'Jetro', 'Calebe'],
       correctIndex: 0,
       explanation: 'Arão fala ao povo por Moisés (Êxodo 4).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Com que nome Deus se identificou a Moisés na sarça ardente?',
@@ -1221,6 +1313,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Essa praga leva Faraó a libertar Israel (Êxodo 12).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['rãs', 'gafanhotos', 'trevas'],
     ),
     QuizQuestion(
       text: 'O que os israelitas deviam colocar em suas portas durante '
@@ -1242,6 +1336,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       correctIndex: 0,
       explanation:
           'Por ordem de Deus, Moisés bate na rocha (Êxodo 17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['vara', 'água', 'Arão'],
     ),
     QuizQuestion(
       text: 'Quantos mandamentos compõem o Decálogo dado no Sinai?',
@@ -1269,6 +1365,7 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Arão', 'Josué', 'Hur', 'Bezalel'],
       correctIndex: 0,
       explanation: 'Arão cede ao pedido do povo (Êxodo 32).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   'Exodus#4': <QuizQuestion>[
@@ -1278,6 +1375,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC1 = <String, List<QuizQuest
       options: <String>['Estava radiante', 'Estava velado de tristeza', 'Havia envelhecido', 'Nada de especial'],
       correctIndex: 0,
       explanation: 'Moisés precisava velar seu rosto radiante (Êxodo 34).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['radiante'],
     ),
     QuizQuestion(
       text: 'O que preenchia o tabernáculo assim que ficou pronto?',

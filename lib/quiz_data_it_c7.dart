@@ -38,6 +38,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Viene annunciato un segno premonitore '
           '(2 Tessalonicesi 2:3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['uomo dell’illegalità'],
     ),
     QuizQuestion(
       text: 'Quale incoraggiamento dà Paolo nonostante questo annuncio '
@@ -125,6 +127,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Vengono dati criteri morali precisi '
           '(1 Timoteo 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ricchi', 'severi', 'eloquenti'],
     ),
     QuizQuestion(
       text: 'Cosa dice 1 Timoteo 4 sull’esercizio fisico rispetto alla '
@@ -183,6 +187,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Un incoraggiamento a restare attivi spiritualmente '
           '(2 Timoteo 1:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['spegnerlo', 'nasconderlo', 'dono'],
     ),
     QuizQuestion(
       text: 'Di cosa dice Paolo di non vergognarsi?',
@@ -211,6 +217,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Un’immagine di disciplina e sacrificio '
           '(2 Timoteo 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['atleta', 'agricoltore', 'servo'],
     ),
     QuizQuestion(
       text: 'Cosa dice 2 Timoteo 3 sull’utilità delle Scritture?',
@@ -238,6 +246,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un appello pressante alla fedeltà (2 Timoteo 4:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tacere', 'attendere', 'riposare'],
     ),
     QuizQuestion(
       text: 'Come riassume Paolo la sua vita alla fine di questa '
@@ -280,6 +290,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Viene dato un chiaro avvertimento (Tito 1:10, 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['anziani', 'fratelli', 'vedove'],
     ),
   ],
   'Titus#1': <QuizQuestion>[
@@ -365,6 +377,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un gesto personale di mediazione (Filemone 1:18, 19).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['schiavo', 'fratello', 'lettera'],
     ),
   ],
   'Hebrews#0': <QuizQuestion>[
@@ -376,6 +390,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Una rivelazione superiore attraverso Cristo (Ebrei '
           '1:1, 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['profeti', 'angeli', 'legge'],
     ),
     QuizQuestion(
       text: 'Cosa descrive Ebrei 4 riguardo alla parola di Dio?',
@@ -413,6 +429,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un sacerdozio superiore e permanente (Ebrei 7).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Cosa rende possibile il nuovo patto secondo Ebrei '
@@ -426,6 +443,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Viene instaurato un patto superiore (Ebrei 8:10).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['legge', 'sacrifici', 'tempio'],
     ),
     QuizQuestion(
       text: 'Cosa purifica il sangue di Cristo secondo Ebrei 9?',
@@ -453,6 +472,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una citazione chiave ripresa da Abacuc (Ebrei 10:38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['opere', 'legge', 'sacrifici'],
     ),
     QuizQuestion(
       text: 'Quali esempi mette in risalto il famoso capitolo 11?',
@@ -479,6 +500,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       explanation:
           'Un’affermazione di costanza e affidabilità '
           '(Ebrei 13:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['mutevole', 'domani', 'tempo'],
     ),
   ],
   'James#0': <QuizQuestion>[
@@ -488,6 +511,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Dio dà la sapienza generosamente (Giacomo 1:5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['sapienza'],
     ),
     QuizQuestion(
       text: 'Cosa dice Giacomo 2 sulla relazione tra fede e opere?',
@@ -543,6 +568,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una lezione di umiltà pratica (Giacomo 4:13-15).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pregare', 'giurare', 'lamentarsi'],
     ),
     QuizQuestion(
       text: 'Cosa deve fare una persona malata secondo Giacomo 5?',
@@ -626,6 +653,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una qualità essenziale da coltivare (1 Pietro 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['perdona', 'giudica', 'fede'],
     ),
     QuizQuestion(
       text: 'Quale atteggiamento chiede 1 Pietro 5 agli anziani verso '

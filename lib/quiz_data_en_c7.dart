@@ -34,6 +34,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A preceding sign is announced (2 Thessalonians 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Satan', 'restraint', 'judgment'],
     ),
     QuizQuestion(
       text: 'What encouragement does Paul give despite this troubling announcement?',
@@ -86,6 +88,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Paul wants to preserve the purity of the teaching (1 Timothy 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['law', 'genealogies', 'myths'],
     ),
     QuizQuestion(
       text: 'For whom does Paul ask that prayers be made in 1 Timothy 2?',
@@ -164,6 +168,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An encouragement to stay spiritually active (2 Timothy 1:6).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gift', 'spirit', 'flame'],
     ),
     QuizQuestion(
       text: 'What does Paul say he is not ashamed of?',
@@ -190,6 +196,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An image of discipline and sacrifice (2 Timothy 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['athlete', 'farmer', 'servant'],
     ),
     QuizQuestion(
       text: 'What does 2 Timothy 3 say about the usefulness of the Scriptures?',
@@ -254,6 +262,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A clear warning is given (Titus 1:10, 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['elders', 'circumcision', 'myths'],
     ),
   ],
   'Titus#1': <QuizQuestion>[
@@ -341,6 +351,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A revelation superior to any before, through Christ (Hebrews 1:1, 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['prophets', 'angels', 'Moses'],
     ),
     QuizQuestion(
       text: 'What does Hebrews 4 describe about the word of God?',
@@ -374,6 +386,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A superior and permanent priesthood (Hebrews 7).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What does the new covenant make possible according to Hebrews 8?',
@@ -445,6 +458,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'God gives wisdom generously (James 1:5).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What does James 2 say about the relationship between faith and works?',
@@ -483,6 +497,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A clear contrast is drawn (James 3:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tongue', 'fire', 'envy'],
     ),
   ],
   'James#2': <QuizQuestion>[
@@ -497,6 +513,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A practical lesson in humility (James 4:13-15).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['elders', 'prayer', 'oil'],
     ),
     QuizQuestion(
       text: 'What should a sick person do according to James 5?',
@@ -535,6 +553,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An image of a community built together (1 Peter 2:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['temple', 'priest', 'cornerstone'],
     ),
   ],
   '1 Peter#1': <QuizQuestion>[
@@ -575,6 +595,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An essential quality to cultivate (1 Peter 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['flock', 'elders', 'suffering'],
     ),
     QuizQuestion(
       text: 'What attitude does 1 Peter 5 ask elders to have toward the flock?',

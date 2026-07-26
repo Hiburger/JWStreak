@@ -131,6 +131,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una prova essenziale della fede autentica (1 Giovanni 3:11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['giudicarsi', 'servirsi', 'perdonarsi'],
     ),
   ],
   '1 John#2': <QuizQuestion>[
@@ -140,6 +142,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una dichiarazione centrale della lettera (1 Giovanni 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['luce', 'giudice', 'spirito'],
     ),
     QuizQuestion(
       text: 'Che cosa dice 1 Giovanni 5 su ciò che vince il mondo?',
@@ -170,6 +174,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un richiamo costante all’amore fraterno (2 Giovanni 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['obbedire', 'vegliare', 'pregare'],
     ),
   ],
   '3 John#0': <QuizQuestion>[
@@ -224,6 +230,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Esempi di giudizio passato (Giuda 1:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Ninive', 'Egitto', 'Caino'],
     ),
   ],
   'Revelation#0': <QuizQuestion>[
@@ -249,6 +257,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       explanation:
           'Vengono dati sette messaggi personalizzati (Rivelazione '
           '2-3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
       text: 'Chi solo viene trovato degno di aprire il rotolo sigillato '
@@ -262,6 +272,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Solo Cristo merita questo onore (Rivelazione 5:5-9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['leone', 'dragone', 'anziano'],
     ),
   ],
   'Revelation#1': <QuizQuestion>[
@@ -271,6 +283,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Viene descritta una guerra celeste (Rivelazione 12:7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['dragone', 'Satana'],
     ),
     QuizQuestion(
       text: 'Che cosa rappresentano i 144.000 menzionati insieme '
@@ -297,6 +311,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Una tappa finale del giudizio divino (Rivelazione 15:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['coppe', 'angeli', 'trombe'],
     ),
   ],
   'Revelation#2': <QuizQuestion>[
@@ -326,6 +342,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       explanation:
           'Gli viene imposto un periodo di restrizione '
           '(Rivelazione 20:2, 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['abisso', 'fuoco', 'trono'],
     ),
     QuizQuestion(
       text: 'Che cosa promette Rivelazione 21-22 riguardo al dolore e '

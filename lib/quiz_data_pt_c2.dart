@@ -42,6 +42,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Saul', 'Davi', 'Jônatas', 'Abner'],
       correctIndex: 0,
       explanation: 'Samuel unge Saul discretamente (1 Samuel 9-10).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Por que Samuel anunciou a rejeição de Saul como rei?',
@@ -72,6 +73,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Uma funda e uma pedra', 'Uma espada', 'Uma lança', 'As próprias mãos'],
       correctIndex: 0,
       explanation: 'Davi recusa a armadura e usa sua funda (1 Samuel 17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['espada', 'lança', 'escudo'],
     ),
     QuizQuestion(
       text: 'Que sentimento levou Saul a querer matar Davi depois de sua vitória?',
@@ -84,6 +87,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Jônatas', 'Abner', 'Apenas Samuel', 'Um sacerdote desconhecido'],
       correctIndex: 0,
       explanation: 'Jônatas avisa Davi por meio de um sinal combinado (1 Samuel 20).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   '1 Samuel#3': <QuizQuestion>[
@@ -103,6 +107,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Abigail', 'Mical', 'Uma serva', 'O sumo sacerdote'],
       correctIndex: 0,
       explanation: 'Abigail acalma Davi com provisões (1 Samuel 25).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Onde Saul e Jônatas morrem na batalha final do livro?',
@@ -133,6 +138,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Jerusalém', 'Hebrom', 'Siló', 'Gibeá'],
       correctIndex: 0,
       explanation: 'Davi toma a fortaleza de Sião (2 Samuel 5).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Que promessa Jeová fez a Davi por meio do profeta Natã?',
@@ -152,6 +158,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Bate-Seba', 'Mical', 'Abigail', 'Tamar'],
       correctIndex: 0,
       explanation: 'Davi manda matar Urias para esconder seu pecado (2 Samuel 11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Betsabá'],
     ),
     QuizQuestion(
       text: 'Como o profeta Natã confrontou Davi sobre seu pecado?',
@@ -169,6 +177,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Absalão', 'Amnom', 'Salomão', 'Adonias'],
       correctIndex: 0,
       explanation: 'Começa a rebelião de Absalão (2 Samuel 15).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   '2 Samuel#2': <QuizQuestion>[
@@ -204,6 +213,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'O recenseamento desagrada a Deus e uma peste se segue (2 Samuel 24).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['guerra', 'templo', 'tributo'],
     ),
   ],
   '1 Kings#0': <QuizQuestion>[
@@ -212,6 +223,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Adonias', 'Absalão', 'Apenas Joabe', 'Natã'],
       correctIndex: 0,
       explanation: 'Adonias se proclama rei sem o consentimento de Davi (1 Reis 1).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'O que Salomão pede a Jeová logo no início do seu reinado?',
@@ -229,6 +241,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Hirão, rei de Tiro', 'O faraó do Egito', 'A rainha de Sabá', 'O rei de Moabe'],
       correctIndex: 0,
       explanation: 'Hirão fornece madeira de cedro e artesãos (1 Reis 5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Hirão'],
     ),
   ],
   '1 Kings#1': <QuizQuestion>[
@@ -272,6 +286,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Elias', 'Eliseu', 'Miqueias', 'Obadias'],
       correctIndex: 0,
       explanation: 'Elias anuncia a ausência de chuva e de orvalho (1 Reis 17).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'O que aconteceu no desafio no monte Carmelo?',
@@ -307,6 +322,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Eliseu vê Elias ser levado por um redemoinho (2 Reis 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['carro', 'manto', 'Eliseu'],
     ),
     QuizQuestion(
       text: 'Que milagre Eliseu realizou pela mulher sunamita?',
@@ -329,6 +346,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Naamã obedece à instrução de Eliseu apesar de seu ceticismo (2 Reis 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Naamã', 'água', 'sacerdote'],
     ),
   ],
   '2 Kings#1': <QuizQuestion>[
@@ -364,6 +383,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Joás escapa do massacre de Atalia (2 Reis 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Atalia', 'palácio', 'rainha'],
     ),
   ],
   '2 Kings#2': <QuizQuestion>[
@@ -418,6 +439,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['A Páscoa', 'As Tendas', 'O Pentecostes', 'O Jubileu'],
       correctIndex: 0,
       explanation: 'Uma Páscoa memorável é celebrada (2 Reis 23).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Páscoa'],
     ),
     QuizQuestion(
       text: 'Como termina o livro de Reis?',
@@ -448,6 +471,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Judá', 'Levi', 'Benjamim', 'Efraim'],
       correctIndex: 0,
       explanation: 'A genealogia de Judá inclui a casa de Davi (1 Crônicas 2-3).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Que tribos se estabeleceram a leste do Jordão, segundo essas genealogias?',
@@ -494,6 +518,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Davi derrota os filisteus várias vezes (1 Crônicas 14).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['filisteus'],
     ),
   ],
   '1 Chronicles#2': <QuizQuestion>[
@@ -553,6 +579,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Asafe, Hemã e Jedutum dirigem a música sagrada (1 Crônicas 25).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sacrifícios', 'portões', 'tesouro'],
     ),
     QuizQuestion(
       text: 'Qual foi a última grande ação pública de Davi antes de morrer?',
@@ -577,6 +605,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Seu pedido agrada a Deus, que também lhe dá riqueza (2 Crônicas 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riqueza', 'vida', 'honra'],
     ),
     QuizQuestion(
       text: 'O que aconteceu quando o templo foi dedicado?',
@@ -612,6 +642,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Ela fica impressionada com sua sabedoria e sua riqueza (2 Crônicas 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Hirão', 'Egito', 'Salomão'],
     ),
     QuizQuestion(
       text: 'Por que o reino se dividiu sob Roboão?',
@@ -647,6 +679,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Ele consulta os médicos em vez de Deus (2 Crônicas 16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lepra', 'olhos', 'febre'],
     ),
     QuizQuestion(
       text: 'Por que Josafá foi repreendido por um profeta?',
@@ -682,6 +716,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Jeoseba o esconde até sua coroação (2 Crônicas 22-23).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Atalia', 'palácio', 'rainha'],
     ),
     QuizQuestion(
       text: 'Por que Uzias (Azarias) foi atingido pela lepra?',
@@ -712,6 +748,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Uma Páscoa excepcional', 'As Tendas', 'O Jubileu', 'O Pentecostes'],
       correctIndex: 0,
       explanation: 'Essa Páscoa reúne Judá e parte de Israel (2 Crônicas 30).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['festa', 'templo', 'sábado'],
     ),
     QuizQuestion(
       text: 'O que aconteceu depois que Manassés se arrependeu no cativeiro?',
@@ -742,6 +780,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['Ciro, rei da Pérsia', 'Nabucodonosor', 'Apenas Dario', 'Xerxes'],
       correctIndex: 0,
       explanation: 'Ciro publica um decreto libertador (Esdras 1).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ciro'],
     ),
     QuizQuestion(
       text: 'O que os exilados fizeram logo que voltaram, antes mesmo de terminar o templo?',
@@ -788,12 +828,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'As mensagens deles fazem a construção ser retomada (Esdras 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Esdras', 'Neemias', 'Ciro'],
     ),
     QuizQuestion(
       text: 'Quem chegou mais tarde da Babilônia com um grupo adicional de exilados?',
       options: <String>['Esdras, sacerdote e escriba', 'Neemias', 'Zorobabel', 'Mordecai'],
       correctIndex: 0,
       explanation: 'Esdras chega durante o reinado de Artaxerxes (Esdras 7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Esdras'],
     ),
   ],
   'Ezra#2': <QuizQuestion>[
@@ -818,6 +862,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Esdras rasga suas roupas de tanta dor (Esdras 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['templo', 'muralha', 'sacerdotes'],
     ),
     QuizQuestion(
       text: 'Como o povo respondeu ao apelo de Esdras?',
@@ -853,6 +899,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'O rei aceita e lhe fornece recursos (Neemias 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['templo', 'rei', 'Jerusalém'],
     ),
     QuizQuestion(
       text: 'Como os construtores reagiram diante das zombarias e ameaças?',
@@ -883,6 +931,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC2 = <String, List<QuizQu
       options: <String>['52 dias', 'Um ano', 'Dez anos', 'Uma semana'],
       correctIndex: 0,
       explanation: 'Um feito notável apesar de forte oposição (Neemias 6).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['cinquenta e dois dias', '52'],
     ),
     QuizQuestion(
       text: 'O que aconteceu quando Esdras leu a Lei publicamente para o povo?',

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../quiz_data.dart';
+import '../services/answer_validator.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an
 /// explanation, then a final score. [onCompleted] is called once with the
@@ -25,24 +26,48 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  static const AnswerValidator _validator = FuzzyAnswerValidator();
+
+  final Random _random = Random();
+  final TextEditingController _textController = TextEditingController();
+
   int _index = 0;
   int? _selected;
   bool _answered = false;
+  bool _lastAnswerCorrect = false;
   int _score = 0;
   bool _finished = false;
+
+  /// Word chips currently placed in the answer row (word-bank questions).
+  List<String> _pickedWords = <String>[];
 
   // Shuffled once per play-through, so replaying a quiz never shows the same
   // question order or the same option order (previously the correct answer
   // was always authored as option 0, so it was always listed first).
   late final List<QuizQuestion> _questions = _shuffledQuestions();
 
+  /// Chip pool per question index, shuffled once so tapping doesn't reorder it.
+  late final Map<int, List<String>> _wordBanks = <int, List<String>>{};
+
   QuizQuestion get _current => _questions[_index];
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   List<QuizQuestion> _shuffledQuestions() {
     final Random random = Random();
     final List<QuizQuestion> shuffled = List<QuizQuestion>.of(widget.questions)
       ..shuffle(random);
     return shuffled.map((QuizQuestion q) {
+      // Only multiple-choice questions get their options reordered: the other
+      // types derive their answer from `correctAnswer`, and shuffling would
+      // just churn indices for no visible benefit.
+      if (q.type != QuizAnswerType.multipleChoice) {
+        return q;
+      }
       final List<int> order = List<int>.generate(q.options.length, (int i) => i)
         ..shuffle(random);
       final List<String> options = order
@@ -54,8 +79,31 @@ class _QuizScreenState extends State<QuizScreen> {
         options: options,
         correctIndex: correctIndex,
         explanation: q.explanation,
+        type: q.type,
+        acceptedAnswers: q.acceptedAnswers,
+        wordBankDistractors: q.wordBankDistractors,
+        wordBankSegments: q.wordBankSegments,
       );
     }).toList(growable: false);
+  }
+
+  /// The scrambled chips for the current word-bank question: the words of the
+  /// answer plus any authored distractors, shuffled once and then reused.
+  List<String> _wordBankFor(int index) {
+    return _wordBanks[index] ??= () {
+      final QuizQuestion q = _questions[index];
+      final List<String> answerWords = q.wordBankSegments.isNotEmpty
+          ? q.wordBankSegments
+          : q.correctAnswer
+                .split(RegExp(r'\s+'))
+                .where((String w) => w.isNotEmpty)
+                .toList(growable: false);
+      final List<String> words = <String>[
+        ...answerWords,
+        ...q.wordBankDistractors,
+      ];
+      return words..shuffle(_random);
+    }();
   }
 
   void _select(int i) {
@@ -65,7 +113,30 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() {
       _selected = i;
       _answered = true;
-      if (i == _current.correctIndex) {
+      _lastAnswerCorrect = i == _current.correctIndex;
+      if (_lastAnswerCorrect) {
+        _score++;
+      }
+    });
+  }
+
+  void _submitTypedAnswer() {
+    if (_answered) {
+      return;
+    }
+    final String input = _current.type == QuizAnswerType.wordBank
+        ? _pickedWords.join(' ')
+        : _textController.text;
+    if (input.trim().isEmpty) {
+      return;
+    }
+    setState(() {
+      _answered = true;
+      _lastAnswerCorrect = _validator.matches(
+        input,
+        _current.allAcceptedAnswers,
+      );
+      if (_lastAnswerCorrect) {
         _score++;
       }
     });
@@ -77,6 +148,9 @@ class _QuizScreenState extends State<QuizScreen> {
         _index++;
         _selected = null;
         _answered = false;
+        _lastAnswerCorrect = false;
+        _pickedWords = <String>[];
+        _textController.clear();
       });
     } else {
       await widget.onCompleted(_score, _questions.length);
@@ -98,7 +172,7 @@ class _QuizScreenState extends State<QuizScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final bool correct = _selected == _current.correctIndex;
+    final bool correct = _lastAnswerCorrect;
 
     return Column(
       children: <Widget>[
@@ -140,16 +214,26 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              for (int i = 0; i < _current.options.length; i++) ...<Widget>[
-                _AnimatedOption(
-                  label: _current.options[i],
-                  state: _optionState(i),
-                  onTap: () => _select(i),
-                ),
-                const SizedBox(height: 10),
-              ],
+              switch (_current.type) {
+                QuizAnswerType.multipleChoice => _buildChoices(),
+                QuizAnswerType.freeText => _buildTextInput(l10n),
+                QuizAnswerType.wordBank => _buildWordBank(l10n),
+              },
               if (_answered) ...<Widget>[
                 const SizedBox(height: 8),
+                // For typed answers a wrong attempt should still teach the
+                // right one, which the options list would have shown.
+                if (!correct && _current.type != QuizAnswerType.multipleChoice)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      l10n.quizCorrectAnswerWas(_current.correctAnswer),
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: cs.primary,
+                      ),
+                    ),
+                  ),
                 _FeedbackBanner(correct: correct, text: _current.explanation),
               ],
             ],
@@ -175,7 +259,160 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ),
             ),
+          )
+        else if (_current.type != QuizAnswerType.multipleChoice)
+          // Typed answers need an explicit submit; multiple choice commits as
+          // soon as an option is tapped.
+          SafeArea(
+            minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: FilledButton.icon(
+              onPressed: _hasPendingAnswer ? _submitTypedAnswer : null,
+              icon: const Icon(Icons.check_rounded),
+              label: Text(l10n.quizCheckAnswer),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(54),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+            ),
           ),
+      ],
+    );
+  }
+
+  /// Whether the user has entered enough to submit a typed answer.
+  bool get _hasPendingAnswer => _current.type == QuizAnswerType.wordBank
+      ? _pickedWords.isNotEmpty
+      : _textController.text.trim().isNotEmpty;
+
+  Widget _buildChoices() {
+    return Column(
+      children: <Widget>[
+        for (int i = 0; i < _current.options.length; i++) ...<Widget>[
+          _AnimatedOption(
+            label: _current.options[i],
+            state: _optionState(i),
+            onTap: () => _select(i),
+          ),
+          const SizedBox(height: 10),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildTextInput(AppLocalizations l10n) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    return TextField(
+      controller: _textController,
+      enabled: !_answered,
+      autocorrect: false,
+      enableSuggestions: false,
+      textInputAction: TextInputAction.done,
+      textCapitalization: TextCapitalization.sentences,
+      onChanged: (_) => setState(() {}),
+      onSubmitted: (_) => _submitTypedAnswer(),
+      decoration: InputDecoration(
+        hintText: l10n.quizTypeAnswerHint,
+        filled: true,
+        fillColor: cs.surfaceContainerHigh,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: cs.outlineVariant),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: cs.outlineVariant),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: cs.primary, width: 2),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 18,
+        ),
+      ),
+      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+    );
+  }
+
+  Widget _buildWordBank(AppLocalizations l10n) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+    final List<String> bank = _wordBankFor(_index);
+
+    // A chip is used up once it's been placed; duplicates of the same word
+    // are matched by position so repeated words still work.
+    final List<String> remaining = List<String>.of(bank);
+    for (final String picked in _pickedWords) {
+      remaining.remove(picked);
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          l10n.quizWordBankInstruction,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: cs.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 12),
+        // The answer being assembled.
+        Container(
+          width: double.infinity,
+          constraints: const BoxConstraints(minHeight: 64),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: cs.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(16),
+            border: Border(
+              bottom: BorderSide(color: cs.outlineVariant, width: 2),
+            ),
+          ),
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: <Widget>[
+              for (int i = 0; i < _pickedWords.length; i++)
+                _WordChip(
+                  label: _pickedWords[i],
+                  onTap: _answered
+                      ? null
+                      : () => setState(() => _pickedWords.removeAt(i)),
+                  filled: true,
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        // The remaining pool.
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: <Widget>[
+            for (final String word in remaining)
+              _WordChip(
+                label: word,
+                onTap: _answered
+                    ? null
+                    : () => setState(() => _pickedWords.add(word)),
+                filled: false,
+              ),
+          ],
+        ),
+        if (_pickedWords.isNotEmpty && !_answered) ...<Widget>[
+          const SizedBox(height: 8),
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: TextButton.icon(
+              onPressed: () => setState(() => _pickedWords = <String>[]),
+              icon: const Icon(Icons.backspace_outlined, size: 18),
+              label: Text(l10n.quizClearAnswer),
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -326,6 +563,51 @@ class _StreakPill extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A tappable word chip used to assemble a word-bank answer. Chips in the
+/// pool are outlined; chips already placed in the answer are filled and tap
+/// to remove.
+class _WordChip extends StatelessWidget {
+  const _WordChip({
+    required this.label,
+    required this.onTap,
+    required this.filled,
+  });
+
+  final String label;
+  final VoidCallback? onTap;
+  final bool filled;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    return Material(
+      color: filled ? cs.primaryContainer : cs.surfaceContainerHighest,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(
+          color: filled ? cs.primary : cs.outlineVariant,
+          width: 1.5,
+        ),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: filled ? cs.onPrimaryContainer : cs.onSurface,
+            ),
+          ),
+        ),
       ),
     );
   }

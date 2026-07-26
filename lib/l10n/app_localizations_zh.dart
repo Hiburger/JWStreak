@@ -257,19 +257,135 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeTagline => '你的每日圣经阅读，\n一天一点，慢慢来。';
 
   @override
-  String get welcomeFeatureReminder => '每天在你选定的时间提醒你';
-
-  @override
-  String get welcomeFeatureOpen => '轻轻一点，立刻开始阅读';
-
-  @override
-  String get welcomeFeaturePrivate => '100% 隐私保护：所有数据都留在你的设备上';
-
-  @override
   String get welcomeButton => '开始吧！';
 
   @override
+  String get welcomeLogoGreeting => '嗨！';
+
+  @override
   String get welcomeFooter => '免费、自由、开源';
+
+  @override
+  String get onbContinue => '继续';
+
+  @override
+  String get onbBack => '返回';
+
+  @override
+  String get onbFeaturesTitle => '你可以做什么';
+
+  @override
+  String get onbFeaturesSubtitle => '一些帮助你每日阅读的功能。';
+
+  @override
+  String get onbFeatureReadingTitle => '每日引导阅读';
+
+  @override
+  String get onbFeatureReadingDesc =>
+      '每天一章，按自己的节奏。它会在 JW Library 或 jw.org 中打开——可在设置中选择。标记为已读即可推进并延续你的连续记录。';
+
+  @override
+  String get onbFeatureQuizTitle => '测验和星星';
+
+  @override
+  String get onbFeatureQuizDesc => '通过随阅读解锁的简短测验检验你的理解。可以选择、输入或拼词作答，并一路赚取星星。';
+
+  @override
+  String get onbFeatureNotesTitle => '个人笔记';
+
+  @override
+  String get onbFeatureNotesDesc => '在阅读时记下你的思考，随时都能再找到它们。你甚至可以导出它们。';
+
+  @override
+  String get onbFeaturePrivacyTitle => '100% 隐私';
+
+  @override
+  String get onbFeaturePrivacyDesc => '一切都留在你的手机上。不会发送任何数据，也无需账户。';
+
+  @override
+  String get onbReminderTitle => '设置你的第一个提醒';
+
+  @override
+  String get onbReminderIntro =>
+      '每天一个小提醒是延续连续记录的最好方法。选一天中安静的时刻——你随时可以在设置中添加更多或修改它们。';
+
+  @override
+  String get onbReminderTip => '小贴士：把提醒和你已有的习惯绑定，比如早咖啡后或睡前。';
+
+  @override
+  String get onbReminderFinish => '完成';
+
+  @override
+  String get onbReminderSkip => '以后再说';
+
+  @override
+  String get tourNext => '下一步';
+
+  @override
+  String get tourDone => '知道了';
+
+  @override
+  String get tourSkip => '跳过';
+
+  @override
+  String get tourStreakTitle => '你的连续记录';
+
+  @override
+  String get tourStreakBody => '每天读一章或做一次测验就会增长。火柴会替你补上错过的日子。';
+
+  @override
+  String get tourReadingTitle => '今天的章节';
+
+  @override
+  String get tourReadingBody => '打开它，然后标记为已读，就能进入下一章。';
+
+  @override
+  String get tourBrowseTitle => '整本圣经';
+
+  @override
+  String get tourBrowseBody => '跳转到任意书卷或章节，查看你已经读过的内容。';
+
+  @override
+  String get tourProgressTitle => '你的进度';
+
+  @override
+  String get tourProgressBody => '阅读次数、星星和近期活动，全都在这里。';
+
+  @override
+  String get tourQuickActionsTitle => '快捷操作';
+
+  @override
+  String get tourQuickActionsBody => '每日经文和你的笔记，一点即达。';
+
+  @override
+  String get tourAchievementsTitle => '成就';
+
+  @override
+  String get tourAchievementsBody => '追踪你在阅读过程中解锁的里程碑。';
+
+  @override
+  String get tourNotesTitle => '你的笔记';
+
+  @override
+  String get tourNotesBody => '你写下的一切，随时可以重读或导出。';
+
+  @override
+  String get tourSettingsTitle => '设置';
+
+  @override
+  String get tourSettingsBody => '主题、语言、提醒——还有这个导览，想再看一次都行。';
+
+  @override
+  String get settingsReplayTour => '重新观看导览';
+
+  @override
+  String get settingsReplayTourSubtitle => '再次查看主屏幕介绍';
+
+  @override
+  String get onbReminderPermissionMissing => '通知已关闭，所以这个提醒不会响。开启通知才能收到提醒。';
+
+  @override
+  String get onbReminderPermissionEnable => '开启';
 
   @override
   String get streakInfoTitle => '让你的连续记录持续下去';
@@ -284,25 +400,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get streakInfoRow1Text => '标记一章已读，或完成一个测验：两者都能帮你保持连续记录。';
 
   @override
-  String get streakInfoRow2Title => '每月 4 张冻结卡';
+  String get streakInfoRow2Title => '每月 4 根火柴';
 
   @override
-  String get streakInfoRow2Text => '错过一天时，系统会自动使用一张冻结卡保护你的连续记录。冻结卡每月都会补满。';
+  String get streakInfoRow2Text => '错过一天时，系统会自动使用一根火柴，让你的连续记录不熄灭。火柴每月都会补满。';
 
   @override
-  String get streakInfoRow3Title => '赚回一张冻结卡';
+  String get streakInfoRow3Title => '赚回一根火柴';
 
   @override
-  String get streakInfoRow3Text => '冻结卡用完了？完成一次复习测验（综合你读过的内容），就能再赚回一张。';
+  String get streakInfoRow3Text => '火柴用完了？完成一次复习测验（综合你读过的内容），就能再赚回一根。';
 
   @override
   String get streakInfoRow4Title => '我们会提醒你';
 
   @override
   String get streakInfoRow4Text => '如果你的连续记录岌岌可危，系统会发出提醒，晚间通知也会推你一把。';
-
-  @override
-  String get streakInfoButton => '出发！';
 
   @override
   String get settingsTitle => '设置';
@@ -318,6 +431,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsDynamicColorOff => '使用应用的品牌配色';
+
+  @override
+  String get settingsBibleTargetTitle => '打开圣经的方式';
+
+  @override
+  String get settingsBibleTargetJwLibrary => 'JW Library 应用';
+
+  @override
+  String get settingsBibleTargetWeb => 'jw.org（浏览器）';
+
+  @override
+  String get settingsBibleTargetJwLibraryMissing =>
+      '以这种方式打开圣经需要 JW Library 应用。要安装吗？';
+
+  @override
+  String get settingsBibleTargetInstall => '安装';
 
   @override
   String get settingsLanguage => '语言';
@@ -365,22 +494,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLicense => '许可证';
 
   @override
+  String get settingsLicenseLegalese =>
+      'JW Streak 是根据 GNU 通用公共许可证 v3 授权的自由软件。以下许可证涵盖了构成本应用的开源组件。';
+
+  @override
   String get settingsQuestion => '有问题？';
 
   @override
   String get settingsFooter => '怀着弟兄般的爱，制作于瑞士。\n本应用免费、自由、开源。';
-
-  @override
-  String get settingsNotifGranted => '通知权限已授予。';
-
-  @override
-  String get settingsNotifDenied => '通知权限被拒绝。';
-
-  @override
-  String get settingsAlarmsGranted => '精确闹钟已获授权。';
-
-  @override
-  String get settingsAlarmsDenied => '精确闹钟未获授权。';
 
   @override
   String settingsError(String error) {
@@ -398,11 +519,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get reminderAlreadyExists => '这个提醒已经存在啦。';
-
-  @override
-  String reminderAdded(String label) {
-    return '已添加 $label 的提醒。';
-  }
 
   @override
   String get reminderTitle => '阅读提醒';
@@ -443,6 +559,23 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get quizSeeScore => '查看得分';
+
+  @override
+  String get quizTypeAnswerHint => '输入你的答案';
+
+  @override
+  String get quizCheckAnswer => '检查';
+
+  @override
+  String get quizWordBankInstruction => '按正确顺序点击词语';
+
+  @override
+  String get quizClearAnswer => '清除';
+
+  @override
+  String quizCorrectAnswerWas(String answer) {
+    return '答案：$answer';
+  }
 
   @override
   String get quizPerfect => '满分！';
@@ -502,11 +635,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeStreakLostMessage => '你的连续记录清零了——别担心，我们一起重新开始 💪';
 
   @override
-  String homeChapterMarkedRead(String reference) {
-    return '$reference 已标记为已读。';
-  }
-
-  @override
   String get homeExactAlarmDialogTitle => '准时提醒';
 
   @override
@@ -526,7 +654,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeReviewQuizTitle => '复习测验';
 
   @override
-  String get homeReviewQuizEarned => '太棒了！你赚回了一张冻结卡 ❄️';
+  String get homeReviewQuizEarned => '太棒了！你赚回了一根火柴 🔥';
 
   @override
   String get homeReviewQuizFailed => '至少需要答对 60% 才算通过，再试一次吧！';
@@ -620,14 +748,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeToReadToday => '今天待读';
 
   @override
-  String get homeFreezesNone => '没有冻结卡了';
+  String get homeFreezesNone => '没有火柴了';
 
   @override
   String homeFreezesRemaining(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '还剩 $count 张冻结卡',
+      other: '还剩 $count 根火柴',
     );
     return '$_temp0';
   }
@@ -641,7 +769,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get homeEarnFreezeButton => '赚回一张冻结卡（复习测验）';
+  String get homeEarnFreezeButton => '赚回一根火柴（复习测验）';
 
   @override
   String get homeNewQuizUnlocked => '解锁了新测验';
@@ -839,12 +967,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get noteEditorTitleErrorHint => '添加标题才能保存。';
 
   @override
-  String get noteEditorTitleRequired => '标题不能为空。';
-
-  @override
-  String get noteEditorSavedSnackbar => '笔记已保存到本地。';
-
-  @override
   String noteEditorErrorSnackbar(String error) {
     return '错误：$error';
   }
@@ -892,11 +1014,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notesLibraryDelete => '删除';
 
   @override
-  String notesLibraryDeletedSnackbar(String title) {
-    return '「$title」已删除。';
-  }
-
-  @override
   String notesLibraryDeleteConfirmSingular(String title) {
     return '「$title」将被永久删除。';
   }
@@ -904,14 +1021,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String notesLibraryDeleteConfirmPlural(int count) {
     return '这 $count 篇笔记将从你的设备中永久删除。';
-  }
-
-  @override
-  String get notesLibraryDeletedSingular => '笔记已删除。';
-
-  @override
-  String notesLibraryDeletedPlural(int count) {
-    return '$count 篇笔记已删除。';
   }
 
   @override
@@ -1013,4 +1122,197 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noteReaderEmpty => '这篇笔记是空的。';
+
+  @override
+  String get homeAchievementsTooltip => '成就';
+
+  @override
+  String get achievementsTitle => '成就';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '已解锁 $unlocked/$total';
+  }
+
+  @override
+  String achievementsProgressFraction(int current, int goal) {
+    return '$current / $goal';
+  }
+
+  @override
+  String get achievementsSectionReading => '阅读';
+
+  @override
+  String get achievementsSectionQuizzes => '测验';
+
+  @override
+  String get achievementsSectionStreak => '连续记录';
+
+  @override
+  String get achievementsSectionOther => '其他';
+
+  @override
+  String get achievementFirstChapterTitle => '第一步';
+
+  @override
+  String get achievementFirstChapterDesc => '读完你的第一章。';
+
+  @override
+  String get achievementChapters10Title => '良好的开端';
+
+  @override
+  String get achievementChapters10Desc => '读完10章。';
+
+  @override
+  String get achievementChapters50Title => '持续的读者';
+
+  @override
+  String get achievementChapters50Desc => '读完50章。';
+
+  @override
+  String get achievementChapters150Title => '专注的读者';
+
+  @override
+  String get achievementChapters150Desc => '读完150章。';
+
+  @override
+  String get achievementGenesisTitle => '太初';
+
+  @override
+  String get achievementGenesisDesc => '读完整本创世记。';
+
+  @override
+  String get achievementWholeBibleTitle => '从头到尾';
+
+  @override
+  String get achievementWholeBibleDesc => '读完圣经的每一章。';
+
+  @override
+  String get achievementExplorerTitle => '探索者';
+
+  @override
+  String get achievementExplorerDesc => '阅读5本不同书卷的内容。';
+
+  @override
+  String get achievementFirstQuizTitle => '第一次测验';
+
+  @override
+  String get achievementFirstQuizDesc => '完成你的第一次测验。';
+
+  @override
+  String get achievementQuizzes5Title => '测验常客';
+
+  @override
+  String get achievementQuizzes5Desc => '完成5次测验。';
+
+  @override
+  String get achievementQuizzes25Title => '测验高手';
+
+  @override
+  String get achievementQuizzes25Desc => '完成25次测验。';
+
+  @override
+  String get achievementPerfectQuizTitle => '完美主义者';
+
+  @override
+  String get achievementPerfectQuizDesc => '在一次测验中获得满分。';
+
+  @override
+  String get achievementStars20Title => '星星收集者';
+
+  @override
+  String get achievementStars20Desc => '获得20颗星。';
+
+  @override
+  String get achievementStreak7Title => '坚持一周';
+
+  @override
+  String get achievementStreak7Desc => '保持7天连续阅读记录。';
+
+  @override
+  String get achievementStreak30Title => '坚持一个月';
+
+  @override
+  String get achievementStreak30Desc => '保持30天连续阅读记录。';
+
+  @override
+  String get achievementFirstNoteTitle => '笔记达人';
+
+  @override
+  String get achievementFirstNoteDesc => '写下你的第一篇笔记。';
+
+  @override
+  String get achievementReminderTitle => '保持节奏';
+
+  @override
+  String get achievementReminderDesc => '设置每日提醒。';
+
+  @override
+  String get notifReminderTitle => 'JW Streak · 圣经阅读';
+
+  @override
+  String get notifReminderBody => '该阅读了。点击继续 📖';
+
+  @override
+  String get notifStreakRiskTitle => '你的连续记录岌岌可危 🔥';
+
+  @override
+  String get notifStreakRiskBody => '你今天还没有活动过——读一章或做一次测验来保持它。';
+
+  @override
+  String get easterEggHeartBody => '我也爱你 :)';
+
+  @override
+  String get easterEggVersionTitle => '发现秘密啦！🕵️';
+
+  @override
+  String get easterEggVersionBody => '嘘……你本不该发现这个。其实这里没有真正的隐藏模式，只是一个小小的眨眼 😉';
+
+  @override
+  String get easterEggVersionButton => '我会保守秘密 🤫';
+
+  @override
+  String get achievementQuizzes40Title => '测验传奇';
+
+  @override
+  String get achievementQuizzes40Desc => '完成40次测验。';
+
+  @override
+  String get achievementStars40Title => '银河收集者';
+
+  @override
+  String get achievementStars40Desc => '获得40颗星。';
+
+  @override
+  String get achievementStreak180Title => '坚持半年';
+
+  @override
+  String get achievementStreak180Desc => '保持180天连续阅读记录。';
+
+  @override
+  String get achievementNotes10Title => '多产作者';
+
+  @override
+  String get achievementNotes10Desc => '写10篇笔记。';
+
+  @override
+  String get achievementEasterEggsTitle => '秘密猎人';
+
+  @override
+  String get achievementEasterEggsDesc => '发现应用中的所有隐藏秘密。';
+
+  @override
+  String get freezeEarnedTitle => '获得新的火柴！';
+
+  @override
+  String get freezeEarnedBody => '你完成了3次新的测验。火柴可以在你错过一天时，让你的连续记录不熄灭。';
+
+  @override
+  String get freezeEarnedButton => '太棒了！';
+
+  @override
+  String get commonOk => '知道了';
+
+  @override
+  String get commonCancel => '取消';
 }

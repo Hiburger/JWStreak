@@ -70,6 +70,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un llamado a una consagración práctica (Romanos 12:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['culto', 'cuerpo', 'mente'],
     ),
     QuizQuestion(
       text: '¿Qué principio establece Romanos 13 con respecto a las '
@@ -112,6 +114,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'Una imagen sagrada subraya la responsabilidad colectiva '
           '(1 Corintios 3:16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['cuerpo', 'edificio', 'campo'],
     ),
   ],
   '1 Corinthians#1': <QuizQuestion>[
@@ -166,6 +170,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Sin amor, todo lo demás carece de valor (1 Corintios 13).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['amor'],
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
@@ -206,6 +212,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'El mensaje central de la reconciliación (2 Corintios '
           '5:20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['arrepiéntanse', 'oren', 'perdonen'],
     ),
     QuizQuestion(
       text: '¿Qué principio enseña Pablo sobre el dar con generosidad '
@@ -331,6 +339,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Un llamado a la ayuda mutua fraternal (Gálatas 6:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['propias', 'pecados', 'deudas'],
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
@@ -414,6 +424,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'Cada pieza simboliza una cualidad protectora '
           '(Efesios 6:11-17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['armadura', 'escudo', 'espada'],
     ),
   ],
   'Philippians#0': <QuizQuestion>[
@@ -469,6 +481,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'Considera todo como pérdida frente a Cristo '
           '(Filipenses 3:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Cristo', 'justicia', 'ley'],
     ),
   ],
   'Philippians#2': <QuizQuestion>[
@@ -539,6 +553,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'Una advertencia contra las falsas doctrinas '
           '(Colosenses 2:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['circuncisión', 'ángeles', 'sombras'],
     ),
     QuizQuestion(
       text: '¿Qué deben «vestirse» los cristianos según Colosenses 3?',
@@ -656,6 +672,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       explanation:
           'Una imagen de llegada repentina e inesperada '
           '(1 Tesalonicenses 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['esposo', 'siervo', 'trompeta'],
     ),
   ],
 };

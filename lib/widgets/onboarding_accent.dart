@@ -1,0 +1,64 @@
+// ignore_for_file: prefer_initializing_formals — the public constructor
+// parameter names below are intentionally friendlier than the private fields
+// they back.
+
+import 'package:flutter/material.dart';
+
+/// A small, deliberately chosen palette of background/foreground pairs for
+/// onboarding icons. Material 3's automatic primary/secondary/tertiary
+/// containers, under this app's blue brand seed, produce two nearly
+/// identical pale blues plus one odd pink — inconsistent and hard to read as
+/// distinct categories. These fixed pairs are chosen to be clearly
+/// distinguishable and to echo colors already used elsewhere in the app
+/// (amber for quizzes/streak matches, purple for the logo), while still
+/// adapting between light and dark themes.
+class OnboardingAccent {
+  const OnboardingAccent({
+    required Color lightBg,
+    required Color lightFg,
+    required Color darkBg,
+    required Color darkFg,
+  }) : _lightBg = lightBg,
+       _lightFg = lightFg,
+       _darkBg = darkBg,
+       _darkFg = darkFg;
+
+  final Color _lightBg;
+  final Color _lightFg;
+  final Color _darkBg;
+  final Color _darkFg;
+
+  Color background(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? _darkBg : _lightBg;
+
+  Color foreground(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? _darkFg : _lightFg;
+}
+
+const OnboardingAccent kAccentBlue = OnboardingAccent(
+  lightBg: Color(0xFFD9E8FB),
+  lightFg: Color(0xFF1F4E79),
+  darkBg: Color(0xFF25436A),
+  darkFg: Color(0xFFBFDBFF),
+);
+
+const OnboardingAccent kAccentAmber = OnboardingAccent(
+  lightBg: Color(0xFFFFE7A8),
+  lightFg: Color(0xFF7A5200),
+  darkBg: Color(0xFF5C4200),
+  darkFg: Color(0xFFFFD98A),
+);
+
+const OnboardingAccent kAccentTeal = OnboardingAccent(
+  lightBg: Color(0xFFC7EDE2),
+  lightFg: Color(0xFF0E6B56),
+  darkBg: Color(0xFF104A3D),
+  darkFg: Color(0xFF8FE6D2),
+);
+
+const OnboardingAccent kAccentPurple = OnboardingAccent(
+  lightBg: Color(0xFFF0E0FC),
+  lightFg: Color(0xFF6A3F94),
+  darkBg: Color(0xFF48305F),
+  darkFg: Color(0xFFE4C9FA),
+);

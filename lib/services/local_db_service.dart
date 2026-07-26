@@ -2,7 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../achievements_data.dart';
 import '../app_constants.dart';
+import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/theme_preference.dart';
 
@@ -98,8 +100,7 @@ class QuizResult {
   bool get isPerfect => total > 0 && score == total;
 
   /// 1-3 stars based on the ratio (0 only when nothing correct).
-  int get stars =>
-      total == 0 ? 0 : ((score / total) * 3).ceil().clamp(1, 3);
+  int get stars => total == 0 ? 0 : ((score / total) * 3).ceil().clamp(1, 3);
 }
 
 class LocalDbService {
@@ -167,11 +168,25 @@ class LocalDbService {
           )
         ''';
 
+  static const String _createAchievementsTableSql = '''
+          CREATE TABLE achievements (
+            id TEXT PRIMARY KEY,
+            unlockedAt TEXT NOT NULL
+          )
+        ''';
+
+  static const String _createEasterEggsTableSql = '''
+          CREATE TABLE easter_eggs (
+            id TEXT PRIMARY KEY,
+            foundAt TEXT NOT NULL
+          )
+        ''';
+
   Future<Database> _openDatabase() async {
     final String dbPath = join(await getDatabasesPath(), _databaseName);
     final Database db = await openDatabase(
       dbPath,
-      version: 5,
+      version: 7,
       onCreate: (Database database, int version) async {
         await database.execute('''
           CREATE TABLE readings (
@@ -187,6 +202,8 @@ class LocalDbService {
         await database.execute(_createReflectionsTableSql);
         await database.execute(_createRemindersTableSql);
         await database.execute(_createFrozenDaysTableSql);
+        await database.execute(_createAchievementsTableSql);
+        await database.execute(_createEasterEggsTableSql);
 
         await database.execute('''
           CREATE TABLE settings (
@@ -196,6 +213,12 @@ class LocalDbService {
         ''');
       },
       onUpgrade: (Database database, int oldVersion, int newVersion) async {
+        if (oldVersion < 7) {
+          await database.execute(_createEasterEggsTableSql);
+        }
+        if (oldVersion < 6) {
+          await database.execute(_createAchievementsTableSql);
+        }
         if (oldVersion < 5) {
           await database.execute(_createFrozenDaysTableSql);
         }
@@ -288,10 +311,7 @@ class LocalDbService {
         .toList(growable: false);
   }
 
-  Future<Reminder> addReminder({
-    required int hour,
-    required int minute,
-  }) async {
+  Future<Reminder> addReminder({required int hour, required int minute}) async {
     final Database db = await _getDb();
     final int id = await db.insert('reminders', <String, Object>{
       'hour': hour,
@@ -538,12 +558,18 @@ class LocalDbService {
         .toList(growable: false);
   }
 
-  Future<void> saveQuizResult({
+  /// Saves a quiz result. Returns `true` if this was the quiz's first-ever
+  /// completion and it happens to be the [kQuizzesPerFreeze]th, 2×, 3×, ...
+  /// distinct quiz ever completed — which awards +1 streak freeze. Replaying
+  /// an already-completed quiz updates its score but never awards a freeze.
+  Future<bool> saveQuizResult({
     required String quizId,
     required int score,
     required int total,
   }) async {
     final Database db = await _getDb();
+    final bool isNewCompletion = await getQuizResult(quizId) == null;
+
     await db.insert('quiz_results', <String, Object>{
       'quizId': quizId,
       'score': score,
@@ -551,6 +577,16 @@ class LocalDbService {
       'passedAt': DateTime.now().toIso8601String(),
     }, conflictAlgorithm: ConflictAlgorithm.replace);
     await _recordStreakActivity(db);
+
+    if (!isNewCompletion) {
+      return false;
+    }
+    final int distinctCompletedCount = (await getCompletedQuizIds()).length;
+    if (distinctCompletedCount % kQuizzesPerFreeze != 0) {
+      return false;
+    }
+    await addStreakFreeze();
+    return true;
   }
 
   Future<QuizResult?> getQuizResult(String quizId) async {
@@ -639,7 +675,9 @@ class LocalDbService {
       'reflections',
       columns: const <String>['promptId'],
     );
-    return rows.map((Map<String, Object?> r) => r['promptId'] as String).toSet();
+    return rows
+        .map((Map<String, Object?> r) => r['promptId'] as String)
+        .toSet();
   }
 
   Future<String?> getReflection(String promptId) async {
@@ -800,6 +838,28 @@ class LocalDbService {
     }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  /// Whether the home-screen guided tour has already been shown. It runs once
+  /// automatically after onboarding; [resetGuidedTour] lets the user replay it
+  /// from the settings screen.
+  Future<bool> isGuidedTourDone() async {
+    final Database db = await _getDb();
+    return await _getSetting(db, 'guided_tour_done') == 'true';
+  }
+
+  Future<void> setGuidedTourDone() async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'guided_tour_done', 'true');
+  }
+
+  Future<void> resetGuidedTour() async {
+    final Database db = await _getDb();
+    await db.delete(
+      'settings',
+      where: 'key = ?',
+      whereArgs: const <String>['guided_tour_done'],
+    );
+  }
+
   Future<void> saveThemePreference(ThemePreference preference) async {
     final Database db = await _getDb();
     await db.insert('settings', {
@@ -838,11 +898,28 @@ class LocalDbService {
   }
 
   /// Whether to use the device's Material You wallpaper-derived palette
-  /// (default) instead of the app's fixed brand seed color.
+  /// instead of the app's fixed brand seed color (the default).
   Future<bool> getUseDynamicColor() async {
     final Database db = await _getDb();
     final String? value = await _getSetting(db, 'use_dynamic_color');
-    return value == null ? true : value == '1';
+    return value == '1';
+  }
+
+  /// Whether Bible chapters should open on jw.org (web) instead of in the JW
+  /// Library app. Persisted as '1' (web) / '0' (JW Library app, the default).
+  Future<void> saveOpenBibleOnWeb(bool value) async {
+    final Database db = await _getDb();
+    await db.insert('settings', <String, Object>{
+      'key': 'open_bible_on_web',
+      'value': value ? '1' : '0',
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  /// Defaults to false: the JW Library app is the preferred Bible target.
+  Future<bool> getOpenBibleOnWeb() async {
+    final Database db = await _getDb();
+    final String? value = await _getSetting(db, 'open_bible_on_web');
+    return value == '1';
   }
 
   /// Persists the chosen UI language code (e.g. 'en', 'fr'), or clears it
@@ -850,7 +927,11 @@ class LocalDbService {
   Future<void> saveAppLocale(String? code) async {
     final Database db = await _getDb();
     if (code == null) {
-      await db.delete('settings', where: 'key = ?', whereArgs: const ['app_locale']);
+      await db.delete(
+        'settings',
+        where: 'key = ?',
+        whereArgs: const ['app_locale'],
+      );
       return;
     }
     await db.insert('settings', <String, Object>{
@@ -953,13 +1034,17 @@ class LocalDbService {
     }
 
     final int missed = gap - 1; // full days with no activity before today
-    int freezes = int.tryParse(await _getSetting(db, 'streak_freezes') ?? '0') ??
-        0;
+    int freezes =
+        int.tryParse(await _getSetting(db, 'streak_freezes') ?? '0') ?? 0;
     if (freezes >= missed) {
       freezes -= missed;
       await _setSetting(db, 'streak_freezes', freezes.toString());
       // Chain is now protected through yesterday.
-      await _setSetting(db, 'streak_chain', _dayKey(today.subtract(const Duration(days: 1))));
+      await _setSetting(
+        db,
+        'streak_chain',
+        _dayKey(today.subtract(const Duration(days: 1))),
+      );
       // Log each covered day so the calendar can show it as "frozen".
       for (int i = 1; i <= missed; i++) {
         final String key = _dayKey(chainDate.add(Duration(days: i)));
@@ -990,8 +1075,7 @@ class LocalDbService {
     }
 
     int count = int.tryParse(await _getSetting(db, 'streak_count') ?? '0') ?? 0;
-    if (chain != null &&
-        today.difference(DateTime.parse(chain)).inDays == 1) {
+    if (chain != null && today.difference(DateTime.parse(chain)).inDays == 1) {
       count += 1;
     } else {
       count = 1;
@@ -1041,6 +1125,97 @@ class LocalDbService {
   Future<void> acknowledgeStreakLoss() async {
     final Database db = await _getDb();
     await _setSetting(db, 'streak_lost', '0');
+  }
+
+  Future<int> getNotesCount() async {
+    final Database db = await _getDb();
+    final List<Map<String, Object?>> result = await db.rawQuery(
+      'SELECT COUNT(*) AS total FROM notes',
+    );
+    return (result.first['total'] as int?) ?? 0;
+  }
+
+  /// Ids of achievements permanently unlocked so far (see [syncAchievements]).
+  Future<Set<String>> getUnlockedAchievementIds() async {
+    final Database db = await _getDb();
+    final List<Map<String, Object?>> rows = await db.query(
+      'achievements',
+      columns: const <String>['id'],
+    );
+    return rows.map((Map<String, Object?> r) => r['id'] as String).toSet();
+  }
+
+  /// Records that the user found the given secret (see [kEasterEggIds]).
+  /// Idempotent — retriggering an already-found egg is a no-op.
+  Future<void> markEasterEggFound(String id) async {
+    final Database db = await _getDb();
+    await db.insert('easter_eggs', <String, Object>{
+      'id': id,
+      'foundAt': DateTime.now().toIso8601String(),
+    }, conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
+
+  Future<Set<String>> getFoundEasterEggIds() async {
+    final Database db = await _getDb();
+    final List<Map<String, Object?>> rows = await db.query(
+      'easter_eggs',
+      columns: const <String>['id'],
+    );
+    return rows.map((Map<String, Object?> r) => r['id'] as String).toSet();
+  }
+
+  /// Gathers the stats [AchievementDef]s are evaluated against.
+  Future<AchievementStats> getAchievementStats() async {
+    final Set<String> readKeys = await getReadChapterKeys();
+    final Set<String> booksRead = readKeys
+        .map((String key) => key.split('|').first)
+        .toSet();
+    final BibleBook? genesis = bibleBookById('Genesis');
+    final bool genesisComplete =
+        genesis != null &&
+        List<int>.generate(genesis.chapters, (int i) => i + 1).every(
+          (int chapter) =>
+              readKeys.contains(bibleChapterKey('Genesis', chapter)),
+        );
+
+    final Map<String, QuizResult> quizResults = await getAllQuizResults();
+    final Map<String, int> starsByBook = await getEarnedStarsByBook();
+    final StreakState streakState = await getStreakState();
+    final List<Reminder> reminders = await getReminders();
+    final Set<String> foundEggs = await getFoundEasterEggIds();
+
+    return AchievementStats(
+      chaptersRead: readKeys.length,
+      distinctBooksRead: booksRead.length,
+      genesisComplete: genesisComplete,
+      wholeBibleComplete: readKeys.length >= kTotalBibleChapters,
+      completedQuizzes: quizResults.length,
+      hasPerfectQuiz: quizResults.values.any((QuizResult r) => r.isPerfect),
+      totalStars: starsByBook.values.fold<int>(0, (int a, int b) => a + b),
+      currentStreak: streakState.count,
+      notesCount: await getNotesCount(),
+      hasReminder: reminders.isNotEmpty,
+      easterEggsFound: foundEggs.intersection(kEasterEggIds.toSet()).length,
+    );
+  }
+
+  /// Persists any newly-met achievement so it stays unlocked even if the
+  /// underlying stat later regresses (e.g. the streak resets). Returns the
+  /// full set of unlocked ids, including ones just unlocked.
+  Future<Set<String>> syncAchievements() async {
+    final Database db = await _getDb();
+    final AchievementStats stats = await getAchievementStats();
+    final Set<String> unlocked = await getUnlockedAchievementIds();
+    for (final AchievementDef def in kAchievementDefs) {
+      if (!unlocked.contains(def.id) && def.isMet(stats)) {
+        await db.insert('achievements', <String, Object>{
+          'id': def.id,
+          'unlockedAt': DateTime.now().toIso8601String(),
+        }, conflictAlgorithm: ConflictAlgorithm.ignore);
+        unlocked.add(def.id);
+      }
+    }
+    return unlocked;
   }
 
   DateTime _dateOnly(DateTime dateTime) {

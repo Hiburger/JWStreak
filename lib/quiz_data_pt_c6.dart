@@ -71,6 +71,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Um princípio de respeito cívico é ensinado (Romanos 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['reis', 'obedecer', 'governo'],
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
@@ -95,6 +97,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Uma imagem sagrada ressalta a responsabilidade coletiva (1 Coríntios 3:16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['corpo', 'casa', 'pedra'],
     ),
   ],
   '1 Corinthians#1': <QuizQuestion>[
@@ -138,6 +142,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       options: <String>['O amor', 'A riqueza', 'A fama', 'O poder'],
       correctIndex: 0,
       explanation: 'Sem amor, tudo o mais é vão (1 Coríntios 13).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['amor'],
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
@@ -170,6 +176,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       options: <String>['Reconciliem-se com Deus', 'Busquem a riqueza acima de tudo', 'Evitem toda pregação', 'Fujam de toda responsabilidade'],
       correctIndex: 0,
       explanation: 'A mensagem central da reconciliação (2 Coríntios 5:20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['perdão', 'embaixadores', 'fé'],
     ),
     QuizQuestion(
       text: 'Que princípio Paulo ensina sobre a doação generosa em 2 Coríntios 9?',
@@ -277,6 +285,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Um apelo à ajuda mútua fraternal (Gálatas 6:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fardo', 'ajudar', 'irmãos'],
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
@@ -338,6 +348,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Um modelo de amor sacrificial é proposto (Efésios 5:25).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['marido', 'esposa', 'amor'],
     ),
     QuizQuestion(
       text: 'O que representa "a armadura completa de Deus" em Efésios 6?',
@@ -458,6 +470,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Uma advertência contra as falsas doutrinas (Colossenses 2:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lei', 'anjos', 'sabedoria'],
     ),
     QuizQuestion(
       text: 'O que os cristãos devem "revestir" segundo Colossenses 3?',
@@ -493,6 +507,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Paulo termina com saudações afetuosas (Colossenses 4).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['advertências', 'oração', 'cartas'],
     ),
   ],
   '1 Thessalonians#0': <QuizQuestion>[
@@ -536,6 +552,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       options: <String>['Uma grande alegria', 'Decepção', 'Indiferença', 'Raiva'],
       correctIndex: 0,
       explanation: 'A constância deles o consola profundamente (1 Tessalonicenses 3:8, 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tristeza', 'paz', 'esperança'],
     ),
   ],
   '1 Thessalonians#2': <QuizQuestion>[
@@ -555,6 +573,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC6 = <String, List<QuizQu
       options: <String>['A um ladrão de noite', 'A uma festa previsível', 'A um dia comum', 'A um simples aviso sem efeito'],
       correctIndex: 0,
       explanation: 'Uma imagem de chegada súbita e inesperada (1 Tessalonicenses 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['dia', 'luz', 'dormir'],
     ),
   ],
 };

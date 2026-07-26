@@ -35,6 +35,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um sinal precursor é anunciado (2 Tessalonicenses 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['apostasia', 'Senhor', 'dia'],
     ),
     QuizQuestion(
       text: 'Que encorajamento Paulo dá apesar desse anúncio perturbador?',
@@ -199,6 +201,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma imagem de disciplina e sacrifício (2 Timóteo 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['atleta', 'lavrador', 'servo'],
     ),
     QuizQuestion(
       text: 'O que 2 Timóteo 3 diz sobre a utilidade das Escrituras?',
@@ -267,6 +271,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma advertência clara é dada (Tito 1:10, 11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['anciãos', 'irmãos', 'judeus'],
     ),
   ],
   'Titus#1': <QuizQuestion>[
@@ -356,6 +362,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma revelação superior por meio de Cristo (Hebreus 1:1, 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['profetas', 'anjos', 'lei'],
     ),
     QuizQuestion(
       text: 'O que Hebreus 4 descreve a respeito da palavra de Deus?',
@@ -391,6 +399,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um sacerdócio superior e permanente (Hebreus 7).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'O que a nova aliança torna possível, segundo Hebreus 8?',
@@ -430,6 +439,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma citação-chave retomada de Habacuque (Hebreus 10:38).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ímpio', 'obras', 'lei'],
     ),
     QuizQuestion(
       text: 'Que exemplos o célebre capítulo 11 destaca?',
@@ -463,6 +474,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Deus dá a sabedoria generosamente (Tiago 1:5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['sabedoria'],
     ),
     QuizQuestion(
       text: 'O que Tiago 2 diz sobre a relação entre fé e obras?',
@@ -502,6 +515,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um contraste claro é estabelecido (Tiago 3:17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['terrena', 'inveja', 'contenda'],
     ),
   ],
   'James#2': <QuizQuestion>[
@@ -516,6 +531,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma lição de humildade prática (Tiago 4:13-15).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['riqueza', 'planos', 'vida'],
     ),
     QuizQuestion(
       text: 'O que uma pessoa doente deve fazer, segundo Tiago 5?',
@@ -596,6 +613,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC7 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma qualidade essencial a cultivar (1 Pedro 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['amor', 'irmãos', 'perdão'],
     ),
     QuizQuestion(
       text: 'Que atitude 1 Pedro 5 pede aos anciãos para com o rebanho?',

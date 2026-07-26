@@ -38,6 +38,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Una potente affermazione conclude questo capitolo (Romani 8:38, 39).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['morte', 'angeli', 'tribolazione'],
     ),
     QuizQuestion(
       text: 'Cosa dice Romani 10 riguardo alla salvezza?',
@@ -73,6 +75,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Viene insegnato un principio di rispetto civico (Romani 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ribelli', 'indifferenti', 'giudici'],
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
@@ -97,6 +101,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Un’immagine sacra sottolinea la responsabilità collettiva (1 Corinti 3:16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['corpo', 'famiglia', 'campo'],
     ),
   ],
   '1 Corinthians#1': <QuizQuestion>[
@@ -142,6 +148,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       options: <String>['L’amore', 'La ricchezza', 'La fama', 'Il potere'],
       correctIndex: 0,
       explanation: 'Senza amore, tutto il resto è vano (1 Corinti 13).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['amore'],
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
@@ -174,6 +182,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       options: <String>['Riconciliatevi con Dio', 'Cercate prima di tutto la ricchezza', 'Evitate ogni predicazione', 'Fuggite ogni responsabilità'],
       correctIndex: 0,
       explanation: 'Il messaggio centrale della riconciliazione (2 Corinti 5:20).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pentitevi', 'pregate', 'amatevi'],
     ),
     QuizQuestion(
       text: 'Quale principio insegna Paolo sul dono generoso in 2 Corinti 9?',
@@ -284,6 +294,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Un invito al sostegno reciproco tra fratelli (Galati 6:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['ignorarli', 'aumentarli', 'dividerli'],
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
@@ -332,6 +344,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Viene richiesto un profondo cambiamento interiore (Efesini 4:24).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['vecchia', 'carne', 'opere'],
     ),
   ],
   'Ephesians#2': <QuizQuestion>[
@@ -500,6 +514,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Paolo conclude con affettuosi saluti (Colossesi 4).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['rimproveri', 'avvertimenti', 'istruzioni'],
     ),
   ],
   '1 Thessalonians#0': <QuizQuestion>[
@@ -513,6 +529,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'La loro fede è diventata un modello riconosciuto (1 Tessalonicesi 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['debole', 'tiepida', 'vacillante'],
     ),
     QuizQuestion(
       text: 'Come descrive Paolo il suo ministero tra loro?',
@@ -543,6 +561,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       options: <String>['Una grande gioia', 'Delusione', 'Indifferenza', 'Rabbia'],
       correctIndex: 0,
       explanation: 'La loro costanza lo conforta profondamente (1 Tessalonicesi 3:8, 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tristezza', 'timore', 'sorpresa'],
     ),
   ],
   '1 Thessalonians#2': <QuizQuestion>[
@@ -562,6 +582,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC6 = <String, List<QuizQu
       options: <String>['A un ladro di notte', 'A una festa prevedibile', 'A un giorno ordinario', 'A un semplice avvertimento senza effetto'],
       correctIndex: 0,
       explanation: 'Un’immagine di arrivo improvviso e inatteso (1 Tessalonicesi 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sposo', 'pastore', 'giorno'],
     ),
   ],
 };

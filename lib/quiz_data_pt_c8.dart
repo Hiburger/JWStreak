@@ -41,6 +41,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um alerta detalhado é dado (2 Pedro 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['anjos', 'anciãos', 'zombadores'],
     ),
     QuizQuestion(
       text: 'Que exemplos históricos 2 Pedro 2 cita como advertência?',
@@ -129,6 +131,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um teste essencial da fé genuína (1 João 3:11).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fé', 'justiça', 'mundo'],
     ),
   ],
   '1 John#2': <QuizQuestion>[
@@ -138,6 +142,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Uma declaração central da carta (1 João 4:8).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['luz', 'vida', 'verdade'],
     ),
     QuizQuestion(
       text: 'O que 1 João 5 diz sobre o que vence o mundo?',
@@ -169,6 +175,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Um lembrete constante do amor fraternal (2 João 1:5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['verdade', 'anticristo', 'ensino'],
     ),
   ],
   '3 John#0': <QuizQuestion>[
@@ -224,6 +232,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Exemplos de julgamento passado (Judas 1:6, 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Caim', 'Balaão', 'Corá'],
     ),
   ],
   'Revelation#0': <QuizQuestion>[
@@ -248,6 +258,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       explanation:
           'Sete mensagens personalizadas são dadas (Apocalipse '
           '2 e 3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
       text: 'Quem é o único achado digno de abrir o rolo selado '
@@ -326,6 +338,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC8 = <String, List<QuizQu
       explanation:
           'Um período de restrição lhe é imposto '
           '(Apocalipse 20:2, 3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['abismo', 'solto', 'Babilônia'],
     ),
     QuizQuestion(
       text: 'O que Apocalipse 21 e 22 prometem sobre a dor e '

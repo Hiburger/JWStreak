@@ -42,6 +42,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Saul', 'Davide', 'Gionatan', 'Abner'],
       correctIndex: 0,
       explanation: 'Samuele unge Saul in modo discreto (1 Samuele 9-10).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Perché Samuele annunciò il rigetto di Saul come re?',
@@ -72,6 +73,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Una fionda e una pietra', 'Una spada', 'Una lancia', 'A mani nude'],
       correctIndex: 0,
       explanation: 'Davide rifiuta l’armatura e usa la sua fionda (1 Samuele 17).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['spada', 'lancia', 'scudo'],
     ),
     QuizQuestion(
       text: 'Quale sentimento spinse Saul a voler uccidere Davide dopo la sua vittoria?',
@@ -84,6 +87,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Gionatan', 'Abner', 'Solo Samuele', 'Un sacerdote sconosciuto'],
       correctIndex: 0,
       explanation: 'Gionatan avverte Davide grazie a un segnale concordato (1 Samuele 20).',
+      type: QuizAnswerType.freeText,
     ),
   ],
   '1 Samuel#3': <QuizQuestion>[
@@ -103,6 +107,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Abigail', 'Mical', 'Una serva', 'Il sommo sacerdote'],
       correctIndex: 0,
       explanation: 'Abigail placa Davide con delle provviste (1 Samuele 25).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Dove muoiono Saul e Gionatan nella battaglia finale del libro?',
@@ -133,6 +138,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Gerusalemme', 'Ebron', 'Silo', 'Ghibea'],
       correctIndex: 0,
       explanation: 'Davide prende la fortezza di Sion (2 Samuele 5).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quale promessa fa Geova a Davide tramite il profeta Natan?',
@@ -152,6 +158,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Bat-Sceba', 'Mical', 'Abigail', 'Tamar'],
       correctIndex: 0,
       explanation: 'Davide fa uccidere Uria per nascondere il suo peccato (2 Samuele 11).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Betsabea'],
     ),
     QuizQuestion(
       text: 'In che modo il profeta Natan affrontò Davide riguardo al suo peccato?',
@@ -169,6 +177,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Absalom', 'Amnon', 'Salomone', 'Adonia'],
       correctIndex: 0,
       explanation: 'Inizia la ribellione di Absalom (2 Samuele 15).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Assalonne'],
     ),
   ],
   '2 Samuel#2': <QuizQuestion>[
@@ -204,6 +214,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Il censimento dispiace a Dio e ne segue una pestilenza (2 Samuele 24).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['peste', 'guerra', 'altare'],
     ),
   ],
   '1 Kings#0': <QuizQuestion>[
@@ -212,6 +224,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Adonia', 'Absalom', 'Solo Ioab', 'Natan'],
       correctIndex: 0,
       explanation: 'Adonia si proclama re senza il consenso di Davide (1 Re 1).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Che cosa chiede Salomone a Geova all’inizio del suo regno?',
@@ -229,6 +242,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Chiram, re di Tiro', 'Il faraone d’Egitto', 'La regina di Seba', 'Il re di Moab'],
       correctIndex: 0,
       explanation: 'Chiram fornisce legno di cedro e artigiani (1 Re 5).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Chiram', 'Hiram'],
     ),
   ],
   '1 Kings#1': <QuizQuestion>[
@@ -272,6 +287,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Elia', 'Eliseo', 'Michea', 'Abdia'],
       correctIndex: 0,
       explanation: 'Elia annuncia l’assenza di pioggia e di rugiada (1 Re 17).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Che cosa accadde durante la sfida sul monte Carmelo?',
@@ -307,6 +323,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Eliseo vede Elia portato via da un turbine (2 Re 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['carro', 'fuoco', 'Eliseo'],
     ),
     QuizQuestion(
       text: 'Quale miracolo compì Eliseo per la donna sunamita?',
@@ -418,6 +436,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['La Pasqua', 'Le Capanne', 'La Pentecoste', 'Il Giubileo'],
       correctIndex: 0,
       explanation: 'Viene celebrata una Pasqua memorabile (2 Re 23).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Pasqua'],
     ),
     QuizQuestion(
       text: 'Come termina il libro dei Re?',
@@ -448,6 +468,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Giuda', 'Levi', 'Beniamino', 'Efraim'],
       correctIndex: 0,
       explanation: 'La genealogia di Giuda include la casa di Davide (1 Cronache 2-3).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'Quali tribù si stabilirono a est del Giordano secondo queste genealogie?',
@@ -494,6 +515,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Davide sconfigge più volte i Filistei (1 Cronache 14).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Filistei'],
     ),
   ],
   '1 Chronicles#2': <QuizQuestion>[
@@ -612,6 +635,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Rimane colpita dalla sua saggezza e dalla sua ricchezza (2 Cronache 9).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Salomone', 'oro', 'Tiro'],
     ),
     QuizQuestion(
       text: 'Perché il regno si divise sotto Roboamo?',
@@ -647,6 +672,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'Consulta i medici anziché Dio (2 Cronache 16).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['lebbra', 'peste', 'cecità'],
     ),
     QuizQuestion(
       text: 'Perché Giosafat fu ripreso da un profeta?',
@@ -712,6 +739,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Una Pasqua straordinaria', 'Le Capanne', 'Il Giubileo', 'La Pentecoste'],
       correctIndex: 0,
       explanation: 'Questa Pasqua riunisce Giuda e parte d’Israele (2 Cronache 30).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Pentecoste', 'Capanne', 'digiuno'],
     ),
     QuizQuestion(
       text: 'Che cosa accadde dopo che Manasse si pentì durante la prigionia?',
@@ -742,6 +771,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['Ciro, re di Persia', 'Nabucodonosor', 'Solo Dario', 'Serse'],
       correctIndex: 0,
       explanation: 'Ciro emana un decreto liberatorio (Esdra 1).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Ciro'],
     ),
     QuizQuestion(
       text: 'Che cosa fecero gli esuli appena tornati, ancora prima di completare il tempio?',
@@ -788,12 +819,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'I loro messaggi rilanciano la costruzione (Esdra 5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Esdra', 'Neemia', 'Ciro'],
     ),
     QuizQuestion(
       text: 'Chi arrivò più tardi da Babilonia con un ulteriore gruppo di esuli?',
       options: <String>['Esdra, sacerdote e scriba', 'Neemia', 'Zorobabele', 'Mardocheo'],
       correctIndex: 0,
       explanation: 'Esdra arriva sotto il regno di Artaserse (Esdra 7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['Esdra'],
     ),
   ],
   'Ezra#2': <QuizQuestion>[
@@ -883,6 +918,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC2 = <String, List<QuizQu
       options: <String>['52 giorni', 'Un anno', 'Dieci anni', 'Una settimana'],
       correctIndex: 0,
       explanation: 'Un’impresa nonostante una forte opposizione (Neemia 6).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['cinquantadue giorni', '52'],
     ),
     QuizQuestion(
       text: 'Che cosa accadde quando Esdra lesse la Legge pubblicamente al popolo?',

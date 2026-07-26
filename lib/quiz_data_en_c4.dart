@@ -36,6 +36,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       ],
       correctIndex: 0,
       explanation: 'The book is a funeral elegy (Lamentations 1-2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['joy', 'temple', 'walls'],
     ),
   ],
   'Lamentations#1': <QuizQuestion>[
@@ -87,6 +89,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'The famine of the siege is described with stark realism (Lamentations 4).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['plague', 'sword', 'fire'],
     ),
     QuizQuestion(
       text: 'What does the closing prayer of chapter 5 ask for?',
@@ -125,6 +129,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An impressive vision opens the book (Ezekiel 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['throne', 'wheels', 'temple'],
     ),
     QuizQuestion(
       text: 'What must Ezekiel do with the scroll he is given?',
@@ -132,6 +138,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A symbolic sign of absorbing the message (Ezekiel 3).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['eat the scroll'],
     ),
     QuizQuestion(
       text: 'What secret idolatry does Ezekiel see being practiced inside the temple itself?',
@@ -246,6 +254,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A nautical image illustrates her past glory (Ezekiel 27).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Tyre', 'sea', 'cedar'],
     ),
     QuizQuestion(
       text: 'What is Egypt compared to in the judgment concerning her?',
@@ -296,6 +306,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'One people reunited under one shepherd (Ezekiel 37:19).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['sticks', 'bones', 'temple'],
     ),
   ],
   'Ezekiel#5': <QuizQuestion>[
@@ -310,6 +322,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A symbolic return of the divine presence (Ezekiel 43).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['glory', 'river', 'gate'],
     ),
     QuizQuestion(
       text: 'What does the river flowing from the temple produce, according to Ezekiel 47?',
@@ -355,6 +369,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A final kingdom established by God surpasses all the others (Daniel 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['statue', 'dream', 'lions'],
     ),
     QuizQuestion(
       text: 'What happened when Shadrach, Meshach, and Abednego refused to worship the golden statue?',
@@ -519,6 +535,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An unprecedented disaster is described (Joel 1).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['locusts'],
     ),
     QuizQuestion(
       text: 'What call does Joel make in the face of this disaster?',
@@ -561,6 +579,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A collective judgment is announced there (Joel 3:14).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jerusalem', 'Zion', 'Egypt'],
     ),
     QuizQuestion(
       text: 'What does Joel 3 promise Judah after the judgment of the nations?',
@@ -628,6 +648,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'The image tests the straightness of a wall (Amos 7).',
+      type: QuizAnswerType.freeText,
+      acceptedAnswers: <String>['plumb line'],
     ),
     QuizQuestion(
       text: 'What does Amos 9 promise despite the judgment announced?',
@@ -649,6 +671,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Edom is judged for its violence against its brother Jacob (Obadiah 1).',
+      type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
       text: 'What statement closes the book of Obadiah?',
@@ -695,6 +718,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A prayer of distress and gratitude (Jonah 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fish', 'Nineveh', 'sackcloth'],
     ),
     QuizQuestion(
       text: 'How did Nineveh respond to Jonah\'s message?',
@@ -742,6 +767,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'The two capitals are targeted (Micah 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Babylon', 'Nineveh', 'Bethlehem'],
     ),
     QuizQuestion(
       text: 'What social abuse does Micah 2 denounce?',
@@ -768,6 +795,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A precise messianic prophecy (Micah 5:2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Jerusalem', 'Judah', 'Egypt'],
     ),
     QuizQuestion(
       text: 'What vision of peace does Micah 4 share, similar to Isaiah?',
@@ -806,6 +835,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Renewed confidence closes the book (Micah 7).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['anger', 'judgment', 'sea'],
     ),
   ],
   'Nahum#0': <QuizQuestion>[
@@ -836,6 +867,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A vivid description of battle (Nahum 2).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Samaria', 'Babylon', 'Judah'],
     ),
     QuizQuestion(
       text: 'What tone dominates this description of Nineveh\'s fall?',
@@ -852,6 +885,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A severe judgment for its violence (Nahum 3:1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Nineveh', 'ruined', 'proud'],
     ),
     QuizQuestion(
       text: 'What final outcome is announced for Nineveh?',
@@ -911,6 +946,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A universal promise of hope (Habakkuk 2:14).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['waters', 'sea', 'earth'],
     ),
   ],
   'Habakkuk#2': <QuizQuestion>[
@@ -925,6 +962,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'A confidence that rises above circumstances (Habakkuk 3:17, 18).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['fig', 'flock', 'vine'],
     ),
     QuizQuestion(
       text: 'How does the book of Habakkuk conclude?',
@@ -958,6 +997,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'The judgment begins with God\'s own people (Zephaniah 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['Nineveh', 'Moab', 'Egypt'],
     ),
   ],
   'Zephaniah#1': <QuizQuestion>[
@@ -967,6 +1008,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'An urgent call to repentance (Zephaniah 2:3).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['pride', 'nations', 'wealth'],
     ),
     QuizQuestion(
       text: 'Which nations are also judged in this chapter?',
@@ -1040,6 +1083,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Eight night visions structure these chapters (Zechariah 1-5).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['dreams', 'angel', 'temple'],
     ),
     QuizQuestion(
       text: 'What does the cleansing of Joshua the high priest symbolize in one of these visions?',
@@ -1092,6 +1137,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'This detail is picked up in the Gospel accounts (Zechariah 11:12, 13).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['gold', 'shepherd', 'potter'],
     ),
     QuizQuestion(
       text: 'How does the book of Zechariah conclude concerning the future?',
@@ -1118,6 +1165,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'Contempt for the offerings is denounced (Malachi 1).',
+      type: QuizAnswerType.wordBank,
+      wordBankDistractors: <String>['tithes', 'incense', 'altar'],
     ),
     QuizQuestion(
       text: 'How does Malachi 1 illustrate Jehovah\'s love for his people?',
@@ -1176,6 +1225,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC4 = <String, List<QuizQu
       correctIndex: 0,
       explanation:
           'This prophecy is linked to John the Baptist in the Gospels (Malachi 4:5).',
+      type: QuizAnswerType.freeText,
     ),
   ],
 };

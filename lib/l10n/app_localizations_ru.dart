@@ -261,21 +261,150 @@ class AppLocalizationsRu extends AppLocalizations {
   String get welcomeTagline => 'Твоё ежедневное чтение Библии,\nдень за днём.';
 
   @override
-  String get welcomeFeatureReminder =>
-      'Напоминание каждый день, в удобное для тебя время';
-
-  @override
-  String get welcomeFeatureOpen => 'Твоё чтение открывается одним касанием';
-
-  @override
-  String get welcomeFeaturePrivate =>
-      '100% приватности: всё остаётся на твоём устройстве';
-
-  @override
   String get welcomeButton => 'Добро пожаловать!';
 
   @override
+  String get welcomeLogoGreeting => 'Привет!';
+
+  @override
   String get welcomeFooter => 'Бесплатно, свободно и с открытым исходным кодом';
+
+  @override
+  String get onbContinue => 'Продолжить';
+
+  @override
+  String get onbBack => 'Назад';
+
+  @override
+  String get onbFeaturesTitle => 'Что ты можешь делать';
+
+  @override
+  String get onbFeaturesSubtitle =>
+      'Несколько функций для твоего ежедневного чтения.';
+
+  @override
+  String get onbFeatureReadingTitle => 'Ежедневное чтение с подсказками';
+
+  @override
+  String get onbFeatureReadingDesc =>
+      'По одной главе в день, в твоём темпе. Она открывается в JW Library или на jw.org — выбор в настройках. Отмечай её прочитанной, чтобы двигаться дальше и поддерживать серию.';
+
+  @override
+  String get onbFeatureQuizTitle => 'Викторины и звёзды';
+
+  @override
+  String get onbFeatureQuizDesc =>
+      'Проверяй понимание короткими викторинами, которые открываются по мере чтения. Отвечай, выбирая, набирая или составляя слова, и зарабатывай звёзды.';
+
+  @override
+  String get onbFeatureNotesTitle => 'Личные заметки';
+
+  @override
+  String get onbFeatureNotesDesc =>
+      'Записывай свои размышления во время чтения и возвращайся к ним когда угодно. Их можно даже экспортировать.';
+
+  @override
+  String get onbFeaturePrivacyTitle => '100% конфиденциально';
+
+  @override
+  String get onbFeaturePrivacyDesc =>
+      'Всё остаётся на твоём телефоне. Никакие данные не отправляются, и аккаунт не нужен.';
+
+  @override
+  String get onbReminderTitle => 'Настрой первое напоминание';
+
+  @override
+  String get onbReminderIntro =>
+      'Небольшое ежедневное напоминание — лучший способ поддерживать серию. Выбери спокойный момент дня — позже ты всегда сможешь добавить ещё или изменить их в настройках.';
+
+  @override
+  String get onbReminderTip =>
+      'Совет: привяжи напоминание к уже сложившейся привычке — например, после утреннего кофе или перед сном.';
+
+  @override
+  String get onbReminderFinish => 'Готово';
+
+  @override
+  String get onbReminderSkip => 'Может, позже';
+
+  @override
+  String get tourNext => 'Далее';
+
+  @override
+  String get tourDone => 'Понятно';
+
+  @override
+  String get tourSkip => 'Пропустить';
+
+  @override
+  String get tourStreakTitle => 'Твоя серия';
+
+  @override
+  String get tourStreakBody =>
+      'Растёт каждый день, когда ты читаешь главу или проходишь квиз. Спички покрывают пропущенные дни.';
+
+  @override
+  String get tourReadingTitle => 'Глава на сегодня';
+
+  @override
+  String get tourReadingBody =>
+      'Открой её, затем отметь прочитанной, чтобы перейти к следующей.';
+
+  @override
+  String get tourBrowseTitle => 'Вся Библия';
+
+  @override
+  String get tourBrowseBody =>
+      'Переходи к любой книге или главе и смотри, что уже прочитано.';
+
+  @override
+  String get tourProgressTitle => 'Твой прогресс';
+
+  @override
+  String get tourProgressBody =>
+      'Чтения, звёзды и недавняя активность — всё в одном месте.';
+
+  @override
+  String get tourQuickActionsTitle => 'Быстрые действия';
+
+  @override
+  String get tourQuickActionsBody =>
+      'Текст на каждый день и твои заметки — всегда в одно касание.';
+
+  @override
+  String get tourAchievementsTitle => 'Достижения';
+
+  @override
+  String get tourAchievementsBody =>
+      'Следи за этапами, которые открываешь по мере чтения.';
+
+  @override
+  String get tourNotesTitle => 'Твои заметки';
+
+  @override
+  String get tourNotesBody =>
+      'Всё, что ты написал(а), готово к перечитыванию или экспорту.';
+
+  @override
+  String get tourSettingsTitle => 'Настройки';
+
+  @override
+  String get tourSettingsBody =>
+      'Тема, язык, напоминания — и этот тур, если захочешь посмотреть его снова.';
+
+  @override
+  String get settingsReplayTour => 'Пройти обучение заново';
+
+  @override
+  String get settingsReplayTourSubtitle =>
+      'Снова показать знакомство с главным экраном';
+
+  @override
+  String get onbReminderPermissionMissing =>
+      'Уведомления отключены, поэтому это напоминание не сработает. Включи их, чтобы получать оповещения.';
+
+  @override
+  String get onbReminderPermissionEnable => 'Включить';
 
   @override
   String get streakInfoTitle => 'Поддерживай свою серию';
@@ -292,18 +421,18 @@ class AppLocalizationsRu extends AppLocalizations {
       'Отметь главу как прочитанную ИЛИ пройди квиз: и то, и другое засчитывается для поддержания серии.';
 
   @override
-  String get streakInfoRow2Title => '4 заморозки в месяц';
+  String get streakInfoRow2Title => '4 спички в месяц';
 
   @override
   String get streakInfoRow2Text =>
-      'Пропущенный день автоматически расходует заморозку, чтобы защитить твою серию. Они пополняются каждый месяц.';
+      'Пропущенный день автоматически расходует спичку, чтобы серия не погасла. Они пополняются каждый месяц.';
 
   @override
-  String get streakInfoRow3Title => 'Верни заморозку';
+  String get streakInfoRow3Title => 'Верни спичку';
 
   @override
   String get streakInfoRow3Text =>
-      'Закончились заморозки? Пройди контрольный квиз (смесь твоих чтений), чтобы вернуть одну.';
+      'Закончились спички? Пройди контрольный квиз (смесь твоих чтений), чтобы вернуть одну.';
 
   @override
   String get streakInfoRow4Title => 'Мы тебя предупредим';
@@ -311,9 +440,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get streakInfoRow4Text =>
       'Если твоя серия под угрозой, появится предупреждение, а вечернее напоминание подтолкнёт тебя.';
-
-  @override
-  String get streakInfoButton => 'Поехали!';
 
   @override
   String get settingsTitle => 'Настройки';
@@ -330,6 +456,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsDynamicColorOff => 'Использует фирменный цвет приложения';
+
+  @override
+  String get settingsBibleTargetTitle => 'Открывать Библию через';
+
+  @override
+  String get settingsBibleTargetJwLibrary => 'Приложение JW Library';
+
+  @override
+  String get settingsBibleTargetWeb => 'jw.org (браузер)';
+
+  @override
+  String get settingsBibleTargetJwLibraryMissing =>
+      'Для открытия Библии таким способом требуется приложение JW Library. Установить его?';
+
+  @override
+  String get settingsBibleTargetInstall => 'Установить';
 
   @override
   String get settingsLanguage => 'Язык';
@@ -380,23 +522,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLicense => 'Лицензия';
 
   @override
+  String get settingsLicenseLegalese =>
+      'JW Streak — свободное программное обеспечение под лицензией GNU General Public License v3. Приведённые ниже лицензии относятся к компонентам с открытым исходным кодом, из которых оно состоит.';
+
+  @override
   String get settingsQuestion => 'Есть вопрос?';
 
   @override
   String get settingsFooter =>
       'Сделано с братской любовью, в Швейцарии.\nЭто приложение бесплатное, свободное и с открытым исходным кодом.';
-
-  @override
-  String get settingsNotifGranted => 'Разрешение на уведомления предоставлено.';
-
-  @override
-  String get settingsNotifDenied => 'В разрешении на уведомления отказано.';
-
-  @override
-  String get settingsAlarmsGranted => 'Точные будильники разрешены.';
-
-  @override
-  String get settingsAlarmsDenied => 'Точные будильники не разрешены.';
 
   @override
   String settingsError(String error) {
@@ -414,11 +548,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reminderAlreadyExists => 'Это напоминание уже существует.';
-
-  @override
-  String reminderAdded(String label) {
-    return 'Напоминание добавлено на $label.';
-  }
 
   @override
   String get reminderTitle => 'Напоминания о чтении';
@@ -460,6 +589,23 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quizSeeScore => 'Посмотреть результат';
+
+  @override
+  String get quizTypeAnswerHint => 'Напиши свой ответ';
+
+  @override
+  String get quizCheckAnswer => 'Проверить';
+
+  @override
+  String get quizWordBankInstruction => 'Нажимай на слова в правильном порядке';
+
+  @override
+  String get quizClearAnswer => 'Очистить';
+
+  @override
+  String quizCorrectAnswerWas(String answer) {
+    return 'Ответ: $answer';
+  }
 
   @override
   String get quizPerfect => 'Идеально!';
@@ -520,11 +666,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Твоя серия обнулилась — не переживай, начнём заново вместе 💪';
 
   @override
-  String homeChapterMarkedRead(String reference) {
-    return '$reference отмечено как прочитанное.';
-  }
-
-  @override
   String get homeExactAlarmDialogTitle => 'Напоминание в точное время';
 
   @override
@@ -545,7 +686,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeReviewQuizTitle => 'Контрольный квиз';
 
   @override
-  String get homeReviewQuizEarned => 'Молодец! Ты вернул(а) заморозку ❄️';
+  String get homeReviewQuizEarned => 'Молодец! Ты вернул(а) спичку 🔥';
 
   @override
   String get homeReviewQuizFailed =>
@@ -643,17 +784,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeToReadToday => 'К прочтению сегодня';
 
   @override
-  String get homeFreezesNone => 'заморозок не осталось';
+  String get homeFreezesNone => 'спичек не осталось';
 
   @override
   String homeFreezesRemaining(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Осталось $count заморозки',
-      many: 'Осталось $count заморозок',
-      few: 'Осталось $count заморозки',
-      one: 'Осталось $count заморозка',
+      other: 'Осталось $count спички',
+      many: 'Осталось $count спичек',
+      few: 'Осталось $count спички',
+      one: 'Осталась $count спичка',
     );
     return '$_temp0';
   }
@@ -667,7 +808,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get homeEarnFreezeButton => 'Вернуть заморозку (контрольный квиз)';
+  String get homeEarnFreezeButton => 'Вернуть спичку (контрольный квиз)';
 
   @override
   String get homeNewQuizUnlocked => 'Новый квиз разблокирован';
@@ -865,12 +1006,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get noteEditorTitleErrorHint => 'Добавь заголовок, чтобы сохранить.';
 
   @override
-  String get noteEditorTitleRequired => 'Заголовок обязателен.';
-
-  @override
-  String get noteEditorSavedSnackbar => 'Заметка сохранена локально.';
-
-  @override
   String noteEditorErrorSnackbar(String error) {
     return 'Ошибка: $error';
   }
@@ -919,11 +1054,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notesLibraryDelete => 'Удалить';
 
   @override
-  String notesLibraryDeletedSnackbar(String title) {
-    return '«$title» удалена.';
-  }
-
-  @override
   String notesLibraryDeleteConfirmSingular(String title) {
     return '«$title» будет удалена навсегда.';
   }
@@ -931,14 +1061,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String notesLibraryDeleteConfirmPlural(int count) {
     return 'Эти $count заметок будут навсегда удалены с твоего устройства.';
-  }
-
-  @override
-  String get notesLibraryDeletedSingular => 'Заметка удалена.';
-
-  @override
-  String notesLibraryDeletedPlural(int count) {
-    return '$count заметок удалено.';
   }
 
   @override
@@ -1043,4 +1165,204 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noteReaderEmpty => 'Эта заметка пуста.';
+
+  @override
+  String get homeAchievementsTooltip => 'Достижения';
+
+  @override
+  String get achievementsTitle => 'Достижения';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked из $total открыто';
+  }
+
+  @override
+  String achievementsProgressFraction(int current, int goal) {
+    return '$current / $goal';
+  }
+
+  @override
+  String get achievementsSectionReading => 'Чтение';
+
+  @override
+  String get achievementsSectionQuizzes => 'Викторины';
+
+  @override
+  String get achievementsSectionStreak => 'Серия';
+
+  @override
+  String get achievementsSectionOther => 'Другое';
+
+  @override
+  String get achievementFirstChapterTitle => 'Первые шаги';
+
+  @override
+  String get achievementFirstChapterDesc => 'Прочитай свою первую главу.';
+
+  @override
+  String get achievementChapters10Title => 'Хорошее начало';
+
+  @override
+  String get achievementChapters10Desc => 'Прочитай 10 глав.';
+
+  @override
+  String get achievementChapters50Title => 'Постоянный читатель';
+
+  @override
+  String get achievementChapters50Desc => 'Прочитай 50 глав.';
+
+  @override
+  String get achievementChapters150Title => 'Преданный читатель';
+
+  @override
+  String get achievementChapters150Desc => 'Прочитай 150 глав.';
+
+  @override
+  String get achievementGenesisTitle => 'В начале';
+
+  @override
+  String get achievementGenesisDesc => 'Дочитай книгу Бытие до конца.';
+
+  @override
+  String get achievementWholeBibleTitle => 'От начала до конца';
+
+  @override
+  String get achievementWholeBibleDesc => 'Прочитай все главы Библии.';
+
+  @override
+  String get achievementExplorerTitle => 'Исследователь';
+
+  @override
+  String get achievementExplorerDesc => 'Прочитай главы из 5 разных книг.';
+
+  @override
+  String get achievementFirstQuizTitle => 'Первая викторина';
+
+  @override
+  String get achievementFirstQuizDesc => 'Пройди свою первую викторину.';
+
+  @override
+  String get achievementQuizzes5Title => 'Любитель викторин';
+
+  @override
+  String get achievementQuizzes5Desc => 'Пройди 5 викторин.';
+
+  @override
+  String get achievementQuizzes25Title => 'Мастер викторин';
+
+  @override
+  String get achievementQuizzes25Desc => 'Пройди 25 викторин.';
+
+  @override
+  String get achievementPerfectQuizTitle => 'Перфекционист';
+
+  @override
+  String get achievementPerfectQuizDesc =>
+      'Набери максимальный балл в викторине.';
+
+  @override
+  String get achievementStars20Title => 'Коллекционер звёзд';
+
+  @override
+  String get achievementStars20Desc => 'Заработай 20 звёзд.';
+
+  @override
+  String get achievementStreak7Title => 'Крепкая неделя';
+
+  @override
+  String get achievementStreak7Desc =>
+      'Поддерживай серию чтения 7 дней подряд.';
+
+  @override
+  String get achievementStreak30Title => 'Крепкий месяц';
+
+  @override
+  String get achievementStreak30Desc =>
+      'Поддерживай серию чтения 30 дней подряд.';
+
+  @override
+  String get achievementFirstNoteTitle => 'Автор заметок';
+
+  @override
+  String get achievementFirstNoteDesc => 'Напиши свою первую заметку.';
+
+  @override
+  String get achievementReminderTitle => 'Держись курса';
+
+  @override
+  String get achievementReminderDesc => 'Настрой ежедневное напоминание.';
+
+  @override
+  String get notifReminderTitle => 'JW Streak · Чтение Библии';
+
+  @override
+  String get notifReminderBody => 'Пора читать. Нажми, чтобы продолжить 📖';
+
+  @override
+  String get notifStreakRiskTitle => 'Твоя серия под угрозой 🔥';
+
+  @override
+  String get notifStreakRiskBody =>
+      'Ты ещё не был(а) активен(на) сегодня — прочитай главу или пройди викторину, чтобы сохранить её.';
+
+  @override
+  String get easterEggHeartBody => 'Я тоже тебя люблю :)';
+
+  @override
+  String get easterEggVersionTitle => 'Секрет раскрыт! 🕵️';
+
+  @override
+  String get easterEggVersionBody =>
+      'Тсс... тебе не следовало это находить. На самом деле здесь нет скрытого режима, просто маленькое подмигивание 😉';
+
+  @override
+  String get easterEggVersionButton => 'Я сохраню тайну 🤫';
+
+  @override
+  String get achievementQuizzes40Title => 'Легенда викторин';
+
+  @override
+  String get achievementQuizzes40Desc => 'Пройди 40 викторин.';
+
+  @override
+  String get achievementStars40Title => 'Коллекционер галактик';
+
+  @override
+  String get achievementStars40Desc => 'Заработай 40 звёзд.';
+
+  @override
+  String get achievementStreak180Title => 'Крепкие полгода';
+
+  @override
+  String get achievementStreak180Desc =>
+      'Поддерживай серию чтения 180 дней подряд.';
+
+  @override
+  String get achievementNotes10Title => 'Плодовитый автор';
+
+  @override
+  String get achievementNotes10Desc => 'Напиши 10 заметок.';
+
+  @override
+  String get achievementEasterEggsTitle => 'Охотник за секретами';
+
+  @override
+  String get achievementEasterEggsDesc => 'Найди все секреты в приложении.';
+
+  @override
+  String get freezeEarnedTitle => 'Новая спичка получена!';
+
+  @override
+  String get freezeEarnedBody =>
+      'Ты прошёл(а) 3 новые викторины. Спичка не даст твоей серии погаснуть, если ты пропустишь день.';
+
+  @override
+  String get freezeEarnedButton => 'Здорово!';
+
+  @override
+  String get commonOk => 'Понятно';
+
+  @override
+  String get commonCancel => 'Отмена';
 }

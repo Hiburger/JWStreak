@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz_data.dart';
 import '../services/local_db_service.dart';
+import '../widgets/freeze_earned_dialog.dart';
 import 'quiz_screen.dart';
 
 class _StarRow extends StatelessWidget {
@@ -72,17 +73,28 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
 
   Future<void> _startQuiz() async {
     final Checkpoint cp = widget.checkpoint;
+    bool freezeEarned = false;
     await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
         builder: (_) => QuizScreen(
           title: localizedCheckpointTitle(context, cp),
           questions: cp.questions,
-          onCompleted: (int score, int total) => widget.dbService
-              .saveQuizResult(quizId: cp.id, score: score, total: total),
+          onCompleted: (int score, int total) async {
+            freezeEarned = await widget.dbService.saveQuizResult(
+              quizId: cp.id,
+              score: score,
+              total: total,
+            );
+          },
         ),
       ),
     );
     await _load();
+    // Shown after returning from the quiz's own score screen, rather than
+    // stacked on top of it, so the user sees their result first.
+    if (freezeEarned && mounted) {
+      await showFreezeEarnedDialog(context);
+    }
   }
 
   Future<void> _answerReflection() async {

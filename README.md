@@ -11,7 +11,7 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 ## Features
 
 - **Guided Reading**: One chapter at a time, opened in JW Library or on jw.org (choice in settings), with progress tracking across the entire Bible.
-- **Interactive Quizzes**: Multiple choice, typed answer, or word reconstruction with typo-tolerant validation (only fr/en/es/it/pt/de; ru/zh remain multiple choice soory).
+- **Interactive Quizzes**: Multiple choice, typed answer, or word reconstruction with typo-tolerant validation (only fr/en/es/de/it/pt/pl; ru/zh remain multiple choice soory).
 - **Streak & Matches**: The streak grows each active day; "matches" (earned by completing quizzes) automatically cover missed days
 - **Achievements**: Milestones unlocked through reading, quizzes, and streaks
 - **Personal Notes**: Linked to a passage, viewable and exportable from a dedicated library
@@ -106,7 +106,7 @@ Absolument ! L'application fonctionne **en parfaite harmonie avec le contenu et 
 ## Fonctionnalités
 
 - **Lecture guidée** : Un chapitre à la fois, ouvert dans JW Library ou sur jw.org (choix dans les paramètres), avec suivi de la progression à travers toute la Bible.
-- **Quiz interactifs** : Choix multiples, réponse saisie ou reconstruction de mots avec validation tolérante aux fautes de frappe (uniquement fr/en/es/it/pt/de ; ru/zh restent en choix multiples désolé).
+- **Quiz interactifs** : Choix multiples, réponse saisie ou reconstruction de mots avec validation tolérante aux fautes de frappe (uniquement fr/en/es/it/de/pt/pl ; ru/zh restent en choix multiples désolé).
 - **Série & Matchs** : La série augmente chaque jour actif ; les « matchs » (gagnés en complétant les quiz) couvrent automatiquement les jours manqués.
 - **Succès** : Jalons débloqués grâce à la lecture, aux quiz et aux séries.
 - **Notes personnelles** : Liées à un passage, consultables et exportables depuis une bibliothèque dédiée.

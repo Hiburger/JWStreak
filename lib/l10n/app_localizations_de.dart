@@ -404,6 +404,42 @@ class AppLocalizationsDe extends AppLocalizations {
       'Die Einführung zum Startbildschirm erneut ansehen';
 
   @override
+  String get settingsPrivacy => 'Privatsphäre';
+
+  @override
+  String get settingsAppLockTitle => 'App sperren';
+
+  @override
+  String get settingsAppLockOn =>
+      'Fragt nach Fingerabdruck, Gesicht oder PIN, bevor deine Notizen geöffnet werden — außer du kehrst innerhalb von 10 Minuten zurück.';
+
+  @override
+  String get settingsAppLockOff => 'Deine Notizen öffnen sich ohne Nachfrage.';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Richte zuerst eine Displaysperre auf deinem Handy ein.';
+
+  @override
+  String get appLockPromptReason => 'JW Streak entsperren';
+
+  @override
+  String get appLockEnableReason => 'Bestätige, um die Sperre zu aktivieren';
+
+  @override
+  String get appLockDisableReason => 'Bestätige, um die Sperre zu deaktivieren';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak ist gesperrt';
+
+  @override
+  String get appLockScreenBody =>
+      'Deine Notizen und dein Fortschritt bleiben privat, bis du entsperrst.';
+
+  @override
+  String get appLockUnlockButton => 'Entsperren';
+
+  @override
   String get onbReminderPermissionMissing =>
       'Benachrichtigungen sind aus, deshalb wird diese Erinnerung nicht klingeln. Schalte sie ein, um benachrichtigt zu werden.';
 
@@ -582,6 +618,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get reminderEditTime => 'Uhrzeit ändern';
+
+  @override
+  String get reminderDailyTextTitle => 'Tagestext';
+
+  @override
+  String get reminderDailyTextSubtitle =>
+      'Als kleines Extra: eine sanfte Erinnerung an den Tagestext auf jw.org.';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · Tagestext';
+
+  @override
+  String get notifDailyTextBody => 'Der Tagestext wartet auf jw.org.';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -950,7 +999,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return 'Lies $title zu Ende, um diese Etappe freizuschalten.';
+    return 'Lies $title, um dieses Quiz freizuschalten!';
   }
 
   @override
@@ -1316,14 +1365,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get easterEggHeartBody => 'Ich dich auch :)';
 
   @override
-  String get easterEggVersionTitle => 'Geheimnis gefunden! 🕵️';
+  String get easterEggVersionTitle => 'Sieben Mal, tatsächlich';
 
   @override
   String get easterEggVersionBody =>
-      'Pssst … das hättest du eigentlich nicht finden sollen. Hier gibt es keinen echten versteckten Modus, nur ein kleines Augenzwinkern 😉';
+      'Hier gibt es keinen versteckten Modus, tut mir leid. Nur ein Danke, dass du so weit gesucht hast — diese App entstand Abend für Abend, und es freut mich, dass jemand nachschaut.';
 
   @override
-  String get easterEggVersionButton => 'Ich sag nichts 🤫';
+  String get easterEggVersionButton => 'Bleibt unter uns';
 
   @override
   String get achievementQuizzes40Title => 'Quiz-Legende';

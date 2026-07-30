@@ -22,6 +22,18 @@ class ReminderSettings {
   final int chapter;
 }
 
+class DailyTextReminderSettings {
+  const DailyTextReminderSettings({
+    required this.enabled,
+    required this.hour,
+    required this.minute,
+  });
+
+  final bool enabled;
+  final int hour;
+  final int minute;
+}
+
 class NoteEntry {
   const NoteEntry({
     required this.id,
@@ -920,6 +932,68 @@ class LocalDbService {
     final Database db = await _getDb();
     final String? value = await _getSetting(db, 'open_bible_on_web');
     return value == '1';
+  }
+
+  /// The optional "daily text" reminder: a single time, separate from the
+  /// book-reading reminders list, since it points at jw.org's daily text
+  /// rather than a chapter. Off by default.
+  Future<void> saveDailyTextReminder({
+    required bool enabled,
+    required int hour,
+    required int minute,
+  }) async {
+    final Database db = await _getDb();
+    final Batch batch = db.batch();
+    batch.insert('settings', <String, Object>{
+      'key': 'daily_text_reminder_enabled',
+      'value': enabled ? '1' : '0',
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    batch.insert('settings', <String, Object>{
+      'key': 'daily_text_reminder_hour',
+      'value': hour.toString(),
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    batch.insert('settings', <String, Object>{
+      'key': 'daily_text_reminder_minute',
+      'value': minute.toString(),
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    await batch.commit(noResult: true);
+  }
+
+  /// Returns null hour/minute when never configured, defaulting the picker
+  /// to a sensible morning time (8:00) rather than midnight.
+  Future<DailyTextReminderSettings> getDailyTextReminder() async {
+    final Database db = await _getDb();
+    final bool enabled =
+        await _getSetting(db, 'daily_text_reminder_enabled') == '1';
+    final int hour =
+        int.tryParse(await _getSetting(db, 'daily_text_reminder_hour') ?? '') ??
+        8;
+    final int minute =
+        int.tryParse(
+          await _getSetting(db, 'daily_text_reminder_minute') ?? '',
+        ) ??
+        0;
+    return DailyTextReminderSettings(
+      enabled: enabled,
+      hour: hour,
+      minute: minute,
+    );
+  }
+
+  /// Whether the app asks for the device's screen lock (fingerprint, face or
+  /// PIN) before showing its content. Off by default — turning it on is a
+  /// deliberate choice made in settings.
+  Future<void> saveAppLockEnabled(bool value) async {
+    final Database db = await _getDb();
+    await db.insert('settings', <String, Object>{
+      'key': 'app_lock_enabled',
+      'value': value ? '1' : '0',
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<bool> getAppLockEnabled() async {
+    final Database db = await _getDb();
+    return await _getSetting(db, 'app_lock_enabled') == '1';
   }
 
   /// Persists the chosen UI language code (e.g. 'en', 'fr'), or clears it

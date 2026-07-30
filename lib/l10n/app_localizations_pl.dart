@@ -401,6 +401,42 @@ class AppLocalizationsPl extends AppLocalizations {
       'Zobacz ponownie wprowadzenie do ekranu głównego';
 
   @override
+  String get settingsPrivacy => 'Prywatność';
+
+  @override
+  String get settingsAppLockTitle => 'Zablokuj aplikację';
+
+  @override
+  String get settingsAppLockOn =>
+      'Prosi o odcisk palca, twarz lub PIN przed otwarciem notatek — chyba że wrócisz w ciągu 10 minut.';
+
+  @override
+  String get settingsAppLockOff => 'Notatki otwierają się bez pytania.';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Najpierw skonfiguruj blokadę ekranu w telefonie.';
+
+  @override
+  String get appLockPromptReason => 'Odblokuj JW Streak';
+
+  @override
+  String get appLockEnableReason => 'Potwierdź, aby włączyć blokadę';
+
+  @override
+  String get appLockDisableReason => 'Potwierdź, aby wyłączyć blokadę';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak jest zablokowany';
+
+  @override
+  String get appLockScreenBody =>
+      'Twoje notatki i postępy pozostają prywatne do momentu odblokowania.';
+
+  @override
+  String get appLockUnlockButton => 'Odblokuj';
+
+  @override
   String get onbReminderPermissionMissing =>
       'Powiadomienia są wyłączone, więc to przypomnienie się nie odezwie. Włącz je, aby otrzymywać powiadomienia.';
 
@@ -578,6 +614,19 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get reminderEditTime => 'Edytuj godzinę';
+
+  @override
+  String get reminderDailyTextTitle => 'Myśl dnia';
+
+  @override
+  String get reminderDailyTextSubtitle =>
+      'Jako dodatek: delikatne przypomnienie o myśli dnia na jw.org.';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · Myśl dnia';
+
+  @override
+  String get notifDailyTextBody => 'Dzisiejsza myśl dnia czeka na jw.org.';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -944,7 +993,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return 'Ukończ $title, aby odblokować ten etap.';
+    return 'Przeczytaj $title, aby odblokować ten quiz!';
   }
 
   @override
@@ -1308,14 +1357,14 @@ class AppLocalizationsPl extends AppLocalizations {
   String get easterEggHeartBody => 'Ja ciebie też kocham :)';
 
   @override
-  String get easterEggVersionTitle => 'Znaleziono sekret! 🕵️';
+  String get easterEggVersionTitle => 'Siedem razy, serio';
 
   @override
   String get easterEggVersionBody =>
-      'Cii... nie powinieneś był tego znaleźć. Nie ma tu żadnego prawdziwego ukrytego trybu, to tylko małe mrugnięcie okiem 😉';
+      'Nie ma tu żadnego ukrytego trybu, przykro mi. Po prostu dziękuję, że szukałeś tak daleko — ta aplikacja powstawała wieczór po wieczorze i miło wiedzieć, że ktoś zagląda.';
 
   @override
-  String get easterEggVersionButton => 'Będę milczeć 🤫';
+  String get easterEggVersionButton => 'Zostaje między nami';
 
   @override
   String get achievementQuizzes40Title => 'Legenda quizów';

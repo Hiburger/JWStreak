@@ -402,6 +402,43 @@ class AppLocalizationsEn extends AppLocalizations {
       'See the home screen walkthrough again';
 
   @override
+  String get settingsPrivacy => 'Privacy';
+
+  @override
+  String get settingsAppLockTitle => 'Lock the app';
+
+  @override
+  String get settingsAppLockOn =>
+      'Asks for your fingerprint, face or PIN before opening your notes — unless you come back within 10 minutes.';
+
+  @override
+  String get settingsAppLockOff =>
+      'Your notes open without asking for anything.';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Set up a screen lock on your phone first.';
+
+  @override
+  String get appLockPromptReason => 'Unlock JW Streak';
+
+  @override
+  String get appLockEnableReason => 'Confirm to turn the lock on';
+
+  @override
+  String get appLockDisableReason => 'Confirm to turn the lock off';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak is locked';
+
+  @override
+  String get appLockScreenBody =>
+      'Your notes and your progress stay private until you unlock.';
+
+  @override
+  String get appLockUnlockButton => 'Unlock';
+
+  @override
   String get onbReminderPermissionMissing =>
       'Notifications are off, so this reminder won\'t ring. Turn them on to get notified.';
 
@@ -577,6 +614,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reminderEditTime => 'Edit time';
+
+  @override
+  String get reminderDailyTextTitle => 'Daily text';
+
+  @override
+  String get reminderDailyTextSubtitle =>
+      'As a bonus, a gentle reminder for jw.org\'s daily text.';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · Daily text';
+
+  @override
+  String get notifDailyTextBody => 'Today\'s text is waiting on jw.org.';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -941,7 +991,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return 'Finish $title to unlock this step.';
+    return 'Read $title to unlock this quiz!';
   }
 
   @override
@@ -1301,14 +1351,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get easterEggHeartBody => 'I love you too :)';
 
   @override
-  String get easterEggVersionTitle => 'Secret found! 🕵️';
+  String get easterEggVersionTitle => 'Seven taps, really';
 
   @override
   String get easterEggVersionBody =>
-      'Shh... you weren\'t supposed to find that. There\'s no real hidden mode here, just a little wink 😉';
+      'No hidden mode here, sorry. Just a thank you for looking this far — this app was written one evening at a time, and it\'s nice to know someone\'s poking around.';
 
   @override
-  String get easterEggVersionButton => 'I\'ll keep quiet 🤫';
+  String get easterEggVersionButton => 'Stays between us';
 
   @override
   String get achievementQuizzes40Title => 'Quiz Legend';

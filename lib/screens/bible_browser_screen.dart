@@ -140,7 +140,7 @@ class _TotalStarsBanner extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          const Icon(Icons.star_rounded, color: Colors.amber, size: 40),
+          const _GlowingStar(size: 68, boxSize: 84),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -161,16 +161,32 @@ class _TotalStarsBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(999),
-                  child: LinearProgressIndicator(
-                    value: progress,
-                    minHeight: 6,
-                    backgroundColor: cs.onTertiaryContainer.withValues(
-                      alpha: 0.15,
+                // The outline keeps the empty part of the track readable: the
+                // banner's gradient sits close enough to the muted track color
+                // that without it, the bar's full width is hard to make out
+                // and the fill looks like it floats.
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(
+                      color: cs.onTertiaryContainer.withValues(alpha: 0.45),
+                      width: 1.5,
                     ),
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.amber,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: LinearProgressIndicator(
+                        value: progress,
+                        minHeight: 7,
+                        backgroundColor: cs.onTertiaryContainer.withValues(
+                          alpha: 0.15,
+                        ),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          Colors.amber,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -178,6 +194,84 @@ class _TotalStarsBanner extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// The banner's star. Sits on a purple-to-blue gradient that a flat amber
+/// glyph disappears into, so it gets a warm halo behind it and a slow
+/// twinkle to draw the eye. [boxSize] is the fixed footprint reserved in the
+/// banner's Row — independent of [size] so the icon can grow without the
+/// banner itself growing around it.
+class _GlowingStar extends StatefulWidget {
+  const _GlowingStar({required this.size, required this.boxSize});
+
+  final double size;
+  final double boxSize;
+
+  @override
+  State<_GlowingStar> createState() => _GlowingStarState();
+}
+
+class _GlowingStarState extends State<_GlowingStar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3600),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.boxSize,
+      height: widget.boxSize,
+      // The banner sits above a long scrolling list; without this the
+      // twinkle would repaint every book row behind it on each frame.
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: _controller,
+          child: Icon(Icons.star_rounded, size: widget.size, color: Colors.amber),
+          builder: (BuildContext context, Widget? child) {
+            // Integer multiples of the base loop, so every wave is back at
+            // its starting value when the controller wraps to 0 and the
+            // restart isn't visible as a jump.
+            final double t = _controller.value * 2 * math.pi;
+            final double glow = 0.5 + 0.5 * math.sin(t);
+            final double scale = 1.0 + 0.06 * math.sin(t * 2);
+            return Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  width: widget.size * (0.95 + 0.25 * glow),
+                  height: widget.size * (0.95 + 0.25 * glow),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: <Color>[
+                        Colors.amber.withValues(alpha: 0.30 + 0.25 * glow),
+                        Colors.amber.withValues(alpha: 0),
+                      ],
+                    ),
+                  ),
+                ),
+                Transform.scale(scale: scale, child: child),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -260,12 +354,24 @@ class _BookTile extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(999),
-                      child: LinearProgressIndicator(
-                        value: progress,
-                        minHeight: 5,
-                        backgroundColor: cs.surfaceContainerHighest,
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(
+                          color: cs.outlineVariant,
+                          width: 1,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(1.5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(999),
+                          child: LinearProgressIndicator(
+                            value: progress,
+                            minHeight: 8,
+                            backgroundColor: cs.surfaceContainerHighest,
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -287,7 +393,7 @@ class _BookTile extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.star_rounded,
-                      size: 18,
+                      size: 24,
                       color: stars > 0 ? Colors.amber : cs.outlineVariant,
                     ),
                     Text(

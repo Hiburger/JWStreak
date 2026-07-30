@@ -11,6 +11,7 @@ class TapEasterEgg extends StatefulWidget {
     required this.onTriggered,
     this.tapsToTrigger = 8,
     this.tapWindow = const Duration(milliseconds: 1500),
+    this.onTapCount,
     super.key,
   });
 
@@ -18,6 +19,12 @@ class TapEasterEgg extends StatefulWidget {
   final VoidCallback onTriggered;
   final int tapsToTrigger;
   final Duration tapWindow;
+
+  /// Fires on every tap with the running count within the current window
+  /// (reset to 0 the moment a tap lands outside [tapWindow], and again right
+  /// after [onTriggered] fires) — lets a caller drive a per-tap visual
+  /// without duplicating this widget's own counting/window logic.
+  final ValueChanged<int>? onTapCount;
 
   @override
   State<TapEasterEgg> createState() => _TapEasterEggState();
@@ -63,11 +70,13 @@ class _TapEasterEggState extends State<TapEasterEgg>
     }
     _lastTap = now;
     _tapCount++;
+    widget.onTapCount?.call(_tapCount);
 
     if (_tapCount >= widget.tapsToTrigger) {
       _tapCount = 0;
       _lastTap = null;
       widget.onTriggered();
+      widget.onTapCount?.call(0);
     }
   }
 

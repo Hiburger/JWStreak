@@ -68,8 +68,13 @@ class NotificationService {
     final String timezoneName = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timezoneName));
 
+    // The status bar only renders this icon's alpha channel (a plain white
+    // silhouette), never its color — @mipmap/ic_launcher is the full-color
+    // square app icon, which is why using it here used to show up as a
+    // solid dark blob. ic_stat_notify (tool/icons/generate_notification_icon.py)
+    // is the isolated glyph, already prepared for that.
     const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('ic_stat_notify');
     await _plugin.initialize(
       const InitializationSettings(android: androidSettings),
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
@@ -166,6 +171,41 @@ class NotificationService {
         ),
       ),
     );
+  }
+
+  static const int _dailyTextNotificationId = 600;
+
+  /// Schedules the single optional daily-text reminder, replacing whatever
+  /// was scheduled for it before (there is only ever one — no id to pass in,
+  /// unlike the book-reading reminders list).
+  Future<void> scheduleDailyTextReminder({
+    required TimeOfDay time,
+    required String title,
+    required String body,
+  }) async {
+    final tz.TZDateTime firstTrigger = _nextInstanceFor(time);
+    final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
+    await _plugin.zonedSchedule(
+      _dailyTextNotificationId,
+      title,
+      body,
+      firstTrigger,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          _channelId,
+          'JW Streak Reminders',
+          channelDescription: 'Daily reminders for JW Streak reading flow.',
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+      ),
+      androidScheduleMode: scheduleMode,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  Future<void> cancelDailyTextReminder() async {
+    await _plugin.cancel(_dailyTextNotificationId);
   }
 
   static const int _streakRiskNotificationId = 500;

@@ -400,6 +400,42 @@ class AppLocalizationsEs extends AppLocalizations {
       'Ver de nuevo la presentación de la pantalla de inicio';
 
   @override
+  String get settingsPrivacy => 'Privacidad';
+
+  @override
+  String get settingsAppLockTitle => 'Bloquear la aplicación';
+
+  @override
+  String get settingsAppLockOn =>
+      'Pide tu huella, tu cara o tu PIN antes de abrir tus notas — salvo que vuelvas antes de 10 minutos.';
+
+  @override
+  String get settingsAppLockOff => 'Tus notas se abren sin pedir nada.';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Configura primero un bloqueo de pantalla en tu teléfono.';
+
+  @override
+  String get appLockPromptReason => 'Desbloquea JW Streak';
+
+  @override
+  String get appLockEnableReason => 'Confirma para activar el bloqueo';
+
+  @override
+  String get appLockDisableReason => 'Confirma para desactivar el bloqueo';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak está bloqueado';
+
+  @override
+  String get appLockScreenBody =>
+      'Tus notas y tu progreso siguen siendo privados hasta que desbloquees.';
+
+  @override
+  String get appLockUnlockButton => 'Desbloquear';
+
+  @override
   String get onbReminderPermissionMissing =>
       'Las notificaciones están desactivadas, así que este recordatorio no sonará. Actívalas para recibir avisos.';
 
@@ -578,6 +614,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get reminderEditTime => 'Editar hora';
+
+  @override
+  String get reminderDailyTextTitle => 'Texto del día';
+
+  @override
+  String get reminderDailyTextSubtitle =>
+      'Como extra, un recordatorio suave para el texto del día en jw.org.';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · Texto del día';
+
+  @override
+  String get notifDailyTextBody => 'El texto de hoy te espera en jw.org.';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -944,7 +993,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return 'Termina $title para desbloquear esta etapa.';
+    return '¡Lee $title para desbloquear este cuestionario!';
   }
 
   @override
@@ -1309,14 +1358,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get easterEggHeartBody => 'Yo también te quiero :)';
 
   @override
-  String get easterEggVersionTitle => '¡Secreto descubierto! 🕵️';
+  String get easterEggVersionTitle => 'Siete veces, vaya';
 
   @override
   String get easterEggVersionBody =>
-      'Chist... no debías encontrar esto. En realidad no hay un modo oculto aquí, solo un pequeño guiño 😉';
+      'Aquí no hay ningún modo oculto, lo siento. Solo un gracias por buscar tan lejos — esta app se escribió noche tras noche, y da gusto saber que alguien anda husmeando.';
 
   @override
-  String get easterEggVersionButton => 'Guardaré el secreto 🤫';
+  String get easterEggVersionButton => 'Queda entre nosotros';
 
   @override
   String get achievementQuizzes40Title => 'Leyenda de los cuestionarios';

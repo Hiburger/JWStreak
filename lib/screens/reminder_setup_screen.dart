@@ -26,6 +26,12 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen> {
   List<Reminder> _reminders = const <Reminder>[];
   bool _isLoading = true;
 
+  // The daily-text reminder: a single optional extra, kept separate from the
+  // book-reading reminders list above since it points at jw.org rather than
+  // a chapter.
+  bool _dailyTextEnabled = false;
+  TimeOfDay _dailyTextTime = const TimeOfDay(hour: 8, minute: 0);
+
   @override
   void initState() {
     super.initState();
@@ -34,12 +40,54 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen> {
 
   Future<void> _load() async {
     final List<Reminder> reminders = await widget.dbService.getReminders();
+    final DailyTextReminderSettings dailyText = await widget.dbService
+        .getDailyTextReminder();
     if (mounted) {
       setState(() {
         _reminders = reminders;
+        _dailyTextEnabled = dailyText.enabled;
+        _dailyTextTime = TimeOfDay(
+          hour: dailyText.hour,
+          minute: dailyText.minute,
+        );
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> _saveDailyTextReminder() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    await widget.dbService.saveDailyTextReminder(
+      enabled: _dailyTextEnabled,
+      hour: _dailyTextTime.hour,
+      minute: _dailyTextTime.minute,
+    );
+    if (!_dailyTextEnabled) {
+      await _notifications.cancelDailyTextReminder();
+      return;
+    }
+    await _notifications.scheduleDailyTextReminder(
+      time: _dailyTextTime,
+      title: l10n.notifDailyTextTitle,
+      body: l10n.notifDailyTextBody,
+    );
+  }
+
+  Future<void> _toggleDailyText(bool value) async {
+    setState(() => _dailyTextEnabled = value);
+    await _saveDailyTextReminder();
+  }
+
+  Future<void> _pickDailyTextTime() async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _dailyTextTime,
+    );
+    if (picked == null) {
+      return;
+    }
+    setState(() => _dailyTextTime = picked);
+    await _saveDailyTextReminder();
   }
 
   Future<void> _pickTime() async {
@@ -142,8 +190,72 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen> {
                       ),
                     ),
                   ),
+                const SizedBox(height: 20),
+                _DailyTextReminderTile(
+                  enabled: _dailyTextEnabled,
+                  time: _dailyTextTime,
+                  onChanged: _toggleDailyText,
+                  onPickTime: _pickDailyTextTime,
+                ),
               ],
             ),
+    );
+  }
+}
+
+/// A single, deliberately quiet row — this is a nice-to-have next to the
+/// book-reading reminders above, not a second feature competing for
+/// attention. One switch, and a time picker that only appears once enabled.
+class _DailyTextReminderTile extends StatelessWidget {
+  const _DailyTextReminderTile({
+    required this.enabled,
+    required this.time,
+    required this.onChanged,
+    required this.onPickTime,
+  });
+
+  final bool enabled;
+  final TimeOfDay time;
+  final ValueChanged<bool> onChanged;
+  final VoidCallback onPickTime;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+    return Card(
+      elevation: 0,
+      color: cs.surfaceContainerLow,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: cs.outlineVariant.withValues(alpha: 0.6)),
+      ),
+      child: SwitchListTile(
+        dense: true,
+        // Tapping the time isn't part of the switch gesture, so it's a
+        // small separate control shown only once the reminder is on.
+        secondary: enabled
+            ? TextButton(
+                onPressed: onPickTime,
+                child: Text(time.format(context)),
+              )
+            : Icon(Icons.auto_stories_outlined, color: cs.onSurfaceVariant),
+        title: Text(
+          l10n.reminderDailyTextTitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        subtitle: Text(
+          l10n.reminderDailyTextSubtitle,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: cs.onSurfaceVariant,
+          ),
+        ),
+        value: enabled,
+        onChanged: onChanged,
+      ),
     );
   }
 }

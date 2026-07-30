@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
+import '../services/app_lock_service.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
@@ -74,6 +75,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _openInJwLibrary = true;
   final DeepLinkService _deepLinkService = DeepLinkService();
 
+  // App lock: null while we're still asking the platform whether the device
+  // can authenticate at all. A device with no screen lock set up never gets
+  // the switch, since turning it on there would lock the user out for good.
+  final AppLockService _lockService = AppLockService();
+  bool? _appLockAvailable;
+  bool _appLockEnabled = false;
+
   // Secret: tap the version row 7 times (the classic Android "developer
   // options" gag) for a little wink — there's no real hidden mode here.
   static const int _versionTapsToTrigger = 7;
@@ -103,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await showDialog<void>(
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
-        icon: const Text('🕵️', style: TextStyle(fontSize: 40)),
+        icon: const Icon(Icons.auto_awesome_rounded, size: 32),
         title: Text(l10n.easterEggVersionTitle),
         content: Text(l10n.easterEggVersionBody),
         actions: <Widget>[
@@ -146,11 +154,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final bool exactAlarmsAllowed = await widget.notificationService
           .canScheduleExactAlarms();
       final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
+      final bool lockAvailable = await _lockService.isAvailable();
+      final bool lockEnabled = await _lockService.isEnabled();
       if (!mounted) {
         return;
       }
       setState(() {
-        _version = '${packageInfo.version} (${packageInfo.buildNumber})';
+        _appLockAvailable = lockAvailable;
+        _appLockEnabled = lockEnabled;
+        // Version name only: the build number after the "+" is an Android
+        // bookkeeping detail, not something a reader gets anything out of.
+        _version = packageInfo.version;
         _notificationsEnabled = notificationsEnabled;
         _exactAlarmsAllowed = exactAlarmsAllowed;
         _openInJwLibrary = !openOnWeb;
@@ -216,6 +230,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await LocalDbService().saveOpenBibleOnWeb(!wantJwLibrary);
     } catch (error) {
       if (mounted) {
+        _showError(error);
+      }
+    }
+  }
+
+  /// Turning the lock on or off both require passing the lock first: enabling
+  /// proves the device can actually authenticate before the user is shut
+  /// behind it, and disabling stops whoever is holding an already-unlocked
+  /// session from simply switching the protection off.
+  Future<void> _changeAppLock(bool wantEnabled) async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final bool ok = await _lockService.authenticate(
+      reason: wantEnabled ? l10n.appLockEnableReason : l10n.appLockDisableReason,
+    );
+    if (!ok || !mounted) {
+      return;
+    }
+    setState(() {
+      _appLockEnabled = wantEnabled;
+    });
+    try {
+      await _lockService.setEnabled(wantEnabled);
+    } catch (error) {
+      if (mounted) {
+        setState(() => _appLockEnabled = !wantEnabled);
         _showError(error);
       }
     }
@@ -444,6 +483,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           const SizedBox(height: 16),
+          Text(
+            l10n.settingsPrivacy,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          Card.filled(
+            child: SwitchListTile(
+              secondary: Icon(
+                _appLockEnabled ? Icons.lock_rounded : Icons.lock_open_rounded,
+              ),
+              title: Text(l10n.settingsAppLockTitle),
+              subtitle: Text(
+                _appLockAvailable == false
+                    ? l10n.settingsAppLockUnavailable
+                    : _appLockEnabled
+                    ? l10n.settingsAppLockOn
+                    : l10n.settingsAppLockOff,
+              ),
+              value: _appLockEnabled,
+              // Disabled (null) both while we're still checking and on a
+              // device with no screen lock configured.
+              onChanged: _appLockAvailable == true ? _changeAppLock : null,
+            ),
+          ),
+          const SizedBox(height: 16),
           Card.filled(
             child: ListTile(
               leading: const Icon(Icons.explore_outlined),
@@ -525,6 +589,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.code_outlined),
                   title: Text(l10n.settingsSourceCode),
                   subtitle: Text(kGithubRepoUrl),
+                  trailing: const Icon(Icons.open_in_new_rounded, size: 20),
                   onTap: () => _openExternal(Uri.parse(kGithubRepoUrl)),
                 ),
                 ListTile(
@@ -568,13 +633,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-class _HeartEasterEgg extends StatelessWidget {
+class _HeartEasterEgg extends StatefulWidget {
   const _HeartEasterEgg();
+
+  @override
+  State<_HeartEasterEgg> createState() => _HeartEasterEggState();
+}
+
+class _HeartEasterEggState extends State<_HeartEasterEgg> {
+  // Cycles through on every tap, wrapping back to the theme's own primary
+  // color at 0 — so the heart starts and ends looking like a normal icon,
+  // with the color play only showing up while someone's actually tapping.
+  static const List<Color> _colors = <Color>[
+    Colors.pinkAccent,
+    Colors.deepOrange,
+    Colors.amber,
+    Colors.lightGreen,
+    Colors.teal,
+    Colors.lightBlue,
+    Colors.deepPurpleAccent,
+  ];
+
+  int _tapCount = 0;
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final Color color = _tapCount == 0
+        ? Theme.of(context).colorScheme.primary
+        : _colors[(_tapCount - 1) % _colors.length];
     return TapEasterEgg(
+      onTapCount: (int count) => setState(() => _tapCount = count),
       onTriggered: () {
         LocalDbService().markEasterEggFound('heart');
         NotificationService().showInstantMessage(
@@ -582,10 +671,14 @@ class _HeartEasterEgg extends StatelessWidget {
           body: l10n.easterEggHeartBody,
         );
       },
-      child: Icon(
-        Icons.favorite,
-        size: 64,
-        color: Theme.of(context).colorScheme.primary,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 150),
+        child: Icon(
+          Icons.favorite,
+          key: ValueKey<Color>(color),
+          size: 64,
+          color: color,
+        ),
       ),
     );
   }

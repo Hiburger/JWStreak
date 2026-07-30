@@ -951,34 +951,60 @@ class _StreakFireEasterEggState extends State<_StreakFireEasterEgg> {
         LocalDbService().markEasterEggFound('flame');
         setState(() => _pranked = true);
       },
-      child: _StreakFireBadge(streak: displayedStreak),
+      child: _StreakBadge(streak: displayedStreak),
     );
   }
 }
 
-class _StreakFireBadge extends StatefulWidget {
-  const _StreakFireBadge({required this.streak});
+/// The big number at the top right of the home hero.
+///
+/// A burning streak gets a flickering flame; a streak of zero gets a
+/// snowflake instead — a dead flame reads as "broken", a frozen one reads as
+/// "waiting to be lit again", which is the truer message when someone has
+/// just lost their run. Also covers the negative numbers the flame easter egg
+/// can produce.
+class _StreakBadge extends StatefulWidget {
+  const _StreakBadge({required this.streak});
 
   final int streak;
 
   @override
-  State<_StreakFireBadge> createState() => _StreakFireBadgeState();
+  State<_StreakBadge> createState() => _StreakBadgeState();
 }
 
-class _StreakFireBadgeState extends State<_StreakFireBadge>
+class _StreakBadgeState extends State<_StreakBadge>
     with SingleTickerProviderStateMixin {
+  // Frost turns much more slowly than fire flickers.
+  static const Duration _fireLoop = Duration(milliseconds: 4200);
+  static const Duration _frostLoop = Duration(milliseconds: 9000);
+
   late final AnimationController _controller;
+
+  bool get _frozen => widget.streak <= 0;
 
   @override
   void initState() {
     super.initState();
     // A single, continuously-looping (non-reversing) controller. Driving
     // several sine waves of different frequencies off one linear value gives
-    // an organic, non-mechanical flicker instead of a ping-pong tween.
+    // an organic, non-mechanical motion instead of a ping-pong tween.
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 4200),
+      duration: _frozen ? _frostLoop : _fireLoop,
     )..repeat();
+  }
+
+  @override
+  void didUpdateWidget(_StreakBadge oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Crossing zero (first read of the day, or the easter egg firing) swaps
+    // which animation is playing, so the loop length has to follow.
+    final Duration wanted = _frozen ? _frostLoop : _fireLoop;
+    if (_controller.duration != wanted) {
+      _controller
+        ..duration = wanted
+        ..repeat();
+    }
   }
 
   @override
@@ -1004,79 +1030,47 @@ class _StreakFireBadgeState extends State<_StreakFireBadge>
             child: RepaintBoundary(
               child: AnimatedBuilder(
                 animation: _controller,
-                // The flame's shader + icon never actually change — only the
+                // The shader + icon never actually change — only the
                 // Transform wrapping them does — so it's passed as `child`
                 // instead of being rebuilt on every one of the ~60 ticks/sec.
                 child: ShaderMask(
                   shaderCallback: (Rect rect) {
-                    return const LinearGradient(
+                    return LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
-                      colors: <Color>[
-                        Colors.deepOrange,
-                        Colors.orange,
-                        Colors.amber,
-                      ],
+                      colors: _frozen
+                          ? const <Color>[
+                              Color(0xFF2196F3), // blue
+                              Color(0xFF4FC3F7), // light blue
+                              Color(0xFFB3E5FC), // near-white ice
+                            ]
+                          : const <Color>[
+                              Colors.deepOrange,
+                              Colors.orange,
+                              Colors.amber,
+                            ],
                     ).createShader(rect);
                   },
-                  child: const Icon(
-                    Icons.local_fire_department_rounded,
-                    size: 92,
+                  child: Icon(
+                    _frozen
+                        ? Icons.ac_unit_rounded
+                        : Icons.local_fire_department_rounded,
+                    size: _frozen ? 78 : 92,
                     color: Colors.white,
                   ),
                 ),
                 builder: (BuildContext context, Widget? child) {
                   final double t = _controller.value * 2 * math.pi;
-                  // Frequencies must be integer multiples of the base loop so
-                  // every sine wave lands back exactly where it started when
-                  // the controller wraps from 1.0 to 0.0 — otherwise the loop
-                  // restart shows a visible jump.
-                  final double glow = 0.5 + 0.5 * math.sin(t * 2);
-                  final double scale =
-                      1.0 +
-                      0.05 * math.sin(t * 3) +
-                      0.02 * math.sin(t * 5 + 0.6);
-                  final double skew = 0.05 * math.sin(t * 2 + 1.0);
-                  final double bob = 1.5 * math.sin(t * 3 + 0.5);
-
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      // Soft glow behind the flame.
-                      Container(
-                        width: 80 + 18 * glow,
-                        height: 80 + 18 * glow,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: RadialGradient(
-                            colors: <Color>[
-                              Colors.deepOrange.withValues(alpha: 0.35 * glow),
-                              Colors.deepOrange.withValues(alpha: 0),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Single flame, warm gradient from base to tip.
-                      Transform.translate(
-                        offset: Offset(0, bob),
-                        child: Transform(
-                          alignment: Alignment.bottomCenter,
-                          transform: Matrix4.identity()
-                            ..setEntry(3, 2, 0.001)
-                            ..rotateZ(skew)
-                            ..scaleByDouble(scale, scale, 1, 1),
-                          child: child,
-                        ),
-                      ),
-                    ],
-                  );
+                  return _frozen
+                      ? _buildFrost(t, child!)
+                      : _buildFlame(t, child!);
                 },
               ),
             ),
           ),
           const SizedBox(height: 4),
           Transform.translate(
-            // Pull the number ~3mm closer to the flame above it.
+            // Pull the number ~3mm closer to the icon above it.
             offset: const Offset(0, -19),
             child: Text(
               widget.streak.toString(),
@@ -1089,6 +1083,79 @@ class _StreakFireBadgeState extends State<_StreakFireBadge>
           ),
         ],
       ),
+    );
+  }
+
+  /// Fire: fast, irregular, always leaning. Frequencies must be integer
+  /// multiples of the base loop so every sine wave lands back exactly where
+  /// it started when the controller wraps from 1.0 to 0.0 — otherwise the
+  /// loop restart shows a visible jump.
+  Widget _buildFlame(double t, Widget icon) {
+    final double glow = 0.5 + 0.5 * math.sin(t * 2);
+    final double scale =
+        1.0 + 0.05 * math.sin(t * 3) + 0.02 * math.sin(t * 5 + 0.6);
+    final double skew = 0.05 * math.sin(t * 2 + 1.0);
+    final double bob = 1.5 * math.sin(t * 3 + 0.5);
+
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          width: 80 + 18 * glow,
+          height: 80 + 18 * glow,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              colors: <Color>[
+                Colors.deepOrange.withValues(alpha: 0.35 * glow),
+                Colors.deepOrange.withValues(alpha: 0),
+              ],
+            ),
+          ),
+        ),
+        Transform.translate(
+          offset: Offset(0, bob),
+          child: Transform(
+            alignment: Alignment.bottomCenter,
+            transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.001)
+              ..rotateZ(skew)
+              ..scaleByDouble(scale, scale, 1, 1),
+            child: icon,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Frost: one slow, complete turn per loop (seamless by construction) with
+  /// a shallow breath. Deliberately calmer than the flame — nothing here
+  /// should look like it's struggling to stay alive.
+  Widget _buildFrost(double t, Widget icon) {
+    final double shimmer = 0.5 + 0.5 * math.sin(t * 2);
+    final double scale = 1.0 + 0.03 * math.sin(t * 2);
+
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          width: 74 + 14 * shimmer,
+          height: 74 + 14 * shimmer,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              colors: <Color>[
+                const Color(0xFF4FC3F7).withValues(alpha: 0.30 * shimmer),
+                const Color(0xFF4FC3F7).withValues(alpha: 0),
+              ],
+            ),
+          ),
+        ),
+        Transform.rotate(
+          angle: t,
+          child: Transform.scale(scale: scale, child: icon),
+        ),
+      ],
     );
   }
 }

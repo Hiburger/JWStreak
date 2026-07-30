@@ -400,6 +400,42 @@ class AppLocalizationsRu extends AppLocalizations {
       'Снова показать знакомство с главным экраном';
 
   @override
+  String get settingsPrivacy => 'Конфиденциальность';
+
+  @override
+  String get settingsAppLockTitle => 'Заблокировать приложение';
+
+  @override
+  String get settingsAppLockOn =>
+      'Запрашивает отпечаток, лицо или PIN-код перед открытием заметок — если вы не вернётесь в течение 10 минут.';
+
+  @override
+  String get settingsAppLockOff => 'Заметки открываются без запроса.';
+
+  @override
+  String get settingsAppLockUnavailable =>
+      'Сначала настройте блокировку экрана на телефоне.';
+
+  @override
+  String get appLockPromptReason => 'Разблокируйте JW Streak';
+
+  @override
+  String get appLockEnableReason => 'Подтвердите, чтобы включить блокировку';
+
+  @override
+  String get appLockDisableReason => 'Подтвердите, чтобы отключить блокировку';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak заблокирован';
+
+  @override
+  String get appLockScreenBody =>
+      'Ваши заметки и прогресс останутся приватными до разблокировки.';
+
+  @override
+  String get appLockUnlockButton => 'Разблокировать';
+
+  @override
   String get onbReminderPermissionMissing =>
       'Уведомления отключены, поэтому это напоминание не сработает. Включи их, чтобы получать оповещения.';
 
@@ -578,6 +614,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get reminderEditTime => 'Изменить время';
+
+  @override
+  String get reminderDailyTextTitle => 'Текст дня';
+
+  @override
+  String get reminderDailyTextSubtitle =>
+      'Дополнительно: мягкое напоминание о тексте дня на jw.org.';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · Текст дня';
+
+  @override
+  String get notifDailyTextBody => 'Текст дня ждёт вас на jw.org.';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -946,7 +995,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return 'Заверши $title, чтобы разблокировать этот этап.';
+    return 'Прочитайте $title, чтобы открыть этот тест!';
   }
 
   @override
@@ -1310,14 +1359,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get easterEggHeartBody => 'Я тоже тебя люблю :)';
 
   @override
-  String get easterEggVersionTitle => 'Секрет раскрыт! 🕵️';
+  String get easterEggVersionTitle => 'Семь раз, надо же';
 
   @override
   String get easterEggVersionBody =>
-      'Тсс... тебе не следовало это находить. На самом деле здесь нет скрытого режима, просто маленькое подмигивание 😉';
+      'Здесь нет скрытого режима, увы. Просто спасибо, что искали так далеко — это приложение писалось вечер за вечером, и приятно знать, что кто-то заглядывает.';
 
   @override
-  String get easterEggVersionButton => 'Я сохраню тайну 🤫';
+  String get easterEggVersionButton => 'Останется между нами';
 
   @override
   String get achievementQuizzes40Title => 'Легенда викторин';

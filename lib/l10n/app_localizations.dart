@@ -850,6 +850,72 @@ abstract class AppLocalizations {
   /// **'See the home screen walkthrough again'**
   String get settingsReplayTourSubtitle;
 
+  /// No description provided for @settingsPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get settingsPrivacy;
+
+  /// No description provided for @settingsAppLockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock the app'**
+  String get settingsAppLockTitle;
+
+  /// No description provided for @settingsAppLockOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks for your fingerprint, face or PIN before opening your notes — unless you come back within 10 minutes.'**
+  String get settingsAppLockOn;
+
+  /// No description provided for @settingsAppLockOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Your notes open without asking for anything.'**
+  String get settingsAppLockOff;
+
+  /// No description provided for @settingsAppLockUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a screen lock on your phone first.'**
+  String get settingsAppLockUnavailable;
+
+  /// No description provided for @appLockPromptReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock JW Streak'**
+  String get appLockPromptReason;
+
+  /// No description provided for @appLockEnableReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm to turn the lock on'**
+  String get appLockEnableReason;
+
+  /// No description provided for @appLockDisableReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm to turn the lock off'**
+  String get appLockDisableReason;
+
+  /// No description provided for @appLockScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak is locked'**
+  String get appLockScreenTitle;
+
+  /// No description provided for @appLockScreenBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your notes and your progress stay private until you unlock.'**
+  String get appLockScreenBody;
+
+  /// No description provided for @appLockUnlockButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get appLockUnlockButton;
+
   /// No description provided for @onbReminderPermissionMissing.
   ///
   /// In en, this message translates to:
@@ -1173,6 +1239,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit time'**
   String get reminderEditTime;
+
+  /// No description provided for @reminderDailyTextTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily text'**
+  String get reminderDailyTextTitle;
+
+  /// No description provided for @reminderDailyTextSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'As a bonus, a gentle reminder for jw.org\'s daily text.'**
+  String get reminderDailyTextSubtitle;
+
+  /// No description provided for @notifDailyTextTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak · Daily text'**
+  String get notifDailyTextTitle;
+
+  /// No description provided for @notifDailyTextBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s text is waiting on jw.org.'**
+  String get notifDailyTextBody;
 
   /// No description provided for @quizQuestionCounter.
   ///
@@ -1795,7 +1885,7 @@ abstract class AppLocalizations {
   /// No description provided for @bibleUnlockHint.
   ///
   /// In en, this message translates to:
-  /// **'Finish {title} to unlock this step.'**
+  /// **'Read {title} to unlock this quiz!'**
   String bibleUnlockHint(String title);
 
   /// No description provided for @bibleErrorGeneric.
@@ -2436,19 +2526,19 @@ abstract class AppLocalizations {
   /// No description provided for @easterEggVersionTitle.
   ///
   /// In en, this message translates to:
-  /// **'Secret found! 🕵️'**
+  /// **'Seven taps, really'**
   String get easterEggVersionTitle;
 
   /// No description provided for @easterEggVersionBody.
   ///
   /// In en, this message translates to:
-  /// **'Shh... you weren\'t supposed to find that. There\'s no real hidden mode here, just a little wink 😉'**
+  /// **'No hidden mode here, sorry. Just a thank you for looking this far — this app was written one evening at a time, and it\'s nice to know someone\'s poking around.'**
   String get easterEggVersionBody;
 
   /// No description provided for @easterEggVersionButton.
   ///
   /// In en, this message translates to:
-  /// **'I\'ll keep quiet 🤫'**
+  /// **'Stays between us'**
   String get easterEggVersionButton;
 
   /// No description provided for @achievementQuizzes40Title.

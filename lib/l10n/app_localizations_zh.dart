@@ -382,6 +382,39 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsReplayTourSubtitle => '再次查看主屏幕介绍';
 
   @override
+  String get settingsPrivacy => '隐私';
+
+  @override
+  String get settingsAppLockTitle => '锁定应用';
+
+  @override
+  String get settingsAppLockOn => '打开笔记前需要指纹、面容或 PIN 码——除非你在 10 分钟内返回。';
+
+  @override
+  String get settingsAppLockOff => '笔记无需验证即可打开。';
+
+  @override
+  String get settingsAppLockUnavailable => '请先在手机上设置屏幕锁。';
+
+  @override
+  String get appLockPromptReason => '解锁 JW Streak';
+
+  @override
+  String get appLockEnableReason => '确认以开启锁定';
+
+  @override
+  String get appLockDisableReason => '确认以关闭锁定';
+
+  @override
+  String get appLockScreenTitle => 'JW Streak 已锁定';
+
+  @override
+  String get appLockScreenBody => '在你解锁之前，笔记和进度都是私密的。';
+
+  @override
+  String get appLockUnlockButton => '解锁';
+
+  @override
   String get onbReminderPermissionMissing => '通知已关闭，所以这个提醒不会响。开启通知才能收到提醒。';
 
   @override
@@ -548,6 +581,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get reminderEditTime => '编辑时间';
+
+  @override
+  String get reminderDailyTextTitle => '每日经文';
+
+  @override
+  String get reminderDailyTextSubtitle => '附加提醒：jw.org 上的每日经文。';
+
+  @override
+  String get notifDailyTextTitle => 'JW Streak · 每日经文';
+
+  @override
+  String get notifDailyTextBody => '今天的经文正在 jw.org 上等着你。';
 
   @override
   String quizQuestionCounter(int index, int total) {
@@ -907,7 +952,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String bibleUnlockHint(String title) {
-    return '完成「$title」以解锁这个步骤。';
+    return '阅读$title即可解锁这个测验！';
   }
 
   @override
@@ -1263,13 +1308,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get easterEggHeartBody => '我也爱你 :)';
 
   @override
-  String get easterEggVersionTitle => '发现秘密啦！🕵️';
+  String get easterEggVersionTitle => '居然点了七次';
 
   @override
-  String get easterEggVersionBody => '嘘……你本不该发现这个。其实这里没有真正的隐藏模式，只是一个小小的眨眼 😉';
+  String get easterEggVersionBody =>
+      '这里没有隐藏模式，抱歉。只是想说声谢谢，谢谢你找到这么深的地方——这个应用是一个又一个夜晚写出来的，知道有人在翻看，真让人高兴。';
 
   @override
-  String get easterEggVersionButton => '我会保守秘密 🤫';
+  String get easterEggVersionButton => '这是我们的秘密';
 
   @override
   String get achievementQuizzes40Title => '测验传奇';

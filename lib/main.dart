@@ -9,6 +9,7 @@ import 'screens/streak_info_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'services/local_db_service.dart';
 import 'theme/theme_preference.dart';
+import 'widgets/app_lock_gate.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -266,7 +267,8 @@ class _DailyJwAppState extends State<DailyJwApp> {
           supportedLocales: AppLocalizations.supportedLocales,
           home: _isThemeLoading
               ? loading
-              : PopScope(
+              : _withAppLock(
+                  PopScope(
                   // While onboarding, the system back gesture should step
                   // backwards through the flow instead of exiting the app —
                   // there's no Navigator route to pop since each step just
@@ -296,10 +298,16 @@ class _DailyJwAppState extends State<DailyJwApp> {
                             currentLocaleCode: _localeCode,
                             onLocaleChanged: _updateLocale,
                           ),
+                    ),
                   ),
                 ),
         );
       },
     );
   }
+
+  /// Wraps the app in the lock gate, except under [skipBootstrap] (widget
+  /// tests), where there is no database for the gate to read its setting from.
+  Widget _withAppLock(Widget child) =>
+      widget.skipBootstrap ? child : AppLockGate(child: child);
 }

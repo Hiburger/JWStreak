@@ -12,6 +12,15 @@ import 'theme/theme_preference.dart';
 import 'widgets/app_lock_gate.dart';
 
 void main() {
+  // The native launch splash (android/app/src/main/res/drawable/
+  // launch_background.xml + the Android 12 SplashScreen API, both generated
+  // by `dart run flutter_native_splash:create`) is removed automatically the
+  // moment Flutter draws its first frame — deliberately not held open any
+  // longer than that. Blocking it on _loadThemePreference() finishing used
+  // to make Android show its own "still loading" spinner once the icon's
+  // budgeted display time ran out; better to get *something* on screen fast
+  // (see _isThemeLoading's skeleton below) than to hold a blank native
+  // splash hostage to a network-free, sub-50ms local DB read.
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const DailyJwApp());
 }
@@ -62,10 +71,19 @@ class _DailyJwAppState extends State<DailyJwApp> {
   Future<void> _loadThemePreference() async {
     try {
       await _dbService.initialize();
-      final ThemePreference preference = await _dbService.getThemePreference();
-      final bool useDynamicColor = await _dbService.getUseDynamicColor();
-      final String? localeCode = await _dbService.getAppLocale();
-      final bool onboardingDone = await _dbService.isOnboardingDone();
+      // These 4 reads don't depend on each other — run them concurrently
+      // instead of paying 4 separate method-channel round-trips back to
+      // back, so the skeleton below is on screen as briefly as possible.
+      final List<Object?> results = await Future.wait(<Future<Object?>>[
+        _dbService.getThemePreference(),
+        _dbService.getUseDynamicColor(),
+        _dbService.getAppLocale(),
+        _dbService.isOnboardingDone(),
+      ]);
+      final ThemePreference preference = results[0] as ThemePreference;
+      final bool useDynamicColor = results[1]! as bool;
+      final String? localeCode = results[2] as String?;
+      final bool onboardingDone = results[3]! as bool;
       if (!mounted) {
         return;
       }
@@ -216,9 +234,10 @@ class _DailyJwAppState extends State<DailyJwApp> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget loading = const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
+    // The native splash (see main()) covers the whole _loadThemePreference
+    // window, so this never actually gets painted under normal timing — kept
+    // blank rather than a spinner so that IS true on the rare frame it does.
+    const Widget loading = SizedBox.shrink();
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         final ColorScheme lightScheme =
@@ -265,6 +284,7 @@ class _DailyJwAppState extends State<DailyJwApp> {
           locale: _localeCode == null ? null : Locale(_localeCode!),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          localeListResolutionCallback: _resolveLocale,
           home: _isThemeLoading
               ? loading
               : _withAppLock(
@@ -304,6 +324,25 @@ class _DailyJwAppState extends State<DailyJwApp> {
         );
       },
     );
+  }
+
+  /// Picks the UI language for a device whose own language list is what we
+  /// have to work with (i.e. no explicit in-app choice saved).
+  ///
+  /// Flutter's built-in resolution falls back to `supportedLocales.first`,
+  /// and that list is generated alphabetically from the .arb filenames — so
+  /// German, purely by being alphabetically first, was the fallback for every
+  /// unsupported language. A device set to Japanese got a German UI. English
+  /// is the sane fallback instead.
+  Locale? _resolveLocale(List<Locale>? deviceLocales, Iterable<Locale> supported) {
+    for (final Locale deviceLocale in deviceLocales ?? const <Locale>[]) {
+      for (final Locale candidate in supported) {
+        if (candidate.languageCode == deviceLocale.languageCode) {
+          return candidate;
+        }
+      }
+    }
+    return const Locale('en');
   }
 
   /// Wraps the app in the lock gate, except under [skipBootstrap] (widget

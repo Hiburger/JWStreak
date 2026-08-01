@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -85,12 +86,16 @@ class NotificationService {
     await _createNotificationChannel();
     await requestNotificationPermission();
 
-    debugPrint('NotificationService: Initialized successfully');
+    if (kDebugMode) {
+      debugPrint('NotificationService: Initialized successfully');
+    }
     _isInitialized = true;
   }
 
   Future<void> _createNotificationChannel() async {
-    debugPrint('NotificationService: Creating notification channel');
+    if (kDebugMode) {
+      debugPrint('NotificationService: Creating notification channel');
+    }
     await _androidPlugin?.createNotificationChannel(
       AndroidNotificationChannel(
         _channelId,
@@ -102,7 +107,9 @@ class NotificationService {
         showBadge: true,
       ),
     );
-    debugPrint('NotificationService: Notification channel created');
+    if (kDebugMode) {
+      debugPrint('NotificationService: Notification channel created');
+    }
   }
 
   Future<void> handleAppLaunchNotification() async {
@@ -141,10 +148,12 @@ class NotificationService {
       androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
-    debugPrint(
-      'NotificationService: Reminder $id scheduled for '
-      '${firstTrigger.hour}:${firstTrigger.minute} (mode: $scheduleMode)',
-    );
+    if (kDebugMode) {
+      debugPrint(
+        'NotificationService: Reminder $id scheduled for '
+        '${firstTrigger.hour}:${firstTrigger.minute} (mode: $scheduleMode)',
+      );
+    }
   }
 
   Future<void> cancelReminder(int id) async {
@@ -357,9 +366,11 @@ class NotificationService {
     } else if (schedule.isAtSameMomentAs(now)) {
       schedule = schedule.add(const Duration(minutes: 1));
     }
-    debugPrint(
-      'NotificationService: Next trigger at ${schedule.year}-${schedule.month}-${schedule.day} ${schedule.hour}:${schedule.minute}',
-    );
+    if (kDebugMode) {
+      debugPrint(
+        'NotificationService: Next trigger at ${schedule.year}-${schedule.month}-${schedule.day} ${schedule.hour}:${schedule.minute}',
+      );
+    }
     return schedule;
   }
 }

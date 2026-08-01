@@ -218,6 +218,23 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     }
   }
 
+  /// Unlike [_shareSelected], fetches every note unfiltered — "export all"
+  /// shouldn't silently only export whatever an active search happens to
+  /// currently be showing.
+  Future<void> _exportAll() async {
+    try {
+      final List<NoteEntry> allNotes = await widget.dbService.getAllNotes();
+      if (!mounted || allNotes.isEmpty) {
+        return;
+      }
+      await exportAllNotesAsZip(context, allNotes);
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+    }
+  }
+
   void _onSearchChanged(String value) {
     setState(() {
       _query = value;
@@ -290,6 +307,25 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                   colorScheme.surfaceTint,
                 ),
               ),
+              if (!_selectionMode && !_isLoading && _notes.isNotEmpty) ...<Widget>[
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.tonalIcon(
+                    onPressed: _exportAll,
+                    icon: const Icon(Icons.ios_share_rounded, size: 20),
+                    label: Text(
+                      AppLocalizations.of(context)!.notesLibraryExportAllTooltip,
+                    ),
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size.fromHeight(48),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 12),
               Expanded(
                 child: AnimatedSwitcher(

@@ -1239,9 +1239,48 @@ class LocalDbService {
   }
 
   /// Gathers the stats [AchievementDef]s are evaluated against.
-  Future<AchievementStats> getAchievementStats() async {
-    final Set<String> readKeys = await getReadChapterKeys();
-    final Set<String> booksRead = readKeys
+  /// Every parameter is optional: pass in whatever a caller already fetched
+  /// moments ago (e.g. HomeScreen's own dashboard refresh reads readKeys,
+  /// starsByBook, streakState and reminders anyway) to skip re-querying it
+  /// here — this used to always re-read all five from scratch even when the
+  /// caller had them sitting in a local variable one line above.
+  Future<AchievementStats> getAchievementStats({
+    Set<String>? readKeys,
+    Map<String, QuizResult>? quizResults,
+    Map<String, int>? starsByBook,
+    StreakState? streakState,
+    List<Reminder>? reminders,
+  }) async {
+    // Whatever wasn't handed in gets fetched here, all concurrently instead
+    // of one round-trip at a time — Future.value wraps an already-known
+    // value so it lines up with the rest of the list without an extra query.
+    final List<dynamic> fetched = await Future.wait<dynamic>(<Future<dynamic>>[
+      readKeys != null ? Future<Set<String>>.value(readKeys) : getReadChapterKeys(),
+      quizResults != null
+          ? Future<Map<String, QuizResult>>.value(quizResults)
+          : getAllQuizResults(),
+      starsByBook != null
+          ? Future<Map<String, int>>.value(starsByBook)
+          : getEarnedStarsByBook(),
+      streakState != null
+          ? Future<StreakState>.value(streakState)
+          : getStreakState(),
+      reminders != null
+          ? Future<List<Reminder>>.value(reminders)
+          : getReminders(),
+      getNotesCount(),
+      getFoundEasterEggIds(),
+    ]);
+    final Set<String> resolvedReadKeys = fetched[0] as Set<String>;
+    final Map<String, QuizResult> resolvedQuizResults =
+        fetched[1] as Map<String, QuizResult>;
+    final Map<String, int> resolvedStarsByBook = fetched[2] as Map<String, int>;
+    final StreakState resolvedStreakState = fetched[3] as StreakState;
+    final List<Reminder> resolvedReminders = fetched[4] as List<Reminder>;
+    final int notesCount = fetched[5] as int;
+    final Set<String> foundEggs = fetched[6] as Set<String>;
+
+    final Set<String> booksRead = resolvedReadKeys
         .map((String key) => key.split('|').first)
         .toSet();
     final BibleBook? genesis = bibleBookById('Genesis');
@@ -1249,39 +1288,40 @@ class LocalDbService {
         genesis != null &&
         List<int>.generate(genesis.chapters, (int i) => i + 1).every(
           (int chapter) =>
-              readKeys.contains(bibleChapterKey('Genesis', chapter)),
+              resolvedReadKeys.contains(bibleChapterKey('Genesis', chapter)),
         );
 
-    final Map<String, QuizResult> quizResults = await getAllQuizResults();
-    final Map<String, int> starsByBook = await getEarnedStarsByBook();
-    final StreakState streakState = await getStreakState();
-    final List<Reminder> reminders = await getReminders();
-    final Set<String> foundEggs = await getFoundEasterEggIds();
-
     return AchievementStats(
-      chaptersRead: readKeys.length,
+      chaptersRead: resolvedReadKeys.length,
       distinctBooksRead: booksRead.length,
       genesisComplete: genesisComplete,
-      wholeBibleComplete: readKeys.length >= kTotalBibleChapters,
-      completedQuizzes: quizResults.length,
-      hasPerfectQuiz: quizResults.values.any((QuizResult r) => r.isPerfect),
-      totalStars: starsByBook.values.fold<int>(0, (int a, int b) => a + b),
-      currentStreak: streakState.count,
-      notesCount: await getNotesCount(),
-      hasReminder: reminders.isNotEmpty,
+      wholeBibleComplete: resolvedReadKeys.length >= kTotalBibleChapters,
+      completedQuizzes: resolvedQuizResults.length,
+      hasPerfectQuiz: resolvedQuizResults.values.any(
+        (QuizResult r) => r.isPerfect,
+      ),
+      totalStars: resolvedStarsByBook.values.fold<int>(
+        0,
+        (int a, int b) => a + b,
+      ),
+      currentStreak: resolvedStreakState.count,
+      notesCount: notesCount,
+      hasReminder: resolvedReminders.isNotEmpty,
       easterEggsFound: foundEggs.intersection(kEasterEggIds.toSet()).length,
     );
   }
 
   /// Persists any newly-met achievement so it stays unlocked even if the
   /// underlying stat later regresses (e.g. the streak resets). Returns the
-  /// full set of unlocked ids, including ones just unlocked.
-  Future<Set<String>> syncAchievements() async {
+  /// full set of unlocked ids, including ones just unlocked. Pass [stats] if
+  /// the caller already computed it (see [getAchievementStats]) to avoid
+  /// computing it a second time right after.
+  Future<Set<String>> syncAchievements({AchievementStats? stats}) async {
     final Database db = await _getDb();
-    final AchievementStats stats = await getAchievementStats();
+    final AchievementStats resolvedStats = stats ?? await getAchievementStats();
     final Set<String> unlocked = await getUnlockedAchievementIds();
     for (final AchievementDef def in kAchievementDefs) {
-      if (!unlocked.contains(def.id) && def.isMet(stats)) {
+      if (!unlocked.contains(def.id) && def.isMet(resolvedStats)) {
         await db.insert('achievements', <String, Object>{
           'id': def.id,
           'unlockedAt': DateTime.now().toIso8601String(),

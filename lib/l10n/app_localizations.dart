@@ -1054,6 +1054,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get settingsLanguage;
 
+  /// No description provided for @settingsLanguageSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsLanguageSystem;
+
   /// No description provided for @settingsPermissions.
   ///
   /// In en, this message translates to:
@@ -1155,6 +1161,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Made with brotherly love, from Switzerland.\nThis app is Free, Libre, and Open Source.'**
   String get settingsFooter;
+
+  /// No description provided for @settingsUnaffiliated.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak is an independent, unofficial project — not affiliated with Jehovah\'s Witnesses, the Watch Tower Bible and Tract Society, or JW.org.'**
+  String get settingsUnaffiliated;
 
   /// No description provided for @settingsError.
   ///
@@ -2132,6 +2144,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share'**
   String get notesLibraryShareTooltip;
+
+  /// No description provided for @notesLibraryExportAllTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Export my notes'**
+  String get notesLibraryExportAllTooltip;
 
   /// No description provided for @notesLibraryDeleteTooltip.
   ///

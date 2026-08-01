@@ -165,6 +165,7 @@
   "settingsBibleTargetJwLibraryMissing": "Aby otworzyć Biblię w ten sposób, potrzebna jest aplikacja JW Library. Chcesz ją zainstalować?",
   "settingsBibleTargetInstall": "Zainstaluj",
   "settingsLanguage": "Język",
+  "settingsLanguageSystem": "Systemowy",
   "settingsPermissions": "Uprawnienia",
   "settingsNotifPermTitle": "Uprawnienia powiadomień",
   "settingsChecking": "Sprawdzanie...",
@@ -182,6 +183,7 @@
   "settingsLicenseLegalese": "JW Streak to wolne oprogramowanie na licencji GNU General Public License v3. Poniższe licencje obejmują komponenty open source, z których zbudowano aplikację.",
   "settingsQuestion": "Masz pytanie?",
   "settingsFooter": "Stworzone z braterską miłością, w Szwajcarii.\nTa aplikacja jest darmowa, wolna i open source.",
+  "settingsUnaffiliated": "JW Streak jest niezależnym, nieoficjalnym projektem — niezwiązanym ze Świadkami Jehowy, Watch Tower Bible and Tract Society ani JW.org.",
   "settingsError": "Błąd: {error}",
 
   "reminderPresetMorning": "Rano",
@@ -351,6 +353,7 @@
   "notesLibrarySelectedCountSingular": "Zaznaczono: {count}",
   "notesLibrarySelectedCountPlural": "Zaznaczono: {count}",
   "notesLibraryShareTooltip": "Udostępnij",
+  "notesLibraryExportAllTooltip": "Eksportuj moje notatki",
   "notesLibraryDeleteTooltip": "Usuń",
   "notesLibraryJustNow": "przed chwilą",
   "notesLibraryMinutesAgo": "{minutes} min temu",

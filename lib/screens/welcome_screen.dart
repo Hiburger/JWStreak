@@ -276,7 +276,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   child: Text(
                     AppLocalizations.of(context)!.welcomeFooter,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),

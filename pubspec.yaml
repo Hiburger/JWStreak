@@ -24,7 +24,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # The build number after the "+" must increase on every release built for
 # distribution, even a rebuild of the same version name; it is never shown to
 # the user, only Android uses it to tell two builds apart.
-version: 1.1.0+2
+version: 1.2.0+3
 
 environment:
   sdk: ^3.12.2
@@ -41,7 +41,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
   flutter_local_notifications: ^19.4.2
   flutter_timezone: ^4.1.1
   intl: ^0.20.2
@@ -58,6 +57,7 @@ dependencies:
   vibration: ^3.0.0
   permission_handler: ^11.3.1
   local_auth: ^3.0.2
+  archive: ^4.0.9
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +69,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  # Only used for its `dart run flutter_native_splash:create` codegen step
+  # (regenerates android/app/src/main/res/drawable*/launch_background.xml and
+  # the values*/styles.xml splash themes) — nothing in app code calls its
+  # Dart API, so it doesn't need to ship in the app itself.
+  flutter_native_splash: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -82,9 +87,12 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # Only what Dart code actually loads at runtime. assets/icon.png is
+  # deliberately NOT here: it's a build-time source (the launcher/notification
+  # icon pipeline in tool/icons/, and flutter_native_splash) whose output is
+  # baked into Android resources, so bundling it again would ship a second,
+  # never-loaded copy inside the APK.
   assets:
-    - assets/icon.png
     - assets/icon_onboarding.png
 
   # Bundled locally (not fetched from Google's servers at runtime like the
@@ -105,3 +113,26 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Native launch splash (flutter_native_splash), regenerate with:
+#   dart run flutter_native_splash:create
+# This is what stays on screen for the brief window between process start
+# and the DB/theme/locale read finishing (see main.dart's
+# FlutterNativeSplash.preserve/.remove) — replaces the app's own spinner
+# screen, which used to show as a second, separate flash after this one.
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#000000"
+  image: assets/icon.png
+  # Same full logo (purple square, "JWS" + flower) as the legacy splash below
+  # — the isolated foreground glyph (tool/icons/icon_foreground_art.png) was
+  # designed to sit inside that square, not stand alone; on its own, floating
+  # on plain white, it read as a broken/disconnected shape instead of a logo.
+  android_12:
+    image: assets/icon.png
+    icon_background_color: "#FFFFFF"
+    color: "#FFFFFF"
+    color_dark: "#000000"
+  android: true
+  ios: false
+  web: false

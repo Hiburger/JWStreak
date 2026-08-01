@@ -831,7 +831,10 @@ class _FullBookQuizCard extends StatelessWidget {
                     ),
                     Text(
                       AppLocalizations.of(context)!.bibleFullBookQuizSubtitle,
-                      style: theme.textTheme.bodySmall?.copyWith(
+                      // Matches the subtitle size used by every other
+                      // 44/14-icon-box list row in the app (achievements,
+                      // reminders, home screen's quick actions).
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onTertiaryContainer.withValues(alpha: 0.85),
                       ),
                     ),

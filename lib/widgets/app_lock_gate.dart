@@ -48,7 +48,7 @@ class AppLockGateState extends State<AppLockGate> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  Future<void> _lockIfEnabled() async {
+  Future<void> _lockIfEnabled({bool promptImmediately = true}) async {
     final bool enabled = await _lockService.isEnabled();
     if (!mounted) {
       return;
@@ -57,7 +57,7 @@ class AppLockGateState extends State<AppLockGate> with WidgetsBindingObserver {
       _locked = enabled;
       _checking = false;
     });
-    if (enabled) {
+    if (enabled && promptImmediately) {
       await _promptUnlock();
     }
   }
@@ -81,24 +81,36 @@ class AppLockGateState extends State<AppLockGate> with WidgetsBindingObserver {
         DateTime.now().difference(leftAt) < _backgroundGrace) {
       return;
     }
-    _lockIfEnabled();
+    // Only re-show the lock screen here, without auto-firing the system
+    // prompt: the Activity has just this instant come back to the
+    // foreground, and asking BiometricPrompt to appear in that exact window
+    // is unreliable — it can silently fail to attach. Left to a real tap on
+    // the Unlock button (a later frame, unambiguously foregrounded), it
+    // shows every time.
+    _lockIfEnabled(promptImmediately: false);
   }
 
   /// Shows the system prompt. Staying locked on failure is deliberate: the
   /// user can retry from the button, and there is no in-app passcode fallback
-  /// to fall down to.
+  /// to fall down to. The whole body runs in a finally so _authenticating
+  /// always clears — the button reads "does nothing" forever if any
+  /// exception here (not just local_auth's own PlatformException) left it
+  /// stuck true.
   Future<void> _promptUnlock() async {
     if (_authenticating || !mounted) {
       return;
     }
     _authenticating = true;
-    final String reason = AppLocalizations.of(context)!.appLockPromptReason;
-    final bool ok = await _lockService.authenticate(reason: reason);
-    _authenticating = false;
-    if (!mounted || !ok) {
-      return;
+    try {
+      final String reason = AppLocalizations.of(context)!.appLockPromptReason;
+      final bool ok = await _lockService.authenticate(reason: reason);
+      if (!mounted || !ok) {
+        return;
+      }
+      setState(() => _locked = false);
+    } finally {
+      _authenticating = false;
     }
-    setState(() => _locked = false);
   }
 
   @override
@@ -159,10 +171,24 @@ class _LockScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 28),
-              FilledButton.icon(
-                onPressed: onUnlock,
-                icon: const Icon(Icons.fingerprint_rounded),
-                label: Text(l10n.appLockUnlockButton),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: onUnlock,
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.appLockUnlockButton,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

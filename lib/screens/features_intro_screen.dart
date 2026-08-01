@@ -197,7 +197,7 @@ class _FeatureCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     desc,
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: theme.textTheme.bodyLarge?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.35,
                     ),

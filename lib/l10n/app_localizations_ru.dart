@@ -513,6 +513,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguage => 'Язык';
 
   @override
+  String get settingsLanguageSystem => 'Системный';
+
+  @override
   String get settingsPermissions => 'Разрешения';
 
   @override
@@ -567,6 +570,10 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsFooter =>
       'Сделано с братской любовью, в Швейцарии.\nЭто приложение бесплатное, свободное и с открытым исходным кодом.';
+
+  @override
+  String get settingsUnaffiliated =>
+      'JW Streak — независимый неофициальный проект, не связанный со Свидетелями Иеговы, Watch Tower Bible and Tract Society или JW.org.';
 
   @override
   String settingsError(String error) {
@@ -879,7 +886,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String homeChaptersReadCount(int read, int total) {
-    return '$read / $total глав';
+    final intl.NumberFormat readNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String readString = readNumberFormat.format(read);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return '$readString / $totalString глав';
   }
 
   @override
@@ -1142,6 +1157,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notesLibraryShareTooltip => 'Поделиться';
+
+  @override
+  String get notesLibraryExportAllTooltip => 'Экспортировать мои заметки';
 
   @override
   String get notesLibraryDeleteTooltip => 'Удалить';

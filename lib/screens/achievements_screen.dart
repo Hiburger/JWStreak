@@ -89,8 +89,13 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   }
 
   Future<void> _load() async {
-    final Set<String> unlockedIds = await widget.dbService.syncAchievements();
+    // Was computing the full stats twice back to back: once inside
+    // syncAchievements (to check what's newly met) and again right after
+    // for display. Compute it once and hand the same object to both.
     final AchievementStats stats = await widget.dbService.getAchievementStats();
+    final Set<String> unlockedIds = await widget.dbService.syncAchievements(
+      stats: stats,
+    );
     if (!mounted) {
       return;
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The app tells users "everything stays on your phone, no data is sent
+  anywhere" (see the onboarding privacy page and docs/index.html), so the
+  local SQLite database — which holds personal notes and reflections — must
+  not be swept up into Google's cloud backup. Every domain is excluded there.
+
+  Direct device-to-device transfer is deliberately left enabled: it moves the
+  data straight from the old phone to the new one without any server in the
+  middle, so it keeps that promise intact while not punishing someone who
+  simply upgrades their phone by wiping their streak and notes.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+        <exclude domain="file" />
+    </cloud-backup>
+    <device-transfer />
+</data-extraction-rules>

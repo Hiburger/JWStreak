@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pre-Android-12 counterpart to data_extraction_rules.xml. Belt-and-braces
+  next to android:allowBackup="false": if backup is ever re-enabled, this
+  still keeps the local database (personal notes, reflections) out of it.
+-->
+<full-backup-content>
+    <exclude domain="root" />
+    <exclude domain="database" />
+    <exclude domain="sharedpref" />
+    <exclude domain="external" />
+    <exclude domain="file" />
+</full-backup-content>

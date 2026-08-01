@@ -165,6 +165,7 @@
   "settingsBibleTargetJwLibraryMissing": "Для открытия Библии таким способом требуется приложение JW Library. Установить его?",
   "settingsBibleTargetInstall": "Установить",
   "settingsLanguage": "Язык",
+  "settingsLanguageSystem": "Системный",
   "settingsPermissions": "Разрешения",
   "settingsNotifPermTitle": "Разрешения на уведомления",
   "settingsChecking": "Проверка...",
@@ -182,6 +183,7 @@
   "settingsLicenseLegalese": "JW Streak — свободное программное обеспечение под лицензией GNU General Public License v3. Приведённые ниже лицензии относятся к компонентам с открытым исходным кодом, из которых оно состоит.",
   "settingsQuestion": "Есть вопрос?",
   "settingsFooter": "Сделано с братской любовью, в Швейцарии.\nЭто приложение бесплатное, свободное и с открытым исходным кодом.",
+  "settingsUnaffiliated": "JW Streak — независимый неофициальный проект, не связанный со Свидетелями Иеговы, Watch Tower Bible and Tract Society или JW.org.",
   "settingsError": "Ошибка: {error}",
 
   "reminderPresetMorning": "Утро",
@@ -351,6 +353,7 @@
   "notesLibrarySelectedCountSingular": "Выбрано: {count}",
   "notesLibrarySelectedCountPlural": "Выбрано: {count}",
   "notesLibraryShareTooltip": "Поделиться",
+  "notesLibraryExportAllTooltip": "Экспортировать мои заметки",
   "notesLibraryDeleteTooltip": "Удалить",
   "notesLibraryJustNow": "только что",
   "notesLibraryMinutesAgo": "{minutes} мин назад",

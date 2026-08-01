@@ -1,8 +1,10 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../achievements_data.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
@@ -71,6 +73,15 @@ class _HomeScreenState extends State<HomeScreen> {
   int _totalStars = 0;
   bool _isLoading = true;
 
+  // Derived from _readKeys / _completedQuiz, which only change in
+  // _refreshDashboard — so they're computed there, once, rather than in
+  // build(). Both walk all 66 books (and _pendingQuizCheckpoint additionally
+  // rebuilds every book's checkpoint list), which is far too much to redo on
+  // every rebuild: a scroll, a theme change or a tour step would each pay
+  // for it again.
+  _ChapterRef? _nextChapter;
+  Checkpoint? _pendingCheckpoint;
+
   // Targets for the guided tour. Adding a step is just: declare a key here,
   // attach it below, and add one entry to _tourSteps().
   final GlobalKey _tourStreakKey = GlobalKey();
@@ -91,6 +102,24 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
     _bootstrap();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // _pendingCheckpoint holds quiz content in the current language, so it
+    // has to be rebuilt when the locale changes — this widget survives that
+    // change (it's keyed) and would otherwise keep showing the old language.
+    _recomputeDerived();
+  }
+
+  /// Recomputes the two expensive, data-derived values behind the "continue
+  /// reading" card and the "new quiz unlocked" banner. Called when the data
+  /// changes (_refreshDashboard) or the locale does (didChangeDependencies) —
+  /// never from build().
+  void _recomputeDerived() {
+    _nextChapter = _nextUnread();
+    _pendingCheckpoint = _pendingQuizCheckpoint();
   }
 
   Future<void> _bootstrap() async {
@@ -196,22 +225,44 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _refreshDashboard() async {
-    final List<Reminder> reminders = await _dbService.getReminders();
-    final DateTime? lastReadAt = await _dbService.getLastReadingAt();
-    final StreakState streakState = await _dbService.getStreakState();
-    final int totalReadings = await _dbService.getTotalReadings();
-    final List<DateTime> recentReadingDays = await _dbService
-        .getRecentReadingDays(limit: 14);
-    final Set<String> readKeys = await _dbService.getReadChapterKeys();
-    final Set<String> completedQuiz = await _dbService.getCompletedQuizIds();
-    final Map<String, int> starsByBook = await _dbService
-        .getEarnedStarsByBook();
+    // These 9 reads don't depend on each other — was one round-trip after
+    // another, now all in flight at once.
+    final List<dynamic> fetched = await Future.wait<dynamic>(<Future<dynamic>>[
+      _dbService.getReminders(),
+      _dbService.getLastReadingAt(),
+      _dbService.getStreakState(),
+      _dbService.getTotalReadings(),
+      _dbService.getRecentReadingDays(limit: 14),
+      _dbService.getReadChapterKeys(),
+      _dbService.getCompletedQuizIds(),
+      _dbService.getEarnedStarsByBook(),
+      _dbService.getFrozenDays(),
+    ]);
+    final List<Reminder> reminders = fetched[0] as List<Reminder>;
+    final DateTime? lastReadAt = fetched[1] as DateTime?;
+    final StreakState streakState = fetched[2] as StreakState;
+    final int totalReadings = fetched[3] as int;
+    final List<DateTime> recentReadingDays = fetched[4] as List<DateTime>;
+    final Set<String> readKeys = fetched[5] as Set<String>;
+    final Set<String> completedQuiz = fetched[6] as Set<String>;
+    final Map<String, int> starsByBook = fetched[7] as Map<String, int>;
     final int totalStars = starsByBook.values.fold<int>(
       0,
       (int a, int b) => a + b,
     );
-    final Set<String> frozenDays = await _dbService.getFrozenDays();
-    await _dbService.syncAchievements();
+    final Set<String> frozenDays = fetched[8] as Set<String>;
+    // Achievement stats independently re-read several of the same things
+    // (readKeys, starsByBook, streakState, reminders) — hand over what's
+    // already sitting right here instead of paying for a second copy of
+    // each query.
+    final AchievementStats achievementStats = await _dbService
+        .getAchievementStats(
+          readKeys: readKeys,
+          starsByBook: starsByBook,
+          streakState: streakState,
+          reminders: reminders,
+        );
+    await _dbService.syncAchievements(stats: achievementStats);
 
     if (!mounted) {
       return;
@@ -254,6 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _completedQuiz = completedQuiz;
       _totalStars = totalStars;
       _isLoading = false;
+      _recomputeDerived();
     });
 
     // Gentle message the first time the user comes back after losing the streak.
@@ -544,7 +596,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const _HomeScreenSkeleton();
     }
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
@@ -555,9 +607,9 @@ class _HomeScreenState extends State<HomeScreen> {
         : _reminders.length == 1
         ? l10n.homeReminderAt(_reminders.first.label)
         : l10n.homeRemindersActive(_reminders.length);
-    final _ChapterRef? nextChapter = _nextUnread();
+    final _ChapterRef? nextChapter = _nextChapter;
     final int chaptersRead = _readKeys.length;
-    final Checkpoint? pendingCheckpoint = _pendingQuizCheckpoint();
+    final Checkpoint? pendingCheckpoint = _pendingCheckpoint;
 
     return Scaffold(
       appBar: AppBar(
@@ -592,7 +644,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
         children: <Widget>[
           _StreakHero(
             key: _tourStreakKey,
@@ -609,7 +661,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onEarnFreeze: _openReviewQuiz,
             ),
           ],
-          const SizedBox(height: 28),
+          const SizedBox(height: 32),
           _SectionCard(
             title: l10n.homeSectionReadingTitle,
             subtitle: l10n.homeSectionReadingSubtitle,
@@ -636,7 +688,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _BrowseBibleTile(key: _tourBrowseKey, onTap: _openBibleBrowser),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
           _SectionCard(
             title: l10n.homeSectionProgressTitle,
             children: <Widget>[
@@ -653,7 +705,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 32),
           _SectionHeader(title: l10n.homeSectionQuickActions),
           const SizedBox(height: 12),
           _QuickActions(
@@ -663,6 +715,128 @@ class _HomeScreenState extends State<HomeScreen> {
             onReadNotes: _openNotesLibrary,
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Placeholder shown while [_HomeScreenState._bootstrap] is still running,
+/// shaped like the real dashboard (hero, section cards, quick actions) with
+/// a light sweeping across it — communicates "this is what's coming and
+/// it's already working on it" rather than a blank spinner, and reaching the
+/// screen's actual outline this fast is what keeps Android's own splash
+/// screen from deciding the app is slow to start (see main.dart).
+class _HomeScreenSkeleton extends StatefulWidget {
+  const _HomeScreenSkeleton();
+
+  @override
+  State<_HomeScreenSkeleton> createState() => _HomeScreenSkeletonState();
+}
+
+class _HomeScreenSkeletonState extends State<_HomeScreenSkeleton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1400),
+  )..repeat();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'JW Streak',
+          style: TextStyle(
+            fontFamily: 'PlusJakartaSans',
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
+          ),
+        ),
+      ),
+      body: AnimatedBuilder(
+        animation: _controller,
+        // The shapes never change, only the shimmer sweeping over them —
+        // built once and reused every tick instead of rebuilt ~60 times/sec.
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+          physics: const NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            _SkeletonBlock(height: 176, radius: 28),
+            const SizedBox(height: 32),
+            _SkeletonBlock(height: 214, radius: 24),
+            const SizedBox(height: 24),
+            _SkeletonBlock(height: 236, radius: 24),
+            const SizedBox(height: 32),
+            _SkeletonBlock(height: 20, width: 150, radius: 6),
+            const SizedBox(height: 12),
+            _SkeletonBlock(height: 74, radius: 16),
+            const SizedBox(height: 10),
+            _SkeletonBlock(height: 74, radius: 16),
+            const SizedBox(height: 10),
+            _SkeletonBlock(height: 74, radius: 16),
+          ],
+        ),
+        builder: (BuildContext context, Widget? child) {
+          return ShaderMask(
+            blendMode: BlendMode.srcATop,
+            shaderCallback: (Rect bounds) => LinearGradient(
+              begin: const Alignment(-1, 0),
+              end: const Alignment(1, 0),
+              colors: <Color>[
+                cs.surfaceContainerHighest,
+                cs.surfaceContainerHigh,
+                cs.surfaceContainerHighest,
+              ],
+              stops: const <double>[0.35, 0.5, 0.65],
+              transform: _SlidingGradientTransform(
+                slidePercent: _controller.value * 2 - 1,
+              ),
+            ).createShader(bounds),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// Slides a [LinearGradient] horizontally by [slidePercent] of the shaded
+/// bounds' width — the same technique the `shimmer` package uses, without
+/// pulling in the dependency for one effect.
+class _SlidingGradientTransform extends GradientTransform {
+  const _SlidingGradientTransform({required this.slidePercent});
+
+  final double slidePercent;
+
+  @override
+  Matrix4? transform(Rect bounds, {ui.TextDirection? textDirection}) {
+    return Matrix4.translationValues(bounds.width * slidePercent, 0, 0);
+  }
+}
+
+class _SkeletonBlock extends StatelessWidget {
+  const _SkeletonBlock({required this.height, this.width, required this.radius});
+
+  final double height;
+  final double? width;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width ?? double.infinity,
+      height: height,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(radius),
       ),
     );
   }
@@ -711,6 +885,7 @@ class _StreakHero extends StatelessWidget {
           colors: <Color>[cs.primaryContainer, cs.tertiaryContainer],
         ),
         borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.6)),
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -946,12 +1121,12 @@ class _StreakFireEasterEggState extends State<_StreakFireEasterEgg> {
     final int displayedStreak = _pranked
         ? (widget.streak <= 0 ? -100 : 0)
         : widget.streak;
-    return TapEasterEgg(
-      onTriggered: () {
+    return _StreakBadge(
+      streak: displayedStreak,
+      onIconTapEasterEgg: () {
         LocalDbService().markEasterEggFound('flame');
         setState(() => _pranked = true);
       },
-      child: _StreakBadge(streak: displayedStreak),
     );
   }
 }
@@ -964,9 +1139,13 @@ class _StreakFireEasterEggState extends State<_StreakFireEasterEgg> {
 /// just lost their run. Also covers the negative numbers the flame easter egg
 /// can produce.
 class _StreakBadge extends StatefulWidget {
-  const _StreakBadge({required this.streak});
+  const _StreakBadge({required this.streak, required this.onIconTapEasterEgg});
 
   final int streak;
+
+  /// Fired by the shared tap-8-times gesture, scoped to just the icon below
+  /// (see build()) — the shake it plays should not also jostle the number.
+  final VoidCallback onIconTapEasterEgg;
 
   @override
   State<_StreakBadge> createState() => _StreakBadgeState();
@@ -977,6 +1156,11 @@ class _StreakBadgeState extends State<_StreakBadge>
   // Frost turns much more slowly than fire flickers.
   static const Duration _fireLoop = Duration(milliseconds: 4200);
   static const Duration _frostLoop = Duration(milliseconds: 9000);
+  // The flame keeps flickering forever (that's what makes it read as
+  // "alive"), but a snowflake spinning on and on starts to feel like it's
+  // stuck rather than decorative — a handful of slow turns reads as a
+  // deliberate flourish, then it settles.
+  static const int _frostSpins = 4;
 
   late final AnimationController _controller;
 
@@ -991,7 +1175,16 @@ class _StreakBadgeState extends State<_StreakBadge>
     _controller = AnimationController(
       vsync: this,
       duration: _frozen ? _frostLoop : _fireLoop,
-    )..repeat();
+    );
+    _repeat();
+  }
+
+  void _repeat() {
+    if (_frozen) {
+      _controller.repeat(count: _frostSpins);
+    } else {
+      _controller.repeat();
+    }
   }
 
   @override
@@ -1001,9 +1194,8 @@ class _StreakBadgeState extends State<_StreakBadge>
     // which animation is playing, so the loop length has to follow.
     final Duration wanted = _frozen ? _frostLoop : _fireLoop;
     if (_controller.duration != wanted) {
-      _controller
-        ..duration = wanted
-        ..repeat();
+      _controller.duration = wanted;
+      _repeat();
     }
   }
 
@@ -1021,50 +1213,55 @@ class _StreakBadgeState extends State<_StreakBadge>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(
-            width: 108,
-            height: 108,
-            // Isolates this perpetually-animating subtree so it doesn't
-            // force repaints of the rest of the (potentially long) home
-            // screen list around it.
-            child: RepaintBoundary(
-              child: AnimatedBuilder(
-                animation: _controller,
-                // The shader + icon never actually change — only the
-                // Transform wrapping them does — so it's passed as `child`
-                // instead of being rebuilt on every one of the ~60 ticks/sec.
-                child: ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    return LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: _frozen
-                          ? const <Color>[
-                              Color(0xFF2196F3), // blue
-                              Color(0xFF4FC3F7), // light blue
-                              Color(0xFFB3E5FC), // near-white ice
-                            ]
-                          : const <Color>[
-                              Colors.deepOrange,
-                              Colors.orange,
-                              Colors.amber,
-                            ],
-                    ).createShader(rect);
-                  },
-                  child: Icon(
-                    _frozen
-                        ? Icons.ac_unit_rounded
-                        : Icons.local_fire_department_rounded,
-                    size: _frozen ? 78 : 92,
-                    color: Colors.white,
+          // Scoped to just the icon: the tap-8-times shake should jostle the
+          // flame/snowflake, not the streak number sitting below it.
+          TapEasterEgg(
+            onTriggered: widget.onIconTapEasterEgg,
+            child: SizedBox(
+              width: 108,
+              height: 108,
+              // Isolates this perpetually-animating subtree so it doesn't
+              // force repaints of the rest of the (potentially long) home
+              // screen list around it.
+              child: RepaintBoundary(
+                child: AnimatedBuilder(
+                  animation: _controller,
+                  // The shader + icon never actually change — only the
+                  // Transform wrapping them does — so it's passed as `child`
+                  // instead of being rebuilt on every one of the ~60 ticks/sec.
+                  child: ShaderMask(
+                    shaderCallback: (Rect rect) {
+                      return LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: _frozen
+                            ? const <Color>[
+                                Color(0xFF2196F3), // blue
+                                Color(0xFF4FC3F7), // light blue
+                                Color(0xFFB3E5FC), // near-white ice
+                              ]
+                            : const <Color>[
+                                Colors.deepOrange,
+                                Colors.orange,
+                                Colors.amber,
+                              ],
+                      ).createShader(rect);
+                    },
+                    child: Icon(
+                      _frozen
+                          ? Icons.ac_unit_rounded
+                          : Icons.local_fire_department_rounded,
+                      size: _frozen ? 78 : 92,
+                      color: Colors.white,
+                    ),
                   ),
+                  builder: (BuildContext context, Widget? child) {
+                    final double t = _controller.value * 2 * math.pi;
+                    return _frozen
+                        ? _buildFrost(t, child!)
+                        : _buildFlame(t, child!);
+                  },
                 ),
-                builder: (BuildContext context, Widget? child) {
-                  final double t = _controller.value * 2 * math.pi;
-                  return _frozen
-                      ? _buildFrost(t, child!)
-                      : _buildFlame(t, child!);
-                },
               ),
             ),
           ),
@@ -1205,7 +1402,7 @@ class _SectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.6)),
       ),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -1228,7 +1425,7 @@ class _SectionCard extends StatelessWidget {
           const SizedBox(height: 14),
           for (int i = 0; i < children.length; i++) ...<Widget>[
             children[i],
-            if (i != children.length - 1) const SizedBox(height: 12),
+            if (i != children.length - 1) const SizedBox(height: 10),
           ],
         ],
       ),
@@ -1263,21 +1460,25 @@ class _ContinueReadingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: onOpen,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14),
           child: Column(
             children: <Widget>[
               Row(
                 children: <Widget>[
                   Container(
-                    width: 52,
-                    height: 52,
+                    width: 44,
+                    height: 44,
                     decoration: BoxDecoration(
                       color: cs.primaryContainer,
-                      borderRadius: BorderRadius.circular(16),
+                      // 44/14 is the leading-icon size used by every other
+                      // list-item card in the app (achievements, quick
+                      // actions) — matches that instead of its own one-off.
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(
                       Icons.auto_stories_outlined,
                       color: cs.onPrimaryContainer,
+                      size: 22,
                     ),
                   ),
                   const SizedBox(width: 14),
@@ -1311,7 +1512,14 @@ class _ContinueReadingCard extends StatelessWidget {
                     child: FilledButton.icon(
                       onPressed: onOpen,
                       icon: const Icon(Icons.menu_book_outlined, size: 18),
-                      label: Text(l10n.homeOpenButton),
+                      // Some translations ("Segna come letto") don't fit this
+                      // half-width slot on one line at full size; scaling
+                      // down instead of wrapping keeps it on a single line
+                      // without cutting any of it off like ellipsis would.
+                      label: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(l10n.homeOpenButton, maxLines: 1),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -1319,7 +1527,18 @@ class _ContinueReadingCard extends StatelessWidget {
                     child: FilledButton.tonalIcon(
                       onPressed: onMarkRead,
                       icon: const Icon(Icons.check_circle_outline, size: 18),
-                      label: Text(l10n.homeMarkReadButton),
+                      label: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(l10n.homeMarkReadButton, maxLines: 1),
+                      ),
+                      // The default tonal secondaryContainer pairing reads too
+                      // faint sitting on this card's own light-blue tint;
+                      // secondary/onSecondary is the same family but a solid,
+                      // higher-contrast step darker.
+                      style: FilledButton.styleFrom(
+                        backgroundColor: cs.secondary,
+                        foregroundColor: cs.onSecondary,
+                      ),
                     ),
                   ),
                 ],
@@ -1407,7 +1626,11 @@ class _StreakAtRiskBanner extends StatelessWidget {
                     ),
                     Text(
                       l10n.homeStreakAtRiskSubtitle(freezeLabel),
-                      style: theme.textTheme.bodySmall?.copyWith(
+                      // bodyMedium, not bodySmall: this is a warning someone
+                      // needs to actually read, not a caption — matches the
+                      // subtitle size used by every other list-row-with-
+                      // description in the app (achievements, reminders).
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onErrorContainer.withValues(alpha: 0.9),
                       ),
                     ),
@@ -1648,12 +1871,16 @@ class _ProgressCard extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: _StatTile(
-                icon: Icons.local_fire_department_rounded,
+                // Matches the hero badge above: a live streak is a flame, a
+                // streak of zero is frozen rather than "still on fire at 0".
+                icon: streak > 0
+                    ? Icons.local_fire_department_rounded
+                    : Icons.ac_unit_rounded,
                 value: '$streak',
-                label: streak > 1
+                label: streak != 1
                     ? l10n.homeStatStreakDaysPlural
                     : l10n.homeStatStreakDaySingular,
-                color: cs.tertiary,
+                color: streak > 0 ? cs.tertiary : Colors.lightBlue,
               ),
             ),
             const SizedBox(width: 12),
@@ -1661,7 +1888,7 @@ class _ProgressCard extends StatelessWidget {
               child: _StatTile(
                 icon: Icons.menu_book_rounded,
                 value: '$totalReadings',
-                label: totalReadings > 1
+                label: totalReadings != 1
                     ? l10n.homeStatReadingsPlural
                     : l10n.homeStatReadingSingular,
                 color: cs.primary,
@@ -1672,7 +1899,7 @@ class _ProgressCard extends StatelessWidget {
               child: _StatTile(
                 icon: Icons.star_rounded,
                 value: '$totalStars',
-                label: totalStars > 1
+                label: totalStars != 1
                     ? l10n.homeStatStarsPlural
                     : l10n.homeStatStarSingular,
                 color: Colors.amber,
@@ -1815,7 +2042,7 @@ class _StatTile extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: cs.secondaryContainer.withValues(alpha: 0.35),
         borderRadius: BorderRadius.circular(20),
@@ -1825,11 +2052,13 @@ class _StatTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            width: 40,
-            height: 40,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.16),
-              borderRadius: BorderRadius.circular(12),
+              // Matches the 44/14 leading-icon convention used everywhere
+              // else in the app (achievements, quick actions, reading card).
+              borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(icon, color: color, size: 22),
           ),
@@ -1914,8 +2143,11 @@ class _QuickActionTile extends StatelessWidget {
     return Card.filled(
       margin: EdgeInsets.zero,
       color: cs.surfaceContainerHigh,
+      // Explicit radius matching the other leading-icon list card on this
+      // screen (_ContinueReadingCard) instead of Card's own implicit default.
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(14),
@@ -1943,7 +2175,10 @@ class _QuickActionTile extends StatelessWidget {
                     ),
                     Text(
                       subtitle,
-                      style: theme.textTheme.bodySmall?.copyWith(
+                      // Matches _AchievementTile's and ReminderRow's subtitle
+                      // size — this screen had drifted to one size smaller
+                      // for what's structurally the same list-row shape.
+                      style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurfaceVariant,
                       ),
                     ),
@@ -2011,26 +2246,38 @@ class _MiniReadingCalendar extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              activeCount > 1
+              activeCount != 1
                   ? l10n.homeActiveDaysPlural(activeCount)
                   : l10n.homeActiveDaysSingular(activeCount),
-              style: theme.textTheme.labelSmall?.copyWith(
+              style: theme.textTheme.labelMedium?.copyWith(
                 color: cs.onSurfaceVariant,
               ),
             ),
           ],
         ),
+        const SizedBox(height: 2),
+        Text(
+          DateFormat.yMMMM(
+            Localizations.localeOf(context).toString(),
+          ).format(now),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: cs.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: 10),
         Row(
+          // labelSmall at 55% opacity was the smallest, faintest text on the
+          // whole screen — these column headers need to stay visually
+          // secondary to the day numbers below them, but still legible.
           children: _weekdayLabels(l10n)
               .map(
                 (String label) => Expanded(
                   child: Center(
                     child: Text(
                       label,
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: cs.onSurfaceVariant.withValues(alpha: 0.55),
-                        fontWeight: FontWeight.w500,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: cs.onSurfaceVariant.withValues(alpha: 0.75),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -2122,7 +2369,7 @@ class _DayCell extends StatelessWidget {
         child: done
             ? Icon(Icons.check_rounded, size: 16, color: fg)
             : frozen
-            ? Icon(Icons.whatshot_rounded, size: 15, color: fg)
+            ? Icon(Icons.ac_unit_rounded, size: 15, color: fg)
             : Text(
                 '${day.day}',
                 style: theme.textTheme.labelMedium?.copyWith(

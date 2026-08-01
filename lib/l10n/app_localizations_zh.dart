@@ -485,6 +485,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLanguage => '语言';
 
   @override
+  String get settingsLanguageSystem => '跟随系统';
+
+  @override
   String get settingsPermissions => '权限';
 
   @override
@@ -535,6 +538,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsFooter => '怀着弟兄般的爱，制作于瑞士。\n本应用免费、自由、开源。';
+
+  @override
+  String get settingsUnaffiliated =>
+      'JW Streak 是一个独立的非官方项目，与耶和华见证人、守望台圣经书社（Watch Tower Bible and Tract Society）或 JW.org 均无关联。';
 
   @override
   String settingsError(String error) {
@@ -836,7 +843,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String homeChaptersReadCount(int read, int total) {
-    return '$read / $total 章';
+    final intl.NumberFormat readNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String readString = readNumberFormat.format(read);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return '$readString / $totalString 章';
   }
 
   @override
@@ -1097,6 +1112,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notesLibraryShareTooltip => '分享';
+
+  @override
+  String get notesLibraryExportAllTooltip => '导出我的笔记';
 
   @override
   String get notesLibraryDeleteTooltip => '删除';

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  flutter_local_notifications is handed the notification icon as a raw string
+  ('ic_stat_notify') at runtime, so the resource shrinker never sees a static
+  reference to it and strips it from release builds — the app then crashes on
+  startup with PlatformException(invalid_icon, ...) the first time it tries to
+  initialize notifications. This keeps it (and the launcher icon, for the same
+  reason belt-and-braces) regardless of what the shrinker can prove is used.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_notify,@mipmap/ic_launcher" />

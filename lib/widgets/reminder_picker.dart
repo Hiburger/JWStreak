@@ -161,8 +161,16 @@ class ReminderPresetChip extends StatelessWidget {
             children: <Widget>[
               Icon(preset.icon, color: fg, size: 22),
               const SizedBox(height: 6),
+              // Some translations ("Mezzogiorno", "Południe", "Mediodía")
+              // run noticeably longer than the English source; without a
+              // line cap they'd wrap to two lines, left-aligned inside this
+              // centered chip, which reads as a ragged, awkward break rather
+              // than a deliberate one.
               Text(
                 preset.label,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: fg,
                   fontWeight: FontWeight.w700,

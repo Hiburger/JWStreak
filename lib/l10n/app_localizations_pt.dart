@@ -515,6 +515,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsLanguage => 'Idioma';
 
   @override
+  String get settingsLanguageSystem => 'Sistema';
+
+  @override
   String get settingsPermissions => 'Permissões';
 
   @override
@@ -568,6 +571,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get settingsFooter =>
       'Feito com amor fraternal, desde a Suíça.\nEste aplicativo é gratuito, livre e de código aberto.';
+
+  @override
+  String get settingsUnaffiliated =>
+      'JW Streak é um projeto independente e não oficial, sem afiliação com as Testemunhas de Jeová, a Watch Tower Bible and Tract Society, ou JW.org.';
 
   @override
   String settingsError(String error) {
@@ -876,7 +883,15 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String homeChaptersReadCount(int read, int total) {
-    return '$read / $total capítulos';
+    final intl.NumberFormat readNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String readString = readNumberFormat.format(read);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return '$readString / $totalString capítulos';
   }
 
   @override
@@ -1140,6 +1155,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get notesLibraryShareTooltip => 'Compartilhar';
+
+  @override
+  String get notesLibraryExportAllTooltip => 'Exportar as minhas notas';
 
   @override
   String get notesLibraryDeleteTooltip => 'Excluir';

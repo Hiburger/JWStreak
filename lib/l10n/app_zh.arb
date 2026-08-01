@@ -165,6 +165,7 @@
   "settingsBibleTargetJwLibraryMissing": "以这种方式打开圣经需要 JW Library 应用。要安装吗？",
   "settingsBibleTargetInstall": "安装",
   "settingsLanguage": "语言",
+  "settingsLanguageSystem": "跟随系统",
   "settingsPermissions": "权限",
   "settingsNotifPermTitle": "通知权限",
   "settingsChecking": "检查中…",
@@ -182,6 +183,7 @@
   "settingsLicenseLegalese": "JW Streak 是根据 GNU 通用公共许可证 v3 授权的自由软件。以下许可证涵盖了构成本应用的开源组件。",
   "settingsQuestion": "有问题？",
   "settingsFooter": "怀着弟兄般的爱，制作于瑞士。\n本应用免费、自由、开源。",
+  "settingsUnaffiliated": "JW Streak 是一个独立的非官方项目，与耶和华见证人、守望台圣经书社（Watch Tower Bible and Tract Society）或 JW.org 均无关联。",
   "settingsError": "错误：{error}",
 
   "reminderPresetMorning": "早上",
@@ -351,6 +353,7 @@
   "notesLibrarySelectedCountSingular": "已选择 {count} 项",
   "notesLibrarySelectedCountPlural": "已选择 {count} 项",
   "notesLibraryShareTooltip": "分享",
+  "notesLibraryExportAllTooltip": "导出我的笔记",
   "notesLibraryDeleteTooltip": "删除",
   "notesLibraryJustNow": "刚刚",
   "notesLibraryMinutesAgo": "{minutes} 分钟前",

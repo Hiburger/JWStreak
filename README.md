@@ -1,6 +1,8 @@
 
 # JW Streak 🫶
 
+> **Unofficial, independent project.** JW Streak is not affiliated with, endorsed by, or connected to Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal, fan-made tool that links out to JW.org / JW Library for their own content — it doesn't host, redistribute, or claim to represent that content as its own.
+
 Hi! 
 JW Streak (JWS) is a friendly Flutter application (Android, Material 3 Expressive) that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for Jehovah’s Witnesses, anyone can use and enjoy it.
 
@@ -120,6 +122,8 @@ Hiiiii if you have something to say please do at contact@olynthe.org
 
 
 # JW Streak
+
+> **Projet indépendant et non officiel.** JW Streak n'est affilié à, approuvé par, ou connecté d'aucune manière aux Témoins de Jéhovah, à la Watch Tower Bible and Tract Society, ou à JW.org. C'est un outil personnel, créé par un fan, qui renvoie simplement vers JW.org / JW Library pour leur propre contenu — il ne l'héberge pas, ne le redistribue pas, et ne prétend pas le représenter.
 
 Salut ! 
 JW Streak (JWS) est une application Flutter conviviale (Android, Material 3 Expressive) qui aide à maintenir une habitude de lecture quotidienne de la Bible, avec des quiz, un système de série, des succès et des notes personnelles. Tout cela **100% local, aucun compte ou serveur requis**. Bien que j'ai créé JWS pour les Témoins de Jéhovah, tout le monde peut l'utiliser et en profiter.

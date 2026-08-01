@@ -123,7 +123,14 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
       showMessageDialog(context, message: l10n.reminderAlreadyExists);
       return;
     }
-    await _ensureNotificationsReady();
+    try {
+      await _ensureNotificationsReady();
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+      return;
+    }
     // The permission prompt (if any) already happened inside
     // _ensureNotificationsReady; without it, a saved reminder would just sit
     // there and never actually ring, so don't persist it — show the warning
@@ -176,6 +183,14 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
     await _load();
   }
 
+  void _showError(Object error) {
+    showMessageDialog(
+      context,
+      message: AppLocalizations.of(context)!.settingsError(error.toString()),
+      isError: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -210,10 +225,14 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
                                 constraints: BoxConstraints(
                                   minHeight: constraints.maxHeight - 20,
                                 ),
+                                // Always anchored to the top: centering while
+                                // empty pushed the title down and wasted the
+                                // space above it, which is the opposite of
+                                // what a "here's what to do" first screen
+                                // needs — more breathing room below the title,
+                                // not above it.
                                 child: Column(
-                                  mainAxisAlignment: hasReminders
-                                      ? MainAxisAlignment.start
-                                      : MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       l10n.onbReminderTitle,
@@ -389,7 +408,7 @@ class _NotificationPermissionWarning extends StatelessWidget {
           Expanded(
             child: Text(
               l10n.onbReminderPermissionMissing,
-              style: theme.textTheme.bodyMedium?.copyWith(
+              style: theme.textTheme.bodyLarge?.copyWith(
                 color: cs.onErrorContainer,
               ),
             ),
@@ -431,7 +450,7 @@ class _TipCard extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: theme.textTheme.bodyMedium?.copyWith(
+              style: theme.textTheme.bodyLarge?.copyWith(
                 color: kAccentAmber.foreground(context),
                 height: 1.35,
               ),

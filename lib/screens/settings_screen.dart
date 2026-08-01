@@ -23,7 +23,14 @@ class _AppLanguage {
   final String name;
 }
 
+/// The `null`-code entry is what makes "follow the system language" — the
+/// default on a fresh install — actually selectable *and* visibly selected.
+/// Without it the picker had no chip matching a null preference, so a new
+/// user saw a correctly-translated app above a picker with nothing chosen.
+/// Its label is the only one localized rather than an endonym: it names a
+/// behaviour, not a language.
 const List<_AppLanguage> _kAppLanguages = <_AppLanguage>[
+  _AppLanguage(null, ''),
   _AppLanguage('en', 'English (US)'),
   _AppLanguage('fr', 'Français'),
   _AppLanguage('de', 'Deutsch'),
@@ -325,7 +332,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     try {
       await callback(code);
-      await Future.delayed(const Duration(milliseconds: 1200));
+      // Just long enough for the fade-in/fade-out of the loading screen to
+      // read as a deliberate transition rather than a flash — the locale
+      // switch itself is near-instant, so this used to sit idle for a full
+      // extra second after everything was already done.
+      await Future.delayed(const Duration(milliseconds: 300));
     } catch (error) {
       if (mounted) {
         _showError(error);
@@ -395,6 +406,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final bool exactAlarmsAllowed = _exactAlarmsAllowed ?? false;
 
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    // +2dp over Card's own implicit ~12dp default, with an outline so each
+    // section reads as a distinct, bordered block instead of a borderless
+    // tonal fill blending into the page background.
+    final RoundedRectangleBorder sectionShape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(14),
+      side: BorderSide(color: cs.outlineVariant),
+    );
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
@@ -406,6 +425,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Wrap(
@@ -425,6 +445,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: SwitchListTile(
               title: Text(l10n.settingsDynamicColor),
               subtitle: Text(
@@ -440,6 +461,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: SwitchListTile(
               secondary: Icon(
                 _openInJwLibrary
@@ -463,6 +485,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Wrap(
@@ -471,7 +494,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: _kAppLanguages
                     .map(
                       (_AppLanguage lang) => ChoiceChip(
-                        label: Text(lang.name),
+                        label: Text(
+                          lang.code == null
+                              ? l10n.settingsLanguageSystem
+                              : lang.name,
+                        ),
                         selected: _selectedLocaleCode == lang.code,
                         onSelected: widget.onLocaleChanged == null
                             ? null
@@ -489,6 +516,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: SwitchListTile(
               secondary: Icon(
                 _appLockEnabled ? Icons.lock_rounded : Icons.lock_open_rounded,
@@ -509,6 +537,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 16),
           Card.filled(
+            shape: sectionShape,
             child: ListTile(
               leading: const Icon(Icons.explore_outlined),
               title: Text(l10n.settingsReplayTour),
@@ -524,6 +553,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: ListTile(
               leading: Icon(
                 notificationsEnabled ? Icons.check_circle : Icons.warning_amber,
@@ -548,6 +578,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: ListTile(
               leading: Icon(
                 exactAlarmsAllowed ? Icons.check_circle : Icons.warning_amber,
@@ -577,6 +608,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card.filled(
+            shape: sectionShape,
             child: Column(
               children: <Widget>[
                 ListTile(
@@ -593,16 +625,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () => _openExternal(Uri.parse(kGithubRepoUrl)),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.edit_outlined),
-                  title: Text(l10n.settingsLicense),
-                  subtitle: const Text('GNU GPLv3'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: _showLicenses,
-                ),
-                ListTile(
                   leading: const Icon(Icons.waving_hand),
                   title: Text(l10n.settingsQuestion),
                   subtitle: const Text(kSupportEmail),
+                  trailing: const Icon(Icons.open_in_new_rounded, size: 20),
                   onTap: () => _openExternal(
                     Uri(
                       scheme: 'mailto',
@@ -613,6 +639,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
+                ListTile(
+                  leading: const Icon(Icons.edit_outlined),
+                  title: Text(l10n.settingsLicense),
+                  subtitle: const Text('GNU GPLv3'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: _showLicenses,
+                ),
               ],
             ),
           ),
@@ -621,6 +654,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             l10n.settingsFooter,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.settingsUnaffiliated,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 32),
           const Padding(

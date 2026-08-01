@@ -66,6 +66,58 @@ kotlin {
     }
 }
 
+// AGP 9's public Variant API dropped VariantOutput.outputFileName, and even
+// on older AGP versions it wouldn't have mattered: Flutter's own Gradle
+// plugin (FlutterPlugin.kt) always copies the built APK into
+// build/app/outputs/flutter-apk/ and force-renames that copy to the generic
+// "app-<buildmode>.apk", via its own doLast on this same assemble task —
+// registered earlier (the plugin applies before this block runs), so it
+// always executes first. This doLast picks up right after it: copies that
+// file under a name that actually identifies the build, and clears out this
+// build type's previous custom-named copies first (matched by buildmode, so
+// a release build never deletes a debug one or vice versa) instead of
+// letting them pile up run after run. app-<buildmode>.apk itself is left in
+// place alongside the copy — `flutter build` checks for that exact file
+// right after Gradle exits and reports the build as failed if it's gone.
+androidComponents {
+    onVariants { variant ->
+        val buildTypeName = variant.buildType ?: variant.name
+        val assembleTaskName = "assemble${variant.name.replaceFirstChar(Char::uppercase)}"
+        // onVariants fires during configuration, before AGP is guaranteed to
+        // have registered its own assemble<Variant> task yet — tasks.named
+        // would fail outright ("task not found") if it hasn't. afterEvaluate
+        // waits until the whole project is configured, when it always has.
+        project.afterEvaluate {
+            tasks.named(assembleTaskName).configure {
+                doLast {
+                    val outputDir =
+                        rootProject.projectDir.parentFile.resolve("build/app/outputs/flutter-apk")
+                    val defaultApk = outputDir.resolve("app-$buildTypeName.apk")
+                    if (!defaultApk.exists()) {
+                        return@doLast
+                    }
+                    outputDir
+                        .listFiles { f ->
+                            f.extension == "apk" &&
+                                f.name.startsWith("JWStreak-") &&
+                                f.name.endsWith("-$buildTypeName.apk")
+                        }
+                        ?.forEach { it.delete() }
+                    val renamed = outputDir.resolve(
+                        "JWStreak-${flutter.versionName}+${flutter.versionCode}-$buildTypeName.apk"
+                    )
+                    // Leaves app-<buildmode>.apk in place rather than deleting
+                    // it: the `flutter` command checks for that exact file
+                    // right after Gradle exits and reports the build as
+                    // failed if it's gone, even though this renamed copy
+                    // built successfully right next to it.
+                    defaultApk.copyTo(renamed, overwrite = true)
+                }
+            }
+        }
+    }
+}
+
 flutter {
     source = "../.."
 }

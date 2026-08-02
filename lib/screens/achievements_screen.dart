@@ -3,19 +3,26 @@ import 'package:flutter/material.dart';
 import '../achievements_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
+import '../widgets/responsive_body.dart';
 
 /// Localized title/description for one achievement id. Kept separate from
 /// [kAchievementDefs] since that list is plain data (no BuildContext).
 (String, String) _achievementText(AppLocalizations l10n, String id) {
   switch (id) {
     case 'first_chapter':
-      return (l10n.achievementFirstChapterTitle, l10n.achievementFirstChapterDesc);
+      return (
+        l10n.achievementFirstChapterTitle,
+        l10n.achievementFirstChapterDesc,
+      );
     case 'chapters_10':
       return (l10n.achievementChapters10Title, l10n.achievementChapters10Desc);
     case 'chapters_50':
       return (l10n.achievementChapters50Title, l10n.achievementChapters50Desc);
     case 'chapters_150':
-      return (l10n.achievementChapters150Title, l10n.achievementChapters150Desc);
+      return (
+        l10n.achievementChapters150Title,
+        l10n.achievementChapters150Desc,
+      );
     case 'genesis_complete':
       return (l10n.achievementGenesisTitle, l10n.achievementGenesisDesc);
     case 'whole_bible':
@@ -31,7 +38,10 @@ import '../services/local_db_service.dart';
     case 'quizzes_40':
       return (l10n.achievementQuizzes40Title, l10n.achievementQuizzes40Desc);
     case 'perfect_quiz':
-      return (l10n.achievementPerfectQuizTitle, l10n.achievementPerfectQuizDesc);
+      return (
+        l10n.achievementPerfectQuizTitle,
+        l10n.achievementPerfectQuizDesc,
+      );
     case 'stars_20':
       return (l10n.achievementStars20Title, l10n.achievementStars20Desc);
     case 'stars_40':
@@ -132,69 +142,84 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.achievementsTitle)),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              // Matches the home screen's streak hero card instead of a flat
-              // (previously light-blue-reading) container color.
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[cs.primaryContainer, cs.tertiaryContainer],
+      body: ResponsiveBody(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                // Matches the home screen's streak hero card instead of a flat
+                // (previously light-blue-reading) container color.
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[cs.primaryContainer, cs.tertiaryContainer],
+                ),
+                borderRadius: BorderRadius.circular(20),
               ),
-              borderRadius: BorderRadius.circular(20),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.emoji_events_rounded,
+                    color: cs.onPrimaryContainer,
+                    size: 32,
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          l10n.achievementsUnlockedCount(
+                            unlockedCount,
+                            kAchievementDefs.length,
+                          ),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: cs.onPrimaryContainer,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: LinearProgressIndicator(
+                            value: kAchievementDefs.isEmpty
+                                ? 0
+                                : unlockedCount / kAchievementDefs.length,
+                            minHeight: 8,
+                            backgroundColor: cs.onPrimaryContainer.withValues(
+                              alpha: 0.15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.emoji_events_rounded, color: cs.onPrimaryContainer, size: 32),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        l10n.achievementsUnlockedCount(unlockedCount, kAchievementDefs.length),
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: cs.onPrimaryContainer,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: LinearProgressIndicator(
-                          value: kAchievementDefs.isEmpty
-                              ? 0
-                              : unlockedCount / kAchievementDefs.length,
-                          minHeight: 8,
-                          backgroundColor: cs.onPrimaryContainer.withValues(alpha: 0.15),
-                        ),
-                      ),
-                    ],
+            for (final AchievementCategory category
+                in AchievementCategory.values)
+              if (byCategory[category]
+                  case final List<AchievementDef> defs?) ...<Widget>[
+                const SizedBox(height: 24),
+                Text(
+                  _sectionTitle(l10n, category),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
+                const SizedBox(height: 8),
+                for (final AchievementDef def in defs)
+                  _AchievementTile(
+                    def: def,
+                    stats: stats,
+                    unlocked: _unlockedIds.contains(def.id),
+                  ),
               ],
-            ),
-          ),
-          for (final AchievementCategory category in AchievementCategory.values)
-            if (byCategory[category] case final List<AchievementDef> defs?) ...<Widget>[
-              const SizedBox(height: 24),
-              Text(
-                _sectionTitle(l10n, category),
-                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 8),
-              for (final AchievementDef def in defs)
-                _AchievementTile(
-                  def: def,
-                  stats: stats,
-                  unlocked: _unlockedIds.contains(def.id),
-                ),
-            ],
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -233,7 +258,9 @@ class _AchievementTile extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: unlocked ? cs.tertiaryContainer : cs.surfaceContainerHighest,
+                color: unlocked
+                    ? cs.tertiaryContainer
+                    : cs.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(
@@ -257,9 +284,13 @@ class _AchievementTile extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     description,
-                    style: theme.textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
                   ),
-                  if (goal != null && progress != null && !unlocked) ...<Widget>[
+                  if (goal != null &&
+                      progress != null &&
+                      !unlocked) ...<Widget>[
                     const SizedBox(height: 8),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(6),
@@ -271,8 +302,13 @@ class _AchievementTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      l10n.achievementsProgressFraction(progress.clamp(0, goal), goal),
-                      style: theme.textTheme.labelSmall?.copyWith(color: cs.onSurfaceVariant),
+                      l10n.achievementsProgressFraction(
+                        progress.clamp(0, goal),
+                        goal,
+                      ),
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: cs.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ],

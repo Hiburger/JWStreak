@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 import 'note_reader_screen.dart';
 import 'notes_screen.dart';
 
@@ -113,7 +114,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
       context: context,
       builder: (BuildContext dialogContext) => AlertDialog(
         icon: const Icon(Icons.delete_outline),
-        title: Text(AppLocalizations.of(dialogContext)!.notesLibraryDeleteDialogTitle),
+        title: Text(
+          AppLocalizations.of(dialogContext)!.notesLibraryDeleteDialogTitle,
+        ),
         content: Text(message),
         actions: <Widget>[
           TextButton(
@@ -181,7 +184,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final bool ok = await _confirmDeleteMessage(
       count == 1
-          ? l10n.notesLibraryDeleteConfirmSingular(selected.first.displayTitle(context))
+          ? l10n.notesLibraryDeleteConfirmSingular(
+              selected.first.displayTitle(context),
+            )
           : l10n.notesLibraryDeleteConfirmPlural(count),
     );
     if (!ok) {
@@ -282,85 +287,95 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                 foregroundColor: colorScheme.onPrimaryContainer,
                 elevation: 0,
               ),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: Column(
-            children: <Widget>[
-              SearchBar(
-                controller: _searchController,
-                hintText: AppLocalizations.of(context)!.notesLibrarySearchHint,
-                leading: const Padding(
-                  padding: EdgeInsets.only(left: 4),
-                  child: Icon(Icons.search),
-                ),
-                onChanged: _onSearchChanged,
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+        body: ResponsiveBody(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            child: Column(
+              children: <Widget>[
+                SearchBar(
+                  controller: _searchController,
+                  hintText: AppLocalizations.of(
+                    context,
+                  )!.notesLibrarySearchHint,
+                  leading: const Padding(
+                    padding: EdgeInsets.only(left: 4),
+                    child: Icon(Icons.search),
+                  ),
+                  onChanged: _onSearchChanged,
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  backgroundColor: WidgetStatePropertyAll(
+                    colorScheme.surfaceContainerHighest,
+                  ),
+                  shadowColor: const WidgetStatePropertyAll(Colors.transparent),
+                  surfaceTintColor: WidgetStatePropertyAll(
+                    colorScheme.surfaceTint,
                   ),
                 ),
-                backgroundColor: WidgetStatePropertyAll(
-                  colorScheme.surfaceContainerHighest,
-                ),
-                shadowColor: const WidgetStatePropertyAll(Colors.transparent),
-                surfaceTintColor: WidgetStatePropertyAll(
-                  colorScheme.surfaceTint,
-                ),
-              ),
-              if (!_selectionMode && !_isLoading && _notes.isNotEmpty) ...<Widget>[
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.tonalIcon(
-                    onPressed: _exportAll,
-                    icon: const Icon(Icons.ios_share_rounded, size: 20),
-                    label: Text(
-                      AppLocalizations.of(context)!.notesLibraryExportAllTooltip,
-                    ),
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(48),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                if (!_selectionMode &&
+                    !_isLoading &&
+                    _notes.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.tonalIcon(
+                      onPressed: _exportAll,
+                      icon: const Icon(Icons.ios_share_rounded, size: 20),
+                      label: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.notesLibraryExportAllTooltip,
+                      ),
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size.fromHeight(48),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
                     ),
                   ),
+                ],
+                const SizedBox(height: 12),
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: _isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : _notes.isEmpty
+                        ? _EmptyNotesState(
+                            isSearching: _query.trim().isNotEmpty,
+                          )
+                        : ListView.separated(
+                            padding: const EdgeInsets.only(bottom: 96),
+                            itemCount: _notes.length,
+                            separatorBuilder: (_, _) =>
+                                const SizedBox(height: 8),
+                            itemBuilder: (_, int index) {
+                              final NoteEntry note = _notes[index];
+                              return _NoteCard(
+                                note: note,
+                                selectionMode: _selectionMode,
+                                selected: _selectedIds.contains(note.id),
+                                onTap: () {
+                                  if (_selectionMode) {
+                                    _toggleSelect(note);
+                                  } else {
+                                    _openReader(note);
+                                  }
+                                },
+                                onLongPress: () => _toggleSelect(note),
+                                confirmDismiss: () => _confirmSwipeDelete(note),
+                                onDismissed: () => _removeNoteFromList(note),
+                              );
+                            },
+                          ),
+                  ),
                 ),
               ],
-              const SizedBox(height: 12),
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  child: _isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : _notes.isEmpty
-                      ? _EmptyNotesState(isSearching: _query.trim().isNotEmpty)
-                      : ListView.separated(
-                          padding: const EdgeInsets.only(bottom: 96),
-                          itemCount: _notes.length,
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(height: 8),
-                          itemBuilder: (_, int index) {
-                            final NoteEntry note = _notes[index];
-                            return _NoteCard(
-                              note: note,
-                              selectionMode: _selectionMode,
-                              selected: _selectedIds.contains(note.id),
-                              onTap: () {
-                                if (_selectionMode) {
-                                  _toggleSelect(note);
-                                } else {
-                                  _openReader(note);
-                                }
-                              },
-                              onLongPress: () => _toggleSelect(note),
-                              confirmDismiss: () => _confirmSwipeDelete(note),
-                              onDismissed: () => _removeNoteFromList(note),
-                            );
-                          },
-                        ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -368,9 +383,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   }
 
   AppBar _buildNormalAppBar() {
-    return AppBar(
-      title: Text(AppLocalizations.of(context)!.notesLibraryTitle),
-    );
+    return AppBar(title: Text(AppLocalizations.of(context)!.notesLibraryTitle));
   }
 
   AppBar _buildSelectionAppBar() {
@@ -466,7 +479,10 @@ class _NoteCard extends StatelessWidget {
                   ),
                   if (!selectionMode) ...<Widget>[
                     const SizedBox(width: 8),
-                    Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant),
+                    Icon(
+                      Icons.chevron_right,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ],
                 ],
               ),

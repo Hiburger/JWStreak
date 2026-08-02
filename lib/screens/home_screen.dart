@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../achievements_data.dart';
+import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
@@ -15,6 +16,7 @@ import '../theme/theme_preference.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/guided_tour.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 import '../widgets/tap_easter_egg.dart';
 import 'achievements_screen.dart';
 import 'bible_browser_screen.dart';
@@ -528,10 +530,20 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openNotesEditor() async {
-    // No noteId: opens the editor on a brand-new note linked to Genesis 1.
+    // No noteId: opens the editor on a brand-new note. Linked to today's
+    // chapter (the same one shown on the "continue reading" card) rather
+    // than always Genesis 1 — a note written from the home screen should be
+    // about whatever the user is actually reading, not a hardcoded default.
+    // Only falls back to Genesis 1 when the whole Bible is already read,
+    // since there's no "next chapter" left to attach it to at that point.
+    final _ChapterRef? current = _nextChapter;
     final bool? changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
-        builder: (_) => NotesScreen(dbService: _dbService),
+        builder: (_) => NotesScreen(
+          dbService: _dbService,
+          book: current?.book.id ?? kDefaultBook,
+          chapter: current?.chapter ?? kDefaultChapter,
+        ),
       ),
     );
     if (changed == true) {
@@ -643,78 +655,80 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
-        children: <Widget>[
-          _StreakHero(
-            key: _tourStreakKey,
-            streak: _streak,
-            freezes: _streakState.freezes,
-            readToday: readToday,
-            reminderLabel: reminderLabel,
-            onConfigureReminder: _configureReminder,
-          ),
-          if (streakAtRisk) ...<Widget>[
-            const SizedBox(height: 12),
-            _StreakAtRiskBanner(
+      body: ResponsiveBody(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+          children: <Widget>[
+            _StreakHero(
+              key: _tourStreakKey,
+              streak: _streak,
               freezes: _streakState.freezes,
-              onEarnFreeze: _openReviewQuiz,
+              readToday: readToday,
+              reminderLabel: reminderLabel,
+              onConfigureReminder: _configureReminder,
             ),
-          ],
-          const SizedBox(height: 32),
-          _SectionCard(
-            title: l10n.homeSectionReadingTitle,
-            subtitle: l10n.homeSectionReadingSubtitle,
-            children: <Widget>[
-              if (nextChapter != null)
-                _ContinueReadingCard(
-                  key: _tourReadingKey,
-                  reference:
-                      '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
-                  onOpen: () =>
-                      _openChapter(nextChapter.book.id, nextChapter.chapter),
-                  onMarkRead: () => _markChapterRead(
-                    nextChapter.book.id,
-                    nextChapter.chapter,
-                  ),
-                )
-              else
-                _AllReadCard(key: _tourReadingKey),
-              if (pendingCheckpoint != null)
-                _CheckpointBanner(
-                  checkpoint: pendingCheckpoint,
-                  onTap: () => _openCheckpoint(pendingCheckpoint),
-                ),
-              _BrowseBibleTile(key: _tourBrowseKey, onTap: _openBibleBrowser),
-            ],
-          ),
-          const SizedBox(height: 24),
-          _SectionCard(
-            title: l10n.homeSectionProgressTitle,
-            children: <Widget>[
-              _ProgressCard(
-                key: _tourProgressKey,
-                streak: _streak,
-                totalReadings: _totalReadings,
-                totalStars: _totalStars,
-                lastReadAt: _lastReadAt,
-                recentReadingDays: _recentReadingDays,
-                frozenDays: _frozenDays,
-                chaptersRead: chaptersRead,
-                totalChapters: kTotalBibleChapters,
+            if (streakAtRisk) ...<Widget>[
+              const SizedBox(height: 12),
+              _StreakAtRiskBanner(
+                freezes: _streakState.freezes,
+                onEarnFreeze: _openReviewQuiz,
               ),
             ],
-          ),
-          const SizedBox(height: 32),
-          _SectionHeader(title: l10n.homeSectionQuickActions),
-          const SizedBox(height: 12),
-          _QuickActions(
-            key: _tourQuickActionsKey,
-            onOpenDailyText: _openDailyTextLink,
-            onWriteNote: _openNotesEditor,
-            onReadNotes: _openNotesLibrary,
-          ),
-        ],
+            const SizedBox(height: 32),
+            _SectionCard(
+              title: l10n.homeSectionReadingTitle,
+              subtitle: l10n.homeSectionReadingSubtitle,
+              children: <Widget>[
+                if (nextChapter != null)
+                  _ContinueReadingCard(
+                    key: _tourReadingKey,
+                    reference:
+                        '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
+                    onOpen: () =>
+                        _openChapter(nextChapter.book.id, nextChapter.chapter),
+                    onMarkRead: () => _markChapterRead(
+                      nextChapter.book.id,
+                      nextChapter.chapter,
+                    ),
+                  )
+                else
+                  _AllReadCard(key: _tourReadingKey),
+                if (pendingCheckpoint != null)
+                  _CheckpointBanner(
+                    checkpoint: pendingCheckpoint,
+                    onTap: () => _openCheckpoint(pendingCheckpoint),
+                  ),
+                _BrowseBibleTile(key: _tourBrowseKey, onTap: _openBibleBrowser),
+              ],
+            ),
+            const SizedBox(height: 24),
+            _SectionCard(
+              title: l10n.homeSectionProgressTitle,
+              children: <Widget>[
+                _ProgressCard(
+                  key: _tourProgressKey,
+                  streak: _streak,
+                  totalReadings: _totalReadings,
+                  totalStars: _totalStars,
+                  lastReadAt: _lastReadAt,
+                  recentReadingDays: _recentReadingDays,
+                  frozenDays: _frozenDays,
+                  chaptersRead: chaptersRead,
+                  totalChapters: kTotalBibleChapters,
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+            _SectionHeader(title: l10n.homeSectionQuickActions),
+            const SizedBox(height: 12),
+            _QuickActions(
+              key: _tourQuickActionsKey,
+              onOpenDailyText: _openDailyTextLink,
+              onWriteNote: _openNotesEditor,
+              onReadNotes: _openNotesLibrary,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -823,7 +837,11 @@ class _SlidingGradientTransform extends GradientTransform {
 }
 
 class _SkeletonBlock extends StatelessWidget {
-  const _SkeletonBlock({required this.height, this.width, required this.radius});
+  const _SkeletonBlock({
+    required this.height,
+    this.width,
+    required this.radius,
+  });
 
   final double height;
   final double? width;

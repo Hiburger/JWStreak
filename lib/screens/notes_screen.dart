@@ -6,6 +6,7 @@ import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../widgets/markdown_editing_controller.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 
 /// Note editor. With [noteId] it edits an existing note; without it,
 /// it creates a new note linked to [book]/[chapter].
@@ -94,7 +95,9 @@ class _NotesScreenState extends State<NotesScreen> {
       // The inline errorText below already surfaces this; no need to also
       // interrupt with a dialog.
       setState(
-        () => _titleError = AppLocalizations.of(context)!.noteEditorTitleErrorHint,
+        () => _titleError = AppLocalizations.of(
+          context,
+        )!.noteEditorTitleErrorHint,
       );
       return;
     }
@@ -138,7 +141,9 @@ class _NotesScreenState extends State<NotesScreen> {
   void _showError(Object error) {
     showMessageDialog(
       context,
-      message: AppLocalizations.of(context)!.noteEditorErrorSnackbar(error.toString()),
+      message: AppLocalizations.of(
+        context,
+      )!.noteEditorErrorSnackbar(error.toString()),
       isError: true,
     );
   }
@@ -169,7 +174,9 @@ class _NotesScreenState extends State<NotesScreen> {
                   size: 20,
                   color: colorScheme.onSecondaryContainer,
                 ),
-                label: Text(displayReference(context, widget.book, widget.chapter)),
+                label: Text(
+                  displayReference(context, widget.book, widget.chapter),
+                ),
                 labelStyle: theme.textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSecondaryContainer,
                   fontWeight: FontWeight.w600,
@@ -204,64 +211,68 @@ class _NotesScreenState extends State<NotesScreen> {
         foregroundColor: colorScheme.onPrimaryContainer,
         elevation: 0,
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-            child: TextField(
-              controller: _titleController,
-              textCapitalization: TextCapitalization.sentences,
-              onChanged: (_) {
-                if (_titleError != null) {
-                  setState(() => _titleError = null);
-                }
-              },
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.noteEditorTitleHint,
-                hintStyle: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
-                ),
-                border: InputBorder.none,
-                errorText: _titleError,
-              ),
-            ),
-          ),
-          Divider(
-            height: 1,
-            indent: 20,
-            endIndent: 20,
-            color: colorScheme.outlineVariant,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+      body: ResponsiveBody(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
               child: TextField(
-                controller: _contentController,
-                expands: true,
-                maxLines: null,
-                minLines: null,
+                controller: _titleController,
                 textCapitalization: TextCapitalization.sentences,
-                textAlignVertical: TextAlignVertical.top,
-                inputFormatters: <TextInputFormatter>[
-                  MarkdownListContinuationFormatter(),
-                ],
-                style: theme.textTheme.bodyLarge,
+                onChanged: (_) {
+                  if (_titleError != null) {
+                    setState(() => _titleError = null);
+                  }
+                },
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.noteEditorBodyHint,
-                  hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                  hintText: AppLocalizations.of(context)!.noteEditorTitleHint,
+                  hintStyle: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
                     color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
                   ),
                   border: InputBorder.none,
+                  errorText: _titleError,
                 ),
               ),
             ),
-          ),
-          const _MarkdownHelpBanner(),
-        ],
+            Divider(
+              height: 1,
+              indent: 20,
+              endIndent: 20,
+              color: colorScheme.outlineVariant,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+                child: TextField(
+                  controller: _contentController,
+                  expands: true,
+                  maxLines: null,
+                  minLines: null,
+                  textCapitalization: TextCapitalization.sentences,
+                  textAlignVertical: TextAlignVertical.top,
+                  inputFormatters: <TextInputFormatter>[
+                    MarkdownListContinuationFormatter(),
+                  ],
+                  style: theme.textTheme.bodyLarge,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.noteEditorBodyHint,
+                    hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.5,
+                      ),
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+            ),
+            const _MarkdownHelpBanner(),
+          ],
+        ),
       ),
     );
   }
@@ -334,7 +345,9 @@ class _MarkdownHelpBanner extends StatelessWidget {
                         style: tipStyle,
                       ),
                       Text(
-                        AppLocalizations.of(context)!.noteEditorTipStrikethrough,
+                        AppLocalizations.of(
+                          context,
+                        )!.noteEditorTipStrikethrough,
                         style: tipStyle,
                       ),
                       Text(

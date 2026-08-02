@@ -10,6 +10,7 @@ import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 import 'checkpoint_screen.dart';
 import 'quiz_screen.dart';
 
@@ -79,27 +80,32 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.bibleAppTitle)),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-              children: <Widget>[
-                _TotalStarsBanner(
-                  earned: _starsByBook.values.fold<int>(0, (int a, int b) => a + b),
-                  max: totalMaxStars(),
-                ),
-                const SizedBox(height: 16),
-                _GroupHeader(
-                  title: AppLocalizations.of(context)!.bibleHebrewScriptures,
-                ),
-                ...ot.map(_bookTile),
-                const SizedBox(height: 20),
-                _GroupHeader(
-                  title: AppLocalizations.of(context)!.bibleGreekScriptures,
-                ),
-                ...nt.map(_bookTile),
-              ],
-            ),
+      body: ResponsiveBody(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+                children: <Widget>[
+                  _TotalStarsBanner(
+                    earned: _starsByBook.values.fold<int>(
+                      0,
+                      (int a, int b) => a + b,
+                    ),
+                    max: totalMaxStars(),
+                  ),
+                  const SizedBox(height: 16),
+                  _GroupHeader(
+                    title: AppLocalizations.of(context)!.bibleHebrewScriptures,
+                  ),
+                  ...ot.map(_bookTile),
+                  const SizedBox(height: 20),
+                  _GroupHeader(
+                    title: AppLocalizations.of(context)!.bibleGreekScriptures,
+                  ),
+                  ...nt.map(_bookTile),
+                ],
+              ),
+      ),
     );
   }
 
@@ -243,7 +249,11 @@ class _GlowingStarState extends State<_GlowingStar>
       child: RepaintBoundary(
         child: AnimatedBuilder(
           animation: _controller,
-          child: Icon(Icons.star_rounded, size: widget.size, color: Colors.amber),
+          child: Icon(
+            Icons.star_rounded,
+            size: widget.size,
+            color: Colors.amber,
+          ),
           builder: (BuildContext context, Widget? child) {
             // Integer multiples of the base loop, so every wave is back at
             // its starting value when the controller wraps to 0 and the
@@ -357,10 +367,7 @@ class _BookTile extends StatelessWidget {
                     DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(999),
-                        border: Border.all(
-                          color: cs.outlineVariant,
-                          width: 1,
-                        ),
+                        border: Border.all(color: cs.outlineVariant, width: 1),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(1.5),
@@ -563,9 +570,9 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
     if (!_isCheckpointUnlocked(cp)) {
       showMessageDialog(
         context,
-        message: AppLocalizations.of(context)!.bibleUnlockHint(
-          localizedCheckpointTitle(context, cp),
-        ),
+        message: AppLocalizations.of(
+          context,
+        )!.bibleUnlockHint(localizedCheckpointTitle(context, cp)),
       );
       return;
     }
@@ -633,9 +640,7 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.open_in_new),
-                title: Text(
-                  AppLocalizations.of(context)!.bibleOpenInJwLibrary,
-                ),
+                title: Text(AppLocalizations.of(context)!.bibleOpenInJwLibrary),
                 onTap: () {
                   Navigator.of(sheetContext).pop();
                   _openInJwLibrary(chapter);
@@ -687,56 +692,62 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
             ),
         ],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              padding: const EdgeInsets.all(16),
-              children: <Widget>[
-                Text(
-                  AppLocalizations.of(context)!.bibleChaptersHeader,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
+      body: ResponsiveBody(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
+                padding: const EdgeInsets.all(16),
+                children: <Widget>[
+                  Text(
+                    AppLocalizations.of(context)!.bibleChaptersHeader,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 5,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: 1,
-                      ),
-                  itemCount: _gridEntries.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Object entry = _gridEntries[index];
-                    if (entry is int) {
-                      final int chapter = entry;
-                      return _ChapterCell(
-                        chapter: chapter,
-                        isRead: _readChapters.contains(chapter),
-                        onTap: () => _onChapterTap(chapter),
-                        cs: cs,
+                  const SizedBox(height: 12),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    // Fixed cell size (not a fixed column count): a phone-width
+                    // screen still lands on ~5 columns, but a tablet's much
+                    // wider content column gets more columns of the same-size
+                    // cells instead of 5 giant stretched-out tiles.
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 64,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 1,
+                        ),
+                    itemCount: _gridEntries.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Object entry = _gridEntries[index];
+                      if (entry is int) {
+                        final int chapter = entry;
+                        return _ChapterCell(
+                          chapter: chapter,
+                          isRead: _readChapters.contains(chapter),
+                          onTap: () => _onChapterTap(chapter),
+                          cs: cs,
+                        );
+                      }
+                      final Checkpoint cp = entry as Checkpoint;
+                      return _QuizGridCell(
+                        unlocked: _isCheckpointUnlocked(cp),
+                        done: _isCheckpointDone(cp),
+                        onTap: () => _openCheckpoint(cp),
                       );
-                    }
-                    final Checkpoint cp = entry as Checkpoint;
-                    return _QuizGridCell(
-                      unlocked: _isCheckpointUnlocked(cp),
-                      done: _isCheckpointDone(cp),
-                      onTap: () => _openCheckpoint(cp),
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-                ..._buildCheckpointSections(),
-                if (_allQuizzesDone()) ...<Widget>[
-                  const SizedBox(height: 20),
-                  _FullBookQuizCard(onTap: _openFullBookQuiz),
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  ..._buildCheckpointSections(),
+                  if (_allQuizzesDone()) ...<Widget>[
+                    const SizedBox(height: 20),
+                    _FullBookQuizCard(onTap: _openFullBookQuiz),
+                  ],
                 ],
-              ],
-            ),
+              ),
+      ),
     );
   }
 
@@ -953,9 +964,7 @@ class _CheckpointRow extends StatelessWidget {
                   const SizedBox(width: 8),
                 ],
                 Icon(
-                  unlocked || done
-                      ? Icons.chevron_right
-                      : Icons.lock_outline,
+                  unlocked || done ? Icons.chevron_right : Icons.lock_outline,
                   color: cs.onSurfaceVariant,
                   size: 20,
                 ),
@@ -979,12 +988,9 @@ class _CheckpointRow extends StatelessWidget {
           '${DateFormat('dd/MM').format(result!.passedAt)} · '
           '${DateFormat('HH:mm').format(result!.passedAt)}';
       return Text(
-        AppLocalizations.of(context)!.bibleCheckpointScoreDate(
-          result!.score,
-          result!.total,
-          date,
-          suffix,
-        ),
+        AppLocalizations.of(
+          context,
+        )!.bibleCheckpointScoreDate(result!.score, result!.total, date, suffix),
         style: style,
       );
     }
@@ -1134,7 +1140,8 @@ class _QuizGridCellState extends State<_QuizGridCell>
         animation: controller,
         builder: (BuildContext context, Widget? child) {
           final double angle = controller.value * 2 * math.pi;
-          final double pulse = 0.5 + 0.5 * math.sin(controller.value * 2 * math.pi);
+          final double pulse =
+              0.5 + 0.5 * math.sin(controller.value * 2 * math.pi);
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),

@@ -24,7 +24,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # The build number after the "+" must increase on every release built for
 # distribution, even a rebuild of the same version name; it is never shown to
 # the user, only Android uses it to tell two builds apart.
-version: 1.2.0+3
+version: 1.2.1+4
 
 environment:
   sdk: ^3.12.2

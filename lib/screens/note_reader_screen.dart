@@ -7,6 +7,7 @@ import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 import 'notes_screen.dart';
 
 class NoteReaderScreen extends StatefulWidget {
@@ -36,9 +37,7 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
 
   Future<void> _loadNote() async {
     try {
-      final NoteEntry? note = await widget.dbService.getNoteById(
-        widget.noteId,
-      );
+      final NoteEntry? note = await widget.dbService.getNoteById(widget.noteId);
       if (!mounted) {
         return;
       }
@@ -179,7 +178,10 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(note?.displayTitle(context) ?? AppLocalizations.of(context)!.noteReaderTitle),
+          title: Text(
+            note?.displayTitle(context) ??
+                AppLocalizations.of(context)!.noteReaderTitle,
+          ),
           actions: <Widget>[
             IconButton(
               onPressed: note == null ? null : _share,
@@ -198,81 +200,89 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
             ),
           ],
         ),
-        body: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : note == null
-            ? Center(
-                child: Text(AppLocalizations.of(context)!.noteReaderNoteGone),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 4,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: colorScheme.secondaryContainer,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            displayReference(context, note.book, note.chapter),
-                            style: theme.textTheme.titleSmall?.copyWith(
-                              color: colorScheme.onSecondaryContainer,
-                              fontWeight: FontWeight.w600,
+        body: ResponsiveBody(
+          child: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : note == null
+              ? Center(
+                  child: Text(AppLocalizations.of(context)!.noteReaderNoteGone),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 14,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: colorScheme.secondaryContainer,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              displayReference(
+                                context,
+                                note.book,
+                                note.chapter,
+                              ),
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                color: colorScheme.onSecondaryContainer,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)!.noteReaderUpdatedAt(
-                            '${DateFormat('dd/MM/yyyy').format(note.updatedAt)} · '
-                            '${DateFormat('HH:mm').format(note.updatedAt)}',
+                          Text(
+                            AppLocalizations.of(context)!.noteReaderUpdatedAt(
+                              '${DateFormat('dd/MM/yyyy').format(note.updatedAt)} · '
+                              '${DateFormat('HH:mm').format(note.updatedAt)}',
+                            ),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
                           ),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Expanded(
-                      child: Card.filled(
-                        margin: EdgeInsets.zero,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: SingleChildScrollView(
-                              child: note.content.trim().isEmpty
-                                  ? Text(
-                                      AppLocalizations.of(context)!.noteReaderEmpty,
-                                      style: theme.textTheme.bodyMedium
-                                          ?.copyWith(
-                                            color:
-                                                colorScheme.onSurfaceVariant,
-                                          ),
-                                    )
-                                  : MarkdownBody(
-                                      data: note.content,
-                                      selectable: true,
-                                      styleSheet: _readerMarkdownStyle(theme),
-                                    ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: Card.filled(
+                          margin: EdgeInsets.zero,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: SingleChildScrollView(
+                                child: note.content.trim().isEmpty
+                                    ? Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.noteReaderEmpty,
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                              color:
+                                                  colorScheme.onSurfaceVariant,
+                                            ),
+                                      )
+                                    : MarkdownBody(
+                                        data: note.content,
+                                        selectable: true,
+                                        styleSheet: _readerMarkdownStyle(theme),
+                                      ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }

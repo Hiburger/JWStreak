@@ -10,6 +10,7 @@ import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/responsive_body.dart';
 import '../widgets/tap_easter_egg.dart';
 
 /// A selectable UI language. The [name] is always shown in its own
@@ -249,7 +250,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _changeAppLock(bool wantEnabled) async {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final bool ok = await _lockService.authenticate(
-      reason: wantEnabled ? l10n.appLockEnableReason : l10n.appLockDisableReason,
+      reason: wantEnabled
+          ? l10n.appLockEnableReason
+          : l10n.appLockDisableReason,
     );
     if (!ok || !mounted) {
       return;
@@ -416,259 +419,265 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: <Widget>[
-          Text(
-            l10n.settingsAppearance,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: ThemePreference.values
-                    .map(
-                      (ThemePreference preference) => ChoiceChip(
-                        label: Text(preference.label(context)),
-                        selected: _selectedTheme == preference,
-                        onSelected: (_) => _changeTheme(preference),
-                      ),
-                    )
-                    .toList(growable: false),
-              ),
+      body: ResponsiveBody(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: <Widget>[
+            Text(
+              l10n.settingsAppearance,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: SwitchListTile(
-              title: Text(l10n.settingsDynamicColor),
-              subtitle: Text(
-                _useDynamicColor
-                    ? l10n.settingsDynamicColorOn
-                    : l10n.settingsDynamicColorOff,
-              ),
-              value: _useDynamicColor,
-              onChanged: widget.onUseDynamicColorChanged == null
-                  ? null
-                  : _changeUseDynamicColor,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: SwitchListTile(
-              secondary: Icon(
-                _openInJwLibrary
-                    ? Icons.menu_book_outlined
-                    : Icons.language_outlined,
-              ),
-              title: Text(l10n.settingsBibleTargetTitle),
-              subtitle: Text(
-                _openInJwLibrary
-                    ? l10n.settingsBibleTargetJwLibrary
-                    : l10n.settingsBibleTargetWeb,
-              ),
-              value: _openInJwLibrary,
-              onChanged: _changeBibleTarget,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.settingsLanguage,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: _kAppLanguages
-                    .map(
-                      (_AppLanguage lang) => ChoiceChip(
-                        label: Text(
-                          lang.code == null
-                              ? l10n.settingsLanguageSystem
-                              : lang.name,
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: ThemePreference.values
+                      .map(
+                        (ThemePreference preference) => ChoiceChip(
+                          label: Text(preference.label(context)),
+                          selected: _selectedTheme == preference,
+                          onSelected: (_) => _changeTheme(preference),
                         ),
-                        selected: _selectedLocaleCode == lang.code,
-                        onSelected: widget.onLocaleChanged == null
-                            ? null
-                            : (_) => _changeLocale(lang.code),
+                      )
+                      .toList(growable: false),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: SwitchListTile(
+                title: Text(l10n.settingsDynamicColor),
+                subtitle: Text(
+                  _useDynamicColor
+                      ? l10n.settingsDynamicColorOn
+                      : l10n.settingsDynamicColorOff,
+                ),
+                value: _useDynamicColor,
+                onChanged: widget.onUseDynamicColorChanged == null
+                    ? null
+                    : _changeUseDynamicColor,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: SwitchListTile(
+                secondary: Icon(
+                  _openInJwLibrary
+                      ? Icons.menu_book_outlined
+                      : Icons.language_outlined,
+                ),
+                title: Text(l10n.settingsBibleTargetTitle),
+                subtitle: Text(
+                  _openInJwLibrary
+                      ? l10n.settingsBibleTargetJwLibrary
+                      : l10n.settingsBibleTargetWeb,
+                ),
+                value: _openInJwLibrary,
+                onChanged: _changeBibleTarget,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.settingsLanguage,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _kAppLanguages
+                      .map(
+                        (_AppLanguage lang) => ChoiceChip(
+                          label: Text(
+                            lang.code == null
+                                ? l10n.settingsLanguageSystem
+                                : lang.name,
+                          ),
+                          selected: _selectedLocaleCode == lang.code,
+                          onSelected: widget.onLocaleChanged == null
+                              ? null
+                              : (_) => _changeLocale(lang.code),
+                        ),
+                      )
+                      .toList(growable: false),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.settingsPrivacy,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: SwitchListTile(
+                secondary: Icon(
+                  _appLockEnabled
+                      ? Icons.lock_rounded
+                      : Icons.lock_open_rounded,
+                ),
+                title: Text(l10n.settingsAppLockTitle),
+                subtitle: Text(
+                  _appLockAvailable == false
+                      ? l10n.settingsAppLockUnavailable
+                      : _appLockEnabled
+                      ? l10n.settingsAppLockOn
+                      : l10n.settingsAppLockOff,
+                ),
+                value: _appLockEnabled,
+                // Disabled (null) both while we're still checking and on a
+                // device with no screen lock configured.
+                onChanged: _appLockAvailable == true ? _changeAppLock : null,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Card.filled(
+              shape: sectionShape,
+              child: ListTile(
+                leading: const Icon(Icons.explore_outlined),
+                title: Text(l10n.settingsReplayTour),
+                subtitle: Text(l10n.settingsReplayTourSubtitle),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: _replayGuidedTour,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.settingsPermissions,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: ListTile(
+                leading: Icon(
+                  notificationsEnabled
+                      ? Icons.check_circle
+                      : Icons.warning_amber,
+                  size: 32,
+                  color: notificationsEnabled
+                      ? Colors.lightGreen
+                      : Colors.redAccent,
+                ),
+                title: Text(l10n.settingsNotifPermTitle),
+                subtitle: Text(
+                  _isCheckingPermissions
+                      ? l10n.settingsChecking
+                      : notificationsEnabled
+                      ? l10n.settingsNotifActive
+                      : l10n.settingsNotifMissing,
+                ),
+                trailing: TextButton(
+                  onPressed: _requestPermission,
+                  child: Text(l10n.settingsVerify),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: ListTile(
+                leading: Icon(
+                  exactAlarmsAllowed ? Icons.check_circle : Icons.warning_amber,
+                  size: 32,
+                  color: exactAlarmsAllowed
+                      ? Colors.lightGreen
+                      : Colors.redAccent,
+                ),
+                title: Text(l10n.settingsExactAlarms),
+                subtitle: Text(
+                  _isCheckingPermissions
+                      ? l10n.settingsChecking
+                      : exactAlarmsAllowed
+                      ? l10n.settingsExactAlarmsOn
+                      : l10n.settingsExactAlarmsOff,
+                ),
+                trailing: TextButton(
+                  onPressed: _requestExactAlarms,
+                  child: Text(l10n.settingsAllow),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.settingsInfo,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Card.filled(
+              shape: sectionShape,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: const Icon(Icons.info_outline),
+                    title: Text(l10n.settingsVersionLabel),
+                    subtitle: Text(_version),
+                    onTap: _handleVersionTap,
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.code_outlined),
+                    title: Text(l10n.settingsSourceCode),
+                    subtitle: Text(kGithubRepoUrl),
+                    trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+                    onTap: () => _openExternal(Uri.parse(kGithubRepoUrl)),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.waving_hand),
+                    title: Text(l10n.settingsQuestion),
+                    subtitle: const Text(kSupportEmail),
+                    trailing: const Icon(Icons.open_in_new_rounded, size: 20),
+                    onTap: () => _openExternal(
+                      Uri(
+                        scheme: 'mailto',
+                        path: kSupportEmail,
+                        queryParameters: <String, String>{
+                          'subject': 'Support JW Streak',
+                        },
                       ),
-                    )
-                    .toList(growable: false),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.settingsPrivacy,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: SwitchListTile(
-              secondary: Icon(
-                _appLockEnabled ? Icons.lock_rounded : Icons.lock_open_rounded,
-              ),
-              title: Text(l10n.settingsAppLockTitle),
-              subtitle: Text(
-                _appLockAvailable == false
-                    ? l10n.settingsAppLockUnavailable
-                    : _appLockEnabled
-                    ? l10n.settingsAppLockOn
-                    : l10n.settingsAppLockOff,
-              ),
-              value: _appLockEnabled,
-              // Disabled (null) both while we're still checking and on a
-              // device with no screen lock configured.
-              onChanged: _appLockAvailable == true ? _changeAppLock : null,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Card.filled(
-            shape: sectionShape,
-            child: ListTile(
-              leading: const Icon(Icons.explore_outlined),
-              title: Text(l10n.settingsReplayTour),
-              subtitle: Text(l10n.settingsReplayTourSubtitle),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: _replayGuidedTour,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.settingsPermissions,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: ListTile(
-              leading: Icon(
-                notificationsEnabled ? Icons.check_circle : Icons.warning_amber,
-                size: 32,
-                color: notificationsEnabled
-                    ? Colors.lightGreen
-                    : Colors.redAccent,
-              ),
-              title: Text(l10n.settingsNotifPermTitle),
-              subtitle: Text(
-                _isCheckingPermissions
-                    ? l10n.settingsChecking
-                    : notificationsEnabled
-                    ? l10n.settingsNotifActive
-                    : l10n.settingsNotifMissing,
-              ),
-              trailing: TextButton(
-                onPressed: _requestPermission,
-                child: Text(l10n.settingsVerify),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: ListTile(
-              leading: Icon(
-                exactAlarmsAllowed ? Icons.check_circle : Icons.warning_amber,
-                size: 32,
-                color: exactAlarmsAllowed
-                    ? Colors.lightGreen
-                    : Colors.redAccent,
-              ),
-              title: Text(l10n.settingsExactAlarms),
-              subtitle: Text(
-                _isCheckingPermissions
-                    ? l10n.settingsChecking
-                    : exactAlarmsAllowed
-                    ? l10n.settingsExactAlarmsOn
-                    : l10n.settingsExactAlarmsOff,
-              ),
-              trailing: TextButton(
-                onPressed: _requestExactAlarms,
-                child: Text(l10n.settingsAllow),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            l10n.settingsInfo,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Card.filled(
-            shape: sectionShape,
-            child: Column(
-              children: <Widget>[
-                ListTile(
-                  leading: const Icon(Icons.info_outline),
-                  title: Text(l10n.settingsVersionLabel),
-                  subtitle: Text(_version),
-                  onTap: _handleVersionTap,
-                ),
-                ListTile(
-                  leading: const Icon(Icons.code_outlined),
-                  title: Text(l10n.settingsSourceCode),
-                  subtitle: Text(kGithubRepoUrl),
-                  trailing: const Icon(Icons.open_in_new_rounded, size: 20),
-                  onTap: () => _openExternal(Uri.parse(kGithubRepoUrl)),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.waving_hand),
-                  title: Text(l10n.settingsQuestion),
-                  subtitle: const Text(kSupportEmail),
-                  trailing: const Icon(Icons.open_in_new_rounded, size: 20),
-                  onTap: () => _openExternal(
-                    Uri(
-                      scheme: 'mailto',
-                      path: kSupportEmail,
-                      queryParameters: <String, String>{
-                        'subject': 'Support JW Streak',
-                      },
                     ),
                   ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.edit_outlined),
-                  title: Text(l10n.settingsLicense),
-                  subtitle: const Text('GNU GPLv3'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: _showLicenses,
-                ),
-              ],
+                  ListTile(
+                    leading: const Icon(Icons.edit_outlined),
+                    title: Text(l10n.settingsLicense),
+                    subtitle: const Text('GNU GPLv3'),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: _showLicenses,
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            l10n.settingsFooter,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            l10n.settingsUnaffiliated,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            const SizedBox(height: 24),
+            Text(
+              l10n.settingsFooter,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
-          ),
-          const SizedBox(height: 32),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 24),
-            child: Center(child: _HeartEasterEgg()),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              l10n.settingsUnaffiliated,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 32),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 24),
+              child: Center(child: _HeartEasterEgg()),
+            ),
+          ],
+        ),
       ),
     );
   }

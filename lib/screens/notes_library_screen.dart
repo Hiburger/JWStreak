@@ -11,9 +11,20 @@ import 'note_reader_screen.dart';
 import 'notes_screen.dart';
 
 class NotesLibraryScreen extends StatefulWidget {
-  const NotesLibraryScreen({required this.dbService, super.key});
+  const NotesLibraryScreen({
+    required this.dbService,
+    this.book = kDefaultBook,
+    this.chapter = kDefaultChapter,
+    super.key,
+  });
 
   final LocalDbService dbService;
+
+  /// Where a note created from this screen's own "+ New note" button gets
+  /// linked to — passed in by the caller (today's chapter, ideally) rather
+  /// than left to fall back to Genesis 1 for every single note.
+  final String book;
+  final int chapter;
 
   @override
   State<NotesLibraryScreen> createState() => _NotesLibraryScreenState();
@@ -100,7 +111,11 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   Future<void> _createNote() async {
     final bool? changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
-        builder: (_) => NotesScreen(dbService: widget.dbService),
+        builder: (_) => NotesScreen(
+          dbService: widget.dbService,
+          book: widget.book,
+          chapter: widget.chapter,
+        ),
       ),
     );
     if (changed == true) {

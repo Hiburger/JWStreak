@@ -560,9 +560,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openNotesLibrary() async {
+    final _ChapterRef? current = _nextChapter;
     final bool? changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
-        builder: (_) => NotesLibraryScreen(dbService: _dbService),
+        builder: (_) => NotesLibraryScreen(
+          dbService: _dbService,
+          book: current?.book.id ?? kDefaultBook,
+          chapter: current?.chapter ?? kDefaultChapter,
+        ),
       ),
     );
     if (changed == true) {

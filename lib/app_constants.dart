@@ -67,12 +67,6 @@ const Map<String, _WolLanguage> _kWolByLanguage = <String, _WolLanguage>{
 _WolLanguage _wolFor(String? languageCode) =>
     _kWolByLanguage[languageCode] ?? _kWolByLanguage['fr']!;
 
-/// The jw.org homepage fallback URL for [languageCode], opened when the JW
-/// Library deep link can't be handled. Falls back to French for unknown codes.
-String webFallbackUrlFor(String? languageCode) {
-  return 'https://www.jw.org/finder?wtlocale=${wtLocaleFor(languageCode)}&srcid=share';
-}
-
 /// The daily-text URL for [languageCode]. Falls back to French for unknown
 /// codes.
 String dailyTextUrlFor(String? languageCode) {

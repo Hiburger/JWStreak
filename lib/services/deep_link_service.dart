@@ -20,7 +20,11 @@ class DeepLinkService {
     // User preference: read the chapter on jw.org (web) rather than in the app.
     final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
     if (openOnWeb) {
-      await _openChapterOnWeb(book: book, chapter: chapter, languageCode: languageCode);
+      await _openChapterOnWeb(
+        book: book,
+        chapter: chapter,
+        languageCode: languageCode,
+      );
       return;
     }
 
@@ -37,15 +41,14 @@ class DeepLinkService {
       return;
     }
 
-    final bool openedOnWeb = await launchUrl(
-      Uri.parse(webFallbackUrlFor(languageCode)),
-      mode: LaunchMode.externalApplication,
+    // JW Library isn't installed (or refused the link) — land on the actual
+    // chapter on wol.jw.org rather than jw.org's generic homepage/finder, so
+    // the fallback still takes the user to what they asked to read.
+    await _openChapterOnWeb(
+      book: book,
+      chapter: chapter,
+      languageCode: languageCode,
     );
-    if (!openedOnWeb) {
-      throw StateError(
-        'Unable to open JW Library deep link or the web fallback URL.',
-      );
-    }
   }
 
   /// Opens a Bible chapter on jw.org in a Chrome Custom Tab (same App Link
@@ -61,14 +64,20 @@ class DeepLinkService {
       jwOrgChapterUrlFor(resolved.number, chapter, languageCode),
     );
     try {
-      final bool opened = await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+      final bool opened = await launchUrl(
+        uri,
+        mode: LaunchMode.inAppBrowserView,
+      );
       if (opened) {
         return;
       }
     } on Exception {
       // No Custom Tabs provider available — fall back below.
     }
-    final bool opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    final bool opened = await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
     if (!opened) {
       throw StateError('Unable to open the Bible chapter on the web.');
     }
@@ -85,14 +94,20 @@ class DeepLinkService {
   Future<void> openDailyText({String? languageCode}) async {
     final Uri uri = Uri.parse(dailyTextUrlFor(languageCode));
     try {
-      final bool opened = await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+      final bool opened = await launchUrl(
+        uri,
+        mode: LaunchMode.inAppBrowserView,
+      );
       if (opened) {
         return;
       }
     } on Exception {
       // No Custom Tabs provider available — fall back below.
     }
-    final bool opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    final bool opened = await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
     if (!opened) {
       throw StateError('Unable to open the daily text link.');
     }

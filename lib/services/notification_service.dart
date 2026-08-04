@@ -55,6 +55,31 @@ class NotificationService {
         AndroidFlutterLocalNotificationsPlugin
       >();
 
+  /// Non-null only on iOS/iPadOS, the same way [_androidPlugin] is non-null
+  /// only on Android — every call site below picks whichever one exists.
+  IOSFlutterLocalNotificationsPlugin? get _iosPlugin => _plugin
+      .resolvePlatformSpecificImplementation<
+        IOSFlutterLocalNotificationsPlugin
+      >();
+
+  /// Every notification this app sends is a reminder, so they all share one
+  /// presentation. Kept in a single constant so the Android and iOS sides
+  /// can't quietly drift apart as reminders get added.
+  static const NotificationDetails _reminderDetails = NotificationDetails(
+    android: AndroidNotificationDetails(
+      _channelId,
+      'JW Streak Reminders',
+      channelDescription: 'Daily reminders for JW Streak reading flow.',
+      importance: Importance.high,
+      priority: Priority.high,
+    ),
+    iOS: DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    ),
+  );
+
   Future<void> initialize({
     required NotificationTapHandler onTap,
     required NotificationErrorHandler onError,
@@ -76,8 +101,18 @@ class NotificationService {
     // is the isolated glyph, already prepared for that.
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('ic_stat_notify');
+    // iOS has no notification-channel concept and uses the app icon in the
+    // banner, so there's nothing to point at here. Permissions are all left
+    // false so initialize() stays silent: requestNotificationPermission()
+    // below owns the prompt, on both platforms.
+    const DarwinInitializationSettings iosSettings =
+        DarwinInitializationSettings(
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+        );
     await _plugin.initialize(
-      const InitializationSettings(android: androidSettings),
+      const InitializationSettings(android: androidSettings, iOS: iosSettings),
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         await _safelyHandlePayload(response.payload);
       },
@@ -136,15 +171,7 @@ class NotificationService {
       title,
       body,
       firstTrigger,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          _channelId,
-          'JW Streak Reminders',
-          channelDescription: 'Daily reminders for JW Streak reading flow.',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-      ),
+      _reminderDetails,
       androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
@@ -166,20 +193,7 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    await _plugin.show(
-      999,
-      title,
-      body,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          _channelId,
-          'JW Streak Reminders',
-          channelDescription: 'Daily reminders for JW Streak reading flow.',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-      ),
-    );
+    await _plugin.show(999, title, body, _reminderDetails);
   }
 
   static const int _dailyTextNotificationId = 600;
@@ -199,15 +213,7 @@ class NotificationService {
       title,
       body,
       firstTrigger,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          _channelId,
-          'JW Streak Reminders',
-          channelDescription: 'Daily reminders for JW Streak reading flow.',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-      ),
+      _reminderDetails,
       androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
@@ -242,15 +248,7 @@ class NotificationService {
       title,
       body,
       target,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          _channelId,
-          'JW Streak Reminders',
-          channelDescription: 'Daily reminders for JW Streak reading flow.',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-      ),
+      _reminderDetails,
       androidScheduleMode: mode,
     );
   }
@@ -279,6 +277,15 @@ class NotificationService {
   }
 
   Future<bool> requestNotificationPermission() async {
+    final IOSFlutterLocalNotificationsPlugin? ios = _iosPlugin;
+    if (ios != null) {
+      final bool? granted = await ios.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      return granted ?? false;
+    }
     final bool? granted = await _androidPlugin
         ?.requestNotificationsPermission();
     return granted ?? true;
@@ -293,6 +300,15 @@ class NotificationService {
   }
 
   Future<bool> areNotificationsEnabled() async {
+    final IOSFlutterLocalNotificationsPlugin? ios = _iosPlugin;
+    if (ios != null) {
+      final NotificationsEnabledOptions? options = await ios.checkPermissions();
+      // Provisional authorisation still delivers reminders (quietly, straight
+      // to the notification centre), so it counts as enabled here.
+      return options == null ||
+          options.isEnabled ||
+          options.isProvisionalEnabled;
+    }
     final bool? enabled = await _androidPlugin?.areNotificationsEnabled();
     return enabled ?? true;
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -304,7 +305,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           FilledButton(
             onPressed: () {
               Navigator.of(dialogContext).pop();
-              _openExternal(Uri.parse(kJwLibraryPlayStoreUrl));
+              _openExternal(Uri.parse(jwLibraryStoreUrl));
             },
             child: Text(l10n.settingsBibleTargetInstall),
           ),
@@ -447,22 +448,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            Card.filled(
-              shape: sectionShape,
-              child: SwitchListTile(
-                title: Text(l10n.settingsDynamicColor),
-                subtitle: Text(
-                  _useDynamicColor
-                      ? l10n.settingsDynamicColorOn
-                      : l10n.settingsDynamicColorOff,
+            // Dynamic color (Material You) is an Android-only concept — it
+            // derives the palette from the device wallpaper, which iOS/iPadOS
+            // has no equivalent of. The dynamic_color package already no-ops
+            // there, but showing a toggle that can never do anything is just
+            // confusing, so the setting itself is Android-only.
+            if (defaultTargetPlatform == TargetPlatform.android) ...<Widget>[
+              const SizedBox(height: 8),
+              Card.filled(
+                shape: sectionShape,
+                child: SwitchListTile(
+                  title: Text(l10n.settingsDynamicColor),
+                  subtitle: Text(
+                    _useDynamicColor
+                        ? l10n.settingsDynamicColorOn
+                        : l10n.settingsDynamicColorOff,
+                  ),
+                  value: _useDynamicColor,
+                  onChanged: widget.onUseDynamicColorChanged == null
+                      ? null
+                      : _changeUseDynamicColor,
                 ),
-                value: _useDynamicColor,
-                onChanged: widget.onUseDynamicColorChanged == null
-                    ? null
-                    : _changeUseDynamicColor,
               ),
-            ),
+            ],
             const SizedBox(height: 8),
             Card.filled(
               shape: sectionShape,

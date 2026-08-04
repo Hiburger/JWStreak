@@ -7,6 +7,7 @@ import '../widgets/message_dialog.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/onboarding_progress.dart';
 import '../widgets/reminder_picker.dart';
+import '../widgets/responsive_body.dart';
 
 /// Final onboarding page: helps the user set up their first daily reminder(s)
 /// right away. Reuses the reminder picker widgets from the settings screen, but
@@ -200,182 +201,190 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
     final bool hasReminders = _reminders.isNotEmpty;
 
     return Scaffold(
-      body: SafeArea(
-        child: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                    child: IconButton(
-                      onPressed: widget.onBack,
-                      icon: const Icon(Icons.arrow_back_rounded),
-                      tooltip: l10n.onbBack,
+      body: ResponsiveBody(
+        child: SafeArea(
+          child: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                      child: IconButton(
+                        onPressed: widget.onBack,
+                        icon: const Icon(Icons.arrow_back_rounded),
+                        tooltip: l10n.onbBack,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                            return SingleChildScrollView(
-                              physics: const ClampingScrollPhysics(),
-                              padding: const EdgeInsets.fromLTRB(24, 4, 24, 16),
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minHeight: constraints.maxHeight - 20,
+                    Expanded(
+                      child: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                              return SingleChildScrollView(
+                                physics: const ClampingScrollPhysics(),
+                                padding: const EdgeInsets.fromLTRB(
+                                  24,
+                                  4,
+                                  24,
+                                  16,
                                 ),
-                                // Always anchored to the top: centering while
-                                // empty pushed the title down and wasted the
-                                // space above it, which is the opposite of
-                                // what a "here's what to do" first screen
-                                // needs — more breathing room below the title,
-                                // not above it.
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      l10n.onbReminderTitle,
-                                      style: theme.textTheme.headlineSmall
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w800,
-                                          ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      l10n.onbReminderIntro,
-                                      style: theme.textTheme.bodyLarge
-                                          ?.copyWith(
-                                            color: cs.onSurfaceVariant,
-                                            height: 1.35,
-                                          ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    _TipCard(text: l10n.onbReminderTip),
-                                    const SizedBox(height: 20),
-                                    ReminderTimeHero(
-                                      time: _picked,
-                                      onTap: _pickTime,
-                                    ),
-                                    const SizedBox(height: 20),
-                                    ReminderSectionHeader(
-                                      title: l10n.reminderSuggestions,
-                                    ),
-                                    const SizedBox(height: 12),
-                                    ReminderPresetRow(
-                                      presets: presets,
-                                      picked: _picked,
-                                      onPick: (ReminderTimePreset p) =>
-                                          setState(
-                                            () => _picked = TimeOfDay(
-                                              hour: p.hour,
-                                              minute: p.minute,
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    minHeight: constraints.maxHeight - 20,
+                                  ),
+                                  // Always anchored to the top: centering while
+                                  // empty pushed the title down and wasted the
+                                  // space above it, which is the opposite of
+                                  // what a "here's what to do" first screen
+                                  // needs — more breathing room below the title,
+                                  // not above it.
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        l10n.onbReminderTitle,
+                                        style: theme.textTheme.headlineSmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w800,
                                             ),
-                                          ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    if (_reminders.length >= _maxReminders)
-                                      ReminderLimitNote(max: _maxReminders)
-                                    else
-                                      FilledButton.icon(
-                                        onPressed: _addReminder,
-                                        icon: const Icon(
-                                          Icons.add_alarm_rounded,
-                                          size: 22,
-                                        ),
-                                        label: Text(
-                                          l10n.reminderAddButton,
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        style: FilledButton.styleFrom(
-                                          minimumSize: const Size.fromHeight(
-                                            56,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              18,
-                                            ),
-                                          ),
-                                        ),
                                       ),
-                                    if (_notificationsEnabled ==
-                                        false) ...<Widget>[
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        l10n.onbReminderIntro,
+                                        style: theme.textTheme.bodyLarge
+                                            ?.copyWith(
+                                              color: cs.onSurfaceVariant,
+                                              height: 1.35,
+                                            ),
+                                      ),
                                       const SizedBox(height: 16),
-                                      _NotificationPermissionWarning(
-                                        onEnable:
-                                            _requestNotificationPermission,
+                                      _TipCard(text: l10n.onbReminderTip),
+                                      const SizedBox(height: 20),
+                                      ReminderTimeHero(
+                                        time: _picked,
+                                        onTap: _pickTime,
                                       ),
-                                    ],
-                                    if (hasReminders) ...<Widget>[
-                                      const SizedBox(height: 28),
+                                      const SizedBox(height: 20),
                                       ReminderSectionHeader(
-                                        title: l10n.reminderMine,
+                                        title: l10n.reminderSuggestions,
                                       ),
                                       const SizedBox(height: 12),
-                                      ..._reminders.map(
-                                        (Reminder r) => Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 8,
+                                      ReminderPresetRow(
+                                        presets: presets,
+                                        picked: _picked,
+                                        onPick: (ReminderTimePreset p) =>
+                                            setState(
+                                              () => _picked = TimeOfDay(
+                                                hour: p.hour,
+                                                minute: p.minute,
+                                              ),
+                                            ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      if (_reminders.length >= _maxReminders)
+                                        ReminderLimitNote(max: _maxReminders)
+                                      else
+                                        FilledButton.icon(
+                                          onPressed: _addReminder,
+                                          icon: const Icon(
+                                            Icons.add_alarm_rounded,
+                                            size: 22,
                                           ),
-                                          child: ReminderRow(
-                                            reminder: r,
-                                            onDelete: () => _deleteReminder(r),
+                                          label: Text(
+                                            l10n.reminderAddButton,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          style: FilledButton.styleFrom(
+                                            minimumSize: const Size.fromHeight(
+                                              56,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                      if (_notificationsEnabled ==
+                                          false) ...<Widget>[
+                                        const SizedBox(height: 16),
+                                        _NotificationPermissionWarning(
+                                          onEnable:
+                                              _requestNotificationPermission,
+                                        ),
+                                      ],
+                                      if (hasReminders) ...<Widget>[
+                                        const SizedBox(height: 28),
+                                        ReminderSectionHeader(
+                                          title: l10n.reminderMine,
+                                        ),
+                                        const SizedBox(height: 12),
+                                        ..._reminders.map(
+                                          (Reminder r) => Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: 8,
+                                            ),
+                                            child: ReminderRow(
+                                              reminder: r,
+                                              onDelete: () =>
+                                                  _deleteReminder(r),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ],
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 4, 24, 16),
-                    child: Column(
-                      children: <Widget>[
-                        OnboardingProgress(
-                          count: widget.stepCount,
-                          index: widget.stepIndex,
-                        ),
-                        const SizedBox(height: 16),
-                        AnimatedOpacity(
-                          opacity: widget.hideActionButton ? 0 : 1,
-                          duration: const Duration(milliseconds: 150),
-                          child: IgnorePointer(
-                            ignoring: widget.hideActionButton,
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: FilledButton(
-                                onPressed: widget.onDone,
-                                style: FilledButton.styleFrom(
-                                  minimumSize: const Size.fromHeight(56),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
                                   ),
                                 ),
-                                child: Text(
-                                  hasReminders
-                                      ? l10n.onbReminderFinish
-                                      : l10n.onbReminderSkip,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
+                              );
+                            },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 4, 24, 16),
+                      child: Column(
+                        children: <Widget>[
+                          OnboardingProgress(
+                            count: widget.stepCount,
+                            index: widget.stepIndex,
+                          ),
+                          const SizedBox(height: 16),
+                          AnimatedOpacity(
+                            opacity: widget.hideActionButton ? 0 : 1,
+                            duration: const Duration(milliseconds: 150),
+                            child: IgnorePointer(
+                              ignoring: widget.hideActionButton,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: FilledButton(
+                                  onPressed: widget.onDone,
+                                  style: FilledButton.styleFrom(
+                                    minimumSize: const Size.fromHeight(56),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    hasReminders
+                                        ? l10n.onbReminderFinish
+                                        : l10n.onbReminderSkip,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+        ),
       ),
     );
   }

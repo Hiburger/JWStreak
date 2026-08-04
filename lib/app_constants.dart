@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'bible_data.dart';
@@ -91,10 +92,15 @@ String jwOrgChapterUrlFor(int bookNumber, int chapter, String? languageCode) {
 const String kGithubRepoUrl = 'https://github.com/Hiburger/JWStreak';
 const String kSupportEmail = 'contact@olynthe.org';
 
-/// Google Play listing for the JW Library app, offered when the user picks JW
-/// Library as their Bible target but the app isn't installed.
-const String kJwLibraryPlayStoreUrl =
-    'https://play.google.com/store/apps/details?id=org.jw.jwlibrary.mobile';
+/// Store listing for the JW Library app, offered when the user picks JW
+/// Library as their Bible target but the app isn't installed. The two stores
+/// don't share an id — JW Library is `org.jw.jwlibrary.mobile` on Google Play
+/// and `id672417831` on the App Store — so the right one has to be picked at
+/// runtime. The App Store link is deliberately storefront-less: Apple
+/// redirects it to the viewer's own country.
+String get jwLibraryStoreUrl => defaultTargetPlatform == TargetPlatform.iOS
+    ? 'https://apps.apple.com/app/id672417831'
+    : 'https://play.google.com/store/apps/details?id=org.jw.jwlibrary.mobile';
 
 /// A `jwlibrary://` probe URI used to detect whether the JW Library app is
 /// installed (via `canLaunchUrl`). The manifest's `<queries>` block whitelists

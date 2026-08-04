@@ -131,6 +131,12 @@ class _GuidedTourViewState extends State<_GuidedTourView>
   // default padding made those circles feel oversized next to a small icon.
   static const double _circleHolePadding = -4;
   static const double _cardGap = 16;
+  static const double _cardMargin = 20;
+  // Caps the card's width on tablets — without it the card stretched edge to
+  // edge on an iPad, turning a couple of sentences into one absurdly long
+  // line. On a phone the screen is already narrower than this, so it's a
+  // no-op there, same idea as ResponsiveBody elsewhere in the app.
+  static const double _maxCardWidth = 420;
 
   int _index = 0;
   // True while a scroll-into-view is in flight. The spotlight is measured
@@ -282,26 +288,56 @@ class _GuidedTourViewState extends State<_GuidedTourView>
                 final Rect inflated = step.shape == TourHighlightShape.circle
                     ? Rect.fromCircle(center: hole.center, radius: padding)
                     : hole.inflate(padding);
-                final bool cardBelow = hole.center.dy < screen.height * 0.5;
+                // Place the card on whichever side actually has more room —
+                // a target near the top or bottom edge can leave very little
+                // space on one side no matter where its center falls — then
+                // hard-cap the card to that room. A fixed "is there enough
+                // space" threshold isn't enough on its own: the card's real
+                // height depends on how long the translated copy is, so the
+                // cap (with a scroll fallback) is what actually guarantees it
+                // never renders past the screen edge.
+                final double spaceAbove =
+                    inflated.top - _cardGap - safe.top - _cardMargin;
+                final double spaceBelow =
+                    screen.height -
+                    safe.bottom -
+                    _cardMargin -
+                    (inflated.bottom + _cardGap);
+                final bool cardBelow = spaceBelow >= spaceAbove;
+                final double maxHeight = math.max(
+                  120,
+                  cardBelow ? spaceBelow : spaceAbove,
+                );
                 return Positioned(
-                  left: 20,
-                  right: 20,
+                  left: _cardMargin + safe.left,
+                  right: _cardMargin + safe.right,
                   top: cardBelow ? inflated.bottom + _cardGap : null,
                   bottom: cardBelow
                       ? null
                       : screen.height - inflated.top + _cardGap,
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    child: _TourCard(
-                      key: ValueKey<int>(_index),
-                      title: step.title,
-                      body: step.body,
-                      index: _index,
-                      total: widget.steps.length,
-                      actionLabel: isLast
-                          ? widget.labels.done
-                          : widget.labels.next,
-                      onAction: _next,
+                  child: Align(
+                    alignment: cardBelow
+                        ? Alignment.topCenter
+                        : Alignment.bottomCenter,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: _maxCardWidth,
+                        maxHeight: maxHeight,
+                      ),
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: _TourCard(
+                          key: ValueKey<int>(_index),
+                          title: step.title,
+                          body: step.body,
+                          index: _index,
+                          total: widget.steps.length,
+                          actionLabel: isLast
+                              ? widget.labels.done
+                              : widget.labels.next,
+                          onAction: _next,
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -369,18 +405,32 @@ class _TourCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              title,
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              body,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: cs.onSurfaceVariant,
-                height: 1.35,
+            // Only the copy scrolls when the caller's maxHeight clamp runs
+            // out of room (unusually long translated text on a cramped
+            // target) — the action row below stays pinned so the button that
+            // advances the tour is never what scrolls out of view.
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      body,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: cs.onSurfaceVariant,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 8),

@@ -780,48 +780,53 @@ class _HomeScreenSkeletonState extends State<_HomeScreenSkeleton>
           ),
         ),
       ),
-      body: AnimatedBuilder(
-        animation: _controller,
-        // The shapes never change, only the shimmer sweeping over them —
-        // built once and reused every tick instead of rebuilt ~60 times/sec.
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
-          physics: const NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            _SkeletonBlock(height: 176, radius: 28),
-            const SizedBox(height: 32),
-            _SkeletonBlock(height: 214, radius: 24),
-            const SizedBox(height: 24),
-            _SkeletonBlock(height: 236, radius: 24),
-            const SizedBox(height: 32),
-            _SkeletonBlock(height: 20, width: 150, radius: 6),
-            const SizedBox(height: 12),
-            _SkeletonBlock(height: 74, radius: 16),
-            const SizedBox(height: 10),
-            _SkeletonBlock(height: 74, radius: 16),
-            const SizedBox(height: 10),
-            _SkeletonBlock(height: 74, radius: 16),
-          ],
+      // Same width cap as the loaded home screen below: without it the
+      // placeholder blocks span a tablet edge to edge, then visibly snap
+      // inwards the moment the real content replaces them.
+      body: ResponsiveBody(
+        child: AnimatedBuilder(
+          animation: _controller,
+          // The shapes never change, only the shimmer sweeping over them —
+          // built once and reused every tick instead of rebuilt ~60 times/sec.
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+            physics: const NeverScrollableScrollPhysics(),
+            children: <Widget>[
+              _SkeletonBlock(height: 176, radius: 28),
+              const SizedBox(height: 32),
+              _SkeletonBlock(height: 214, radius: 24),
+              const SizedBox(height: 24),
+              _SkeletonBlock(height: 236, radius: 24),
+              const SizedBox(height: 32),
+              _SkeletonBlock(height: 20, width: 150, radius: 6),
+              const SizedBox(height: 12),
+              _SkeletonBlock(height: 74, radius: 16),
+              const SizedBox(height: 10),
+              _SkeletonBlock(height: 74, radius: 16),
+              const SizedBox(height: 10),
+              _SkeletonBlock(height: 74, radius: 16),
+            ],
+          ),
+          builder: (BuildContext context, Widget? child) {
+            return ShaderMask(
+              blendMode: BlendMode.srcATop,
+              shaderCallback: (Rect bounds) => LinearGradient(
+                begin: const Alignment(-1, 0),
+                end: const Alignment(1, 0),
+                colors: <Color>[
+                  cs.surfaceContainerHighest,
+                  cs.surfaceContainerHigh,
+                  cs.surfaceContainerHighest,
+                ],
+                stops: const <double>[0.35, 0.5, 0.65],
+                transform: _SlidingGradientTransform(
+                  slidePercent: _controller.value * 2 - 1,
+                ),
+              ).createShader(bounds),
+              child: child,
+            );
+          },
         ),
-        builder: (BuildContext context, Widget? child) {
-          return ShaderMask(
-            blendMode: BlendMode.srcATop,
-            shaderCallback: (Rect bounds) => LinearGradient(
-              begin: const Alignment(-1, 0),
-              end: const Alignment(1, 0),
-              colors: <Color>[
-                cs.surfaceContainerHighest,
-                cs.surfaceContainerHigh,
-                cs.surfaceContainerHighest,
-              ],
-              stops: const <double>[0.35, 0.5, 0.65],
-              transform: _SlidingGradientTransform(
-                slidePercent: _controller.value * 2 - 1,
-              ),
-            ).createShader(bounds),
-            child: child,
-          );
-        },
       ),
     );
   }

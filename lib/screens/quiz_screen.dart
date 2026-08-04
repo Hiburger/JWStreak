@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/answer_validator.dart';
+import '../widgets/responsive_body.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an
 /// explanation, then a final score. [onCompleted] is called once with the
@@ -61,30 +62,34 @@ class _QuizScreenState extends State<QuizScreen> {
     final Random random = Random();
     final List<QuizQuestion> shuffled = List<QuizQuestion>.of(widget.questions)
       ..shuffle(random);
-    return shuffled.map((QuizQuestion q) {
-      // Only multiple-choice questions get their options reordered: the other
-      // types derive their answer from `correctAnswer`, and shuffling would
-      // just churn indices for no visible benefit.
-      if (q.type != QuizAnswerType.multipleChoice) {
-        return q;
-      }
-      final List<int> order = List<int>.generate(q.options.length, (int i) => i)
-        ..shuffle(random);
-      final List<String> options = order
-          .map((int i) => q.options[i])
-          .toList(growable: false);
-      final int correctIndex = order.indexOf(q.correctIndex);
-      return QuizQuestion(
-        text: q.text,
-        options: options,
-        correctIndex: correctIndex,
-        explanation: q.explanation,
-        type: q.type,
-        acceptedAnswers: q.acceptedAnswers,
-        wordBankDistractors: q.wordBankDistractors,
-        wordBankSegments: q.wordBankSegments,
-      );
-    }).toList(growable: false);
+    return shuffled
+        .map((QuizQuestion q) {
+          // Only multiple-choice questions get their options reordered: the other
+          // types derive their answer from `correctAnswer`, and shuffling would
+          // just churn indices for no visible benefit.
+          if (q.type != QuizAnswerType.multipleChoice) {
+            return q;
+          }
+          final List<int> order = List<int>.generate(
+            q.options.length,
+            (int i) => i,
+          )..shuffle(random);
+          final List<String> options = order
+              .map((int i) => q.options[i])
+              .toList(growable: false);
+          final int correctIndex = order.indexOf(q.correctIndex);
+          return QuizQuestion(
+            text: q.text,
+            options: options,
+            correctIndex: correctIndex,
+            explanation: q.explanation,
+            type: q.type,
+            acceptedAnswers: q.acceptedAnswers,
+            wordBankDistractors: q.wordBankDistractors,
+            wordBankSegments: q.wordBankSegments,
+          );
+        })
+        .toList(growable: false);
   }
 
   /// The scrambled chips for the current word-bank question: the words of the
@@ -164,7 +169,9 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: _finished ? _buildResult() : _buildQuestion(),
+      body: ResponsiveBody(
+        child: _finished ? _buildResult() : _buildQuestion(),
+      ),
     );
   }
 
@@ -198,8 +205,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   color: cs.onSurfaceVariant,
                 ),
               ),
-              if (_score > 0)
-                _StreakPill(score: _score),
+              if (_score > 0) _StreakPill(score: _score),
             ],
           ),
         ),
@@ -250,7 +256,9 @@ class _QuizScreenState extends State<QuizScreen> {
                     : Icons.flag_rounded,
               ),
               label: Text(
-                _index < _questions.length - 1 ? l10n.quizNext : l10n.quizSeeScore,
+                _index < _questions.length - 1
+                    ? l10n.quizNext
+                    : l10n.quizSeeScore,
               ),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(54),
@@ -464,10 +472,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   duration: Duration(milliseconds: 300 + i * 150),
                   curve: Curves.elasticOut,
                   builder: (BuildContext context, double v, Widget? child) {
-                    return Transform.scale(
-                      scale: 0.6 + 0.4 * v,
-                      child: child,
-                    );
+                    return Transform.scale(scale: 0.6 + 0.4 * v, child: child);
                   },
                   child: Icon(
                     filled ? Icons.star_rounded : Icons.star_outline_rounded,
@@ -647,7 +652,10 @@ class _AnimatedOption extends StatelessWidget {
         icon = Icons.cancel;
     }
     return TweenAnimationBuilder<double>(
-      tween: Tween<double>(begin: 1, end: state == _OptionState.idle ? 1 : 1.02),
+      tween: Tween<double>(
+        begin: 1,
+        end: state == _OptionState.idle ? 1 : 1.02,
+      ),
       duration: const Duration(milliseconds: 180),
       curve: Curves.easeOut,
       builder: (BuildContext context, double scale, Widget? child) {
@@ -720,7 +728,9 @@ class _FeedbackBanner extends StatelessWidget {
               color: fg,
             ),
             const SizedBox(width: 10),
-            Expanded(child: Text(text, style: TextStyle(color: fg))),
+            Expanded(
+              child: Text(text, style: TextStyle(color: fg)),
+            ),
           ],
         ),
       ),

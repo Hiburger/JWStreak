@@ -6,6 +6,7 @@ import 'package:vibration/vibration.dart';
 
 import '../l10n/app_localizations.dart';
 import '../widgets/onboarding_progress.dart';
+import '../widgets/responsive_body.dart';
 
 /// First-launch welcome screen: a warm splash that kicks off onboarding.
 class WelcomeScreen extends StatefulWidget {
@@ -137,152 +138,159 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const Spacer(flex: 3),
-                _staggered(
-                  from: 0,
-                  to: 0.45,
-                  child: RepaintBoundary(
-                    child: SizedBox(
-                      width: _kLogoGlowSize,
-                      height: _kLogoGlowSize,
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: <Widget>[
-                          Center(
-                            child: GestureDetector(
-                              onTap: _handleLogoTap,
-                              child: _LogoGlow(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(24),
-                                  child: Image.asset(
-                                    'assets/icon_onboarding.png',
-                                    width: _kLogoSize,
-                                    height: _kLogoSize,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: (_kLogoGlowSize - _kLogoSize) / 2 - 50,
-                            left: 0,
-                            right: 0,
-                            child: Center(
-                              child: IgnorePointer(
-                                child: AnimatedOpacity(
-                                  opacity: _showGreeting ? 1 : 0,
-                                  duration: const Duration(milliseconds: 180),
-                                  child: AnimatedScale(
-                                    scale: _showGreeting ? 1 : 0.7,
-                                    duration: const Duration(milliseconds: 180),
-                                    curve: Curves.easeOut,
-                                    child: _GreetingBubble(
-                                      text: AppLocalizations.of(
-                                        context,
-                                      )!.welcomeLogoGreeting,
+          // Inside the gradient Container, not around it, so the background
+          // still bleeds to the screen edges on a tablet while the column —
+          // and especially the full-width action button — stays readable.
+          child: ResponsiveBody(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  const Spacer(flex: 3),
+                  _staggered(
+                    from: 0,
+                    to: 0.45,
+                    child: RepaintBoundary(
+                      child: SizedBox(
+                        width: _kLogoGlowSize,
+                        height: _kLogoGlowSize,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Center(
+                              child: GestureDetector(
+                                onTap: _handleLogoTap,
+                                child: _LogoGlow(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(24),
+                                    child: Image.asset(
+                                      'assets/icon_onboarding.png',
+                                      width: _kLogoSize,
+                                      height: _kLogoSize,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            Positioned(
+                              top: (_kLogoGlowSize - _kLogoSize) / 2 - 50,
+                              left: 0,
+                              right: 0,
+                              child: Center(
+                                child: IgnorePointer(
+                                  child: AnimatedOpacity(
+                                    opacity: _showGreeting ? 1 : 0,
+                                    duration: const Duration(milliseconds: 180),
+                                    child: AnimatedScale(
+                                      scale: _showGreeting ? 1 : 0.7,
+                                      duration: const Duration(
+                                        milliseconds: 180,
+                                      ),
+                                      curve: Curves.easeOut,
+                                      child: _GreetingBubble(
+                                        text: AppLocalizations.of(
+                                          context,
+                                        )!.welcomeLogoGreeting,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                _staggered(
-                  from: 0.15,
-                  to: 0.55,
-                  child: Text(
-                    'JW Streak',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'PlusJakartaSans',
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -1,
-                      color: colorScheme.onSurface,
+                  const SizedBox(height: 16),
+                  _staggered(
+                    from: 0.15,
+                    to: 0.55,
+                    child: Text(
+                      'JW Streak',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'PlusJakartaSans',
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -1,
+                        color: colorScheme.onSurface,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                _staggered(
-                  from: 0.25,
-                  to: 0.65,
-                  child: Text(
-                    AppLocalizations.of(context)!.welcomeTagline,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
+                  const SizedBox(height: 8),
+                  _staggered(
+                    from: 0.25,
+                    to: 0.65,
+                    child: Text(
+                      AppLocalizations.of(context)!.welcomeTagline,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
-                ),
-                const Spacer(flex: 3),
-                _staggered(
-                  from: 0.45,
-                  to: 0.85,
-                  child: OnboardingProgress(
-                    count: widget.stepCount,
-                    index: widget.stepIndex,
+                  const Spacer(flex: 3),
+                  _staggered(
+                    from: 0.45,
+                    to: 0.85,
+                    child: OnboardingProgress(
+                      count: widget.stepCount,
+                      index: widget.stepIndex,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                _staggered(
-                  from: 0.6,
-                  to: 1,
-                  child: AnimatedOpacity(
-                    opacity: widget.hideActionButton ? 0 : 1,
-                    duration: const Duration(milliseconds: 150),
-                    child: IgnorePointer(
-                      ignoring: widget.hideActionButton,
-                      child: _PulsingGlow(
-                        color: colorScheme.primary,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(999),
-                        child: FilledButton(
-                          onPressed: _handleContinue,
-                          style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 48,
-                              vertical: 20,
+                  const SizedBox(height: 20),
+                  _staggered(
+                    from: 0.6,
+                    to: 1,
+                    child: AnimatedOpacity(
+                      opacity: widget.hideActionButton ? 0 : 1,
+                      duration: const Duration(milliseconds: 150),
+                      child: IgnorePointer(
+                        ignoring: widget.hideActionButton,
+                        child: _PulsingGlow(
+                          color: colorScheme.primary,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(999),
+                          child: FilledButton(
+                            onPressed: _handleContinue,
+                            style: FilledButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 48,
+                                vertical: 20,
+                              ),
+                              shape: const StadiumBorder(),
                             ),
-                            shape: const StadiumBorder(),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.welcomeButton,
-                            style: const TextStyle(
-                              fontFamily: 'PlusJakartaSans',
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+                            child: Text(
+                              AppLocalizations.of(context)!.welcomeButton,
+                              style: const TextStyle(
+                                fontFamily: 'PlusJakartaSans',
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                _staggered(
-                  from: 0.7,
-                  to: 1,
-                  child: Text(
-                    AppLocalizations.of(context)!.welcomeFooter,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
+                  const SizedBox(height: 16),
+                  _staggered(
+                    from: 0.7,
+                    to: 1,
+                    child: Text(
+                      AppLocalizations.of(context)!.welcomeFooter,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 24),
-              ],
+                  const SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),

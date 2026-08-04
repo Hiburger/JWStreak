@@ -5,6 +5,7 @@ import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/reminder_picker.dart';
+import '../widgets/responsive_body.dart';
 
 /// Manage daily reading reminders. The user can keep several reminders at
 /// different times; each one fires a local Android notification every day.
@@ -182,9 +183,8 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen>
     }
   }
 
-  bool _alreadyExists(int hour, int minute) => _reminders.any(
-    (Reminder r) => r.hour == hour && r.minute == minute,
-  );
+  bool _alreadyExists(int hour, int minute) =>
+      _reminders.any((Reminder r) => r.hour == hour && r.minute == minute);
 
   Future<void> _addReminder() async {
     if (_reminders.length >= _maxReminders) {
@@ -251,77 +251,80 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen>
     final List<ReminderTimePreset> presets = reminderPresets(l10n);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.reminderTitle)),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-              children: <Widget>[
-                ReminderTimeHero(time: _picked, onTap: _pickTime),
-                const SizedBox(height: 24),
-                ReminderSectionHeader(title: l10n.reminderSuggestions),
-                const SizedBox(height: 12),
-                ReminderPresetRow(
-                  presets: presets,
-                  picked: _picked,
-                  onPick: (ReminderTimePreset p) => setState(
-                    () => _picked = TimeOfDay(hour: p.hour, minute: p.minute),
+      body: ResponsiveBody(
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                children: <Widget>[
+                  ReminderTimeHero(time: _picked, onTap: _pickTime),
+                  const SizedBox(height: 24),
+                  ReminderSectionHeader(title: l10n.reminderSuggestions),
+                  const SizedBox(height: 12),
+                  ReminderPresetRow(
+                    presets: presets,
+                    picked: _picked,
+                    onPick: (ReminderTimePreset p) => setState(
+                      () => _picked = TimeOfDay(hour: p.hour, minute: p.minute),
+                    ),
                   ),
-                ),
-                if (!_notificationsEnabled) ...<Widget>[
+                  if (!_notificationsEnabled) ...<Widget>[
+                    const SizedBox(height: 16),
+                    _NotificationPermissionWarning(
+                      onEnable: _requestNotificationPermission,
+                    ),
+                  ],
+                  if (_notificationsEnabled &&
+                      !_exactAlarmsAllowed) ...<Widget>[
+                    const SizedBox(height: 16),
+                    _ExactAlarmWarning(onEnable: _requestExactAlarms),
+                  ],
                   const SizedBox(height: 16),
-                  _NotificationPermissionWarning(
-                    onEnable: _requestNotificationPermission,
+                  if (_reminders.length >= _maxReminders)
+                    ReminderLimitNote(max: _maxReminders)
+                  else
+                    FilledButton.icon(
+                      onPressed: _addReminder,
+                      icon: const Icon(Icons.add_alarm_rounded, size: 22),
+                      label: Text(
+                        l10n.reminderAddButton,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 28),
+                  ReminderSectionHeader(title: l10n.reminderMine),
+                  const SizedBox(height: 12),
+                  if (_reminders.isEmpty)
+                    const ReminderEmptyState()
+                  else
+                    ..._reminders.map(
+                      (Reminder r) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: ReminderRow(
+                          reminder: r,
+                          onDelete: () => _deleteReminder(r),
+                        ),
+                      ),
+                    ),
+                  const SizedBox(height: 20),
+                  _DailyTextReminderTile(
+                    enabled: _dailyTextEnabled,
+                    time: _dailyTextTime,
+                    onChanged: _toggleDailyText,
+                    onPickTime: _pickDailyTextTime,
                   ),
                 ],
-                if (_notificationsEnabled && !_exactAlarmsAllowed) ...<Widget>[
-                  const SizedBox(height: 16),
-                  _ExactAlarmWarning(onEnable: _requestExactAlarms),
-                ],
-                const SizedBox(height: 16),
-                if (_reminders.length >= _maxReminders)
-                  ReminderLimitNote(max: _maxReminders)
-                else
-                  FilledButton.icon(
-                    onPressed: _addReminder,
-                    icon: const Icon(Icons.add_alarm_rounded, size: 22),
-                    label: Text(
-                      l10n.reminderAddButton,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 28),
-                ReminderSectionHeader(title: l10n.reminderMine),
-                const SizedBox(height: 12),
-                if (_reminders.isEmpty)
-                  const ReminderEmptyState()
-                else
-                  ..._reminders.map(
-                    (Reminder r) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: ReminderRow(
-                        reminder: r,
-                        onDelete: () => _deleteReminder(r),
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 20),
-                _DailyTextReminderTile(
-                  enabled: _dailyTextEnabled,
-                  time: _dailyTextTime,
-                  onChanged: _toggleDailyText,
-                  onPickTime: _pickDailyTextTime,
-                ),
-              ],
-            ),
+              ),
+      ),
     );
   }
 }

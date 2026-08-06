@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/markdown_editing_controller.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
@@ -159,6 +160,7 @@ class _NotesScreenState extends State<NotesScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: const CircularBackButton(),
         title: Text(
           _isNew
               ? AppLocalizations.of(context)!.noteEditorTitleNew

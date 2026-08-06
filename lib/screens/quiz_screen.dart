@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/answer_validator.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/responsive_body.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an
@@ -168,7 +169,10 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(widget.title),
+      ),
       body: ResponsiveBody(
         child: _finished ? _buildResult() : _buildQuestion(),
       ),

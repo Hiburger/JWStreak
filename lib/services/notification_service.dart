@@ -91,7 +91,11 @@ class NotificationService {
     }
 
     tz_data.initializeTimeZones();
-    final String timezoneName = await FlutterTimezone.getLocalTimezone();
+    // `.identifier` is the IANA name ("Europe/Zurich") that tz.getLocation
+    // expects; the other field on TimezoneInfo is a display name, which
+    // wouldn't resolve.
+    final String timezoneName =
+        (await FlutterTimezone.getLocalTimezone()).identifier;
     tz.setLocalLocation(tz.getLocation(timezoneName));
 
     // The status bar only renders this icon's alpha channel (a plain white
@@ -112,7 +116,10 @@ class NotificationService {
           requestSoundPermission: false,
         );
     await _plugin.initialize(
-      const InitializationSettings(android: androidSettings, iOS: iosSettings),
+      settings: const InitializationSettings(
+        android: androidSettings,
+        iOS: iosSettings,
+      ),
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         await _safelyHandlePayload(response.payload);
       },
@@ -167,11 +174,11 @@ class NotificationService {
     final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
 
     await _plugin.zonedSchedule(
-      _reminderBaseId + id,
-      title,
-      body,
-      firstTrigger,
-      _reminderDetails,
+      id: _reminderBaseId + id,
+      title: title,
+      body: body,
+      scheduledDate: firstTrigger,
+      notificationDetails: _reminderDetails,
       androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
@@ -184,7 +191,7 @@ class NotificationService {
   }
 
   Future<void> cancelReminder(int id) async {
-    await _plugin.cancel(_reminderBaseId + id);
+    await _plugin.cancel(id: _reminderBaseId + id);
   }
 
   /// Shows an immediate one-off local notification (used for small in-app
@@ -193,7 +200,12 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    await _plugin.show(999, title, body, _reminderDetails);
+    await _plugin.show(
+      id: 999,
+      title: title,
+      body: body,
+      notificationDetails: _reminderDetails,
+    );
   }
 
   static const int _dailyTextNotificationId = 600;
@@ -209,18 +221,18 @@ class NotificationService {
     final tz.TZDateTime firstTrigger = _nextInstanceFor(time);
     final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
     await _plugin.zonedSchedule(
-      _dailyTextNotificationId,
-      title,
-      body,
-      firstTrigger,
-      _reminderDetails,
+      id: _dailyTextNotificationId,
+      title: title,
+      body: body,
+      scheduledDate: firstTrigger,
+      notificationDetails: _reminderDetails,
       androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
 
   Future<void> cancelDailyTextReminder() async {
-    await _plugin.cancel(_dailyTextNotificationId);
+    await _plugin.cancel(id: _dailyTextNotificationId);
   }
 
   static const int _streakRiskNotificationId = 500;
@@ -244,17 +256,17 @@ class NotificationService {
     }
     final AndroidScheduleMode mode = await _resolveScheduleMode();
     await _plugin.zonedSchedule(
-      _streakRiskNotificationId,
-      title,
-      body,
-      target,
-      _reminderDetails,
+      id: _streakRiskNotificationId,
+      title: title,
+      body: body,
+      scheduledDate: target,
+      notificationDetails: _reminderDetails,
       androidScheduleMode: mode,
     );
   }
 
   Future<void> cancelStreakRiskCheck() async {
-    await _plugin.cancel(_streakRiskNotificationId);
+    await _plugin.cancel(id: _streakRiskNotificationId);
   }
 
   /// Cancels every scheduled reminder (used before a full resync).

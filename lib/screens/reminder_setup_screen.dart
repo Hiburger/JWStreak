@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/reminder_picker.dart';
 import '../widgets/responsive_body.dart';
@@ -250,7 +251,10 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final List<ReminderTimePreset> presets = reminderPresets(l10n);
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.reminderTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(l10n.reminderTitle),
+      ),
       body: ResponsiveBody(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())

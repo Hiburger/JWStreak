@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/local_db_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'quiz_screen.dart';
@@ -120,7 +121,10 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
     final Checkpoint cp = widget.checkpoint;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.checkpointAppBarTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(l10n.checkpointAppBarTitle),
+      ),
       body: ResponsiveBody(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
@@ -365,7 +369,10 @@ class _ReflectionScreenState extends State<ReflectionScreen> {
     final ThemeData theme = Theme.of(context);
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.checkpointReflectionAppBarTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(l10n.checkpointReflectionAppBarTitle),
+      ),
       body: ResponsiveBody(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())

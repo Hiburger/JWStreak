@@ -6,6 +6,7 @@ import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'notes_screen.dart';
@@ -178,6 +179,7 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: const CircularBackButton(),
           title: Text(
             note?.displayTitle(context) ??
                 AppLocalizations.of(context)!.noteReaderTitle,

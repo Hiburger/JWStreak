@@ -68,7 +68,9 @@ Future<Uint8List> _buildNotesPdf(
           );
           widgets.add(
             pw.Text(
-              l10n.noteExportedOn(DateFormat('dd/MM/yyyy').format(DateTime.now())),
+              l10n.noteExportedOn(
+                DateFormat('dd/MM/yyyy').format(DateTime.now()),
+              ),
               style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey600),
             ),
           );
@@ -116,7 +118,10 @@ Future<Uint8List> _buildNotesPdf(
 ///
 /// All context-dependent (localized) strings are resolved synchronously up
 /// front, since [context] must not be used after the `await` points below.
-Future<void> shareNotesAsPdf(BuildContext context, List<NoteEntry> notes) async {
+Future<void> shareNotesAsPdf(
+  BuildContext context,
+  List<NoteEntry> notes,
+) async {
   if (notes.isEmpty) {
     return;
   }
@@ -125,7 +130,9 @@ Future<void> shareNotesAsPdf(BuildContext context, List<NoteEntry> notes) async 
       .map((NoteEntry note) => note.displayTitle(context))
       .toList(growable: false);
   final List<String> displayReferences = notes
-      .map((NoteEntry note) => displayReference(context, note.book, note.chapter))
+      .map(
+        (NoteEntry note) => displayReference(context, note.book, note.chapter),
+      )
       .toList(growable: false);
 
   final Uint8List bytes = await _buildNotesPdf(
@@ -140,9 +147,13 @@ Future<void> shareNotesAsPdf(BuildContext context, List<NoteEntry> notes) async 
       : 'notes_jwstreak.pdf';
   final File file = File('${dir.path}/$fileName');
   await file.writeAsBytes(bytes);
-  await Share.shareXFiles(
-    <XFile>[XFile(file.path, mimeType: 'application/pdf')],
-    subject: notes.length == 1 ? displayTitles.first : l10n.noteExportMultiTitle,
+  await SharePlus.instance.share(
+    ShareParams(
+      files: <XFile>[XFile(file.path, mimeType: 'application/pdf')],
+      subject: notes.length == 1
+          ? displayTitles.first
+          : l10n.noteExportMultiTitle,
+    ),
   );
 }
 
@@ -162,7 +173,9 @@ Future<void> exportAllNotesAsZip(
       .map((NoteEntry note) => note.displayTitle(context))
       .toList(growable: false);
   final List<String> displayReferences = notes
-      .map((NoteEntry note) => displayReference(context, note.book, note.chapter))
+      .map(
+        (NoteEntry note) => displayReference(context, note.book, note.chapter),
+      )
       .toList(growable: false);
 
   final Archive archive = Archive();
@@ -171,11 +184,18 @@ Future<void> exportAllNotesAsZip(
   // get a numeric suffix instead of silently overwriting each other.
   final Map<String, int> usedNames = <String, int>{};
   for (int i = 0; i < notes.length; i++) {
-    final Uint8List bytes = await _buildNotesPdf(l10n, <String>[
-      displayTitles[i],
-    ], <String>[displayReferences[i]], <NoteEntry>[notes[i]]);
+    final Uint8List bytes = await _buildNotesPdf(
+      l10n,
+      <String>[displayTitles[i]],
+      <String>[displayReferences[i]],
+      <NoteEntry>[notes[i]],
+    );
     final String base = _sanitizeFileName(displayTitles[i]);
-    final int seen = usedNames.update(base, (int n) => n + 1, ifAbsent: () => 1);
+    final int seen = usedNames.update(
+      base,
+      (int n) => n + 1,
+      ifAbsent: () => 1,
+    );
     final String fileName = seen == 1 ? '$base.pdf' : '${base}_$seen.pdf';
     archive.addFile(ArchiveFile(fileName, bytes.length, bytes));
   }
@@ -184,8 +204,10 @@ Future<void> exportAllNotesAsZip(
   final Directory dir = await getTemporaryDirectory();
   final File file = File('${dir.path}/notes_jwstreak.zip');
   await file.writeAsBytes(zipBytes);
-  await Share.shareXFiles(
-    <XFile>[XFile(file.path, mimeType: 'application/zip')],
-    subject: l10n.noteExportMultiTitle,
+  await SharePlus.instance.share(
+    ShareParams(
+      files: <XFile>[XFile(file.path, mimeType: 'application/zip')],
+      subject: l10n.noteExportMultiTitle,
+    ),
   );
 }

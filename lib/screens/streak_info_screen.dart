@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/onboarding_progress.dart';
 import '../widgets/responsive_body.dart';
@@ -43,6 +44,7 @@ class StreakInfoScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
+                    style: circularIconButtonStyle(context),
                     onPressed: onBack,
                     icon: const Icon(Icons.arrow_back_rounded),
                     tooltip: l10n.onbBack,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/onboarding_progress.dart';
@@ -211,6 +212,7 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                       child: IconButton(
+                        style: circularIconButtonStyle(context),
                         onPressed: widget.onBack,
                         icon: const Icon(Icons.arrow_back_rounded),
                         tooltip: l10n.onbBack,

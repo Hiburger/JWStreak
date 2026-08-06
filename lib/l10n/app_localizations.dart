@@ -1798,6 +1798,18 @@ abstract class AppLocalizations {
   /// **'{count} active day'**
   String homeActiveDaysSingular(int count);
 
+  /// No description provided for @homeCalendarPreviousWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous week'**
+  String get homeCalendarPreviousWeek;
+
+  /// No description provided for @homeCalendarNextWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Next week'**
+  String get homeCalendarNextWeek;
+
   /// No description provided for @homeWeekdayMon.
   ///
   /// In en, this message translates to:
@@ -2294,6 +2306,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{current} / {goal}'**
   String achievementsProgressFraction(int current, int goal);
+
+  /// No description provided for @achievementStarReward.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count}'**
+  String achievementStarReward(int count);
 
   /// No description provided for @achievementsSectionReading.
   ///

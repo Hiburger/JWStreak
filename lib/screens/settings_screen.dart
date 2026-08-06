@@ -10,6 +10,7 @@ import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../theme/theme_preference.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
 import '../widgets/tap_easter_egg.dart';
@@ -165,6 +166,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
       final bool lockAvailable = await _lockService.isAvailable();
       final bool lockEnabled = await _lockService.isEnabled();
+      // The stored preference just says what was picked last time — it
+      // doesn't know if JW Library got uninstalled since. Re-check now
+      // rather than showing a toggle that's on for an app that's gone.
+      bool openInJwLibrary = !openOnWeb;
+      if (openInJwLibrary && !await _deepLinkService.isJwLibraryInstalled()) {
+        openInJwLibrary = false;
+        await LocalDbService().saveOpenBibleOnWeb(true);
+      }
       if (!mounted) {
         return;
       }
@@ -176,7 +185,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _version = packageInfo.version;
         _notificationsEnabled = notificationsEnabled;
         _exactAlarmsAllowed = exactAlarmsAllowed;
-        _openInJwLibrary = !openOnWeb;
+        _openInJwLibrary = openInJwLibrary;
         _isCheckingPermissions = false;
       });
     } catch (error) {
@@ -411,15 +420,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ColorScheme cs = Theme.of(context).colorScheme;
-    // +2dp over Card's own implicit ~12dp default, with an outline so each
+    // Matches the achievements screen's cards, with an outline so each
     // section reads as a distinct, bordered block instead of a borderless
     // tonal fill blending into the page background.
     final RoundedRectangleBorder sectionShape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(20),
       side: BorderSide(color: cs.outlineVariant),
     );
+    // Chips default to a much smaller radius than sectionShape — inside a
+    // card that's now more rounded, that read as a mismatch.
+    const RoundedRectangleBorder chipShape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+    );
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(l10n.settingsTitle),
+      ),
       body: ResponsiveBody(
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -439,8 +456,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: ThemePreference.values
                       .map(
                         (ThemePreference preference) => ChoiceChip(
+                          shape: chipShape,
                           label: Text(preference.label(context)),
                           selected: _selectedTheme == preference,
+                          selectedColor: cs.primary,
+                          checkmarkColor: cs.onPrimary,
+                          labelStyle: TextStyle(
+                            color: _selectedTheme == preference
+                                ? cs.onPrimary
+                                : cs.onSurface,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          side: BorderSide(
+                            color: _selectedTheme == preference
+                                ? cs.primary
+                                : cs.outlineVariant,
+                          ),
                           onSelected: (_) => _changeTheme(preference),
                         ),
                       )
@@ -506,12 +537,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: _kAppLanguages
                       .map(
                         (_AppLanguage lang) => ChoiceChip(
+                          shape: chipShape,
                           label: Text(
                             lang.code == null
                                 ? l10n.settingsLanguageSystem
                                 : lang.name,
                           ),
                           selected: _selectedLocaleCode == lang.code,
+                          selectedColor: cs.primary,
+                          checkmarkColor: cs.onPrimary,
+                          labelStyle: TextStyle(
+                            color: _selectedLocaleCode == lang.code
+                                ? cs.onPrimary
+                                : cs.onSurface,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          side: BorderSide(
+                            color: _selectedLocaleCode == lang.code
+                                ? cs.primary
+                                : cs.outlineVariant,
+                          ),
                           onSelected: widget.onLocaleChanged == null
                               ? null
                               : (_) => _changeLocale(lang.code),
@@ -592,31 +637,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            Card.filled(
-              shape: sectionShape,
-              child: ListTile(
-                leading: Icon(
-                  exactAlarmsAllowed ? Icons.check_circle : Icons.warning_amber,
-                  size: 32,
-                  color: exactAlarmsAllowed
-                      ? Colors.lightGreen
-                      : Colors.redAccent,
-                ),
-                title: Text(l10n.settingsExactAlarms),
-                subtitle: Text(
-                  _isCheckingPermissions
-                      ? l10n.settingsChecking
-                      : exactAlarmsAllowed
-                      ? l10n.settingsExactAlarmsOn
-                      : l10n.settingsExactAlarmsOff,
-                ),
-                trailing: TextButton(
-                  onPressed: _requestExactAlarms,
-                  child: Text(l10n.settingsAllow),
+            // Exact-alarm scheduling (AlarmManager's SCHEDULE_EXACT_ALARM) is
+            // an Android-only concept — iOS has no equivalent permission, so
+            // this card would be meaningless clutter there.
+            if (defaultTargetPlatform == TargetPlatform.android) ...<Widget>[
+              const SizedBox(height: 8),
+              Card.filled(
+                shape: sectionShape,
+                child: ListTile(
+                  leading: Icon(
+                    exactAlarmsAllowed
+                        ? Icons.check_circle
+                        : Icons.warning_amber,
+                    size: 32,
+                    color: exactAlarmsAllowed
+                        ? Colors.lightGreen
+                        : Colors.redAccent,
+                  ),
+                  title: Text(l10n.settingsExactAlarms),
+                  subtitle: Text(
+                    _isCheckingPermissions
+                        ? l10n.settingsChecking
+                        : exactAlarmsAllowed
+                        ? l10n.settingsExactAlarmsOn
+                        : l10n.settingsExactAlarmsOff,
+                  ),
+                  trailing: TextButton(
+                    onPressed: _requestExactAlarms,
+                    child: Text(l10n.settingsAllow),
+                  ),
                 ),
               ),
-            ),
+            ],
             const SizedBox(height: 16),
             Text(
               l10n.settingsInfo,

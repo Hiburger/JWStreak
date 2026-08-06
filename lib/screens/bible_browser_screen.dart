@@ -8,6 +8,7 @@ import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
@@ -79,7 +80,10 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
         .toList(growable: false);
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.bibleAppTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(AppLocalizations.of(context)!.bibleAppTitle),
+      ),
       body: ResponsiveBody(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
@@ -674,6 +678,7 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
     final ColorScheme cs = theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
+        leading: const CircularBackButton(),
         title: Text(localizedBookName(context, widget.book)),
         actions: <Widget>[
           if (bookMaxStars(widget.book) > 0)

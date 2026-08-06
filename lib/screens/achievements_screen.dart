@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../achievements_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/responsive_body.dart';
 
 /// Localized title/description for one achievement id. Kept separate from
@@ -124,7 +125,10 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
     if (_isLoading || _stats == null) {
       return Scaffold(
-        appBar: AppBar(title: Text(l10n.achievementsTitle)),
+        appBar: AppBar(
+          leading: const CircularBackButton(),
+          title: Text(l10n.achievementsTitle),
+        ),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
@@ -133,6 +137,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     final int unlockedCount = kAchievementDefs
         .where((AchievementDef def) => _unlockedIds.contains(def.id))
         .length;
+    final int bonusStars = achievementBonusStars(_unlockedIds);
 
     final Map<AchievementCategory, List<AchievementDef>> byCategory =
         <AchievementCategory, List<AchievementDef>>{};
@@ -141,7 +146,10 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.achievementsTitle)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        title: Text(l10n.achievementsTitle),
+      ),
       body: ResponsiveBody(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
@@ -193,6 +201,34 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             ),
                           ),
                         ),
+                        if (bonusStars > 0) ...<Widget>[
+                          const SizedBox(height: 8),
+                          Row(
+                            children: <Widget>[
+                              // Plain amber read as washed-out against this
+                              // card's pastel gradient — onPrimaryContainer
+                              // is the same tone as the text next to it, so
+                              // it's guaranteed to actually stand out here.
+                              Icon(
+                                Icons.star_rounded,
+                                color: cs.onPrimaryContainer,
+                                size: 22,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                // The leading "+" is what marks this as a
+                                // bonus rather than a restatement of the
+                                // home screen's own star total.
+                                '+$bonusStars '
+                                '${bonusStars != 1 ? l10n.homeStatStarsPlural : l10n.homeStatStarSingular}',
+                                style: theme.textTheme.titleSmall?.copyWith(
+                                  color: cs.onPrimaryContainer,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ],
                     ),
                   ),
@@ -248,6 +284,10 @@ class _AchievementTile extends StatelessWidget {
 
     return Card.filled(
       margin: const EdgeInsets.only(bottom: 10),
+      // Matches the trophy banner above — Material 3's own Card default
+      // (12) reads as a different, smaller radius sitting right underneath
+      // it.
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       color: unlocked ? cs.surfaceContainerHigh : cs.surfaceContainerLow,
       child: Padding(
         padding: const EdgeInsets.all(14),
@@ -314,10 +354,68 @@ class _AchievementTile extends StatelessWidget {
                 ],
               ),
             ),
-            if (unlocked)
-              Icon(Icons.check_circle_rounded, color: cs.tertiary, size: 22),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                if (unlocked)
+                  Icon(
+                    Icons.check_circle_rounded,
+                    color: cs.tertiary,
+                    size: 22,
+                  ),
+                if (def.starReward > 0) ...<Widget>[
+                  if (unlocked) const SizedBox(height: 6),
+                  _StarRewardBadge(
+                    count: def.starReward,
+                    // Muted while locked: a preview of what's coming, not a
+                    // claim that it's already been earned.
+                    active: unlocked,
+                  ),
+                ],
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Small "+N ⭐" pill next to an achievement, previewing (locked) or
+/// confirming (unlocked) the bonus stars that achievement is worth.
+class _StarRewardBadge extends StatelessWidget {
+  const _StarRewardBadge({required this.count, required this.active});
+
+  final int count;
+  final bool active;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+    final Color fg = active ? Colors.amber.shade800 : cs.onSurfaceVariant;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: active
+            ? Colors.amber.withValues(alpha: 0.18)
+            : cs.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(Icons.star_rounded, color: fg, size: 18),
+          const SizedBox(width: 3),
+          Text(
+            l10n.achievementStarReward(count),
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: fg,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
       ),
     );
   }

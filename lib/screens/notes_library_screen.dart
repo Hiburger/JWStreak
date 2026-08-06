@@ -5,6 +5,7 @@ import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
+import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'note_reader_screen.dart';
@@ -398,7 +399,10 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   }
 
   AppBar _buildNormalAppBar() {
-    return AppBar(title: Text(AppLocalizations.of(context)!.notesLibraryTitle));
+    return AppBar(
+      leading: const CircularBackButton(),
+      title: Text(AppLocalizations.of(context)!.notesLibraryTitle),
+    );
   }
 
   AppBar _buildSelectionAppBar() {
@@ -406,6 +410,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     final int count = _selectedIds.length;
     return AppBar(
       leading: IconButton(
+        style: circularIconButtonStyle(context),
         icon: const Icon(Icons.close),
         tooltip: l10n.notesLibraryCancelSelectionTooltip,
         onPressed: _clearSelection,

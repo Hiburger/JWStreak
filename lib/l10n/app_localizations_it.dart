@@ -955,6 +955,12 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String get homeCalendarPreviousWeek => 'Settimana precedente';
+
+  @override
+  String get homeCalendarNextWeek => 'Settimana successiva';
+
+  @override
   String get homeWeekdayMon => 'L';
 
   @override
@@ -1247,6 +1253,11 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String achievementsProgressFraction(int current, int goal) {
     return '$current / $goal';
+  }
+
+  @override
+  String achievementStarReward(int count) {
+    return '+$count';
   }
 
   @override

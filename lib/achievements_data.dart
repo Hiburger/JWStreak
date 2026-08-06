@@ -50,6 +50,7 @@ class AchievementDef {
     required this.isMet,
     this.goal,
     this.progress,
+    this.starReward = 0,
   });
 
   /// Stable id, persisted in the DB once unlocked so it stays unlocked even
@@ -63,6 +64,13 @@ class AchievementDef {
   /// boolean (all-or-nothing) achievement.
   final int? goal;
   final int Function(AchievementStats stats)? progress;
+
+  /// Bonus stars added to the home screen's total the moment this unlocks,
+  /// scaled to how hard it is to earn. Zero for `stars_20`/`stars_40`
+  /// specifically: those two unlock *by* reaching a star total, so having
+  /// them also grant stars would let unlocking one nudge you toward the
+  /// other for free rather than through actual quiz play.
+  final int starReward;
 }
 
 // Not `const`: the easter-eggs achievement's goal reads kEasterEggIds.length,
@@ -70,12 +78,14 @@ class AchievementDef {
 final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   AchievementDef(
     id: 'first_chapter',
+    starReward: 1,
     icon: Icons.auto_stories_outlined,
     category: AchievementCategory.reading,
     isMet: _firstChapter,
   ),
   AchievementDef(
     id: 'chapters_10',
+    starReward: 2,
     icon: Icons.menu_book_outlined,
     category: AchievementCategory.reading,
     isMet: _chapters10,
@@ -84,6 +94,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'chapters_50',
+    starReward: 3,
     icon: Icons.local_library_outlined,
     category: AchievementCategory.reading,
     isMet: _chapters50,
@@ -92,6 +103,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'chapters_150',
+    starReward: 5,
     icon: Icons.auto_stories_rounded,
     category: AchievementCategory.reading,
     isMet: _chapters150,
@@ -100,18 +112,21 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'genesis_complete',
+    starReward: 3,
     icon: Icons.terrain_outlined,
     category: AchievementCategory.reading,
     isMet: _genesisComplete,
   ),
   AchievementDef(
     id: 'whole_bible',
+    starReward: 10,
     icon: Icons.public,
     category: AchievementCategory.reading,
     isMet: _wholeBibleComplete,
   ),
   AchievementDef(
     id: 'explorer_5books',
+    starReward: 2,
     icon: Icons.travel_explore_rounded,
     category: AchievementCategory.reading,
     isMet: _explorer5Books,
@@ -120,12 +135,14 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'first_quiz',
+    starReward: 1,
     icon: Icons.quiz_outlined,
     category: AchievementCategory.quizzes,
     isMet: _firstQuiz,
   ),
   AchievementDef(
     id: 'quizzes_5',
+    starReward: 2,
     icon: Icons.school_outlined,
     category: AchievementCategory.quizzes,
     isMet: _quizzes5,
@@ -134,6 +151,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'quizzes_25',
+    starReward: 3,
     icon: Icons.psychology_outlined,
     category: AchievementCategory.quizzes,
     isMet: _quizzes25,
@@ -142,6 +160,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'quizzes_40',
+    starReward: 5,
     icon: Icons.military_tech_outlined,
     category: AchievementCategory.quizzes,
     isMet: _quizzes40,
@@ -150,6 +169,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'perfect_quiz',
+    starReward: 2,
     icon: Icons.workspace_premium_outlined,
     category: AchievementCategory.quizzes,
     isMet: _perfectQuiz,
@@ -172,6 +192,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'streak_7',
+    starReward: 2,
     icon: Icons.local_fire_department_rounded,
     category: AchievementCategory.streak,
     isMet: _streak7,
@@ -180,6 +201,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'streak_30',
+    starReward: 4,
     icon: Icons.whatshot_rounded,
     category: AchievementCategory.streak,
     isMet: _streak30,
@@ -188,6 +210,7 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'streak_180',
+    starReward: 10,
     icon: Icons.local_fire_department_rounded,
     category: AchievementCategory.streak,
     isMet: _streak180,
@@ -196,12 +219,14 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'first_note',
+    starReward: 1,
     icon: Icons.edit_note_outlined,
     category: AchievementCategory.other,
     isMet: _firstNote,
   ),
   AchievementDef(
     id: 'notes_10',
+    starReward: 2,
     icon: Icons.library_books_outlined,
     category: AchievementCategory.other,
     isMet: _notes10,
@@ -210,12 +235,14 @@ final List<AchievementDef> kAchievementDefs = <AchievementDef>[
   ),
   AchievementDef(
     id: 'reminder_set',
+    starReward: 1,
     icon: Icons.notifications_active_outlined,
     category: AchievementCategory.other,
     isMet: _reminderSet,
   ),
   AchievementDef(
     id: 'easter_eggs_all',
+    starReward: 3,
     icon: Icons.auto_fix_high_rounded,
     category: AchievementCategory.other,
     isMet: _easterEggsAll,
@@ -254,3 +281,12 @@ int _totalStarsProgress(AchievementStats s) => s.totalStars;
 int _currentStreakProgress(AchievementStats s) => s.currentStreak;
 int _notesCountProgress(AchievementStats s) => s.notesCount;
 int _easterEggsProgress(AchievementStats s) => s.easterEggsFound;
+
+/// Sum of [AchievementDef.starReward] over every id in [unlockedIds]. This is
+/// additive on top of quiz-earned stars, not part of [AchievementStats] —
+/// keeping it separate means `stars_20`/`stars_40` still evaluate against
+/// quiz stars alone, unaffected by however many bonus stars other
+/// achievements have already handed out.
+int achievementBonusStars(Set<String> unlockedIds) => kAchievementDefs
+    .where((AchievementDef def) => unlockedIds.contains(def.id))
+    .fold(0, (int sum, AchievementDef def) => sum + def.starReward);

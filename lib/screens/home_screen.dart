@@ -26,6 +26,7 @@ import 'quiz_screen.dart';
 import 'notes_screen.dart';
 import 'reminder_setup_screen.dart';
 import 'settings_screen.dart';
+import 'streak_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -234,7 +235,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _dbService.getLastReadingAt(),
       _dbService.getStreakState(),
       _dbService.getTotalReadings(),
-      _dbService.getRecentReadingDays(limit: 14),
+      // Enough to fill the six-week grid on the streak detail screen —
+      // anything less and days the user actually read would render as
+      // missed simply because they fell off the end of this query.
+      _dbService.getRecentReadingDays(limit: 42),
       _dbService.getReadChapterKeys(),
       _dbService.getCompletedQuizIds(),
       _dbService.getEarnedStarsByBook(),
@@ -264,7 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
           streakState: streakState,
           reminders: reminders,
         );
-    await _dbService.syncAchievements(stats: achievementStats);
+    final Set<String> unlockedAchievementIds = await _dbService
+        .syncAchievements(stats: achievementStats);
+    // Additive on top of quiz stars, not folded into achievementStats: that
+    // keeps the stars_20/stars_40 achievements evaluated against quiz play
+    // alone, while what's shown on the home screen is everything earned.
+    final int displayedStars =
+        totalStars + achievementBonusStars(unlockedAchievementIds);
 
     if (!mounted) {
       return;
@@ -305,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _frozenDays = frozenDays;
       _readKeys = readKeys;
       _completedQuiz = completedQuiz;
-      _totalStars = totalStars;
+      _totalStars = displayedStars;
       _isLoading = false;
       _recomputeDerived();
     });
@@ -559,6 +569,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> _openStreakDetail() async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => StreakDetailScreen(
+          streak: _streak,
+          freezes: _streakState.freezes,
+          recentReadingDays: _recentReadingDays,
+          frozenDays: _frozenDays,
+          lastReadAt: _lastReadAt,
+        ),
+      ),
+    );
+  }
+
   Future<void> _openNotesLibrary() async {
     final _ChapterRef? current = _nextChapter;
     final bool? changed = await Navigator.of(context).push<bool>(
@@ -715,11 +739,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   streak: _streak,
                   totalReadings: _totalReadings,
                   totalStars: _totalStars,
-                  lastReadAt: _lastReadAt,
-                  recentReadingDays: _recentReadingDays,
-                  frozenDays: _frozenDays,
                   chaptersRead: chaptersRead,
                   totalChapters: kTotalBibleChapters,
+                  onOpenStreak: _openStreakDetail,
+                  // The browser is where "readings" actually live — it marks
+                  // every chapter already read.
+                  onOpenReadings: _openBibleBrowser,
+                  // Stars come from quizzes, and the achievements screen is
+                  // where star milestones are tracked.
+                  onOpenStars: _openAchievements,
                 ),
               ],
             ),
@@ -934,13 +962,16 @@ class _StreakHero extends StatelessWidget {
                           color: cs.onPrimaryContainer.withValues(alpha: 0.85),
                         ),
                         const SizedBox(width: 6),
-                        Text(
-                          greeting,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: cs.onPrimaryContainer.withValues(
-                              alpha: 0.85,
+                        Expanded(
+                          child: Text(
+                            greeting,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: cs.onPrimaryContainer.withValues(
+                                alpha: 0.85,
+                              ),
+                              fontWeight: FontWeight.w600,
                             ),
-                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -1867,21 +1898,21 @@ class _ProgressCard extends StatelessWidget {
     required this.streak,
     required this.totalReadings,
     required this.totalStars,
-    required this.lastReadAt,
-    required this.recentReadingDays,
-    required this.frozenDays,
     required this.chaptersRead,
     required this.totalChapters,
+    required this.onOpenStreak,
+    required this.onOpenReadings,
+    required this.onOpenStars,
   });
 
   final int streak;
   final int totalReadings;
   final int totalStars;
-  final DateTime? lastReadAt;
-  final List<DateTime> recentReadingDays;
-  final Set<String> frozenDays;
   final int chaptersRead;
   final int totalChapters;
+  final VoidCallback onOpenStreak;
+  final VoidCallback onOpenReadings;
+  final VoidCallback onOpenStars;
 
   @override
   Widget build(BuildContext context) {
@@ -1909,6 +1940,7 @@ class _ProgressCard extends StatelessWidget {
                     ? l10n.homeStatStreakDaysPlural
                     : l10n.homeStatStreakDaySingular,
                 color: streak > 0 ? cs.tertiary : Colors.lightBlue,
+                onTap: onOpenStreak,
               ),
             ),
             const SizedBox(width: 12),
@@ -1920,6 +1952,7 @@ class _ProgressCard extends StatelessWidget {
                     ? l10n.homeStatReadingsPlural
                     : l10n.homeStatReadingSingular,
                 color: cs.primary,
+                onTap: onOpenReadings,
               ),
             ),
             const SizedBox(width: 12),
@@ -1931,6 +1964,7 @@ class _ProgressCard extends StatelessWidget {
                     ? l10n.homeStatStarsPlural
                     : l10n.homeStatStarSingular,
                 color: Colors.amber,
+                onTap: onOpenStars,
               ),
             ),
           ],
@@ -1942,22 +1976,6 @@ class _ProgressCard extends StatelessWidget {
           chaptersRead: chaptersRead,
           totalChapters: totalChapters,
         ),
-        const SizedBox(height: 16),
-        _MiniReadingCalendar(
-          readDays: recentReadingDays,
-          frozenDays: frozenDays,
-        ),
-        if (lastReadAt != null) ...<Widget>[
-          const SizedBox(height: 12),
-          Text(
-            l10n.homeLastReadAt(
-              DateFormat('dd/MM/yyyy HH:mm').format(lastReadAt!),
-            ),
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: cs.onSurfaceVariant,
-            ),
-          ),
-        ],
       ],
     );
   }
@@ -2058,6 +2076,7 @@ class _StatTile extends StatelessWidget {
     required this.value,
     required this.label,
     required this.color,
+    required this.onTap,
   });
 
   final IconData icon;
@@ -2065,45 +2084,57 @@ class _StatTile extends StatelessWidget {
   final String label;
   final Color color;
 
+  /// Each stat opens the screen that number comes from. These tiles already
+  /// looked tappable (they share the app's card shape), and people kept
+  /// trying — so they lead somewhere instead of being flattened to look inert.
+  final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: cs.secondaryContainer.withValues(alpha: 0.35),
+    return Material(
+      color: cs.secondaryContainer.withValues(alpha: 0.35),
+      borderRadius: BorderRadius.circular(20),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: cs.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.16),
-              // Matches the 44/14 leading-icon convention used everywhere
-              // else in the app (achievements, quick actions, reading card).
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(icon, color: color, size: 22),
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: cs.outlineVariant),
           ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.16),
+                  // Matches the 44/14 leading-icon convention used everywhere
+                  // else in the app (achievements, quick actions, reading card).
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(icon, color: color, size: 22),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                value,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text(
+                label,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: cs.onSurfaceVariant,
+                ),
+              ),
+            ],
           ),
-          Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: cs.onSurfaceVariant,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -2217,194 +2248,6 @@ class _QuickActionTile extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _MiniReadingCalendar extends StatelessWidget {
-  const _MiniReadingCalendar({
-    required this.readDays,
-    required this.frozenDays,
-  });
-
-  final List<DateTime> readDays;
-  final Set<String> frozenDays;
-
-  static List<String> _weekdayLabels(AppLocalizations l10n) => <String>[
-    l10n.homeWeekdayMon,
-    l10n.homeWeekdayTue,
-    l10n.homeWeekdayWed,
-    l10n.homeWeekdayThu,
-    l10n.homeWeekdayFri,
-    l10n.homeWeekdaySat,
-    l10n.homeWeekdaySun,
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme cs = theme.colorScheme;
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
-
-    final DateTime now = DateTime.now();
-    final DateTime today = DateTime(now.year, now.month, now.day);
-    final Set<String> readDaySet = readDays
-        .map((DateTime day) => DateFormat('yyyy-MM-dd').format(day))
-        .toSet();
-
-    // Align to whole weeks (Monday-first): show the current week plus the two
-    // previous ones, so columns line up under their weekday label.
-    final DateTime weekStart = today.subtract(
-      Duration(days: today.weekday - 1),
-    );
-    final DateTime firstDay = weekStart.subtract(const Duration(days: 14));
-    final int activeCount = readDaySet.length;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Text(
-              l10n.homeRecentActivity,
-              style: theme.textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const Spacer(),
-            Text(
-              activeCount != 1
-                  ? l10n.homeActiveDaysPlural(activeCount)
-                  : l10n.homeActiveDaysSingular(activeCount),
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: cs.onSurfaceVariant,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 2),
-        Text(
-          DateFormat.yMMMM(
-            Localizations.localeOf(context).toString(),
-          ).format(now),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: cs.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          // labelSmall at 55% opacity was the smallest, faintest text on the
-          // whole screen — these column headers need to stay visually
-          // secondary to the day numbers below them, but still legible.
-          children: _weekdayLabels(l10n)
-              .map(
-                (String label) => Expanded(
-                  child: Center(
-                    child: Text(
-                      label,
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: cs.onSurfaceVariant.withValues(alpha: 0.75),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              .toList(growable: false),
-        ),
-        const SizedBox(height: 4),
-        for (int week = 0; week < 3; week++)
-          Row(
-            children: <Widget>[
-              for (int d = 0; d < 7; d++)
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(3),
-                    child: _DayCell(
-                      day: firstDay.add(Duration(days: week * 7 + d)),
-                      today: today,
-                      readDaySet: readDaySet,
-                      frozenDays: frozenDays,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-      ],
-    );
-  }
-}
-
-class _DayCell extends StatelessWidget {
-  const _DayCell({
-    required this.day,
-    required this.today,
-    required this.readDaySet,
-    required this.frozenDays,
-  });
-
-  final DateTime day;
-  final DateTime today;
-  final Set<String> readDaySet;
-  final Set<String> frozenDays;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme cs = theme.colorScheme;
-
-    final String dayKey = DateFormat('yyyy-MM-dd').format(day);
-    final bool isFuture = day.isAfter(today);
-    final bool isToday = day == today;
-    final bool done = readDaySet.contains(dayKey);
-    final bool frozen = !done && frozenDays.contains(dayKey);
-
-    Color bg;
-    Color fg;
-    Border border;
-    if (done) {
-      bg = cs.primary;
-      fg = cs.onPrimary;
-      border = Border.all(color: cs.primary);
-    } else if (frozen) {
-      bg = Colors.lightBlue.withValues(alpha: 0.25);
-      fg = Colors.lightBlue.shade700;
-      border = Border.all(color: Colors.lightBlue.withValues(alpha: 0.6));
-    } else if (isFuture) {
-      bg = cs.surfaceContainerHighest.withValues(alpha: 0.4);
-      fg = cs.onSurfaceVariant.withValues(alpha: 0.4);
-      border = Border.all(color: cs.outlineVariant.withValues(alpha: 0.4));
-    } else {
-      bg = cs.surfaceContainerHighest;
-      fg = cs.onSurfaceVariant;
-      border = Border.all(color: cs.outlineVariant);
-    }
-    if (isToday) {
-      border = Border.all(color: cs.primary, width: 2);
-    }
-
-    return AspectRatio(
-      aspectRatio: 1,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        decoration: BoxDecoration(
-          color: bg,
-          borderRadius: BorderRadius.circular(10),
-          border: border,
-        ),
-        alignment: Alignment.center,
-        child: done
-            ? Icon(Icons.check_rounded, size: 16, color: fg)
-            : frozen
-            ? Icon(Icons.ac_unit_rounded, size: 15, color: fg)
-            : Text(
-                '${day.day}',
-                style: theme.textTheme.labelMedium?.copyWith(
-                  color: fg,
-                  fontWeight: isToday ? FontWeight.w800 : FontWeight.w500,
-                ),
-              ),
       ),
     );
   }

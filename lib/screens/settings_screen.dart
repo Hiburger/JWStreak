@@ -77,6 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late String? _selectedLocaleCode;
   bool? _notificationsEnabled;
   bool? _exactAlarmsAllowed;
+  bool? _batteryOptimizationsIgnored;
   bool _isCheckingPermissions = true;
   String _version = '...';
 
@@ -163,6 +164,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           .areNotificationsEnabled();
       final bool exactAlarmsAllowed = await widget.notificationService
           .canScheduleExactAlarms();
+      final bool batteryOptimizationsIgnored = await widget.notificationService
+          .isIgnoringBatteryOptimizations();
       final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
       final bool lockAvailable = await _lockService.isAvailable();
       final bool lockEnabled = await _lockService.isEnabled();
@@ -185,6 +188,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _version = packageInfo.version;
         _notificationsEnabled = notificationsEnabled;
         _exactAlarmsAllowed = exactAlarmsAllowed;
+        _batteryOptimizationsIgnored = batteryOptimizationsIgnored;
         _openInJwLibrary = openInJwLibrary;
         _isCheckingPermissions = false;
       });
@@ -395,6 +399,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  Future<void> _requestIgnoreBatteryOptimizations() async {
+    try {
+      final bool granted = await widget.notificationService
+          .requestIgnoreBatteryOptimizations();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _batteryOptimizationsIgnored = granted;
+      });
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      _showError(error);
+    }
+  }
+
   Future<void> _openExternal(Uri uri) async {
     final bool opened = await launchUrl(
       uri,
@@ -417,6 +439,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final bool notificationsEnabled = _notificationsEnabled ?? false;
     final bool exactAlarmsAllowed = _exactAlarmsAllowed ?? false;
+    final bool batteryOptimizationsIgnored =
+        _batteryOptimizationsIgnored ?? true;
 
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ColorScheme cs = Theme.of(context).colorScheme;
@@ -664,6 +688,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   trailing: TextButton(
                     onPressed: _requestExactAlarms,
+                    child: Text(l10n.settingsAllow),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Card.filled(
+                shape: sectionShape,
+                child: ListTile(
+                  leading: Icon(
+                    batteryOptimizationsIgnored
+                        ? Icons.check_circle
+                        : Icons.warning_amber,
+                    size: 32,
+                    color: batteryOptimizationsIgnored
+                        ? Colors.lightGreen
+                        : Colors.redAccent,
+                  ),
+                  title: Text(l10n.settingsBatteryOptimization),
+                  subtitle: Text(
+                    _isCheckingPermissions
+                        ? l10n.settingsChecking
+                        : batteryOptimizationsIgnored
+                        ? l10n.settingsBatteryOptimizationOn
+                        : l10n.settingsBatteryOptimizationOff,
+                  ),
+                  trailing: TextButton(
+                    onPressed: _requestIgnoreBatteryOptimizations,
                     child: Text(l10n.settingsAllow),
                   ),
                 ),

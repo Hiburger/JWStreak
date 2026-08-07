@@ -1114,6 +1114,24 @@ abstract class AppLocalizations {
   /// **'Not allowed. Reminders may be delayed.'**
   String get settingsExactAlarmsOff;
 
+  /// No description provided for @settingsBatteryOptimization.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery optimization'**
+  String get settingsBatteryOptimization;
+
+  /// No description provided for @settingsBatteryOptimizationOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Exempt. The reading-session notification can stay up.'**
+  String get settingsBatteryOptimizationOn;
+
+  /// No description provided for @settingsBatteryOptimizationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Not exempt. The device may remove that notification early.'**
+  String get settingsBatteryOptimizationOff;
+
   /// No description provided for @settingsAllow.
   ///
   /// In en, this message translates to:
@@ -1677,6 +1695,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mark as read'**
   String get homeMarkReadButton;
+
+  /// No description provided for @readingSessionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading {reference}'**
+  String readingSessionTitle(String reference);
+
+  /// No description provided for @readingSessionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to come back to JW Streak when you\'re done.'**
+  String get readingSessionBody;
+
+  /// No description provided for @readingSessionDoneTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished {reference}?'**
+  String readingSessionDoneTitle(String reference);
+
+  /// No description provided for @readingSessionDoneBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark it as read to keep your streak going.'**
+  String get readingSessionDoneBody;
+
+  /// No description provided for @readingSessionNotYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get readingSessionNotYet;
 
   /// No description provided for @homeAllRead.
   ///

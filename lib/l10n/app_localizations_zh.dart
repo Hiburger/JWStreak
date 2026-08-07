@@ -515,6 +515,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsExactAlarmsOff => '未获授权。提醒可能会延迟。';
 
   @override
+  String get settingsBatteryOptimization => '电池优化';
+
+  @override
+  String get settingsBatteryOptimizationOn => '已豁免。阅读会话通知可以保持显示。';
+
+  @override
+  String get settingsBatteryOptimizationOff => '未豁免。设备可能会提前移除该通知。';
+
+  @override
   String get settingsAllow => '允许';
 
   @override
@@ -834,6 +843,25 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeMarkReadButton => '标记为已读';
+
+  @override
+  String readingSessionTitle(String reference) {
+    return '正在阅读$reference';
+  }
+
+  @override
+  String get readingSessionBody => '读完后点按即可返回 JW Streak。';
+
+  @override
+  String readingSessionDoneTitle(String reference) {
+    return '读完$reference了吗？';
+  }
+
+  @override
+  String get readingSessionDoneBody => '标记为已读以保持你的连续记录。';
+
+  @override
+  String get readingSessionNotYet => '还没有';
 
   @override
   String get homeAllRead => '太厉害了！你已经读完整本圣经。';

@@ -3,11 +3,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
+import '../services/reading_session_service.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/message_dialog.dart';
@@ -446,6 +448,7 @@ class BibleChaptersScreen extends StatefulWidget {
 
 class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
   final DeepLinkService _deepLinkService = DeepLinkService();
+  final ReadingSessionService _readingSession = ReadingSessionService();
   Set<int> _readChapters = const <int>{};
   Map<String, QuizResult> _quizResults = const <String, QuizResult>{};
   Set<String> _answeredReflections = const <String>{};
@@ -591,12 +594,29 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
 
   Future<void> _openInJwLibrary(int chapter) async {
     final String languageCode = Localizations.localeOf(context).languageCode;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String reference = displayReference(context, widget.book.id, chapter);
     try {
-      await _deepLinkService.openReference(
+      // Posted before the launch: once JW Library is in front, this app may
+      // not get scheduled again for a while.
+      await _readingSession.start(
         book: widget.book.id,
         chapter: chapter,
-        languageCode: languageCode,
+        title: l10n.readingSessionTitle(reference),
+        body: l10n.readingSessionBody,
+        onReturn: _promptMarkRead,
       );
+      try {
+        await _deepLinkService.openReference(
+          book: widget.book.id,
+          chapter: chapter,
+          languageCode: languageCode,
+        );
+      } catch (_) {
+        // Nothing opened, so there's no session to come back from.
+        await _readingSession.cancel();
+        rethrow;
+      }
     } catch (error) {
       if (mounted) {
         showMessageDialog(
@@ -606,6 +626,46 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
         );
       }
     }
+  }
+
+  /// Offers to mark the chapter as read once the user is back from reading it.
+  Future<void> _promptMarkRead(ReadingSession session) async {
+    if (!mounted || _readChapters.contains(session.chapter)) {
+      return;
+    }
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String reference = displayReference(
+      context,
+      session.book,
+      session.chapter,
+    );
+    final bool confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (BuildContext dialogContext) => AlertDialog(
+            title: Text(l10n.readingSessionDoneTitle(reference)),
+            content: Text(l10n.readingSessionDoneBody),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(false),
+                child: Text(l10n.readingSessionNotYet),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(dialogContext).pop(true),
+                child: Text(l10n.bibleMarkRead),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    if (!confirmed || !mounted) {
+      return;
+    }
+    await widget.dbService.markChapterRead(
+      book: session.book,
+      chapter: session.chapter,
+    );
+    await _loadProgress();
   }
 
   Future<void> _toggleRead(int chapter) async {

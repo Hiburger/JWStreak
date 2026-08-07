@@ -546,6 +546,17 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не разрешено. Напоминания могут задерживаться.';
 
   @override
+  String get settingsBatteryOptimization => 'Оптимизация батареи';
+
+  @override
+  String get settingsBatteryOptimizationOn =>
+      'Исключено. Уведомление о сессии чтения может оставаться активным.';
+
+  @override
+  String get settingsBatteryOptimizationOff =>
+      'Не исключено. Устройство может удалить это уведомление раньше времени.';
+
+  @override
   String get settingsAllow => 'Разрешить';
 
   @override
@@ -877,6 +888,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeMarkReadButton => 'Отметить как прочитанное';
+
+  @override
+  String readingSessionTitle(String reference) {
+    return 'Чтение: $reference';
+  }
+
+  @override
+  String get readingSessionBody =>
+      'Нажми, чтобы вернуться в JW Streak, когда закончишь.';
+
+  @override
+  String readingSessionDoneTitle(String reference) {
+    return 'Закончил $reference?';
+  }
+
+  @override
+  String get readingSessionDoneBody =>
+      'Отметь как прочитанное, чтобы сохранить свою серию.';
+
+  @override
+  String get readingSessionNotYet => 'Ещё нет';
 
   @override
   String get homeAllRead => 'Отлично! Ты прочитал(а) всю Библию.';

@@ -547,6 +547,17 @@ class AppLocalizationsFr extends AppLocalizations {
       'Non autorisées. Les rappels peuvent être retardés.';
 
   @override
+  String get settingsBatteryOptimization => 'Optimisation de la batterie';
+
+  @override
+  String get settingsBatteryOptimizationOn =>
+      'Exemptée. La notification de session de lecture peut rester affichée.';
+
+  @override
+  String get settingsBatteryOptimizationOff =>
+      'Non exemptée. L’appareil peut supprimer cette notification prématurément.';
+
+  @override
   String get settingsAllow => 'Autoriser';
 
   @override
@@ -875,6 +886,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeMarkReadButton => 'Marquer lu';
+
+  @override
+  String readingSessionTitle(String reference) {
+    return 'Lecture de $reference';
+  }
+
+  @override
+  String get readingSessionBody =>
+      'Touche pour revenir à JW Streak une fois terminé.';
+
+  @override
+  String readingSessionDoneTitle(String reference) {
+    return '$reference terminé ?';
+  }
+
+  @override
+  String get readingSessionDoneBody =>
+      'Marque-le comme lu pour continuer ta série.';
+
+  @override
+  String get readingSessionNotYet => 'Pas encore';
 
   @override
   String get homeAllRead => 'Bravo ! Tu as lu toute la Bible.';

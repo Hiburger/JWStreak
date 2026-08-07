@@ -43,6 +43,30 @@ class NotificationService {
   static const int _reminderBaseId = 200;
   static const String _channelId = 'jwstreak_reminders';
 
+  /// Separate channel from [_channelId] so the always-present reading-session
+  /// notification can be silenced (or turned off entirely) in Android's
+  /// settings without also killing the daily reminders — they're different
+  /// enough in kind that sharing one channel would make that impossible.
+  ///
+  /// `_v3`: channel importance is locked in by the OS the first time a
+  /// channel is created and stays there even if the app later asks to
+  /// recreate it at a different importance, so bumping this forces a fresh
+  /// channel for every install that already saw an older one.
+  ///
+  /// This channel started at `Importance.low`, then `defaultImportance` —
+  /// both were accepted (no error, no exception) but never actually
+  /// surfaced anywhere on a real device: not in the shade, not as a status
+  /// bar icon, gone from `dumpsys notification`'s active list within
+  /// moments of being posted, confirmed via adb across many repeats even
+  /// while the app was verifiably backgrounded and the target app verifiably
+  /// focused. [Importance.high] on the exact same device, same install,
+  /// same code path, showed instantly and reliably. So: high it is,
+  /// with [AndroidNotificationDetails.silent] doing the actual job of
+  /// keeping it from peeking, buzzing or making sound — that's a property
+  /// of `silent`, not of the channel's importance tier.
+  static const String _sessionChannelId = 'jwstreak_reading_session_v3';
+  static const int _sessionNotificationId = 700;
+
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
@@ -126,6 +150,10 @@ class NotificationService {
     );
 
     await _createNotificationChannel();
+    // A reading-session notification outlives the process that posted it, so
+    // one can survive Android killing us mid-session. Nothing can legitimately
+    // be in progress at app start, so clear any leftover.
+    await endReadingSession();
     await requestNotificationPermission();
 
     if (kDebugMode) {
@@ -147,6 +175,21 @@ class NotificationService {
         playSound: true,
         enableVibration: true,
         showBadge: true,
+      ),
+    );
+    // High: see the comment on [_sessionChannelId] for why. `silent` below
+    // still keeps it from buzzing or peeking — that property doesn't depend
+    // on the channel's importance tier.
+    await _androidPlugin?.createNotificationChannel(
+      const AndroidNotificationChannel(
+        _sessionChannelId,
+        'Reading session',
+        description:
+            'Shown while a chapter is open in JW Library or on jw.org.',
+        importance: Importance.high,
+        playSound: false,
+        enableVibration: false,
+        showBadge: false,
       ),
     );
     if (kDebugMode) {
@@ -206,6 +249,65 @@ class NotificationService {
       body: body,
       notificationDetails: _reminderDetails,
     );
+  }
+
+  /// Posts the ongoing "you're reading, come back when you're done"
+  /// notification, with a chronometer counting up from now.
+  ///
+  /// Android only: the equivalent on iOS is a Live Activity, which needs a
+  /// native widget extension rather than a local notification, so calling this
+  /// there would produce a banner that behaves nothing like the intended
+  /// thing. Silently a no-op instead of throwing — call sites shouldn't have
+  /// to platform-check something this incidental.
+  Future<void> startReadingSession({
+    required String title,
+    required String body,
+  }) async {
+    if (defaultTargetPlatform != TargetPlatform.android) {
+      return;
+    }
+    await _plugin.show(
+      id: _sessionNotificationId,
+      title: title,
+      body: body,
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          _sessionChannelId,
+          'Reading session',
+          channelDescription:
+              'Shown while a chapter is open in JW Library or on jw.org.',
+          importance: Importance.high,
+          priority: Priority.high,
+          // The pair that turns the timestamp into a live "12:34" counter
+          // ticking upward, rendered by the system — no polling from us.
+          usesChronometer: true,
+          when: DateTime.now().millisecondsSinceEpoch,
+          ongoing: true,
+          autoCancel: false,
+          silent: true,
+          // Safety net for the case that actually matters here: Android is
+          // free to kill this process while the user reads in another app,
+          // and a posted notification outlives its process. Without a
+          // timeout, an `ongoing` (so undismissable) notification could
+          // strand the user with no way to clear it short of force-stopping
+          // the app. Four hours is far past any real reading session.
+          timeoutAfter: const Duration(hours: 4).inMilliseconds,
+        ),
+      ),
+    );
+    if (kDebugMode) {
+      debugPrint('NotificationService: reading session notification shown');
+    }
+  }
+
+  Future<void> endReadingSession() async {
+    if (defaultTargetPlatform != TargetPlatform.android) {
+      return;
+    }
+    if (kDebugMode) {
+      debugPrint('NotificationService: reading session notification cancelled');
+    }
+    await _plugin.cancel(id: _sessionNotificationId);
   }
 
   static const int _dailyTextNotificationId = 600;
@@ -346,6 +448,38 @@ class NotificationService {
       final bool? canExact = await _androidPlugin
           ?.canScheduleExactNotifications();
       return canExact ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Android only. Some OEM battery managers kill or suppress notifications
+  /// posted by a backgrounded, non-exempt app outright — confirmed on both a
+  /// LineageOS build and Huawei's EMUI, both by design rather than a bug in
+  /// what gets posted. This is what the reading-session notification
+  /// (see reading_session_service.dart) needs to actually survive.
+  Future<bool> isIgnoringBatteryOptimizations() async {
+    if (defaultTargetPlatform != TargetPlatform.android) {
+      return true;
+    }
+    try {
+      return await Permission.ignoreBatteryOptimizations.isGranted;
+    } catch (_) {
+      return true;
+    }
+  }
+
+  /// Opens the system's "ignore battery optimizations" dialog. Returns
+  /// `true` if the exemption is granted afterward.
+  Future<bool> requestIgnoreBatteryOptimizations() async {
+    if (defaultTargetPlatform != TargetPlatform.android) {
+      return true;
+    }
+    try {
+      final PermissionStatus status = await Permission
+          .ignoreBatteryOptimizations
+          .request();
+      return status.isGranted;
     } catch (_) {
       return false;
     }

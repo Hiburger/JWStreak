@@ -12,6 +12,7 @@ import '../quiz/quiz_data.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
+import '../services/reading_session_service.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/guided_tour.dart';
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final LocalDbService _dbService = LocalDbService();
   final NotificationService _notificationService = NotificationService();
   final DeepLinkService _deepLinkService = DeepLinkService();
+  final ReadingSessionService _readingSession = ReadingSessionService();
 
   List<Reminder> _reminders = const <Reminder>[];
   DateTime? _lastReadAt;
@@ -398,12 +400,76 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> _handleNotificationTap(ReminderPayload payload) async {
-    await _deepLinkService.openReference(
-      book: payload.book,
-      chapter: payload.chapter,
-      languageCode: Localizations.localeOf(context).languageCode,
+  /// Opens a chapter in JW Library (or on jw.org) and puts up the ongoing
+  /// reading-session notification, which stays until the user comes back.
+  Future<void> _launchChapter(String book, int chapter) async {
+    final String languageCode = Localizations.localeOf(context).languageCode;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String reference = displayReference(context, book, chapter);
+    await _readingSession.start(
+      book: book,
+      chapter: chapter,
+      title: l10n.readingSessionTitle(reference),
+      body: l10n.readingSessionBody,
+      onReturn: _promptMarkRead,
     );
+    try {
+      await _deepLinkService.openReference(
+        book: book,
+        chapter: chapter,
+        languageCode: languageCode,
+      );
+    } catch (_) {
+      // Nothing actually opened, so there's no session to come back from —
+      // otherwise the notification would hang around until its timeout.
+      await _readingSession.cancel();
+      rethrow;
+    }
+  }
+
+  /// Offers to mark the chapter as read once the user is back from reading it.
+  Future<void> _promptMarkRead(ReadingSession session) async {
+    if (!mounted) {
+      return;
+    }
+    // It may already have been marked while they were away — from the Bible
+    // browser, or by tapping "Mark as read" before opening it.
+    if (_readKeys.contains(bibleChapterKey(session.book, session.chapter))) {
+      return;
+    }
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String reference = displayReference(
+      context,
+      session.book,
+      session.chapter,
+    );
+    final bool confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (BuildContext dialogContext) => AlertDialog(
+            title: Text(l10n.readingSessionDoneTitle(reference)),
+            content: Text(l10n.readingSessionDoneBody),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(dialogContext).pop(false),
+                child: Text(l10n.readingSessionNotYet),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(dialogContext).pop(true),
+                child: Text(l10n.homeMarkReadButton),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    if (!confirmed || !mounted) {
+      return;
+    }
+    await _markChapterRead(session.book, session.chapter);
+  }
+
+  Future<void> _handleNotificationTap(ReminderPayload payload) async {
+    await _launchChapter(payload.book, payload.chapter);
   }
 
   void _handleBackgroundError(Object error, StackTrace stackTrace) {
@@ -422,14 +488,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openChapter(String book, int chapter) async {
-    final String languageCode = Localizations.localeOf(context).languageCode;
-    await _runAction(() async {
-      await _deepLinkService.openReference(
-        book: book,
-        chapter: chapter,
-        languageCode: languageCode,
-      );
-    });
+    await _runAction(() => _launchChapter(book, chapter));
   }
 
   Future<void> _openBibleBrowser() async {
@@ -987,7 +1046,12 @@ class _StreakHero extends StatelessWidget {
                     const SizedBox(height: 12),
                     Row(
                       children: <Widget>[
-                        _StatusPill(readToday: readToday),
+                        // Flexible rather than a fixed size: "To read today"
+                        // is long enough that on a narrow phone it plus the
+                        // freeze pill next to it can overflow the card's
+                        // width — this lets the status pill's own text
+                        // ellipsize instead.
+                        Flexible(child: _StatusPill(readToday: readToday)),
                         const SizedBox(width: 8),
                         _FreezePill(freezes: freezes),
                       ],
@@ -1097,12 +1161,15 @@ class _StatusPill extends StatelessWidget {
         children: <Widget>[
           Icon(icon, size: 16, color: cs.onPrimaryContainer),
           const SizedBox(width: 6),
-          Text(
-            text,
-            style: TextStyle(
-              color: cs.onPrimaryContainer,
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
+          Flexible(
+            child: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: cs.onPrimaryContainer,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
             ),
           ),
         ],

@@ -547,6 +547,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsExactAlarmsOff => 'Not allowed. Reminders may be delayed.';
 
   @override
+  String get settingsBatteryOptimization => 'Battery optimization';
+
+  @override
+  String get settingsBatteryOptimizationOn =>
+      'Exempt. The reading-session notification can stay up.';
+
+  @override
+  String get settingsBatteryOptimizationOff =>
+      'Not exempt. The device may remove that notification early.';
+
+  @override
   String get settingsAllow => 'Allow';
 
   @override
@@ -873,6 +884,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeMarkReadButton => 'Mark as read';
+
+  @override
+  String readingSessionTitle(String reference) {
+    return 'Reading $reference';
+  }
+
+  @override
+  String get readingSessionBody =>
+      'Tap to come back to JW Streak when you\'re done.';
+
+  @override
+  String readingSessionDoneTitle(String reference) {
+    return 'Finished $reference?';
+  }
+
+  @override
+  String get readingSessionDoneBody =>
+      'Mark it as read to keep your streak going.';
+
+  @override
+  String get readingSessionNotYet => 'Not yet';
 
   @override
   String get homeAllRead => 'Well done! You\'ve read the whole Bible.';

@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesRuC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Что Пётр призывает добавлять к вере во 2 Петра 1?',
@@ -11,8 +12,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Политическую власть',
       ],
       correctIndex: 0,
-      explanation:
-          'Поощряется постепенный духовный рост (2 Петра 1:5—7).',
+      explanation: 'Поощряется постепенный духовный рост (2 Петра 1:5—7).',
     ),
     QuizQuestion(
       text: 'Как во 2 Петра 1 описано происхождение библейского пророчества?',
@@ -23,8 +23,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Оно происходит из народных преданий',
       ],
       correctIndex: 0,
-      explanation:
-          'Утверждение о божественном вдохновении (2 Петра 1:21).',
+      explanation: 'Утверждение о божественном вдохновении (2 Петра 1:21).',
     ),
   ],
   '2 Peter#1': <QuizQuestion>[
@@ -37,11 +36,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'От верных старейшин',
       ],
       correctIndex: 0,
-      explanation:
-          'Даётся подробное предостережение (2 Петра 2).',
+      explanation: 'Даётся подробное предостережение (2 Петра 2).',
     ),
     QuizQuestion(
-      text: 'Какие исторические примеры приводит 2 Петра 2 в качестве предостережения?',
+      text:
+          'Какие исторические примеры приводит 2 Петра 2 в качестве предостережения?',
       options: <String>[
         'Потоп и уничтожение Содома',
         'Строительство храма',
@@ -49,8 +48,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Правление Соломона',
       ],
       correctIndex: 0,
-      explanation:
-          'Примеры прошлого суда (2 Петра 2:5, 6).',
+      explanation: 'Примеры прошлого суда (2 Петра 2:5, 6).',
     ),
   ],
   '2 Peter#2': <QuizQuestion>[
@@ -63,8 +61,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Они полностью одобрят пророчество',
       ],
       correctIndex: 0,
-      explanation:
-          'Скептицизм предсказан заранее (2 Петра 3:4).',
+      explanation: 'Скептицизм предсказан заранее (2 Петра 3:4).',
     ),
     QuizQuestion(
       text: 'Что обещает 2 Петра 3 после окончательного суда?',
@@ -75,8 +72,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Никакого особого обещания',
       ],
       correctIndex: 0,
-      explanation:
-          'Надежда на обновление (2 Петра 3:13).',
+      explanation: 'Надежда на обновление (2 Петра 3:13).',
     ),
   ],
   '1 John#0': <QuizQuestion>[
@@ -89,8 +85,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Оправдываться, не признавая вины',
       ],
       correctIndex: 0,
-      explanation:
-          'Обещание искреннего прощения (1 Иоанна 1:9).',
+      explanation: 'Обещание искреннего прощения (1 Иоанна 1:9).',
     ),
     QuizQuestion(
       text: 'Как 1 Иоанна 2 предостерегает нас от «любви к миру»?',
@@ -101,13 +96,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Она необходима для спасения',
       ],
       correctIndex: 0,
-      explanation:
-          'Требуется сделать ясный выбор (1 Иоанна 2:15).',
+      explanation: 'Требуется сделать ясный выбор (1 Иоанна 2:15).',
     ),
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как 1 Иоанна 3 определяет детей Бога в сравнении с детьми Дьявола?',
+      text:
+          'Как 1 Иоанна 3 определяет детей Бога в сравнении с детьми Дьявола?',
       options: <String>[
         'По их праведным или неправедным делам',
         'По их богатству',
@@ -115,31 +110,42 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'По их возрасту',
       ],
       correctIndex: 0,
-      explanation:
-          'Поведение раскрывает принадлежность (1 Иоанна 3:10).',
+      explanation: 'Поведение раскрывает принадлежность (1 Иоанна 3:10).',
     ),
     QuizQuestion(
       text: 'Какую главную заповедь подчёркивает 1 Иоанна 3?',
-      options: <String>['Любить друг друга', 'Избегать всякого общения', 'Стремиться к богатству', 'Сурово судить других'],
+      options: <String>[
+        'Любить друг друга',
+        'Избегать всякого общения',
+        'Стремиться к богатству',
+        'Сурово судить других',
+      ],
       correctIndex: 0,
-      explanation:
-          'Важнейшее испытание подлинной веры (1 Иоанна 3:11).',
+      explanation: 'Важнейшее испытание подлинной веры (1 Иоанна 3:11).',
     ),
   ],
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Как 1 Иоанна 4 прямо определяет Бога?',
-      options: <String>['Бог есть любовь', 'Бог далёк', 'Бог безразличен', 'Бог только суров'],
+      options: <String>[
+        'Бог есть любовь',
+        'Бог далёк',
+        'Бог безразличен',
+        'Бог только суров',
+      ],
       correctIndex: 0,
-      explanation:
-          'Центральное утверждение письма (1 Иоанна 4:8).',
+      explanation: 'Центральное утверждение письма (1 Иоанна 4:8).',
     ),
     QuizQuestion(
       text: 'Что говорит 1 Иоанна 5 о том, что побеждает мир?',
-      options: <String>['Наша вера', 'Богатство', 'Человеческая власть', 'Удача'],
+      options: <String>[
+        'Наша вера',
+        'Богатство',
+        'Человеческая власть',
+        'Удача',
+      ],
       correctIndex: 0,
-      explanation:
-          'Победа, основанная на вере (1 Иоанна 5:4).',
+      explanation: 'Победа, основанная на вере (1 Иоанна 5:4).',
     ),
   ],
   '2 John#0': <QuizQuestion>[
@@ -156,11 +162,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
           'Требуется бдительность в вопросах учения (2 Иоанна 1:7, 10).',
     ),
     QuizQuestion(
-      text: 'Какую заповедь Иоанн напоминает как основную в этом коротком письме?',
-      options: <String>['Любить друг друга', 'Избегать всякого собрания', 'Искать богатство', 'Игнорировать новоприбывших'],
+      text:
+          'Какую заповедь Иоанн напоминает как основную в этом коротком письме?',
+      options: <String>[
+        'Любить друг друга',
+        'Избегать всякого собрания',
+        'Искать богатство',
+        'Игнорировать новоприбывших',
+      ],
       correctIndex: 0,
-      explanation:
-          'Постоянное напоминание о братской любви (2 Иоанна 1:5).',
+      explanation: 'Постоянное напоминание о братской любви (2 Иоанна 1:5).',
     ),
   ],
   '3 John#0': <QuizQuestion>[
@@ -173,8 +184,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Его добровольную изоляцию',
       ],
       correctIndex: 0,
-      explanation:
-          'Его щедрость приводится в пример (3 Иоанна 1:5).',
+      explanation: 'Его щедрость приводится в пример (3 Иоанна 1:5).',
     ),
     QuizQuestion(
       text: 'Какое поведение проявляет Диотреф в этом письме?',
@@ -185,13 +195,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Глубокое уважение к Иоанну',
       ],
       correctIndex: 0,
-      explanation:
-          'Осуждается проблемное поведение (3 Иоанна 1:9, 10).',
+      explanation: 'Осуждается проблемное поведение (3 Иоанна 1:9, 10).',
     ),
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'О чём Иуда просит своих читателей перед лицом безбожных лазутчиков?',
+      text:
+          'О чём Иуда просит своих читателей перед лицом безбожных лазутчиков?',
       options: <String>[
         'Решительно бороться за веру',
         'Полностью игнорировать ситуацию',
@@ -199,11 +209,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Отказаться от всех убеждений',
       ],
       correctIndex: 0,
-      explanation:
-          'Твёрдый призыв к верности (Иуды 1:3).',
+      explanation: 'Твёрдый призыв к верности (Иуды 1:3).',
     ),
     QuizQuestion(
-      text: 'Какие примеры приводит Иуда в качестве исторических предостережений?',
+      text:
+          'Какие примеры приводит Иуда в качестве исторических предостережений?',
       options: <String>[
         'Содом и восставших ангелов',
         'Строительство храма',
@@ -211,8 +221,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Только выход из Египта',
       ],
       correctIndex: 0,
-      explanation:
-          'Примеры прошлого суда (Иуды 1:6, 7).',
+      explanation: 'Примеры прошлого суда (Иуды 1:6, 7).',
     ),
   ],
   'Revelation#0': <QuizQuestion>[
@@ -225,18 +234,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Земную битву',
       ],
       correctIndex: 0,
-      explanation:
-          'Книгу открывает впечатляющее видение (Откровение 1).',
+      explanation: 'Книгу открывает впечатляющее видение (Откровение 1).',
     ),
     QuizQuestion(
       text: 'Скольким собраниям адресованы письма из 2—3 глав?',
       options: <String>['Семи', 'Двенадцати', 'Трём', 'Только одному'],
       correctIndex: 0,
-      explanation:
-          'Даются семь индивидуальных посланий (Откровение 2—3).',
+      explanation: 'Даются семь индивидуальных посланий (Откровение 2—3).',
     ),
     QuizQuestion(
-      text: 'Кто один оказывается достоин открыть запечатанный свиток в Откровении 5?',
+      text:
+          'Кто один оказывается достоин открыть запечатанный свиток в Откровении 5?',
       options: <String>[
         'Агнец, который был заклан',
         'Могущественный ангел',
@@ -244,20 +252,24 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Никто не может его открыть',
       ],
       correctIndex: 0,
-      explanation:
-          'Только Христос заслуживает этой чести (Откровение 5:5—9).',
+      explanation: 'Только Христос заслуживает этой чести (Откровение 5:5—9).',
     ),
   ],
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: 'С кем сражается Михаил в видении из Откровения 12?',
-      options: <String>['С драконом (Сатаной)', 'С человеческим войском', 'С земным царём', 'С обычным животным'],
+      options: <String>[
+        'С драконом (Сатаной)',
+        'С человеческим войском',
+        'С земным царём',
+        'С обычным животным',
+      ],
       correctIndex: 0,
-      explanation:
-          'Описывается небесная война (Откровение 12:7).',
+      explanation: 'Описывается небесная война (Откровение 12:7).',
     ),
     QuizQuestion(
-      text: 'Кого представляют 144 000, упомянутые вместе с Агнцем в Откровении 14?',
+      text:
+          'Кого представляют 144 000, упомянутые вместе с Агнцем в Откровении 14?',
       options: <String>[
         'Группу, собранную вместе с Агнцем на горе Сион',
         'Буквальное военное войско',
@@ -265,8 +277,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Простой символ без значения',
       ],
       correctIndex: 0,
-      explanation:
-          'Особая группа, связанная с Агнцем (Откровение 14:1).',
+      explanation: 'Особая группа, связанная с Агнцем (Откровение 14:1).',
     ),
     QuizQuestion(
       text: 'Что содержат семь последних язв, объявленных в Откровении 15?',
@@ -277,8 +288,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'Ничего значимого',
       ],
       correctIndex: 0,
-      explanation:
-          'Заключительный этап Божьего суда (Откровение 15:1).',
+      explanation: 'Заключительный этап Божьего суда (Откровение 15:1).',
     ),
   ],
   'Revelation#2': <QuizQuestion>[
@@ -291,8 +301,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'С ним ничего не происходит',
       ],
       correctIndex: 0,
-      explanation:
-          'Его падение описывается с плачем (Откровение 18).',
+      explanation: 'Его падение описывается с плачем (Откровение 18).',
     ),
     QuizQuestion(
       text: 'Что происходит с Сатаной в начале Откровения 20?',
@@ -315,10 +324,10 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC8 = <String, List<QuizQu
         'На этот счёт ничего не обещано',
       ],
       correctIndex: 0,
-      explanation:
-          'Прекрасная надежда завершает Библию (Откровение 21:4).',
+      explanation: 'Прекрасная надежда завершает Библию (Откровение 21:4).',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesRuC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesRuC8 =
+    <String, List<QuizQuestion>>{};

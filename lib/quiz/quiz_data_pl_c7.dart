@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPlC7 = <String, List<QuizQuestion>>{
   '2 Thessalonians#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Jak Paweł zachęca prześladowanych Tesaloniczan?',
@@ -23,17 +24,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Myśl, że modlitwa powinna ustać',
       ],
       correctIndex: 0,
-      explanation:
-          'Wyjaśnione zostaje nieporozumienie (2 Tesaloniczan 2:2).',
+      explanation: 'Wyjaśnione zostaje nieporozumienie (2 Tesaloniczan 2:2).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Co musi się pojawić przed dniem Pana, według 2 Tesaloniczan 2?',
-      options: <String>['Człowiek bezprawia', 'Sprawiedliwy król', 'Powszechny pokój', 'Nic konkretnego'],
+      options: <String>[
+        'Człowiek bezprawia',
+        'Sprawiedliwy król',
+        'Powszechny pokój',
+        'Nic konkretnego',
+      ],
       correctIndex: 0,
-      explanation:
-          'Zapowiedziany jest wcześniejszy znak (2 Tesaloniczan 2:3).',
+      explanation: 'Zapowiedziany jest wcześniejszy znak (2 Tesaloniczan 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Szatan', 'powściągliwość', 'sąd'],
     ),
@@ -46,8 +50,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Aby natychmiast się rozproszyć',
       ],
       correctIndex: 0,
-      explanation:
-          'Wezwanie do wytrwałości (2 Tesaloniczan 2:15).',
+      explanation: 'Wezwanie do wytrwałości (2 Tesaloniczan 2:15).',
     ),
   ],
   '2 Thessalonians#2': <QuizQuestion>[
@@ -60,8 +63,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Praca zastępuje wiarę',
       ],
       correctIndex: 0,
-      explanation:
-          'Ostrzeżenie przed bezczynnością (2 Tesaloniczan 3:10).',
+      explanation: 'Ostrzeżenie przed bezczynnością (2 Tesaloniczan 3:10).',
     ),
     QuizQuestion(
       text: 'Jak Paweł kończy ten list?',
@@ -86,8 +88,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Przed małżeństwem w ogóle',
       ],
       correctIndex: 0,
-      explanation:
-          'Paweł chce zachować czystość nauki (1 Tymoteusza 1).',
+      explanation: 'Paweł chce zachować czystość nauki (1 Tymoteusza 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['prawo', 'rodowody', 'mity'],
     ),
@@ -114,11 +115,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Cieszyć się wielkim publicznym rozgłosem',
       ],
       correctIndex: 0,
-      explanation:
-          'Podane są precyzyjne kryteria moralne (1 Tymoteusza 3).',
+      explanation: 'Podane są precyzyjne kryteria moralne (1 Tymoteusza 3).',
     ),
     QuizQuestion(
-      text: 'Co 1 Tymoteusza 4 mówi o treningu fizycznym w porównaniu z pobożnym oddaniem?',
+      text:
+          'Co 1 Tymoteusza 4 mówi o treningu fizycznym w porównaniu z pobożnym oddaniem?',
       options: <String>[
         'Pobożne oddanie jest pożyteczne pod każdym względem, podczas gdy trening fizyczny ma ograniczoną wartość',
         'Trening fizyczny jest ważniejszy',
@@ -152,13 +153,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Gwarantuje szczęście',
       ],
       correctIndex: 0,
-      explanation:
-          'Słynne ostrzeżenie przed chciwością (1 Tymoteusza 6:10).',
+      explanation: 'Słynne ostrzeżenie przed chciwością (1 Tymoteusza 6:10).',
     ),
   ],
   '2 Timothy#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'O co Paweł prosi Tymoteusza w związku z darem, który otrzymał przez nałożenie rąk?',
+      text:
+          'O co Paweł prosi Tymoteusza w związku z darem, który otrzymał przez nałożenie rąk?',
       options: <String>[
         'Aby rozniecił go na nowo jak ogień',
         'Aby na zawsze o nim zapomniał',
@@ -166,8 +167,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Aby przekazał go obcemu',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęta, by pozostać duchowo aktywnym (2 Tymoteusza 1:6).',
+      explanation: 'Zachęta, by pozostać duchowo aktywnym (2 Tymoteusza 1:6).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['dar', 'duch', 'płomień'],
     ),
@@ -180,13 +180,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Wyłącznie swojej przeszłości',
       ],
       correctIndex: 0,
-      explanation:
-          'Niezłomna postawa mimo uwięzienia (2 Tymoteusza 1:8).',
+      explanation: 'Niezłomna postawa mimo uwięzienia (2 Tymoteusza 1:8).',
     ),
   ],
   '2 Timothy#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Do czego Paweł porównuje Tymoteusza, aby zilustrować potrzebną wytrwałość?',
+      text:
+          'Do czego Paweł porównuje Tymoteusza, aby zilustrować potrzebną wytrwałość?',
       options: <String>[
         'Do dobrego żołnierza Chrystusa',
         'Do zwykłego widza',
@@ -194,8 +194,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Do ostrożnego kupca',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz dyscypliny i poświęcenia (2 Tymoteusza 2:3).',
+      explanation: 'Obraz dyscypliny i poświęcenia (2 Tymoteusza 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['sportowiec', 'rolnik', 'sługa'],
     ),
@@ -222,8 +221,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Zachowaj ostrożne milczenie',
       ],
       correctIndex: 0,
-      explanation:
-          'Pilne wezwanie do wierności (2 Tymoteusza 4:2).',
+      explanation: 'Pilne wezwanie do wierności (2 Tymoteusza 4:2).',
     ),
     QuizQuestion(
       text: 'Jak Paweł podsumowuje swoje życie pod koniec tego listu?',
@@ -234,13 +232,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Niczego nie dokonałem',
       ],
       correctIndex: 0,
-      explanation:
-          'Pewne siebie podsumowanie wierności (2 Tymoteusza 4:7).',
+      explanation: 'Pewne siebie podsumowanie wierności (2 Tymoteusza 4:7).',
     ),
   ],
   'Titus#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jakich cech Tytus musi szukać u starszych, którzy mają być ustanowieni na Krecie?',
+      text:
+          'Jakich cech Tytus musi szukać u starszych, którzy mają być ustanowieni na Krecie?',
       options: <String>[
         'Bycia nienagannymi i trzymania się zdrowej nauki',
         'Bycia przede wszystkim bogatymi',
@@ -248,8 +246,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Bycia wyłącznie młodymi',
       ],
       correctIndex: 0,
-      explanation:
-          'Podane są surowe kryteria moralne (Tytusa 1).',
+      explanation: 'Podane są surowe kryteria moralne (Tytusa 1).',
     ),
     QuizQuestion(
       text: 'Przed kim Paweł ostrzega z powodu ich złego wpływu na Krecie?',
@@ -260,15 +257,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Uczciwymi kupcami',
       ],
       correctIndex: 0,
-      explanation:
-          'Wyraźne ostrzeżenie zostaje udzielone (Tytusa 1:10, 11).',
+      explanation: 'Wyraźne ostrzeżenie zostaje udzielone (Tytusa 1:10, 11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['starsi', 'obrzezanie', 'mity'],
     ),
   ],
   'Titus#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Czego Tytus musi nauczać różne grupy w zborze, według rozdziału 2?',
+      text:
+          'Czego Tytus musi nauczać różne grupy w zborze, według rozdziału 2?',
       options: <String>[
         'Zdrowego postępowania zgodnego z pożyteczną nauką',
         'Niczego konkretnego',
@@ -276,8 +273,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Całkowitej izolacji od świata',
       ],
       correctIndex: 0,
-      explanation:
-          'Każdej grupie udzielana jest odpowiednia rada (Tytusa 2).',
+      explanation: 'Każdej grupie udzielana jest odpowiednia rada (Tytusa 2).',
     ),
     QuizQuestion(
       text: 'Czego uczy nas niezasłużona życzliwość Boga, według Tytusa 2?',
@@ -302,8 +298,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Odmowę płacenia podatków',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęcany jest duch obywatelskiej współpracy (Tytusa 3:1).',
+      explanation: 'Zachęcany jest duch obywatelskiej współpracy (Tytusa 3:1).',
     ),
     QuizQuestion(
       text: 'Czego należy unikać, według Tytusa 3, w kwestii sporów?',
@@ -328,11 +323,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Aby całkowicie go zignorował',
       ],
       correctIndex: 0,
-      explanation:
-          'Apel o braterskie pojednanie (Filemona 1).',
+      explanation: 'Apel o braterskie pojednanie (Filemona 1).',
     ),
     QuizQuestion(
-      text: 'Jak Paweł proponuje uregulować dług, jaki Onezym może mieć wobec Filemona?',
+      text:
+          'Jak Paweł proponuje uregulować dług, jaki Onezym może mieć wobec Filemona?',
       options: <String>[
         'Oferuje, że obciąży nim swoje własne konto',
         'Żąda, aby Filemon go anulował bez dyskusji',
@@ -340,14 +335,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Prosi zbór, aby go spłacił',
       ],
       correctIndex: 0,
-      explanation:
-          'Osobisty akt pośrednictwa (Filemona 1:18, 19).',
+      explanation: 'Osobisty akt pośrednictwa (Filemona 1:18, 19).',
     ),
   ],
   'Hebrews#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'W jaki sposób Bóg ostatecznie przemówił do ludzkości, według Hebrajczyków 1?',
-      options: <String>['Przez swego Syna', 'Wyłącznie przez aniołów', 'Wyłącznie przez sny', 'Nigdy nie przemówił'],
+      text:
+          'W jaki sposób Bóg ostatecznie przemówił do ludzkości, według Hebrajczyków 1?',
+      options: <String>[
+        'Przez swego Syna',
+        'Wyłącznie przez aniołów',
+        'Wyłącznie przez sny',
+        'Nigdy nie przemówił',
+      ],
       correctIndex: 0,
       explanation:
           'Objawienie przewyższające wszystkie wcześniejsze, przez Chrystusa (Hebrajczyków 1:1, 2).',
@@ -363,11 +363,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Zniknęło z biegiem czasu',
       ],
       correctIndex: 0,
-      explanation:
-          'Silny obraz boskiego słowa (Hebrajczyków 4:12).',
+      explanation: 'Silny obraz boskiego słowa (Hebrajczyków 4:12).',
     ),
     QuizQuestion(
-      text: 'Przed czym ostrzega rozdział 3, powołując się na przykład pustyni?',
+      text:
+          'Przed czym ostrzega rozdział 3, powołując się na przykład pustyni?',
       options: <String>[
         'Przed niegodziwym, niewiernym sercem, które odwraca się od Boga',
         'Przed nadmierną hojnością',
@@ -381,11 +381,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
   ],
   'Hebrews#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Do jakiego starożytnego porządku kapłańskiego jest porównany Chrystus w tym liście?',
-      options: <String>['Do Melchizedeka', 'Wyłącznie do Aarona', 'Wyłącznie do Lewiego', 'Do żadnego konkretnego porządku'],
+      text:
+          'Do jakiego starożytnego porządku kapłańskiego jest porównany Chrystus w tym liście?',
+      options: <String>[
+        'Do Melchizedeka',
+        'Wyłącznie do Aarona',
+        'Wyłącznie do Lewiego',
+        'Do żadnego konkretnego porządku',
+      ],
       correctIndex: 0,
-      explanation:
-          'Wyższe i trwałe kapłaństwo (Hebrajczyków 7).',
+      explanation: 'Wyższe i trwałe kapłaństwo (Hebrajczyków 7).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -397,8 +402,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Żadną prawdziwą zmianę',
       ],
       correctIndex: 0,
-      explanation:
-          'Ustanowione zostaje wyższe przymierze (Hebrajczyków 8:10).',
+      explanation: 'Ustanowione zostaje wyższe przymierze (Hebrajczyków 8:10).',
     ),
     QuizQuestion(
       text: 'Co oczyszcza krew Chrystusa, według Hebrajczyków 9?',
@@ -409,13 +413,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Wyłącznie przedmioty świątynne',
       ],
       correctIndex: 0,
-      explanation:
-          'Głębokie wewnętrzne oczyszczenie (Hebrajczyków 9:14).',
+      explanation: 'Głębokie wewnętrzne oczyszczenie (Hebrajczyków 9:14).',
     ),
   ],
   'Hebrews#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaką podstawową zasadę podkreślają Hebrajczyków 10-11 w kwestii zbawienia?',
+      text:
+          'Jaką podstawową zasadę podkreślają Hebrajczyków 10-11 w kwestii zbawienia?',
       options: <String>[
         'Prawy będzie żył dzięki wierze',
         'Zbawienie zależy wyłącznie od rytuałów',
@@ -447,8 +451,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Niepoznawalny',
       ],
       correctIndex: 0,
-      explanation:
-          'Stwierdzenie stałości i niezawodności (Hebrajczyków 13:8).',
+      explanation: 'Stwierdzenie stałości i niezawodności (Hebrajczyków 13:8).',
     ),
   ],
   'James#0': <QuizQuestion>[
@@ -456,8 +459,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
       text: 'O co należy prosić z wiarą, według Jakuba 1?',
       options: <String>['O mądrość', 'O bogactwo', 'O popularność', 'O władzę'],
       correctIndex: 0,
-      explanation:
-          'Bóg hojnie daje mądrość (Jakuba 1:5).',
+      explanation: 'Bóg hojnie daje mądrość (Jakuba 1:5).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -469,8 +471,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Uczynki całkowicie zastępują wiarę',
       ],
       correctIndex: 0,
-      explanation:
-          'Prawdziwa wiara przejawia się w czynach (Jakuba 2:26).',
+      explanation: 'Prawdziwa wiara przejawia się w czynach (Jakuba 2:26).',
     ),
   ],
   'James#1': <QuizQuestion>[
@@ -483,8 +484,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Do siły, która jest zawsze pozytywna',
       ],
       correctIndex: 0,
-      explanation:
-          'Silny obraz wpływu słów (Jakuba 3:5).',
+      explanation: 'Silny obraz wpływu słów (Jakuba 3:5).',
     ),
     QuizQuestion(
       text: 'Jak Jakuba 3 odróżnia mądrość z góry od mądrości ziemskiej?',
@@ -495,8 +495,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Nie wprowadza się żadnego rozróżnienia',
       ],
       correctIndex: 0,
-      explanation:
-          'Wyraźny kontrast zostaje przedstawiony (Jakuba 3:17).',
+      explanation: 'Wyraźny kontrast zostaje przedstawiony (Jakuba 3:17).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['język', 'ogień', 'zazdrość'],
     ),
@@ -511,8 +510,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Polegać wyłącznie na szczęściu',
       ],
       correctIndex: 0,
-      explanation:
-          'Praktyczna lekcja pokory (Jakuba 4:13-15).',
+      explanation: 'Praktyczna lekcja pokory (Jakuba 4:13-15).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['starsi', 'modlitwa', 'olej'],
     ),
@@ -525,8 +523,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Zignorować swój stan',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęta do wspólnej modlitwy (Jakuba 5:14).',
+      explanation: 'Zachęta do wspólnej modlitwy (Jakuba 5:14).',
     ),
   ],
   '1 Peter#0': <QuizQuestion>[
@@ -539,8 +536,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Do wyższego statusu społecznego',
       ],
       correctIndex: 0,
-      explanation:
-          'Nadzieja oparta na zmartwychwstaniu (1 Piotra 1:3).',
+      explanation: 'Nadzieja oparta na zmartwychwstaniu (1 Piotra 1:3).',
     ),
     QuizQuestion(
       text: 'Do czego są porównani chrześcijanie w 1 Piotra 2?',
@@ -551,15 +547,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Do najwyższych sędziów',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz wspólnie budowanej społeczności (1 Piotra 2:5).',
+      explanation: 'Obraz wspólnie budowanej społeczności (1 Piotra 2:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['świątynia', 'kapłan', 'kamień węgielny'],
     ),
   ],
   '1 Peter#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaki przykład oferuje 1 Piotra 3 w obliczu niesprawiedliwego cierpienia?',
+      text:
+          'Jaki przykład oferuje 1 Piotra 3 w obliczu niesprawiedliwego cierpienia?',
       options: <String>[
         'Chrystusa, który cierpiał, aby zostawić nam wzór',
         'Natychmiastową zemstę',
@@ -567,11 +563,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Całkowitą obojętność',
       ],
       correctIndex: 0,
-      explanation:
-          'Wzorzec cierpliwości i prawości (1 Piotra 3:18).',
+      explanation: 'Wzorzec cierpliwości i prawości (1 Piotra 3:18).',
     ),
     QuizQuestion(
-      text: 'Jaką postawę zaleca 1 Piotra 3 wobec tych, którzy zadają pytania o wiarę?',
+      text:
+          'Jaką postawę zaleca 1 Piotra 3 wobec tych, którzy zadają pytania o wiarę?',
       options: <String>[
         'Bycie gotowym do obrony, z łagodnością i szacunkiem',
         'Odmowę wszelkiej dyskusji',
@@ -579,8 +575,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Systematyczne unikanie tego tematu',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęcana jest pełna szacunku odpowiedź (1 Piotra 3:15).',
+      explanation: 'Zachęcana jest pełna szacunku odpowiedź (1 Piotra 3:15).',
     ),
   ],
   '1 Peter#2': <QuizQuestion>[
@@ -593,13 +588,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
         'Jest zastrzeżona dla nielicznych',
       ],
       correctIndex: 0,
-      explanation:
-          'Podstawowa cecha, którą warto pielęgnować (1 Piotra 4:8).',
+      explanation: 'Podstawowa cecha, którą warto pielęgnować (1 Piotra 4:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['trzoda', 'starsi', 'cierpienie'],
     ),
     QuizQuestion(
-      text: 'Jaką postawę 1 Piotra 5 prosi starszych, aby przyjęli wobec trzody?',
+      text:
+          'Jaką postawę 1 Piotra 5 prosi starszych, aby przyjęli wobec trzody?',
       options: <String>[
         'Pasienie jej chętnie, z pokorą, nie pod przymusem',
         'Panowanie nad nią surową władzą',
@@ -613,4 +608,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC7 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPlC7 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesPlC7 =
+    <String, List<QuizQuestion>>{};

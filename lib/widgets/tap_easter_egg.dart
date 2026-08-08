@@ -38,11 +38,26 @@ class _TapEasterEggState extends State<TapEasterEgg>
   );
   late final Animation<double> _shakeAnimation =
       TweenSequence<double>(<TweenSequenceItem<double>>[
-        TweenSequenceItem<double>(tween: Tween<double>(begin: 0, end: -0.15), weight: 1),
-        TweenSequenceItem<double>(tween: Tween<double>(begin: -0.15, end: 0.15), weight: 1),
-        TweenSequenceItem<double>(tween: Tween<double>(begin: 0.15, end: -0.15), weight: 1),
-        TweenSequenceItem<double>(tween: Tween<double>(begin: -0.15, end: 0.15), weight: 1),
-        TweenSequenceItem<double>(tween: Tween<double>(begin: 0.15, end: 0), weight: 1),
+        TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0, end: -0.15),
+          weight: 1,
+        ),
+        TweenSequenceItem<double>(
+          tween: Tween<double>(begin: -0.15, end: 0.15),
+          weight: 1,
+        ),
+        TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0.15, end: -0.15),
+          weight: 1,
+        ),
+        TweenSequenceItem<double>(
+          tween: Tween<double>(begin: -0.15, end: 0.15),
+          weight: 1,
+        ),
+        TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 0.15, end: 0),
+          weight: 1,
+        ),
       ]).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
   int _tapCount = 0;

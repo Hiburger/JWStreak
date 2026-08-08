@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesRuC2 = <String, List<QuizQuestion>>{
   '1 Samuel#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Что Анна пообещала Иегове, если у неё родится сын?',
@@ -11,8 +12,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Самой стать жрицей',
       ],
       correctIndex: 0,
-      explanation:
-          'Анна посвящает Самуила служению при скинии (1 Самуила 1).',
+      explanation: 'Анна посвящает Самуила служению при скинии (1 Самуила 1).',
     ),
     QuizQuestion(
       text: 'Как Иегова обратился к юному Самуилу?',
@@ -23,8 +23,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Через голос, слышный всему народу',
       ],
       correctIndex: 0,
-      explanation:
-          'Сначала Самуил думает, что его зовёт Илий (1 Самуила 3).',
+      explanation: 'Сначала Самуил думает, что его зовёт Илий (1 Самуила 3).',
     ),
     QuizQuestion(
       text: 'Почему народ попросил Самуила поставить над ним царя?',
@@ -35,8 +34,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Потому что это предложил сам Самуил',
       ],
       correctIndex: 0,
-      explanation:
-          'Народ отвергает прямое правление Бога (1 Самуила 8).',
+      explanation: 'Народ отвергает прямое правление Бога (1 Самуила 8).',
     ),
   ],
   '1 Samuel#1': <QuizQuestion>[
@@ -83,16 +81,28 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
           '(1 Самуила 17).',
     ),
     QuizQuestion(
-      text: 'Какое чувство толкнуло Саула на желание убить Давида после его победы?',
-      options: <String>['Зависть', 'Страх перед филистимлянами', 'Гнев Самуила', 'Совет Ионафана'],
+      text:
+          'Какое чувство толкнуло Саула на желание убить Давида после его победы?',
+      options: <String>[
+        'Зависть',
+        'Страх перед филистимлянами',
+        'Гнев Самуила',
+        'Совет Ионафана',
+      ],
       correctIndex: 0,
       explanation:
           'Песни хвалы в честь Давида вызывают у Саула зависть '
           '(1 Самуила 18).',
     ),
     QuizQuestion(
-      text: 'Кто помог Давиду избежать гибели от руки Саула, предупредив его об опасности?',
-      options: <String>['Ионафан', 'Авенир', 'Один только Самуил', 'Неизвестный священник'],
+      text:
+          'Кто помог Давиду избежать гибели от руки Саула, предупредив его об опасности?',
+      options: <String>[
+        'Ионафан',
+        'Авенир',
+        'Один только Самуил',
+        'Неизвестный священник',
+      ],
       correctIndex: 0,
       explanation:
           'Ионафан предупреждает Давида условным знаком '
@@ -114,14 +124,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
           '(1 Самуила 24).',
     ),
     QuizQuestion(
-      text: 'Кто своей мудростью предотвратил конфликт между Давидом и Навалом?',
+      text:
+          'Кто своей мудростью предотвратил конфликт между Давидом и Навалом?',
       options: <String>['Авигея', 'Мелхола', 'Служанка', 'Первосвященник'],
       correctIndex: 0,
       explanation:
           'Авигея успокаивает Давида, принеся ему припасы (1 Самуила 25).',
     ),
     QuizQuestion(
-      text: 'Где погибли Саул и Ионафан в последнем сражении, описанном в книге?',
+      text:
+          'Где погибли Саул и Ионафан в последнем сражении, описанном в книге?',
       options: <String>[
         'На горе Гелвуй в бою с филистимлянами',
         'В Иерусалиме',
@@ -129,8 +141,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'В Гиве',
       ],
       correctIndex: 0,
-      explanation:
-          'Саул и его сыновья погибают на горе Гелвуй (1 Самуила 31).',
+      explanation: 'Саул и его сыновья погибают на горе Гелвуй (1 Самуила 31).',
     ),
   ],
   '2 Samuel#0': <QuizQuestion>[
@@ -143,15 +154,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Он тут же начал нападение',
       ],
       correctIndex: 0,
-      explanation:
-          'Давид слагает «Песнь лука» (2 Самуила 1).',
+      explanation: 'Давид слагает «Песнь лука» (2 Самуила 1).',
     ),
     QuizQuestion(
       text: 'Какой город Давид завоевал, чтобы сделать его своей столицей?',
       options: <String>['Иерусалим', 'Хеврон', 'Силом', 'Гиву'],
       correctIndex: 0,
-      explanation:
-          'Давид захватывает крепость Сион (2 Самуила 5).',
+      explanation: 'Давид захватывает крепость Сион (2 Самуила 5).',
     ),
     QuizQuestion(
       text: 'Какое обещание Иегова дал Давиду через пророка Нафана?',
@@ -193,8 +202,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
       text: 'Кто восстал против своего отца Давида, чтобы захватить престол?',
       options: <String>['Авессалом', 'Амнон', 'Соломон', 'Адония'],
       correctIndex: 0,
-      explanation:
-          'Начинается восстание Авессалома (2 Самуила 15).',
+      explanation: 'Начинается восстание Авессалома (2 Самуила 15).',
     ),
   ],
   '2 Samuel#2': <QuizQuestion>[
@@ -261,7 +269,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Кто помог Соломону с материалами для строительства храма?',
-      options: <String>['Хирам, царь Тира', 'Фараон Египта', 'Царица Савская', 'Царь Моава'],
+      options: <String>[
+        'Хирам, царь Тира',
+        'Фараон Египта',
+        'Царица Савская',
+        'Царь Моава',
+      ],
       correctIndex: 0,
       explanation:
           'Хирам поставляет кедровый лес и мастеров '
@@ -278,8 +291,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Соломон покидает Иерусалим',
       ],
       correctIndex: 0,
-      explanation:
-          'Облако славы наполняет дом (1 Царей 8).',
+      explanation: 'Облако славы наполняет дом (1 Царей 8).',
     ),
     QuizQuestion(
       text: 'Почему царство Соломона в конце концов духовно ослабло?',
@@ -295,7 +307,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
           '(1 Царей 11).',
     ),
     QuizQuestion(
-      text: 'Что сделал Иеровоам после разделения царства, чтобы помешать народу ходить в Иерусалим?',
+      text:
+          'Что сделал Иеровоам после разделения царства, чтобы помешать народу ходить в Иерусалим?',
       options: <String>[
         'Установил золотых тельцов в Вефиле и Дане',
         'Разрушил все дороги',
@@ -461,8 +474,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Его постепенно ослабила эпидемия',
       ],
       correctIndex: 0,
-      explanation:
-          'Божественное вмешательство спасает Иерусалим (2 Царей 19).',
+      explanation: 'Божественное вмешательство спасает Иерусалим (2 Царей 19).',
     ),
   ],
   '2 Kings#3': <QuizQuestion>[
@@ -481,10 +493,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Какой большой праздник Иосия отпраздновал после своей реформы?',
-      options: <String>['Пасху', 'Праздник кущей', 'Пятидесятницу', 'Юбилейный год'],
+      options: <String>[
+        'Пасху',
+        'Праздник кущей',
+        'Пятидесятницу',
+        'Юбилейный год',
+      ],
       correctIndex: 0,
-      explanation:
-          'Проводится памятная Пасха (2 Царей 23).',
+      explanation: 'Проводится памятная Пасха (2 Царей 23).',
     ),
     QuizQuestion(
       text: 'Чем заканчивается книга Царей?',
@@ -509,8 +525,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Родословием царей Египта',
       ],
       correctIndex: 0,
-      explanation:
-          'Списки восходят к Адаму (1 Летопись 1-2).',
+      explanation: 'Списки восходят к Адаму (1 Летопись 1-2).',
     ),
     QuizQuestion(
       text: 'Из какого колена происходит царский род Давида?',
@@ -521,7 +536,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
           '(1 Летопись 2-3).',
     ),
     QuizQuestion(
-      text: 'Какие колена, согласно этим родословиям, поселились к востоку от Иордана?',
+      text:
+          'Какие колена, согласно этим родословиям, поселились к востоку от Иордана?',
       options: <String>[
         'Рувим, Гад и половина Манассии',
         'Иуда и Вениамин',
@@ -557,8 +573,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Его несли египетские жрецы',
       ],
       correctIndex: 0,
-      explanation:
-          'Давид исправляет прежнюю ошибку (1 Летопись 15).',
+      explanation: 'Давид исправляет прежнюю ошибку (1 Летопись 15).',
     ),
     QuizQuestion(
       text: 'Над кем Давид одержал заметные победы в этих главах?',
@@ -597,8 +612,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Народ был против',
       ],
       correctIndex: 0,
-      explanation:
-          'Иегова оставляет эту задачу Соломону (1 Летопись 22; 28).',
+      explanation: 'Иегова оставляет эту задачу Соломону (1 Летопись 22; 28).',
     ),
     QuizQuestion(
       text: 'Где Давид приобрёл участок для будущего храма?',
@@ -642,7 +656,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
           '(1 Летопись 25).',
     ),
     QuizQuestion(
-      text: 'Каким было последнее великое всенародное деяние Давида перед его смертью?',
+      text:
+          'Каким было последнее великое всенародное деяние Давида перед его смертью?',
       options: <String>[
         'Поручить Соломону и народу построить храм',
         'Провести последнюю войну',
@@ -732,13 +747,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Он заплатил тяжёлую дань',
       ],
       correctIndex: 0,
-      explanation:
-          'Его доверие Богу вознаграждено (2 Летопись 14).',
+      explanation: 'Его доверие Богу вознаграждено (2 Летопись 14).',
     ),
   ],
   '2 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какая болезнь поразила Асу после того, как он перестал искать Иегову?',
+      text:
+          'Какая болезнь поразила Асу после того, как он перестал искать Иегову?',
       options: <String>[
         'Тяжёлая болезнь ног',
         'Проказа',
@@ -759,8 +774,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'За то, что он отменил праздники',
       ],
       correctIndex: 0,
-      explanation:
-          'Его союз с Ахавом подвергается критике (2 Летопись 19).',
+      explanation: 'Его союз с Ахавом подвергается критике (2 Летопись 19).',
     ),
     QuizQuestion(
       text: 'Как Иосафат одержал победу, не вступая в бой?',
@@ -820,7 +834,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
   '2 Chronicles#4': <QuizQuestion>[
     QuizQuestion(
       text: 'Какой большой праздник Езекия устроил после очищения храма?',
-      options: <String>['Исключительную Пасху', 'Праздник кущей', 'Юбилейный год', 'Пятидесятницу'],
+      options: <String>[
+        'Исключительную Пасху',
+        'Праздник кущей',
+        'Юбилейный год',
+        'Пятидесятницу',
+      ],
       correctIndex: 0,
       explanation:
           'Эта Пасха объединяет Иуду и часть Израиля '
@@ -856,13 +875,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
   'Ezra#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Кто разрешил изгнанникам вернуться и восстановить храм?',
-      options: <String>['Кир, царь Персии', 'Навуходоносор', 'Один Дарий', 'Ксеркс'],
+      options: <String>[
+        'Кир, царь Персии',
+        'Навуходоносор',
+        'Один Дарий',
+        'Ксеркс',
+      ],
       correctIndex: 0,
-      explanation:
-          'Кир издаёт освободительный указ (Ездра 1).',
+      explanation: 'Кир издаёт освободительный указ (Ездра 1).',
     ),
     QuizQuestion(
-      text: 'Что сделали изгнанники сразу по возвращении, ещё до завершения храма?',
+      text:
+          'Что сделали изгнанники сразу по возвращении, ещё до завершения храма?',
       options: <String>[
         'Восстановили жертвенник, чтобы приносить жертвы',
         'Избрали нового царя',
@@ -870,8 +894,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Отказались от всякого богослужения',
       ],
       correctIndex: 0,
-      explanation:
-          'Жертвенник восстановлен раньше основания храма (Ездра 3).',
+      explanation: 'Жертвенник восстановлен раньше основания храма (Ездра 3).',
     ),
     QuizQuestion(
       text: 'Какую смешанную реакцию вызвала закладка основания нового храма?',
@@ -909,12 +932,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Осия и Амос',
       ],
       correctIndex: 0,
-      explanation:
-          'Их вести возобновляют строительство (Ездра 5).',
+      explanation: 'Их вести возобновляют строительство (Ездра 5).',
     ),
     QuizQuestion(
-      text: 'Кто позже прибыл из Вавилона с дополнительной группой изгнанников?',
-      options: <String>['Ездра, священник и книжник', 'Неемия', 'Зоровавель', 'Мардохей'],
+      text:
+          'Кто позже прибыл из Вавилона с дополнительной группой изгнанников?',
+      options: <String>[
+        'Ездра, священник и книжник',
+        'Неемия',
+        'Зоровавель',
+        'Мардохей',
+      ],
       correctIndex: 0,
       explanation:
           'Ездра прибывает во времена правления Артаксеркса (Ездра 7).',
@@ -922,7 +950,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
   ],
   'Ezra#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Почему Ездра не попросил вооружённое сопровождение для путешествия?',
+      text:
+          'Почему Ездра не попросил вооружённое сопровождение для путешествия?',
       options: <String>[
         'Он выразил уверенность в защите Бога',
         'Царь ему в этом отказал',
@@ -943,8 +972,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Гражданская война',
       ],
       correctIndex: 0,
-      explanation:
-          'Ездра в скорби раздирает свои одежды (Ездра 9).',
+      explanation: 'Ездра в скорби раздирает свои одежды (Ездра 9).',
     ),
     QuizQuestion(
       text: 'Как народ откликнулся на призыв Ездры?',
@@ -955,8 +983,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Проигнорировав призыв',
       ],
       correctIndex: 0,
-      explanation:
-          'Происходит всенародная реформа (Ездра 10).',
+      explanation: 'Происходит всенародная реформа (Ездра 10).',
     ),
   ],
   'Nehemiah#0': <QuizQuestion>[
@@ -969,8 +996,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Он устроил праздник',
       ],
       correctIndex: 0,
-      explanation:
-          'Его скорбь побуждает его к действию (Неемия 1).',
+      explanation: 'Его скорбь побуждает его к действию (Неемия 1).',
     ),
     QuizQuestion(
       text: 'О чём Неемия попросил царя Артаксеркса?',
@@ -1009,8 +1035,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
         'Продажность судей',
       ],
       correctIndex: 0,
-      explanation:
-          'Неемия исправляет эту несправедливую практику (Неемия 5).',
+      explanation: 'Неемия исправляет эту несправедливую практику (Неемия 5).',
     ),
     QuizQuestion(
       text: 'За сколько времени была завершена стена Иерусалима?',
@@ -1075,4 +1100,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC2 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesRuC2 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesRuC2 =
+    <String, List<QuizQuestion>>{};

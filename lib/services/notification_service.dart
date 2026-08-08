@@ -279,7 +279,9 @@ class NotificationService {
   }) async {
     if (await _tryShowLiveUpdate(title: title, body: body)) {
       if (kDebugMode) {
-        debugPrint('NotificationService: reading session posted as Live Update');
+        debugPrint(
+          'NotificationService: reading session posted as Live Update',
+        );
       }
       return;
     }

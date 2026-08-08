@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesRuC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Сколько дней творения описывает Библия?',
@@ -12,7 +13,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Кто были первым мужчиной и первой женщиной?',
-      options: <String>['Адам и Ева', 'Каин и Авель', 'Ной и его жена', 'Авраам и Сарра'],
+      options: <String>[
+        'Адам и Ева',
+        'Каин и Авель',
+        'Ной и его жена',
+        'Авраам и Сарра',
+      ],
       correctIndex: 0,
       explanation: 'Адам и Ева — первые люди (Бытие 2).',
     ),
@@ -31,33 +37,36 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Без какой-либо причины',
       ],
       correctIndex: 0,
-      explanation:
-          'Злоба людей на земле была велика (Бытие 6).',
+      explanation: 'Злоба людей на земле была велика (Бытие 6).',
     ),
   ],
   'Genesis#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какой знак дал Бог в подтверждение обещания больше не '
+      text:
+          'Какой знак дал Бог в подтверждение обещания больше не '
           'уничтожать землю потопом?',
       options: <String>['Радугу', 'Звезду', 'Оливковое дерево', 'Гром'],
       correctIndex: 0,
-      explanation:
-          'Радуга — знак соглашения (Бытие 9).',
+      explanation: 'Радуга — знак соглашения (Бытие 9).',
     ),
     QuizQuestion(
-      text: 'Как называлась башня, которую люди хотели '
+      text:
+          'Как называлась башня, которую люди хотели '
           'построить?',
-      options: <String>['Вавилонская башня', 'Башня Сиона', 'Башня Давида', 'Башня Ура'],
+      options: <String>[
+        'Вавилонская башня',
+        'Башня Сиона',
+        'Башня Давида',
+        'Башня Ура',
+      ],
       correctIndex: 0,
-      explanation:
-          'В Вавилоне Бог смешивает их язык (Бытие 11).',
+      explanation: 'В Вавилоне Бог смешивает их язык (Бытие 11).',
     ),
     QuizQuestion(
       text: 'Кого Бог призвал покинуть Ур?',
       options: <String>['Аврама (Авраама)', 'Лота', 'Исаака', 'Иакова'],
       correctIndex: 0,
-      explanation:
-          'Бог призывает Аврама и даёт ему обещания (Бытие 12).',
+      explanation: 'Бог призывает Аврама и даёт ему обещания (Бытие 12).',
     ),
   ],
   'Exodus#0': <QuizQuestion>[
@@ -96,13 +105,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'В виде землетрясения',
       ],
       correctIndex: 0,
-      explanation:
-          'Бог говорит с Моисеем из горящего куста (Исход 3).',
+      explanation: 'Бог говорит с Моисеем из горящего куста (Исход 3).',
     ),
   ],
   'Exodus#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какой праздник Бог установил перед тем, как вывести Израиль '
+      text:
+          'Какой праздник Бог установил перед тем, как вывести Израиль '
           'из Египта?',
       options: <String>['Пасху', 'Пятидесятницу', 'Праздник кущей', 'Субботу'],
       correctIndex: 0,
@@ -131,7 +140,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Exodus#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Кто посоветовал Моисею разделить с другими решение споров '
+      text:
+          'Кто посоветовал Моисею разделить с другими решение споров '
           'народа?',
       options: <String>['Иофор, его тесть', 'Аарон', 'Иисус Навин', 'Мариам'],
       correctIndex: 0,
@@ -141,35 +151,39 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Где Бог дал десять заповедей?',
-      options: <String>['На горе Синай', 'На горе Нево', 'В Кадесе', 'В Вефиле'],
+      options: <String>[
+        'На горе Синай',
+        'На горе Нево',
+        'В Кадесе',
+        'В Вефиле',
+      ],
       correctIndex: 0,
       explanation: 'Закон дан на горе Синай (Исход 19—20).',
     ),
     QuizQuestion(
       text: 'Какая заповедь запрещает желать чужое имущество?',
-      options: <String>[
-        'Десятая («Не желай»)',
-        'Первая',
-        'Пятая',
-        'Седьмая',
-      ],
+      options: <String>['Десятая («Не желай»)', 'Первая', 'Пятая', 'Седьмая'],
       correctIndex: 0,
-      explanation:
-          'Десятая заповедь запрещает алчность (Исход 20:17).',
+      explanation: 'Десятая заповедь запрещает алчность (Исход 20:17).',
     ),
   ],
   'Exodus#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что нужно было построить согласно указаниям, данным Богом '
+      text:
+          'Что нужно было построить согласно указаниям, данным Богом '
           'Моисею?',
       options: <String>['Скинию', 'Дворец', 'Стену', 'Каменный храм'],
       correctIndex: 0,
-      explanation:
-          'Бог даёт подробный план скинии (Исход 25).',
+      explanation: 'Бог даёт подробный план скинии (Исход 25).',
     ),
     QuizQuestion(
       text: 'Что сделал народ, пока Моисей был на горе?',
-      options: <String>['Золотого телёнка', 'Каменную статую', 'Деревянный жертвенник', 'Храм'],
+      options: <String>[
+        'Золотого телёнка',
+        'Каменную статую',
+        'Деревянный жертвенник',
+        'Храм',
+      ],
       correctIndex: 0,
       explanation:
           'Народ делает золотого телёнка и поклоняется ему (Исход 32).',
@@ -177,7 +191,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Exodus#4': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что покрыло скинию после её завершения в знак присутствия '
+      text:
+          'Что покрыло скинию после её завершения в знак присутствия '
           'Бога?',
       options: <String>['Облако', 'Видимый днём огонь', 'Радуга', 'Звезда'],
       correctIndex: 0,
@@ -186,9 +201,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Исход 40).',
     ),
     QuizQuestion(
-      text: 'Кто вытесал новые каменные скрижали после того, как Моисей '
+      text:
+          'Кто вытесал новые каменные скрижали после того, как Моисей '
           'разбил первые?',
-      options: <String>['Моисей, по повелению Бога', 'Аарон', 'Иисус Навин', 'Веселеил'],
+      options: <String>[
+        'Моисей, по повелению Бога',
+        'Аарон',
+        'Иисус Навин',
+        'Веселеил',
+      ],
       correctIndex: 0,
       explanation:
           'Бог повелевает Моисею вытесать две новые скрижали (Исход 34).',
@@ -209,7 +230,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Левит 1).',
     ),
     QuizQuestion(
-      text: 'Сколько основных видов приношений описано в этих первых '
+      text:
+          'Сколько основных видов приношений описано в этих первых '
           'главах?',
       options: <String>['Пять', 'Два', 'Десять', 'Три'],
       correctIndex: 0,
@@ -218,7 +240,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           'грех и жертва повинности (Левит 1—7).',
     ),
     QuizQuestion(
-      text: 'Кто должен был приносить приношения ко входу в шатёр '
+      text:
+          'Кто должен был приносить приношения ко входу в шатёр '
           'собрания?',
       options: <String>[
         'Сам человек, с помощью священников',
@@ -246,7 +269,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           'Сыновья Аарона приносят «чужой огонь» и умирают (Левит 10).',
     ),
     QuizQuestion(
-      text: 'По какому признаку наземное животное считалось чистым для '
+      text:
+          'По какому признаку наземное животное считалось чистым для '
           'еды?',
       options: <String>[
         'Раздвоенное копыто и жвачка',
@@ -260,7 +284,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Левит 11).',
     ),
     QuizQuestion(
-      text: 'Какое кожное заболевание подробно рассматривают священники '
+      text:
+          'Какое кожное заболевание подробно рассматривают священники '
           'в этих главах?',
       options: <String>['Проказу', 'Оспу', 'Только ожоги', 'Угри'],
       correctIndex: 0,
@@ -271,7 +296,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Leviticus#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'В какой торжественный день раз в год грехи народа '
+      text:
+          'В какой торжественный день раз в год грехи народа '
           'покрывались?',
       options: <String>[
         'В День искупления (Йом-Кипур)',
@@ -285,7 +311,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Левит 16).',
     ),
     QuizQuestion(
-      text: 'Какая известная заповедь встречается в «своде святости» из '
+      text:
+          'Какая известная заповедь встречается в «своде святости» из '
           'Левита 19?',
       options: <String>[
         'Люби ближнего твоего, как самого себя',
@@ -331,8 +358,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Пересматривать закон',
       ],
       correctIndex: 0,
-      explanation:
-          'Юбилейный год восстанавливает земли и свободу (Левит 25).',
+      explanation: 'Юбилейный год восстанавливает земли и свободу (Левит 25).',
     ),
     QuizQuestion(
       text: 'Что обещает Левит 26 при верности соглашению?',
@@ -364,7 +390,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Кому было поручено переносить скинию и служить при ней?',
-      options: <String>['Левитам', 'Только священникам', 'Старейшинам', 'Воинам'],
+      options: <String>[
+        'Левитам',
+        'Только священникам',
+        'Старейшинам',
+        'Воинам',
+      ],
       correctIndex: 0,
       explanation:
           'Левиты получают конкретные обязанности по скинии '
@@ -379,21 +410,26 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Отдать весь свой скот',
       ],
       correctIndex: 0,
-      explanation:
-          'Назорейский обет накладывает особые ограничения (Числа 6).',
+      explanation: 'Назорейский обет накладывает особые ограничения (Числа 6).',
     ),
   ],
   'Numbers#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Кому Бог поручил помогать Моисею нести бремя народа?',
-      options: <String>['70 старейшинам', '12 разведчикам', 'Одному Аарону', 'Одному Иисусу Навину'],
+      options: <String>[
+        '70 старейшинам',
+        '12 разведчикам',
+        'Одному Аарону',
+        'Одному Иисусу Навину',
+      ],
       correctIndex: 0,
       explanation:
           '70 старейшин получают дух, чтобы разделить ответственность '
           '(Числа 11).',
     ),
     QuizQuestion(
-      text: 'Что случилось с Мариам и Аароном после того, как они '
+      text:
+          'Что случилось с Мариам и Аароном после того, как они '
           'раскритиковали Моисея?',
       options: <String>[
         'Мариам поразила проказа',
@@ -406,7 +442,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Сколько разведчиков дали ободряющий отчёт о Ханаане?',
-      options: <String>['Двое (Иисус Навин и Халев)', 'Двенадцать', 'Ни одного', 'Пятеро'],
+      options: <String>[
+        'Двое (Иисус Навин и Халев)',
+        'Двенадцать',
+        'Ни одного',
+        'Пятеро',
+      ],
       correctIndex: 0,
       explanation:
           'Только Иисус Навин и Халев побуждают народ войти в землю '
@@ -416,10 +457,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   'Numbers#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Кто восстал против власти Моисея и Аарона?',
-      options: <String>['Корей и его сторонники', 'Иисус Навин', 'Халев', 'Валаам'],
+      options: <String>[
+        'Корей и его сторонники',
+        'Иисус Навин',
+        'Халев',
+        'Валаам',
+      ],
       correctIndex: 0,
-      explanation:
-          'Мятежников во главе с Кореем поглощает земля (Числа 16).',
+      explanation: 'Мятежников во главе с Кореем поглощает земля (Числа 16).',
     ),
     QuizQuestion(
       text: 'Какое знамение подтвердило избрание Аарона первосвященником?',
@@ -456,12 +501,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Числа 23—24).',
     ),
     QuizQuestion(
-      text: 'Кто проявил рвение, чтобы остановить бедствие во время '
+      text:
+          'Кто проявил рвение, чтобы остановить бедствие во время '
           'отступничества у Ваал-Фегора?',
       options: <String>['Финеес', 'Иисус Навин', 'Один Елеазар', 'Халев'],
       correctIndex: 0,
-      explanation:
-          'Финеес вмешивается, и бедствие прекращается (Числа 25).',
+      explanation: 'Финеес вмешивается, и бедствие прекращается (Числа 25).',
     ),
     QuizQuestion(
       text: 'Кого Моисей назначил своим преемником?',
@@ -506,7 +551,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Deuteronomy#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какую великую заповедь, называемую Шема, Моисей повторяет во '
+      text:
+          'Какую великую заповедь, называемую Шема, Моисей повторяет во '
           'Второзаконии 6?',
       options: <String>[
         'Иегова один, люби Его всем сердцем',
@@ -545,7 +591,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Deuteronomy#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'О чём должно было напоминать Израилю воспоминание о манне в '
+      text:
+          'О чём должно было напоминать Израилю воспоминание о манне в '
           'пустыне?',
       options: <String>[
         'О том, что человек живёт не одним хлебом, а словом Бога',
@@ -557,7 +604,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
       explanation: 'Второзаконие 8:3, позже процитировано Иисусом.',
     ),
     QuizQuestion(
-      text: 'О каком событии в пустыне напоминает Моисей, предостерегая '
+      text:
+          'О каком событии в пустыне напоминает Моисей, предостерегая '
           'от гордости?',
       options: <String>[
         'О золотом телёнке',
@@ -571,7 +619,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Второзаконие 9).',
     ),
     QuizQuestion(
-      text: 'Куда израильтяне должны были приносить свои жертвы, согласно '
+      text:
+          'Куда израильтяне должны были приносить свои жертвы, согласно '
           'Второзаконию 12?',
       options: <String>[
         'Только туда, куда изберёт Иегова',
@@ -596,7 +645,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
       explanation: 'Год освобождения списывает долги (Второзаконие 15).',
     ),
     QuizQuestion(
-      text: 'О каком будущем пророке, подобном Моисею, говорится во '
+      text:
+          'О каком будущем пророке, подобном Моисею, говорится во '
           'Второзаконии 18?',
       options: <String>[
         'О пророке, которого воздвигнет Бог',
@@ -610,7 +660,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Второзаконие 18).',
     ),
     QuizQuestion(
-      text: 'Сколько свидетелей требовалось, чтобы обвинение считалось '
+      text:
+          'Сколько свидетелей требовалось, чтобы обвинение считалось '
           'доказанным?',
       options: <String>[
         'Двое или трое',
@@ -624,7 +675,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Deuteronomy#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какое ежегодное приношение напоминало об освобождении из '
+      text:
+          'Какое ежегодное приношение напоминало об освобождении из '
           'Египта?',
       options: <String>[
         'Приношение первых плодов',
@@ -638,7 +690,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           'Египта (Второзаконие 26).',
     ),
     QuizQuestion(
-      text: 'Что должны были сделать израильтяне при входе в Ханаан на '
+      text:
+          'Что должны были сделать израильтяне при входе в Ханаан на '
           'горе Гевал?',
       options: <String>[
         'Построить жертвенник и провозгласить благословения и проклятия',
@@ -687,12 +740,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Платить налог или нет',
       ],
       correctIndex: 0,
-      explanation:
-          'Народ призывают «избрать жизнь» (Второзаконие 30:19).',
+      explanation: 'Народ призывают «избрать жизнь» (Второзаконие 30:19).',
     ),
     QuizQuestion(
       text: 'Где умер Моисей, так и не войдя в Обетованную землю?',
-      options: <String>['На горе Нево', 'В Иерихоне', 'На горе Синай', 'В Вифлееме'],
+      options: <String>[
+        'На горе Нево',
+        'В Иерихоне',
+        'На горе Синай',
+        'В Вифлееме',
+      ],
       correctIndex: 0,
       explanation:
           'Моисей смотрит на землю с вершины Нево перед смертью '
@@ -701,7 +758,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Joshua#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какое наставление Иегова неоднократно повторяет Иисусу '
+      text:
+          'Какое наставление Иегова неоднократно повторяет Иисусу '
           'Навину в начале книги?',
       options: <String>[
         'Будь твёрд и мужествен',
@@ -747,7 +805,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           '(Иисус Навин 9).',
     ),
     QuizQuestion(
-      text: 'Что необычное произошло во время битвы против пяти '
+      text:
+          'Что необычное произошло во время битвы против пяти '
           'аморрейских царей?',
       options: <String>[
         'Остановилось солнце',
@@ -764,8 +823,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
       text: 'Какой участок земли Халев потребовал себе в 85 лет?',
       options: <String>['Хеврон', 'Иерихон', 'Силом', 'Вефиль'],
       correctIndex: 0,
-      explanation:
-          'Халев остаётся верным и получает Хеврон (Иисус Навин 14).',
+      explanation: 'Халев остаётся верным и получает Хеврон (Иисус Навин 14).',
     ),
   ],
   'Joshua#2': <QuizQuestion>[
@@ -773,8 +831,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
       text: 'Где была установлена скиния после первых завоеваний?',
       options: <String>['В Силоме', 'В Иерусалиме', 'В Хевроне', 'В Вефиле'],
       correctIndex: 0,
-      explanation:
-          'Шатёр собрания устанавливают в Силоме (Иисус Навин 18).',
+      explanation: 'Шатёр собрания устанавливают в Силоме (Иисус Навин 18).',
     ),
     QuizQuestion(
       text: 'Почему восточные племена возвели жертвенник у Иордана?',
@@ -790,7 +847,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
           'жертвоприношений (Иисус Навин 22).',
     ),
     QuizQuestion(
-      text: 'Какое знаменитое заявление делает Иисус Навин в Сихеме перед '
+      text:
+          'Какое знаменитое заявление делает Иисус Навин в Сихеме перед '
           'смертью?',
       options: <String>[
         'А я и дом мой будем служить Иегове',
@@ -836,7 +894,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что произошло после того, как Авимелех провозгласил себя '
+      text:
+          'Что произошло после того, как Авимелех провозгласил себя '
           'царём?',
       options: <String>[
         'Он убил своих братьев, а затем сам погиб',
@@ -880,7 +939,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Кто выдал филистимлянам секрет силы Самсона?',
-      options: <String>['Далида', 'Его мать', 'Соперничающий судья', 'Священник'],
+      options: <String>[
+        'Далида',
+        'Его мать',
+        'Соперничающий судья',
+        'Священник',
+      ],
       correctIndex: 0,
       explanation: 'Далида узнаёт, что его сила — в волосах (Судьи 16).',
     ),
@@ -930,8 +994,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Они основали город',
       ],
       correctIndex: 0,
-      explanation:
-          'Елимелех, а затем оба его сына умирают в Моаве (Руфь 1).',
+      explanation: 'Елимелех, а затем оба его сына умирают в Моаве (Руфь 1).',
     ),
   ],
   'Ruth#1': <QuizQuestion>[
@@ -969,8 +1032,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Выйти замуж за другого человека',
       ],
       correctIndex: 0,
-      explanation:
-          'Ноеминь направляет Руфь к возможному выкупу (Руфь 3).',
+      explanation: 'Ноеминь направляет Руфь к возможному выкупу (Руфь 3).',
     ),
   ],
   'Ruth#2': <QuizQuestion>[
@@ -983,8 +1045,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
         'Ни с кем не советовались',
       ],
       correctIndex: 0,
-      explanation:
-          'Юридическая процедура проходит у городских ворот (Руфь 4).',
+      explanation: 'Юридическая процедура проходит у городских ворот (Руфь 4).',
     ),
     QuizQuestion(
       text: 'Кто родился сыном у Руфи и Вооза?',
@@ -1006,7 +1067,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC1 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+extraQuizzesRuC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Какое дерево посреди сада Эдем было запрещено Адаму и Еве?',
@@ -1034,7 +1096,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
       explanation: 'Голубь показывает, что вода убывает (Бытие 8).',
     ),
     QuizQuestion(
-      text: 'Кто благословил Аврама, будучи царём Салима и священником '
+      text:
+          'Кто благословил Аврама, будучи царём Салима и священником '
           'Бога Всевышнего?',
       options: <String>['Мелхиседек', 'Лот', 'Фараон', 'Исаак'],
       correctIndex: 0,
@@ -1056,10 +1119,14 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'Какие города Бог уничтожил за их злодеяния?',
-      options: <String>['Содом и Гоморру', 'Вавилон и Ур', 'Ниневию и Тир', 'Вефиль и Гай'],
+      options: <String>[
+        'Содом и Гоморру',
+        'Вавилон и Ур',
+        'Ниневию и Тир',
+        'Вефиль и Гай',
+      ],
       correctIndex: 0,
-      explanation:
-          'Огонь уничтожает эти города; Лот спасается (Бытие 19).',
+      explanation: 'Огонь уничтожает эти города; Лот спасается (Бытие 19).',
     ),
   ],
   'Genesis#3': <QuizQuestion>[
@@ -1071,7 +1138,12 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'За что Исав продал Иакову своё право первородства?',
-      options: <String>['За чечевичную похлёбку', 'За золото', 'За стадо', 'За шатёр'],
+      options: <String>[
+        'За чечевичную похлёбку',
+        'За золото',
+        'За стадо',
+        'За шатёр',
+      ],
       correctIndex: 0,
       explanation: 'Исав пренебрегает своим правом первородства (Бытие 25).',
     ),
@@ -1095,7 +1167,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
       explanation: 'Имя Израиль означает «борющийся с Богом» (Бытие 32).',
     ),
     QuizQuestion(
-      text: 'Сколько сыновей было у Иакова, ставших родоначальниками '
+      text:
+          'Сколько сыновей было у Иакова, ставших родоначальниками '
           'племён Израиля?',
       options: <String>['Двенадцать', 'Десять', 'Семь', 'Четырнадцать'],
       correctIndex: 0,
@@ -1105,7 +1178,12 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'С кем Иаков помирился после многих лет разлуки?',
-      options: <String>['Со своим братом Исавом', 'С Лаваном', 'С фараоном', 'С Исааком'],
+      options: <String>[
+        'Со своим братом Исавом',
+        'С Лаваном',
+        'С фараоном',
+        'С Исааком',
+      ],
       correctIndex: 0,
       explanation: 'Братья мирно встречаются вновь (Бытие 33).',
     ),
@@ -1124,13 +1202,18 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'Какую особую одежду Иаков подарил Иосифу?',
-      options: <String>['Красивую одежду', 'Корону', 'Доспехи', 'Священническую накидку'],
+      options: <String>[
+        'Красивую одежду',
+        'Корону',
+        'Доспехи',
+        'Священническую накидку',
+      ],
       correctIndex: 0,
-      explanation:
-          'Этот подарок разжигает зависть его братьев (Бытие 37).',
+      explanation: 'Этот подарок разжигает зависть его братьев (Бытие 37).',
     ),
     QuizQuestion(
-      text: 'Что истолковал Иосиф для фараона, предсказав семь лет '
+      text:
+          'Что истолковал Иосиф для фараона, предсказав семь лет '
           'голода?',
       options: <String>['Его сны', 'Древнюю книгу', 'Звёзды', 'Оракул'],
       correctIndex: 0,
@@ -1191,11 +1274,11 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
       text: 'Какой была десятая, последняя казнь Египта?',
       options: <String>['Смерть первенцев', 'Саранча', 'Тьма', 'Град'],
       correctIndex: 0,
-      explanation:
-          'Эта казнь заставляет фараона отпустить Израиль (Исход 12).',
+      explanation: 'Эта казнь заставляет фараона отпустить Израиль (Исход 12).',
     ),
     QuizQuestion(
-      text: 'Что израильтяне должны были нанести на свои двери во время '
+      text:
+          'Что израильтяне должны были нанести на свои двери во время '
           'Пасхи?',
       options: <String>['Кровь ягнёнка', 'Масло', 'Муку', 'Знак из пепла'],
       correctIndex: 0,
@@ -1212,8 +1295,7 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
         'Был вырыт колодец',
       ],
       correctIndex: 0,
-      explanation:
-          'По повелению Бога Моисей ударяет по скале (Исход 17).',
+      explanation: 'По повелению Бога Моисей ударяет по скале (Исход 17).',
     ),
     QuizQuestion(
       text: 'Сколько заповедей составляют Десятисловие, данное на Синае?',
@@ -1232,8 +1314,7 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
         'Приношения пищи',
       ],
       correctIndex: 0,
-      explanation:
-          'В него помещают скрижали с заповедями (Исход 25).',
+      explanation: 'В него помещают скрижали с заповедями (Исход 25).',
     ),
     QuizQuestion(
       text: 'Кто сделал золотого телёнка, пока Моисей отсутствовал?',
@@ -1244,7 +1325,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesRuC1 = <String, List<QuizQuest
   ],
   'Exodus#4': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что было особенным в лице Моисея после того, как он говорил '
+      text:
+          'Что было особенным в лице Моисея после того, как он говорил '
           'с Богом?',
       options: <String>[
         'Оно сияло',

@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesEnC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
       text: 'What does Peter encourage adding to faith in 2 Peter 1?',
@@ -23,8 +24,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'It comes from popular traditions',
       ],
       correctIndex: 0,
-      explanation:
-          'A statement about divine inspiration (2 Peter 1:21).',
+      explanation: 'A statement about divine inspiration (2 Peter 1:21).',
     ),
   ],
   '2 Peter#1': <QuizQuestion>[
@@ -37,8 +37,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Faithful elders',
       ],
       correctIndex: 0,
-      explanation:
-          'A detailed warning is given (2 Peter 2).',
+      explanation: 'A detailed warning is given (2 Peter 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['angels', 'Noah', 'Sodom'],
     ),
@@ -51,8 +50,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Solomon\'s reign',
       ],
       correctIndex: 0,
-      explanation:
-          'Examples of past judgment (2 Peter 2:5, 6).',
+      explanation: 'Examples of past judgment (2 Peter 2:5, 6).',
     ),
   ],
   '2 Peter#2': <QuizQuestion>[
@@ -65,8 +63,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'They will fully accept the prophecy',
       ],
       correctIndex: 0,
-      explanation:
-          'Skepticism is foretold (2 Peter 3:4).',
+      explanation: 'Skepticism is foretold (2 Peter 3:4).',
     ),
     QuizQuestion(
       text: 'What does 2 Peter 3 promise after the final judgment?',
@@ -77,8 +74,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'No particular promise',
       ],
       correctIndex: 0,
-      explanation:
-          'A hope of renewal (2 Peter 3:13).',
+      explanation: 'A hope of renewal (2 Peter 3:13).',
     ),
   ],
   '1 John#0': <QuizQuestion>[
@@ -91,8 +87,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Justify ourselves without admitting fault',
       ],
       correctIndex: 0,
-      explanation:
-          'A sincere promise of forgiveness (1 John 1:9).',
+      explanation: 'A sincere promise of forgiveness (1 John 1:9).',
     ),
     QuizQuestion(
       text: 'How does 1 John 2 warn us against "love of the world"?',
@@ -103,13 +98,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'It is necessary for salvation',
       ],
       correctIndex: 0,
-      explanation:
-          'A clear choice is called for (1 John 2:15).',
+      explanation: 'A clear choice is called for (1 John 2:15).',
     ),
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'How does 1 John 3 define God\'s children as opposed to the '
+      text:
+          'How does 1 John 3 define God\'s children as opposed to the '
           'Devil\'s children?',
       options: <String>[
         'By their acts of righteousness or unrighteousness',
@@ -118,15 +113,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'By their age',
       ],
       correctIndex: 0,
-      explanation:
-          'Behavior reveals belonging (1 John 3:10).',
+      explanation: 'Behavior reveals belonging (1 John 3:10).',
     ),
     QuizQuestion(
       text: 'What central command does 1 John 3 highlight?',
-      options: <String>['Love one another', 'Avoid all social contact', 'Pursue wealth', 'Judge others harshly'],
+      options: <String>[
+        'Love one another',
+        'Avoid all social contact',
+        'Pursue wealth',
+        'Judge others harshly',
+      ],
       correctIndex: 0,
-      explanation:
-          'An essential test of genuine faith (1 John 3:11).',
+      explanation: 'An essential test of genuine faith (1 John 3:11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['hate', 'world', 'truth'],
     ),
@@ -134,10 +132,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: 'How does 1 John 4 define God directly?',
-      options: <String>['God is love', 'God is distant', 'God is indifferent', 'God is only severe'],
+      options: <String>[
+        'God is love',
+        'God is distant',
+        'God is indifferent',
+        'God is only severe',
+      ],
       correctIndex: 0,
-      explanation:
-          'A central declaration of the letter (1 John 4:8).',
+      explanation: 'A central declaration of the letter (1 John 4:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['light', 'spirit', 'truth'],
     ),
@@ -145,8 +147,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       text: 'What does 1 John 5 say conquers the world?',
       options: <String>['Our faith', 'Wealth', 'Human power', 'Luck'],
       correctIndex: 0,
-      explanation:
-          'A victory founded on faith (1 John 5:4).',
+      explanation: 'A victory founded on faith (1 John 5:4).',
     ),
   ],
   '2 John#0': <QuizQuestion>[
@@ -159,16 +160,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Completely ignore doctrine',
       ],
       correctIndex: 0,
-      explanation:
-          'Doctrinal watchfulness is called for (2 John 1:7, 10).',
+      explanation: 'Doctrinal watchfulness is called for (2 John 1:7, 10).',
     ),
     QuizQuestion(
-      text: 'What command does John recall as fundamental in this short '
+      text:
+          'What command does John recall as fundamental in this short '
           'letter?',
-      options: <String>['Love one another', 'Avoid every congregation', 'Seek wealth', 'Ignore newcomers'],
+      options: <String>[
+        'Love one another',
+        'Avoid every congregation',
+        'Seek wealth',
+        'Ignore newcomers',
+      ],
       correctIndex: 0,
-      explanation:
-          'A constant reminder of brotherly love (2 John 1:5).',
+      explanation: 'A constant reminder of brotherly love (2 John 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['truth', 'antichrist', 'walk'],
     ),
@@ -183,8 +188,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'His voluntary isolation',
       ],
       correctIndex: 0,
-      explanation:
-          'His generosity is held up as an example (3 John 1:5).',
+      explanation: 'His generosity is held up as an example (3 John 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Diotrephes', 'truth', 'letter'],
     ),
@@ -197,13 +201,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Deep respect for John',
       ],
       correctIndex: 0,
-      explanation:
-          'A problematic behavior is exposed (3 John 1:9, 10).',
+      explanation: 'A problematic behavior is exposed (3 John 1:9, 10).',
     ),
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'What does Jude ask his readers to do in the face of ungodly '
+      text:
+          'What does Jude ask his readers to do in the face of ungodly '
           'infiltrators?',
       options: <String>[
         'Fight vigorously for the faith',
@@ -212,8 +216,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Abandon all conviction',
       ],
       correctIndex: 0,
-      explanation:
-          'A firm call to faithfulness (Jude 1:3).',
+      explanation: 'A firm call to faithfulness (Jude 1:3).',
     ),
     QuizQuestion(
       text: 'What examples does Jude cite as historical warnings?',
@@ -224,8 +227,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Only the exodus from Egypt',
       ],
       correctIndex: 0,
-      explanation:
-          'Examples of past judgment (Jude 1:6, 7).',
+      explanation: 'Examples of past judgment (Jude 1:6, 7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Egypt', 'Cain', 'Korah'],
     ),
@@ -247,7 +249,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       wordBankDistractors: <String>['throne', 'scroll', 'stars'],
     ),
     QuizQuestion(
-      text: 'How many congregations are the letters in chapters 2-3 '
+      text:
+          'How many congregations are the letters in chapters 2-3 '
           'addressed to?',
       options: <String>['Seven', 'Twelve', 'Three', 'Just one'],
       correctIndex: 0,
@@ -257,7 +260,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Who alone is found worthy to open the sealed scroll in '
+      text:
+          'Who alone is found worthy to open the sealed scroll in '
           'Revelation 5?',
       options: <String>[
         'The Lamb, who was slaughtered',
@@ -266,20 +270,24 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'No one can open it',
       ],
       correctIndex: 0,
-      explanation:
-          'Christ alone deserves this honor (Revelation 5:5-9).',
+      explanation: 'Christ alone deserves this honor (Revelation 5:5-9).',
     ),
   ],
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: 'What does Michael fight in the vision of Revelation 12?',
-      options: <String>['The dragon (Satan)', 'A human army', 'An earthly king', 'A mere animal'],
+      options: <String>[
+        'The dragon (Satan)',
+        'A human army',
+        'An earthly king',
+        'A mere animal',
+      ],
       correctIndex: 0,
-      explanation:
-          'A war in heaven is described (Revelation 12:7).',
+      explanation: 'A war in heaven is described (Revelation 12:7).',
     ),
     QuizQuestion(
-      text: 'What do the 144,000 mentioned with the Lamb represent in '
+      text:
+          'What do the 144,000 mentioned with the Lamb represent in '
           'Revelation 14?',
       options: <String>[
         'A group gathered with the Lamb on Mount Zion',
@@ -292,7 +300,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
           'A distinct group associated with the Lamb (Revelation 14:1).',
     ),
     QuizQuestion(
-      text: 'What do the seven last plagues announced in Revelation 15 '
+      text:
+          'What do the seven last plagues announced in Revelation 15 '
           'contain?',
       options: <String>[
         'The completion of God\'s anger',
@@ -301,15 +310,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Nothing significant',
       ],
       correctIndex: 0,
-      explanation:
-          'A final stage of divine judgment (Revelation 15:1).',
+      explanation: 'A final stage of divine judgment (Revelation 15:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['seals', 'trumpets', 'plagues'],
     ),
   ],
   'Revelation#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'What happens to "Babylon the Great" according to Revelation '
+      text:
+          'What happens to "Babylon the Great" according to Revelation '
           '17-18?',
       options: <String>[
         'She is judged and completely destroyed',
@@ -346,10 +355,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEnC8 = <String, List<QuizQu
         'Nothing is promised about this',
       ],
       correctIndex: 0,
-      explanation: 'A magnificent hope concludes the Bible '
+      explanation:
+          'A magnificent hope concludes the Bible '
           '(Revelation 21:4).',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesEnC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesEnC8 =
+    <String, List<QuizQuestion>>{};

@@ -89,7 +89,9 @@ class MarkdownEditingController extends TextEditingController {
     int last = 0;
     for (final RegExpMatch m in _inline.allMatches(text)) {
       if (m.start > last) {
-        out.add(TextSpan(text: text.substring(last, m.start), style: contentStyle));
+        out.add(
+          TextSpan(text: text.substring(last, m.start), style: contentStyle),
+        );
       }
       final String token = m.group(0)!;
       final int start = baseGlobal + m.start;
@@ -208,9 +210,7 @@ class MarkdownListContinuationFormatter extends TextInputFormatter {
         newValue.text.substring(insertPos);
     return TextEditingValue(
       text: newText,
-      selection: TextSelection.collapsed(
-        offset: insertPos + insertion.length,
-      ),
+      selection: TextSelection.collapsed(offset: insertPos + insertion.length),
     );
   }
 }

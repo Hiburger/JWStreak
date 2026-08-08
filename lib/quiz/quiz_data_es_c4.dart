@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesEsC4 = <String, List<QuizQuestion>>{
   'Lamentations#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo describe Lamentaciones 1 a Jerusalén después de su '
+      text:
+          '¿Cómo describe Lamentaciones 1 a Jerusalén después de su '
           'caída?',
       options: <String>[
         'Como una ciudad antes poblada, ahora solitaria',
@@ -17,7 +19,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Lamentaciones 1:1).',
     ),
     QuizQuestion(
-      text: '¿Qué describe Lamentaciones 2 acerca de la ira de '
+      text:
+          '¿Qué describe Lamentaciones 2 acerca de la ira de '
           'Jehová?',
       options: <String>[
         'Se derramó sobre Sion a causa de su infidelidad',
@@ -31,7 +34,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Lamentaciones 2).',
     ),
     QuizQuestion(
-      text: '¿Qué tono domina el conjunto de estos dos primeros '
+      text:
+          '¿Qué tono domina el conjunto de estos dos primeros '
           'capítulos?',
       options: <String>[
         'Un duelo profundo por la ciudad destruida',
@@ -40,13 +44,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un triunfo militar',
       ],
       correctIndex: 0,
-      explanation:
-          'El libro es una elegía fúnebre (Lamentaciones 1-2).',
+      explanation: 'El libro es una elegía fúnebre (Lamentaciones 1-2).',
     ),
   ],
   'Lamentations#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué afirmación de esperanza se encuentra en el corazón '
+      text:
+          '¿Qué afirmación de esperanza se encuentra en el corazón '
           'del capítulo 3 pese al sufrimiento?',
       options: <String>[
         'Las bondades de Jehová se renuevan cada mañana',
@@ -55,8 +59,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Dios ha abandonado por completo a su pueblo',
       ],
       correctIndex: 0,
-      explanation:
-          '«Grande es tu fidelidad» (Lamentaciones 3:22, 23).',
+      explanation: '«Grande es tu fidelidad» (Lamentaciones 3:22, 23).',
     ),
     QuizQuestion(
       text: '¿Cómo se describe el autor a sí mismo en el capítulo 3?',
@@ -72,7 +75,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Lamentaciones 3:1).',
     ),
     QuizQuestion(
-      text: '¿Qué actitud recomienda el capítulo 3 frente a la '
+      text:
+          '¿Qué actitud recomienda el capítulo 3 frente a la '
           'prueba?',
       options: <String>[
         'Esperar a Jehová en silencio con esperanza',
@@ -88,7 +92,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Lamentations#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué sufrimiento extremo recuerda el capítulo 4 durante '
+      text:
+          '¿Qué sufrimiento extremo recuerda el capítulo 4 durante '
           'el sitio?',
       options: <String>[
         'Una hambruna severa entre los habitantes',
@@ -117,7 +122,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Lamentaciones 5:21).',
     ),
     QuizQuestion(
-      text: '¿Qué sentimiento domina la oración colectiva del último '
+      text:
+          '¿Qué sentimiento domina la oración colectiva del último '
           'capítulo?',
       options: <String>[
         'Una humilde súplica pese a la vergüenza del pasado',
@@ -141,8 +147,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un ejército en marcha',
       ],
       correctIndex: 0,
-      explanation:
-          'Una visión impresionante abre el libro (Ezequiel 1).',
+      explanation: 'Una visión impresionante abre el libro (Ezequiel 1).',
     ),
     QuizQuestion(
       text: '¿Qué debe hacer Ezequiel con el rollo que se le entrega?',
@@ -155,7 +160,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       acceptedAnswers: <String>['comerlo', 'comer el rollo'],
     ),
     QuizQuestion(
-      text: '¿Qué idolatría secreta ve Ezequiel practicada en el '
+      text:
+          '¿Qué idolatría secreta ve Ezequiel practicada en el '
           'templo mismo?',
       options: <String>[
         'El culto al sol y a ídolos ocultados por los ancianos',
@@ -164,13 +170,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un banquete público legítimo',
       ],
       correctIndex: 0,
-      explanation:
-          'Una visión revela la corrupción oculta (Ezequiel 8).',
+      explanation: 'Una visión revela la corrupción oculta (Ezequiel 8).',
     ),
   ],
   'Ezekiel#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Quién recibe una marca protectora antes del juicio de '
+      text:
+          '¿Quién recibe una marca protectora antes del juicio de '
           'Jerusalén?',
       options: <String>[
         'Los que gimen a causa de las prácticas abominables',
@@ -184,7 +190,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Ezequiel 9).',
     ),
     QuizQuestion(
-      text: '¿Qué sucede de significativo con la gloria de Jehová en '
+      text:
+          '¿Qué sucede de significativo con la gloria de Jehová en '
           'Ezequiel 10-11?',
       options: <String>[
         'Abandona el templo y la ciudad',
@@ -193,13 +200,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Nada cambia',
       ],
       correctIndex: 0,
-      explanation:
-          'Una señal grave de juicio inminente (Ezequiel 10-11).',
+      explanation: 'Una señal grave de juicio inminente (Ezequiel 10-11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['gloria', 'carro', 'querubines'],
     ),
     QuizQuestion(
-      text: '¿Con qué se compara a Jerusalén en la parábola del '
+      text:
+          '¿Con qué se compara a Jerusalén en la parábola del '
           'capítulo 16?',
       options: <String>[
         'Con una esposa infiel criada por Dios desde su nacimiento',
@@ -214,7 +221,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Ezekiel#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué declara Ezequiel 18 sobre la responsabilidad '
+      text:
+          '¿Qué declara Ezequiel 18 sobre la responsabilidad '
           'individual?',
       options: <String>[
         'El alma que peca, esa morirá',
@@ -241,7 +249,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Ezequiel 22:30).',
     ),
     QuizQuestion(
-      text: '¿Qué señal personal dolorosa vive Ezequiel en el '
+      text:
+          '¿Qué señal personal dolorosa vive Ezequiel en el '
           'capítulo 24?',
       options: <String>[
         'La muerte de su esposa, sin poder llorarla públicamente',
@@ -257,7 +266,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Ezekiel#3': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Contra qué naciones vecinas se dirigen los oráculos de '
+      text:
+          '¿Contra qué naciones vecinas se dirigen los oráculos de '
           'estos capítulos?',
       options: <String>[
         'Amón, Moab, Edom, los filisteos y Tiro',
@@ -271,7 +281,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '25-28).',
     ),
     QuizQuestion(
-      text: '¿Cómo se describe a Tiro en la lamentación poética que '
+      text:
+          '¿Cómo se describe a Tiro en la lamentación poética que '
           'la concierne?',
       options: <String>[
         'Como un magnífico barco mercante',
@@ -287,7 +298,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       wordBankDistractors: <String>['ciudad', 'cedro', 'león'],
     ),
     QuizQuestion(
-      text: '¿Con qué se compara a Egipto en el juicio que le '
+      text:
+          '¿Con qué se compara a Egipto en el juicio que le '
           'concierne?',
       options: <String>[
         'Con un gran cedro finalmente derribado',
@@ -296,8 +308,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Con un desierto vacío',
       ],
       correctIndex: 0,
-      explanation:
-          'Una imagen de grandeza seguida de caída (Ezequiel 31).',
+      explanation: 'Una imagen de grandeza seguida de caída (Ezequiel 31).',
     ),
   ],
   'Ezekiel#4': <QuizQuestion>[
@@ -315,7 +326,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Ezequiel 33).',
     ),
     QuizQuestion(
-      text: '¿Qué ve Ezequiel en la célebre visión del valle de los '
+      text:
+          '¿Qué ve Ezequiel en la célebre visión del valle de los '
           'huesos secos?',
       options: <String>[
         'Huesos que vuelven a la vida, imagen de la restauración de Israel',
@@ -329,7 +341,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Ezequiel 37).',
     ),
     QuizQuestion(
-      text: '¿Qué simbolizan los dos palos unidos en uno solo en '
+      text:
+          '¿Qué simbolizan los dos palos unidos en uno solo en '
           'Ezequiel 37?',
       options: <String>[
         'La reunificación de Judá e Israel',
@@ -347,7 +360,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Ezekiel#5': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué vuelve a hacer la gloria de Jehová en la visión del '
+      text:
+          '¿Qué vuelve a hacer la gloria de Jehová en la visión del '
           'nuevo templo?',
       options: <String>[
         'Llena de nuevo la casa',
@@ -363,7 +377,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       wordBankDistractors: <String>['río', 'altar', 'puerta'],
     ),
     QuizQuestion(
-      text: '¿Qué produce el río que sale del templo según '
+      text:
+          '¿Qué produce el río que sale del templo según '
           'Ezequiel 47?',
       options: <String>[
         'Un agua que sana y da vida por donde pasa',
@@ -372,12 +387,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un agua reservada solo a los sacerdotes',
       ],
       correctIndex: 0,
-      explanation:
-          'Una imagen de restauración abundante (Ezequiel 47:9).',
+      explanation: 'Una imagen de restauración abundante (Ezequiel 47:9).',
     ),
     QuizQuestion(
       text: '¿Cómo se llama la ciudad final al final del libro?',
-      options: <String>['«Jehová está allí»', '«La ciudad eterna»', '«Nueva Babilonia»', 'Solo «la ciudad santa»'],
+      options: <String>[
+        '«Jehová está allí»',
+        '«La ciudad eterna»',
+        '«Nueva Babilonia»',
+        'Solo «la ciudad santa»',
+      ],
       correctIndex: 0,
       explanation:
           'Este nombre resume la esperanza del libro (Ezequiel 48:35).',
@@ -385,7 +404,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Daniel#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Por qué rechazaron Daniel y sus compañeros la comida '
+      text:
+          '¿Por qué rechazaron Daniel y sus compañeros la comida '
           'del rey?',
       options: <String>[
         'Para mantenerse fieles a sus principios',
@@ -394,11 +414,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Por orden del propio rey',
       ],
       correctIndex: 0,
-      explanation:
-          'Su integridad es recompensada con salud (Daniel 1).',
+      explanation: 'Su integridad es recompensada con salud (Daniel 1).',
     ),
     QuizQuestion(
-      text: '¿Qué representa la estatua del sueño de Nabucodonosor '
+      text:
+          '¿Qué representa la estatua del sueño de Nabucodonosor '
           'interpretada por Daniel?',
       options: <String>[
         'Una sucesión de reinos mundiales',
@@ -412,7 +432,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           'demás (Daniel 2).',
     ),
     QuizQuestion(
-      text: '¿Qué ocurrió cuando Sadrac, Mesac y Abednego se negaron '
+      text:
+          '¿Qué ocurrió cuando Sadrac, Mesac y Abednego se negaron '
           'a adorar la estatua de oro?',
       options: <String>[
         'Fueron protegidos en el horno ardiente',
@@ -421,15 +442,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Huyeron del reino',
       ],
       correctIndex: 0,
-      explanation:
-          'Un milagro demuestra la protección divina (Daniel 3).',
+      explanation: 'Un milagro demuestra la protección divina (Daniel 3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['leones', 'estatua', 'rey'],
     ),
   ],
   'Daniel#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué mensaje misterioso aparece en la pared durante el '
+      text:
+          '¿Qué mensaje misterioso aparece en la pared durante el '
           'banquete de Belsasar?',
       options: <String>[
         'Una escritura que anuncia la caída del reino',
@@ -438,8 +459,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un mensaje de paz',
       ],
       correctIndex: 0,
-      explanation:
-          'Babilonia cae esa misma noche (Daniel 5).',
+      explanation: 'Babilonia cae esa misma noche (Daniel 5).',
     ),
     QuizQuestion(
       text: '¿Por qué fue arrojado Daniel al foso de los leones?',
@@ -450,8 +470,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Se negaba a trabajar',
       ],
       correctIndex: 0,
-      explanation:
-          'Su fidelidad a la oración es puesta a prueba (Daniel 6).',
+      explanation: 'Su fidelidad a la oración es puesta a prueba (Daniel 6).',
     ),
     QuizQuestion(
       text: '¿Qué ve Daniel en su visión de las cuatro bestias?',
@@ -470,7 +489,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Daniel#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué hace Daniel antes de recibir la profecía de las '
+      text:
+          '¿Qué hace Daniel antes de recibir la profecía de las '
           '«70 semanas»?',
       options: <String>[
         'Ora y confiesa los pecados de su pueblo',
@@ -484,7 +504,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Daniel 9).',
     ),
     QuizQuestion(
-      text: '¿Quién se aparece a Daniel cerca del Tigris para '
+      text:
+          '¿Quién se aparece a Daniel cerca del Tigris para '
           'explicarle un conflicto celestial?',
       options: <String>[
         'Un mensajero celestial enviado tras un combate espiritual',
@@ -493,8 +514,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Nabucodonosor en persona',
       ],
       correctIndex: 0,
-      explanation:
-          'Se revela a Daniel una lucha espiritual (Daniel 10).',
+      explanation: 'Se revela a Daniel una lucha espiritual (Daniel 10).',
     ),
     QuizQuestion(
       text: '¿Qué esperanza final concluye el libro de Daniel?',
@@ -512,7 +532,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Hosea#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué le pidió Jehová a Oseas para ilustrar la '
+      text:
+          '¿Qué le pidió Jehová a Oseas para ilustrar la '
           'infidelidad de Israel?',
       options: <String>[
         'Casarse con una mujer infiel, Gómer',
@@ -526,7 +547,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Oseas 1).',
     ),
     QuizQuestion(
-      text: '¿Qué carencia le reprocha Jehová a su pueblo en el '
+      text:
+          '¿Qué carencia le reprocha Jehová a su pueblo en el '
           'capítulo 4?',
       options: <String>[
         'La falta de conocimiento de Dios',
@@ -544,18 +566,30 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Hosea#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué prefiere Jehová antes que el sacrificio, según '
+      text:
+          '¿Qué prefiere Jehová antes que el sacrificio, según '
           'Oseas 6?',
-      options: <String>['El amor fiel (la bondad de corazón)', 'Ofrendas abundantes', 'Un templo más grande', 'Ceremonias más largas'],
+      options: <String>[
+        'El amor fiel (la bondad de corazón)',
+        'Ofrendas abundantes',
+        'Un templo más grande',
+        'Ceremonias más largas',
+      ],
       correctIndex: 0,
       explanation:
           '«Me deleito en la bondad de corazón, no en los '
           'sacrificios» (Oseas 6:6).',
     ),
     QuizQuestion(
-      text: '¿Qué cosecha Israel tras «sembrar viento» según '
+      text:
+          '¿Qué cosecha Israel tras «sembrar viento» según '
           'Oseas 8?',
-      options: <String>['La tempestad', 'La paz duradera', 'La riqueza', 'Nada en particular'],
+      options: <String>[
+        'La tempestad',
+        'La paz duradera',
+        'La riqueza',
+        'Nada en particular',
+      ],
       correctIndex: 0,
       explanation:
           'Una imagen de las consecuencias de la infidelidad (Oseas 8:7).',
@@ -565,7 +599,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Hosea#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo expresa Jehová su apego paternal a Efraín en '
+      text:
+          '¿Cómo expresa Jehová su apego paternal a Efraín en '
           'Oseas 11?',
       options: <String>[
         '«¿Cómo podría abandonarte, Efraín?»',
@@ -594,19 +629,27 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Joel#0': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué plaga azota el país al comienzo del libro de Joel?',
-      options: <String>['Una invasión de langostas', 'Una guerra civil', 'Una sequía de diez años', 'Una epidemia'],
+      options: <String>[
+        'Una invasión de langostas',
+        'Una guerra civil',
+        'Una sequía de diez años',
+        'Una epidemia',
+      ],
       correctIndex: 0,
-      explanation:
-          'Se describe una plaga sin precedentes (Joel 1).',
+      explanation: 'Se describe una plaga sin precedentes (Joel 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['sequía', 'granizo', 'guerra'],
     ),
     QuizQuestion(
       text: '¿Qué llamado hace Joel ante este desastre?',
-      options: <String>['Lamentarse y ayunar', 'Celebrar una fiesta', 'Ignorar el evento', 'Emigrar de inmediato'],
+      options: <String>[
+        'Lamentarse y ayunar',
+        'Celebrar una fiesta',
+        'Ignorar el evento',
+        'Emigrar de inmediato',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un llamado al arrepentimiento colectivo (Joel 1).',
+      explanation: 'Un llamado al arrepentimiento colectivo (Joel 1).',
     ),
   ],
   'Joel#1': <QuizQuestion>[
@@ -619,11 +662,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Pagar una multa',
       ],
       correctIndex: 0,
-      explanation:
-          'Se pide un arrepentimiento sincero (Joel 2:13).',
+      explanation: 'Se pide un arrepentimiento sincero (Joel 2:13).',
     ),
     QuizQuestion(
-      text: '¿Qué promesa de Joel 2 cita Pedro el día de '
+      text:
+          '¿Qué promesa de Joel 2 cita Pedro el día de '
           'Pentecostés?',
       options: <String>[
         'Derramaré mi espíritu sobre toda carne',
@@ -632,8 +675,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Ninguna promesa notable',
       ],
       correctIndex: 0,
-      explanation:
-          'Citada en Hechos 2 durante Pentecostés (Joel 2:28).',
+      explanation: 'Citada en Hechos 2 durante Pentecostés (Joel 2:28).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['fuego', 'lluvia', 'sueños'],
     ),
@@ -641,25 +683,35 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Joel#2': <QuizQuestion>[
     QuizQuestion(
       text: '¿Dónde son juzgadas las naciones según Joel 3?',
-      options: <String>['En el valle de la Decisión', 'En Babilonia', 'En Nínive', 'En Egipto'],
+      options: <String>[
+        'En el valle de la Decisión',
+        'En Babilonia',
+        'En Nínive',
+        'En Egipto',
+      ],
       correctIndex: 0,
-      explanation:
-          'Allí se anuncia un juicio colectivo (Joel 3:14).',
+      explanation: 'Allí se anuncia un juicio colectivo (Joel 3:14).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Jezreel', 'Sion', 'Jerusalén'],
     ),
     QuizQuestion(
-      text: '¿Qué promete Joel 3 a Judá después del juicio de las '
+      text:
+          '¿Qué promete Joel 3 a Judá después del juicio de las '
           'naciones?',
-      options: <String>['Bendición y restauración', 'Una destrucción definitiva', 'Un exilio adicional', 'Nada en particular'],
+      options: <String>[
+        'Bendición y restauración',
+        'Una destrucción definitiva',
+        'Un exilio adicional',
+        'Nada en particular',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una conclusión llena de esperanza (Joel 3).',
+      explanation: 'Una conclusión llena de esperanza (Joel 3).',
     ),
   ],
   'Amos#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Contra qué naciones pronuncia Amós juicios al comienzo '
+      text:
+          '¿Contra qué naciones pronuncia Amós juicios al comienzo '
           'del libro?',
       options: <String>[
         'Damasco, Gaza, Tiro, Edom, Amón, Moab, y luego Judá e Israel',
@@ -681,13 +733,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'No necesita mensajeros',
       ],
       correctIndex: 0,
-      explanation:
-          'Se subraya el papel profético (Amós 3:7).',
+      explanation: 'Se subraya el papel profético (Amós 3:7).',
     ),
   ],
   'Amos#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿A quiénes critica Amós 4 al compararlas con las «vacas '
+      text:
+          '¿A quiénes critica Amós 4 al compararlas con las «vacas '
           'de Basán»?',
       options: <String>[
         'A las mujeres ricas que oprimen a los pobres',
@@ -696,8 +748,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'A los reyes vecinos',
       ],
       correctIndex: 0,
-      explanation:
-          'Una crítica social directa (Amós 4:1).',
+      explanation: 'Una crítica social directa (Amós 4:1).',
     ),
     QuizQuestion(
       text: '¿Qué pide Amós 5 al pueblo respecto a la justicia?',
@@ -708,18 +759,22 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Que la justicia siga siendo simbólica',
       ],
       correctIndex: 0,
-      explanation:
-          'Un llamado célebre a la justicia real (Amós 5:24).',
+      explanation: 'Un llamado célebre a la justicia real (Amós 5:24).',
     ),
   ],
   'Amos#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué instrumento simbólico usa Dios en una visión para '
+      text:
+          '¿Qué instrumento simbólico usa Dios en una visión para '
           'juzgar a Israel?',
-      options: <String>['Una plomada', 'Una balanza vacía', 'Una trompeta rota', 'Un cetro real'],
+      options: <String>[
+        'Una plomada',
+        'Una balanza vacía',
+        'Una trompeta rota',
+        'Un cetro real',
+      ],
       correctIndex: 0,
-      explanation:
-          'La imagen prueba la rectitud de un muro (Amós 7).',
+      explanation: 'La imagen prueba la rectitud de un muro (Amós 7).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['plomada'],
     ),
@@ -732,8 +787,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'El fin de toda promesa divina',
       ],
       correctIndex: 0,
-      explanation:
-          'Una nota de esperanza concluye el libro (Amós 9:11).',
+      explanation: 'Una nota de esperanza concluye el libro (Amós 9:11).',
     ),
   ],
   'Obadiah#0': <QuizQuestion>[
@@ -755,13 +809,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'No habrá ningún juicio',
       ],
       correctIndex: 0,
-      explanation:
-          'Una afirmación de la soberanía divina (Abdías 21).',
+      explanation: 'Una afirmación de la soberanía divina (Abdías 21).',
     ),
   ],
   'Jonah#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Por qué huyó Jonás hacia Tarsis en lugar de ir a '
+      text:
+          '¿Por qué huyó Jonás hacia Tarsis en lugar de ir a '
           'Nínive?',
       options: <String>[
         'Quería escapar de la misión que Jehová le había confiado',
@@ -770,8 +824,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Nínive lo había invitado personalmente',
       ],
       correctIndex: 0,
-      explanation:
-          'Jonás intenta huir de su misión (Jonás 1).',
+      explanation: 'Jonás intenta huir de su misión (Jonás 1).',
     ),
     QuizQuestion(
       text: '¿Qué ocurrió cuando Jonás fue arrojado al mar?',
@@ -782,8 +835,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un barco lo rescató enseguida',
       ],
       correctIndex: 0,
-      explanation:
-          'Un suceso extraordinario lo salva (Jonás 1:17).',
+      explanation: 'Un suceso extraordinario lo salva (Jonás 1:17).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['tormenta', 'barco', 'marineros'],
     ),
@@ -791,10 +843,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Jonah#1': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué hace Jonás desde el interior del pez?',
-      options: <String>['Ora a Jehová', 'Duerme profundamente', 'Protesta con ira', 'Permanece en silencio'],
+      options: <String>[
+        'Ora a Jehová',
+        'Duerme profundamente',
+        'Protesta con ira',
+        'Permanece en silencio',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una oración de angustia y reconocimiento (Jonás 2).',
+      explanation: 'Una oración de angustia y reconocimiento (Jonás 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['duerme', 'canta', 'huye'],
     ),
@@ -807,13 +863,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Declaró la guerra a Israel',
       ],
       correctIndex: 0,
-      explanation:
-          'Un arrepentimiento colectivo sorprendente (Jonás 3).',
+      explanation: 'Un arrepentimiento colectivo sorprendente (Jonás 3).',
     ),
   ],
   'Jonah#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Por qué estaba descontento Jonás tras el arrepentimiento '
+      text:
+          '¿Por qué estaba descontento Jonás tras el arrepentimiento '
           'de Nínive?',
       options: <String>[
         'Habría preferido que Dios destruyera la ciudad',
@@ -826,7 +882,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           'A Jonás le cuesta aceptar la misericordia divina (Jonás 4).',
     ),
     QuizQuestion(
-      text: '¿Qué quiere enseñarle Jehová a Jonás con la planta que '
+      text:
+          '¿Qué quiere enseñarle Jehová a Jonás con la planta que '
           'se marchita?',
       options: <String>[
         'La importancia de la compasión, incluso hacia extraños',
@@ -835,18 +892,22 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un simple dato botánico',
       ],
       correctIndex: 0,
-      explanation:
-          'Una lección sobre la compasión divina (Jonás 4).',
+      explanation: 'Una lección sobre la compasión divina (Jonás 4).',
     ),
   ],
   'Micah#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Contra qué ciudades se anuncia el juicio de Miqueas al '
+      text:
+          '¿Contra qué ciudades se anuncia el juicio de Miqueas al '
           'comienzo del libro?',
-      options: <String>['Samaria y Jerusalén', 'Nínive y Babilonia', 'Tiro y Sidón', 'Solo Damasco'],
+      options: <String>[
+        'Samaria y Jerusalén',
+        'Nínive y Babilonia',
+        'Tiro y Sidón',
+        'Solo Damasco',
+      ],
       correctIndex: 0,
-      explanation:
-          'Las dos capitales son el blanco (Miqueas 1).',
+      explanation: 'Las dos capitales son el blanco (Miqueas 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Nínive', 'Babilonia', 'Belén'],
     ),
@@ -859,8 +920,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'La falta de sacerdotes',
       ],
       correctIndex: 0,
-      explanation:
-          'Se condena una injusticia social (Miqueas 2).',
+      explanation: 'Se condena una injusticia social (Miqueas 2).',
     ),
   ],
   'Micah#1': <QuizQuestion>[
@@ -873,13 +933,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'No se precisa ningún lugar',
       ],
       correctIndex: 0,
-      explanation:
-          'Una profecía mesiánica precisa (Miqueas 5:2).',
+      explanation: 'Una profecía mesiánica precisa (Miqueas 5:2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Jerusalén', 'Nazaret', 'Sion'],
     ),
     QuizQuestion(
-      text: '¿Qué visión de paz comparte Miqueas 4, semejante a la '
+      text:
+          '¿Qué visión de paz comparte Miqueas 4, semejante a la '
           'de Isaías?',
       options: <String>[
         'Las espadas transformadas en rejas de arado',
@@ -888,8 +948,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Un silencio total sobre el futuro',
       ],
       correctIndex: 0,
-      explanation:
-          'Una imagen de paz universal (Miqueas 4:3).',
+      explanation: 'Una imagen de paz universal (Miqueas 4:3).',
     ),
   ],
   'Micah#2': <QuizQuestion>[
@@ -907,7 +966,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '6:8).',
     ),
     QuizQuestion(
-      text: '¿Qué esperanza expresa Miqueas pese a la corrupción '
+      text:
+          '¿Qué esperanza expresa Miqueas pese a la corrupción '
           'ambiente?',
       options: <String>[
         'Dios mostrará de nuevo su compasión',
@@ -916,8 +976,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'El pueblo debe vengarse solo',
       ],
       correctIndex: 0,
-      explanation:
-          'Una confianza renovada concluye el libro (Miqueas 7).',
+      explanation: 'Una confianza renovada concluye el libro (Miqueas 7).',
     ),
   ],
   'Nahum#0': <QuizQuestion>[
@@ -930,15 +989,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Sin emoción alguna',
       ],
       correctIndex: 0,
-      explanation:
-          'Un equilibrio entre paciencia y poder (Nahúm 1).',
+      explanation: 'Un equilibrio entre paciencia y poder (Nahúm 1).',
     ),
     QuizQuestion(
       text: '¿A quién ofrece Nahúm consuelo pese al juicio anunciado?',
-      options: <String>['A quienes se refugian en él', 'Solo a los habitantes de Nínive', 'A reyes extranjeros', 'A nadie'],
+      options: <String>[
+        'A quienes se refugian en él',
+        'Solo a los habitantes de Nínive',
+        'A reyes extranjeros',
+        'A nadie',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un consuelo para los fieles (Nahúm 1:7).',
+      explanation: 'Un consuelo para los fieles (Nahúm 1:7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['enemigos', 'Nínive', 'naciones'],
     ),
@@ -946,15 +1008,25 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Nahum#1': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué describe con intensidad Nahúm 2?',
-      options: <String>['El sitio y la caída de Nínive', 'La construcción de un templo', 'Una fiesta de la cosecha', 'Una coronación real'],
+      options: <String>[
+        'El sitio y la caída de Nínive',
+        'La construcción de un templo',
+        'Una fiesta de la cosecha',
+        'Una coronación real',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una descripción vívida de batalla (Nahúm 2).',
+      explanation: 'Una descripción vívida de batalla (Nahúm 2).',
     ),
     QuizQuestion(
-      text: '¿Qué tono domina esta descripción de la caída de '
+      text:
+          '¿Qué tono domina esta descripción de la caída de '
           'Nínive?',
-      options: <String>['Un juicio inevitable y completo', 'Una simple advertencia leve', 'Una esperanza de paz duradera', 'Una negociación en curso'],
+      options: <String>[
+        'Un juicio inevitable y completo',
+        'Una simple advertencia leve',
+        'Una esperanza de paz duradera',
+        'Una negociación en curso',
+      ],
       correctIndex: 0,
       explanation:
           'El fin de Nínive se presenta como cierto '
@@ -964,16 +1036,25 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Nahum#2': <QuizQuestion>[
     QuizQuestion(
       text: '¿Cómo califica Nahúm 3 a Nínive?',
-      options: <String>['La ciudad sanguinaria', 'La ciudad santa', 'La ciudad de la paz', 'La ciudad bendecida'],
+      options: <String>[
+        'La ciudad sanguinaria',
+        'La ciudad santa',
+        'La ciudad de la paz',
+        'La ciudad bendecida',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un juicio severo por su violencia (Nahúm 3:1).',
+      explanation: 'Un juicio severo por su violencia (Nahúm 3:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Nínive', 'ramera', 'fortaleza'],
     ),
     QuizQuestion(
       text: '¿Cuál es el desenlace final anunciado para Nínive?',
-      options: <String>['Una destrucción total', 'Una restauración futura', 'Una alianza con Israel', 'Una simple advertencia sin consecuencias'],
+      options: <String>[
+        'Una destrucción total',
+        'Una restauración futura',
+        'Una alianza con Israel',
+        'Una simple advertencia sin consecuencias',
+      ],
       correctIndex: 0,
       explanation:
           'El libro termina con la caída irreversible de la '
@@ -990,8 +1071,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'De un conflicto personal con un sacerdote',
       ],
       correctIndex: 0,
-      explanation:
-          'Una queja sincera frente a la injusticia (Habacuc 1).',
+      explanation: 'Una queja sincera frente a la injusticia (Habacuc 1).',
     ),
     QuizQuestion(
       text: '¿Qué respuesta sorprendente le da Dios a Habacuc?',
@@ -1032,13 +1112,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'El dominio de Babilonia para siempre',
       ],
       correctIndex: 0,
-      explanation:
-          'Una promesa universal de esperanza (Habacuc 2:14).',
+      explanation: 'Una promesa universal de esperanza (Habacuc 2:14).',
     ),
   ],
   'Habakkuk#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué actitud adopta Habacuc en su oración final pese a '
+      text:
+          '¿Qué actitud adopta Habacuc en su oración final pese a '
           'la ausencia de cosecha?',
       options: <String>[
         'Se alegrará de todos modos en Jehová',
@@ -1060,8 +1140,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Con un silencio completo',
       ],
       correctIndex: 0,
-      explanation:
-          'Un salmo de fe termina el libro (Habacuc 3).',
+      explanation: 'Un salmo de fe termina el libro (Habacuc 3).',
     ),
   ],
   'Zephaniah#0': <QuizQuestion>[
@@ -1074,12 +1153,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Una alianza comercial',
       ],
       correctIndex: 0,
-      explanation:
-          'Se anuncia un juicio universal (Sofonías 1).',
+      explanation: 'Se anuncia un juicio universal (Sofonías 1).',
     ),
     QuizQuestion(
       text: '¿Sobre quién recae este juicio en primer lugar?',
-      options: <String>['Judá y Jerusalén', 'Solo Egipto', 'Solo Nínive', 'Solo Edom'],
+      options: <String>[
+        'Judá y Jerusalén',
+        'Solo Egipto',
+        'Solo Nínive',
+        'Solo Edom',
+      ],
       correctIndex: 0,
       explanation:
           'El juicio comienza por el pueblo de Dios '
@@ -1091,16 +1174,25 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   'Zephaniah#1': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué aconseja Sofonías 2 antes de que llegue el juicio?',
-      options: <String>['Buscar a Jehová y la humildad', 'Alegrarse sin preocupación', 'Ignorar las advertencias', 'Huir sin pensarlo'],
+      options: <String>[
+        'Buscar a Jehová y la humildad',
+        'Alegrarse sin preocupación',
+        'Ignorar las advertencias',
+        'Huir sin pensarlo',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un llamado urgente al arrepentimiento (Sofonías 2:3).',
+      explanation: 'Un llamado urgente al arrepentimiento (Sofonías 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['orgullo', 'juicio', 'ídolos'],
     ),
     QuizQuestion(
       text: '¿Qué naciones son también juzgadas en este capítulo?',
-      options: <String>['Las naciones vecinas como Moab y Amón', 'Solo Israel', 'Ninguna otra nación', 'Solo Babilonia'],
+      options: <String>[
+        'Las naciones vecinas como Moab y Amón',
+        'Solo Israel',
+        'Ninguna otra nación',
+        'Solo Babilonia',
+      ],
       correctIndex: 0,
       explanation:
           'El juicio se extiende a las naciones vecinas '
@@ -1117,8 +1209,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'El pueblo será olvidado para siempre',
       ],
       correctIndex: 0,
-      explanation:
-          'Una imagen conmovedora del gozo divino (Sofonías 3:17).',
+      explanation: 'Una imagen conmovedora del gozo divino (Sofonías 3:17).',
     ),
     QuizQuestion(
       text: '¿Qué promete Sofonías 3 respecto a un resto fiel?',
@@ -1146,11 +1237,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Habían construido demasiados templos',
       ],
       correctIndex: 0,
-      explanation:
-          'El pueblo priorizaba sus propias casas (Ageo 1).',
+      explanation: 'El pueblo priorizaba sus propias casas (Ageo 1).',
     ),
     QuizQuestion(
-      text: '¿Qué promesa anima la reanudación de las obras del '
+      text:
+          '¿Qué promesa anima la reanudación de las obras del '
           'templo?',
       options: <String>[
         'La gloria de esta casa superará a la anterior',
@@ -1166,7 +1257,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Zechariah#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué tipo de revelaciones recibe Zacarías al comienzo '
+      text:
+          '¿Qué tipo de revelaciones recibe Zacarías al comienzo '
           'del libro?',
       options: <String>[
         'Una serie de visiones nocturnas simbólicas',
@@ -1182,7 +1274,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       wordBankDistractors: <String>['sueños', 'parábolas', 'señales'],
     ),
     QuizQuestion(
-      text: '¿Qué simboliza la purificación del sumo sacerdote Josué '
+      text:
+          '¿Qué simboliza la purificación del sumo sacerdote Josué '
           'en una de estas visiones?',
       options: <String>[
         'El perdón y la renovación del sacerdocio',
@@ -1198,7 +1291,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Zechariah#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo se describe al futuro rey mesiánico en '
+      text:
+          '¿Cómo se describe al futuro rey mesiánico en '
           'Zacarías 9?',
       options: <String>[
         'Humilde, montado en un pollino',
@@ -1212,7 +1306,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           'Jesús (Zacarías 9:9).',
     ),
     QuizQuestion(
-      text: '¿Qué responde Zacarías 7-8 a la pregunta sobre el ayuno '
+      text:
+          '¿Qué responde Zacarías 7-8 a la pregunta sobre el ayuno '
           'ritual?',
       options: <String>[
         'La justicia y la misericordia importan más que el rito',
@@ -1228,7 +1323,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Zechariah#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué profecía de Zacarías 11 se asocia con la traición '
+      text:
+          '¿Qué profecía de Zacarías 11 se asocia con la traición '
           'de Judas?',
       options: <String>[
         'Las treinta piezas de plata',
@@ -1259,7 +1355,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
   'Malachi#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué reproche dirige Malaquías a los sacerdotes en el '
+      text:
+          '¿Qué reproche dirige Malaquías a los sacerdotes en el '
           'capítulo 1?',
       options: <String>[
         'Ofrecer sacrificios defectuosos a Jehová',
@@ -1275,7 +1372,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
       wordBankDistractors: <String>['diezmos', 'incienso', 'pan'],
     ),
     QuizQuestion(
-      text: '¿Cómo ilustra Malaquías 1 el amor de Jehová por su '
+      text:
+          '¿Cómo ilustra Malaquías 1 el amor de Jehová por su '
           'pueblo?',
       options: <String>[
         'Contrastando a Jacob y Esaú',
@@ -1304,7 +1402,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
           '(Malaquías 3:10).',
     ),
     QuizQuestion(
-      text: '¿Qué mensajero anuncia Malaquías 3 antes de la venida '
+      text:
+          '¿Qué mensajero anuncia Malaquías 3 antes de la venida '
           'del Señor?',
       options: <String>[
         'Un mensajero que preparará el camino',
@@ -1313,8 +1412,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'No se menciona ningún mensajero',
       ],
       correctIndex: 0,
-      explanation:
-          'Una profecía vinculada a Juan el Bautista (Malaquías 3:1).',
+      explanation: 'Una profecía vinculada a Juan el Bautista (Malaquías 3:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Elías', 'profeta', 'sacerdote'],
     ),
@@ -1329,11 +1427,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
         'Ningún día en particular',
       ],
       correctIndex: 0,
-      explanation:
-          'Una imagen de juicio final (Malaquías 4:1).',
+      explanation: 'Una imagen de juicio final (Malaquías 4:1).',
     ),
     QuizQuestion(
-      text: '¿Quién anuncia Malaquías que debe regresar antes de ese '
+      text:
+          '¿Quién anuncia Malaquías que debe regresar antes de ese '
           'día?',
       options: <String>['Elías', 'Moisés', 'David', 'Salomón'],
       correctIndex: 0,
@@ -1345,7 +1443,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC4 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesEsC4 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+extraQuizzesEsC4 = <String, List<QuizQuestion>>{
   // Empty: Lamentations, Ezekiel, Daniel, Hosea, Joel, Amos, Obadiah, Jonah,
   // Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, and Malachi are not
   // flagship books, so none of them appear in _extraQuizzes.

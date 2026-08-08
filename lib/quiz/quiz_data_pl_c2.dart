@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
   '1 Samuel#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Co Anna obiecała Jehowie, gdyby miała syna?',
@@ -11,8 +12,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Zostać kapłanką',
       ],
       correctIndex: 0,
-      explanation:
-          'Anna poświęca Samuela na służbę w przybytku (1 Samuela 1).',
+      explanation: 'Anna poświęca Samuela na służbę w przybytku (1 Samuela 1).',
     ),
     QuizQuestion(
       text: 'Jak Jehowa powołał młodego Samuela?',
@@ -34,8 +34,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Ponieważ zaproponował to Samuel',
       ],
       correctIndex: 0,
-      explanation:
-          'Lud odrzuca bezpośrednie panowanie Boga (1 Samuela 8).',
+      explanation: 'Lud odrzuca bezpośrednie panowanie Boga (1 Samuela 8).',
     ),
   ],
   '1 Samuel#1': <QuizQuestion>[
@@ -59,7 +58,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Saul jest nieposłuszny, sam składając ofiarę (1 Samuela 13).',
     ),
     QuizQuestion(
-      text: 'Dlaczego Saul został ostatecznie odrzucony przez Jehowę jako król?',
+      text:
+          'Dlaczego Saul został ostatecznie odrzucony przez Jehowę jako król?',
       options: <String>[
         'Był nieposłuszny, oszczędzając Agaga i najlepsze bydło',
         'Przegrał niewielką bitwę',
@@ -74,22 +74,33 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
   '1 Samuel#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Jaką bronią Dawid pokonał Goliata?',
-      options: <String>['Procą i kamieniem', 'Mieczem', 'Włócznią', 'Gołymi rękami'],
+      options: <String>[
+        'Procą i kamieniem',
+        'Mieczem',
+        'Włócznią',
+        'Gołymi rękami',
+      ],
       correctIndex: 0,
-      explanation:
-          'Dawid odrzuca zbroję i używa procy (1 Samuela 17).',
+      explanation: 'Dawid odrzuca zbroję i używa procy (1 Samuela 17).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['miecz', 'tarcza', 'włócznia'],
     ),
     QuizQuestion(
-      text: 'Jakie uczucie skłoniło Saula, by chciał zabić Dawida po jego zwycięstwie?',
-      options: <String>['Zazdrość', 'Strach przed Filistynami', 'Gniew Samuela', 'Rada Jonatana'],
+      text:
+          'Jakie uczucie skłoniło Saula, by chciał zabić Dawida po jego zwycięstwie?',
+      options: <String>[
+        'Zazdrość',
+        'Strach przed Filistynami',
+        'Gniew Samuela',
+        'Rada Jonatana',
+      ],
       correctIndex: 0,
       explanation:
           'Pieśni pochwalne na cześć Dawida budzą zazdrość Saula (1 Samuela 18).',
     ),
     QuizQuestion(
-      text: 'Kto pomógł Dawidowi uciec przed Saulem, ostrzegając go o niebezpieczeństwie?',
+      text:
+          'Kto pomógł Dawidowi uciec przed Saulem, ostrzegając go o niebezpieczeństwie?',
       options: <String>['Jonatan', 'Abner', 'Sam Samuel', 'Nieznany kapłan'],
       correctIndex: 0,
       explanation:
@@ -111,11 +122,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Dawid odmawia dotknięcia „pomazańca Jehowy” (1 Samuela 24).',
     ),
     QuizQuestion(
-      text: 'Kto swoją mądrością zapobiegł konfliktowi między Dawidem a Nabalem?',
+      text:
+          'Kto swoją mądrością zapobiegł konfliktowi między Dawidem a Nabalem?',
       options: <String>['Abigail', 'Mikal', 'Służąca', 'Arcykapłan'],
       correctIndex: 0,
-      explanation:
-          'Abigail uspokaja Dawida zapasami żywności (1 Samuela 25).',
+      explanation: 'Abigail uspokaja Dawida zapasami żywności (1 Samuela 25).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -127,8 +138,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'W Gibea',
       ],
       correctIndex: 0,
-      explanation:
-          'Saul i jego synowie giną pod Gilboa (1 Samuela 31).',
+      explanation: 'Saul i jego synowie giną pod Gilboa (1 Samuela 31).',
     ),
   ],
   '2 Samuel#0': <QuizQuestion>[
@@ -141,15 +151,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Natychmiast zaatakował',
       ],
       correctIndex: 0,
-      explanation:
-          'Dawid układa „Pieśń Łuku” (2 Samuela 1).',
+      explanation: 'Dawid układa „Pieśń Łuku” (2 Samuela 1).',
     ),
     QuizQuestion(
       text: 'Które miasto zdobył Dawid, aby uczynić je swoją stolicą?',
       options: <String>['Jerozolimę', 'Hebron', 'Szilo', 'Gibea'],
       correctIndex: 0,
-      explanation:
-          'Dawid zdobywa twierdzę Syjon (2 Samuela 5).',
+      explanation: 'Dawid zdobywa twierdzę Syjon (2 Samuela 5).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -169,7 +177,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
   ],
   '2 Samuel#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Z kim Dawid dopuścił się cudzołóstwa, co doprowadziło do zabójstwa Uriasza?',
+      text:
+          'Z kim Dawid dopuścił się cudzołóstwa, co doprowadziło do zabójstwa Uriasza?',
       options: <String>['Z Batszebą', 'Z Mikal', 'Z Abigail', 'Z Tamar'],
       correctIndex: 0,
       explanation:
@@ -189,11 +198,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Przypowieść skłania Dawida do przyznania się do winy (2 Samuela 12).',
     ),
     QuizQuestion(
-      text: 'Kto zbuntował się przeciw swojemu ojcu Dawidowi, aby przejąć tron?',
+      text:
+          'Kto zbuntował się przeciw swojemu ojcu Dawidowi, aby przejąć tron?',
       options: <String>['Absalom', 'Amnon', 'Salomon', 'Adoniasz'],
       correctIndex: 0,
-      explanation:
-          'Rozpoczyna się bunt Absaloma (2 Samuela 15).',
+      explanation: 'Rozpoczyna się bunt Absaloma (2 Samuela 15).',
       type: QuizAnswerType.freeText,
     ),
   ],
@@ -207,8 +216,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Rada Salomona',
       ],
       correctIndex: 0,
-      explanation:
-          'Chuszaj opóźnia atak i ratuje Dawida (2 Samuela 17).',
+      explanation: 'Chuszaj opóźnia atak i ratuje Dawida (2 Samuela 17).',
     ),
     QuizQuestion(
       text: 'Jak zginął Absalom?',
@@ -242,8 +250,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
       text: 'Kto próbował przejąć tron przed śmiercią Dawida?',
       options: <String>['Adoniasz', 'Absalom', 'Sam Joab', 'Natan'],
       correctIndex: 0,
-      explanation:
-          'Adoniasz ogłasza się królem bez zgody Dawida (1 Królów 1).',
+      explanation: 'Adoniasz ogłasza się królem bez zgody Dawida (1 Królów 1).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -255,12 +262,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'O długie życie, bez żadnych warunków',
       ],
       correctIndex: 0,
-      explanation:
-          'Salomon prosi o mądrość, co podoba się Bogu (1 Królów 3).',
+      explanation: 'Salomon prosi o mądrość, co podoba się Bogu (1 Królów 3).',
     ),
     QuizQuestion(
-      text: 'Kto pomógł Salomonowi w dostarczeniu materiałów do budowy świątyni?',
-      options: <String>['Hiram, król Tyru', 'Faraon Egiptu', 'Królowa Saby', 'Król Moabu'],
+      text:
+          'Kto pomógł Salomonowi w dostarczeniu materiałów do budowy świątyni?',
+      options: <String>[
+        'Hiram, król Tyru',
+        'Faraon Egiptu',
+        'Królowa Saby',
+        'Król Moabu',
+      ],
       correctIndex: 0,
       explanation:
           'Hiram dostarcza drewno cedrowe i rzemieślników (1 Królów 5).',
@@ -278,8 +290,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Salomon opuszcza Jerozolimę',
       ],
       correctIndex: 0,
-      explanation:
-          'Obłok chwały wypełnia dom (1 Królów 8).',
+      explanation: 'Obłok chwały wypełnia dom (1 Królów 8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['obłok', 'arka', 'kapłani'],
     ),
@@ -296,7 +307,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Bałwochwalstwo jego żon prowadzi go do niewierności (1 Królów 11).',
     ),
     QuizQuestion(
-      text: 'Co robi Jeroboam po podziale królestwa, aby lud nie chodził do Jerozolimy?',
+      text:
+          'Co robi Jeroboam po podziale królestwa, aby lud nie chodził do Jerozolimy?',
       options: <String>[
         'Ustawia złote cielce w Betel i Dan',
         'Niszczy wszystkie drogi',
@@ -366,8 +378,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Odbudował jej dom',
       ],
       correctIndex: 0,
-      explanation:
-          'Elizeusz przywraca życie dziecku Szunemitki (2 Królów 4).',
+      explanation: 'Elizeusz przywraca życie dziecku Szunemitki (2 Królów 4).',
     ),
     QuizQuestion(
       text: 'Jak Naaman został uzdrowiony z trądu?',
@@ -416,13 +427,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Chroniło go wojsko asyryjskie',
       ],
       correctIndex: 0,
-      explanation:
-          'Joasz unika masakry dokonanej przez Atalię (2 Królów 11).',
+      explanation: 'Joasz unika masakry dokonanej przez Atalię (2 Królów 11).',
     ),
   ],
   '2 Kings#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Co dzieje się z królestwem północnym (Izraelem) po oblężeniu asyryjskim?',
+      text:
+          'Co dzieje się z królestwem północnym (Izraelem) po oblężeniu asyryjskim?',
       options: <String>[
         'Samaria upada, a lud zostaje deportowany',
         'Podbija Asyrię',
@@ -454,8 +465,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Epidemia stopniowo je osłabiła',
       ],
       correctIndex: 0,
-      explanation:
-          'Boska interwencja ratuje Jerozolimę (2 Królów 19).',
+      explanation: 'Boska interwencja ratuje Jerozolimę (2 Królów 19).',
     ),
   ],
   '2 Kings#3': <QuizQuestion>[
@@ -473,10 +483,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Jakie wielkie święto obchodził Jozjasz po swojej reformie?',
-      options: <String>['Paschę', 'Święto Szałasów', 'Pięćdziesiątnicę', 'Rok Jubileuszowy'],
+      options: <String>[
+        'Paschę',
+        'Święto Szałasów',
+        'Pięćdziesiątnicę',
+        'Rok Jubileuszowy',
+      ],
       correctIndex: 0,
-      explanation:
-          'Obchodzona jest pamiętna Pascha (2 Królów 23).',
+      explanation: 'Obchodzona jest pamiętna Pascha (2 Królów 23).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Pascha'],
     ),
@@ -489,8 +503,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Natychmiastowym powrotem z wygnania',
       ],
       correctIndex: 0,
-      explanation:
-          'Relacja kończy się wygnaniem do Babilonu (2 Królów 25).',
+      explanation: 'Relacja kończy się wygnaniem do Babilonu (2 Królów 25).',
     ),
   ],
   '1 Chronicles#0': <QuizQuestion>[
@@ -503,19 +516,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Od królów Egiptu',
       ],
       correctIndex: 0,
-      explanation:
-          'Wykazy sięgają aż do Adama (1 Kronik 1-2).',
+      explanation: 'Wykazy sięgają aż do Adama (1 Kronik 1-2).',
     ),
     QuizQuestion(
       text: 'Z jakiego plemienia pochodzi królewska linia Dawida?',
       options: <String>['Judy', 'Lewiego', 'Beniamina', 'Efraima'],
       correctIndex: 0,
-      explanation:
-          'Rodowód Judy obejmuje dom Dawida (1 Kronik 2-3).',
+      explanation: 'Rodowód Judy obejmuje dom Dawida (1 Kronik 2-3).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Które plemiona osiedliły się na wschód od Jordanu według tych rodowodów?',
+      text:
+          'Które plemiona osiedliły się na wschód od Jordanu według tych rodowodów?',
       options: <String>[
         'Ruben, Gad i połowa Manassesa',
         'Juda i Beniamin',
@@ -523,8 +535,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Dan i Naftali',
       ],
       correctIndex: 0,
-      explanation:
-          'Zapisano ich terytorium i przywódców (1 Kronik 5).',
+      explanation: 'Zapisano ich terytorium i przywódców (1 Kronik 5).',
     ),
   ],
   '1 Chronicles#1': <QuizQuestion>[
@@ -541,7 +552,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Transport nie odbywał się według poleceń Boga (1 Kronik 13).',
     ),
     QuizQuestion(
-      text: 'W jaki sposób Arka została ostatecznie prawidłowo przeniesiona do Jerozolimy?',
+      text:
+          'W jaki sposób Arka została ostatecznie prawidłowo przeniesiona do Jerozolimy?',
       options: <String>[
         'Niesiona przez Lewitów, jak nakazywało Prawo',
         'Na wozie ciągniętym przez woły',
@@ -549,8 +561,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Przez egipskich kapłanów',
       ],
       correctIndex: 0,
-      explanation:
-          'Dawid naprawia wcześniejszy błąd (1 Kronik 15).',
+      explanation: 'Dawid naprawia wcześniejszy błąd (1 Kronik 15).',
     ),
     QuizQuestion(
       text: 'Nad kim Dawid odniósł znaczące zwycięstwa w tych rozdziałach?',
@@ -561,8 +572,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Nad Persami',
       ],
       correctIndex: 0,
-      explanation:
-          'Dawid kilkakrotnie pokonuje Filistynów (1 Kronik 14).',
+      explanation: 'Dawid kilkakrotnie pokonuje Filistynów (1 Kronik 14).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Filistyni'],
     ),
@@ -603,8 +613,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Ziemię podarowaną przez Hirama',
       ],
       correctIndex: 0,
-      explanation:
-          'Dawid buduje tam ołtarz po pladze (1 Kronik 21).',
+      explanation: 'Dawid buduje tam ołtarz po pladze (1 Kronik 21).',
     ),
   ],
   '1 Chronicles#3': <QuizQuestion>[
@@ -617,8 +626,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Zostali zwolnieni ze służby',
       ],
       correctIndex: 0,
-      explanation:
-          'Lewici zostają podzieleni według funkcji (1 Kronik 23).',
+      explanation: 'Lewici zostają podzieleni według funkcji (1 Kronik 23).',
     ),
     QuizQuestion(
       text: 'Jaką rolę pełnili muzycy wyznaczeni przez Dawida?',
@@ -629,8 +637,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Uczyli wyłącznie czytania',
       ],
       correctIndex: 0,
-      explanation:
-          'Asaf, Heman i Jedutun kierują świętą muzyką (1 Kronik 25).',
+      explanation: 'Asaf, Heman i Jedutun kierują świętą muzyką (1 Kronik 25).',
     ),
     QuizQuestion(
       text: 'Jaki był ostatni wielki publiczny czyn Dawida przed śmiercią?',
@@ -681,8 +688,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Pieśń żałobną',
       ],
       correctIndex: 0,
-      explanation:
-          'Salomon prosi Boga, by słuchał z nieba (2 Kronik 6).',
+      explanation: 'Salomon prosi Boga, by słuchał z nieba (2 Kronik 6).',
     ),
   ],
   '2 Chronicles#1': <QuizQuestion>[
@@ -695,8 +701,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Król Tyru',
       ],
       correctIndex: 0,
-      explanation:
-          'Jest pod wrażeniem jego mądrości i bogactwa (2 Kronik 9).',
+      explanation: 'Jest pod wrażeniem jego mądrości i bogactwa (2 Kronik 9).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Salomon', 'Egipt', 'Tyr'],
     ),
@@ -721,8 +726,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Zapłacił wysoki trybut',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego ufność Bogu zostaje wynagrodzona (2 Kronik 14).',
+      explanation: 'Jego ufność Bogu zostaje wynagrodzona (2 Kronik 14).',
     ),
   ],
   '2 Chronicles#2': <QuizQuestion>[
@@ -735,8 +739,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Całkowity paraliż',
       ],
       correctIndex: 0,
-      explanation:
-          'Radzi się lekarzy zamiast Boga (2 Kronik 16).',
+      explanation: 'Radzi się lekarzy zamiast Boga (2 Kronik 16).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['oczy', 'ręce', 'trąd'],
     ),
@@ -749,8 +752,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Za zniesienie świąt',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego sojusz z Achabem zostaje skrytykowany (2 Kronik 19).',
+      explanation: 'Jego sojusz z Achabem zostaje skrytykowany (2 Kronik 19).',
     ),
     QuizQuestion(
       text: 'Jak Jehoszafat odniósł zwycięstwo, nie walcząc?',
@@ -761,8 +763,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Dzięki traktatowi z Egiptem',
       ],
       correctIndex: 0,
-      explanation:
-          'Ufność Bogu poprzedza cudowne wybawienie (2 Kronik 20).',
+      explanation: 'Ufność Bogu poprzedza cudowne wybawienie (2 Kronik 20).',
     ),
   ],
   '2 Chronicles#3': <QuizQuestion>[
@@ -775,8 +776,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Chroniło go sprzymierzone wojsko',
       ],
       correctIndex: 0,
-      explanation:
-          'Jehoszeba ukrywa go aż do jego koronacji (2 Kronik 22-23).',
+      explanation: 'Jehoszeba ukrywa go aż do jego koronacji (2 Kronik 22-23).',
     ),
     QuizQuestion(
       text: 'Dlaczego Uzjasz został dotknięty trądem?',
@@ -807,11 +807,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
   ],
   '2 Chronicles#4': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jakie wielkie święto zorganizował Ezechiasz po oczyszczeniu świątyni?',
-      options: <String>['Niezwykłą Paschę', 'Święto Szałasów', 'Rok Jubileuszowy', 'Pięćdziesiątnicę'],
+      text:
+          'Jakie wielkie święto zorganizował Ezechiasz po oczyszczeniu świątyni?',
+      options: <String>[
+        'Niezwykłą Paschę',
+        'Święto Szałasów',
+        'Rok Jubileuszowy',
+        'Pięćdziesiątnicę',
+      ],
       correctIndex: 0,
-      explanation:
-          'Ta Pascha gromadzi Judę i część Izraela (2 Kronik 30).',
+      explanation: 'Ta Pascha gromadzi Judę i część Izraela (2 Kronik 30).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Pascha'],
     ),
@@ -824,8 +829,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Nic się nie zmieniło',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego szczera skrucha zmienia jego los (2 Kronik 33).',
+      explanation: 'Jego szczera skrucha zmienia jego los (2 Kronik 33).',
     ),
     QuizQuestion(
       text: 'Jak kończy się Księga Kronik?',
@@ -843,15 +847,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
   'Ezra#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Kto upoważnił wygnańców do powrotu i odbudowy świątyni?',
-      options: <String>['Cyrus, król Persji', 'Nabuchodonozor', 'Sam Dariusz', 'Kserkses'],
+      options: <String>[
+        'Cyrus, król Persji',
+        'Nabuchodonozor',
+        'Sam Dariusz',
+        'Kserkses',
+      ],
       correctIndex: 0,
-      explanation:
-          'Cyrus wydaje wyzwalający dekret (Ezdrasza 1).',
+      explanation: 'Cyrus wydaje wyzwalający dekret (Ezdrasza 1).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Cyrus'],
     ),
     QuizQuestion(
-      text: 'Co zrobili wygnańcy zaraz po powrocie, jeszcze przed dokończeniem świątyni?',
+      text:
+          'Co zrobili wygnańcy zaraz po powrocie, jeszcze przed dokończeniem świątyni?',
       options: <String>[
         'Odbudowali ołtarz, aby składać ofiary',
         'Wybrali nowego króla',
@@ -863,7 +872,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
           'Ołtarz zostaje odbudowany przed położeniem fundamentu (Ezdrasza 3).',
     ),
     QuizQuestion(
-      text: 'Jaka mieszana reakcja towarzyszyła położeniu fundamentu nowej świątyni?',
+      text:
+          'Jaka mieszana reakcja towarzyszyła położeniu fundamentu nowej świątyni?',
       options: <String>[
         'Radość u młodych, płacz u starszych, którzy pamiętali pierwszą',
         'Ogólna obojętność',
@@ -897,17 +907,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Ozeasz i Amos',
       ],
       correctIndex: 0,
-      explanation:
-          'Ich orędzia ponownie pobudzają budowę (Ezdrasza 5).',
+      explanation: 'Ich orędzia ponownie pobudzają budowę (Ezdrasza 5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Ezdrasz', 'Nehemiasz', 'Daniel'],
     ),
     QuizQuestion(
       text: 'Kto przybył później z Babilonu z dodatkową grupą wygnańców?',
-      options: <String>['Ezdrasz, kapłan i pisarz', 'Nehemiasz', 'Zerubbabel', 'Mardocheusz'],
+      options: <String>[
+        'Ezdrasz, kapłan i pisarz',
+        'Nehemiasz',
+        'Zerubbabel',
+        'Mardocheusz',
+      ],
       correctIndex: 0,
-      explanation:
-          'Ezdrasz przybywa za panowania Artakserksesa (Ezdrasza 7).',
+      explanation: 'Ezdrasz przybywa za panowania Artakserksesa (Ezdrasza 7).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Ezdrasz'],
     ),
@@ -922,8 +935,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Miał już wojsko',
       ],
       correctIndex: 0,
-      explanation:
-          'Ezdrasz zaświadczył o ochronie Boga (Ezdrasza 8).',
+      explanation: 'Ezdrasz zaświadczył o ochronie Boga (Ezdrasza 8).',
     ),
     QuizQuestion(
       text: 'Jaki problem głęboko zasmucił Ezdrasza po jego przybyciu?',
@@ -934,8 +946,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Wojna domowa',
       ],
       correctIndex: 0,
-      explanation:
-          'Ezdrasz rozdziera swoje szaty z rozpaczy (Ezdrasza 9).',
+      explanation: 'Ezdrasz rozdziera swoje szaty z rozpaczy (Ezdrasza 9).',
     ),
     QuizQuestion(
       text: 'Jak lud zareagował na apel Ezdrasza?',
@@ -946,13 +957,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Ignorując apel',
       ],
       correctIndex: 0,
-      explanation:
-          'Następuje wspólna reforma (Ezdrasza 10).',
+      explanation: 'Następuje wspólna reforma (Ezdrasza 10).',
     ),
   ],
   'Nehemiah#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jak zareagował Nehemiasz, gdy dowiedział się o stanie murów Jerozolimy?',
+      text:
+          'Jak zareagował Nehemiasz, gdy dowiedział się o stanie murów Jerozolimy?',
       options: <String>[
         'Płakał, pościł i modlił się',
         'Pozostał obojętny',
@@ -960,8 +971,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Zorganizował uroczystość',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego smutek skłania go do działania (Nehemiasza 1).',
+      explanation: 'Jego smutek skłania go do działania (Nehemiasza 1).',
     ),
     QuizQuestion(
       text: 'O co Nehemiasz poprosił króla Artakserksesa?',
@@ -972,8 +982,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'O wolność od służby u króla',
       ],
       correctIndex: 0,
-      explanation:
-          'Król się zgadza i zapewnia mu środki (Nehemiasza 2).',
+      explanation: 'Król się zgadza i zapewnia mu środki (Nehemiasza 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['świątynia', 'król', 'Jerozolima'],
     ),
@@ -986,8 +995,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Negocjowali z przeciwnikami',
       ],
       correctIndex: 0,
-      explanation:
-          'Czujność i determinacja cechują tę pracę (Nehemiasza 4).',
+      explanation: 'Czujność i determinacja cechują tę pracę (Nehemiasza 4).',
     ),
   ],
   'Nehemiah#1': <QuizQuestion>[
@@ -1045,8 +1053,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
         'Zamykając bramy',
       ],
       correctIndex: 0,
-      explanation:
-          'Dwa chóry obchodzą mur, śpiewając (Nehemiasza 12).',
+      explanation: 'Dwa chóry obchodzą mur, śpiewając (Nehemiasza 12).',
     ),
     QuizQuestion(
       text: 'Jaką reformę wprowadził Nehemiasz po powrocie z drugiej kadencji?',
@@ -1063,4 +1070,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC2 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPlC2 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesPlC2 =
+    <String, List<QuizQuestion>>{};

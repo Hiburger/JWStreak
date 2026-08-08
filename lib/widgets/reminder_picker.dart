@@ -105,7 +105,10 @@ class ReminderTimeHero extends StatelessWidget {
               icon: const Icon(Icons.edit_rounded, size: 22),
               label: Text(
                 AppLocalizations.of(context)!.reminderEditTime,
-                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(52),
@@ -210,7 +213,8 @@ class ReminderPresetRow extends StatelessWidget {
           Expanded(
             child: ReminderPresetChip(
               preset: presets[i],
-              selected: picked.hour == presets[i].hour &&
+              selected:
+                  picked.hour == presets[i].hour &&
                   picked.minute == presets[i].minute,
               onTap: () => onPick(presets[i]),
             ),

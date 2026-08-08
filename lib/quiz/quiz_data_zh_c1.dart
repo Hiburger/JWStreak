@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text: '圣经描述上帝的创造工作经历了多少天？',
@@ -270,7 +271,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '摩西为什么不能进入应许之地？',
-      options: <String>['他用杖击打磐石，而不是照吩咐对磐石说话', '他违抗了一道作战命令', '他敬拜了一尊偶像', '他年纪太大了'],
+      options: <String>[
+        '他用杖击打磐石，而不是照吩咐对磐石说话',
+        '他违抗了一道作战命令',
+        '他敬拜了一尊偶像',
+        '他年纪太大了',
+      ],
       correctIndex: 0,
       explanation: '摩西一时动怒击打磐石，没有尊崇上帝的圣洁（民数记20章）。',
     ),
@@ -338,7 +344,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
   'Deuteronomy#1': <QuizQuestion>[
     QuizQuestion(
       text: '旷野吗哪的经历要提醒以色列人什么道理？',
-      options: <String>['人活着不是单靠食物，而是靠上帝口中所出的话', '上帝总是施行惩罚', '旷野是受咒诅的', '食物并不重要'],
+      options: <String>[
+        '人活着不是单靠食物，而是靠上帝口中所出的话',
+        '上帝总是施行惩罚',
+        '旷野是受咒诅的',
+        '食物并不重要',
+      ],
       correctIndex: 0,
       explanation: '申命记8:3，这句话后来被耶稣引用过。',
     ),
@@ -498,7 +509,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
       text: '亚比米勒自立为王之后发生了什么事？',
-      options: <String>['他屠杀了自己的兄弟，最后自己也丧命', '他长久太平地统治', '他毫无冲突地被赶下台', '他建立了一个长久的王朝'],
+      options: <String>[
+        '他屠杀了自己的兄弟，最后自己也丧命',
+        '他长久太平地统治',
+        '他毫无冲突地被赶下台',
+        '他建立了一个长久的王朝',
+      ],
       correctIndex: 0,
       explanation: '亚比米勒被一名妇人扔下的磨石砸死（士师记9章）。',
     ),
@@ -510,7 +526,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '在约旦河渡口，人们是怎样识别以法莲人的？',
-      options: <String>['他们没办法把“示播列”这个词读准确', '从他们的衣着看出来', '从他们独特的腔调听出来', '从他们的武器看出来'],
+      options: <String>[
+        '他们没办法把“示播列”这个词读准确',
+        '从他们的衣着看出来',
+        '从他们独特的腔调听出来',
+        '从他们的武器看出来',
+      ],
       correctIndex: 0,
       explanation: '这个通关口令揭穿了逃亡者的身份（士师记12章）。',
     ),
@@ -544,7 +565,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '路得对拿俄米作出了怎样的决定？',
-      options: <String>['留在她身边，说“你往哪里去，我也往哪里去”', '回到自己本族那里去', '立刻在摩押再婚', '独自留在摩押'],
+      options: <String>[
+        '留在她身边，说“你往哪里去，我也往哪里去”',
+        '回到自己本族那里去',
+        '立刻在摩押再婚',
+        '独自留在摩押',
+      ],
       correctIndex: 0,
       explanation: '路得表达了一份著名的忠贞之情（路得记1:16）。',
     ),
@@ -590,210 +616,226 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC1 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '路得记为什么以一份族谱作结尾？',
-      options: <String>['为了把路得和通向大卫的世系连接起来', '只是出于文学传统', '为了了结一场法律争议', '为了尊崇摩押'],
+      options: <String>[
+        '为了把路得和通向大卫的世系连接起来',
+        '只是出于文学传统',
+        '为了了结一场法律争议',
+        '为了尊崇摩押',
+      ],
       correctIndex: 0,
       explanation: '这份族谱把路得和大卫连接了起来（路得记4:17-22）。',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesZhC1 = <String, List<QuizQuestion>>{
-  'Genesis#0': <QuizQuestion>[
-    QuizQuestion(
-      text: '伊甸园中央的哪棵树是亚当和夏娃不可吃的？',
-      options: <String>['分辨善恶的树', '只有生命树', '一棵无花果树', '一棵橄榄树'],
-      correctIndex: 0,
-      explanation: '上帝只禁止吃这一棵树的果子（创世记2:17）。',
-    ),
-    QuizQuestion(
-      text: '谁欺骗夏娃去吃了那禁果？',
-      options: <String>['蛇', '该隐', '一位天使', '亚当'],
-      correctIndex: 0,
-      explanation: '蛇怂恿夏娃违背了命令（创世记3章）。',
-    ),
-  ],
-  'Genesis#1': <QuizQuestion>[
-    QuizQuestion(
-      text: '挪亚放出的哪种鸟衔着橄榄叶飞回来了？',
-      options: <String>['鸽子', '乌鸦', '鹰', '麻雀'],
-      correctIndex: 0,
-      explanation: '鸽子表明水已经消退了（创世记8章）。',
-    ),
-    QuizQuestion(
-      text: '谁是撒冷王、至高上帝的祭司，祝福了亚伯兰？',
-      options: <String>['麦基洗德', '罗得', '法老', '以撒'],
-      correctIndex: 0,
-      explanation: '麦基洗德在一次胜利之后祝福了亚伯兰（创世记14章）。',
-    ),
-  ],
-  'Genesis#2': <QuizQuestion>[
-    QuizQuestion(
-      text: '上帝赐给亚伯拉罕什么作为立约的记号？',
-      options: <String>['割礼', '一个纹身', '一枚戒指', '一根杖'],
-      correctIndex: 0,
-      explanation: '割礼标志着这个约（创世记17章）。',
-    ),
-    QuizQuestion(
-      text: '亚伯拉罕和夏甲所生的儿子叫什么名字？',
-      options: <String>['以实玛利', '以撒', '以扫', '雅各'],
-      correctIndex: 0,
-      explanation: '以实玛利是女仆夏甲所生的（创世记16章）。',
-    ),
-    QuizQuestion(
-      text: '上帝因哪几座城邪恶而将它们毁灭？',
-      options: <String>['所多玛和蛾摩拉', '巴别和吾珥', '尼尼微和推罗', '伯特利和艾城'],
-      correctIndex: 0,
-      explanation: '大火毁灭了这几座城；罗得得救了（创世记19章）。',
-    ),
-  ],
-  'Genesis#3': <QuizQuestion>[
-    QuizQuestion(
-      text: '上帝要亚伯拉罕在摩利亚山献上什么？',
-      options: <String>['他的儿子以撒', '一只公绵羊', '他的帐篷', '他的牲畜'],
-      correctIndex: 0,
-      explanation: '上帝阻止了亚伯拉罕，并提供了一只公绵羊（创世记22章）。',
-    ),
-    QuizQuestion(
-      text: '以扫用什么换走了自己的长子名分，卖给了雅各？',
-      options: <String>['一碗扁豆汤', '金子', '一群牲畜', '一顶帐篷'],
-      correctIndex: 0,
-      explanation: '以扫轻视了自己的长子名分（创世记25章）。',
-    ),
-    QuizQuestion(
-      text: '雅各在伯特利做梦看见了什么？',
-      options: <String>['一道通到天上、有天使上下的梯子', '一片狂涛汹涌的海', '一丛燃烧的荆棘', '一座荒废的城市'],
-      correctIndex: 0,
-      explanation: '上帝借此向雅各确认了自己的应许（创世记28章）。',
-    ),
-  ],
-  'Genesis#4': <QuizQuestion>[
-    QuizQuestion(
-      text: '雅各与天使摔跤之后得到了什么新名字？',
-      options: <String>['以色列', '以东', '亚伯拉罕', '以法莲'],
-      correctIndex: 0,
-      explanation: '以色列这个名字的意思是“与上帝摔跤”（创世记32章）。',
-    ),
-    QuizQuestion(
-      text: '雅各有多少个儿子，成为以色列各支派的祖先？',
-      options: <String>['十二个', '十个', '七个', '十四个'],
-      correctIndex: 0,
-      explanation: '他的十二个儿子成为以色列各支派的始祖（创世记35章）。',
-    ),
-    QuizQuestion(
-      text: '雅各在分离多年之后与谁和好了？',
-      options: <String>['他的哥哥以扫', '拉班', '法老', '以撒'],
-      correctIndex: 0,
-      explanation: '兄弟二人和睦相聚（创世记33章）。',
-    ),
-  ],
-  'Genesis#5': <QuizQuestion>[
-    QuizQuestion(
-      text: '约瑟的哥哥们出于嫉妒做了什么？',
-      options: <String>['把他卖为奴隶', '拥立他为王', '把他丢在埃及不管', '对他置之不理'],
-      correctIndex: 0,
-      explanation: '约瑟被卖，并被带到了埃及（创世记37章）。',
-    ),
-    QuizQuestion(
-      text: '雅各曾送给约瑟一件怎样特别的衣服？',
-      options: <String>['一件华美的外衣', '一顶冠冕', '一副盔甲', '一件祭司长袍'],
-      correctIndex: 0,
-      explanation: '这份礼物引发了哥哥们的嫉妒（创世记37章）。',
-    ),
-    QuizQuestion(
-      text: '约瑟为法老解释了什么，预告将有七年饥荒？',
-      options: <String>['法老的梦', '一本古书', '星象', '神谕'],
-      correctIndex: 0,
-      explanation: '约瑟为法老解释了他的梦（创世记41章）。',
-    ),
-  ],
-  'Genesis#6': <QuizQuestion>[
-    QuizQuestion(
-      text: '约瑟向哥哥们表明身份之后，是怎样对待他们的？',
-      options: <String>['他原谅了他们', '把他们终身监禁', '把他们赶走', '对他们置之不理'],
-      correctIndex: 0,
-      explanation: '约瑟原谅了哥哥们，并供养他们（创世记45章）。',
-    ),
-    QuizQuestion(
-      text: '雅各一家在埃及定居在哪个地区？',
-      options: <String>['歌珊地', '孟斐斯', '底比斯', '西奈'],
-      correctIndex: 0,
-      explanation: '法老把歌珊地赐给了他们（创世记47章）。',
-    ),
-    QuizQuestion(
-      text: '约瑟怎样看待哥哥们曾经加害于他的事？',
-      options: <String>['上帝使这件坏事变成了好事，拯救了许多人的性命', '这是一件应当报复的不义之事', '这件事无关紧要', '这只是一次意外'],
-      correctIndex: 0,
-      explanation: '这是一句著名的信心宣言（创世记50:20）。',
-    ),
-  ],
-  'Exodus#0': <QuizQuestion>[
-    QuizQuestion(
-      text: '谁是摩西的哥哥，被指派作他的代言人？',
-      options: <String>['亚伦', '约书亚', '叶忒罗', '迦勒'],
-      correctIndex: 0,
-      explanation: '亚伦代替摩西向百姓说话（出埃及记4章）。',
-    ),
-    QuizQuestion(
-      text: '上帝在燃烧的荆棘那里用什么名字向摩西介绍自己？',
-      options: <String>['“我要成为我所要成为的”', '“唯独全能者”', '“隐藏的神”', '“万王之王”'],
-      correctIndex: 0,
-      explanation: '上帝向摩西揭示了自己名字的含义（出埃及记3:14）。',
-    ),
-  ],
-  'Exodus#1': <QuizQuestion>[
-    QuizQuestion(
-      text: '埃及所遭受的第十场、也是最后一场灾殃是什么？',
-      options: <String>['长子的死亡', '蝗灾', '黑暗', '冰雹'],
-      correctIndex: 0,
-      explanation: '正是这场灾殃促使法老释放了以色列人（出埃及记12章）。',
-    ),
-    QuizQuestion(
-      text: '逾越节那晚，以色列人要在门框上涂抹什么？',
-      options: <String>['羊羔的血', '油', '面粉', '灰烬做的记号'],
-      correctIndex: 0,
-      explanation: '这些血保护了他们的长子（出埃及记12章）。',
-    ),
-  ],
-  'Exodus#2': <QuizQuestion>[
-    QuizQuestion(
-      text: '在何烈山，口渴的百姓是怎样得到水喝的？',
-      options: <String>['摩西击打了磐石', '泉水自己涌了出来', '天降大雨', '挖了一口井'],
-      correctIndex: 0,
-      explanation: '摩西遵照上帝的吩咐击打了磐石（出埃及记17章）。',
-    ),
-    QuizQuestion(
-      text: '在西奈颁布的十诫共有多少条诫命？',
-      options: <String>['十条', '七条', '十二条', '五条'],
-      correctIndex: 0,
-      explanation: '十诫是在西奈颁布的（出埃及记20章）。',
-    ),
-  ],
-  'Exodus#3': <QuizQuestion>[
-    QuizQuestion(
-      text: '约柜里应该放着什么？',
-      options: <String>['法律的石版', '金子和银子', '预言的书卷', '食物祭品'],
-      correctIndex: 0,
-      explanation: '刻有诫命的石版被放在约柜里（出埃及记25章）。',
-    ),
-    QuizQuestion(
-      text: '摩西不在的时候，是谁制造了那只金牛犊？',
-      options: <String>['亚伦', '约书亚', '户珥', '比撒列'],
-      correctIndex: 0,
-      explanation: '亚伦顺从了百姓的要求（出埃及记32章）。',
-    ),
-  ],
-  'Exodus#4': <QuizQuestion>[
-    QuizQuestion(
-      text: '摩西与上帝谈话之后，他的脸有什么特征？',
-      options: <String>['容光焕发', '因悲伤而蒙上面纱', '显得苍老了许多', '没有任何特别之处'],
-      correctIndex: 0,
-      explanation: '摩西不得不用面纱遮住自己发光的脸（出埃及记34章）。',
-    ),
-    QuizQuestion(
-      text: '帐幕建成之后，里面充满了什么？',
-      options: <String>['耶和华的荣耀（一团云彩）', '仅仅是香的烟雾', '人造的光', '看不见任何东西'],
-      correctIndex: 0,
-      explanation: '云彩标示着上帝的临在（出埃及记40章）。',
-    ),
-  ],
-};
+const Map<String, List<QuizQuestion>> extraQuizzesZhC1 =
+    <String, List<QuizQuestion>>{
+      'Genesis#0': <QuizQuestion>[
+        QuizQuestion(
+          text: '伊甸园中央的哪棵树是亚当和夏娃不可吃的？',
+          options: <String>['分辨善恶的树', '只有生命树', '一棵无花果树', '一棵橄榄树'],
+          correctIndex: 0,
+          explanation: '上帝只禁止吃这一棵树的果子（创世记2:17）。',
+        ),
+        QuizQuestion(
+          text: '谁欺骗夏娃去吃了那禁果？',
+          options: <String>['蛇', '该隐', '一位天使', '亚当'],
+          correctIndex: 0,
+          explanation: '蛇怂恿夏娃违背了命令（创世记3章）。',
+        ),
+      ],
+      'Genesis#1': <QuizQuestion>[
+        QuizQuestion(
+          text: '挪亚放出的哪种鸟衔着橄榄叶飞回来了？',
+          options: <String>['鸽子', '乌鸦', '鹰', '麻雀'],
+          correctIndex: 0,
+          explanation: '鸽子表明水已经消退了（创世记8章）。',
+        ),
+        QuizQuestion(
+          text: '谁是撒冷王、至高上帝的祭司，祝福了亚伯兰？',
+          options: <String>['麦基洗德', '罗得', '法老', '以撒'],
+          correctIndex: 0,
+          explanation: '麦基洗德在一次胜利之后祝福了亚伯兰（创世记14章）。',
+        ),
+      ],
+      'Genesis#2': <QuizQuestion>[
+        QuizQuestion(
+          text: '上帝赐给亚伯拉罕什么作为立约的记号？',
+          options: <String>['割礼', '一个纹身', '一枚戒指', '一根杖'],
+          correctIndex: 0,
+          explanation: '割礼标志着这个约（创世记17章）。',
+        ),
+        QuizQuestion(
+          text: '亚伯拉罕和夏甲所生的儿子叫什么名字？',
+          options: <String>['以实玛利', '以撒', '以扫', '雅各'],
+          correctIndex: 0,
+          explanation: '以实玛利是女仆夏甲所生的（创世记16章）。',
+        ),
+        QuizQuestion(
+          text: '上帝因哪几座城邪恶而将它们毁灭？',
+          options: <String>['所多玛和蛾摩拉', '巴别和吾珥', '尼尼微和推罗', '伯特利和艾城'],
+          correctIndex: 0,
+          explanation: '大火毁灭了这几座城；罗得得救了（创世记19章）。',
+        ),
+      ],
+      'Genesis#3': <QuizQuestion>[
+        QuizQuestion(
+          text: '上帝要亚伯拉罕在摩利亚山献上什么？',
+          options: <String>['他的儿子以撒', '一只公绵羊', '他的帐篷', '他的牲畜'],
+          correctIndex: 0,
+          explanation: '上帝阻止了亚伯拉罕，并提供了一只公绵羊（创世记22章）。',
+        ),
+        QuizQuestion(
+          text: '以扫用什么换走了自己的长子名分，卖给了雅各？',
+          options: <String>['一碗扁豆汤', '金子', '一群牲畜', '一顶帐篷'],
+          correctIndex: 0,
+          explanation: '以扫轻视了自己的长子名分（创世记25章）。',
+        ),
+        QuizQuestion(
+          text: '雅各在伯特利做梦看见了什么？',
+          options: <String>[
+            '一道通到天上、有天使上下的梯子',
+            '一片狂涛汹涌的海',
+            '一丛燃烧的荆棘',
+            '一座荒废的城市',
+          ],
+          correctIndex: 0,
+          explanation: '上帝借此向雅各确认了自己的应许（创世记28章）。',
+        ),
+      ],
+      'Genesis#4': <QuizQuestion>[
+        QuizQuestion(
+          text: '雅各与天使摔跤之后得到了什么新名字？',
+          options: <String>['以色列', '以东', '亚伯拉罕', '以法莲'],
+          correctIndex: 0,
+          explanation: '以色列这个名字的意思是“与上帝摔跤”（创世记32章）。',
+        ),
+        QuizQuestion(
+          text: '雅各有多少个儿子，成为以色列各支派的祖先？',
+          options: <String>['十二个', '十个', '七个', '十四个'],
+          correctIndex: 0,
+          explanation: '他的十二个儿子成为以色列各支派的始祖（创世记35章）。',
+        ),
+        QuizQuestion(
+          text: '雅各在分离多年之后与谁和好了？',
+          options: <String>['他的哥哥以扫', '拉班', '法老', '以撒'],
+          correctIndex: 0,
+          explanation: '兄弟二人和睦相聚（创世记33章）。',
+        ),
+      ],
+      'Genesis#5': <QuizQuestion>[
+        QuizQuestion(
+          text: '约瑟的哥哥们出于嫉妒做了什么？',
+          options: <String>['把他卖为奴隶', '拥立他为王', '把他丢在埃及不管', '对他置之不理'],
+          correctIndex: 0,
+          explanation: '约瑟被卖，并被带到了埃及（创世记37章）。',
+        ),
+        QuizQuestion(
+          text: '雅各曾送给约瑟一件怎样特别的衣服？',
+          options: <String>['一件华美的外衣', '一顶冠冕', '一副盔甲', '一件祭司长袍'],
+          correctIndex: 0,
+          explanation: '这份礼物引发了哥哥们的嫉妒（创世记37章）。',
+        ),
+        QuizQuestion(
+          text: '约瑟为法老解释了什么，预告将有七年饥荒？',
+          options: <String>['法老的梦', '一本古书', '星象', '神谕'],
+          correctIndex: 0,
+          explanation: '约瑟为法老解释了他的梦（创世记41章）。',
+        ),
+      ],
+      'Genesis#6': <QuizQuestion>[
+        QuizQuestion(
+          text: '约瑟向哥哥们表明身份之后，是怎样对待他们的？',
+          options: <String>['他原谅了他们', '把他们终身监禁', '把他们赶走', '对他们置之不理'],
+          correctIndex: 0,
+          explanation: '约瑟原谅了哥哥们，并供养他们（创世记45章）。',
+        ),
+        QuizQuestion(
+          text: '雅各一家在埃及定居在哪个地区？',
+          options: <String>['歌珊地', '孟斐斯', '底比斯', '西奈'],
+          correctIndex: 0,
+          explanation: '法老把歌珊地赐给了他们（创世记47章）。',
+        ),
+        QuizQuestion(
+          text: '约瑟怎样看待哥哥们曾经加害于他的事？',
+          options: <String>[
+            '上帝使这件坏事变成了好事，拯救了许多人的性命',
+            '这是一件应当报复的不义之事',
+            '这件事无关紧要',
+            '这只是一次意外',
+          ],
+          correctIndex: 0,
+          explanation: '这是一句著名的信心宣言（创世记50:20）。',
+        ),
+      ],
+      'Exodus#0': <QuizQuestion>[
+        QuizQuestion(
+          text: '谁是摩西的哥哥，被指派作他的代言人？',
+          options: <String>['亚伦', '约书亚', '叶忒罗', '迦勒'],
+          correctIndex: 0,
+          explanation: '亚伦代替摩西向百姓说话（出埃及记4章）。',
+        ),
+        QuizQuestion(
+          text: '上帝在燃烧的荆棘那里用什么名字向摩西介绍自己？',
+          options: <String>['“我要成为我所要成为的”', '“唯独全能者”', '“隐藏的神”', '“万王之王”'],
+          correctIndex: 0,
+          explanation: '上帝向摩西揭示了自己名字的含义（出埃及记3:14）。',
+        ),
+      ],
+      'Exodus#1': <QuizQuestion>[
+        QuizQuestion(
+          text: '埃及所遭受的第十场、也是最后一场灾殃是什么？',
+          options: <String>['长子的死亡', '蝗灾', '黑暗', '冰雹'],
+          correctIndex: 0,
+          explanation: '正是这场灾殃促使法老释放了以色列人（出埃及记12章）。',
+        ),
+        QuizQuestion(
+          text: '逾越节那晚，以色列人要在门框上涂抹什么？',
+          options: <String>['羊羔的血', '油', '面粉', '灰烬做的记号'],
+          correctIndex: 0,
+          explanation: '这些血保护了他们的长子（出埃及记12章）。',
+        ),
+      ],
+      'Exodus#2': <QuizQuestion>[
+        QuizQuestion(
+          text: '在何烈山，口渴的百姓是怎样得到水喝的？',
+          options: <String>['摩西击打了磐石', '泉水自己涌了出来', '天降大雨', '挖了一口井'],
+          correctIndex: 0,
+          explanation: '摩西遵照上帝的吩咐击打了磐石（出埃及记17章）。',
+        ),
+        QuizQuestion(
+          text: '在西奈颁布的十诫共有多少条诫命？',
+          options: <String>['十条', '七条', '十二条', '五条'],
+          correctIndex: 0,
+          explanation: '十诫是在西奈颁布的（出埃及记20章）。',
+        ),
+      ],
+      'Exodus#3': <QuizQuestion>[
+        QuizQuestion(
+          text: '约柜里应该放着什么？',
+          options: <String>['法律的石版', '金子和银子', '预言的书卷', '食物祭品'],
+          correctIndex: 0,
+          explanation: '刻有诫命的石版被放在约柜里（出埃及记25章）。',
+        ),
+        QuizQuestion(
+          text: '摩西不在的时候，是谁制造了那只金牛犊？',
+          options: <String>['亚伦', '约书亚', '户珥', '比撒列'],
+          correctIndex: 0,
+          explanation: '亚伦顺从了百姓的要求（出埃及记32章）。',
+        ),
+      ],
+      'Exodus#4': <QuizQuestion>[
+        QuizQuestion(
+          text: '摩西与上帝谈话之后，他的脸有什么特征？',
+          options: <String>['容光焕发', '因悲伤而蒙上面纱', '显得苍老了许多', '没有任何特别之处'],
+          correctIndex: 0,
+          explanation: '摩西不得不用面纱遮住自己发光的脸（出埃及记34章）。',
+        ),
+        QuizQuestion(
+          text: '帐幕建成之后，里面充满了什么？',
+          options: <String>['耶和华的荣耀（一团云彩）', '仅仅是香的烟雾', '人造的光', '看不见任何东西'],
+          correctIndex: 0,
+          explanation: '云彩标示着上帝的临在（出埃及记40章）。',
+        ),
+      ],
+    };

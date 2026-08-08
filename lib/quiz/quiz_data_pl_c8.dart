@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPlC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Co Piotr zachęca dodawać do wiary w 2 Piotra 1?',
@@ -11,8 +12,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Władzę polityczną',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęcany jest stopniowy duchowy wzrost (2 Piotra 1:5-7).',
+      explanation: 'Zachęcany jest stopniowy duchowy wzrost (2 Piotra 1:5-7).',
     ),
     QuizQuestion(
       text: 'Jak 2 Piotra 1 opisuje pochodzenie biblijnego proroctwa?',
@@ -23,8 +23,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Pochodzi z popularnych tradycji',
       ],
       correctIndex: 0,
-      explanation:
-          'Stwierdzenie o boskim natchnieniu (2 Piotra 1:21).',
+      explanation: 'Stwierdzenie o boskim natchnieniu (2 Piotra 1:21).',
     ),
   ],
   '2 Peter#1': <QuizQuestion>[
@@ -37,13 +36,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Wiernymi starszymi',
       ],
       correctIndex: 0,
-      explanation:
-          'Udzielone zostaje szczegółowe ostrzeżenie (2 Piotra 2).',
+      explanation: 'Udzielone zostaje szczegółowe ostrzeżenie (2 Piotra 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['aniołowie', 'Noe', 'Sodoma'],
     ),
     QuizQuestion(
-      text: 'Jakie historyczne przykłady przytacza 2 Piotra 2 jako ostrzeżenie?',
+      text:
+          'Jakie historyczne przykłady przytacza 2 Piotra 2 jako ostrzeżenie?',
       options: <String>[
         'Potop i zniszczenie Sodomy',
         'Budowę świątyni',
@@ -51,8 +50,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Panowanie Salomona',
       ],
       correctIndex: 0,
-      explanation:
-          'Przykłady minionego sądu (2 Piotra 2:5, 6).',
+      explanation: 'Przykłady minionego sądu (2 Piotra 2:5, 6).',
     ),
   ],
   '2 Peter#2': <QuizQuestion>[
@@ -65,8 +63,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'W pełni zaakceptują proroctwo',
       ],
       correctIndex: 0,
-      explanation:
-          'Zapowiedziany jest sceptycyzm (2 Piotra 3:4).',
+      explanation: 'Zapowiedziany jest sceptycyzm (2 Piotra 3:4).',
     ),
     QuizQuestion(
       text: 'Co obiecuje 2 Piotra 3 po ostatecznym sądzie?',
@@ -77,8 +74,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Żadnej konkretnej obietnicy',
       ],
       correctIndex: 0,
-      explanation:
-          'Nadzieja na odnowę (2 Piotra 3:13).',
+      explanation: 'Nadzieja na odnowę (2 Piotra 3:13).',
     ),
   ],
   '1 John#0': <QuizQuestion>[
@@ -91,8 +87,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Usprawiedliwiać się, nie przyznając się do winy',
       ],
       correctIndex: 0,
-      explanation:
-          'Szczera obietnica przebaczenia (1 Jana 1:9).',
+      explanation: 'Szczera obietnica przebaczenia (1 Jana 1:9).',
     ),
     QuizQuestion(
       text: 'Jak 1 Jana 2 ostrzega nas przed „umiłowaniem świata”?',
@@ -103,13 +98,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Jest konieczne do zbawienia',
       ],
       correctIndex: 0,
-      explanation:
-          'Wzywa się do jasnego wyboru (1 Jana 2:15).',
+      explanation: 'Wzywa się do jasnego wyboru (1 Jana 2:15).',
     ),
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jak 1 Jana 3 określa dzieci Boże w przeciwieństwie do dzieci Diabła?',
+      text:
+          'Jak 1 Jana 3 określa dzieci Boże w przeciwieństwie do dzieci Diabła?',
       options: <String>[
         'Poprzez ich sprawiedliwe lub niesprawiedliwe czyny',
         'Poprzez ich bogactwo',
@@ -117,15 +112,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Poprzez ich wiek',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachowanie ujawnia przynależność (1 Jana 3:10).',
+      explanation: 'Zachowanie ujawnia przynależność (1 Jana 3:10).',
     ),
     QuizQuestion(
       text: 'Jakie centralne przykazanie podkreśla 1 Jana 3?',
-      options: <String>['Miłujcie się nawzajem', 'Unikajcie wszelkich kontaktów towarzyskich', 'Dążcie do bogactwa', 'Surowo sądźcie innych'],
+      options: <String>[
+        'Miłujcie się nawzajem',
+        'Unikajcie wszelkich kontaktów towarzyskich',
+        'Dążcie do bogactwa',
+        'Surowo sądźcie innych',
+      ],
       correctIndex: 0,
-      explanation:
-          'Podstawowy sprawdzian autentycznej wiary (1 Jana 3:11).',
+      explanation: 'Podstawowy sprawdzian autentycznej wiary (1 Jana 3:11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['nienawiść', 'świat', 'prawda'],
     ),
@@ -133,10 +131,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Jak 1 Jana 4 bezpośrednio określa Boga?',
-      options: <String>['Bóg jest miłością', 'Bóg jest daleki', 'Bóg jest obojętny', 'Bóg jest tylko surowy'],
+      options: <String>[
+        'Bóg jest miłością',
+        'Bóg jest daleki',
+        'Bóg jest obojętny',
+        'Bóg jest tylko surowy',
+      ],
       correctIndex: 0,
-      explanation:
-          'Centralne stwierdzenie tego listu (1 Jana 4:8).',
+      explanation: 'Centralne stwierdzenie tego listu (1 Jana 4:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['światło', 'duch', 'prawda'],
     ),
@@ -144,8 +146,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
       text: 'Co, według 1 Jana 5, zwycięża świat?',
       options: <String>['Nasza wiara', 'Bogactwo', 'Ludzka moc', 'Szczęście'],
       correctIndex: 0,
-      explanation:
-          'Zwycięstwo oparte na wierze (1 Jana 5:4).',
+      explanation: 'Zwycięstwo oparte na wierze (1 Jana 5:4).',
     ),
   ],
   '2 John#0': <QuizQuestion>[
@@ -158,15 +159,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Całkowicie ignorujcie doktrynę',
       ],
       correctIndex: 0,
-      explanation:
-          'Wzywa się do doktrynalnej czujności (2 Jana 1:7, 10).',
+      explanation: 'Wzywa się do doktrynalnej czujności (2 Jana 1:7, 10).',
     ),
     QuizQuestion(
-      text: 'O jakim przykazaniu Jan przypomina jako podstawowym w tym krótkim liście?',
-      options: <String>['Miłujcie się nawzajem', 'Unikajcie każdego zboru', 'Szukajcie bogactwa', 'Ignorujcie przybyszów'],
+      text:
+          'O jakim przykazaniu Jan przypomina jako podstawowym w tym krótkim liście?',
+      options: <String>[
+        'Miłujcie się nawzajem',
+        'Unikajcie każdego zboru',
+        'Szukajcie bogactwa',
+        'Ignorujcie przybyszów',
+      ],
       correctIndex: 0,
-      explanation:
-          'Stałe przypomnienie o braterskiej miłości (2 Jana 1:5).',
+      explanation: 'Stałe przypomnienie o braterskiej miłości (2 Jana 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['prawda', 'antychryst', 'chodzić'],
     ),
@@ -181,8 +186,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Za jego dobrowolną izolację',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego hojność jest stawiana za przykład (3 Jana 1:5).',
+      explanation: 'Jego hojność jest stawiana za przykład (3 Jana 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Diotrefes', 'prawda', 'list'],
     ),
@@ -201,7 +205,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'O co Judas prosi swoich czytelników w obliczu bezbożnych infiltratorów?',
+      text:
+          'O co Judas prosi swoich czytelników w obliczu bezbożnych infiltratorów?',
       options: <String>[
         'Aby energicznie walczyli o wiarę',
         'Aby całkowicie zignorowali sytuację',
@@ -209,8 +214,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Aby porzucili wszelkie przekonania',
       ],
       correctIndex: 0,
-      explanation:
-          'Zdecydowane wezwanie do wierności (Judy 1:3).',
+      explanation: 'Zdecydowane wezwanie do wierności (Judy 1:3).',
     ),
     QuizQuestion(
       text: 'Jakie przykłady przytacza Judas jako historyczne ostrzeżenia?',
@@ -221,8 +225,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Wyłącznie wyjście z Egiptu',
       ],
       correctIndex: 0,
-      explanation:
-          'Przykłady minionego sądu (Judy 1:6, 7).',
+      explanation: 'Przykłady minionego sądu (Judy 1:6, 7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Egipt', 'Kain', 'Korach'],
     ),
@@ -237,8 +240,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Bitwę na lądzie',
       ],
       correctIndex: 0,
-      explanation:
-          'Imponująca wizja otwiera księgę (Objawienie 1).',
+      explanation: 'Imponująca wizja otwiera księgę (Objawienie 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['tron', 'zwój', 'gwiazdy'],
     ),
@@ -251,7 +253,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Kto jedyny okazuje się godny otworzyć zapieczętowany zwój w Objawieniu 5?',
+      text:
+          'Kto jedyny okazuje się godny otworzyć zapieczętowany zwój w Objawieniu 5?',
       options: <String>[
         'Baranek, który został zabity',
         'Potężny anioł',
@@ -266,13 +269,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Z kim walczy Michał w wizji z Objawienia 12?',
-      options: <String>['Ze smokiem (Szatanem)', 'Z ludzkim wojskiem', 'Z ziemskim królem', 'Ze zwykłym zwierzęciem'],
+      options: <String>[
+        'Ze smokiem (Szatanem)',
+        'Z ludzkim wojskiem',
+        'Z ziemskim królem',
+        'Ze zwykłym zwierzęciem',
+      ],
       correctIndex: 0,
-      explanation:
-          'Opisana jest wojna w niebie (Objawienie 12:7).',
+      explanation: 'Opisana jest wojna w niebie (Objawienie 12:7).',
     ),
     QuizQuestion(
-      text: 'Co reprezentuje 144 000 wymienionych wraz z Barankiem w Objawieniu 14?',
+      text:
+          'Co reprezentuje 144 000 wymienionych wraz z Barankiem w Objawieniu 14?',
       options: <String>[
         'Grupę zgromadzoną z Barankiem na górze Syjon',
         'Dosłowną armię wojskową',
@@ -284,7 +292,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
           'Wyróżniająca się grupa związana z Barankiem (Objawienie 14:1).',
     ),
     QuizQuestion(
-      text: 'Co zawierają siedem ostatnich plag zapowiedzianych w Objawieniu 15?',
+      text:
+          'Co zawierają siedem ostatnich plag zapowiedzianych w Objawieniu 15?',
       options: <String>[
         'Dopełnienie gniewu Boga',
         'Natychmiastowe błogosławieństwa',
@@ -292,8 +301,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Nic znaczącego',
       ],
       correctIndex: 0,
-      explanation:
-          'Ostateczny etap boskiego sądu (Objawienie 15:1).',
+      explanation: 'Ostateczny etap boskiego sądu (Objawienie 15:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['pieczęcie', 'trąby', 'plagi'],
     ),
@@ -308,8 +316,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Nic się z nim nie dzieje',
       ],
       correctIndex: 0,
-      explanation:
-          'Jego upadek opisany jest wśród lamentu (Objawienie 18).',
+      explanation: 'Jego upadek opisany jest wśród lamentu (Objawienie 18).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Babilon', 'nierządnica', 'bestia'],
     ),
@@ -334,10 +341,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC8 = <String, List<QuizQu
         'Nic nie zostaje na ten temat obiecane',
       ],
       correctIndex: 0,
-      explanation: 'Wspaniała nadzieja kończy Biblię '
+      explanation:
+          'Wspaniała nadzieja kończy Biblię '
           '(Objawienie 21:4).',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPlC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesPlC8 =
+    <String, List<QuizQuestion>>{};

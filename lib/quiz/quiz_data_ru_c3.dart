@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesRuC3 = <String, List<QuizQuestion>>{
   'Esther#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Почему царица Астинь была лишена царского достоинства?',
@@ -15,7 +16,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Кого воспитал Мардохей и кто затем стала царицей?',
-      options: <String>['Эсфирь, свою двоюродную сестру', 'Свою дочь', 'Свою сестру', 'Чужеземную рабыню'],
+      options: <String>[
+        'Эсфирь, свою двоюродную сестру',
+        'Свою дочь',
+        'Свою сестру',
+        'Чужеземную рабыню',
+      ],
       correctIndex: 0,
       explanation: 'Эсфирь была выбрана новой царицей (Эсфирь 2).',
     ),
@@ -28,12 +34,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Началась война',
       ],
       correctIndex: 0,
-      explanation: 'Гнев Амана перерос в заговор с целью полного уничтожения иудеев (Эсфирь 3).',
+      explanation:
+          'Гнев Амана перерос в заговор с целью полного уничтожения иудеев (Эсфирь 3).',
     ),
   ],
   'Esther#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какие знаменитые слова сказал Мардохей Эсфири, чтобы убедить её действовать?',
+      text:
+          'Какие знаменитые слова сказал Мардохей Эсфири, чтобы убедить её действовать?',
       options: <String>[
         '«Кто знает, не для такого ли времени...»',
         '«Беги, пока есть время»',
@@ -52,7 +60,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он отменил свой указ',
       ],
       correctIndex: 0,
-      explanation: 'Эта на первый взгляд случайная деталь меняет ход событий (Эсфирь 6).',
+      explanation:
+          'Эта на первый взгляд случайная деталь меняет ход событий (Эсфирь 6).',
     ),
     QuizQuestion(
       text: 'Как Эсфирь раскрыла заговор Амана?',
@@ -76,7 +85,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он ничего не менял',
       ],
       correctIndex: 0,
-      explanation: 'Один неотменяемый указ нужно было уравновесить другим (Эсфирь 8).',
+      explanation:
+          'Один неотменяемый указ нужно было уравновесить другим (Эсфирь 8).',
     ),
     QuizQuestion(
       text: 'Какой праздник был установлен в память об этом избавлении?',
@@ -117,7 +127,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он оставил свою веру',
       ],
       correctIndex: 0,
-      explanation: 'Несмотря на испытание, его непорочность осталась нетронутой (Иов 1).',
+      explanation:
+          'Несмотря на испытание, его непорочность осталась нетронутой (Иов 1).',
     ),
     QuizQuestion(
       text: 'Что советует жена Иова после того, как он заболел?',
@@ -152,7 +163,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Немедленно получить новое стадо',
       ],
       correctIndex: 0,
-      explanation: 'Иов хочет, чтобы его дело было рассмотрено справедливо (Иов 9).',
+      explanation:
+          'Иов хочет, чтобы его дело было рассмотрено справедливо (Иов 9).',
     ),
     QuizQuestion(
       text: 'Что советует Софар Иову в своей первой речи?',
@@ -163,12 +175,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Навсегда замолчать',
       ],
       correctIndex: 0,
-      explanation: 'Софар предполагает, что Иов скрывает какой-то проступок (Иов 11).',
+      explanation:
+          'Софар предполагает, что Иов скрывает какой-то проступок (Иов 11).',
     ),
   ],
   'Job#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какое знаменитое утверждение произносит Иов, несмотря на свои страдания?',
+      text:
+          'Какое знаменитое утверждение произносит Иов, несмотря на свои страдания?',
       options: <String>[
         '«Я знаю, что мой искупитель жив»',
         '«Бог оставил меня навсегда»',
@@ -187,7 +201,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Они всегда заканчивают в нищете',
       ],
       correctIndex: 0,
-      explanation: 'Иов ставит под сомнение упрощённую теорию своих друзей (Иов 21).',
+      explanation:
+          'Иов ставит под сомнение упрощённую теорию своих друзей (Иов 21).',
     ),
     QuizQuestion(
       text: 'Как Иов описывает отношение к нему друзей в этих главах?',
@@ -211,7 +226,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Во лжи царю',
       ],
       correctIndex: 0,
-      explanation: 'Обвинения Елифаза становятся всё конкретнее, хотя доказательств нет (Иов 22).',
+      explanation:
+          'Обвинения Елифаза становятся всё конкретнее, хотя доказательств нет (Иов 22).',
     ),
     QuizQuestion(
       text: 'Чего страстно желает Иов в своём ответе?',
@@ -233,7 +249,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Законы жертвоприношений',
       ],
       correctIndex: 0,
-      explanation: 'Это поэтическое размышление прославляет мудрость, которая дороже золота (Иов 28).',
+      explanation:
+          'Это поэтическое размышление прославляет мудрость, которая дороже золота (Иов 28).',
     ),
   ],
   'Job#4': <QuizQuestion>[
@@ -246,7 +263,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'О детстве на чужбине',
       ],
       correctIndex: 0,
-      explanation: 'Иов противопоставляет своё почётное прошлое нынешнему положению (Иов 29).',
+      explanation:
+          'Иов противопоставляет своё почётное прошлое нынешнему положению (Иов 29).',
     ),
     QuizQuestion(
       text: 'Что заявляет Иов в своей заключительной клятве невиновности?',
@@ -257,7 +275,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он прямо обвиняет Бога',
       ],
       correctIndex: 0,
-      explanation: 'Иов завершает свою защитную речь развёрнутой клятвой (Иов 31).',
+      explanation:
+          'Иов завершает свою защитную речь развёрнутой клятвой (Иов 31).',
     ),
     QuizQuestion(
       text: 'Кто такой Елиуй, который берёт слово после трёх друзей?',
@@ -268,7 +287,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Сын Иова',
       ],
       correctIndex: 0,
-      explanation: 'Елиуй вмешивается, поскольку старшие не смогли убедить Иова (Иов 32).',
+      explanation:
+          'Елиуй вмешивается, поскольку старшие не смогли убедить Иова (Иов 32).',
     ),
   ],
   'Job#5': <QuizQuestion>[
@@ -292,7 +312,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'О храмовых обрядах',
       ],
       correctIndex: 0,
-      explanation: 'Бог показывает безграничность своей творческой премудрости (Иов 38-41).',
+      explanation:
+          'Бог показывает безграничность своей творческой премудрости (Иов 38-41).',
     ),
     QuizQuestion(
       text: 'Чем заканчивается история Иова?',
@@ -303,12 +324,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Вместо него награду получают его друзья',
       ],
       correctIndex: 0,
-      explanation: 'Иегова благословляет Иова даже больше, чем прежде (Иов 42).',
+      explanation:
+          'Иегова благословляет Иова даже больше, чем прежде (Иов 42).',
     ),
   ],
   'Psalms#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'С чем в Псалме 1 сравнивается счастливый человек, размышляющий над законом Бога?',
+      text:
+          'С чем в Псалме 1 сравнивается счастливый человек, размышляющий над законом Бога?',
       options: <String>[
         'С деревом, посаженным у потоков воды',
         'С крепким камнем',
@@ -316,7 +339,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'С зажжённым светильником',
       ],
       correctIndex: 0,
-      explanation: 'Этот образ плодоносящего дерева открывает книгу (Псалом 1).',
+      explanation:
+          'Этот образ плодоносящего дерева открывает книгу (Псалом 1).',
     ),
     QuizQuestion(
       text: 'О чём говорится в первой части Псалма 19?',
@@ -330,7 +354,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: '«Небеса возвещают славу Бога» (Псалом 19:1).',
     ),
     QuizQuestion(
-      text: 'Какой вопрос задаётся в Псалме 8 перед лицом безграничности творения?',
+      text:
+          'Какой вопрос задаётся в Псалме 8 перед лицом безграничности творения?',
       options: <String>[
         'Что есть человек, что ты помнишь о нём?',
         'Почему море такое необъятное?',
@@ -338,7 +363,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Сколько всего звёзд?',
       ],
       correctIndex: 0,
-      explanation: 'Псалмопевец восхищается тем местом, которое дано человеку (Псалом 8:4).',
+      explanation:
+          'Псалмопевец восхищается тем местом, которое дано человеку (Псалом 8:4).',
     ),
   ],
   'Psalms#1': <QuizQuestion>[
@@ -354,7 +380,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: '«Иегова — мой пастырь» (Псалом 23:1).',
     ),
     QuizQuestion(
-      text: 'Какие пророческие слова из Псалма 22 процитировал Иисус на столбе мучений?',
+      text:
+          'Какие пророческие слова из Псалма 22 процитировал Иисус на столбе мучений?',
       options: <String>[
         '«Боже мой, Боже мой, почему ты меня оставил?»',
         '«Я пришёл, чтобы судить»',
@@ -362,7 +389,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         '«Царство приближается»',
       ],
       correctIndex: 0,
-      explanation: 'Эта цитата связывает данный псалом со страданиями Христа (Псалом 22:1).',
+      explanation:
+          'Эта цитата связывает данный псалом со страданиями Христа (Псалом 22:1).',
     ),
     QuizQuestion(
       text: 'Что говорится в Псалме 34 о доброте Иеговы?',
@@ -373,12 +401,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Она ограничена лишь Израилем',
       ],
       correctIndex: 0,
-      explanation: 'Это приглашение испытать доброту Бога на себе (Псалом 34:8).',
+      explanation:
+          'Это приглашение испытать доброту Бога на себе (Псалом 34:8).',
     ),
   ],
   'Psalms#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какую трогательную молитву составил Давид после греха с Вирсавией?',
+      text:
+          'Какую трогательную молитву составил Давид после греха с Вирсавией?',
       options: <String>[
         'Псалом 51, с просьбой о чистом сердце',
         'Песнь о военной победе',
@@ -389,7 +419,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: '«Сотвори во мне чистое сердце, Боже» (Псалом 51:10).',
     ),
     QuizQuestion(
-      text: 'С чем псалмопевец сравнивает своё горячее стремление к Богу в Псалме 42?',
+      text:
+          'С чем псалмопевец сравнивает своё горячее стремление к Богу в Псалме 42?',
       options: <String>[
         'С ланью, жаждущей потоков воды',
         'С голодным львом',
@@ -413,7 +444,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
   ],
   'Psalms#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'О ком Псалом 72 является молитвой благословения справедливого и процветающего правления?',
+      text:
+          'О ком Псалом 72 является молитвой благословения справедливого и процветающего правления?',
       options: <String>[
         'О царе (Соломоне, а в пророческом смысле — о Мессии)',
         'Только о священниках',
@@ -421,7 +453,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'О пророках',
       ],
       correctIndex: 0,
-      explanation: 'Этот мессианский псалом описывает продолжительное мирное правление (Псалом 72).',
+      explanation:
+          'Этот мессианский псалом описывает продолжительное мирное правление (Псалом 72).',
     ),
     QuizQuestion(
       text: 'Какая дилемма тревожит Асафа в Псалме 73?',
@@ -432,7 +465,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Молчание пророков',
       ],
       correctIndex: 0,
-      explanation: 'Асаф разрешает это недоумение, войдя в святилище Бога (Псалом 73:17).',
+      explanation:
+          'Асаф разрешает это недоумение, войдя в святилище Бога (Псалом 73:17).',
     ),
     QuizQuestion(
       text: 'Каким образом описывается мощное шествие Бога в Псалме 68?',
@@ -491,7 +525,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Плачьте о своих грехах',
       ],
       correctIndex: 0,
-      explanation: 'Это радостный призыв к совместному прославлению Бога (Псалом 100).',
+      explanation:
+          'Это радостный призыв к совместному прославлению Бога (Псалом 100).',
     ),
     QuizQuestion(
       text: 'О чём напоминает Псалом 103 в связи с прощением Бога?',
@@ -505,7 +540,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: 'Это нежный образ отцовского сострадания (Псалом 103:13).',
     ),
     QuizQuestion(
-      text: 'Какие слова из Псалма 110 применяются ко Христу в Греческих Писаниях?',
+      text:
+          'Какие слова из Псалма 110 применяются ко Христу в Греческих Писаниях?',
       options: <String>[
         '«Сядь по правую руку от меня»',
         '«Ты будешь царём Вавилона»',
@@ -526,7 +562,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Путешествие в Египет',
       ],
       correctIndex: 0,
-      explanation: 'Каждый раздел этого псалма размышляет над законом Бога (Псалом 119).',
+      explanation:
+          'Каждый раздел этого псалма размышляет над законом Бога (Псалом 119).',
     ),
     QuizQuestion(
       text: 'Откуда, по словам псалмопевца, приходит его помощь в Псалме 121?',
@@ -537,7 +574,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'От храмовых священников',
       ],
       correctIndex: 0,
-      explanation: '«Я поднимаю глаза к горам... моя помощь приходит от Иеговы» (Псалом 121).',
+      explanation:
+          '«Я поднимаю глаза к горам... моя помощь приходит от Иеговы» (Псалом 121).',
     ),
     QuizQuestion(
       text: 'О чём напоминает Псалом 127 в отношении человеческих замыслов?',
@@ -583,15 +621,22 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Пусть музыка будет запрещена',
       ],
       correctIndex: 0,
-      explanation: 'Книга завершается всеобщим призывом к хвале (Псалом 150:6).',
+      explanation:
+          'Книга завершается всеобщим призывом к хвале (Псалом 150:6).',
     ),
   ],
   'Proverbs#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Согласно Притчам 1, что является началом познания?',
-      options: <String>['Страх перед Иеговой', 'Богатство', 'Только личный опыт', 'Формальное образование'],
+      options: <String>[
+        'Страх перед Иеговой',
+        'Богатство',
+        'Только личный опыт',
+        'Формальное образование',
+      ],
       correctIndex: 0,
-      explanation: 'Этот основополагающий принцип открывает книгу (Притчи 1:7).',
+      explanation:
+          'Этот основополагающий принцип открывает книгу (Притчи 1:7).',
     ),
     QuizQuestion(
       text: 'Что советуют Притчи 3 в отношении доверия?',
@@ -640,7 +685,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: '«Вверяй Иегове свои дела» (Притчи 16:3).',
     ),
     QuizQuestion(
-      text: 'Что символизирует мудрая женщина, строящая свой дом, в Притчах 14?',
+      text:
+          'Что символизирует мудрая женщина, строящая свой дом, в Притчах 14?',
       options: <String>[
         'Практическую мудрость, которая созидает и сохраняет',
         'Иноземную царицу',
@@ -648,7 +694,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Второстепенного, незначительного персонажа',
       ],
       correctIndex: 0,
-      explanation: 'Этот образ показывает созидательное действие мудрости (Притчи 14:1).',
+      explanation:
+          'Этот образ показывает созидательное действие мудрости (Притчи 14:1).',
     ),
   ],
   'Proverbs#2': <QuizQuestion>[
@@ -676,7 +723,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Согласно Притчам 22, что лучше большого богатства?',
-      options: <String>['Доброе имя', 'Огромный дворец', 'Могущественная армия', 'Обширная территория'],
+      options: <String>[
+        'Доброе имя',
+        'Огромный дворец',
+        'Могущественная армия',
+        'Обширная территория',
+      ],
       correctIndex: 0,
       explanation: '«Доброе имя лучше большого богатства» (Притчи 22:1).',
     ),
@@ -702,7 +754,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Народ предпочитает жить без всяких правил',
       ],
       correctIndex: 0,
-      explanation: 'Это предостережение об отсутствии духовного руководства (Притчи 29:18).',
+      explanation:
+          'Это предостережение об отсутствии духовного руководства (Притчи 29:18).',
     ),
     QuizQuestion(
       text: 'Чему посвящена заключительная поэма Притч 31?',
@@ -737,7 +790,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Человеческая мудрость решает всё',
       ],
       correctIndex: 0,
-      explanation: 'Его личный опыт показывает тщетность жизни без Бога (Екклесиаст 2).',
+      explanation:
+          'Его личный опыт показывает тщетность жизни без Бога (Екклесиаст 2).',
     ),
     QuizQuestion(
       text: 'О чём напоминает знаменитый отрывок «всему своё время»?',
@@ -748,7 +802,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Прошлое не имеет значения',
       ],
       correctIndex: 0,
-      explanation: 'Это ритмичное поэтическое произведение открывает Екклесиаста 3.',
+      explanation:
+          'Это ритмичное поэтическое произведение открывает Екклесиаста 3.',
     ),
   ],
   'Ecclesiastes#1': <QuizQuestion>[
@@ -761,7 +816,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Обеты могут давать только священники',
       ],
       correctIndex: 0,
-      explanation: 'Подчёркивается осторожность в словах перед Богом (Екклесиаст 5:4, 5).',
+      explanation:
+          'Подчёркивается осторожность в словах перед Богом (Екклесиаст 5:4, 5).',
     ),
     QuizQuestion(
       text: 'Что говорит Екклесиаст 7 о добром имени?',
@@ -772,7 +828,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Имя никогда не сохраняется',
       ],
       correctIndex: 0,
-      explanation: 'Это суждение о ценности честности и порядочности (Екклесиаст 7:1).',
+      explanation:
+          'Это суждение о ценности честности и порядочности (Екклесиаст 7:1).',
     ),
     QuizQuestion(
       text: 'Что рекомендует Екклесиаст 8 в отношении существующей власти?',
@@ -783,7 +840,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Избегать любой гражданской ответственности',
       ],
       correctIndex: 0,
-      explanation: 'Здесь советуется проявлять практическую осмотрительность (Екклесиаст 8).',
+      explanation:
+          'Здесь советуется проявлять практическую осмотрительность (Екклесиаст 8).',
     ),
   ],
   'Ecclesiastes#2': <QuizQuestion>[
@@ -831,7 +889,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Царский суд',
       ],
       correctIndex: 0,
-      explanation: 'Эта книга прославляет искреннюю супружескую любовь (Песнь песней 1).',
+      explanation:
+          'Эта книга прославляет искреннюю супружескую любовь (Песнь песней 1).',
     ),
     QuizQuestion(
       text: 'Что делает суламитянка в своём сне в 3-й главе?',
@@ -842,7 +901,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Она полностью забывает свою любовь',
       ],
       correctIndex: 0,
-      explanation: 'Даже во сне её привязанность остаётся верной (Песнь песней 3).',
+      explanation:
+          'Даже во сне её привязанность остаётся верной (Песнь песней 3).',
     ),
     QuizQuestion(
       text: 'Как суламитянка выражает свою безраздельную привязанность?',
@@ -866,7 +926,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он вообще её не описывает',
       ],
       correctIndex: 0,
-      explanation: 'Ей посвящается развёрнутая хвалебная поэма (Песнь песней 4).',
+      explanation:
+          'Ей посвящается развёрнутая хвалебная поэма (Песнь песней 4).',
     ),
     QuizQuestion(
       text: 'Что происходит, когда возлюбленный стучит в её дверь в 5-й главе?',
@@ -877,11 +938,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он так и не пришёл',
       ],
       correctIndex: 0,
-      explanation: 'Этот упущенный момент вызывает горькое сожаление (Песнь песней 5).',
+      explanation:
+          'Этот упущенный момент вызывает горькое сожаление (Песнь песней 5).',
     ),
     QuizQuestion(
-      text: 'Кому суламитянка описывает своего возлюбленного после этого случая?',
-      options: <String>['Дочерям Иерусалима', 'Только своей матери', 'Царю Соломону', 'Никому, она хранит молчание'],
+      text:
+          'Кому суламитянка описывает своего возлюбленного после этого случая?',
+      options: <String>[
+        'Дочерям Иерусалима',
+        'Только своей матери',
+        'Царю Соломону',
+        'Никому, она хранит молчание',
+      ],
       correctIndex: 0,
       explanation: 'Далее следует её восторженное описание (Песнь песней 5).',
     ),
@@ -889,9 +957,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
   'Song of Solomon#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Какое знаменитое утверждение о любви встречается в 8-й главе?',
-      options: <String>['Любовь крепка, как смерть', 'Любовь можно купить за деньги', 'Любовь не имеет значения', 'Любовь никогда не длится долго'],
+      options: <String>[
+        'Любовь крепка, как смерть',
+        'Любовь можно купить за деньги',
+        'Любовь не имеет значения',
+        'Любовь никогда не длится долго',
+      ],
       correctIndex: 0,
-      explanation: '«Многие воды не могут погасить любви» (Песнь песней 8:6, 7).',
+      explanation:
+          '«Многие воды не могут погасить любви» (Песнь песней 8:6, 7).',
     ),
     QuizQuestion(
       text: 'Что символизируют «многие воды», неспособные погасить любовь?',
@@ -902,7 +976,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Власть царя',
       ],
       correctIndex: 0,
-      explanation: 'Это яркая метафора, показывающая стойкость любви (Песнь песней 8).',
+      explanation:
+          'Это яркая метафора, показывающая стойкость любви (Песнь песней 8).',
     ),
     QuizQuestion(
       text: 'Какое настроение преобладает в конце Песни Песней?',
@@ -913,7 +988,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Предупреждение о войне',
       ],
       correctIndex: 0,
-      explanation: 'Книга завершается на ноте осуществившейся любви (Песнь песней 8).',
+      explanation:
+          'Книга завершается на ноте осуществившейся любви (Песнь песней 8).',
     ),
   ],
   'Isaiah#0': <QuizQuestion>[
@@ -929,7 +1005,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: 'Это картина всеобщего мира (Исайя 2:4).',
     ),
     QuizQuestion(
-      text: 'Что видит Исайя в видении, в котором получает пророческое поручение?',
+      text:
+          'Что видит Исайя в видении, в котором получает пророческое поручение?',
       options: <String>[
         'Иегову на высоком престоле, окружённого серафимами',
         'Небесное сражение',
@@ -937,7 +1014,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Только разрушенный город',
       ],
       correctIndex: 0,
-      explanation: 'Раскалённый уголь касается его губ, очищая его уста (Исайя 6).',
+      explanation:
+          'Раскалённый уголь касается его губ, очищая его уста (Исайя 6).',
     ),
     QuizQuestion(
       text: 'Какое знамение возвещает Исайя царю Ахазу в 7-й главе?',
@@ -965,7 +1043,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Каким мирным образом Исайя 11 описывает будущее правление?',
-      options: <String>['Волк будет жить вместе с ягнёнком', 'Львы будут господствовать над людьми', 'Пустыни навсегда останутся бесплодными', 'Народы навсегда останутся разобщёнными'],
+      options: <String>[
+        'Волк будет жить вместе с ягнёнком',
+        'Львы будут господствовать над людьми',
+        'Пустыни навсегда останутся бесплодными',
+        'Народы навсегда останутся разобщёнными',
+      ],
       correctIndex: 0,
       explanation: 'Здесь обещана полная гармония (Исайя 11:6).',
     ),
@@ -983,7 +1066,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
   ],
   'Isaiah#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какое символическое действие совершает Исайя против Египта и Куша?',
+      text:
+          'Какое символическое действие совершает Исайя против Египта и Куша?',
       options: <String>[
         'Ходит босым и без верхней одежды',
         'Сжигает свою одежду',
@@ -1006,7 +1090,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Что обещает Исайя 25 относительно смерти?',
-      options: <String>['Иегова навсегда поглотит смерть', 'Смерть останется непобедимой', 'Избегут её только богатые', 'О смерти ничего не говорится'],
+      options: <String>[
+        'Иегова навсегда поглотит смерть',
+        'Смерть останется непобедимой',
+        'Избегут её только богатые',
+        'О смерти ничего не говорится',
+      ],
       correctIndex: 0,
       explanation: 'Здесь выражена необычайная надежда (Исайя 25:8).',
     ),
@@ -1014,12 +1103,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
   'Isaiah#3': <QuizQuestion>[
     QuizQuestion(
       text: 'Что обещает Исайя 26 тому, чей дух опирается на Бога?',
-      options: <String>['Совершенный мир', 'Немедленное богатство', 'Непобедимую армию', 'Гарантированное долголетие'],
+      options: <String>[
+        'Совершенный мир',
+        'Немедленное богатство',
+        'Непобедимую армию',
+        'Гарантированное долголетие',
+      ],
       correctIndex: 0,
       explanation: '«Ты сохранишь в совершенном мире...» (Исайя 26:3).',
     ),
     QuizQuestion(
-      text: 'Какой драгоценный камень, согласно Исайе 28, кладёт Иегова в Сионе?',
+      text:
+          'Какой драгоценный камень, согласно Исайе 28, кладёт Иегова в Сионе?',
       options: <String>[
         'Краеугольный камень, испытанное основание',
         'Обычный булыжник',
@@ -1038,13 +1133,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'От местных священников',
       ],
       correctIndex: 0,
-      explanation: 'Поиск помощи у Египта подвергается осуждению (Исайя 30, 31).',
+      explanation:
+          'Поиск помощи у Египта подвергается осуждению (Исайя 30, 31).',
     ),
   ],
   'Isaiah#4': <QuizQuestion>[
     QuizQuestion(
       text: 'Чем станет пустыня согласно обещанию Исайи 35?',
-      options: <String>['Она расцветёт, как роза', 'Она навсегда останется бесплодной', 'Она превратится в море', 'Она будет окончательно заброшена'],
+      options: <String>[
+        'Она расцветёт, как роза',
+        'Она навсегда останется бесплодной',
+        'Она превратится в море',
+        'Она будет окончательно заброшена',
+      ],
       correctIndex: 0,
       explanation: 'Здесь обещано радостное преображение (Исайя 35:1).',
     ),
@@ -1060,7 +1161,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: 'За молитвой следует поразительное избавление (Исайя 37).',
     ),
     QuizQuestion(
-      text: 'О чём напоминает Исайя 40 в отношении человеческой природы перед Богом?',
+      text:
+          'О чём напоминает Исайя 40 в отношении человеческой природы перед Богом?',
       options: <String>[
         'Всякая плоть подобна траве, которая увядает',
         'Человек по природе вечен',
@@ -1081,13 +1183,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он будет действовать с систематической жестокостью',
       ],
       correctIndex: 0,
-      explanation: 'Этого служителя отличает удивительная кротость (Исайя 42:3).',
+      explanation:
+          'Этого служителя отличает удивительная кротость (Исайя 42:3).',
     ),
     QuizQuestion(
       text: 'Какой иноземный царь заранее назван Исайей освободителем Израиля?',
       options: <String>['Кир', 'Навуходоносор', 'Дарий', 'Ксеркс'],
       correctIndex: 0,
-      explanation: 'Замечательное пророчество называет по имени Кира (Исайя 44, 45).',
+      explanation:
+          'Замечательное пророчество называет по имени Кира (Исайя 44, 45).',
     ),
     QuizQuestion(
       text: 'Что говорит Исайя 48 о прежнем отношении народа к заповедям Бога?',
@@ -1098,7 +1202,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Бог никогда ничего не требовал',
       ],
       correctIndex: 0,
-      explanation: 'Здесь выражено сожаление о том, что они не прислушались (Исайя 48:18).',
+      explanation:
+          'Здесь выражено сожаление о том, что они не прислушались (Исайя 48:18).',
     ),
   ],
   'Isaiah#6': <QuizQuestion>[
@@ -1111,7 +1216,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он был почитаем с самого рождения',
       ],
       correctIndex: 0,
-      explanation: 'Это ключевая глава об искупительном страдании (Исайя 53:5).',
+      explanation:
+          'Это ключевая глава об искупительном страдании (Исайя 53:5).',
     ),
     QuizQuestion(
       text: 'Какое бесплатное приглашение звучит в Исайе 55?',
@@ -1133,13 +1239,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Целый день хранить молчание',
       ],
       correctIndex: 0,
-      explanation: 'Истинный пост выражается в делах справедливости (Исайя 58:6, 7).',
+      explanation:
+          'Истинный пост выражается в делах справедливости (Исайя 58:6, 7).',
     ),
   ],
   'Isaiah#7': <QuizQuestion>[
     QuizQuestion(
       text: 'Какой обнадёживающий образ открывает Исайю 60 для Сиона?',
-      options: <String>['Встань, воссияй, ибо пришёл твой свет', 'Оставайся во тьме навсегда', 'Беги далеко от своего города', 'Жди без всякой надежды'],
+      options: <String>[
+        'Встань, воссияй, ибо пришёл твой свет',
+        'Оставайся во тьме навсегда',
+        'Беги далеко от своего города',
+        'Жди без всякой надежды',
+      ],
       correctIndex: 0,
       explanation: 'Это светлый призыв к восстановлению (Исайя 60:1).',
     ),
@@ -1152,7 +1264,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         '«Никто не будет спасён»',
       ],
       correctIndex: 0,
-      explanation: 'Иисус применяет этот отрывок к самому себе (Луки 4, где цитируется Исайя 61:1).',
+      explanation:
+          'Иисус применяет этот отрывок к самому себе (Луки 4, где цитируется Исайя 61:1).',
     ),
     QuizQuestion(
       text: 'Что обещает Исайя 65 относительно будущего творения?',
@@ -1163,7 +1276,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Конец всей животной жизни',
       ],
       correctIndex: 0,
-      explanation: 'Книга завершается обещанием, исполненным надежды (Исайя 65:17).',
+      explanation:
+          'Книга завершается обещанием, исполненным надежды (Исайя 65:17).',
     ),
   ],
   'Jeremiah#0': <QuizQuestion>[
@@ -1176,11 +1290,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Ни о каком особом призвании не упоминается',
       ],
       correctIndex: 0,
-      explanation: 'Пророческое призвание было установлено ещё до его рождения (Иеремия 1:5).',
+      explanation:
+          'Пророческое призвание было установлено ещё до его рождения (Иеремия 1:5).',
     ),
     QuizQuestion(
       text: 'С чем Иегова сравнивает неверность Израиля во 2-й главе?',
-      options: <String>['С женой, забывшей своего мужа', 'С верным царём', 'С образцовым слугой', 'С неизменно преданным народом'],
+      options: <String>[
+        'С женой, забывшей своего мужа',
+        'С верным царём',
+        'С образцовым слугой',
+        'С неизменно преданным народом',
+      ],
       correctIndex: 0,
       explanation: 'Это образ разрыва отношений (Иеремия 2).',
     ),
@@ -1193,7 +1313,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Доверие к чужеземным пророкам',
       ],
       correctIndex: 0,
-      explanation: 'Народ ошибочно полагает, что храм автоматически их защитит (Иеремия 7).',
+      explanation:
+          'Народ ошибочно полагает, что храм автоматически их защитит (Иеремия 7).',
     ),
   ],
   'Jeremiah#1': <QuizQuestion>[
@@ -1221,9 +1342,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Что открывает Иеремия 17 о человеческом сердце?',
-      options: <String>['Оно обманчивее всего', 'Оно от природы доброе', 'Оно никогда не меняется', 'Оно не имеет значения для Бога'],
+      options: <String>[
+        'Оно обманчивее всего',
+        'Оно от природы доброе',
+        'Оно никогда не меняется',
+        'Оно не имеет значения для Бога',
+      ],
       correctIndex: 0,
-      explanation: 'Это откровенная оценка человеческой природы (Иеремия 17:9).',
+      explanation:
+          'Это откровенная оценка человеческой природы (Иеремия 17:9).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[
@@ -1239,7 +1366,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: 'Это образ верховной власти Бога (Иеремия 18).',
     ),
     QuizQuestion(
-      text: 'Как обошлись с Иеремией после того, как он пророчествовал против Иерусалима?',
+      text:
+          'Как обошлись с Иеремией после того, как он пророчествовал против Иерусалима?',
       options: <String>[
         'Пашхур избил его и заковал в колодки',
         'Его торжественно чествовали',
@@ -1247,7 +1375,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Его отправили с посольством',
       ],
       correctIndex: 0,
-      explanation: 'Иеремия страдает за своё верное пророческое служение (Иеремия 20).',
+      explanation:
+          'Иеремия страдает за своё верное пророческое служение (Иеремия 20).',
     ),
     QuizQuestion(
       text: 'Какой выбор предлагает Иеремия осаждённому народу в 21-й главе?',
@@ -1271,7 +1400,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Царство исчезнет без преемника',
       ],
       correctIndex: 0,
-      explanation: 'Это мессианское обещание противопоставлено недобросовестным пастырям (Иеремия 23:5).',
+      explanation:
+          'Это мессианское обещание противопоставлено недобросовестным пастырям (Иеремия 23:5).',
     ),
     QuizQuestion(
       text: 'Сколько лет вавилонского плена предсказывает Иеремия?',
@@ -1301,10 +1431,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Священство будет упразднено без замены',
       ],
       correctIndex: 0,
-      explanation: 'Здесь возвещается о внутреннем, личном соглашении (Иеремия 31:33).',
+      explanation:
+          'Здесь возвещается о внутреннем, личном соглашении (Иеремия 31:33).',
     ),
     QuizQuestion(
-      text: 'Какое символическое действие совершает Иеремия в разгар кризиса, покупая поле?',
+      text:
+          'Какое символическое действие совершает Иеремия в разгар кризиса, покупая поле?',
       options: <String>[
         'Он выражает веру в будущее восстановление',
         'Он стремится лично обогатиться',
@@ -1312,7 +1444,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Он ведёт переговоры с Вавилоном',
       ],
       correctIndex: 0,
-      explanation: 'Эта покупка свидетельствует о надежде, несмотря на осаду (Иеремия 32).',
+      explanation:
+          'Эта покупка свидетельствует о надежде, несмотря на осаду (Иеремия 32).',
     ),
     QuizQuestion(
       text: 'Какой пример верности подают иудеям рехавиты?',
@@ -1323,7 +1456,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Их союз с Египтом',
       ],
       correctIndex: 0,
-      explanation: 'Их верность резко контрастирует с неверностью Иуды (Иеремия 35).',
+      explanation:
+          'Их верность резко контрастирует с неверностью Иуды (Иеремия 35).',
     ),
   ],
   'Jeremiah#5': <QuizQuestion>[
@@ -1334,13 +1468,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
       explanation: 'Этот эфиоплянин смело вмешался (Иеремия 38).',
     ),
     QuizQuestion(
-      text: 'Кто был назначен наместником после падения Иерусалима, а затем убит?',
+      text:
+          'Кто был назначен наместником после падения Иерусалима, а затем убит?',
       options: <String>['Гедалия', 'Седекия', 'Исмаил', 'Барух'],
       correctIndex: 0,
       explanation: 'Его убийство вызывает новые беспорядки (Иеремия 40, 41).',
     ),
     QuizQuestion(
-      text: 'Что делает остаток народа, несмотря на предупреждение Иеремии остаться в стране?',
+      text:
+          'Что делает остаток народа, несмотря на предупреждение Иеремии остаться в стране?',
       options: <String>[
         'Они бегут в Египет, уводя с собой Иеремию',
         'Они полностью следуют совету пророка',
@@ -1348,12 +1484,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Они рассеиваются в сторону Ассирии',
       ],
       correctIndex: 0,
-      explanation: 'Их непослушание только усугубляет их положение (Иеремия 43).',
+      explanation:
+          'Их непослушание только усугубляет их положение (Иеремия 43).',
     ),
   ],
   'Jeremiah#6': <QuizQuestion>[
     QuizQuestion(
-      text: 'Против каких народов произносятся приговоры в последних главах Иеремии?',
+      text:
+          'Против каких народов произносятся приговоры в последних главах Иеремии?',
       options: <String>[
         'Против Египта, филистимлян, Моава, Аммона, Вавилона и других',
         'Только против Израиля',
@@ -1361,10 +1499,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
         'Только против Иуды',
       ],
       correctIndex: 0,
-      explanation: 'Книгу завершает ряд пророчеств против народов (Иеремия 46-51).',
+      explanation:
+          'Книгу завершает ряд пророчеств против народов (Иеремия 46-51).',
     ),
     QuizQuestion(
-      text: 'Какой символический знак сопровождает пророчество против Вавилона, переданное Сераии?',
+      text:
+          'Какой символический знак сопровождает пророчество против Вавилона, переданное Сераии?',
       options: <String>[
         'Свиток бросают в Евфрат, чтобы он утонул',
         'Его публично сжигают',
@@ -1388,4 +1528,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC3 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesRuC3 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesRuC3 =
+    <String, List<QuizQuestion>>{};

@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesDeC7 = <String, List<QuizQuestion>>{
   '2 Thessalonians#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Wie ermutigt Paulus die verfolgten Thessalonicher?',
@@ -11,7 +12,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Indem er sie drängt, den Glauben aufzugeben',
       ],
       correctIndex: 0,
-      explanation: 'Die Hoffnung auf Gottes Gerechtigkeit ermutigt sie (2. Thessalonicher 1).',
+      explanation:
+          'Die Hoffnung auf Gottes Gerechtigkeit ermutigt sie (2. Thessalonicher 1).',
     ),
     QuizQuestion(
       text: 'Welche Sorge korrigiert Paulus bezüglich des Tages des Herrn?',
@@ -22,20 +24,29 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Die Annahme, dass das Beten aufhören sollte',
       ],
       correctIndex: 0,
-      explanation: 'Ein Missverständnis wird klargestellt (2. Thessalonicher 2:2).',
+      explanation:
+          'Ein Missverständnis wird klargestellt (2. Thessalonicher 2:2).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Was muss laut 2. Thessalonicher 2 vor dem Tag des Herrn erscheinen?',
-      options: <String>['Der Mensch der Gesetzlosigkeit', 'Ein gerechter König', 'Universeller Frieden', 'Nichts Besonderes'],
+      text:
+          'Was muss laut 2. Thessalonicher 2 vor dem Tag des Herrn erscheinen?',
+      options: <String>[
+        'Der Mensch der Gesetzlosigkeit',
+        'Ein gerechter König',
+        'Universeller Frieden',
+        'Nichts Besonderes',
+      ],
       correctIndex: 0,
-      explanation: 'Ein vorausgehendes Zeichen wird angekündigt (2. Thessalonicher 2:3).',
+      explanation:
+          'Ein vorausgehendes Zeichen wird angekündigt (2. Thessalonicher 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Satan', 'Zurückhaltung', 'Gericht'],
     ),
     QuizQuestion(
-      text: 'Welche Ermutigung gibt Paulus trotz dieser beunruhigenden Ankündigung?',
+      text:
+          'Welche Ermutigung gibt Paulus trotz dieser beunruhigenden Ankündigung?',
       options: <String>[
         'Fest an den empfangenen Lehren festzuhalten',
         'Jede Hoffnung aufzugeben',
@@ -48,7 +59,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
   ],
   '2 Thessalonians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welchen Grundsatz stellt Paulus über die Arbeit in 2. Thessalonicher 3 auf?',
+      text:
+          'Welchen Grundsatz stellt Paulus über die Arbeit in 2. Thessalonicher 3 auf?',
       options: <String>[
         'Wenn jemand nicht arbeiten will, soll er auch nicht essen',
         'Arbeit ist für Christen nutzlos',
@@ -67,7 +79,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Mit einer Liste zusätzlicher Regeln',
       ],
       correctIndex: 0,
-      explanation: 'Seine Unterschrift bürgt für die Echtheit des Briefes (2. Thessalonicher 3:17).',
+      explanation:
+          'Seine Unterschrift bürgt für die Echtheit des Briefes (2. Thessalonicher 3:17).',
     ),
   ],
   '1 Timothy#0': <QuizQuestion>[
@@ -80,7 +93,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Vor der Ehe im Allgemeinen',
       ],
       correctIndex: 0,
-      explanation: 'Paulus möchte die Reinheit der Lehre bewahren (1. Timotheus 1).',
+      explanation:
+          'Paulus möchte die Reinheit der Lehre bewahren (1. Timotheus 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Gesetz', 'Geschlechtsregister', 'Mythen'],
     ),
@@ -93,12 +107,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Für niemanden Bestimmten',
       ],
       correctIndex: 0,
-      explanation: 'Ein alle einschließendes Gebet wird empfohlen (1. Timotheus 2:1, 2).',
+      explanation:
+          'Ein alle einschließendes Gebet wird empfohlen (1. Timotheus 2:1, 2).',
     ),
   ],
   '1 Timothy#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welche Eigenschaften werden laut 1. Timotheus 3 von Aufsehern verlangt?',
+      text:
+          'Welche Eigenschaften werden laut 1. Timotheus 3 von Aufsehern verlangt?',
       options: <String>[
         'Unantastbar, besonnen und gastfreundlich zu sein',
         'Vor allem wohlhabend zu sein',
@@ -106,10 +122,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Große öffentliche Bekanntheit zu haben',
       ],
       correctIndex: 0,
-      explanation: 'Genaue sittliche Kriterien werden genannt (1. Timotheus 3).',
+      explanation:
+          'Genaue sittliche Kriterien werden genannt (1. Timotheus 3).',
     ),
     QuizQuestion(
-      text: 'Was sagt 1. Timotheus 4 über körperliches Training im Vergleich zur Gottergebenheit?',
+      text:
+          'Was sagt 1. Timotheus 4 über körperliches Training im Vergleich zur Gottergebenheit?',
       options: <String>[
         'Gottergebenheit ist für alles nützlich, während körperliches Training begrenzt ist',
         'Körperliches Training ist wichtiger',
@@ -130,7 +148,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sie aus der Versammlung auszuschließen',
       ],
       correctIndex: 0,
-      explanation: 'Die familiäre Verantwortung wird betont (1. Timotheus 5:4).',
+      explanation:
+          'Die familiäre Verantwortung wird betont (1. Timotheus 5:4).',
     ),
     QuizQuestion(
       text: 'Was sagt 1. Timotheus 6 über die Geldliebe?',
@@ -146,7 +165,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
   ],
   '2 Timothy#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Worum bittet Paulus Timotheus bezüglich der Gabe, die er durch Handauflegung erhielt?',
+      text:
+          'Worum bittet Paulus Timotheus bezüglich der Gabe, die er durch Handauflegung erhielt?',
       options: <String>[
         'Sie wie ein Feuer wieder anzufachen',
         'Sie endgültig zu vergessen',
@@ -154,7 +174,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sie einem Fremden weiterzugeben',
       ],
       correctIndex: 0,
-      explanation: 'Eine Ermutigung, geistig aktiv zu bleiben (2. Timotheus 1:6).',
+      explanation:
+          'Eine Ermutigung, geistig aktiv zu bleiben (2. Timotheus 1:6).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Gabe', 'Geist', 'Flamme'],
     ),
@@ -167,12 +188,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Nur für seine Vergangenheit',
       ],
       correctIndex: 0,
-      explanation: 'Eine feste Haltung trotz der Gefangenschaft (2. Timotheus 1:8).',
+      explanation:
+          'Eine feste Haltung trotz der Gefangenschaft (2. Timotheus 1:8).',
     ),
   ],
   '2 Timothy#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Womit vergleicht Paulus Timotheus, um die nötige Ausdauer zu veranschaulichen?',
+      text:
+          'Womit vergleicht Paulus Timotheus, um die nötige Ausdauer zu veranschaulichen?',
       options: <String>[
         'Mit einem guten Soldaten Christi',
         'Mit einem bloßen Zuschauer',
@@ -180,7 +203,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Mit einem vorsichtigen Kaufmann',
       ],
       correctIndex: 0,
-      explanation: 'Ein Bild von Disziplin und Opferbereitschaft (2. Timotheus 2:3).',
+      explanation:
+          'Ein Bild von Disziplin und Opferbereitschaft (2. Timotheus 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Athlet', 'Bauer', 'Diener'],
     ),
@@ -193,7 +217,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sie sollte ignoriert werden',
       ],
       correctIndex: 0,
-      explanation: 'Eine berühmte Aussage über die biblische Inspiration (2. Timotheus 3:16).',
+      explanation:
+          'Eine berühmte Aussage über die biblische Inspiration (2. Timotheus 3:16).',
     ),
   ],
   '2 Timothy#2': <QuizQuestion>[
@@ -217,12 +242,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Ich habe nichts erreicht',
       ],
       correctIndex: 0,
-      explanation: 'Eine zuversichtliche Zusammenfassung der Treue (2. Timotheus 4:7).',
+      explanation:
+          'Eine zuversichtliche Zusammenfassung der Treue (2. Timotheus 4:7).',
     ),
   ],
   'Titus#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welche Eigenschaften muss Titus bei den in Kreta einzusetzenden Ältesten suchen?',
+      text:
+          'Welche Eigenschaften muss Titus bei den in Kreta einzusetzenden Ältesten suchen?',
       options: <String>[
         'Unantastbar zu sein und an gesunder Lehre festzuhalten',
         'Vor allem wohlhabend zu sein',
@@ -248,7 +275,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
   ],
   'Titus#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Was muss Titus laut Kapitel 2 den verschiedenen Gruppen in der Versammlung lehren?',
+      text:
+          'Was muss Titus laut Kapitel 2 den verschiedenen Gruppen in der Versammlung lehren?',
       options: <String>[
         'Gesundes Verhalten in Übereinstimmung mit heilsamer Lehre',
         'Nichts Bestimmtes',
@@ -267,7 +295,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sich aus der Gesellschaft zurückzuziehen',
       ],
       correctIndex: 0,
-      explanation: 'Die unverdiente Güte formt den christlichen Charakter (Titus 2:12).',
+      explanation:
+          'Die unverdiente Güte formt den christlichen Charakter (Titus 2:12).',
     ),
   ],
   'Titus#2': <QuizQuestion>[
@@ -280,10 +309,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sich zu weigern, Steuern zu zahlen',
       ],
       correctIndex: 0,
-      explanation: 'Ein Geist bürgerlicher Zusammenarbeit wird gefördert (Titus 3:1).',
+      explanation:
+          'Ein Geist bürgerlicher Zusammenarbeit wird gefördert (Titus 3:1).',
     ),
     QuizQuestion(
-      text: 'Was sollte laut Titus 3 bei Auseinandersetzungen vermieden werden?',
+      text:
+          'Was sollte laut Titus 3 bei Auseinandersetzungen vermieden werden?',
       options: <String>[
         'Törichte Streitfragen und Debatten über das Gesetz',
         'Jedes öffentliche Gespräch',
@@ -307,7 +338,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
       explanation: 'Ein Aufruf zu brüderlicher Versöhnung (Philemon 1).',
     ),
     QuizQuestion(
-      text: 'Wie schlägt Paulus vor, eine etwaige Schuld von Onesimus gegenüber Philemon zu begleichen?',
+      text:
+          'Wie schlägt Paulus vor, eine etwaige Schuld von Onesimus gegenüber Philemon zu begleichen?',
       options: <String>[
         'Er bietet an, sie auf sein eigenes Konto zu buchen',
         'Er verlangt, dass Philemon sie ohne Diskussion erlässt',
@@ -321,9 +353,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
   'Hebrews#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Wie sprach Gott laut Hebräer 1 letztlich zur Menschheit?',
-      options: <String>['Durch seinen Sohn', 'Nur durch Engel', 'Nur durch Träume', 'Er sprach nie'],
+      options: <String>[
+        'Durch seinen Sohn',
+        'Nur durch Engel',
+        'Nur durch Träume',
+        'Er sprach nie',
+      ],
       correctIndex: 0,
-      explanation: 'Eine Offenbarung, überlegen jeder früheren, durch Christus (Hebräer 1:1, 2).',
+      explanation:
+          'Eine Offenbarung, überlegen jeder früheren, durch Christus (Hebräer 1:1, 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Propheten', 'Engel', 'Mose'],
     ),
@@ -347,13 +385,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Vor dem bloßen Reisen',
       ],
       correctIndex: 0,
-      explanation: 'Die Generation der Wildnis dient als Warnung (Hebräer 3:12).',
+      explanation:
+          'Die Generation der Wildnis dient als Warnung (Hebräer 3:12).',
     ),
   ],
   'Hebrews#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Mit welcher alten Priesterordnung wird Christus in diesem Brief verglichen?',
-      options: <String>['Melchisedek', 'Allein Aaron', 'Allein Levi', 'Mit keiner bestimmten Ordnung'],
+      text:
+          'Mit welcher alten Priesterordnung wird Christus in diesem Brief verglichen?',
+      options: <String>[
+        'Melchisedek',
+        'Allein Aaron',
+        'Allein Levi',
+        'Mit keiner bestimmten Ordnung',
+      ],
       correctIndex: 0,
       explanation: 'Ein überlegenes und dauerhaftes Priestertum (Hebräer 7).',
       type: QuizAnswerType.freeText,
@@ -383,7 +428,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
   ],
   'Hebrews#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welchen grundlegenden Grundsatz betonen Hebräer 10-11 bezüglich der Rettung?',
+      text:
+          'Welchen grundlegenden Grundsatz betonen Hebräer 10-11 bezüglich der Rettung?',
       options: <String>[
         'Der Gerechte wird durch Glauben leben',
         'Die Rettung hängt allein von Ritualen ab',
@@ -413,19 +459,26 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Unerkennbar',
       ],
       correctIndex: 0,
-      explanation: 'Eine Aussage der Beständigkeit und Verlässlichkeit (Hebräer 13:8).',
+      explanation:
+          'Eine Aussage der Beständigkeit und Verlässlichkeit (Hebräer 13:8).',
     ),
   ],
   'James#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Worum sollte man laut Jakobus 1 mit Glauben bitten?',
-      options: <String>['Um Weisheit', 'Um Reichtum', 'Um Beliebtheit', 'Um Macht'],
+      options: <String>[
+        'Um Weisheit',
+        'Um Reichtum',
+        'Um Beliebtheit',
+        'Um Macht',
+      ],
       correctIndex: 0,
       explanation: 'Gott gibt Weisheit großzügig (Jakobus 1:5).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Was sagt Jakobus 2 über die Beziehung zwischen Glauben und Werken?',
+      text:
+          'Was sagt Jakobus 2 über die Beziehung zwischen Glauben und Werken?',
       options: <String>[
         'Glaube ohne Werke ist tot',
         'Werke haben keine Bedeutung',
@@ -449,7 +502,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
       explanation: 'Ein starkes Bild von der Wirkung der Worte (Jakobus 3:5).',
     ),
     QuizQuestion(
-      text: 'Wie unterscheidet Jakobus 3 die Weisheit von oben von der irdischen Weisheit?',
+      text:
+          'Wie unterscheidet Jakobus 3 die Weisheit von oben von der irdischen Weisheit?',
       options: <String>[
         'Göttliche Weisheit ist rein und friedsam',
         'Beide Arten von Weisheit sind identisch',
@@ -498,7 +552,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Zu einem höheren gesellschaftlichen Status',
       ],
       correctIndex: 0,
-      explanation: 'Eine Hoffnung, gegründet auf die Auferstehung (1. Petrus 1:3).',
+      explanation:
+          'Eine Hoffnung, gegründet auf die Auferstehung (1. Petrus 1:3).',
     ),
     QuizQuestion(
       text: 'Womit werden Christen in 1. Petrus 2 verglichen?',
@@ -509,14 +564,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Mit obersten Richtern',
       ],
       correctIndex: 0,
-      explanation: 'Ein Bild einer gemeinsam erbauten Gemeinschaft (1. Petrus 2:5).',
+      explanation:
+          'Ein Bild einer gemeinsam erbauten Gemeinschaft (1. Petrus 2:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Tempel', 'Priester', 'Eckstein'],
     ),
   ],
   '1 Peter#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welches Beispiel bietet 1. Petrus 3 angesichts ungerechten Leidens?',
+      text:
+          'Welches Beispiel bietet 1. Petrus 3 angesichts ungerechten Leidens?',
       options: <String>[
         'Christus, der litt, um uns ein Vorbild zu hinterlassen',
         'Sofortige Rache',
@@ -527,7 +584,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
       explanation: 'Ein Vorbild an Geduld und Lauterkeit (1. Petrus 3:18).',
     ),
     QuizQuestion(
-      text: 'Welche Haltung empfiehlt 1. Petrus 3 gegenüber denen, die Fragen zum Glauben stellen?',
+      text:
+          'Welche Haltung empfiehlt 1. Petrus 3 gegenüber denen, die Fragen zum Glauben stellen?',
       options: <String>[
         'Bereit zu sein, sich mit Sanftmut und Respekt zu verteidigen',
         'Jedes Gespräch zu verweigern',
@@ -548,12 +606,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Sie ist wenigen vorbehalten',
       ],
       correctIndex: 0,
-      explanation: 'Eine wesentliche Eigenschaft, die es zu pflegen gilt (1. Petrus 4:8).',
+      explanation:
+          'Eine wesentliche Eigenschaft, die es zu pflegen gilt (1. Petrus 4:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Herde', 'Älteste', 'Leiden'],
     ),
     QuizQuestion(
-      text: 'Welche Haltung verlangt 1. Petrus 5 von den Ältesten gegenüber der Herde?',
+      text:
+          'Welche Haltung verlangt 1. Petrus 5 von den Ältesten gegenüber der Herde?',
       options: <String>[
         'Sie willig zu hüten, mit Demut, nicht aus Zwang',
         'Sie mit strenger Autorität zu beherrschen',
@@ -561,9 +621,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC7 = <String, List<QuizQu
         'Persönlichen Gewinn zu suchen',
       ],
       correctIndex: 0,
-      explanation: 'Ein Vorbild demütiger Führung wird gefördert (1. Petrus 5:2, 3).',
+      explanation:
+          'Ein Vorbild demütiger Führung wird gefördert (1. Petrus 5:2, 3).',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesDeC7 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesDeC7 =
+    <String, List<QuizQuestion>>{};

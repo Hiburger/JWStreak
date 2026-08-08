@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesEsC6 = <String, List<QuizQuestion>>{
   'Romans#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué declara Pablo sobre la situación de todos los seres '
+      text:
+          '¿Qué declara Pablo sobre la situación de todos los seres '
           'humanos, judíos y no judíos, en Romanos 3?',
       options: <String>[
         'Todos han pecado y están privados de la gloria de Dios',
@@ -12,11 +14,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Solo los dirigentes son responsables',
       ],
       correctIndex: 0,
-      explanation:
-          'Una base esencial del argumento de Pablo (Romanos 3:23).',
+      explanation: 'Una base esencial del argumento de Pablo (Romanos 3:23).',
     ),
     QuizQuestion(
-      text: '¿En qué se basa la justificación según Romanos 3 y 4, '
+      text:
+          '¿En qué se basa la justificación según Romanos 3 y 4, '
           'ilustrada con el ejemplo de Abrahán?',
       options: <String>[
         'La fe, y no las obras de la ley',
@@ -25,13 +27,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'El origen étnico',
       ],
       correctIndex: 0,
-      explanation:
-          'Abrahán fue declarado justo por su fe (Romanos 4).',
+      explanation: 'Abrahán fue declarado justo por su fe (Romanos 4).',
     ),
   ],
   'Romans#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué declara Romanos 8 sobre el amor de Dios hacia los '
+      text:
+          '¿Qué declara Romanos 8 sobre el amor de Dios hacia los '
           'cristianos?',
       options: <String>[
         'Nada puede separarnos del amor de Dios',
@@ -53,13 +55,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'No hay salvación posible para las naciones',
       ],
       correctIndex: 0,
-      explanation:
-          'Se cita una promesa universal (Romanos 10:13).',
+      explanation: 'Se cita una promesa universal (Romanos 10:13).',
     ),
   ],
   'Romans#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué pide Romanos 12 a los cristianos con respecto a su '
+      text:
+          '¿Qué pide Romanos 12 a los cristianos con respecto a su '
           'vida diaria?',
       options: <String>[
         'Ofrecerse como sacrificio vivo a Dios',
@@ -68,13 +70,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'No usar nunca sus dones',
       ],
       correctIndex: 0,
-      explanation:
-          'Un llamado a una consagración práctica (Romanos 12:1).',
+      explanation: 'Un llamado a una consagración práctica (Romanos 12:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['culto', 'cuerpo', 'mente'],
     ),
     QuizQuestion(
-      text: '¿Qué principio establece Romanos 13 con respecto a las '
+      text:
+          '¿Qué principio establece Romanos 13 con respecto a las '
           'autoridades?',
       options: <String>[
         'Estar sujetos a las autoridades superiores',
@@ -83,13 +85,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Pagar impuestos solo si se desea',
       ],
       correctIndex: 0,
-      explanation:
-          'Se enseña un principio de respeto cívico (Romanos 13).',
+      explanation: 'Se enseña un principio de respeto cívico (Romanos 13).',
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué problema aborda Pablo desde el comienzo de esta '
+      text:
+          '¿Qué problema aborda Pablo desde el comienzo de esta '
           'carta?',
       options: <String>[
         'Las divisiones y rivalidades en la congregación',
@@ -120,7 +122,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
   ],
   '1 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo aborda Pablo el tema de los alimentos ofrecidos a '
+      text:
+          '¿Cómo aborda Pablo el tema de los alimentos ofrecidos a '
           'los ídolos?',
       options: <String>[
         'El amor y la conciencia del prójimo priman sobre la libertad',
@@ -134,7 +137,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(1 Corintios 8).',
     ),
     QuizQuestion(
-      text: '¿Qué actitud adopta Pablo para ganar a las personas para '
+      text:
+          '¿Qué actitud adopta Pablo para ganar a las personas para '
           'el Evangelio, según 1 Corintios 9?',
       options: <String>[
         'Hacerse todas las cosas para todos, en la medida de lo '
@@ -144,13 +148,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Exigir un pago por predicar',
       ],
       correctIndex: 0,
-      explanation:
-          'Una flexibilidad motivada por el amor (1 Corintios 9:22).',
+      explanation: 'Una flexibilidad motivada por el amor (1 Corintios 9:22).',
     ),
   ],
   '1 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Con qué compara Pablo la diversidad de dones espirituales '
+      text:
+          '¿Con qué compara Pablo la diversidad de dones espirituales '
           'en la congregación?',
       options: <String>[
         'Con las distintas partes de un mismo cuerpo',
@@ -164,19 +168,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(1 Corintios 12).',
     ),
     QuizQuestion(
-      text: '¿Qué cualidad describe Pablo como superior a todos los '
+      text:
+          '¿Qué cualidad describe Pablo como superior a todos los '
           'dones en el célebre capítulo 13?',
       options: <String>['El amor', 'La riqueza', 'La fama', 'El poder'],
       correctIndex: 0,
-      explanation:
-          'Sin amor, todo lo demás carece de valor (1 Corintios 13).',
+      explanation: 'Sin amor, todo lo demás carece de valor (1 Corintios 13).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['amor'],
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo describe Pablo el consuelo que recibió en medio de '
+      text:
+          '¿Cómo describe Pablo el consuelo que recibió en medio de '
           'la prueba?',
       options: <String>[
         'Un consuelo para compartir después con otros',
@@ -190,7 +195,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(2 Corintios 1).',
     ),
     QuizQuestion(
-      text: '¿Con qué compara Pablo a los cristianos transformados en '
+      text:
+          '¿Con qué compara Pablo a los cristianos transformados en '
           '2 Corintios 3 y 4?',
       options: <String>[
         'Con tesoros valiosos en frágiles vasijas de barro',
@@ -207,7 +213,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
   '2 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué llamado central hace Pablo en 2 Corintios 5?',
-      options: <String>['Reconcíliense con Dios', 'Busquen la riqueza ante todo', 'Eviten toda predicación', 'Huyan de toda responsabilidad'],
+      options: <String>[
+        'Reconcíliense con Dios',
+        'Busquen la riqueza ante todo',
+        'Eviten toda predicación',
+        'Huyan de toda responsabilidad',
+      ],
       correctIndex: 0,
       explanation:
           'El mensaje central de la reconciliación (2 Corintios '
@@ -216,7 +227,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
       wordBankDistractors: <String>['arrepiéntanse', 'oren', 'perdonen'],
     ),
     QuizQuestion(
-      text: '¿Qué principio enseña Pablo sobre el dar con generosidad '
+      text:
+          '¿Qué principio enseña Pablo sobre el dar con generosidad '
           'en 2 Corintios 9?',
       options: <String>[
         'Dios ama a quien da con alegría',
@@ -225,13 +237,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'El dar carece de importancia',
       ],
       correctIndex: 0,
-      explanation:
-          '"Dios ama al dador alegre" (2 Corintios 9:7).',
+      explanation: '"Dios ama al dador alegre" (2 Corintios 9:7).',
     ),
   ],
   '2 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo responde Pablo a su «espina en la carne» en '
+      text:
+          '¿Cómo responde Pablo a su «espina en la carne» en '
           '2 Corintios 12?',
       options: <String>[
         'Acepta que el poder de Dios se perfeccione en la debilidad',
@@ -253,13 +265,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Abandonar toda reflexión espiritual',
       ],
       correctIndex: 0,
-      explanation:
-          'Un llamado a la introspección sincera (2 Corintios 13:5).',
+      explanation: 'Un llamado a la introspección sincera (2 Corintios 13:5).',
     ),
   ],
   'Galatians#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿De dónde afirma Pablo que proviene su autoridad '
+      text:
+          '¿De dónde afirma Pablo que proviene su autoridad '
           'apostólica?',
       options: <String>[
         'Directamente de Jesucristo, no de los hombres',
@@ -268,8 +280,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'De una tradición familiar',
       ],
       correctIndex: 0,
-      explanation:
-          'Pablo defiende la legitimidad de su misión (Gálatas 1).',
+      explanation: 'Pablo defiende la legitimidad de su misión (Gálatas 1).',
     ),
     QuizQuestion(
       text: '¿Por qué reprendió Pablo a Pedro en público?',
@@ -280,13 +291,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Pedro se negaba a predicar',
       ],
       correctIndex: 0,
-      explanation:
-          'Se corrige una incoherencia práctica (Gálatas 2).',
+      explanation: 'Se corrige una incoherencia práctica (Gálatas 2).',
     ),
   ],
   'Galatians#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿En qué se basa la justificación según Gálatas 3, '
+      text:
+          '¿En qué se basa la justificación según Gálatas 3, '
           'ilustrada con el ejemplo de Abrahán?',
       options: <String>[
         'La fe, y no las obras de la ley',
@@ -300,7 +311,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(Gálatas 3:6).',
     ),
     QuizQuestion(
-      text: '¿Qué papel desempeñó la ley según Gálatas 3 y 4, mientras '
+      text:
+          '¿Qué papel desempeñó la ley según Gálatas 3 y 4, mientras '
           'se esperaba a Cristo?',
       options: <String>[
         'El de un ayo que conducía a Cristo',
@@ -309,13 +321,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Una maldición sin propósito',
       ],
       correctIndex: 0,
-      explanation:
-          'La ley preparaba la venida del Mesías (Gálatas 3:24).',
+      explanation: 'La ley preparaba la venida del Mesías (Gálatas 3:24).',
     ),
   ],
   'Galatians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué fruto del espíritu destaca Gálatas 5, en contraste '
+      text:
+          '¿Qué fruto del espíritu destaca Gálatas 5, en contraste '
           'con las obras de la carne?',
       options: <String>[
         'Amor, gozo, paz, paciencia y otras cualidades',
@@ -337,15 +349,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Evitarlas a toda costa',
       ],
       correctIndex: 0,
-      explanation:
-          'Un llamado a la ayuda mutua fraternal (Gálatas 6:2).',
+      explanation: 'Un llamado a la ayuda mutua fraternal (Gálatas 6:2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['propias', 'pecados', 'deudas'],
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Por medio de qué son salvos los cristianos según '
+      text:
+          '¿Por medio de qué son salvos los cristianos según '
           'Efesios 2?',
       options: <String>[
         'Por gracia, mediante la fe, y no por las obras',
@@ -354,11 +366,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Por su riqueza material',
       ],
       correctIndex: 0,
-      explanation:
-          'Un principio fundamental de la salvación (Efesios 2:8, 9).',
+      explanation: 'Un principio fundamental de la salvación (Efesios 2:8, 9).',
     ),
     QuizQuestion(
-      text: '¿Qué logra Cristo entre judíos y no judíos según '
+      text:
+          '¿Qué logra Cristo entre judíos y no judíos según '
           'Efesios 2?',
       options: <String>[
         'Los une en una sola humanidad nueva',
@@ -367,13 +379,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Ignora esa distinción',
       ],
       correctIndex: 0,
-      explanation:
-          'El muro de separación es derribado (Efesios 2:14).',
+      explanation: 'El muro de separación es derribado (Efesios 2:14).',
     ),
   ],
   'Ephesians#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué «misterio» dice Pablo haber recibido para revelarlo '
+      text:
+          '¿Qué «misterio» dice Pablo haber recibido para revelarlo '
           'a las naciones?',
       options: <String>[
         'Que los no judíos son coherederos de la promesa',
@@ -382,8 +394,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Una profecía sobre Roma',
       ],
       correctIndex: 0,
-      explanation:
-          'Una inesperada inclusión de las naciones (Efesios 3:6).',
+      explanation: 'Una inesperada inclusión de las naciones (Efesios 3:6).',
     ),
     QuizQuestion(
       text: '¿Qué deben «vestirse» los cristianos según Efesios 4?',
@@ -394,13 +405,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Un estatus social superior',
       ],
       correctIndex: 0,
-      explanation:
-          'Se pide un profundo cambio interior (Efesios 4:24).',
+      explanation: 'Se pide un profundo cambio interior (Efesios 4:24).',
     ),
   ],
   'Ephesians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Con qué compara Pablo la relación entre el esposo y su '
+      text:
+          '¿Con qué compara Pablo la relación entre el esposo y su '
           'esposa en Efesios 5?',
       options: <String>[
         'Con la relación entre Cristo y la congregación',
@@ -409,8 +420,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Con una competencia permanente',
       ],
       correctIndex: 0,
-      explanation:
-          'Se propone un modelo de amor abnegado (Efesios 5:25).',
+      explanation: 'Se propone un modelo de amor abnegado (Efesios 5:25).',
     ),
     QuizQuestion(
       text: '¿Qué representa «toda la armadura de Dios» en Efesios 6?',
@@ -438,11 +448,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Acusa a sus carceleros sin esperanza',
       ],
       correctIndex: 0,
-      explanation:
-          'Una actitud positiva a pesar de la prueba (Filipenses 1).',
+      explanation: 'Una actitud positiva a pesar de la prueba (Filipenses 1).',
     ),
     QuizQuestion(
-      text: '¿Qué famosa declaración resume la perspectiva de Pablo '
+      text:
+          '¿Qué famosa declaración resume la perspectiva de Pablo '
           'sobre la vida y la muerte?',
       options: <String>[
         '"Para mí, el vivir es Cristo, y el morir, una ganancia"',
@@ -451,8 +461,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         '"La muerte debe evitarse a toda costa"',
       ],
       correctIndex: 0,
-      explanation:
-          'Una confianza total en Cristo (Filipenses 1:21).',
+      explanation: 'Una confianza total en Cristo (Filipenses 1:21).',
     ),
   ],
   'Philippians#1': <QuizQuestion>[
@@ -465,11 +474,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Un general victorioso',
       ],
       correctIndex: 0,
-      explanation:
-          'Un modelo de humildad extrema (Filipenses 2:5-8).',
+      explanation: 'Un modelo de humildad extrema (Filipenses 2:5-8).',
     ),
     QuizQuestion(
-      text: '¿Qué dice Pablo haber abandonado para ganar a Cristo en '
+      text:
+          '¿Qué dice Pablo haber abandonado para ganar a Cristo en '
           'Filipenses 3?',
       options: <String>[
         'Todas sus ventajas y logros pasados',
@@ -495,11 +504,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Nada en particular',
       ],
       correctIndex: 0,
-      explanation:
-          'Una promesa de paz interior (Filipenses 4:6, 7).',
+      explanation: 'Una promesa de paz interior (Filipenses 4:6, 7).',
     ),
     QuizQuestion(
-      text: '¿Qué afirmación de confianza hace Pablo sobre su fuerza '
+      text:
+          '¿Qué afirmación de confianza hace Pablo sobre su fuerza '
           'personal?',
       options: <String>[
         '"Para todo tengo fuerzas por medio de aquel que me da poder"',
@@ -508,13 +517,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         '"Nada me sostiene realmente"',
       ],
       correctIndex: 0,
-      explanation:
-          'Una confianza depositada en Cristo (Filipenses 4:13).',
+      explanation: 'Una confianza depositada en Cristo (Filipenses 4:13).',
     ),
   ],
   'Colossians#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo describe Colosenses 1 la posición de Cristo con '
+      text:
+          '¿Cómo describe Colosenses 1 la posición de Cristo con '
           'respecto a la creación?',
       options: <String>[
         'Todo fue creado por medio de él y para él',
@@ -523,8 +532,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Es posterior a toda la creación',
       ],
       correctIndex: 0,
-      explanation:
-          'Se otorga un lugar central a Cristo (Colosenses 1:16).',
+      explanation: 'Se otorga un lugar central a Cristo (Colosenses 1:16).',
     ),
     QuizQuestion(
       text: '¿Qué «misterio» dice Pablo tener la misión de revelar?',
@@ -565,13 +573,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Nada en particular',
       ],
       correctIndex: 0,
-      explanation:
-          'Se pide un cambio interior concreto (Colosenses 3:10, 12).',
+      explanation: 'Se pide un cambio interior concreto (Colosenses 3:10, 12).',
     ),
   ],
   'Colossians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo anima Pablo a comportarse con las personas ajenas a '
+      text:
+          '¿Cómo anima Pablo a comportarse con las personas ajenas a '
           'la fe?',
       options: <String>[
         'Con sabiduría, aprovechando bien el tiempo',
@@ -580,11 +588,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Con desprecio abierto',
       ],
       correctIndex: 0,
-      explanation:
-          'Se recomienda un comportamiento prudente (Colosenses 4:5).',
+      explanation: 'Se recomienda un comportamiento prudente (Colosenses 4:5).',
     ),
     QuizQuestion(
-      text: '¿Qué tono caracteriza el final de la carta a los '
+      text:
+          '¿Qué tono caracteriza el final de la carta a los '
           'Colosenses?',
       options: <String>[
         'Saludos personales cálidos',
@@ -593,8 +601,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
         'Un silencio abrupto',
       ],
       correctIndex: 0,
-      explanation:
-          'Pablo termina con saludos afectuosos (Colosenses 4).',
+      explanation: 'Pablo termina con saludos afectuosos (Colosenses 4).',
     ),
   ],
   '1 Thessalonians#0': <QuizQuestion>[
@@ -640,9 +647,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(1 Tesalonicenses 3).',
     ),
     QuizQuestion(
-      text: '¿Qué sentimiento expresa Pablo al saber de su fidelidad '
+      text:
+          '¿Qué sentimiento expresa Pablo al saber de su fidelidad '
           'constante?',
-      options: <String>['Una gran alegría', 'Decepción', 'Indiferencia', 'Enojo'],
+      options: <String>[
+        'Una gran alegría',
+        'Decepción',
+        'Indiferencia',
+        'Enojo',
+      ],
       correctIndex: 0,
       explanation:
           'Su constancia lo reconforta profundamente '
@@ -651,7 +664,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
   ],
   '1 Thessalonians#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo describe 1 Tesalonicenses 4 la resurrección de los '
+      text:
+          '¿Cómo describe 1 Tesalonicenses 4 la resurrección de los '
           'creyentes?',
       options: <String>[
         'Serán arrebatados para encontrarse con el Señor',
@@ -665,9 +679,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
           '(1 Tesalonicenses 4:17).',
     ),
     QuizQuestion(
-      text: '¿Con qué se compara el día de Jehová en '
+      text:
+          '¿Con qué se compara el día de Jehová en '
           '1 Tesalonicenses 5?',
-      options: <String>['Con un ladrón en la noche', 'Con una fiesta previsible', 'Con un día ordinario', 'Con una simple advertencia sin efecto'],
+      options: <String>[
+        'Con un ladrón en la noche',
+        'Con una fiesta previsible',
+        'Con un día ordinario',
+        'Con una simple advertencia sin efecto',
+      ],
       correctIndex: 0,
       explanation:
           'Una imagen de llegada repentina e inesperada '
@@ -678,4 +698,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC6 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesEsC6 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesEsC6 =
+    <String, List<QuizQuestion>>{};

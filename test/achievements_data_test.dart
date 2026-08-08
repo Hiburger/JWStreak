@@ -28,24 +28,31 @@ void main() {
     expect(def.goal, kEasterEggIds.length);
   });
 
-  test('an all-zero stats snapshot meets nothing except boolean-false checks', () {
-    const AchievementStats empty = AchievementStats(
-      chaptersRead: 0,
-      distinctBooksRead: 0,
-      genesisComplete: false,
-      wholeBibleComplete: false,
-      completedQuizzes: 0,
-      hasPerfectQuiz: false,
-      totalStars: 0,
-      currentStreak: 0,
-      notesCount: 0,
-      hasReminder: false,
-      easterEggsFound: 0,
-    );
-    for (final AchievementDef def in kAchievementDefs) {
-      expect(def.isMet(empty), isFalse, reason: '${def.id} met by empty stats');
-    }
-  });
+  test(
+    'an all-zero stats snapshot meets nothing except boolean-false checks',
+    () {
+      const AchievementStats empty = AchievementStats(
+        chaptersRead: 0,
+        distinctBooksRead: 0,
+        genesisComplete: false,
+        wholeBibleComplete: false,
+        completedQuizzes: 0,
+        hasPerfectQuiz: false,
+        totalStars: 0,
+        currentStreak: 0,
+        notesCount: 0,
+        hasReminder: false,
+        easterEggsFound: 0,
+      );
+      for (final AchievementDef def in kAchievementDefs) {
+        expect(
+          def.isMet(empty),
+          isFalse,
+          reason: '${def.id} met by empty stats',
+        );
+      }
+    },
+  );
 
   test('a maxed-out stats snapshot meets every achievement', () {
     final AchievementStats maxed = AchievementStats(
@@ -62,7 +69,11 @@ void main() {
       easterEggsFound: kEasterEggIds.length,
     );
     for (final AchievementDef def in kAchievementDefs) {
-      expect(def.isMet(maxed), isTrue, reason: '${def.id} not met by maxed stats');
+      expect(
+        def.isMet(maxed),
+        isTrue,
+        reason: '${def.id} not met by maxed stats',
+      );
     }
   });
 }

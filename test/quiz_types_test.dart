@@ -29,10 +29,12 @@ void main() {
   test('typed languages expose the new question types', () {
     for (final String lang in typedLanguages) {
       final List<QuizQuestion> qs = genesis0(lang);
-      final Iterable<QuizQuestion> typed =
-          qs.where((QuizQuestion q) => q.type == QuizAnswerType.freeText);
-      final Iterable<QuizQuestion> banked =
-          qs.where((QuizQuestion q) => q.type == QuizAnswerType.wordBank);
+      final Iterable<QuizQuestion> typed = qs.where(
+        (QuizQuestion q) => q.type == QuizAnswerType.freeText,
+      );
+      final Iterable<QuizQuestion> banked = qs.where(
+        (QuizQuestion q) => q.type == QuizAnswerType.wordBank,
+      );
       expect(typed, isNotEmpty, reason: '$lang has no freeText question');
       expect(banked, isNotEmpty, reason: '$lang has no wordBank question');
 
@@ -49,13 +51,16 @@ void main() {
     // typed answer type, in French. This guards that leak across every book.
     for (final String lang in choiceOnlyLanguages) {
       for (final BibleBook book in kBibleBooks) {
-        for (final Checkpoint cp
-            in checkpointsForBook(book, languageCode: lang)) {
+        for (final Checkpoint cp in checkpointsForBook(
+          book,
+          languageCode: lang,
+        )) {
           for (final QuizQuestion q in cp.questions) {
             expect(
               q.type,
               QuizAnswerType.multipleChoice,
-              reason: '$lang leaked a ${q.type} question at ${cp.id}: '
+              reason:
+                  '$lang leaked a ${q.type} question at ${cp.id}: '
                   '"${q.text}"',
             );
           }
@@ -68,8 +73,8 @@ void main() {
   /// position. Matching on order would pin down which *other* questions in the
   /// checkpoint may be converted, which is content authoring's business, not
   /// this test's.
-  QuizQuestion abelQuestion(String lang, String answer) => genesis0(lang)
-      .firstWhere(
+  QuizQuestion abelQuestion(String lang, String answer) =>
+      genesis0(lang).firstWhere(
         (QuizQuestion q) =>
             q.type == QuizAnswerType.freeText && q.correctAnswer == answer,
         orElse: () => throw StateError(
@@ -103,8 +108,10 @@ void main() {
     // own validator rejects would be impossible to get right.
     for (final String lang in typedLanguages) {
       for (final BibleBook book in kBibleBooks) {
-        for (final Checkpoint cp
-            in checkpointsForBook(book, languageCode: lang)) {
+        for (final Checkpoint cp in checkpointsForBook(
+          book,
+          languageCode: lang,
+        )) {
           for (final QuizQuestion q in cp.questions) {
             if (q.type != QuizAnswerType.freeText) {
               continue;
@@ -112,7 +119,8 @@ void main() {
             expect(
               validator.matches(q.correctAnswer, q.allAcceptedAnswers),
               isTrue,
-              reason: '$lang ${cp.id}: "${q.correctAnswer}" fails its own check',
+              reason:
+                  '$lang ${cp.id}: "${q.correctAnswer}" fails its own check',
             );
           }
         }
@@ -138,8 +146,9 @@ void main() {
       'en': <String>['Adam', 'and', 'Eve'],
     };
     chips.forEach((String lang, List<String> words) {
-      final QuizQuestion q = genesis0(lang)
-          .firstWhere((QuizQuestion q) => q.type == QuizAnswerType.wordBank);
+      final QuizQuestion q = genesis0(
+        lang,
+      ).firstWhere((QuizQuestion q) => q.type == QuizAnswerType.wordBank);
       expect(
         validator.matches(words.join(' '), q.allAcceptedAnswers),
         isTrue,
@@ -152,8 +161,10 @@ void main() {
     // A one-chip bank would hand the user the whole answer.
     for (final String lang in typedLanguages) {
       for (final BibleBook book in kBibleBooks) {
-        for (final Checkpoint cp
-            in checkpointsForBook(book, languageCode: lang)) {
+        for (final Checkpoint cp in checkpointsForBook(
+          book,
+          languageCode: lang,
+        )) {
           for (final QuizQuestion q in cp.questions) {
             if (q.type != QuizAnswerType.wordBank) {
               continue;
@@ -167,7 +178,8 @@ void main() {
             expect(
               chips,
               greaterThan(1),
-              reason: '$lang ${cp.id}: word bank "${q.correctAnswer}" '
+              reason:
+                  '$lang ${cp.id}: word bank "${q.correctAnswer}" '
                   'yields a single chip',
             );
           }
@@ -182,8 +194,10 @@ void main() {
     // gives a free correct placement.
     for (final String lang in typedLanguages) {
       for (final BibleBook book in kBibleBooks) {
-        for (final Checkpoint cp
-            in checkpointsForBook(book, languageCode: lang)) {
+        for (final Checkpoint cp in checkpointsForBook(
+          book,
+          languageCode: lang,
+        )) {
           for (final QuizQuestion q in cp.questions) {
             if (q.type != QuizAnswerType.wordBank ||
                 q.wordBankDistractors.isEmpty) {
@@ -201,7 +215,8 @@ void main() {
                   FuzzyAnswerValidator.normalize(distractor),
                 ),
                 isFalse,
-                reason: '$lang ${cp.id}: distractor "$distractor" '
+                reason:
+                    '$lang ${cp.id}: distractor "$distractor" '
                     'duplicates a word in "${q.correctAnswer}"',
               );
             }

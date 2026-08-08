@@ -22,7 +22,10 @@ void main() {
     });
 
     test('surrounding punctuation and spacing', () {
-      expect(validator.matches('  Adam et Eve ! ', <String>['Adam et Ève']), isTrue);
+      expect(
+        validator.matches('  Adam et Eve ! ', <String>['Adam et Ève']),
+        isTrue,
+      );
       expect(validator.matches('adameteve', <String>['Adam et Ève']), isTrue);
     });
 

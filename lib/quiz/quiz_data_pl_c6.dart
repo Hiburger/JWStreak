@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPlC6 = <String, List<QuizQuestion>>{
   'Romans#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Co Paweł oświadcza o sytuacji wszystkich ludzi, Żydów i nie-Żydów, w Rzymian 3?',
+      text:
+          'Co Paweł oświadcza o sytuacji wszystkich ludzi, Żydów i nie-Żydów, w Rzymian 3?',
       options: <String>[
         'Wszyscy zgrzeszyli i nie osiągają chwały Bożej',
         'Zgrzeszyli tylko nie-Żydzi',
@@ -11,11 +13,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Odpowiedzialni są tylko przywódcy',
       ],
       correctIndex: 0,
-      explanation:
-          'Podstawowy fundament argumentacji Pawła (Rzymian 3:23).',
+      explanation: 'Podstawowy fundament argumentacji Pawła (Rzymian 3:23).',
     ),
     QuizQuestion(
-      text: 'Na czym opiera się usprawiedliwienie, według Rzymian 3-4, zilustrowane przykładem Abrahama?',
+      text:
+          'Na czym opiera się usprawiedliwienie, według Rzymian 3-4, zilustrowane przykładem Abrahama?',
       options: <String>[
         'Na wierze, a nie na uczynkach prawa',
         'Wyłącznie na rytualnych ofiarach',
@@ -49,13 +51,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Dla narodów nie jest możliwe żadne zbawienie',
       ],
       correctIndex: 0,
-      explanation:
-          'Cytowana jest powszechna obietnica (Rzymian 10:13).',
+      explanation: 'Cytowana jest powszechna obietnica (Rzymian 10:13).',
     ),
   ],
   'Romans#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'O co prosi Rzymian 12 chrześcijan w związku z ich codziennym życiem?',
+      text:
+          'O co prosi Rzymian 12 chrześcijan w związku z ich codziennym życiem?',
       options: <String>[
         'Aby złożyli siebie jako żywą ofiarę Bogu',
         'Aby unikali wszelkiej aktywności społecznej',
@@ -63,8 +65,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Aby nigdy nie używali swoich darów',
       ],
       correctIndex: 0,
-      explanation:
-          'Wezwanie do praktycznego oddania (Rzymian 12:1).',
+      explanation: 'Wezwanie do praktycznego oddania (Rzymian 12:1).',
     ),
     QuizQuestion(
       text: 'Jaką zasadę ustanawia Rzymian 13 w związku z władzami?',
@@ -75,8 +76,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Płacenie podatków tylko wtedy, gdy się chce',
       ],
       correctIndex: 0,
-      explanation:
-          'Nauczana jest zasada obywatelskiego szacunku (Rzymian 13).',
+      explanation: 'Nauczana jest zasada obywatelskiego szacunku (Rzymian 13).',
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
@@ -121,7 +121,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
           'Równowaga między wolnością a wzglądem na innych (1 Koryntian 8).',
     ),
     QuizQuestion(
-      text: 'Jaką postawę przyjmuje Paweł, aby pozyskać ludzi dla dobrej nowiny, według 1 Koryntian 9?',
+      text:
+          'Jaką postawę przyjmuje Paweł, aby pozyskać ludzi dla dobrej nowiny, według 1 Koryntian 9?',
       options: <String>[
         'Stawanie się wszystkim dla wszystkich, na ile to możliwe',
         'Pozostanie sztywnym we wszystkich swoich zwyczajach',
@@ -129,8 +130,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Żądanie zapłaty za głoszenie',
       ],
       correctIndex: 0,
-      explanation:
-          'Elastyczność motywowana miłością (1 Koryntian 9:22).',
+      explanation: 'Elastyczność motywowana miłością (1 Koryntian 9:22).',
     ),
   ],
   '1 Corinthians#2': <QuizQuestion>[
@@ -143,11 +143,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Do darów bez celu',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz jedności w różnorodności (1 Koryntian 12).',
+      explanation: 'Obraz jedności w różnorodności (1 Koryntian 12).',
     ),
     QuizQuestion(
-      text: 'Jaką cechę Paweł opisuje jako większą niż wszystkie dary w słynnym rozdziale 13?',
+      text:
+          'Jaką cechę Paweł opisuje jako większą niż wszystkie dary w słynnym rozdziale 13?',
       options: <String>['Miłość', 'Bogactwo', 'Sławę', 'Moc'],
       correctIndex: 0,
       explanation:
@@ -165,11 +165,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Pociechę pochodzącą wyłącznie od ludzi',
       ],
       correctIndex: 0,
-      explanation:
-          'Boska pociecha jest przekazywana innym (2 Koryntian 1).',
+      explanation: 'Boska pociecha jest przekazywana innym (2 Koryntian 1).',
     ),
     QuizQuestion(
-      text: 'Do czego Paweł porównuje przemienionych chrześcijan w 2 Koryntian 3-4?',
+      text:
+          'Do czego Paweł porównuje przemienionych chrześcijan w 2 Koryntian 3-4?',
       options: <String>[
         'Do cennych skarbów w kruchych glinianych naczyniach',
         'Do potężnych królów',
@@ -177,8 +177,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Do niezmiennych posągów',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz pokory i boskiej mocy (2 Koryntian 4:7).',
+      explanation: 'Obraz pokory i boskiej mocy (2 Koryntian 4:7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['złoto', 'naczynie', 'światło'],
     ),
@@ -186,10 +185,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
   '2 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Jaki centralny apel czyni Paweł w 2 Koryntian 5?',
-      options: <String>['Pojednajcie się z Bogiem', 'Szukajcie przede wszystkim bogactwa', 'Unikajcie wszelkiego głoszenia', 'Uciekajcie od wszelkiej odpowiedzialności'],
+      options: <String>[
+        'Pojednajcie się z Bogiem',
+        'Szukajcie przede wszystkim bogactwa',
+        'Unikajcie wszelkiego głoszenia',
+        'Uciekajcie od wszelkiej odpowiedzialności',
+      ],
       correctIndex: 0,
-      explanation:
-          'Centralne orędzie pojednania (2 Koryntian 5:20).',
+      explanation: 'Centralne orędzie pojednania (2 Koryntian 5:20).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['posłowie', 'Chrystus', 'pokój'],
     ),
@@ -202,8 +205,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Dawanie nie ma znaczenia',
       ],
       correctIndex: 0,
-      explanation:
-          '„Bóg miłuje radosnego dawcę” (2 Koryntian 9:7).',
+      explanation: '„Bóg miłuje radosnego dawcę” (2 Koryntian 9:7).',
     ),
   ],
   '2 Corinthians#2': <QuizQuestion>[
@@ -216,8 +218,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Oskarża Boga o niesprawiedliwość',
       ],
       correctIndex: 0,
-      explanation:
-          '„Moja moc doskonali się w słabości” (2 Koryntian 12:9).',
+      explanation: '„Moja moc doskonali się w słabości” (2 Koryntian 12:9).',
     ),
     QuizQuestion(
       text: 'Jaki ostateczny apel czyni Paweł w 2 Koryntian 13?',
@@ -228,8 +229,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Aby porzucili wszelką duchową refleksję',
       ],
       correctIndex: 0,
-      explanation:
-          'Wezwanie do szczerego samobadania (2 Koryntian 13:5).',
+      explanation: 'Wezwanie do szczerego samobadania (2 Koryntian 13:5).',
     ),
   ],
   'Galatians#0': <QuizQuestion>[
@@ -242,8 +242,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Z rodzinnej tradycji',
       ],
       correctIndex: 0,
-      explanation:
-          'Paweł broni prawomocności swojej misji (Galatów 1).',
+      explanation: 'Paweł broni prawomocności swojej misji (Galatów 1).',
     ),
     QuizQuestion(
       text: 'Dlaczego Paweł publicznie zganił Piotra?',
@@ -254,13 +253,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Piotr odmówił głoszenia',
       ],
       correctIndex: 0,
-      explanation:
-          'Naprawiona zostaje praktyczna niekonsekwencja (Galatów 2).',
+      explanation: 'Naprawiona zostaje praktyczna niekonsekwencja (Galatów 2).',
     ),
   ],
   'Galatians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Na czym opiera się usprawiedliwienie, według Galatów 3, zilustrowane przykładem Abrahama?',
+      text:
+          'Na czym opiera się usprawiedliwienie, według Galatów 3, zilustrowane przykładem Abrahama?',
       options: <String>[
         'Na wierze, a nie na uczynkach prawa',
         'Wyłącznie na pochodzeniu biologicznym',
@@ -272,7 +271,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
           'Centralna zasada zaczerpnięta z życia Abrahama (Galatów 3:6).',
     ),
     QuizQuestion(
-      text: 'Jaką rolę odgrywało prawo, według Galatów 3-4, w oczekiwaniu na Chrystusa?',
+      text:
+          'Jaką rolę odgrywało prawo, według Galatów 3-4, w oczekiwaniu na Chrystusa?',
       options: <String>[
         'Rolę wychowawcy prowadzącego do Chrystusa',
         'Ostateczny środek zbawienia',
@@ -280,13 +280,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Przekleństwo bez celu',
       ],
       correctIndex: 0,
-      explanation:
-          'Prawo przygotowywało drogę dla Mesjasza (Galatów 3:24).',
+      explanation: 'Prawo przygotowywało drogę dla Mesjasza (Galatów 3:24).',
     ),
   ],
   'Galatians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaki owoc ducha podkreśla Galatów 5, w przeciwieństwie do uczynków ciała?',
+      text:
+          'Jaki owoc ducha podkreśla Galatów 5, w przeciwieństwie do uczynków ciała?',
       options: <String>[
         'Miłość, radość, pokój, cierpliwość i inne cechy',
         'Bogactwo i władzę',
@@ -322,11 +322,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Dzięki swojemu materialnemu bogactwu',
       ],
       correctIndex: 0,
-      explanation:
-          'Fundamentalna zasada zbawienia (Efezjan 2:8, 9).',
+      explanation: 'Fundamentalna zasada zbawienia (Efezjan 2:8, 9).',
     ),
     QuizQuestion(
-      text: 'Co Chrystus dokonuje między Żydami a nie-Żydami, według Efezjan 2?',
+      text:
+          'Co Chrystus dokonuje między Żydami a nie-Żydami, według Efezjan 2?',
       options: <String>[
         'Jednoczy ich w jedną nową ludzkość',
         'Utrzymuje trwały podział',
@@ -334,8 +334,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Ignoruje to rozróżnienie',
       ],
       correctIndex: 0,
-      explanation:
-          'Mur podziału zostaje zburzony (Efezjan 2:14).',
+      explanation: 'Mur podziału zostaje zburzony (Efezjan 2:14).',
     ),
   ],
   'Ephesians#1': <QuizQuestion>[
@@ -348,8 +347,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Proroctwo o Rzymie',
       ],
       correctIndex: 0,
-      explanation:
-          'Nieoczekiwane włączenie narodów (Efezjan 3:6).',
+      explanation: 'Nieoczekiwane włączenie narodów (Efezjan 3:6).',
     ),
     QuizQuestion(
       text: 'Co chrześcijanie muszą „przyoblec”, według Efezjan 4?',
@@ -360,8 +358,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Wyższy status społeczny',
       ],
       correctIndex: 0,
-      explanation:
-          'Wymagana jest głęboka wewnętrzna zmiana (Efezjan 4:24).',
+      explanation: 'Wymagana jest głęboka wewnętrzna zmiana (Efezjan 4:24).',
     ),
   ],
   'Ephesians#2': <QuizQuestion>[
@@ -400,11 +397,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Bez nadziei oskarża swoich strażników',
       ],
       correctIndex: 0,
-      explanation:
-          'Pozytywna postawa mimo trudności (Filipian 1).',
+      explanation: 'Pozytywna postawa mimo trudności (Filipian 1).',
     ),
     QuizQuestion(
-      text: 'Jakie słynne stwierdzenie podsumowuje spojrzenie Pawła na życie i śmierć?',
+      text:
+          'Jakie słynne stwierdzenie podsumowuje spojrzenie Pawła na życie i śmierć?',
       options: <String>[
         '„Dla mnie życiem jest Chrystus, a śmierć jest zyskiem”',
         '„Życie nie ma sensu”',
@@ -412,8 +409,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         '„Śmierci należy unikać za wszelką cenę”',
       ],
       correctIndex: 0,
-      explanation:
-          'Całkowita ufność w Chrystusa (Filipian 1:21).',
+      explanation: 'Całkowita ufność w Chrystusa (Filipian 1:21).',
     ),
   ],
   'Philippians#1': <QuizQuestion>[
@@ -426,11 +422,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Zwycięskiego generała',
       ],
       correctIndex: 0,
-      explanation:
-          'Wzorzec skrajnej pokory (Filipian 2:5-8).',
+      explanation: 'Wzorzec skrajnej pokory (Filipian 2:5-8).',
     ),
     QuizQuestion(
-      text: 'Z czego, jak mówi Paweł, zrezygnował, aby zyskać Chrystusa, w Filipian 3?',
+      text:
+          'Z czego, jak mówi Paweł, zrezygnował, aby zyskać Chrystusa, w Filipian 3?',
       options: <String>[
         'Ze wszystkich swoich dawnych przywilejów i osiągnięć',
         'Z niczego konkretnego',
@@ -452,8 +448,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Nic konkretnego',
       ],
       correctIndex: 0,
-      explanation:
-          'Obietnica wewnętrznego pokoju (Filipian 4:6, 7).',
+      explanation: 'Obietnica wewnętrznego pokoju (Filipian 4:6, 7).',
     ),
     QuizQuestion(
       text: 'Jakie oświadczenie ufności czyni Paweł o swojej osobistej sile?',
@@ -464,8 +459,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         '„Nic mnie tak naprawdę nie podtrzymuje”',
       ],
       correctIndex: 0,
-      explanation:
-          'Ufność pokładana w Chrystusie (Filipian 4:13).',
+      explanation: 'Ufność pokładana w Chrystusie (Filipian 4:13).',
     ),
   ],
   'Colossians#0': <QuizQuestion>[
@@ -478,8 +472,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Przyszedł po całym stworzeniu',
       ],
       correctIndex: 0,
-      explanation:
-          'Chrystusowi przypisano centralne miejsce (Kolosan 1:16).',
+      explanation: 'Chrystusowi przypisano centralne miejsce (Kolosan 1:16).',
     ),
     QuizQuestion(
       text: 'Jaką „tajemnicę”, jak mówi Paweł, ma za zadanie objawić?',
@@ -490,8 +483,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Ukryty rytuał świątynny',
       ],
       correctIndex: 0,
-      explanation:
-          'Prawda teraz ujawniona publicznie (Kolosan 1:27).',
+      explanation: 'Prawda teraz ujawniona publicznie (Kolosan 1:27).',
     ),
   ],
   'Colossians#1': <QuizQuestion>[
@@ -504,8 +496,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Przed nauką apostołów',
       ],
       correctIndex: 0,
-      explanation:
-          'Ostrzeżenie przed fałszywymi naukami (Kolosan 2:8).',
+      explanation: 'Ostrzeżenie przed fałszywymi naukami (Kolosan 2:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['obrzezanie', 'aniołowie', 'mądrość'],
     ),
@@ -524,7 +515,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
   ],
   'Colossians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jak Paweł zachęca wierzących do zachowania wobec osób spoza wiary?',
+      text:
+          'Jak Paweł zachęca wierzących do zachowania wobec osób spoza wiary?',
       options: <String>[
         'Z mądrością, jak najlepiej wykorzystując czas',
         'Z całkowitą obojętnością',
@@ -532,8 +524,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Z jawną pogardą',
       ],
       correctIndex: 0,
-      explanation:
-          'Zaleca się mądre postępowanie (Kolosan 4:5).',
+      explanation: 'Zaleca się mądre postępowanie (Kolosan 4:5).',
     ),
     QuizQuestion(
       text: 'Jaki ton cechuje zakończenie listu do Kolosan?',
@@ -544,8 +535,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Nagłe milczenie',
       ],
       correctIndex: 0,
-      explanation:
-          'Paweł kończy serdecznymi pozdrowieniami (Kolosan 4).',
+      explanation: 'Paweł kończy serdecznymi pozdrowieniami (Kolosan 4).',
     ),
   ],
   '1 Thessalonians#0': <QuizQuestion>[
@@ -558,8 +548,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Jako opartą wyłącznie na strachu',
       ],
       correctIndex: 0,
-      explanation:
-          'Ich wiara stała się uznanym wzorem (1 Tesaloniczan 1).',
+      explanation: 'Ich wiara stała się uznanym wzorem (1 Tesaloniczan 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['brzemię', 'wstyd', 'filar'],
     ),
@@ -572,8 +561,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Opartą na pochlebstwie',
       ],
       correctIndex: 0,
-      explanation:
-          'Czuły obraz jego oddania (1 Tesaloniczan 2:7).',
+      explanation: 'Czuły obraz jego oddania (1 Tesaloniczan 2:7).',
     ),
   ],
   '1 Thessalonians#1': <QuizQuestion>[
@@ -590,8 +578,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
           'Pasterska troska motywowała to zlecenie (1 Tesaloniczan 3).',
     ),
     QuizQuestion(
-      text: 'Jakie uczucie wyraża Paweł, dowiadując się o ich niezachwianej wierności?',
-      options: <String>['Wielką radość', 'Rozczarowanie', 'Obojętność', 'Gniew'],
+      text:
+          'Jakie uczucie wyraża Paweł, dowiadując się o ich niezachwianej wierności?',
+      options: <String>[
+        'Wielką radość',
+        'Rozczarowanie',
+        'Obojętność',
+        'Gniew',
+      ],
       correctIndex: 0,
       explanation:
           'Ich niezłomność głęboko go pociesza (1 Tesaloniczan 3:8, 9).',
@@ -609,12 +603,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
         'Zmartwychwstanie dotknie tylko nielicznych uprzywilejowanych',
       ],
       correctIndex: 0,
-      explanation:
-          'Centralna nadzieja dla wierzących (1 Tesaloniczan 4:17).',
+      explanation: 'Centralna nadzieja dla wierzących (1 Tesaloniczan 4:17).',
     ),
     QuizQuestion(
       text: 'Do czego porównany jest dzień Jehowy w 1 Tesaloniczan 5?',
-      options: <String>['Do złodzieja w nocy', 'Do przewidywalnej uczty', 'Do zwyczajnego dnia', 'Do zwykłego ostrzeżenia bez skutku'],
+      options: <String>[
+        'Do złodzieja w nocy',
+        'Do przewidywalnej uczty',
+        'Do zwyczajnego dnia',
+        'Do zwykłego ostrzeżenia bez skutku',
+      ],
       correctIndex: 0,
       explanation:
           'Obraz nagłego, niespodziewanego przybycia (1 Tesaloniczan 5:2).',
@@ -624,4 +622,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC6 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPlC6 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesPlC6 =
+    <String, List<QuizQuestion>>{};

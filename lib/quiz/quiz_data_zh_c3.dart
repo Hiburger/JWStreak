@@ -1,15 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
   'Esther#0': <QuizQuestion>[
     QuizQuestion(
       text: '瓦实提王后为什么被废黜？',
-      options: <String>[
-        '她拒绝在王和众宾客面前露面',
-        '她密谋对抗王',
-        '她病倒了',
-        '她离开了王宫',
-      ],
+      options: <String>['她拒绝在王和众宾客面前露面', '她密谋对抗王', '她病倒了', '她离开了王宫'],
       correctIndex: 0,
       explanation: '她的拒绝导致她被废黜（以斯帖记1章）。',
     ),
@@ -21,12 +17,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '哈曼为什么想要灭绝帝国境内所有的犹太人？',
-      options: <String>[
-        '末底改不肯向他下拜',
-        '犹太人欠他债务',
-        '王命令他这样做',
-        '战争刚刚爆发',
-      ],
+      options: <String>['末底改不肯向他下拜', '犹太人欠他债务', '王命令他这样做', '战争刚刚爆发'],
       correctIndex: 0,
       explanation: '哈曼的愤怒演变成一个种族灭绝的阴谋（以斯帖记3章）。',
     ),
@@ -45,23 +36,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '王睡不着觉的时候，发生了什么事？',
-      options: <String>[
-        '他发现末底改从来没有得到奖赏',
-        '他立刻召见以斯帖',
-        '他当场处死了哈曼',
-        '他撤销了自己的谕旨',
-      ],
+      options: <String>['他发现末底改从来没有得到奖赏', '他立刻召见以斯帖', '他当场处死了哈曼', '他撤销了自己的谕旨'],
       correctIndex: 0,
       explanation: '这个天意的细节使局势逆转（以斯帖记6章）。',
     ),
     QuizQuestion(
       text: '以斯帖是怎样揭发哈曼的阴谋的？',
-      options: <String>[
-        '在第二次宴席上，当着王的面',
-        '通过一封匿名信',
-        '在全民面前公开揭发',
-        '通过一个仆人',
-      ],
+      options: <String>['在第二次宴席上，当着王的面', '通过一封匿名信', '在全民面前公开揭发', '通过一个仆人'],
       correctIndex: 0,
       explanation: '哈曼的阴谋被揭穿，他也被处死（以斯帖记7章）。',
     ),
@@ -69,12 +50,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Esther#2': <QuizQuestion>[
     QuizQuestion(
       text: '新的谕旨是怎样对抗哈曼所颁布的谕旨的？',
-      options: <String>[
-        '准许犹太人自卫',
-        '完全废除第一道谕旨',
-        '把所有波斯人都流放',
-        '什么都没有改变',
-      ],
+      options: <String>['准许犹太人自卫', '完全废除第一道谕旨', '把所有波斯人都流放', '什么都没有改变'],
       correctIndex: 0,
       explanation: '一道不能撤销的谕旨必须用另一道谕旨来抗衡（以斯帖记8章）。',
     ),
@@ -86,12 +62,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '末底改后来担任了什么职位？',
-      options: <String>[
-        '一个仅次于王的崇高职位',
-        '他被流放了',
-        '他仍然只是个普通官员',
-        '他离开了波斯',
-      ],
+      options: <String>['一个仅次于王的崇高职位', '他被流放了', '他仍然只是个普通官员', '他离开了波斯'],
       correctIndex: 0,
       explanation: '末底改为自己同胞的福祉效力（以斯帖记10章）。',
     ),
@@ -99,34 +70,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#0': <QuizQuestion>[
     QuizQuestion(
       text: '撒但就约伯的事向上帝提出了什么质疑？',
-      options: <String>[
-        '约伯事奉上帝只是为了个人利益',
-        '约伯根本不存在',
-        '约伯早就不忠了',
-        '约伯想抛弃自己的家人',
-      ],
+      options: <String>['约伯事奉上帝只是为了个人利益', '约伯根本不存在', '约伯早就不忠了', '约伯想抛弃自己的家人'],
       correctIndex: 0,
       explanation: '撒但质疑约伯事奉上帝的动机（约伯记1章）。',
     ),
     QuizQuestion(
       text: '约伯在失去一切之后有什么反应？',
-      options: <String>[
-        '他没有犯罪，也没有指责上帝行事不义',
-        '他咒骂上帝',
-        '他设法报复',
-        '他放弃了自己的信仰',
-      ],
+      options: <String>['他没有犯罪，也没有指责上帝行事不义', '他咒骂上帝', '他设法报复', '他放弃了自己的信仰'],
       correctIndex: 0,
       explanation: '尽管遭遇考验，他的忠义仍然完好无损（约伯记1章）。',
     ),
     QuizQuestion(
       text: '约伯生病以后，他的妻子建议他怎么做？',
-      options: <String>[
-        '咒骂上帝，然后死去',
-        '去看医生',
-        '逃到远方',
-        '静静地耐心等待',
-      ],
+      options: <String>['咒骂上帝，然后死去', '去看医生', '逃到远方', '静静地耐心等待'],
       correctIndex: 0,
       explanation: '约伯拒绝了这个绝望的建议（约伯记2章）。',
     ),
@@ -134,34 +90,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#1': <QuizQuestion>[
     QuizQuestion(
       text: '比勒达在他第一次讲话中提出的主要论点是什么？',
-      options: <String>[
-        '祖先的智慧证明上帝是公正的',
-        '上帝并不存在',
-        '约伯是无辜的',
-        '苦难没有任何起因',
-      ],
+      options: <String>['祖先的智慧证明上帝是公正的', '上帝并不存在', '约伯是无辜的', '苦难没有任何起因'],
       correctIndex: 0,
       explanation: '比勒达倚靠传统的说法（约伯记8章）。',
     ),
     QuizQuestion(
       text: '约伯回答比勒达时，内心深深渴望什么？',
-      options: <String>[
-        '有一位在他与上帝之间的中保',
-        '有钱偿还债务',
-        '向朋友们报复',
-        '立刻得到一群新的牲畜',
-      ],
+      options: <String>['有一位在他与上帝之间的中保', '有钱偿还债务', '向朋友们报复', '立刻得到一群新的牲畜'],
       correctIndex: 0,
       explanation: '约伯渴望能公平地申诉自己的案子（约伯记9章）。',
     ),
     QuizQuestion(
       text: '琐法在他第一次讲话中给约伯什么建议？',
-      options: <String>[
-        '为一个隐藏的罪悔改',
-        '离开自己的家人',
-        '去请教另一位智者',
-        '永远保持沉默',
-      ],
+      options: <String>['为一个隐藏的罪悔改', '离开自己的家人', '去请教另一位智者', '永远保持沉默'],
       correctIndex: 0,
       explanation: '琐法认为约伯隐瞒了什么过错（约伯记11章）。',
     ),
@@ -169,12 +110,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#2': <QuizQuestion>[
     QuizQuestion(
       text: '尽管深受苦难，约伯说出了什么名言？',
-      options: <String>[
-        '“我知道我的救赎主活着”',
-        '“上帝永远抛弃了我”',
-        '“人生毫无意义”',
-        '“我宁愿现在就死”',
-      ],
+      options: <String>['“我知道我的救赎主活着”', '“上帝永远抛弃了我”', '“人生毫无意义”', '“我宁愿现在就死”'],
       correctIndex: 0,
       explanation: '这句满怀希望的宣告出现在约伯记19章。',
     ),
@@ -204,34 +140,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#3': <QuizQuestion>[
     QuizQuestion(
       text: '以利法在第三次讲话中具体指控约伯犯了什么？',
-      options: <String>[
-        '具体的罪行，例如欺压穷人',
-        '抢劫圣殿',
-        '背弃家人',
-        '向王说谎',
-      ],
+      options: <String>['具体的罪行，例如欺压穷人', '抢劫圣殿', '背弃家人', '向王说谎'],
       correctIndex: 0,
       explanation: '以利法的指控越来越具体，却毫无根据（约伯记22章）。',
     ),
     QuizQuestion(
       text: '约伯在回答中热切渴望什么？',
-      options: <String>[
-        '直接到上帝面前申诉自己的案子',
-        '逃到远离家人的地方',
-        '获得财富',
-        '向朋友们报复',
-      ],
+      options: <String>['直接到上帝面前申诉自己的案子', '逃到远离家人的地方', '获得财富', '向朋友们报复'],
       correctIndex: 0,
       explanation: '约伯寻求一个公平的申诉机会（约伯记23章）。',
     ),
     QuizQuestion(
       text: '约伯在第28章阐述了什么核心主题？',
-      options: <String>[
-        '智慧无可比拟的价值',
-        '开采矿产的财富',
-        '沙漠的地理',
-        '献祭的律例',
-      ],
+      options: <String>['智慧无可比拟的价值', '开采矿产的财富', '沙漠的地理', '献祭的律例'],
       correctIndex: 0,
       explanation: '这首诗歌颂智慧比黄金更宝贵（约伯记28章）。',
     ),
@@ -239,34 +160,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#4': <QuizQuestion>[
     QuizQuestion(
       text: '约伯回想过去的日子时，记起了什么？',
-      options: <String>[
-        '他从前所受的尊重和荣耀',
-        '他卑微的出身',
-        '一生都在打仗',
-        '他在异乡度过的童年',
-      ],
+      options: <String>['他从前所受的尊重和荣耀', '他卑微的出身', '一生都在打仗', '他在异乡度过的童年'],
       correctIndex: 0,
       explanation: '约伯将他受人尊崇的过去和眼下的处境做对比（约伯记29章）。',
     ),
     QuizQuestion(
       text: '约伯在最后的清白誓言中宣告了什么？',
-      options: <String>[
-        '他确认自己没有犯下所列举的任何过错',
-        '他承认犯了几项罪',
-        '他拒绝回答',
-        '他直接指控上帝',
-      ],
+      options: <String>['他确认自己没有犯下所列举的任何过错', '他承认犯了几项罪', '他拒绝回答', '他直接指控上帝'],
       correctIndex: 0,
       explanation: '约伯用一个涵盖广泛的誓言作为自己申辩的总结（约伯记31章）。',
     ),
     QuizQuestion(
       text: '在三个朋友之后发言的以利户是谁？',
-      options: <String>[
-        '一个自认为拥有智慧的年轻人',
-        '上帝差来的天使',
-        '第四位年长的朋友',
-        '约伯的儿子',
-      ],
+      options: <String>['一个自认为拥有智慧的年轻人', '上帝差来的天使', '第四位年长的朋友', '约伯的儿子'],
       correctIndex: 0,
       explanation: '因为几位长者都没能说服约伯，以利户便出面发言（约伯记32章）。',
     ),
@@ -274,23 +180,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Job#5': <QuizQuestion>[
     QuizQuestion(
       text: '耶和华最终是从哪里向约伯说话的？',
-      options: <String>[
-        '从旋风当中',
-        '从一个梦境中',
-        '从一位可见的天使那里',
-        '他从来没有回答过',
-      ],
+      options: <String>['从旋风当中', '从一个梦境中', '从一位可见的天使那里', '他从来没有回答过'],
       correctIndex: 0,
       explanation: '上帝终于回答了约伯，但是用问题来回答（约伯记38章）。',
     ),
     QuizQuestion(
       text: '耶和华向约伯提出的问题主要涉及什么？',
-      options: <String>[
-        '创造万物，以及对自然界的掌控',
-        '约伯隐藏的罪',
-        '列国的政治',
-        '圣殿的仪式',
-      ],
+      options: <String>['创造万物，以及对自然界的掌控', '约伯隐藏的罪', '列国的政治', '圣殿的仪式'],
       correctIndex: 0,
       explanation: '上帝显明他创造性智慧的浩瀚无比（约伯记38-41章）。',
     ),
@@ -309,34 +205,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#0': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇1篇把默想上帝律法而快乐的人比作什么？',
-      options: <String>[
-        '栽在溪水旁的树',
-        '坚固的磐石',
-        '飞翔的鸟儿',
-        '点亮的灯',
-      ],
+      options: <String>['栽在溪水旁的树', '坚固的磐石', '飞翔的鸟儿', '点亮的灯'],
       correctIndex: 0,
       explanation: '这卷书一开始就用了硕果累累的树这个比喻（诗篇1篇）。',
     ),
     QuizQuestion(
       text: '诗篇19篇在前半部分歌颂了什么？',
-      options: <String>[
-        '上帝在诸天所彰显的荣耀',
-        '一位王的胜利',
-        '圣殿的建造',
-        '一场打胜的战役',
-      ],
+      options: <String>['上帝在诸天所彰显的荣耀', '一位王的胜利', '圣殿的建造', '一场打胜的战役'],
       correctIndex: 0,
       explanation: '“诸天述说上帝的荣耀”（诗篇19:1）。',
     ),
     QuizQuestion(
       text: '诗篇8篇面对浩瀚无边的创造，提出了什么问题？',
-      options: <String>[
-        '世人算什么，你竟顾念他？',
-        '海洋为什么这么浩瀚？',
-        '伊甸园位于何处？',
-        '天上究竟有多少颗星？',
-      ],
+      options: <String>['世人算什么，你竟顾念他？', '海洋为什么这么浩瀚？', '伊甸园位于何处？', '天上究竟有多少颗星？'],
       correctIndex: 0,
       explanation: '诗人惊叹于人在创造中所占的地位（诗篇8:4）。',
     ),
@@ -344,12 +225,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#1': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇23篇怎样描述耶和华？',
-      options: <String>[
-        '像一位牧人照顾自己的羊群',
-        '像一位严厉的审判官',
-        '像一位遥远的君王',
-        '像一位报复心重的战士',
-      ],
+      options: <String>['像一位牧人照顾自己的羊群', '像一位严厉的审判官', '像一位遥远的君王', '像一位报复心重的战士'],
       correctIndex: 0,
       explanation: '“耶和华是我的牧者”（诗篇23:1）。',
     ),
@@ -379,23 +255,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#2': <QuizQuestion>[
     QuizQuestion(
       text: '大卫在拔示巴事件犯罪之后，写了什么感人的祷告？',
-      options: <String>[
-        '诗篇51篇，祈求一颗纯洁的心',
-        '一首军事胜利之歌',
-        '一个关于巴比伦的预言',
-        '一首加冕之歌',
-      ],
+      options: <String>['诗篇51篇，祈求一颗纯洁的心', '一首军事胜利之歌', '一个关于巴比伦的预言', '一首加冕之歌'],
       correctIndex: 0,
       explanation: '“上帝啊，求你为我造一颗纯洁的心”（诗篇51:10）。',
     ),
     QuizQuestion(
       text: '诗篇42篇把诗人对上帝的渴慕比作什么？',
-      options: <String>[
-        '一只渴求溪水的母鹿',
-        '一头饥饿的狮子',
-        '一只笼中鸟',
-        '一个匆忙的商人',
-      ],
+      options: <String>['一只渴求溪水的母鹿', '一头饥饿的狮子', '一只笼中鸟', '一个匆忙的商人'],
       correctIndex: 0,
       explanation: '这是一幅描绘属灵干渴的强烈意象（诗篇42:1）。',
     ),
@@ -414,34 +280,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#3': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇72篇是为谁祈求公正繁荣统治之福的祷告？',
-      options: <String>[
-        '为王（所罗门，预言性地也指弥赛亚）',
-        '只为祭司',
-        '为敌对的列国',
-        '为众先知',
-      ],
+      options: <String>['为王（所罗门，预言性地也指弥赛亚）', '只为祭司', '为敌对的列国', '为众先知'],
       correctIndex: 0,
       explanation: '这首弥赛亚诗篇描述了一个持久的和平统治（诗篇72篇）。',
     ),
     QuizQuestion(
       text: '诗篇73篇里，什么难题困扰着亚萨？',
-      options: <String>[
-        '恶人表面上兴旺发达',
-        '圣殿的贫困',
-        '缺乏雨水',
-        '众先知保持沉默',
-      ],
+      options: <String>['恶人表面上兴旺发达', '圣殿的贫困', '缺乏雨水', '众先知保持沉默'],
       correctIndex: 0,
       explanation: '亚萨进入上帝的圣所后，才解开了这个困惑（诗篇73:17）。',
     ),
     QuizQuestion(
       text: '诗篇68篇用什么意象描绘上帝大能的行进？',
-      options: <String>[
-        '他为自己的子民驰骋穿越旷野',
-        '他一直隐而不见',
-        '他只在海上航行',
-        '他独自作战，从不介入',
-      ],
+      options: <String>['他为自己的子民驰骋穿越旷野', '他一直隐而不见', '他只在海上航行', '他独自作战，从不介入'],
       correctIndex: 0,
       explanation: '这是描述上帝大能的诗意语言（诗篇68篇）。',
     ),
@@ -449,12 +300,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#4': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇90篇中，摩西就人生短暂这件事向上帝祈求什么？',
-      options: <String>[
-        '教导我们数算自己的日子，好存智慧的心',
-        '无限延长人的寿命',
-        '抹去死亡的记忆',
-        '加快时间的流逝',
-      ],
+      options: <String>['教导我们数算自己的日子，好存智慧的心', '无限延长人的寿命', '抹去死亡的记忆', '加快时间的流逝'],
       correctIndex: 0,
       explanation: '“求你教导我们数算自己的日子”（诗篇90:12）。',
     ),
@@ -471,12 +317,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '诗篇84篇怎样论到上帝的居所？',
-      options: <String>[
-        '说它无比可爱，令人无限向往',
-        '说它令人畏惧',
-        '说它很快就会被毁',
-        '说它只留给君王',
-      ],
+      options: <String>['说它无比可爱，令人无限向往', '说它令人畏惧', '说它很快就会被毁', '说它只留给君王'],
       correctIndex: 0,
       explanation: '“你的居所多么可爱！”（诗篇84:1）。',
     ),
@@ -484,12 +325,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#5': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇100篇开篇发出了什么邀请？',
-      options: <String>[
-        '要欢呼喜乐，怀着感恩的心进到他面前',
-        '要完全保持静默',
-        '要远远逃离圣殿',
-        '要为自己的罪哭泣',
-      ],
+      options: <String>['要欢呼喜乐，怀着感恩的心进到他面前', '要完全保持静默', '要远远逃离圣殿', '要为自己的罪哭泣'],
       correctIndex: 0,
       explanation: '这是号召众人齐声欢乐赞美的话（诗篇100篇）。',
     ),
@@ -506,12 +342,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '诗篇110篇里的哪句话被希腊语经卷用来指基督？',
-      options: <String>[
-        '“你坐在我右边”',
-        '“你将做巴比伦的王”',
-        '“回到埃及去”',
-        '“建造我的圣殿”',
-      ],
+      options: <String>['“你坐在我右边”', '“你将做巴比伦的王”', '“回到埃及去”', '“建造我的圣殿”'],
       correctIndex: 0,
       explanation: '耶稣自己引用了这节经文（诗篇110:1）。',
     ),
@@ -519,23 +350,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#6': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇119篇是圣经中最长的一章，它的主题是什么？',
-      options: <String>[
-        '对上帝律法和话语的热爱',
-        '一场历史性的战役',
-        '圣殿的建造',
-        '前往埃及的旅程',
-      ],
+      options: <String>['对上帝律法和话语的热爱', '一场历史性的战役', '圣殿的建造', '前往埃及的旅程'],
       correctIndex: 0,
       explanation: '每个段落都在默想上帝的律法（诗篇119篇）。',
     ),
     QuizQuestion(
       text: '诗篇121篇中，诗人说自己的帮助是从哪里来的？',
-      options: <String>[
-        '从创造天地的耶和华而来',
-        '从群山本身而来',
-        '从王的军队而来',
-        '从圣殿的祭司而来',
-      ],
+      options: <String>['从创造天地的耶和华而来', '从群山本身而来', '从王的军队而来', '从圣殿的祭司而来'],
       correctIndex: 0,
       explanation: '“我要向群山举目……我的帮助是从耶和华而来”（诗篇121篇）。',
     ),
@@ -554,34 +375,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Psalms#7': <QuizQuestion>[
     QuizQuestion(
       text: '诗篇137篇开篇描绘了什么令人心碎的场景？',
-      options: <String>[
-        '被掳的人坐在巴比伦河边哭泣',
-        '一场加冕的宴席',
-        '一场得胜的战役',
-        '圣殿的建造',
-      ],
+      options: <String>['被掳的人坐在巴比伦河边哭泣', '一场加冕的宴席', '一场得胜的战役', '圣殿的建造'],
       correctIndex: 0,
       explanation: '“我们坐在巴比伦河边哭泣”（诗篇137:1）。',
     ),
     QuizQuestion(
       text: '诗篇145篇怎样描述耶和华？',
-      options: <String>[
-        '伟大，配得无限的赞美',
-        '疏远冷漠',
-        '只有严厉',
-        '对自己的子民保持沉默',
-      ],
+      options: <String>['伟大，配得无限的赞美', '疏远冷漠', '只有严厉', '对自己的子民保持沉默'],
       correctIndex: 0,
       explanation: '这是一首满怀赞美的诗篇（诗篇145:3）。',
     ),
     QuizQuestion(
       text: '诗篇的最后一篇，也就是诗篇150篇，以什么呼吁作结？',
-      options: <String>[
-        '凡有气息的都要赞美耶和华',
-        '愿万物永远沉寂',
-        '只有君王才可以赞美上帝',
-        '音乐应当被禁止',
-      ],
+      options: <String>['凡有气息的都要赞美耶和华', '愿万物永远沉寂', '只有君王才可以赞美上帝', '音乐应当被禁止'],
       correctIndex: 0,
       explanation: '全书以普世性的赞美呼吁作结（诗篇150:6）。',
     ),
@@ -589,34 +395,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Proverbs#0': <QuizQuestion>[
     QuizQuestion(
       text: '根据箴言1章，知识的开端是什么？',
-      options: <String>[
-        '敬畏耶和华',
-        '财富',
-        '单凭经验',
-        '正规教育',
-      ],
+      options: <String>['敬畏耶和华', '财富', '单凭经验', '正规教育'],
       correctIndex: 0,
       explanation: '这条根本的原则是全书的开篇（箴言1:7）。',
     ),
     QuizQuestion(
       text: '箴言3章就信赖这件事提出了什么劝告？',
-      options: <String>[
-        '要一心信赖耶和华',
-        '只倚靠自己的理解力',
-        '避免做任何重要的决定',
-        '随从大多数人的意见',
-      ],
+      options: <String>['要一心信赖耶和华', '只倚靠自己的理解力', '避免做任何重要的决定', '随从大多数人的意见'],
       correctIndex: 0,
       explanation: '“你要一心倚靠耶和华”（箴言3:5）。',
     ),
     QuizQuestion(
       text: '箴言8章把智慧拟人化为什么？',
-      options: <String>[
-        '一个在众人面前公开呼喊的声音',
-        '一件被提及却看不见的宝藏',
-        '一位沉默的君王',
-        '一本合上的书',
-      ],
+      options: <String>['一个在众人面前公开呼喊的声音', '一件被提及却看不见的宝藏', '一位沉默的君王', '一本合上的书'],
       correctIndex: 0,
       explanation: '智慧在公众场所高声呼喊（箴言8章）。',
     ),
@@ -624,12 +415,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Proverbs#1': <QuizQuestion>[
     QuizQuestion(
       text: '箴言15章论到怎样回应愤怒？',
-      options: <String>[
-        '柔和的回答使怒气消退',
-        '总要用强硬的态度回应',
-        '保持沉默总是更可取',
-        '必须完全无视愤怒',
-      ],
+      options: <String>['柔和的回答使怒气消退', '总要用强硬的态度回应', '保持沉默总是更可取', '必须完全无视愤怒'],
       correctIndex: 0,
       explanation: '“柔和的回答使怒气消退”（箴言15:1）。',
     ),
@@ -646,12 +432,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '箴言14章那位建立家室的智慧妇人代表什么？',
-      options: <String>[
-        '能建立并保存家庭的实用智慧',
-        '一位外邦的王后',
-        '一个普通的女工',
-        '一个无足轻重的小角色',
-      ],
+      options: <String>['能建立并保存家庭的实用智慧', '一位外邦的王后', '一个普通的女工', '一个无足轻重的小角色'],
       correctIndex: 0,
       explanation: '这个比喻说明智慧具有建设性的作用（箴言14:1）。',
     ),
@@ -659,34 +440,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Proverbs#2': <QuizQuestion>[
     QuizQuestion(
       text: '箴言18章论到舌头的力量时说了什么？',
-      options: <String>[
-        '生死都在舌头的权下',
-        '舌头其实毫无影响力',
-        '这只关乎掌权的人',
-        '舌头总是无害的',
-      ],
+      options: <String>['生死都在舌头的权下', '舌头其实毫无影响力', '这只关乎掌权的人', '舌头总是无害的'],
       correctIndex: 0,
       explanation: '这是一幅有力的意象，说明话语的影响（箴言18:21）。',
     ),
     QuizQuestion(
       text: '箴言19章论到善待穷人时说了什么？',
-      options: <String>[
-        '这就像是借给耶和华一样',
-        '这是浪费时间',
-        '这只跟富人有关',
-        '这会削弱社会',
-      ],
+      options: <String>['这就像是借给耶和华一样', '这是浪费时间', '这只跟富人有关', '这会削弱社会'],
       correctIndex: 0,
       explanation: '“怜恤穷人的，就是借给耶和华”（箴言19:17）。',
     ),
     QuizQuestion(
       text: '根据箴言22章，什么比大财富更好？',
-      options: <String>[
-        '美好的名声',
-        '宏伟的宫殿',
-        '强大的军队',
-        '辽阔的疆土',
-      ],
+      options: <String>['美好的名声', '宏伟的宫殿', '强大的军队', '辽阔的疆土'],
       correctIndex: 0,
       explanation: '“美名胜过大财富”（箴言22:1）。',
     ),
@@ -705,23 +471,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '箴言29章论到缺乏属灵指引时说了什么？',
-      options: <String>[
-        '没有异象，民就放肆',
-        '民总是可以独自兴旺',
-        '异象无关紧要',
-        '民宁愿没有规矩',
-      ],
+      options: <String>['没有异象，民就放肆', '民总是可以独自兴旺', '异象无关紧要', '民宁愿没有规矩'],
       correctIndex: 0,
       explanation: '这是对缺乏指引的一个警告（箴言29:18）。',
     ),
     QuizQuestion(
       text: '箴言31章的结尾诗篇歌颂了什么？',
-      options: <String>[
-        '能干贤德的妇人',
-        '一位王的财富',
-        '一场军事上的胜利',
-        '一座宫殿的建造',
-      ],
+      options: <String>['能干贤德的妇人', '一位王的财富', '一场军事上的胜利', '一座宫殿的建造'],
       correctIndex: 0,
       explanation: '这是一首离合诗，赞美贤德的妻子（箴言31章）。',
     ),
@@ -729,12 +485,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Ecclesiastes#0': <QuizQuestion>[
     QuizQuestion(
       text: '传道书开篇提出了什么反复出现的观察？',
-      options: <String>[
-        '日光之下，凡事都是虚空的',
-        '一切都完全稳定',
-        '财富能解决一切',
-        '什么都不会改变',
-      ],
+      options: <String>['日光之下，凡事都是虚空的', '一切都完全稳定', '财富能解决一切', '什么都不会改变'],
       correctIndex: 0,
       explanation: '这个主题贯穿全书（传道书1:2）。',
     ),
@@ -751,12 +502,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '那段关于“凡事都有定时”的著名经文提醒我们什么？',
-      options: <String>[
-        '万事都有合宜的时候',
-        '时间根本不重要',
-        '凡事都必须立刻去做',
-        '过去无关紧要',
-      ],
+      options: <String>['万事都有合宜的时候', '时间根本不重要', '凡事都必须立刻去做', '过去无关紧要'],
       correctIndex: 0,
       explanation: '这首富有节奏感的诗歌是传道书3章的开篇。',
     ),
@@ -764,34 +510,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Ecclesiastes#1': <QuizQuestion>[
     QuizQuestion(
       text: '传道书5章就向上帝许愿这件事提出了什么劝告？',
-      options: <String>[
-        '许愿而不还愿，不如不许愿',
-        '应该多多许愿',
-        '许愿毫无价值',
-        '只有祭司才可以许愿',
-      ],
+      options: <String>['许愿而不还愿，不如不许愿', '应该多多许愿', '许愿毫无价值', '只有祭司才可以许愿'],
       correctIndex: 0,
       explanation: '这里强调向上帝说话要谨慎（传道书5:4, 5）。',
     ),
     QuizQuestion(
       text: '传道书7章论到名声时说了什么？',
-      options: <String>[
-        '美名胜过美好的膏油',
-        '名声毫无价值',
-        '只有财富才重要',
-        '名声永远不会流传下去',
-      ],
+      options: <String>['美名胜过美好的膏油', '名声毫无价值', '只有财富才重要', '名声永远不会流传下去'],
       correctIndex: 0,
       explanation: '这是对正直品格价值的评价（传道书7:1）。',
     ),
     QuizQuestion(
       text: '传道书8章就当权者提出了什么建议？',
-      options: <String>[
-        '要明智地服从，不要急于反抗',
-        '总要反抗当权者',
-        '完全无视法律',
-        '逃避一切公民的责任',
-      ],
+      options: <String>['要明智地服从，不要急于反抗', '总要反抗当权者', '完全无视法律', '逃避一切公民的责任'],
       correctIndex: 0,
       explanation: '这里劝人要谨慎行事（传道书8章）。',
     ),
@@ -799,12 +530,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Ecclesiastes#2': <QuizQuestion>[
     QuizQuestion(
       text: '传道书9章就我们日常的活动提醒了什么？',
-      options: <String>[
-        '你手所当做的事，要尽力去做',
-        '工作毫无价值',
-        '不如无所事事',
-        '只有富人才需要工作',
-      ],
+      options: <String>['你手所当做的事，要尽力去做', '工作毫无价值', '不如无所事事', '只有富人才需要工作'],
       correctIndex: 0,
       explanation: '这是号召人全心投入生活的话（传道书9:10）。',
     ),
@@ -821,12 +547,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '传道书全书最后的结论是什么？',
-      options: <String>[
-        '要敬畏上帝，遵守他的诫命',
-        '只追求享乐',
-        '一切根本毫无意义',
-        '财富才是终极目标',
-      ],
+      options: <String>['要敬畏上帝，遵守他的诫命', '只追求享乐', '一切根本毫无意义', '财富才是终极目标'],
       correctIndex: 0,
       explanation: '这个结论总结了全书的主旨（传道书12:13）。',
     ),
@@ -834,23 +555,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Song of Solomon#0': <QuizQuestion>[
     QuizQuestion(
       text: '雅歌开篇洋溢着什么样的情感？',
-      options: <String>[
-        '书拉密女子和她所爱的人之间炽热的爱情',
-        '家庭纠纷',
-        '商业谈判',
-        '王室的审判',
-      ],
+      options: <String>['书拉密女子和她所爱的人之间炽热的爱情', '家庭纠纷', '商业谈判', '王室的审判'],
       correctIndex: 0,
       explanation: '这卷书歌颂了真挚的夫妻之爱（雅歌1章）。',
     ),
     QuizQuestion(
       text: '书拉密女子在第3章的梦里做了什么？',
-      options: <String>[
-        '她在城里寻找自己所爱的人',
-        '她逃到遥远的国度',
-        '她嫁给了另一个男人',
-        '她把自己的爱完全忘记了',
-      ],
+      options: <String>['她在城里寻找自己所爱的人', '她逃到遥远的国度', '她嫁给了另一个男人', '她把自己的爱完全忘记了'],
       correctIndex: 0,
       explanation: '即使在梦里，她对爱人的忠贞依然不变（雅歌3章）。',
     ),
@@ -869,34 +580,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Song of Solomon#1': <QuizQuestion>[
     QuizQuestion(
       text: '在第4章，心上人怎样描述书拉密女子的美貌？',
-      options: <String>[
-        '用一连串赞美洋溢的诗意比喻',
-        '冷淡而疏远地',
-        '把她比作仇敌',
-        '他根本没有描述她',
-      ],
+      options: <String>['用一连串赞美洋溢的诗意比喻', '冷淡而疏远地', '把她比作仇敌', '他根本没有描述她'],
       correctIndex: 0,
       explanation: '雅歌为她写了一整首细致入微的赞美诗（雅歌4章）。',
     ),
     QuizQuestion(
       text: '第5章里，心上人来敲门的时候，发生了什么事？',
-      options: <String>[
-        '她迟迟才去开门，他已经离开了',
-        '她立刻欢喜地开了门',
-        '她拒绝见他',
-        '他根本没有来过',
-      ],
+      options: <String>['她迟迟才去开门，他已经离开了', '她立刻欢喜地开了门', '她拒绝见他', '他根本没有来过'],
       correctIndex: 0,
       explanation: '这个错过的时刻带来了令人心痛的悔恨（雅歌5章）。',
     ),
     QuizQuestion(
       text: '这件事之后，书拉密女子向谁描述她所爱的人？',
-      options: <String>[
-        '向耶路撒冷的众女子',
-        '只向自己的母亲',
-        '向所罗门王',
-        '谁都没有告诉，她保持沉默',
-      ],
+      options: <String>['向耶路撒冷的众女子', '只向自己的母亲', '向所罗门王', '谁都没有告诉，她保持沉默'],
       correctIndex: 0,
       explanation: '接下来是她热情洋溢的描述（雅歌5章）。',
     ),
@@ -904,34 +600,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Song of Solomon#2': <QuizQuestion>[
     QuizQuestion(
       text: '第8章有一句关于爱情的著名宣言，是什么？',
-      options: <String>[
-        '爱情如死一般坚强',
-        '爱情是可以用金钱买到的',
-        '爱情无关紧要',
-        '爱情永远不会长久',
-      ],
+      options: <String>['爱情如死一般坚强', '爱情是可以用金钱买到的', '爱情无关紧要', '爱情永远不会长久'],
       correctIndex: 0,
       explanation: '“大水不能浇灭爱情”（雅歌8:6, 7）。',
     ),
     QuizQuestion(
       text: '那不能浇灭爱情的“大水”象征什么？',
-      options: <String>[
-        '不能摧毁真爱的种种考验',
-        '一场真实的洪水',
-        '王国的财富',
-        '君王的权力',
-      ],
+      options: <String>['不能摧毁真爱的种种考验', '一场真实的洪水', '王国的财富', '君王的权力'],
       correctIndex: 0,
       explanation: '这是一个描绘爱情坚韧不拔的有力比喻（雅歌8章）。',
     ),
     QuizQuestion(
       text: '雅歌全书的结尾洋溢着什么基调？',
-      options: <String>[
-        '歌颂一份忠贞、双方共有的爱情',
-        '彻底的决裂',
-        '严厉的审判',
-        '战争的警告',
-      ],
+      options: <String>['歌颂一份忠贞、双方共有的爱情', '彻底的决裂', '严厉的审判', '战争的警告'],
       correctIndex: 0,
       explanation: '全书以爱情圆满的美好结局作结（雅歌8章）。',
     ),
@@ -939,12 +620,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#0': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书2章对未来的战争作出了什么应许？',
-      options: <String>[
-        '列国要把刀剑打成犁头',
-        '战争会变得更频繁',
-        '只有一个帝国会永远称霸',
-        '没有预言任何改变',
-      ],
+      options: <String>['列国要把刀剑打成犁头', '战争会变得更频繁', '只有一个帝国会永远称霸', '没有预言任何改变'],
       correctIndex: 0,
       explanation: '这是一幅普世和平的异象（以赛亚书2:4）。',
     ),
@@ -985,23 +661,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '以赛亚书11章用什么和平的意象描绘未来的统治？',
-      options: <String>[
-        '豺狼要与绵羊羔同住',
-        '狮子将主宰人类',
-        '沙漠将永远荒芜',
-        '列国将继续分裂',
-      ],
+      options: <String>['豺狼要与绵羊羔同住', '狮子将主宰人类', '沙漠将永远荒芜', '列国将继续分裂'],
       correctIndex: 0,
       explanation: '这里应许了彻底的和睦（以赛亚书11:6）。',
     ),
     QuizQuestion(
       text: '以赛亚书14章怎样描述巴比伦王骄傲的陨落？',
-      options: <String>[
-        '像一颗从天上坠落的明亮星辰',
-        '像一位永远得胜的王',
-        '像以色列的忠实盟友',
-        '像一个普通的商人',
-      ],
+      options: <String>['像一颗从天上坠落的明亮星辰', '像一位永远得胜的王', '像以色列的忠实盟友', '像一个普通的商人'],
       correctIndex: 0,
       explanation: '这是一幅令人震撼的败落景象（以赛亚书14:12）。',
     ),
@@ -1009,34 +675,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#2': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚对埃及和古实做出了什么象征性的举动？',
-      options: <String>[
-        '赤脚行走，不穿外衣',
-        '烧毁自己的衣服',
-        '禁食一整年',
-        '建造一座祭坛',
-      ],
+      options: <String>['赤脚行走，不穿外衣', '烧毁自己的衣服', '禁食一整年', '建造一座祭坛'],
       correctIndex: 0,
       explanation: '这个征兆预示了即将来临的被掳之辱（以赛亚书20章）。',
     ),
     QuizQuestion(
       text: '以赛亚书24章宣告了什么普世性的审判？',
-      options: <String>[
-        '整个大地都要震动，遭到蹂躏',
-        '只有一个国家会受审判',
-        '不会有任何审判发生',
-        '审判只涉及君王',
-      ],
+      options: <String>['整个大地都要震动，遭到蹂躏', '只有一个国家会受审判', '不会有任何审判发生', '审判只涉及君王'],
       correctIndex: 0,
       explanation: '这里描述的是普世性的规模（以赛亚书24章）。',
     ),
     QuizQuestion(
       text: '以赛亚书25章就死亡作出了什么应许？',
-      options: <String>[
-        '耶和华要永远吞灭死亡',
-        '死亡将永远不被征服',
-        '只有富人才能逃过死亡',
-        '这里完全没有提到死亡',
-      ],
+      options: <String>['耶和华要永远吞灭死亡', '死亡将永远不被征服', '只有富人才能逃过死亡', '这里完全没有提到死亡'],
       correctIndex: 0,
       explanation: '这是一个非凡的希望（以赛亚书25:8）。',
     ),
@@ -1044,12 +695,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#3': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书26章应许，凡心意倚靠上帝的人会得到什么？',
-      options: <String>[
-        '完全的平安',
-        '立刻的财富',
-        '一支所向无敌的军队',
-        '有保证的长寿',
-      ],
+      options: <String>['完全的平安', '立刻的财富', '一支所向无敌的军队', '有保证的长寿'],
       correctIndex: 0,
       explanation: '“你必保守他极其平安”（以赛亚书26:3）。',
     ),
@@ -1066,12 +712,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '关于军事同盟，以赛亚警告民众要提防什么？',
-      options: <String>[
-        '倚靠埃及而不是耶和华',
-        '只提防与巴比伦结盟',
-        '提防一切对外贸易',
-        '提防当地的祭司',
-      ],
+      options: <String>['倚靠埃及而不是耶和华', '只提防与巴比伦结盟', '提防一切对外贸易', '提防当地的祭司'],
       correctIndex: 0,
       explanation: '寻求埃及的援助受到谴责（以赛亚书30-31章）。',
     ),
@@ -1079,12 +720,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#4': <QuizQuestion>[
     QuizQuestion(
       text: '根据以赛亚书35章的应许，沙漠将会变成什么样子？',
-      options: <String>[
-        '像玫瑰一样开花',
-        '永远保持荒芜',
-        '变成海洋',
-        '被永远弃置不顾',
-      ],
+      options: <String>['像玫瑰一样开花', '永远保持荒芜', '变成海洋', '被永远弃置不顾'],
       correctIndex: 0,
       explanation: '这里应许了一个令人欢欣的转变（以赛亚书35:1）。',
     ),
@@ -1101,12 +737,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '以赛亚书40章就人的本性相对于上帝提醒了什么？',
-      options: <String>[
-        '凡有血肉之躯的都像草一样会枯萎',
-        '人本质上是永恒不灭的',
-        '上帝要倚赖人',
-        '上帝的话语经常改变',
-      ],
+      options: <String>['凡有血肉之躯的都像草一样会枯萎', '人本质上是永恒不灭的', '上帝要倚赖人', '上帝的话语经常改变'],
       correctIndex: 0,
       explanation: '“我们上帝的话语永远长存”（以赛亚书40:8）。',
     ),
@@ -1114,12 +745,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#5': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书42章怎样描述耶和华仆人的温柔？',
-      options: <String>[
-        '压伤的芦苇，他不折断',
-        '他会摧毁一路上遇到的一切',
-        '他会无视弱小的人',
-        '他会一贯采取暴力手段',
-      ],
+      options: <String>['压伤的芦苇，他不折断', '他会摧毁一路上遇到的一切', '他会无视弱小的人', '他会一贯采取暴力手段'],
       correctIndex: 0,
       explanation: '这位仆人具有非凡的温柔（以赛亚书42:3）。',
     ),
@@ -1131,12 +757,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '以赛亚书48章论到民众过去对上帝诫命的态度时说了什么？',
-      options: <String>[
-        '要是他们早点留心遵从就好了',
-        '他们一向都完全服从',
-        '诫命根本不重要',
-        '上帝从来没有要求过什么',
-      ],
+      options: <String>['要是他们早点留心遵从就好了', '他们一向都完全服从', '诫命根本不重要', '上帝从来没有要求过什么'],
       correctIndex: 0,
       explanation: '这里表达了对他们缺乏聆听的遗憾（以赛亚书48:18）。',
     ),
@@ -1144,34 +765,19 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#6': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书53章怎样描述耶和华仆人所受的苦难？',
-      options: <String>[
-        '他为我们的过犯被刺透',
-        '他一生从未受过苦',
-        '他不经历任何考验就立刻掌权',
-        '他一出生就备受尊崇',
-      ],
+      options: <String>['他为我们的过犯被刺透', '他一生从未受过苦', '他不经历任何考验就立刻掌权', '他一出生就备受尊崇'],
       correctIndex: 0,
       explanation: '这是论到救赎性苦难的核心章节（以赛亚书53:5）。',
     ),
     QuizQuestion(
       text: '以赛亚书55章发出了什么不花钱的邀请？',
-      options: <String>[
-        '你们来买酒和奶，都不用银钱',
-        '要付高价才能获得智慧',
-        '只有富人才能来',
-        '这里没有发出任何邀请',
-      ],
+      options: <String>['你们来买酒和奶，都不用银钱', '要付高价才能获得智慧', '只有富人才能来', '这里没有发出任何邀请'],
       correctIndex: 0,
       explanation: '这是一个慷慨而普世性的邀约（以赛亚书55:1）。',
     ),
     QuizQuestion(
       text: '以赛亚书58章怎样界定上帝眼中真正的“禁食”？',
-      options: <String>[
-        '把食物分给饥饿的人，释放受欺压的人',
-        '只是不吃东西',
-        '穿上特殊的衣服',
-        '整天保持沉默',
-      ],
+      options: <String>['把食物分给饥饿的人，释放受欺压的人', '只是不吃东西', '穿上特殊的衣服', '整天保持沉默'],
       correctIndex: 0,
       explanation: '真正的禁食要表现在公义的行动上（以赛亚书58:6, 7）。',
     ),
@@ -1179,12 +785,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Isaiah#7': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书60章为锡安展现了什么充满希望的画面？',
-      options: <String>[
-        '起来，发光，因为你的光已经来到',
-        '永远留在黑暗中',
-        '远远逃离自己的城市',
-        '毫无希望地等待',
-      ],
+      options: <String>['起来，发光，因为你的光已经来到', '永远留在黑暗中', '远远逃离自己的城市', '毫无希望地等待'],
       correctIndex: 0,
       explanation: '这是号召人重获光明、恢复过来的呼吁（以赛亚书60:1）。',
     ),
@@ -1201,12 +802,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '以赛亚书65章就创造的未来作出了什么应许？',
-      options: <String>[
-        '新天新地',
-        '最终的毁灭，没有任何复兴',
-        '一个仅限于一个国家的王国',
-        '一切动物生命的终结',
-      ],
+      options: <String>['新天新地', '最终的毁灭，没有任何复兴', '一个仅限于一个国家的王国', '一切动物生命的终结'],
       correctIndex: 0,
       explanation: '全书以充满希望的应许作结（以赛亚书65:17）。',
     ),
@@ -1225,12 +821,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '耶和华在第2章把以色列的不忠比作什么？',
-      options: <String>[
-        '一个忘记丈夫的妻子',
-        '一位忠信的王',
-        '一个堪作楷模的仆人',
-        '一个永远忠心的国家',
-      ],
+      options: <String>['一个忘记丈夫的妻子', '一位忠信的王', '一个堪作楷模的仆人', '一个永远忠心的国家'],
       correctIndex: 0,
       explanation: '这是描绘关系破裂、被人遗弃的意象（耶利米书2章）。',
     ),
@@ -1260,23 +851,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '耶利米书13章那条腐坏的细麻腰带象征什么？',
-      options: <String>[
-        '犹大骄傲所带来的腐败',
-        '民众重新获得的财富',
-        '与埃及牢固的联盟',
-        '祭司职分的洁净',
-      ],
+      options: <String>['犹大骄傲所带来的腐败', '民众重新获得的财富', '与埃及牢固的联盟', '祭司职分的洁净'],
       correctIndex: 0,
       explanation: '这是道德败坏的一个视觉性征兆（耶利米书13章）。',
     ),
     QuizQuestion(
       text: '耶利米书17章揭示了人心的什么本质？',
-      options: <String>[
-        '人心比什么都诡诈',
-        '人心天生善良',
-        '人心永远不会改变',
-        '人心在上帝眼中无关紧要',
-      ],
+      options: <String>['人心比什么都诡诈', '人心天生善良', '人心永远不会改变', '人心在上帝眼中无关紧要'],
       correctIndex: 0,
       explanation: '这是对人性坦率的评价（耶利米书17:9）。',
     ),
@@ -1306,12 +887,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '耶利米在第21章给被围困的民众提出了什么选择？',
-      options: <String>[
-        '向巴比伦投降（可以活命）或是抵抗（必死无疑）',
-        '立刻逃往埃及',
-        '率先攻打巴比伦',
-        '与亚述谈判',
-      ],
+      options: <String>['向巴比伦投降（可以活命）或是抵抗（必死无疑）', '立刻逃往埃及', '率先攻打巴比伦', '与亚述谈判'],
       correctIndex: 0,
       explanation: '这里提出了一个艰难却明确的抉择（耶利米书21章）。',
     ),
@@ -1336,12 +912,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '耶利米在他写给巴比伦被掳之人的信中，给了他们什么建议？',
-      options: <String>[
-        '建造房屋，为那城的平安求福',
-        '立刻起来反抗',
-        '拒绝一切工作',
-        '无视当地的官长',
-      ],
+      options: <String>['建造房屋，为那城的平安求福', '立刻起来反抗', '拒绝一切工作', '无视当地的官长'],
       correctIndex: 0,
       explanation: '这是让被掳之人务实地过日子的建议（耶利米书29章）。',
     ),
@@ -1371,12 +942,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '利甲人向犹大展示了什么忠信的榜样？',
-      options: <String>[
-        '他们严格遵守祖先所立的诫命',
-        '他们丰厚的财富',
-        '他们的军事实力',
-        '他们与埃及结的盟',
-      ],
+      options: <String>['他们严格遵守祖先所立的诫命', '他们丰厚的财富', '他们的军事实力', '他们与埃及结的盟'],
       correctIndex: 0,
       explanation: '他们的忠信和犹大的不忠形成鲜明对比（耶利米书35章）。',
     ),
@@ -1396,12 +962,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '尽管耶利米警告要留在本地，剩下的民众却做了什么？',
-      options: <String>[
-        '他们带着耶利米逃往埃及',
-        '他们完全听从了先知的劝告',
-        '他们攻打巴比伦',
-        '他们四散逃往亚述',
-      ],
+      options: <String>['他们带着耶利米逃往埃及', '他们完全听从了先知的劝告', '他们攻打巴比伦', '他们四散逃往亚述'],
       correctIndex: 0,
       explanation: '他们的不服从使处境更加恶化（耶利米书43章）。',
     ),
@@ -1409,12 +970,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   'Jeremiah#6': <QuizQuestion>[
     QuizQuestion(
       text: '耶利米书末尾几章向哪些国家宣告了审判？',
-      options: <String>[
-        '埃及、非利士人、摩押、亚扪、巴比伦等等',
-        '只有以色列',
-        '没有任何外邦国家',
-        '只有犹大',
-      ],
+      options: <String>['埃及、非利士人、摩押、亚扪、巴比伦等等', '只有以色列', '没有任何外邦国家', '只有犹大'],
       correctIndex: 0,
       explanation: '一连串针对列国的宣言为全书作结（耶利米书46-51章）。',
     ),
@@ -1443,6 +999,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC3 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesZhC3 = <String, List<QuizQuestion>>{
-  // No entries for these books in _extraQuizzes (flagship books only).
-};
+const Map<String, List<QuizQuestion>> extraQuizzesZhC3 =
+    <String, List<QuizQuestion>>{
+      // No entries for these books in _extraQuizzes (flagship books only).
+    };

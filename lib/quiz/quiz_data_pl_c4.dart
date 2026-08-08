@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPlC4 = <String, List<QuizQuestion>>{
   'Lamentations#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Jak Lamentacje 1 opisują Jerozolimę po jej upadku?',
@@ -27,7 +28,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
           'Zniszczenie jest przedstawione jako zasłużony wyrok (Lamentacje 2).',
     ),
     QuizQuestion(
-      text: 'Jaki ton dominuje w tych pierwszych dwóch rozdziałach jako całości?',
+      text:
+          'Jaki ton dominuje w tych pierwszych dwóch rozdziałach jako całości?',
       options: <String>[
         'Głęboka żałoba nad zniszczonym miastem',
         'Radosne świętowanie',
@@ -42,7 +44,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   ],
   'Lamentations#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jakie stwierdzenie nadziei stanowi sedno rozdziału 3 mimo cierpienia?',
+      text:
+          'Jakie stwierdzenie nadziei stanowi sedno rozdziału 3 mimo cierpienia?',
       options: <String>[
         'Przejawy lojalnej miłości Jehowy są nowe każdego ranka',
         'Nie ma żadnej nadziei',
@@ -73,13 +76,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Ucieczki daleko od jakiejkolwiek społeczności',
       ],
       correctIndex: 0,
-      explanation:
-          'Zachęca się do ufnej cierpliwości (Lamentacje 3:25, 26).',
+      explanation: 'Zachęca się do ufnej cierpliwości (Lamentacje 3:25, 26).',
     ),
   ],
   'Lamentations#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'O jakim skrajnym cierpieniu przypomina rozdział 4 podczas oblężenia?',
+      text:
+          'O jakim skrajnym cierpieniu przypomina rozdział 4 podczas oblężenia?',
       options: <String>[
         'O dotkliwym głodzie wśród mieszkańców',
         'O obfitości pożywienia',
@@ -105,7 +108,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
           '„Sprowadź nas z powrotem do siebie” kończy księgę (Lamentacje 5:21).',
     ),
     QuizQuestion(
-      text: 'Jakie uczucie dominuje we wspólnej modlitwie ostatniego rozdziału?',
+      text:
+          'Jakie uczucie dominuje we wspólnej modlitwie ostatniego rozdziału?',
       options: <String>[
         'Pokorne błaganie mimo wstydu za przeszłość',
         'Odnowiona pycha',
@@ -127,8 +131,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Maszerujące wojsko',
       ],
       correctIndex: 0,
-      explanation:
-          'Imponująca wizja otwiera księgę (Ezechiela 1).',
+      explanation: 'Imponująca wizja otwiera księgę (Ezechiela 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['tron', 'koła', 'świątynia'],
     ),
@@ -136,13 +139,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
       text: 'Co Ezechiel musi zrobić ze zwojem, który otrzymał?',
       options: <String>['Zjeść go', 'Spalić go', 'Ukryć go', 'Sprzedać go'],
       correctIndex: 0,
-      explanation:
-          'Symboliczny znak przyswojenia orędzia (Ezechiela 3).',
+      explanation: 'Symboliczny znak przyswojenia orędzia (Ezechiela 3).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['zjeść zwój'],
     ),
     QuizQuestion(
-      text: 'Jaki potajemny kult bałwochwalczy widzi Ezechiel uprawiany wewnątrz samej świątyni?',
+      text:
+          'Jaki potajemny kult bałwochwalczy widzi Ezechiel uprawiany wewnątrz samej świątyni?',
       options: <String>[
         'Kult słońca i bożki ukryte przez starszych',
         'Nie znajduje żadnego bałwochwalstwa',
@@ -150,8 +153,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Prawowitą publiczną ucztę',
       ],
       correctIndex: 0,
-      explanation:
-          'Wizja ujawnia ukrytą zepsucie (Ezechiela 8).',
+      explanation: 'Wizja ujawnia ukrytą zepsucie (Ezechiela 8).',
     ),
   ],
   'Ezekiel#1': <QuizQuestion>[
@@ -176,8 +178,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nic się nie zmienia',
       ],
       correctIndex: 0,
-      explanation:
-          'Poważny znak nadchodzącego sądu (Ezechiela 10-11).',
+      explanation: 'Poważny znak nadchodzącego sądu (Ezechiela 10-11).',
     ),
     QuizQuestion(
       text: 'Do czego Jerozolima jest porównana w przypowieści z rozdziału 16?',
@@ -188,8 +189,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Do miasta, które nigdy nie zostało założone',
       ],
       correctIndex: 0,
-      explanation:
-          'Uderzająca alegoria niewierności (Ezechiela 16).',
+      explanation: 'Uderzająca alegoria niewierności (Ezechiela 16).',
     ),
   ],
   'Ezekiel#2': <QuizQuestion>[
@@ -214,11 +214,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Obcego proroka',
       ],
       correctIndex: 0,
-      explanation:
-          'Brak orędownika pogarsza sąd (Ezechiela 22:30).',
+      explanation: 'Brak orędownika pogarsza sąd (Ezechiela 22:30).',
     ),
     QuizQuestion(
-      text: 'Jakiego bolesnego osobistego znaku doświadcza Ezechiel w rozdziale 24?',
+      text:
+          'Jakiego bolesnego osobistego znaku doświadcza Ezechiel w rozdziale 24?',
       options: <String>[
         'Śmierci swojej żony, po której nie mógł jawnie żałować',
         'Utraty swego domu',
@@ -232,7 +232,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   ],
   'Ezekiel#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'Przeciwko jakim sąsiednim narodom skierowane są wyrocznie tych rozdziałów?',
+      text:
+          'Przeciwko jakim sąsiednim narodom skierowane są wyrocznie tych rozdziałów?',
       options: <String>[
         'Ammonowi, Moabowi, Edomowi, Filistynom i Tyrowi',
         'Wyłącznie Egiptowi',
@@ -240,8 +241,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Żadnemu obcemu narodowi',
       ],
       correctIndex: 0,
-      explanation:
-          'Seria wyroków przeciwko narodom (Ezechiela 25-28).',
+      explanation: 'Seria wyroków przeciwko narodom (Ezechiela 25-28).',
     ),
     QuizQuestion(
       text: 'Jak Tyr jest opisany w poetyckim lamencie na jego temat?',
@@ -252,8 +252,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Jako wierny sojusznik Izraela',
       ],
       correctIndex: 0,
-      explanation:
-          'Morski obraz ilustruje jego dawną chwałę (Ezechiela 27).',
+      explanation: 'Morski obraz ilustruje jego dawną chwałę (Ezechiela 27).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Tyr', 'morze', 'cedr'],
     ),
@@ -292,8 +291,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Kwitnące miasto',
       ],
       correctIndex: 0,
-      explanation:
-          'Potężny obraz narodowego zmartwychwstania (Ezechiela 37).',
+      explanation: 'Potężny obraz narodowego zmartwychwstania (Ezechiela 37).',
     ),
     QuizQuestion(
       text: 'Co symbolizują dwa złączone w jeden kije w Ezechiela 37?',
@@ -320,8 +318,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nic się nie dzieje',
       ],
       correctIndex: 0,
-      explanation:
-          'Symboliczny powrót boskiej obecności (Ezechiela 43).',
+      explanation: 'Symboliczny powrót boskiej obecności (Ezechiela 43).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['chwała', 'rzeka', 'brama'],
     ),
@@ -334,15 +331,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Wodę zastrzeżoną tylko dla kapłanów',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz obfitego przywrócenia (Ezechiela 47:9).',
+      explanation: 'Obraz obfitego przywrócenia (Ezechiela 47:9).',
     ),
     QuizQuestion(
       text: 'Jak nazywa się ostatecznie miasto pod koniec księgi?',
-      options: <String>['„Jehowa Tam Jest”', '„Wieczne Miasto”', '„Nowy Babilon”', 'Po prostu „Święte Miasto”'],
+      options: <String>[
+        '„Jehowa Tam Jest”',
+        '„Wieczne Miasto”',
+        '„Nowy Babilon”',
+        'Po prostu „Święte Miasto”',
+      ],
       correctIndex: 0,
-      explanation:
-          'To imię podsumowuje nadzieję księgi (Ezechiela 48:35).',
+      explanation: 'To imię podsumowuje nadzieję księgi (Ezechiela 48:35).',
     ),
   ],
   'Daniel#0': <QuizQuestion>[
@@ -359,7 +359,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
           'Ich prawość zostaje nagrodzona dobrym zdrowiem (Daniela 1).',
     ),
     QuizQuestion(
-      text: 'Co reprezentuje posąg ze snu Nabuchodonozora, zinterpretowany przez Daniela?',
+      text:
+          'Co reprezentuje posąg ze snu Nabuchodonozora, zinterpretowany przez Daniela?',
       options: <String>[
         'Kolejne po sobie następujące światowe królestwa',
         'Zwykłe dzieło sztuki',
@@ -373,7 +374,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
       wordBankDistractors: <String>['posąg', 'sen', 'lwy'],
     ),
     QuizQuestion(
-      text: 'Co się stało, gdy Szadrak, Meszak i Abed-Nego odmówili oddania czci złotemu posągowi?',
+      text:
+          'Co się stało, gdy Szadrak, Meszak i Abed-Nego odmówili oddania czci złotemu posągowi?',
       options: <String>[
         'Zostali ochronieni wewnątrz płonącego pieca',
         'Zostali natychmiast straceni',
@@ -381,13 +383,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Uciekli z królestwa',
       ],
       correctIndex: 0,
-      explanation:
-          'Cud ukazuje boską ochronę (Daniela 3).',
+      explanation: 'Cud ukazuje boską ochronę (Daniela 3).',
     ),
   ],
   'Daniel#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaka tajemnicza wiadomość pojawia się na ścianie podczas uczty Belszaccara?',
+      text:
+          'Jaka tajemnicza wiadomość pojawia się na ścianie podczas uczty Belszaccara?',
       options: <String>[
         'Napis zapowiadający upadek królestwa',
         'Poemat świąteczny',
@@ -418,8 +420,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Wojnę bez prorockiego znaczenia',
       ],
       correctIndex: 0,
-      explanation:
-          'Kluczowa wizja o obiecanym wiecznym panowaniu (Daniela 7).',
+      explanation: 'Kluczowa wizja o obiecanym wiecznym panowaniu (Daniela 7).',
     ),
   ],
   'Daniel#2': <QuizQuestion>[
@@ -436,7 +437,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
           'Jego szczera modlitwa poprzedza odpowiedź Gabriela (Daniela 9).',
     ),
     QuizQuestion(
-      text: 'Kto zjawia się Danielowi w pobliżu Tygrysu, aby wyjaśnić mu niebiański konflikt?',
+      text:
+          'Kto zjawia się Danielowi w pobliżu Tygrysu, aby wyjaśnić mu niebiański konflikt?',
       options: <String>[
         'Niebiański posłaniec, wysłany po duchowej walce',
         'Wyłącznie ludzki król',
@@ -444,8 +446,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Sam Nabuchodonozor',
       ],
       correctIndex: 0,
-      explanation:
-          'Danielowi zostaje objawiona duchowa walka (Daniela 10).',
+      explanation: 'Danielowi zostaje objawiona duchowa walka (Daniela 10).',
     ),
     QuizQuestion(
       text: 'Jaka ostateczna nadzieja kończy Księgę Daniela?',
@@ -462,7 +463,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   ],
   'Hosea#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'O co Jehowa poprosił Ozeasza, aby zilustrować niewierność Izraela?',
+      text:
+          'O co Jehowa poprosił Ozeasza, aby zilustrować niewierność Izraela?',
       options: <String>[
         'Poślubić niewierną kobietę, Gomer',
         'Zbudować nowy ołtarz',
@@ -482,14 +484,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Brak ziemi',
       ],
       correctIndex: 0,
-      explanation:
-          '„Mój lud ginie z braku poznania” (Ozeasza 4:6).',
+      explanation: '„Mój lud ginie z braku poznania” (Ozeasza 4:6).',
     ),
   ],
   'Hosea#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Co Jehowa przedkłada nad ofiarę, według Ozeasza 6?',
-      options: <String>['Lojalną miłość (życzliwość serca)', 'Obfite ofiary', 'Większą świątynię', 'Dłuższe ceremonie'],
+      options: <String>[
+        'Lojalną miłość (życzliwość serca)',
+        'Obfite ofiary',
+        'Większą świątynię',
+        'Dłuższe ceremonie',
+      ],
       correctIndex: 0,
       explanation:
           '„Mam upodobanie w lojalności, a nie w ofierze” (Ozeasza 6:6).',
@@ -498,13 +504,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
       text: 'Co zbiera Izrael po „siania wiatru”, według Ozeasza 8?',
       options: <String>['Burzę', 'Trwały pokój', 'Bogactwo', 'Nic konkretnego'],
       correctIndex: 0,
-      explanation:
-          'Obraz konsekwencji niewierności (Ozeasza 8:7).',
+      explanation: 'Obraz konsekwencji niewierności (Ozeasza 8:7).',
     ),
   ],
   'Hosea#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jak Jehowa wyraża swoje ojcowskie przywiązanie do Efraima w Ozeasza 11?',
+      text:
+          'Jak Jehowa wyraża swoje ojcowskie przywiązanie do Efraima w Ozeasza 11?',
       options: <String>[
         '„Jak mógłbym cię porzucić, Efraimie?”',
         'Oświadcza, że chce go zapomnieć na zawsze',
@@ -512,8 +518,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Całkowicie ignoruje jego los',
       ],
       correctIndex: 0,
-      explanation:
-          'Ojcowska czułość mimo buntu (Ozeasza 11:8).',
+      explanation: 'Ojcowska czułość mimo buntu (Ozeasza 11:8).',
     ),
     QuizQuestion(
       text: 'Jaka ostateczna obietnica kończy Księgę Ozeasza?',
@@ -524,26 +529,33 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Lud zostanie całkowicie wytępiony',
       ],
       correctIndex: 0,
-      explanation:
-          'Ostateczne wezwanie do skruchy i nadziei (Ozeasza 14).',
+      explanation: 'Ostateczne wezwanie do skruchy i nadziei (Ozeasza 14).',
     ),
   ],
   'Joel#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Jaka katastrofa dotyka kraj na początku Księgi Joela?',
-      options: <String>['Inwazja szarańczy', 'Wojna domowa', 'Dziesięcioletnia susza', 'Epidemia'],
+      options: <String>[
+        'Inwazja szarańczy',
+        'Wojna domowa',
+        'Dziesięcioletnia susza',
+        'Epidemia',
+      ],
       correctIndex: 0,
-      explanation:
-          'Opisana jest bezprecedensowa katastrofa (Joela 1).',
+      explanation: 'Opisana jest bezprecedensowa katastrofa (Joela 1).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['szarańcza'],
     ),
     QuizQuestion(
       text: 'Do czego wzywa Joel w obliczu tej katastrofy?',
-      options: <String>['Do żałoby i postu', 'Do zorganizowania uroczystości', 'Do zignorowania wydarzenia', 'Do natychmiastowej emigracji'],
+      options: <String>[
+        'Do żałoby i postu',
+        'Do zorganizowania uroczystości',
+        'Do zignorowania wydarzenia',
+        'Do natychmiastowej emigracji',
+      ],
       correctIndex: 0,
-      explanation:
-          'Wezwanie do zbiorowej skruchy (Joela 1).',
+      explanation: 'Wezwanie do zbiorowej skruchy (Joela 1).',
     ),
   ],
   'Joel#1': <QuizQuestion>[
@@ -556,8 +568,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Zapłacenia grzywny',
       ],
       correctIndex: 0,
-      explanation:
-          'Wymagana jest szczera skrucha (Joela 2:13).',
+      explanation: 'Wymagana jest szczera skrucha (Joela 2:13).',
     ),
     QuizQuestion(
       text: 'Jaką obietnicę z Joela 2 zacytował Piotr w dniu Pięćdziesiątnicy?',
@@ -575,19 +586,27 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   'Joel#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Gdzie sądzone są narody, według Joela 3?',
-      options: <String>['W Dolinie Decyzji', 'W Babilonie', 'W Niniwie', 'W Egipcie'],
+      options: <String>[
+        'W Dolinie Decyzji',
+        'W Babilonie',
+        'W Niniwie',
+        'W Egipcie',
+      ],
       correctIndex: 0,
-      explanation:
-          'Ogłoszony jest tam zbiorowy sąd (Joela 3:14).',
+      explanation: 'Ogłoszony jest tam zbiorowy sąd (Joela 3:14).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Jerozolima', 'Syjon', 'Egipt'],
     ),
     QuizQuestion(
       text: 'Co obiecuje Joela 3 Judzie po sądzie nad narodami?',
-      options: <String>['Błogosławieństwo i przywrócenie', 'Ostateczne zniszczenie', 'Kolejne wygnanie', 'Nic konkretnego'],
+      options: <String>[
+        'Błogosławieństwo i przywrócenie',
+        'Ostateczne zniszczenie',
+        'Kolejne wygnanie',
+        'Nic konkretnego',
+      ],
       correctIndex: 0,
-      explanation:
-          'Wniosek pełen nadziei (Joela 3).',
+      explanation: 'Wniosek pełen nadziei (Joela 3).',
     ),
   ],
   'Amos#0': <QuizQuestion>[
@@ -600,8 +619,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Żadnemu obcemu narodowi',
       ],
       correctIndex: 0,
-      explanation:
-          'Seria wyroczni poprzedza centralne orędzie (Amosa 1-2).',
+      explanation: 'Seria wyroczni poprzedza centralne orędzie (Amosa 1-2).',
     ),
     QuizQuestion(
       text: 'Co oświadcza Amosa 3 o sposobie działania Boga?',
@@ -612,8 +630,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nie potrzebuje posłańców',
       ],
       correctIndex: 0,
-      explanation:
-          'Podkreślona jest rola proroków (Amosa 3:7).',
+      explanation: 'Podkreślona jest rola proroków (Amosa 3:7).',
     ),
   ],
   'Amos#1': <QuizQuestion>[
@@ -643,11 +660,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   ],
   'Amos#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jakiego symbolicznego narzędzia używa Bóg w wizji, aby osądzić Izraela?',
-      options: <String>['Pionu', 'Pustej wagi', 'Złamanej trąby', 'Królewskiego berła'],
+      text:
+          'Jakiego symbolicznego narzędzia używa Bóg w wizji, aby osądzić Izraela?',
+      options: <String>[
+        'Pionu',
+        'Pustej wagi',
+        'Złamanej trąby',
+        'Królewskiego berła',
+      ],
       correctIndex: 0,
-      explanation:
-          'Ten obraz sprawdza prostoliniowość muru (Amosa 7).',
+      explanation: 'Ten obraz sprawdza prostoliniowość muru (Amosa 7).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['pion'],
     ),
@@ -660,8 +682,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Koniec każdej boskiej obietnicy',
       ],
       correctIndex: 0,
-      explanation:
-          'Nuta nadziei kończy księgę (Amosa 9:11).',
+      explanation: 'Nuta nadziei kończy księgę (Amosa 9:11).',
     ),
   ],
   'Obadiah#0': <QuizQuestion>[
@@ -682,13 +703,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Żaden sąd się nie odbędzie',
       ],
       correctIndex: 0,
-      explanation:
-          'Stwierdzenie boskiej suwerenności (Abdiasza 21).',
+      explanation: 'Stwierdzenie boskiej suwerenności (Abdiasza 21).',
     ),
   ],
   'Jonah#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Dlaczego Jonasz uciekał w kierunku Tarszisz, zamiast udać się do Niniwy?',
+      text:
+          'Dlaczego Jonasz uciekał w kierunku Tarszisz, zamiast udać się do Niniwy?',
       options: <String>[
         'Chciał uniknąć misji, którą powierzył mu Jehowa',
         'Nie wiedział o misji',
@@ -707,17 +728,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Statek od razu go podniósł',
       ],
       correctIndex: 0,
-      explanation:
-          'Niezwykłe wydarzenie ratuje go (Jonasza 1:17).',
+      explanation: 'Niezwykłe wydarzenie ratuje go (Jonasza 1:17).',
     ),
   ],
   'Jonah#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Co robi Jonasz wewnątrz ryby?',
-      options: <String>['Modli się do Jehowy', 'Śpi głębokim snem', 'Gniewnie protestuje', 'Milczy'],
+      options: <String>[
+        'Modli się do Jehowy',
+        'Śpi głębokim snem',
+        'Gniewnie protestuje',
+        'Milczy',
+      ],
       correctIndex: 0,
-      explanation:
-          'Modlitwa udręki i wdzięczności (Jonasza 2).',
+      explanation: 'Modlitwa udręki i wdzięczności (Jonasza 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['ryba', 'Niniwa', 'wór'],
     ),
@@ -730,8 +754,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Wypowiedziało wojnę Izraelowi',
       ],
       correctIndex: 0,
-      explanation:
-          'Zaskakująca zbiorowa skrucha (Jonasza 3).',
+      explanation: 'Zaskakująca zbiorowa skrucha (Jonasza 3).',
     ),
   ],
   'Jonah#2': <QuizQuestion>[
@@ -744,8 +767,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Wcale nie był niezadowolony',
       ],
       correctIndex: 0,
-      explanation:
-          'Jonasz z trudem akceptuje boskie miłosierdzie (Jonasza 4).',
+      explanation: 'Jonasz z trudem akceptuje boskie miłosierdzie (Jonasza 4).',
     ),
     QuizQuestion(
       text: 'Czego Jehowa chce nauczyć Jonasza za pomocą więdnącej rośliny?',
@@ -756,17 +778,21 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Prostego faktu botanicznego',
       ],
       correctIndex: 0,
-      explanation:
-          'Lekcja o boskim współczuciu (Jonasza 4).',
+      explanation: 'Lekcja o boskim współczuciu (Jonasza 4).',
     ),
   ],
   'Micah#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Przeciwko jakim miastom ogłoszony jest wyrok Micheasza na początku księgi?',
-      options: <String>['Samarii i Jerozolimie', 'Niniwie i Babilonowi', 'Tyrowi i Sydonowi', 'Wyłącznie Damaszkowi'],
+      text:
+          'Przeciwko jakim miastom ogłoszony jest wyrok Micheasza na początku księgi?',
+      options: <String>[
+        'Samarii i Jerozolimie',
+        'Niniwie i Babilonowi',
+        'Tyrowi i Sydonowi',
+        'Wyłącznie Damaszkowi',
+      ],
       correctIndex: 0,
-      explanation:
-          'Obie stolice są celem (Micheasza 1).',
+      explanation: 'Obie stolice są celem (Micheasza 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Babilon', 'Niniwa', 'Betlejem'],
     ),
@@ -793,13 +819,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nie podano żadnego miejsca',
       ],
       correctIndex: 0,
-      explanation:
-          'Precyzyjne mesjańskie proroctwo (Micheasza 5:2).',
+      explanation: 'Precyzyjne mesjańskie proroctwo (Micheasza 5:2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Jerozolima', 'Juda', 'Egipt'],
     ),
     QuizQuestion(
-      text: 'Jaką wizję pokoju przedstawia Micheasza 4, podobną do wizji Izajasza?',
+      text:
+          'Jaką wizję pokoju przedstawia Micheasza 4, podobną do wizji Izajasza?',
       options: <String>[
         'Miecze przekute na lemiesze',
         'Nieustanną wojnę',
@@ -807,8 +833,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Całkowite milczenie o przyszłości',
       ],
       correctIndex: 0,
-      explanation:
-          'Obraz powszechnego pokoju (Micheasza 4:3).',
+      explanation: 'Obraz powszechnego pokoju (Micheasza 4:3).',
     ),
   ],
   'Micah#2': <QuizQuestion>[
@@ -821,8 +846,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Unikania wszelkiej działalności publicznej',
       ],
       correctIndex: 0,
-      explanation:
-          'Słynne podsumowanie prawdziwej pobożności (Micheasza 6:8).',
+      explanation: 'Słynne podsumowanie prawdziwej pobożności (Micheasza 6:8).',
     ),
     QuizQuestion(
       text: 'Jaką nadzieję wyraża Micheasz mimo otaczającej zepsucia?',
@@ -833,8 +857,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Lud sam musi się zemścić',
       ],
       correctIndex: 0,
-      explanation:
-          'Odnowiona ufność kończy księgę (Micheasza 7).',
+      explanation: 'Odnowiona ufność kończy księgę (Micheasza 7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['gniew', 'sąd', 'morze'],
     ),
@@ -849,48 +872,68 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Pozbawiony jakichkolwiek emocji',
       ],
       correctIndex: 0,
-      explanation:
-          'Równowaga między cierpliwością a mocą (Nahuma 1).',
+      explanation: 'Równowaga między cierpliwością a mocą (Nahuma 1).',
     ),
     QuizQuestion(
       text: 'Komu Nahum oferuje pociechę mimo ogłoszonego sądu?',
-      options: <String>['Tym, którzy szukają w nim schronienia', 'Wyłącznie mieszkańcom Niniwy', 'Obcym królom', 'Nikomu'],
+      options: <String>[
+        'Tym, którzy szukają w nim schronienia',
+        'Wyłącznie mieszkańcom Niniwy',
+        'Obcym królom',
+        'Nikomu',
+      ],
       correctIndex: 0,
-      explanation:
-          'Pocieszenie dla wiernych (Nahuma 1:7).',
+      explanation: 'Pocieszenie dla wiernych (Nahuma 1:7).',
     ),
   ],
   'Nahum#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Co Nahuma 2 opisuje z taką intensywnością?',
-      options: <String>['Oblężenie i upadek Niniwy', 'Budowę świątyni', 'Święto żniw', 'Koronację królewską'],
+      options: <String>[
+        'Oblężenie i upadek Niniwy',
+        'Budowę świątyni',
+        'Święto żniw',
+        'Koronację królewską',
+      ],
       correctIndex: 0,
-      explanation:
-          'Żywy opis bitwy (Nahuma 2).',
+      explanation: 'Żywy opis bitwy (Nahuma 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Samaria', 'Babilon', 'Juda'],
     ),
     QuizQuestion(
       text: 'Jaki ton dominuje w tym opisie upadku Niniwy?',
-      options: <String>['Nieunikniony i całkowity sąd', 'Łagodne ostrzeżenie', 'Nadzieja na trwały pokój', 'Trwające negocjacje'],
+      options: <String>[
+        'Nieunikniony i całkowity sąd',
+        'Łagodne ostrzeżenie',
+        'Nadzieja na trwały pokój',
+        'Trwające negocjacje',
+      ],
       correctIndex: 0,
-      explanation:
-          'Koniec Niniwy jest przedstawiony jako pewny (Nahuma 2).',
+      explanation: 'Koniec Niniwy jest przedstawiony jako pewny (Nahuma 2).',
     ),
   ],
   'Nahum#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Jak Nahuma 3 opisuje Niniwę?',
-      options: <String>['Zbroczone krwią miasto', 'Święte miasto', 'Miasto pokoju', 'Błogosławione miasto'],
+      options: <String>[
+        'Zbroczone krwią miasto',
+        'Święte miasto',
+        'Miasto pokoju',
+        'Błogosławione miasto',
+      ],
       correctIndex: 0,
-      explanation:
-          'Surowy sąd za jej przemoc (Nahuma 3:1).',
+      explanation: 'Surowy sąd za jej przemoc (Nahuma 3:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Niniwa', 'zrujnowane', 'dumne'],
     ),
     QuizQuestion(
       text: 'Jaki ostateczny los ogłoszony jest dla Niniwy?',
-      options: <String>['Całkowite zniszczenie', 'Przyszłe przywrócenie', 'Sojusz z Izraelem', 'Zwykłe ostrzeżenie bez konsekwencji'],
+      options: <String>[
+        'Całkowite zniszczenie',
+        'Przyszłe przywrócenie',
+        'Sojusz z Izraelem',
+        'Zwykłe ostrzeżenie bez konsekwencji',
+      ],
       correctIndex: 0,
       explanation:
           'Księga kończy się nieodwracalnym upadkiem miasta (Nahuma 3).',
@@ -906,8 +949,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Na osobisty konflikt z kapłanem',
       ],
       correctIndex: 0,
-      explanation:
-          'Szczera skarga w obliczu niesprawiedliwości (Habakuka 1).',
+      explanation: 'Szczera skarga w obliczu niesprawiedliwości (Habakuka 1).',
     ),
     QuizQuestion(
       text: 'Jakiej zaskakującej odpowiedzi udziela Bóg Habakukowi?',
@@ -944,15 +986,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Panowanie Babilonu na zawsze',
       ],
       correctIndex: 0,
-      explanation:
-          'Powszechna obietnica nadziei (Habakuka 2:14).',
+      explanation: 'Powszechna obietnica nadziei (Habakuka 2:14).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['wody', 'morze', 'ziemia'],
     ),
   ],
   'Habakkuk#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaką postawę przyjmuje Habakuk w swojej końcowej modlitwie mimo braku plonów?',
+      text:
+          'Jaką postawę przyjmuje Habakuk w swojej końcowej modlitwie mimo braku plonów?',
       options: <String>[
         'Mimo wszystko będzie się radować w Jehowie',
         'Porzuci swoją wiarę',
@@ -974,8 +1016,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Całkowitym milczeniem',
       ],
       correctIndex: 0,
-      explanation:
-          'Psalm wiary kończy księgę (Habakuka 3).',
+      explanation: 'Psalm wiary kończy księgę (Habakuka 3).',
     ),
   ],
   'Zephaniah#0': <QuizQuestion>[
@@ -988,15 +1029,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Sojusz handlowy',
       ],
       correctIndex: 0,
-      explanation:
-          'Ogłoszony jest powszechny sąd (Sofoniasza 1).',
+      explanation: 'Ogłoszony jest powszechny sąd (Sofoniasza 1).',
     ),
     QuizQuestion(
       text: 'Kogo ten sąd dotyczy przede wszystkim?',
-      options: <String>['Judy i Jerozolimy', 'Wyłącznie Egiptu', 'Wyłącznie Niniwy', 'Wyłącznie Edomu'],
+      options: <String>[
+        'Judy i Jerozolimy',
+        'Wyłącznie Egiptu',
+        'Wyłącznie Niniwy',
+        'Wyłącznie Edomu',
+      ],
       correctIndex: 0,
-      explanation:
-          'Sąd zaczyna się od samego ludu Bożego (Sofoniasza 1).',
+      explanation: 'Sąd zaczyna się od samego ludu Bożego (Sofoniasza 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Niniwa', 'Moab', 'Egipt'],
     ),
@@ -1004,19 +1048,27 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   'Zephaniah#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Co radzi Sofoniasza 2 przed nadejściem sądu?',
-      options: <String>['Szukania Jehowy i pokory', 'Beztroskiej radości', 'Ignorowania ostrzeżeń', 'Bezmyślnej ucieczki'],
+      options: <String>[
+        'Szukania Jehowy i pokory',
+        'Beztroskiej radości',
+        'Ignorowania ostrzeżeń',
+        'Bezmyślnej ucieczki',
+      ],
       correctIndex: 0,
-      explanation:
-          'Pilne wezwanie do skruchy (Sofoniasza 2:3).',
+      explanation: 'Pilne wezwanie do skruchy (Sofoniasza 2:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['pycha', 'narody', 'bogactwo'],
     ),
     QuizQuestion(
       text: 'Jakie narody są również sądzone w tym rozdziale?',
-      options: <String>['Sąsiednie narody, takie jak Moab i Ammon', 'Wyłącznie Izrael', 'Żaden inny naród', 'Wyłącznie Babilon'],
+      options: <String>[
+        'Sąsiednie narody, takie jak Moab i Ammon',
+        'Wyłącznie Izrael',
+        'Żaden inny naród',
+        'Wyłącznie Babilon',
+      ],
       correctIndex: 0,
-      explanation:
-          'Sąd rozciąga się na okoliczne narody (Sofoniasza 2).',
+      explanation: 'Sąd rozciąga się na okoliczne narody (Sofoniasza 2).',
     ),
   ],
   'Zephaniah#2': <QuizQuestion>[
@@ -1029,8 +1081,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Lud zostanie zapomniany na zawsze',
       ],
       correctIndex: 0,
-      explanation:
-          'Wzruszający obraz boskiej radości (Sofoniasza 3:17).',
+      explanation: 'Wzruszający obraz boskiej radości (Sofoniasza 3:17).',
     ),
     QuizQuestion(
       text: 'Co obiecuje Sofoniasza 3 w kwestii wiernego ostatku?',
@@ -1041,8 +1092,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nie będzie miał przyszłości',
       ],
       correctIndex: 0,
-      explanation:
-          'Nadzieja przywrócenia dla wiernych (Sofoniasza 3).',
+      explanation: 'Nadzieja przywrócenia dla wiernych (Sofoniasza 3).',
     ),
   ],
   'Haggai#0': <QuizQuestion>[
@@ -1055,8 +1105,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Zbudowali zbyt wiele świątyń',
       ],
       correctIndex: 0,
-      explanation:
-          'Lud stawiał na pierwszym miejscu własne domy (Aggeusza 1).',
+      explanation: 'Lud stawiał na pierwszym miejscu własne domy (Aggeusza 1).',
     ),
     QuizQuestion(
       text: 'Jaka obietnica zachęca do wznowienia budowy świątyni?',
@@ -1067,13 +1116,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Świątynia zostanie na stałe porzucona',
       ],
       correctIndex: 0,
-      explanation:
-          'Silna zachęta dla Zorobabela i ludu (Aggeusza 2:9).',
+      explanation: 'Silna zachęta dla Zorobabela i ludu (Aggeusza 2:9).',
     ),
   ],
   'Zechariah#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jakiego rodzaju objawienia otrzymuje Zachariasz na początku księgi?',
+      text:
+          'Jakiego rodzaju objawienia otrzymuje Zachariasz na początku księgi?',
       options: <String>[
         'Serię symbolicznych nocnych wizji',
         'Zwykłe publiczne przemówienie',
@@ -1087,7 +1136,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
       wordBankDistractors: <String>['sny', 'anioł', 'świątynia'],
     ),
     QuizQuestion(
-      text: 'Co symbolizuje oczyszczenie arcykapłana Jozuego w jednej z tych wizji?',
+      text:
+          'Co symbolizuje oczyszczenie arcykapłana Jozuego w jednej z tych wizji?',
       options: <String>[
         'Przebaczenie i odnowienie kapłaństwa',
         'Ostateczne potępienie kapłanów',
@@ -1149,8 +1199,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Jerozolima zniknie na zawsze',
       ],
       correctIndex: 0,
-      explanation:
-          'Powszechna wizja boskiego panowania (Zachariasza 14:9).',
+      explanation: 'Powszechna wizja boskiego panowania (Zachariasza 14:9).',
     ),
   ],
   'Malachi#0': <QuizQuestion>[
@@ -1163,8 +1212,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Budowę drugiej świątyni',
       ],
       correctIndex: 0,
-      explanation:
-          'Potępiona jest pogarda wobec ofiar (Malachiasza 1).',
+      explanation: 'Potępiona jest pogarda wobec ofiar (Malachiasza 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['dziesięciny', 'kadzidło', 'ołtarz'],
     ),
@@ -1191,8 +1239,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Aby złożyć ją tylko raz w życiu',
       ],
       correctIndex: 0,
-      explanation:
-          'Wyzwanie, by praktycznie zaufać Bogu (Malachiasza 3:10).',
+      explanation: 'Wyzwanie, by praktycznie zaufać Bogu (Malachiasza 3:10).',
     ),
     QuizQuestion(
       text: 'Jakiego posłańca zapowiada Malachiasza 3 przed przyjściem Pana?',
@@ -1203,8 +1250,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
         'Nie wspomina się o żadnym posłańcu',
       ],
       correctIndex: 0,
-      explanation:
-          'Proroctwo związane z Janem Chrzcicielem (Malachiasza 3:1).',
+      explanation: 'Proroctwo związane z Janem Chrzcicielem (Malachiasza 3:1).',
     ),
   ],
   'Malachi#2': <QuizQuestion>[
@@ -1230,4 +1276,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPlC4 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPlC4 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesPlC4 =
+    <String, List<QuizQuestion>>{};

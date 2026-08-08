@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesPtC5 = <String, List<QuizQuestion>>{
   'Matthew#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Quem anunciou a vinda de Jesus pregando no deserto?',
@@ -27,13 +28,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Os famosos',
       ],
       correctIndex: 0,
-      explanation: 'As Bem-aventuranças começam com os pobres em espírito (Mateus 5:3).',
+      explanation:
+          'As Bem-aventuranças começam com os pobres em espírito (Mateus 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quantos pães e peixes Jesus usou para alimentar cerca de 5.000 homens?',
-      options: <String>['5 pães e 2 peixes', '2 pães e 5 peixes', '7 pães', '12 pães'],
+      text:
+          'Quantos pães e peixes Jesus usou para alimentar cerca de 5.000 homens?',
+      options: <String>[
+        '5 pães e 2 peixes',
+        '2 pães e 5 peixes',
+        '7 pães',
+        '12 pães',
+      ],
       correctIndex: 0,
       explanation: 'Jesus multiplica 5 pães e 2 peixes (Mateus 14).',
       type: QuizAnswerType.wordBank,
@@ -48,20 +56,28 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Não fez nada',
       ],
       correctIndex: 0,
-      explanation: 'Pedro caminha em direção a Jesus, mas começa a afundar por falta de fé (Mateus 14).',
+      explanation:
+          'Pedro caminha em direção a Jesus, mas começa a afundar por falta de fé (Mateus 14).',
     ),
     QuizQuestion(
       text: 'Quem pediu a cabeça de João Batista em um prato?',
-      options: <String>['A filha de Herodias', 'O próprio Herodes', 'Um soldado', 'Pilatos'],
+      options: <String>[
+        'A filha de Herodias',
+        'O próprio Herodes',
+        'Um soldado',
+        'Pilatos',
+      ],
       correctIndex: 0,
-      explanation: 'A dançarina, instigada por sua mãe, exige a cabeça de João (Mateus 14).',
+      explanation:
+          'A dançarina, instigada por sua mãe, exige a cabeça de João (Mateus 14).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Herodes', 'banquete', 'rainha'],
     ),
   ],
   'Matthew#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Como Pedro respondeu quando Jesus perguntou: "Quem vocês dizem que eu sou?"?',
+      text:
+          'Como Pedro respondeu quando Jesus perguntou: "Quem vocês dizem que eu sou?"?',
       options: <String>[
         'Tu és o Cristo, o Filho do Deus vivo',
         'Tu és Elias',
@@ -80,20 +96,28 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Jesus andou sobre a água',
       ],
       correctIndex: 0,
-      explanation: 'Jesus é transfigurado diante de Pedro, Tiago e João (Mateus 17).',
+      explanation:
+          'Jesus é transfigurado diante de Pedro, Tiago e João (Mateus 17).',
     ),
     QuizQuestion(
       text: 'Sobre qual animal Jesus entrou em Jerusalém?',
-      options: <String>['Um jumentinho', 'Um cavalo branco', 'Um camelo', 'A pé'],
+      options: <String>[
+        'Um jumentinho',
+        'Um cavalo branco',
+        'Um camelo',
+        'A pé',
+      ],
       correctIndex: 0,
-      explanation: 'Jesus entra montado em um jumentinho, conforme a profecia (Mateus 21).',
+      explanation:
+          'Jesus entra montado em um jumentinho, conforme a profecia (Mateus 21).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['jumentinho', 'jumento'],
     ),
   ],
   'Matthew#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'O que Jesus instituiu durante sua última refeição com os apóstolos?',
+      text:
+          'O que Jesus instituiu durante sua última refeição com os apóstolos?',
       options: <String>[
         'A refeição em memória de sua morte',
         'Uma festa anual da colheita',
@@ -101,7 +125,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Uma peregrinação',
       ],
       correctIndex: 0,
-      explanation: 'Jesus institui a refeição comemorativa com o pão e o vinho (Mateus 26).',
+      explanation:
+          'Jesus institui a refeição comemorativa com o pão e o vinho (Mateus 26).',
     ),
     QuizQuestion(
       text: 'Quem entregou Jesus por trinta moedas de prata?',
@@ -125,7 +150,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
   'John#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Segundo João 1, quem era "a Palavra" (o Logos) junto de Deus no princípio?',
+      text:
+          'Segundo João 1, quem era "a Palavra" (o Logos) junto de Deus no princípio?',
       options: <String>[
         'O Filho de Deus, antes de se tornar humano',
         'Um anjo',
@@ -133,7 +159,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'O espírito santo',
       ],
       correctIndex: 0,
-      explanation: 'A Palavra estava junto de Deus e se torna carne em Jesus (João 1).',
+      explanation:
+          'A Palavra estava junto de Deus e se torna carne em Jesus (João 1).',
     ),
     QuizQuestion(
       text: 'Qual foi o primeiro milagre de Jesus, em Caná?',
@@ -149,8 +176,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
       wordBankDistractors: <String>['Caná', 'festa', 'jarros'],
     ),
     QuizQuestion(
-      text: 'O que uma pessoa deve fazer, segundo Jesus, para "ver o Reino de Deus"?',
-      options: <String>['Nascer de novo', 'Jejuar 40 dias', 'Ir ao templo', 'Tornar-se sacerdote'],
+      text:
+          'O que uma pessoa deve fazer, segundo Jesus, para "ver o Reino de Deus"?',
+      options: <String>[
+        'Nascer de novo',
+        'Jejuar 40 dias',
+        'Ir ao templo',
+        'Tornar-se sacerdote',
+      ],
       correctIndex: 0,
       explanation: 'Jesus explica isso a Nicodemos (João 3).',
       type: QuizAnswerType.wordBank,
@@ -162,19 +195,22 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
       text: 'Como Jesus se descreve em João 10?',
       options: <String>['O bom pastor', 'O leão', 'O sumo sacerdote', 'O juiz'],
       correctIndex: 0,
-      explanation: 'Jesus se apresenta como o bom pastor que dá a vida por suas ovelhas (João 10).',
+      explanation:
+          'Jesus se apresenta como o bom pastor que dá a vida por suas ovelhas (João 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['porta', 'videira', 'luz'],
     ),
     QuizQuestion(
-      text: 'Quem Jesus trouxe de volta à vida depois de quatro dias no túmulo?',
+      text:
+          'Quem Jesus trouxe de volta à vida depois de quatro dias no túmulo?',
       options: <String>['Lázaro', 'Jairo', 'O filho da viúva', 'Um centurião'],
       correctIndex: 0,
       explanation: 'Jesus ressuscita Lázaro (João 11).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'O que Jesus fez por seus apóstolos antes da última refeição, como exemplo de humildade?',
+      text:
+          'O que Jesus fez por seus apóstolos antes da última refeição, como exemplo de humildade?',
       options: <String>[
         'Lavou os pés deles',
         'Abençoou cada um deles',
@@ -187,8 +223,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
   'John#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'A que Jesus compara seu relacionamento com os discípulos em João 15?',
-      options: <String>['Uma videira e seus ramos', 'Um pastor e seu rebanho', 'Um rei e seus súditos', 'Um pai e seus filhos'],
+      text:
+          'A que Jesus compara seu relacionamento com os discípulos em João 15?',
+      options: <String>[
+        'Uma videira e seus ramos',
+        'Um pastor e seu rebanho',
+        'Um rei e seus súditos',
+        'Um pai e seus filhos',
+      ],
       correctIndex: 0,
       explanation: 'Jesus é a videira, seus discípulos os ramos (João 15).',
       type: QuizAnswerType.wordBank,
@@ -201,7 +243,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
       explanation: 'Pedro golpeia Malco com uma espada (João 18).',
     ),
     QuizQuestion(
-      text: 'Quem duvidou primeiro da ressurreição antes de tocar os ferimentos de Jesus?',
+      text:
+          'Quem duvidou primeiro da ressurreição antes de tocar os ferimentos de Jesus?',
       options: <String>['Tomé', 'Pedro', 'João', 'Filipe'],
       correctIndex: 0,
       explanation: 'Tomé duvida e depois crê (João 20).',
@@ -211,14 +254,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   'Mark#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Quem prepara o caminho diante de Jesus no início de Marcos?',
-      options: <String>['João Batista', 'O próprio Elias', 'Um anjo', 'O sumo sacerdote'],
+      options: <String>[
+        'João Batista',
+        'O próprio Elias',
+        'Um anjo',
+        'O sumo sacerdote',
+      ],
       correctIndex: 0,
       explanation: 'João batiza e anuncia a vinda de Jesus (Marcos 1).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['João'],
     ),
     QuizQuestion(
-      text: 'Como Jesus mostrou sua autoridade ao curar o paralítico que desceu pelo teto?',
+      text:
+          'Como Jesus mostrou sua autoridade ao curar o paralítico que desceu pelo teto?',
       options: <String>[
         'Perdoando seus pecados antes de curá-lo',
         'Exigindo um sacrifício prévio',
@@ -254,7 +303,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Que cena extraordinária ocorre no monte em Marcos 9?',
-      options: <String>['A transfiguração de Jesus', 'Um terremoto', 'Uma tempestade violenta', 'Um julgamento público'],
+      options: <String>[
+        'A transfiguração de Jesus',
+        'Um terremoto',
+        'Uma tempestade violenta',
+        'Um julgamento público',
+      ],
       correctIndex: 0,
       explanation: 'Jesus aparece glorioso com Moisés e Elias (Marcos 9).',
       type: QuizAnswerType.wordBank,
@@ -262,7 +316,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Como Jesus entra em Jerusalém em Marcos 11?',
-      options: <String>['Montado em um jumentinho, aclamado pela multidão', 'Em segredo, sem ser visto', 'Com um exército', 'A cavalo como conquistador'],
+      options: <String>[
+        'Montado em um jumentinho, aclamado pela multidão',
+        'Em segredo, sem ser visto',
+        'Com um exército',
+        'A cavalo como conquistador',
+      ],
       correctIndex: 0,
       explanation: 'A entrada triunfal cumpre uma profecia (Marcos 11).',
     ),
@@ -280,7 +339,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
       explanation: 'Jesus resume a lei em dois mandamentos (Marcos 12).',
     ),
     QuizQuestion(
-      text: 'O que Jesus instituiu durante a última refeição com seus discípulos?',
+      text:
+          'O que Jesus instituiu durante a última refeição com seus discípulos?',
       options: <String>[
         'A refeição comemorativa de sua morte',
         'Uma nova festa anual',
@@ -307,15 +367,26 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   'Luke#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Quem anuncia a Maria que ela será a mãe de Jesus?',
-      options: <String>['O anjo Gabriel', 'Um sacerdote', 'João Batista', 'Apenas um sonho'],
+      options: <String>[
+        'O anjo Gabriel',
+        'Um sacerdote',
+        'João Batista',
+        'Apenas um sonho',
+      ],
       correctIndex: 0,
       explanation: 'Gabriel anuncia o nascimento milagroso (Lucas 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Miguel', 'Maria', 'José'],
     ),
     QuizQuestion(
-      text: 'Quem deu testemunho de Jesus menino durante sua apresentação no templo?',
-      options: <String>['Simeão e Ana', 'Herodes', 'Os principais sacerdotes', 'Ninguém'],
+      text:
+          'Quem deu testemunho de Jesus menino durante sua apresentação no templo?',
+      options: <String>[
+        'Simeão e Ana',
+        'Herodes',
+        'Os principais sacerdotes',
+        'Ninguém',
+      ],
       correctIndex: 0,
       explanation: 'Dois fiéis idosos reconhecem o Messias (Lucas 2).',
       type: QuizAnswerType.wordBank,
@@ -336,14 +407,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   'Luke#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Qual parábola famosa ilustra o amor ao próximo em Lucas 10?',
-      options: <String>['O bom samaritano', 'O filho pródigo', 'O semeador', 'As dez virgens'],
+      options: <String>[
+        'O bom samaritano',
+        'O filho pródigo',
+        'O semeador',
+        'As dez virgens',
+      ],
       correctIndex: 0,
       explanation: 'Um exemplo de compaixão por um estranho (Lucas 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['sacerdote', 'levita', 'ladrões'],
     ),
     QuizQuestion(
-      text: 'Quais três parábolas Jesus conta em Lucas 15 sobre o que estava perdido?',
+      text:
+          'Quais três parábolas Jesus conta em Lucas 15 sobre o que estava perdido?',
       options: <String>[
         'A ovelha perdida, a moeda perdida, o filho pródigo',
         'O semeador, a rede, a pérola',
@@ -367,7 +444,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
   'Luke#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'O que Zaqueu faz para mostrar sua mudança de vida depois de encontrar Jesus?',
+      text:
+          'O que Zaqueu faz para mostrar sua mudança de vida depois de encontrar Jesus?',
       options: <String>[
         'Devolve o quádruplo a quem prejudicou',
         'Deixa a cidade',
@@ -404,7 +482,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
   'Acts#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'O que Jesus promete a seus discípulos pouco antes de sua ascensão?',
+      text:
+          'O que Jesus promete a seus discípulos pouco antes de sua ascensão?',
       options: <String>[
         'Eles receberão o poder do espírito santo',
         'Reinarão imediatamente sobre Roma',
@@ -454,10 +533,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Um sonho sem significado',
       ],
       correctIndex: 0,
-      explanation: 'Essa visão prepara Pedro para anunciar as boas novas às nações (Atos 10).',
+      explanation:
+          'Essa visão prepara Pedro para anunciar as boas novas às nações (Atos 10).',
     ),
     QuizQuestion(
-      text: 'Onde os discípulos foram chamados de "cristãos" pela primeira vez?',
+      text:
+          'Onde os discípulos foram chamados de "cristãos" pela primeira vez?',
       options: <String>['Em Antioquia', 'Em Jerusalém', 'Em Roma', 'Em Éfeso'],
       correctIndex: 0,
       explanation: 'Esse nome surge primeiro em Antioquia (Atos 11:26).',
@@ -467,7 +548,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
   'Acts#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Que decisão importante o conselho de Jerusalém toma a respeito dos não judeus convertidos?',
+      text:
+          'Que decisão importante o conselho de Jerusalém toma a respeito dos não judeus convertidos?',
       options: <String>[
         'Não são obrigados à circuncisão mosaica',
         'Devem seguir toda a lei de Moisés',
@@ -475,7 +557,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Nenhuma decisão é tomada',
       ],
       correctIndex: 0,
-      explanation: 'Uma decisão-chave para a expansão do cristianismo (Atos 15).',
+      explanation:
+          'Uma decisão-chave para a expansão do cristianismo (Atos 15).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['lei', 'sábado', 'sacrifícios'],
     ),
@@ -491,8 +574,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
       explanation: 'Um milagre liberta os prisioneiros (Atos 16).',
     ),
     QuizQuestion(
-      text: 'Onde Paulo pronunciou seu famoso discurso sobre o "Deus desconhecido"?',
-      options: <String>['No Areópago, em Atenas', 'Em Roma', 'Em Jerusalém', 'Em Corinto'],
+      text:
+          'Onde Paulo pronunciou seu famoso discurso sobre o "Deus desconhecido"?',
+      options: <String>[
+        'No Areópago, em Atenas',
+        'Em Roma',
+        'Em Jerusalém',
+        'Em Corinto',
+      ],
       correctIndex: 0,
       explanation: 'Paulo se dirige aos filósofos gregos (Atos 17).',
       type: QuizAnswerType.freeText,
@@ -522,7 +611,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
         'Porque queria deixar o ministério',
       ],
       correctIndex: 0,
-      explanation: 'Seu status de cidadão romano lhe dá esse direito (Atos 25).',
+      explanation:
+          'Seu status de cidadão romano lhe dá esse direito (Atos 25).',
     ),
     QuizQuestion(
       text: 'O que aconteceu após o naufrágio na ilha de Malta?',
@@ -538,7 +628,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesPtC5 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+extraQuizzesPtC5 = <String, List<QuizQuestion>>{
   'Matthew#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Qual modelo de oração Jesus deu no Sermão do Monte?',
@@ -552,7 +643,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
       explanation: 'Jesus ensina a orar de forma simples (Mateus 6).',
     ),
     QuizQuestion(
-      text: 'Com o que se parece aquele que põe em prática as palavras de Jesus, segundo Mateus 7?',
+      text:
+          'Com o que se parece aquele que põe em prática as palavras de Jesus, segundo Mateus 7?',
       options: <String>[
         'Um homem que constrói sua casa sobre a rocha',
         'Um homem que constrói sobre a areia',
@@ -566,7 +658,12 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   'Matthew#1': <QuizQuestion>[
     QuizQuestion(
       text: 'O que Jesus fez durante uma tempestade no mar da Galileia?',
-      options: <String>['Acalmou-a com uma palavra', 'Remou mais rápido', 'Esperou passar', 'Fugiu para a margem'],
+      options: <String>[
+        'Acalmou-a com uma palavra',
+        'Remou mais rápido',
+        'Esperou passar',
+        'Fugiu para a margem',
+      ],
       correctIndex: 0,
       explanation: 'O vento e o mar lhe obedecem (Mateus 8).',
     ),
@@ -607,7 +704,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   ],
   'Matthew#3': <QuizQuestion>[
     QuizQuestion(
-      text: 'Que sinais Jesus anunciou para a conclusão do sistema em Mateus 24?',
+      text:
+          'Que sinais Jesus anunciou para a conclusão do sistema em Mateus 24?',
       options: <String>[
         'Guerras, fomes e terremotos',
         'Uma paz mundial imediata',
@@ -660,8 +758,14 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
       acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
-      text: 'O que é preciso se tornar, segundo Jesus, para entrar no Reino de Deus?',
-      options: <String>['Como uma criancinha', 'Rico e poderoso', 'Um líder reconhecido', 'Um sábio'],
+      text:
+          'O que é preciso se tornar, segundo Jesus, para entrar no Reino de Deus?',
+      options: <String>[
+        'Como uma criancinha',
+        'Rico e poderoso',
+        'Um líder reconhecido',
+        'Um sábio',
+      ],
       correctIndex: 0,
       explanation: 'Jesus recebe as crianças como exemplo (Marcos 10).',
     ),
@@ -704,7 +808,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   ],
   'Luke#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quantos discípulos Jesus enviou para pregar dois a dois em Lucas 10?',
+      text:
+          'Quantos discípulos Jesus enviou para pregar dois a dois em Lucas 10?',
       options: <String>['Setenta', 'Doze', 'Cem', 'Três'],
       correctIndex: 0,
       explanation: 'Jesus amplia a pregação (Lucas 10).',
@@ -712,7 +817,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
       acceptedAnswers: <String>['70'],
     ),
     QuizQuestion(
-      text: 'O que Jesus aconselha sobre a preocupação com comida e vestimenta?',
+      text:
+          'O que Jesus aconselha sobre a preocupação com comida e vestimenta?',
       options: <String>[
         'Não se preocupar, mas buscar primeiro o Reino',
         'Acumular o máximo possível',
@@ -725,7 +831,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   ],
   'Luke#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quantos leprosos Jesus curou, dos quais apenas um voltou para agradecer?',
+      text:
+          'Quantos leprosos Jesus curou, dos quais apenas um voltou para agradecer?',
       options: <String>['Dez', 'Sete', 'Três', 'Doze'],
       correctIndex: 0,
       explanation: 'Apenas um samaritano volta para dar graças (Lucas 17).',
@@ -741,8 +848,14 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   ],
   'Acts#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Aproximadamente quantas pessoas foram batizadas no dia de Pentecostes?',
-      options: <String>['Cerca de 3.000', 'Cerca de 500', 'Cerca de 12', 'Cerca de 100'],
+      text:
+          'Aproximadamente quantas pessoas foram batizadas no dia de Pentecostes?',
+      options: <String>[
+        'Cerca de 3.000',
+        'Cerca de 500',
+        'Cerca de 12',
+        'Cerca de 100',
+      ],
       correctIndex: 0,
       explanation: 'Um grande número responde à mensagem (Atos 2).',
       type: QuizAnswerType.freeText,
@@ -750,14 +863,20 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'Quem guardava as roupas dos que apedrejavam Estêvão?',
-      options: <String>['Saulo (mais tarde Paulo)', 'Pedro', 'Barnabé', 'Filipe'],
+      options: <String>[
+        'Saulo (mais tarde Paulo)',
+        'Pedro',
+        'Barnabé',
+        'Filipe',
+      ],
       correctIndex: 0,
       explanation: 'Saulo aprovava esse assassinato (Atos 7-8).',
     ),
   ],
   'Acts#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quem o espírito enviou para anunciar as boas novas ao eunuco etíope?',
+      text:
+          'Quem o espírito enviou para anunciar as boas novas ao eunuco etíope?',
       options: <String>['Filipe', 'Pedro', 'Paulo', 'João'],
       correctIndex: 0,
       explanation: 'Filipe lhe explica as Escrituras (Atos 8).',
@@ -765,7 +884,12 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
     ),
     QuizQuestion(
       text: 'Como Pedro foi libertado da prisão sob Herodes?',
-      options: <String>['Por um anjo', 'Subornando um guarda', 'Por um terremoto', 'Ninguém o ajudou'],
+      options: <String>[
+        'Por um anjo',
+        'Subornando um guarda',
+        'Por um terremoto',
+        'Ninguém o ajudou',
+      ],
       correctIndex: 0,
       explanation: 'Um anjo o faz sair milagrosamente (Atos 12).',
     ),
@@ -773,14 +897,20 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
   'Acts#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Que ofício Paulo exercia com Áquila e Priscila?',
-      options: <String>['Fabricante de tendas', 'Pescador', 'Carpinteiro', 'Médico'],
+      options: <String>[
+        'Fabricante de tendas',
+        'Pescador',
+        'Carpinteiro',
+        'Médico',
+      ],
       correctIndex: 0,
       explanation: 'Paulo trabalhava com as próprias mãos (Atos 18).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['pescador', 'tecelão', 'carpinteiro'],
     ),
     QuizQuestion(
-      text: 'Em qual cidade a pregação de Paulo provocou um tumulto dos ourives de Diana/Ártemis?',
+      text:
+          'Em qual cidade a pregação de Paulo provocou um tumulto dos ourives de Diana/Ártemis?',
       options: <String>['Éfeso', 'Atenas', 'Corinto', 'Roma'],
       correctIndex: 0,
       explanation: 'Os artesãos temiam por seu comércio (Atos 19).',
@@ -799,7 +929,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesPtC5 = <String, List<QuizQuest
       explanation: 'Paulo defende sua fé diante das autoridades (Atos 24-26).',
     ),
     QuizQuestion(
-      text: 'Onde Paulo finalmente chegou para aguardar seu julgamento diante de César?',
+      text:
+          'Onde Paulo finalmente chegou para aguardar seu julgamento diante de César?',
       options: <String>['Em Roma', 'Em Jerusalém', 'Em Antioquia', 'Em Éfeso'],
       correctIndex: 0,
       explanation: 'Paulo prega mesmo em prisão domiciliar (Atos 28).',

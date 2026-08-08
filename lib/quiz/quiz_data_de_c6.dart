@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesDeC6 = <String, List<QuizQuestion>>{
   'Romans#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Was erklärt Paulus in Römer 3 über die Lage aller Menschen, Juden wie Nichtjuden?',
+      text:
+          'Was erklärt Paulus in Römer 3 über die Lage aller Menschen, Juden wie Nichtjuden?',
       options: <String>[
         'Alle haben gesündigt und erreichen die Herrlichkeit Gottes nicht',
         'Nur Nichtjuden haben gesündigt',
@@ -11,10 +13,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Nur die Führer sind verantwortlich',
       ],
       correctIndex: 0,
-      explanation: 'Eine wesentliche Grundlage von Paulus\' Argumentation (Römer 3:23).',
+      explanation:
+          'Eine wesentliche Grundlage von Paulus\' Argumentation (Römer 3:23).',
     ),
     QuizQuestion(
-      text: 'Worauf beruht laut Römer 3-4 die Rechtfertigung, veranschaulicht am Beispiel Abrahams?',
+      text:
+          'Worauf beruht laut Römer 3-4 die Rechtfertigung, veranschaulicht am Beispiel Abrahams?',
       options: <String>[
         'Auf dem Glauben, nicht auf Werken des Gesetzes',
         'Allein auf rituellen Opfern',
@@ -35,7 +39,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Sie verschwindet in Zeiten der Prüfung',
       ],
       correctIndex: 0,
-      explanation: 'Eine kraftvolle Aussage beschließt dieses Kapitel (Römer 8:38, 39).',
+      explanation:
+          'Eine kraftvolle Aussage beschließt dieses Kapitel (Römer 8:38, 39).',
     ),
     QuizQuestion(
       text: 'Was sagt Römer 10 über die Rettung?',
@@ -51,7 +56,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
   ],
   'Romans#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Worum bittet Römer 12 die Christen bezüglich ihres täglichen Lebens?',
+      text:
+          'Worum bittet Römer 12 die Christen bezüglich ihres täglichen Lebens?',
       options: <String>[
         'Sich Gott als lebendiges Opfer darzubringen',
         'Jede gesellschaftliche Tätigkeit zu meiden',
@@ -70,12 +76,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Steuern nur nach Belieben zu zahlen',
       ],
       correctIndex: 0,
-      explanation: 'Ein Grundsatz bürgerlichen Respekts wird gelehrt (Römer 13).',
+      explanation:
+          'Ein Grundsatz bürgerlichen Respekts wird gelehrt (Römer 13).',
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welches Problem spricht Paulus gleich zu Beginn dieses Briefes an?',
+      text:
+          'Welches Problem spricht Paulus gleich zu Beginn dieses Briefes an?',
       options: <String>[
         'Spaltungen und Rivalitäten in der Versammlung',
         'Einen Mangel an Nahrung',
@@ -83,7 +91,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Ein völliges Fehlen von Glauben',
       ],
       correctIndex: 0,
-      explanation: 'Parteiungen um verschiedene Lehrer verursachten Probleme (1. Korinther 1).',
+      explanation:
+          'Parteiungen um verschiedene Lehrer verursachten Probleme (1. Korinther 1).',
     ),
     QuizQuestion(
       text: 'Womit vergleicht Paulus die Gemeinde in 1. Korinther 3?',
@@ -94,7 +103,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Mit einem Geschäftsunternehmen',
       ],
       correctIndex: 0,
-      explanation: 'Ein heiliges Bild unterstreicht ihre gemeinsame Verantwortung (1. Korinther 3:16).',
+      explanation:
+          'Ein heiliges Bild unterstreicht ihre gemeinsame Verantwortung (1. Korinther 3:16).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Körper', 'Geist', 'Stein'],
     ),
@@ -109,10 +119,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Er weigert sich, das Thema anzusprechen',
       ],
       correctIndex: 0,
-      explanation: 'Ein Gleichgewicht zwischen Freiheit und Rücksicht auf andere (1. Korinther 8).',
+      explanation:
+          'Ein Gleichgewicht zwischen Freiheit und Rücksicht auf andere (1. Korinther 8).',
     ),
     QuizQuestion(
-      text: 'Welche Haltung nimmt Paulus laut 1. Korinther 9 ein, um Menschen für die gute Botschaft zu gewinnen?',
+      text:
+          'Welche Haltung nimmt Paulus laut 1. Korinther 9 ein, um Menschen für die gute Botschaft zu gewinnen?',
       options: <String>[
         'Allen alles werden, soweit es möglich ist',
         'In all seinen Gewohnheiten starr bleiben',
@@ -120,12 +132,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Bezahlung für das Predigen verlangen',
       ],
       correctIndex: 0,
-      explanation: 'Eine von Liebe motivierte Flexibilität (1. Korinther 9:22).',
+      explanation:
+          'Eine von Liebe motivierte Flexibilität (1. Korinther 9:22).',
     ),
   ],
   '1 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Womit vergleicht Paulus die Vielfalt der geistigen Gaben in der Versammlung?',
+      text:
+          'Womit vergleicht Paulus die Vielfalt der geistigen Gaben in der Versammlung?',
       options: <String>[
         'Mit den verschiedenen Teilen eines einzigen Körpers',
         'Mit getrennten Rivalen',
@@ -136,7 +150,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Ein Bild der Einheit in Vielfalt (1. Korinther 12).',
     ),
     QuizQuestion(
-      text: 'Welche Eigenschaft beschreibt Paulus im berühmten Kapitel 13 als größer als alle Gaben?',
+      text:
+          'Welche Eigenschaft beschreibt Paulus im berühmten Kapitel 13 als größer als alle Gaben?',
       options: <String>['Liebe', 'Reichtum', 'Ruhm', 'Macht'],
       correctIndex: 0,
       explanation: 'Ohne Liebe ist alles andere wertlos (1. Korinther 13).',
@@ -145,7 +160,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
   ],
   '2 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie beschreibt Paulus den Trost, den er in seiner Prüfung erhielt?',
+      text:
+          'Wie beschreibt Paulus den Trost, den er in seiner Prüfung erhielt?',
       options: <String>[
         'Einen Trost, der später mit anderen geteilt werden soll',
         'Einen Trost, der nur ihm selbst vorbehalten ist',
@@ -153,10 +169,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Einen Trost, der nur von Menschen kommt',
       ],
       correctIndex: 0,
-      explanation: 'Göttlicher Trost wird an andere weitergegeben (2. Korinther 1).',
+      explanation:
+          'Göttlicher Trost wird an andere weitergegeben (2. Korinther 1).',
     ),
     QuizQuestion(
-      text: 'Womit vergleicht Paulus die verwandelten Christen in 2. Korinther 3-4?',
+      text:
+          'Womit vergleicht Paulus die verwandelten Christen in 2. Korinther 3-4?',
       options: <String>[
         'Mit kostbaren Schätzen in zerbrechlichen Tongefäßen',
         'Mit mächtigen Königen',
@@ -164,7 +182,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Mit unveränderlichen Statuen',
       ],
       correctIndex: 0,
-      explanation: 'Ein Bild von Demut und göttlicher Kraft (2. Korinther 4:7).',
+      explanation:
+          'Ein Bild von Demut und göttlicher Kraft (2. Korinther 4:7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Gold', 'Gefäß', 'Licht'],
     ),
@@ -172,14 +191,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
   '2 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Welchen zentralen Appell macht Paulus in 2. Korinther 5?',
-      options: <String>['Lasst euch mit Gott versöhnen', 'Sucht vor allem Reichtum', 'Meidet jede Predigttätigkeit', 'Flieht vor jeder Verantwortung'],
+      options: <String>[
+        'Lasst euch mit Gott versöhnen',
+        'Sucht vor allem Reichtum',
+        'Meidet jede Predigttätigkeit',
+        'Flieht vor jeder Verantwortung',
+      ],
       correctIndex: 0,
       explanation: 'Die zentrale Botschaft der Versöhnung (2. Korinther 5:20).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Gesandte', 'Christus', 'Frieden'],
     ),
     QuizQuestion(
-      text: 'Welchen Grundsatz lehrt Paulus in 2. Korinther 9 über großzügiges Geben?',
+      text:
+          'Welchen Grundsatz lehrt Paulus in 2. Korinther 9 über großzügiges Geben?',
       options: <String>[
         'Gott liebt einen fröhlichen Geber',
         'Geben muss immer erzwungen werden',
@@ -192,7 +217,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
   ],
   '2 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie reagiert Paulus auf seinen „Dorn im Fleisch“ in 2. Korinther 12?',
+      text:
+          'Wie reagiert Paulus auf seinen „Dorn im Fleisch“ in 2. Korinther 12?',
       options: <String>[
         'Er akzeptiert, dass Gottes Kraft sich in Schwachheit als vollkommen erweist',
         'Er gibt seinen Dienst auf',
@@ -200,7 +226,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Er beschuldigt Gott der Ungerechtigkeit',
       ],
       correctIndex: 0,
-      explanation: '„Meine Kraft wird in Schwachheit vollkommen gemacht“ (2. Korinther 12:9).',
+      explanation:
+          '„Meine Kraft wird in Schwachheit vollkommen gemacht“ (2. Korinther 12:9).',
     ),
     QuizQuestion(
       text: 'Welchen abschließenden Appell macht Paulus in 2. Korinther 13?',
@@ -211,7 +238,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Jede geistige Reflexion aufzugeben',
       ],
       correctIndex: 0,
-      explanation: 'Ein Aufruf zu aufrichtiger Selbstprüfung (2. Korinther 13:5).',
+      explanation:
+          'Ein Aufruf zu aufrichtiger Selbstprüfung (2. Korinther 13:5).',
     ),
   ],
   'Galatians#0': <QuizQuestion>[
@@ -224,7 +252,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Aus einer Familientradition',
       ],
       correctIndex: 0,
-      explanation: 'Paulus verteidigt die Rechtmäßigkeit seiner Mission (Galater 1).',
+      explanation:
+          'Paulus verteidigt die Rechtmäßigkeit seiner Mission (Galater 1).',
     ),
     QuizQuestion(
       text: 'Warum tadelte Paulus Petrus öffentlich?',
@@ -235,12 +264,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Petrus weigerte sich zu predigen',
       ],
       correctIndex: 0,
-      explanation: 'Eine praktische Widersprüchlichkeit wird korrigiert (Galater 2).',
+      explanation:
+          'Eine praktische Widersprüchlichkeit wird korrigiert (Galater 2).',
     ),
   ],
   'Galatians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Worauf beruht laut Galater 3 die Rechtfertigung, veranschaulicht am Beispiel Abrahams?',
+      text:
+          'Worauf beruht laut Galater 3 die Rechtfertigung, veranschaulicht am Beispiel Abrahams?',
       options: <String>[
         'Auf dem Glauben, nicht auf Werken des Gesetzes',
         'Allein auf biologischer Abstammung',
@@ -251,7 +282,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Ein zentraler Grundsatz aus Abrahams Leben (Galater 3:6).',
     ),
     QuizQuestion(
-      text: 'Welche Rolle spielte das Gesetz laut Galater 3-4, während man auf Christus wartete?',
+      text:
+          'Welche Rolle spielte das Gesetz laut Galater 3-4, während man auf Christus wartete?',
       options: <String>[
         'Die eines Erziehers, der zu Christus hinführt',
         'Ein endgültiges Mittel zur Rettung',
@@ -259,12 +291,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Ein Fluch ohne Zweck',
       ],
       correctIndex: 0,
-      explanation: 'Das Gesetz bereitete den Weg für den Messias vor (Galater 3:24).',
+      explanation:
+          'Das Gesetz bereitete den Weg für den Messias vor (Galater 3:24).',
     ),
   ],
   'Galatians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welche Frucht des Geistes hebt Galater 5 im Gegensatz zu den Werken des Fleisches hervor?',
+      text:
+          'Welche Frucht des Geistes hebt Galater 5 im Gegensatz zu den Werken des Fleisches hervor?',
       options: <String>[
         'Liebe, Freude, Frieden, Geduld und andere Eigenschaften',
         'Reichtum und Macht',
@@ -272,7 +306,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Herrschaft über andere',
       ],
       correctIndex: 0,
-      explanation: 'Eine Liste wesentlicher christlicher Eigenschaften (Galater 5:22, 23).',
+      explanation:
+          'Eine Liste wesentlicher christlicher Eigenschaften (Galater 5:22, 23).',
     ),
     QuizQuestion(
       text: 'Was rät Galater 6 bezüglich der Lasten anderer?',
@@ -283,7 +318,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Sie um jeden Preis zu meiden',
       ],
       correctIndex: 0,
-      explanation: 'Ein Aufruf zu brüderlicher gegenseitiger Unterstützung (Galater 6:2).',
+      explanation:
+          'Ein Aufruf zu brüderlicher gegenseitiger Unterstützung (Galater 6:2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Gesetz', 'Geist', 'Fleisch'],
     ),
@@ -301,7 +337,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Ein grundlegender Rettungsgrundsatz (Epheser 2:8, 9).',
     ),
     QuizQuestion(
-      text: 'Was bewirkt Christus laut Epheser 2 zwischen Juden und Nichtjuden?',
+      text:
+          'Was bewirkt Christus laut Epheser 2 zwischen Juden und Nichtjuden?',
       options: <String>[
         'Er vereint sie zu einer neuen Menschheit',
         'Er erhält eine dauerhafte Trennung aufrecht',
@@ -314,7 +351,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
   ],
   'Ephesians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welches „Geheimnis“, sagt Paulus, wurde ihm anvertraut, um es den Nationen zu offenbaren?',
+      text:
+          'Welches „Geheimnis“, sagt Paulus, wurde ihm anvertraut, um es den Nationen zu offenbaren?',
       options: <String>[
         'Dass Nichtjuden Miterben der Verheißung sind',
         'Ein wenigen Privilegierten vorbehaltenes Geheimnis',
@@ -333,12 +371,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Einen höheren gesellschaftlichen Status',
       ],
       correctIndex: 0,
-      explanation: 'Eine tiefgreifende innere Veränderung wird gefordert (Epheser 4:24).',
+      explanation:
+          'Eine tiefgreifende innere Veränderung wird gefordert (Epheser 4:24).',
     ),
   ],
   'Ephesians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Womit vergleicht Paulus die Beziehung zwischen Mann und Frau in Epheser 5?',
+      text:
+          'Womit vergleicht Paulus die Beziehung zwischen Mann und Frau in Epheser 5?',
       options: <String>[
         'Mit der Beziehung zwischen Christus und der Versammlung',
         'Mit einer bloßen Geschäftspartnerschaft',
@@ -346,10 +386,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Mit einem ständigen Wettbewerb',
       ],
       correctIndex: 0,
-      explanation: 'Ein Vorbild selbstaufopfernder Liebe wird dargestellt (Epheser 5:25).',
+      explanation:
+          'Ein Vorbild selbstaufopfernder Liebe wird dargestellt (Epheser 5:25).',
     ),
     QuizQuestion(
-      text: 'Wofür steht „die vollständige Waffenrüstung von Gott“ in Epheser 6?',
+      text:
+          'Wofür steht „die vollständige Waffenrüstung von Gott“ in Epheser 6?',
       options: <String>[
         'Für geistige Eigenschaften, um dem geistigen Kampf zu widerstehen',
         'Für buchstäbliche militärische Ausrüstung',
@@ -357,7 +399,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Für eine religiöse Uniform',
       ],
       correctIndex: 0,
-      explanation: 'Jedes Teil steht für eine schützende Eigenschaft (Epheser 6:11-17).',
+      explanation:
+          'Jedes Teil steht für eine schützende Eigenschaft (Epheser 6:11-17).',
     ),
   ],
   'Philippians#0': <QuizQuestion>[
@@ -373,7 +416,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Eine positive Haltung trotz Not (Philipper 1).',
     ),
     QuizQuestion(
-      text: 'Welche berühmte Aussage fasst Paulus\' Sicht auf Leben und Tod zusammen?',
+      text:
+          'Welche berühmte Aussage fasst Paulus\' Sicht auf Leben und Tod zusammen?',
       options: <String>[
         '„Für mich ist das Leben Christus, und der Tod ist Gewinn“',
         '„Das Leben hat keinen Sinn“',
@@ -397,7 +441,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Ein Vorbild äußerster Demut (Philipper 2:5-8).',
     ),
     QuizQuestion(
-      text: 'Worauf, sagt Paulus, verzichtete er, um Christus zu gewinnen, in Philipper 3?',
+      text:
+          'Worauf, sagt Paulus, verzichtete er, um Christus zu gewinnen, in Philipper 3?',
       options: <String>[
         'Auf all seine früheren Vorteile und Errungenschaften',
         'Auf nichts Besonderes',
@@ -405,7 +450,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Auf sein Gebetsleben',
       ],
       correctIndex: 0,
-      explanation: 'Er betrachtet alles als Verlust im Vergleich zu Christus (Philipper 3:8).',
+      explanation:
+          'Er betrachtet alles als Verlust im Vergleich zu Christus (Philipper 3:8).',
     ),
   ],
   'Philippians#2': <QuizQuestion>[
@@ -421,7 +467,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
       explanation: 'Eine Verheißung inneren Friedens (Philipper 4:6, 7).',
     ),
     QuizQuestion(
-      text: 'Welche Vertrauensaussage macht Paulus über seine persönliche Kraft?',
+      text:
+          'Welche Vertrauensaussage macht Paulus über seine persönliche Kraft?',
       options: <String>[
         '„Für alles habe ich die Kraft durch den, der mir Macht gibt“',
         '„Ich habe allein Erfolg, ohne Hilfe“',
@@ -429,12 +476,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         '„Nichts trägt mich wirklich“',
       ],
       correctIndex: 0,
-      explanation: 'Ein Vertrauen, das auf Christus gesetzt wird (Philipper 4:13).',
+      explanation:
+          'Ein Vertrauen, das auf Christus gesetzt wird (Philipper 4:13).',
     ),
   ],
   'Colossians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie beschreibt Kolosser 1 Christi Stellung in Bezug auf die Schöpfung?',
+      text:
+          'Wie beschreibt Kolosser 1 Christi Stellung in Bezug auf die Schöpfung?',
       options: <String>[
         'Alles wurde durch ihn und für ihn geschaffen',
         'Er ist ein Geschöpf unter anderen, ohne Unterschied',
@@ -442,10 +491,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Er kam nach der ganzen Schöpfung',
       ],
       correctIndex: 0,
-      explanation: 'Christus wird eine zentrale Stellung eingeräumt (Kolosser 1:16).',
+      explanation:
+          'Christus wird eine zentrale Stellung eingeräumt (Kolosser 1:16).',
     ),
     QuizQuestion(
-      text: 'Welches „Geheimnis“, sagt Paulus, hat er die Aufgabe zu offenbaren?',
+      text:
+          'Welches „Geheimnis“, sagt Paulus, hat er die Aufgabe zu offenbaren?',
       options: <String>[
         'Christus in euch, die Hoffnung auf Herrlichkeit',
         'Eine wenigen heimlich vorbehaltene Lehre',
@@ -453,7 +504,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Ein verborgenes Tempelritual',
       ],
       correctIndex: 0,
-      explanation: 'Eine Wahrheit, die nun öffentlich gemacht wird (Kolosser 1:27).',
+      explanation:
+          'Eine Wahrheit, die nun öffentlich gemacht wird (Kolosser 1:27).',
     ),
   ],
   'Colossians#1': <QuizQuestion>[
@@ -479,12 +531,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Nichts Besonderes',
       ],
       correctIndex: 0,
-      explanation: 'Eine konkrete innere Veränderung wird gefordert (Kolosser 3:10, 12).',
+      explanation:
+          'Eine konkrete innere Veränderung wird gefordert (Kolosser 3:10, 12).',
     ),
   ],
   'Colossians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie ermutigt Paulus die Gläubigen, sich gegenüber Außenstehenden zu verhalten?',
+      text:
+          'Wie ermutigt Paulus die Gläubigen, sich gegenüber Außenstehenden zu verhalten?',
       options: <String>[
         'Mit Weisheit, indem sie die Zeit bestmöglich nutzen',
         'Mit völliger Gleichgültigkeit',
@@ -516,7 +570,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Nur auf Furcht gegründet',
       ],
       correctIndex: 0,
-      explanation: 'Ihr Glaube wurde zu einem anerkannten Vorbild (1. Thessalonicher 1).',
+      explanation:
+          'Ihr Glaube wurde zu einem anerkannten Vorbild (1. Thessalonicher 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Last', 'Scham', 'Vorbild'],
     ),
@@ -529,7 +584,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Auf Schmeichelei gegründet',
       ],
       correctIndex: 0,
-      explanation: 'Ein zärtliches Bild seiner Hingabe (1. Thessalonicher 2:7).',
+      explanation:
+          'Ein zärtliches Bild seiner Hingabe (1. Thessalonicher 2:7).',
     ),
   ],
   '1 Thessalonians#1': <QuizQuestion>[
@@ -542,20 +598,29 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Um die Versammlung aufzulösen',
       ],
       correctIndex: 0,
-      explanation: 'Hirtliche Fürsorge motivierte diese Botschaft (1. Thessalonicher 3).',
+      explanation:
+          'Hirtliche Fürsorge motivierte diese Botschaft (1. Thessalonicher 3).',
     ),
     QuizQuestion(
-      text: 'Welches Gefühl drückt Paulus aus, als er von ihrer anhaltenden Treue erfährt?',
-      options: <String>['Große Freude', 'Enttäuschung', 'Gleichgültigkeit', 'Zorn'],
+      text:
+          'Welches Gefühl drückt Paulus aus, als er von ihrer anhaltenden Treue erfährt?',
+      options: <String>[
+        'Große Freude',
+        'Enttäuschung',
+        'Gleichgültigkeit',
+        'Zorn',
+      ],
       correctIndex: 0,
-      explanation: 'Ihre Standhaftigkeit tröstet ihn zutiefst (1. Thessalonicher 3:8, 9).',
+      explanation:
+          'Ihre Standhaftigkeit tröstet ihn zutiefst (1. Thessalonicher 3:8, 9).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Kummer', 'Furcht', 'Frieden'],
     ),
   ],
   '1 Thessalonians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie beschreibt 1. Thessalonicher 4 die Auferstehung der Gläubigen?',
+      text:
+          'Wie beschreibt 1. Thessalonicher 4 die Auferstehung der Gläubigen?',
       options: <String>[
         'Sie werden entrückt werden, um dem Herrn zu begegnen',
         'Sie werden für immer im Grab bleiben',
@@ -563,17 +628,25 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC6 = <String, List<QuizQu
         'Nur wenige Privilegierte werden auferweckt',
       ],
       correctIndex: 0,
-      explanation: 'Eine zentrale Hoffnung für die Gläubigen (1. Thessalonicher 4:17).',
+      explanation:
+          'Eine zentrale Hoffnung für die Gläubigen (1. Thessalonicher 4:17).',
     ),
     QuizQuestion(
       text: 'Womit wird der Tag Jehovas in 1. Thessalonicher 5 verglichen?',
-      options: <String>['Mit einem Dieb in der Nacht', 'Mit einem vorhersehbaren Fest', 'Mit einem gewöhnlichen Tag', 'Mit einer bloßen Warnung ohne Wirkung'],
+      options: <String>[
+        'Mit einem Dieb in der Nacht',
+        'Mit einem vorhersehbaren Fest',
+        'Mit einem gewöhnlichen Tag',
+        'Mit einer bloßen Warnung ohne Wirkung',
+      ],
       correctIndex: 0,
-      explanation: 'Ein Bild eines plötzlichen, unerwarteten Eintreffens (1. Thessalonicher 5:2).',
+      explanation:
+          'Ein Bild eines plötzlichen, unerwarteten Eintreffens (1. Thessalonicher 5:2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Trompete', 'Wolke', 'Braut'],
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesDeC6 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesDeC6 =
+    <String, List<QuizQuestion>>{};

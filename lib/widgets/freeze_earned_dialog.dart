@@ -7,7 +7,10 @@ import '../l10n/app_localizations.dart';
 /// [kQuizzesPerFreeze]) or by passing the review quiz. [message] overrides
 /// the default "3 new quizzes" body for contexts where that wording doesn't
 /// apply (e.g. the review quiz).
-Future<void> showFreezeEarnedDialog(BuildContext context, {String? message}) async {
+Future<void> showFreezeEarnedDialog(
+  BuildContext context, {
+  String? message,
+}) async {
   final AppLocalizations l10n = AppLocalizations.of(context)!;
   final ColorScheme cs = Theme.of(context).colorScheme;
 
@@ -28,7 +31,10 @@ Future<void> showFreezeEarnedDialog(BuildContext context, {String? message}) asy
         ),
       ),
       title: Text(l10n.freezeEarnedTitle, textAlign: TextAlign.center),
-      content: Text(message ?? l10n.freezeEarnedBody, textAlign: TextAlign.center),
+      content: Text(
+        message ?? l10n.freezeEarnedBody,
+        textAlign: TextAlign.center,
+      ),
       actions: <Widget>[
         SizedBox(
           width: double.infinity,

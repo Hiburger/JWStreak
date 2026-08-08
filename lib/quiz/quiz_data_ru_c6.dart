@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesRuC6 = <String, List<QuizQuestion>>{
   'Romans#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что Павел заявляет о положении всех людей, иудеев и '
+      text:
+          'Что Павел заявляет о положении всех людей, иудеев и '
           'неевреев, в 3-й главе Римлянам?',
       options: <String>[
         'Все согрешили и лишены славы Божьей',
@@ -12,11 +14,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Ответственны только руководители',
       ],
       correctIndex: 0,
-      explanation:
-          'Важная основа рассуждений Павла (Римлянам 3:23).',
+      explanation: 'Важная основа рассуждений Павла (Римлянам 3:23).',
     ),
     QuizQuestion(
-      text: 'На чём основано оправдание согласно Римлянам 3-4, что '
+      text:
+          'На чём основано оправдание согласно Римлянам 3-4, что '
           'иллюстрирует пример Авраама?',
       options: <String>[
         'На вере, а не на делах закона',
@@ -25,8 +27,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'На этническом происхождении',
       ],
       correctIndex: 0,
-      explanation:
-          'Авраам был объявлен праведным по вере (Римлянам 4).',
+      explanation: 'Авраам был объявлен праведным по вере (Римлянам 4).',
     ),
   ],
   'Romans#1': <QuizQuestion>[
@@ -51,13 +52,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Для народов не может быть никакого спасения',
       ],
       correctIndex: 0,
-      explanation:
-          'Приводится всеобщее обещание (Римлянам 10:13).',
+      explanation: 'Приводится всеобщее обещание (Римлянам 10:13).',
     ),
   ],
   'Romans#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'О чём просит христиан Римлянам 12 в связи с их '
+      text:
+          'О чём просит христиан Римлянам 12 в связи с их '
           'повседневной жизнью?',
       options: <String>[
         'Принести себя в жертву Богу как живую жертву',
@@ -66,11 +67,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Никогда не использовать свои дары',
       ],
       correctIndex: 0,
-      explanation:
-          'Призыв к практическому посвящению себя (Римлянам 12:1).',
+      explanation: 'Призыв к практическому посвящению себя (Римлянам 12:1).',
     ),
     QuizQuestion(
-      text: 'Какой принцип устанавливает Римлянам 13 в отношении '
+      text:
+          'Какой принцип устанавливает Римлянам 13 в отношении '
           'властей?',
       options: <String>[
         'Подчиняться высшим властям',
@@ -79,13 +80,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Платить налоги только по желанию',
       ],
       correctIndex: 0,
-      explanation:
-          'Преподаётся принцип гражданского уважения (Римлянам 13).',
+      explanation: 'Преподаётся принцип гражданского уважения (Римлянам 13).',
     ),
   ],
   '1 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какую проблему Павел затрагивает в самом начале этого '
+      text:
+          'Какую проблему Павел затрагивает в самом начале этого '
           'письма?',
       options: <String>[
         'Разделения и соперничество в собрании',
@@ -114,7 +115,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   '1 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Павел подходит к вопросу о пище, принесённой в жертву '
+      text:
+          'Как Павел подходит к вопросу о пище, принесённой в жертву '
           'идолам?',
       options: <String>[
         'Любовь и забота о совести ближнего важнее свободы',
@@ -128,7 +130,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(1 Коринфянам 8).',
     ),
     QuizQuestion(
-      text: 'Какую позицию занимает Павел, чтобы привлечь людей к '
+      text:
+          'Какую позицию занимает Павел, чтобы привлечь людей к '
           'благой вести, согласно 1 Коринфянам 9?',
       options: <String>[
         'Становиться всем для всех, насколько это возможно',
@@ -137,13 +140,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Требовать плату за проповедь',
       ],
       correctIndex: 0,
-      explanation:
-          'Гибкость, движимая любовью (1 Коринфянам 9:22).',
+      explanation: 'Гибкость, движимая любовью (1 Коринфянам 9:22).',
     ),
   ],
   '1 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'С чем Павел сравнивает разнообразие духовных даров в '
+      text:
+          'С чем Павел сравнивает разнообразие духовных даров в '
           'собрании?',
       options: <String>[
         'С разными частями одного тела',
@@ -152,21 +155,21 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'С бесполезными дарами',
       ],
       correctIndex: 0,
-      explanation:
-          'Образ единства при разнообразии (1 Коринфянам 12).',
+      explanation: 'Образ единства при разнообразии (1 Коринфянам 12).',
     ),
     QuizQuestion(
-      text: 'Какое качество Павел описывает как превосходящее все дары '
+      text:
+          'Какое качество Павел описывает как превосходящее все дары '
           'в знаменитой 13-й главе?',
       options: <String>['Любовь', 'Богатство', 'Известность', 'Власть'],
       correctIndex: 0,
-      explanation:
-          'Без любви всё остальное бесполезно (1 Коринфянам 13).',
+      explanation: 'Без любви всё остальное бесполезно (1 Коринфянам 13).',
     ),
   ],
   '2 Corinthians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Павел описывает утешение, которое он получил в '
+      text:
+          'Как Павел описывает утешение, которое он получил в '
           'испытании?',
       options: <String>[
         'Утешение, которым можно затем поделиться с другими',
@@ -175,11 +178,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Утешение, исходящее только от людей',
       ],
       correctIndex: 0,
-      explanation:
-          'Божественное утешение передаётся другим (2 Коринфянам 1).',
+      explanation: 'Божественное утешение передаётся другим (2 Коринфянам 1).',
     ),
     QuizQuestion(
-      text: 'С чем Павел сравнивает преображённых христиан во '
+      text:
+          'С чем Павел сравнивает преображённых христиан во '
           '2 Коринфянам 3-4?',
       options: <String>[
         'С драгоценными сокровищами в хрупких глиняных сосудах',
@@ -188,20 +191,24 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'С неизменными статуями',
       ],
       correctIndex: 0,
-      explanation:
-          'Образ смирения и Божьей силы (2 Коринфянам 4:7).',
+      explanation: 'Образ смирения и Божьей силы (2 Коринфянам 4:7).',
     ),
   ],
   '2 Corinthians#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Какой главный призыв Павел выдвигает во 2 Коринфянам 5?',
-      options: <String>['Примиритесь с Богом', 'Ищите прежде всего богатство', 'Избегайте всякой проповеди', 'Бегите от всякой ответственности'],
+      options: <String>[
+        'Примиритесь с Богом',
+        'Ищите прежде всего богатство',
+        'Избегайте всякой проповеди',
+        'Бегите от всякой ответственности',
+      ],
       correctIndex: 0,
-      explanation:
-          'Главная весть о примирении (2 Коринфянам 5:20).',
+      explanation: 'Главная весть о примирении (2 Коринфянам 5:20).',
     ),
     QuizQuestion(
-      text: 'Какой принцип Павел преподаёт о щедром даянии во '
+      text:
+          'Какой принцип Павел преподаёт о щедром даянии во '
           '2 Коринфянам 9?',
       options: <String>[
         'Бог любит того, кто даёт с радостью',
@@ -217,7 +224,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   '2 Corinthians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Павел отвечает на своё «жало в плоти» во '
+      text:
+          'Как Павел отвечает на своё «жало в плоти» во '
           '2 Коринфянам 12?',
       options: <String>[
         'Он принимает, что сила Божья проявляется в '
@@ -232,7 +240,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(2 Коринфянам 12:9).',
     ),
     QuizQuestion(
-      text: 'С каким последним призывом Павел обращается во '
+      text:
+          'С каким последним призывом Павел обращается во '
           '2 Коринфянам 13?',
       options: <String>[
         'Испытывать самих себя, в вере ли вы',
@@ -248,7 +257,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Galatians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Откуда, по утверждению Павла, исходит его апостольская '
+      text:
+          'Откуда, по утверждению Павла, исходит его апостольская '
           'власть?',
       options: <String>[
         'Непосредственно от Иисуса Христа, а не от людей',
@@ -257,8 +267,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'От семейной традиции',
       ],
       correctIndex: 0,
-      explanation:
-          'Павел отстаивает законность своей миссии (Галатам 1).',
+      explanation: 'Павел отстаивает законность своей миссии (Галатам 1).',
     ),
     QuizQuestion(
       text: 'Почему Павел публично обличил Петра?',
@@ -275,7 +284,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Galatians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'На чём основано оправдание согласно Галатам 3, что '
+      text:
+          'На чём основано оправдание согласно Галатам 3, что '
           'иллюстрирует пример Авраама?',
       options: <String>[
         'На вере, а не на делах закона',
@@ -289,7 +299,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(Галатам 3:6).',
     ),
     QuizQuestion(
-      text: 'Какую роль сыграл закон, согласно Галатам 3-4, в ожидании '
+      text:
+          'Какую роль сыграл закон, согласно Галатам 3-4, в ожидании '
           'Христа?',
       options: <String>[
         'Роль воспитателя, ведущего ко Христу',
@@ -298,13 +309,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Проклятие без всякой цели',
       ],
       correctIndex: 0,
-      explanation:
-          'Закон готовил к приходу Мессии (Галатам 3:24).',
+      explanation: 'Закон готовил к приходу Мессии (Галатам 3:24).',
     ),
   ],
   'Galatians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какой плод духа выдвигает на первый план Галатам 5, в '
+      text:
+          'Какой плод духа выдвигает на первый план Галатам 5, в '
           'противоположность делам плоти?',
       options: <String>[
         'Любовь, радость, мир, терпение и другие качества',
@@ -326,8 +337,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Любой ценой их избегать',
       ],
       correctIndex: 0,
-      explanation:
-          'Призыв к братской взаимопомощи (Галатам 6:2).',
+      explanation: 'Призыв к братской взаимопомощи (Галатам 6:2).',
     ),
   ],
   'Ephesians#0': <QuizQuestion>[
@@ -340,11 +350,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Своим материальным богатством',
       ],
       correctIndex: 0,
-      explanation:
-          'Основополагающий принцип спасения (Ефесянам 2:8, 9).',
+      explanation: 'Основополагающий принцип спасения (Ефесянам 2:8, 9).',
     ),
     QuizQuestion(
-      text: 'Что совершает Христос между иудеями и неевреями, согласно '
+      text:
+          'Что совершает Христос между иудеями и неевреями, согласно '
           'Ефесянам 2?',
       options: <String>[
         'Он объединяет их в одно новое человечество',
@@ -353,13 +363,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Он игнорирует это различие',
       ],
       correctIndex: 0,
-      explanation:
-          'Разрушена разделяющая стена (Ефесянам 2:14).',
+      explanation: 'Разрушена разделяющая стена (Ефесянам 2:14).',
     ),
   ],
   'Ephesians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какую «тайну», по словам Павла, ему было поручено открыть '
+      text:
+          'Какую «тайну», по словам Павла, ему было поручено открыть '
           'народам?',
       options: <String>[
         'Что неевреи — сонаследники обещания',
@@ -368,11 +378,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Пророчество о Риме',
       ],
       correctIndex: 0,
-      explanation:
-          'Неожиданное включение народов (Ефесянам 3:6).',
+      explanation: 'Неожиданное включение народов (Ефесянам 3:6).',
     ),
     QuizQuestion(
-      text: 'Во что должны «облечься» христиане, согласно '
+      text:
+          'Во что должны «облечься» христиане, согласно '
           'Ефесянам 4?',
       options: <String>[
         'В новую личность, подобную Богу',
@@ -388,7 +398,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Ephesians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'С чем Павел сравнивает отношения между мужем и женой в '
+      text:
+          'С чем Павел сравнивает отношения между мужем и женой в '
           'Ефесянам 5?',
       options: <String>[
         'С отношениями между Христом и собранием',
@@ -402,7 +413,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(Ефесянам 5:25).',
     ),
     QuizQuestion(
-      text: 'Что символизирует «полное вооружение от Бога» в '
+      text:
+          'Что символизирует «полное вооружение от Бога» в '
           'Ефесянам 6?',
       options: <String>[
         'Духовные качества для противостояния в духовной борьбе',
@@ -418,7 +430,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Philippians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Павел воспринимает своё тюремное заключение в этом '
+      text:
+          'Как Павел воспринимает своё тюремное заключение в этом '
           'письме?',
       options: <String>[
         'Он радуется этому, так как это способствует продвижению '
@@ -432,7 +445,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           'Положительный настрой, несмотря на испытание (Филиппийцам 1).',
     ),
     QuizQuestion(
-      text: 'Какое знаменитое утверждение обобщает взгляд Павла на '
+      text:
+          'Какое знаменитое утверждение обобщает взгляд Павла на '
           'жизнь и смерть?',
       options: <String>[
         '«Для меня жить — это Христос, а умереть — приобретение»',
@@ -441,13 +455,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         '«Смерти нужно избегать любой ценой»',
       ],
       correctIndex: 0,
-      explanation:
-          'Полное доверие Христу (Филиппийцам 1:21).',
+      explanation: 'Полное доверие Христу (Филиппийцам 1:21).',
     ),
   ],
   'Philippians#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Какой пример смирения предлагает Павел в '
+      text:
+          'Какой пример смирения предлагает Павел в '
           'Филиппийцам 2?',
       options: <String>[
         'Христа, который смирил себя вплоть до положения раба',
@@ -456,11 +470,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Победоносного полководца',
       ],
       correctIndex: 0,
-      explanation:
-          'Образец предельного смирения (Филиппийцам 2:5-8).',
+      explanation: 'Образец предельного смирения (Филиппийцам 2:5-8).',
     ),
     QuizQuestion(
-      text: 'От чего, по словам Павла, он отказался, чтобы приобрести '
+      text:
+          'От чего, по словам Павла, он отказался, чтобы приобрести '
           'Христа, в Филиппийцам 3?',
       options: <String>[
         'От всех своих прежних преимуществ и достижений',
@@ -476,7 +490,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Philippians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Что обещано в Филиппийцам 4 тем, кто молится без '
+      text:
+          'Что обещано в Филиппийцам 4 тем, кто молится без '
           'тревоги?',
       options: <String>[
         'Мир Божий, превосходящий всякую мысль',
@@ -485,11 +500,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'Ничего особенного',
       ],
       correctIndex: 0,
-      explanation:
-          'Обещание внутреннего мира (Филиппийцам 4:6, 7).',
+      explanation: 'Обещание внутреннего мира (Филиппийцам 4:6, 7).',
     ),
     QuizQuestion(
-      text: 'Какое утверждение уверенности делает Павел о своей '
+      text:
+          'Какое утверждение уверенности делает Павел о своей '
           'личной силе?',
       options: <String>[
         '«Я всё могу благодаря тому, кто даёт мне силу»',
@@ -498,13 +513,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         '«Ничто на самом деле меня не поддерживает»',
       ],
       correctIndex: 0,
-      explanation:
-          'Уверенность, возлагаемая на Христа (Филиппийцам 4:13).',
+      explanation: 'Уверенность, возлагаемая на Христа (Филиппийцам 4:13).',
     ),
   ],
   'Colossians#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Колоссянам 1 описывает положение Христа по отношению '
+      text:
+          'Как Колоссянам 1 описывает положение Христа по отношению '
           'к творению?',
       options: <String>[
         'Всё было создано через него и для него',
@@ -547,7 +562,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(Колоссянам 2:8).',
     ),
     QuizQuestion(
-      text: 'Во что должны «облечься» христиане, согласно '
+      text:
+          'Во что должны «облечься» христиане, согласно '
           'Колоссянам 3?',
       options: <String>[
         'В новую личность, с состраданием и любовью',
@@ -563,7 +579,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   'Colossians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как Павел призывает вести себя по отношению к людям вне '
+      text:
+          'Как Павел призывает вести себя по отношению к людям вне '
           'веры?',
       options: <String>[
         'С мудростью, разумно используя время',
@@ -572,8 +589,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
         'С открытым презрением',
       ],
       correctIndex: 0,
-      explanation:
-          'Рекомендуется разумное поведение (Колоссянам 4:5).',
+      explanation: 'Рекомендуется разумное поведение (Колоссянам 4:5).',
     ),
     QuizQuestion(
       text: 'Какой тон характеризует окончание письма Колоссянам?',
@@ -632,9 +648,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(1 Фессалоникийцам 3).',
     ),
     QuizQuestion(
-      text: 'Какое чувство выражает Павел, узнав об их неизменной '
+      text:
+          'Какое чувство выражает Павел, узнав об их неизменной '
           'верности?',
-      options: <String>['Огромную радость', 'Разочарование', 'Безразличие', 'Гнев'],
+      options: <String>[
+        'Огромную радость',
+        'Разочарование',
+        'Безразличие',
+        'Гнев',
+      ],
       correctIndex: 0,
       explanation:
           'Их стойкость его глубоко утешает '
@@ -643,7 +665,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
   '1 Thessalonians#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Как 1 Фессалоникийцам 4 описывает воскресение '
+      text:
+          'Как 1 Фессалоникийцам 4 описывает воскресение '
           'верующих?',
       options: <String>[
         'Они будут восхищены, чтобы встретить Господа',
@@ -657,9 +680,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
           '(1 Фессалоникийцам 4:17).',
     ),
     QuizQuestion(
-      text: 'С чем сравнивается день Иеговы в '
+      text:
+          'С чем сравнивается день Иеговы в '
           '1 Фессалоникийцам 5?',
-      options: <String>['С вором в ночи', 'С предсказуемым праздником', 'С обычным днём', 'С простым предупреждением без последствий'],
+      options: <String>[
+        'С вором в ночи',
+        'С предсказуемым праздником',
+        'С обычным днём',
+        'С простым предупреждением без последствий',
+      ],
       correctIndex: 0,
       explanation:
           'Образ внезапного и неожиданного прихода '
@@ -668,4 +697,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesRuC6 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesRuC6 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesRuC6 =
+    <String, List<QuizQuestion>>{};

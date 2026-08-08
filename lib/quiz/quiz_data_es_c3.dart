@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
   'Esther#0': <QuizQuestion>[
     QuizQuestion(
       text: '¿Por qué fue destituida la reina Vasti?',
@@ -15,7 +16,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '¿A quién crio Mardoqueo, y quién llegó a ser reina?',
-      options: <String>['A Ester, su prima', 'A su hija', 'A su hermana', 'A una esclava extranjera'],
+      options: <String>[
+        'A Ester, su prima',
+        'A su hija',
+        'A su hermana',
+        'A una esclava extranjera',
+      ],
       correctIndex: 0,
       explanation: 'Ester es elegida como la nueva reina (Ester 2).',
       type: QuizAnswerType.freeText,
@@ -30,12 +36,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Acababa de estallar una guerra',
       ],
       correctIndex: 0,
-      explanation: 'La ira de Amán se transforma en un complot genocida (Ester 3).',
+      explanation:
+          'La ira de Amán se transforma en un complot genocida (Ester 3).',
     ),
   ],
   'Esther#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué frase célebre le dirige Mardoqueo a Ester para convencerla de actuar?',
+      text:
+          '¿Qué frase célebre le dirige Mardoqueo a Ester para convencerla de actuar?',
       options: <String>[
         '«¿Quién sabe si no es precisamente para un tiempo como este...?»',
         '«Huye mientras estés a tiempo»',
@@ -54,7 +62,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Anuló su decreto',
       ],
       correctIndex: 0,
-      explanation: 'Este detalle providencial da un vuelco a la situación (Ester 6).',
+      explanation:
+          'Este detalle providencial da un vuelco a la situación (Ester 6).',
     ),
     QuizQuestion(
       text: '¿Cómo reveló Ester el complot de Amán?',
@@ -78,15 +87,22 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'No cambiaba nada',
       ],
       correctIndex: 0,
-      explanation: 'Un decreto irrevocable debía ser contrarrestado por otro (Ester 8).',
+      explanation:
+          'Un decreto irrevocable debía ser contrarrestado por otro (Ester 8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Amán', 'anillo', 'provincias'],
     ),
     QuizQuestion(
       text: '¿Qué fiesta se instituyó para conmemorar esta liberación?',
-      options: <String>['El Purim', 'La Pascua', 'Los Tabernáculos', 'El Jubileo'],
+      options: <String>[
+        'El Purim',
+        'La Pascua',
+        'Los Tabernáculos',
+        'El Jubileo',
+      ],
       correctIndex: 0,
-      explanation: 'El Purim sigue celebrando este acontecimiento hasta hoy (Ester 9).',
+      explanation:
+          'El Purim sigue celebrando este acontecimiento hasta hoy (Ester 9).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Purim'],
     ),
@@ -123,7 +139,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Abandonó su fe',
       ],
       correctIndex: 0,
-      explanation: 'Su integridad permanece intacta a pesar de la prueba (Job 1).',
+      explanation:
+          'Su integridad permanece intacta a pesar de la prueba (Job 1).',
     ),
     QuizQuestion(
       text: '¿Qué le aconseja la esposa de Job después de su enfermedad?',
@@ -141,7 +158,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Job#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cuál es el argumento principal que expone Bildad en su primer discurso?',
+      text:
+          '¿Cuál es el argumento principal que expone Bildad en su primer discurso?',
       options: <String>[
         'La sabiduría de los antepasados prueba que Dios es justo',
         'Dios no existe',
@@ -200,7 +218,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Job cuestiona la teoría simplista de sus amigos (Job 21).',
     ),
     QuizQuestion(
-      text: '¿Cómo describe Job el trato que recibe de sus amigos en estos capítulos?',
+      text:
+          '¿Cómo describe Job el trato que recibe de sus amigos en estos capítulos?',
       options: <String>[
         'Se siente abandonado e incomprendido por ellos',
         'Les agradece calurosamente',
@@ -208,7 +227,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'No los menciona en absoluto',
       ],
       correctIndex: 0,
-      explanation: 'Job expresa su angustia ante la falta de compasión de ellos (Job 16-17).',
+      explanation:
+          'Job expresa su angustia ante la falta de compasión de ellos (Job 16-17).',
     ),
   ],
   'Job#3': <QuizQuestion>[
@@ -221,7 +241,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'De haber mentido al rey',
       ],
       correctIndex: 0,
-      explanation: 'Las acusaciones de Elifaz se vuelven más precisas, aunque sin pruebas (Job 22).',
+      explanation:
+          'Las acusaciones de Elifaz se vuelven más precisas, aunque sin pruebas (Job 22).',
     ),
     QuizQuestion(
       text: '¿Qué anhela ardientemente Job en su respuesta?',
@@ -245,7 +266,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Las leyes del sacrificio',
       ],
       correctIndex: 0,
-      explanation: 'Este poema exalta la sabiduría, más preciosa que el oro (Job 28).',
+      explanation:
+          'Este poema exalta la sabiduría, más preciosa que el oro (Job 28).',
     ),
   ],
   'Job#4': <QuizQuestion>[
@@ -258,7 +280,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Su infancia en el extranjero',
       ],
       correctIndex: 0,
-      explanation: 'Job contrasta su pasado honorable con su situación actual (Job 29).',
+      explanation:
+          'Job contrasta su pasado honorable con su situación actual (Job 29).',
     ),
     QuizQuestion(
       text: '¿Qué declara Job en su juramento final de inocencia?',
@@ -280,7 +303,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El hijo de Job',
       ],
       correctIndex: 0,
-      explanation: 'Eliú interviene porque los ancianos no lograron convencer (Job 32).',
+      explanation:
+          'Eliú interviene porque los ancianos no lograron convencer (Job 32).',
     ),
   ],
   'Job#5': <QuizQuestion>[
@@ -293,7 +317,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Nunca respondió',
       ],
       correctIndex: 0,
-      explanation: 'Dios finalmente responde, pero mediante preguntas (Job 38).',
+      explanation:
+          'Dios finalmente responde, pero mediante preguntas (Job 38).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['nube', 'zarza', 'sueño'],
     ),
@@ -306,7 +331,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Los rituales del templo',
       ],
       correctIndex: 0,
-      explanation: 'Dios muestra la inmensidad de su sabiduría creadora (Job 38-41).',
+      explanation:
+          'Dios muestra la inmensidad de su sabiduría creadora (Job 38-41).',
     ),
     QuizQuestion(
       text: '¿Cómo concluye la historia de Job?',
@@ -325,7 +351,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   // range instead of attempting exhaustive coverage.
   'Psalms#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Con qué compara el Salmo 1 al hombre feliz que medita en la ley de Dios?',
+      text:
+          '¿Con qué compara el Salmo 1 al hombre feliz que medita en la ley de Dios?',
       options: <String>[
         'Con un árbol plantado junto a corrientes de agua',
         'Con una piedra sólida',
@@ -347,7 +374,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: '«Los cielos declaran la gloria de Dios» (Salmo 19:1).',
     ),
     QuizQuestion(
-      text: '¿Qué pregunta plantea el Salmo 8 ante la inmensidad de la creación?',
+      text:
+          '¿Qué pregunta plantea el Salmo 8 ante la inmensidad de la creación?',
       options: <String>[
         '¿Qué es el hombre para que te acuerdes de él?',
         '¿Por qué es tan vasto el mar?',
@@ -355,7 +383,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         '¿Cuántas estrellas existen?',
       ],
       correctIndex: 0,
-      explanation: 'El salmista se maravilla del lugar dado al hombre (Salmo 8:4).',
+      explanation:
+          'El salmista se maravilla del lugar dado al hombre (Salmo 8:4).',
     ),
   ],
   'Psalms#1': <QuizQuestion>[
@@ -371,7 +400,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: '«Jehová es mi Pastor» (Salmo 23:1).',
     ),
     QuizQuestion(
-      text: '¿Qué palabra profética del Salmo 22 citó Jesús en el madero de tormento?',
+      text:
+          '¿Qué palabra profética del Salmo 22 citó Jesús en el madero de tormento?',
       options: <String>[
         '«Dios mío, Dios mío, ¿por qué me has abandonado?»',
         '«He venido a juzgar»',
@@ -379,7 +409,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         '«El reino se acerca»',
       ],
       correctIndex: 0,
-      explanation: 'Esta cita vincula el salmo con la pasión de Cristo (Salmo 22:1).',
+      explanation:
+          'Esta cita vincula el salmo con la pasión de Cristo (Salmo 22:1).',
     ),
     QuizQuestion(
       text: '¿Qué declara el Salmo 34 sobre la bondad de Jehová?',
@@ -390,12 +421,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Se limita a Israel',
       ],
       correctIndex: 0,
-      explanation: 'Una invitación a experimentar la bondad divina (Salmo 34:8).',
+      explanation:
+          'Una invitación a experimentar la bondad divina (Salmo 34:8).',
     ),
   ],
   'Psalms#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué oración conmovedora compuso David después de su pecado con Betsabé?',
+      text:
+          '¿Qué oración conmovedora compuso David después de su pecado con Betsabé?',
       options: <String>[
         'El Salmo 51, pidiendo un corazón puro',
         'Un canto de victoria militar',
@@ -406,7 +439,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: '«Crea en mí un corazón puro, oh Dios» (Salmo 51:10).',
     ),
     QuizQuestion(
-      text: '¿Con qué compara el salmista su ardiente deseo de Dios en el Salmo 42?',
+      text:
+          '¿Con qué compara el salmista su ardiente deseo de Dios en el Salmo 42?',
       options: <String>[
         'Con una cierva que anhela corrientes de agua',
         'Con un león hambriento',
@@ -425,14 +459,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El rey es nuestra única esperanza',
       ],
       correctIndex: 0,
-      explanation: '«Dios es para nosotros un refugio y una fuerza» (Salmo 46:1).',
+      explanation:
+          '«Dios es para nosotros un refugio y una fuerza» (Salmo 46:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['torre', 'escudo', 'roca'],
     ),
   ],
   'Psalms#3': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Para quién es el Salmo 72 una oración de bendición por un reinado justo y próspero?',
+      text:
+          '¿Para quién es el Salmo 72 una oración de bendición por un reinado justo y próspero?',
       options: <String>[
         'Para el rey (Salomón, y proféticamente el Mesías)',
         'Solo para los sacerdotes',
@@ -440,7 +476,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Para los profetas',
       ],
       correctIndex: 0,
-      explanation: 'Este salmo mesiánico describe un reinado de paz duradera (Salmo 72).',
+      explanation:
+          'Este salmo mesiánico describe un reinado de paz duradera (Salmo 72).',
     ),
     QuizQuestion(
       text: '¿Qué dilema perturba a Asaf en el Salmo 73?',
@@ -451,7 +488,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El silencio de los profetas',
       ],
       correctIndex: 0,
-      explanation: 'Asaf resuelve esta inquietud al entrar en el santuario de Dios (Salmo 73:17).',
+      explanation:
+          'Asaf resuelve esta inquietud al entrar en el santuario de Dios (Salmo 73:17).',
     ),
     QuizQuestion(
       text: '¿Qué imagen describe el poderoso avance de Dios en el Salmo 68?',
@@ -467,7 +505,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Psalms#4': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué le pide Moisés a Dios en el Salmo 90 respecto a la brevedad de la vida?',
+      text:
+          '¿Qué le pide Moisés a Dios en el Salmo 90 respecto a la brevedad de la vida?',
       options: <String>[
         'Que nos enseñe a contar bien nuestros días',
         'Prolongar indefinidamente la vida humana',
@@ -524,7 +563,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Una imagen tierna de compasión paternal (Salmo 103:13).',
     ),
     QuizQuestion(
-      text: '¿Qué palabra del Salmo 110 se aplica a Cristo en las Escrituras Griegas?',
+      text:
+          '¿Qué palabra del Salmo 110 se aplica a Cristo en las Escrituras Griegas?',
       options: <String>[
         '«Siéntate a mi diestra»',
         '«Serás rey de Babilonia»',
@@ -537,7 +577,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Psalms#6': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cuál es el tema principal del Salmo 119, el capítulo más largo de la Biblia?',
+      text:
+          '¿Cuál es el tema principal del Salmo 119, el capítulo más largo de la Biblia?',
       options: <String>[
         'El amor por la ley y la palabra de Dios',
         'Una batalla histórica',
@@ -556,7 +597,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'De los sacerdotes del templo',
       ],
       correctIndex: 0,
-      explanation: '«Alzo mis ojos a las montañas... mi ayuda viene de Jehová» (Salmo 121).',
+      explanation:
+          '«Alzo mis ojos a las montañas... mi ayuda viene de Jehová» (Salmo 121).',
     ),
     QuizQuestion(
       text: '¿Qué recuerda el Salmo 127 sobre los proyectos humanos?',
@@ -580,7 +622,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'La construcción del templo',
       ],
       correctIndex: 0,
-      explanation: '«Junto a los ríos de Babilonia nos sentábamos y llorábamos» (Salmo 137:1).',
+      explanation:
+          '«Junto a los ríos de Babilonia nos sentábamos y llorábamos» (Salmo 137:1).',
     ),
     QuizQuestion(
       text: '¿Cómo describe el Salmo 145 a Jehová?',
@@ -602,7 +645,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Que se prohíba la música',
       ],
       correctIndex: 0,
-      explanation: 'El libro termina con un llamado universal a la alabanza (Salmo 150:6).',
+      explanation:
+          'El libro termina con un llamado universal a la alabanza (Salmo 150:6).',
     ),
   ],
   'Proverbs#0': <QuizQuestion>[
@@ -670,7 +714,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: '«Encomienda a Jehová tus obras» (Proverbios 16:3).',
     ),
     QuizQuestion(
-      text: '¿Qué representa la mujer sabia que edifica su casa en Proverbios 14?',
+      text:
+          '¿Qué representa la mujer sabia que edifica su casa en Proverbios 14?',
       options: <String>[
         'La sabiduría práctica que construye y preserva',
         'Una reina extranjera',
@@ -678,7 +723,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Un personaje menor sin relevancia',
       ],
       correctIndex: 0,
-      explanation: 'La imagen ilustra el efecto constructivo de la sabiduría (Proverbios 14:1).',
+      explanation:
+          'La imagen ilustra el efecto constructivo de la sabiduría (Proverbios 14:1).',
     ),
   ],
   'Proverbs#2': <QuizQuestion>[
@@ -691,7 +737,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Siempre es inofensiva',
       ],
       correctIndex: 0,
-      explanation: 'Una imagen contundente sobre el impacto de las palabras (Proverbios 18:21).',
+      explanation:
+          'Una imagen contundente sobre el impacto de las palabras (Proverbios 18:21).',
     ),
     QuizQuestion(
       text: '¿Qué dice Proverbios 19 sobre la bondad hacia los pobres?',
@@ -702,7 +749,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Debilita a la sociedad',
       ],
       correctIndex: 0,
-      explanation: '«El que se compadece del pobre presta a Jehová» (Proverbios 19:17).',
+      explanation:
+          '«El que se compadece del pobre presta a Jehová» (Proverbios 19:17).',
     ),
     QuizQuestion(
       text: 'Según Proverbios 22, ¿qué vale más que una gran riqueza?',
@@ -713,7 +761,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Un vasto territorio',
       ],
       correctIndex: 0,
-      explanation: '«Vale más una buena reputación que grandes riquezas» (Proverbios 22:1).',
+      explanation:
+          '«Vale más una buena reputación que grandes riquezas» (Proverbios 22:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['riqueza', 'oro', 'plata'],
     ),
@@ -728,7 +777,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Los amigos debilitan el carácter',
       ],
       correctIndex: 0,
-      explanation: 'Una imagen de influencia mutua positiva (Proverbios 27:17).',
+      explanation:
+          'Una imagen de influencia mutua positiva (Proverbios 27:17).',
     ),
     QuizQuestion(
       text: '¿Qué dice Proverbios 29 sobre la falta de dirección espiritual?',
@@ -768,7 +818,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Este tema estructura todo el libro (Eclesiastés 1:2).',
     ),
     QuizQuestion(
-      text: '¿Qué descubrió Salomón después de buscar placer, trabajo y sabiduría?',
+      text:
+          '¿Qué descubrió Salomón después de buscar placer, trabajo y sabiduría?',
       options: <String>[
         'Todo eso, sin Dios, sigue siendo vano',
         'El placer por sí solo basta para la felicidad',
@@ -776,7 +827,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'La sabiduría humana lo resuelve todo',
       ],
       correctIndex: 0,
-      explanation: 'Su experiencia personal ilustra la futilidad sin Dios (Eclesiastés 2).',
+      explanation:
+          'Su experiencia personal ilustra la futilidad sin Dios (Eclesiastés 2).',
     ),
     QuizQuestion(
       text: '¿Qué recuerda el célebre pasaje sobre «un tiempo para todo»?',
@@ -800,7 +852,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Solo los sacerdotes pueden hacer votos',
       ],
       correctIndex: 0,
-      explanation: 'Se subraya la prudencia al hablar con Dios (Eclesiastés 5:4, 5).',
+      explanation:
+          'Se subraya la prudencia al hablar con Dios (Eclesiastés 5:4, 5).',
     ),
     QuizQuestion(
       text: '¿Qué dice Eclesiastés 7 sobre la reputación?',
@@ -814,7 +867,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Un juicio de valor sobre la integridad (Eclesiastés 7:1).',
     ),
     QuizQuestion(
-      text: '¿Qué recomienda Eclesiastés 8 respecto a la autoridad establecida?',
+      text:
+          '¿Qué recomienda Eclesiastés 8 respecto a la autoridad establecida?',
       options: <String>[
         'Obedecer con sabiduría, sin apresurarse a desafiarla',
         'Desafiar siempre a los dirigentes',
@@ -835,7 +889,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Solo los ricos deben trabajar',
       ],
       correctIndex: 0,
-      explanation: 'Un llamado a comprometerse plenamente con la vida (Eclesiastés 9:10).',
+      explanation:
+          'Un llamado a comprometerse plenamente con la vida (Eclesiastés 9:10).',
     ),
     QuizQuestion(
       text: '¿Qué aconseja Eclesiastés 11 sobre la generosidad?',
@@ -846,7 +901,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Hay que esperar tener certeza antes de actuar',
       ],
       correctIndex: 0,
-      explanation: 'Una imagen de inversión generosa y confiada (Eclesiastés 11:1).',
+      explanation:
+          'Una imagen de inversión generosa y confiada (Eclesiastés 11:1).',
     ),
     QuizQuestion(
       text: '¿Cuál es la conclusión final del libro de Eclesiastés?',
@@ -897,7 +953,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Song of Solomon#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo describe el amado la belleza de la sulamita en el capítulo 4?',
+      text:
+          '¿Cómo describe el amado la belleza de la sulamita en el capítulo 4?',
       options: <String>[
         'Mediante una serie de imágenes poéticas de elogio',
         'De manera fría y distante',
@@ -908,7 +965,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Se le dedica un poema detallado de alabanza (Cantar 4).',
     ),
     QuizQuestion(
-      text: '¿Qué sucede cuando el amado viene a llamar a su puerta en el capítulo 5?',
+      text:
+          '¿Qué sucede cuando el amado viene a llamar a su puerta en el capítulo 5?',
       options: <String>[
         'Ella tarda en abrir y él ya se ha marchado',
         'Ella abre de inmediato con alegría',
@@ -919,7 +977,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Este momento perdido crea un pesar conmovedor (Cantar 5).',
     ),
     QuizQuestion(
-      text: '¿A quién le describe la sulamita a su amado después de este episodio?',
+      text:
+          '¿A quién le describe la sulamita a su amado después de este episodio?',
       options: <String>[
         'A las hijas de Jerusalén',
         'Solo a su madre',
@@ -934,7 +993,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Song of Solomon#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué famosa afirmación sobre el amor se encuentra en el capítulo 8?',
+      text:
+          '¿Qué famosa afirmación sobre el amor se encuentra en el capítulo 8?',
       options: <String>[
         'El amor es fuerte como la muerte',
         'El amor se compra con dinero',
@@ -942,7 +1002,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El amor nunca perdura',
       ],
       correctIndex: 0,
-      explanation: '«Las muchas aguas mismas no pueden apagar el amor» (Cantar 8:6, 7).',
+      explanation:
+          '«Las muchas aguas mismas no pueden apagar el amor» (Cantar 8:6, 7).',
     ),
     QuizQuestion(
       text: '¿Qué simbolizan las «muchas aguas» incapaces de apagar el amor?',
@@ -953,7 +1014,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El poder del rey',
       ],
       correctIndex: 0,
-      explanation: 'Una poderosa metáfora sobre la resiliencia del amor (Cantar 8).',
+      explanation:
+          'Una poderosa metáfora sobre la resiliencia del amor (Cantar 8).',
     ),
     QuizQuestion(
       text: '¿Qué tono predomina al final del Cantar de los Cantares?',
@@ -964,7 +1026,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Una advertencia de guerra',
       ],
       correctIndex: 0,
-      explanation: 'El libro concluye con una nota de amor cumplido (Cantar 8).',
+      explanation:
+          'El libro concluye con una nota de amor cumplido (Cantar 8).',
     ),
   ],
   'Isaiah#0': <QuizQuestion>[
@@ -988,7 +1051,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Solo una ciudad en ruinas',
       ],
       correctIndex: 0,
-      explanation: 'Un carbón encendido toca sus labios, purificando su boca (Isaías 6).',
+      explanation:
+          'Un carbón encendido toca sus labios, purificando su boca (Isaías 6).',
     ),
     QuizQuestion(
       text: '¿Qué señal anuncia Isaías al rey Acaz en el capítulo 7?',
@@ -1049,7 +1113,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Construir un altar',
       ],
       correctIndex: 0,
-      explanation: 'Esta señal ilustra la vergüenza del cautiverio venidero (Isaías 20).',
+      explanation:
+          'Esta señal ilustra la vergüenza del cautiverio venidero (Isaías 20).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['saco', 'ceniza', 'Egipto'],
     ),
@@ -1102,7 +1167,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Una imagen mesiánica de fundamento seguro (Isaías 28:16).',
     ),
     QuizQuestion(
-      text: '¿Contra qué advierte Isaías al pueblo respecto a una alianza militar?',
+      text:
+          '¿Contra qué advierte Isaías al pueblo respecto a una alianza militar?',
       options: <String>[
         'Contra confiar en Egipto en lugar de en Jehová',
         'Solo contra una alianza con Babilonia',
@@ -1128,7 +1194,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       wordBankDistractors: <String>['desierto', 'agua', 'arena'],
     ),
     QuizQuestion(
-      text: '¿Cómo respondió Jehová a la oración de Ezequías frente a Senaquerib?',
+      text:
+          '¿Cómo respondió Jehová a la oración de Ezequías frente a Senaquerib?',
       options: <String>[
         'Un ángel hirió al ejército asirio en una sola noche',
         'Ezequías tuvo que rendirse',
@@ -1136,7 +1203,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'No llegó ninguna respuesta',
       ],
       correctIndex: 0,
-      explanation: 'Una liberación espectacular sigue a la oración (Isaías 37).',
+      explanation:
+          'Una liberación espectacular sigue a la oración (Isaías 37).',
     ),
     QuizQuestion(
       text: '¿Qué recuerda Isaías 40 sobre la naturaleza humana frente a Dios?',
@@ -1147,7 +1215,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'La palabra de Dios cambia a menudo',
       ],
       correctIndex: 0,
-      explanation: '«La palabra de nuestro Dios permanece para siempre» (Isaías 40:8).',
+      explanation:
+          '«La palabra de nuestro Dios permanece para siempre» (Isaías 40:8).',
     ),
   ],
   'Isaiah#5': <QuizQuestion>[
@@ -1160,17 +1229,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Actuará con violencia sistemática',
       ],
       correctIndex: 0,
-      explanation: 'Una notable mansedumbre caracteriza a este siervo (Isaías 42:3).',
+      explanation:
+          'Una notable mansedumbre caracteriza a este siervo (Isaías 42:3).',
     ),
     QuizQuestion(
-      text: '¿Qué rey extranjero es nombrado de antemano por Isaías como libertador de Israel?',
+      text:
+          '¿Qué rey extranjero es nombrado de antemano por Isaías como libertador de Israel?',
       options: <String>['Ciro', 'Nabucodonosor', 'Darío', 'Jerjes'],
       correctIndex: 0,
       explanation: 'Una notable profecía nombra a Ciro (Isaías 44-45).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿Qué dice Isaías 48 sobre la actitud pasada del pueblo hacia los mandamientos de Dios?',
+      text:
+          '¿Qué dice Isaías 48 sobre la actitud pasada del pueblo hacia los mandamientos de Dios?',
       options: <String>[
         'Si tan solo les hubieran prestado atención antes',
         'Siempre obedecieron perfectamente',
@@ -1178,7 +1250,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Dios nunca pidió nada',
       ],
       correctIndex: 0,
-      explanation: 'Se expresa un pesar por su falta de atención (Isaías 48:18).',
+      explanation:
+          'Se expresa un pesar por su falta de atención (Isaías 48:18).',
     ),
   ],
   'Isaiah#6': <QuizQuestion>[
@@ -1191,7 +1264,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Fue honrado desde su nacimiento',
       ],
       correctIndex: 0,
-      explanation: 'Un capítulo central sobre el sufrimiento redentor (Isaías 53:5).',
+      explanation:
+          'Un capítulo central sobre el sufrimiento redentor (Isaías 53:5).',
     ),
     QuizQuestion(
       text: '¿Qué invitación gratuita se lanza en Isaías 55?',
@@ -1205,7 +1279,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Una oferta generosa y universal (Isaías 55:1).',
     ),
     QuizQuestion(
-      text: '¿Qué define Isaías 58 como un «ayuno» verdadero a los ojos de Dios?',
+      text:
+          '¿Qué define Isaías 58 como un «ayuno» verdadero a los ojos de Dios?',
       options: <String>[
         'Compartir el pan con el hambriento y liberar a los oprimidos',
         'Abstenerse únicamente de alimento',
@@ -1213,7 +1288,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Guardar silencio todo un día',
       ],
       correctIndex: 0,
-      explanation: 'El ayuno auténtico se traduce en actos de justicia (Isaías 58:6, 7).',
+      explanation:
+          'El ayuno auténtico se traduce en actos de justicia (Isaías 58:6, 7).',
     ),
   ],
   'Isaiah#7': <QuizQuestion>[
@@ -1229,7 +1305,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Un luminoso llamado a la restauración (Isaías 60:1).',
     ),
     QuizQuestion(
-      text: '¿Qué declaración de Isaías 61 leyó Jesús en la sinagoga de Nazaret?',
+      text:
+          '¿Qué declaración de Isaías 61 leyó Jesús en la sinagoga de Nazaret?',
       options: <String>[
         '«El espíritu del Señor Soberano está sobre mí»',
         '«Vendré a juzgar al mundo entero»',
@@ -1237,7 +1314,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         '«Nadie será salvado»',
       ],
       correctIndex: 0,
-      explanation: 'Jesús se aplica este pasaje a sí mismo (Lucas 4, citando Isaías 61:1).',
+      explanation:
+          'Jesús se aplica este pasaje a sí mismo (Lucas 4, citando Isaías 61:1).',
     ),
     QuizQuestion(
       text: '¿Qué promete Isaías 65 respecto al futuro de la creación?',
@@ -1255,7 +1333,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Jeremiah#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué le dice Jehová a Jeremías sobre su llamado incluso antes de nacer?',
+      text:
+          '¿Qué le dice Jehová a Jeremías sobre su llamado incluso antes de nacer?',
       options: <String>[
         '«Antes de formarte en el vientre, te conocía»',
         'Lo eligió solo cuando llegó a adulto',
@@ -1263,10 +1342,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'No se menciona ningún llamado en particular',
       ],
       correctIndex: 0,
-      explanation: 'Una vocación profética establecida desde antes de su nacimiento (Jeremías 1:5).',
+      explanation:
+          'Una vocación profética establecida desde antes de su nacimiento (Jeremías 1:5).',
     ),
     QuizQuestion(
-      text: '¿Con qué compara Jehová la infidelidad de Israel en el capítulo 2?',
+      text:
+          '¿Con qué compara Jehová la infidelidad de Israel en el capítulo 2?',
       options: <String>[
         'Con una esposa que ha olvidado a su marido',
         'Con un rey fiel',
@@ -1285,7 +1366,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'La confianza en profetas extranjeros',
       ],
       correctIndex: 0,
-      explanation: 'El pueblo cree erróneamente que el templo los protege automáticamente (Jeremías 7).',
+      explanation:
+          'El pueblo cree erróneamente que el templo los protege automáticamente (Jeremías 7).',
     ),
   ],
   'Jeremiah#1': <QuizQuestion>[
@@ -1320,7 +1402,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'No tiene importancia para Dios',
       ],
       correctIndex: 0,
-      explanation: 'Una evaluación franca de la naturaleza humana (Jeremías 17:9).',
+      explanation:
+          'Una evaluación franca de la naturaleza humana (Jeremías 17:9).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[
@@ -1336,7 +1419,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Una imagen de la soberanía divina (Jeremías 18).',
     ),
     QuizQuestion(
-      text: '¿Cómo fue tratado Jeremías después de profetizar contra Jerusalén?',
+      text:
+          '¿Cómo fue tratado Jeremías después de profetizar contra Jerusalén?',
       options: <String>[
         'Fue golpeado y puesto en el cepo por Pasur',
         'Fue honrado públicamente',
@@ -1347,7 +1431,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Jeremías sufre por su mensaje fiel (Jeremías 20).',
     ),
     QuizQuestion(
-      text: '¿Qué opción le propone Jeremías al pueblo sitiado en el capítulo 21?',
+      text:
+          '¿Qué opción le propone Jeremías al pueblo sitiado en el capítulo 21?',
       options: <String>[
         'Rendirse ante Babilonia (vida) o resistir (muerte)',
         'Huir de inmediato a Egipto',
@@ -1368,7 +1453,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'El reino desaparecerá sin sucesor',
       ],
       correctIndex: 0,
-      explanation: 'Una promesa mesiánica contrasta con los malos pastores (Jeremías 23:5).',
+      explanation:
+          'Una promesa mesiánica contrasta con los malos pastores (Jeremías 23:5).',
     ),
     QuizQuestion(
       text: '¿Cuántos años de cautiverio en Babilonia anuncia Jeremías?',
@@ -1379,7 +1465,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       acceptedAnswers: <String>['setenta años', 'setenta'],
     ),
     QuizQuestion(
-      text: '¿Qué les aconseja Jeremías a los exiliados en Babilonia en su carta?',
+      text:
+          '¿Qué les aconseja Jeremías a los exiliados en Babilonia en su carta?',
       options: <String>[
         'Construir casas y buscar la paz de la ciudad',
         'Rebelarse de inmediato',
@@ -1403,7 +1490,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
       explanation: 'Se anuncia un pacto interior y personal (Jeremías 31:33).',
     ),
     QuizQuestion(
-      text: '¿Qué gesto simbólico realiza Jeremías en plena crisis, comprando un campo?',
+      text:
+          '¿Qué gesto simbólico realiza Jeremías en plena crisis, comprando un campo?',
       options: <String>[
         'Expresa su fe en una restauración futura',
         'Busca enriquecerse personalmente',
@@ -1411,7 +1499,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Negocia con Babilonia',
       ],
       correctIndex: 0,
-      explanation: 'Esta compra da testimonio de esperanza a pesar del asedio (Jeremías 32).',
+      explanation:
+          'Esta compra da testimonio de esperanza a pesar del asedio (Jeremías 32).',
     ),
     QuizQuestion(
       text: '¿Qué ejemplo de fidelidad ofrecen los recabitas a Judá?',
@@ -1422,26 +1511,30 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Su alianza con Egipto',
       ],
       correctIndex: 0,
-      explanation: 'Su fidelidad contrasta con la infidelidad de Judá (Jeremías 35).',
+      explanation:
+          'Su fidelidad contrasta con la infidelidad de Judá (Jeremías 35).',
     ),
   ],
   'Jeremiah#5': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Quién rescató a Jeremías cuando fue arrojado a una cisterna fangosa?',
+      text:
+          '¿Quién rescató a Jeremías cuando fue arrojado a una cisterna fangosa?',
       options: <String>['Ebed-mélec', 'Baruc', 'Gedalías', 'Ismael'],
       correctIndex: 0,
       explanation: 'Este etíope interviene con valentía (Jeremías 38).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿Quién fue nombrado gobernador después de la caída de Jerusalén, y luego asesinado?',
+      text:
+          '¿Quién fue nombrado gobernador después de la caída de Jerusalén, y luego asesinado?',
       options: <String>['Gedalías', 'Sedequías', 'Ismael', 'Baruc'],
       correctIndex: 0,
       explanation: 'Su asesinato provoca nuevos disturbios (Jeremías 40-41).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿Qué hace el resto del pueblo a pesar de la advertencia de Jeremías de permanecer en el país?',
+      text:
+          '¿Qué hace el resto del pueblo a pesar de la advertencia de Jeremías de permanecer en el país?',
       options: <String>[
         'Huye a Egipto llevándose a Jeremías',
         'Se somete plenamente al consejo del profeta',
@@ -1454,7 +1547,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
   'Jeremiah#6': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Contra qué naciones pronuncian juicios los últimos capítulos de Jeremías?',
+      text:
+          '¿Contra qué naciones pronuncian juicios los últimos capítulos de Jeremías?',
       options: <String>[
         'Egipto, los filisteos, Moab, Amón, Babilonia y otras',
         'Solo Israel',
@@ -1462,10 +1556,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Únicamente Judá',
       ],
       correctIndex: 0,
-      explanation: 'Una serie de oráculos contra las naciones concluye el libro (Jeremías 46-51).',
+      explanation:
+          'Una serie de oráculos contra las naciones concluye el libro (Jeremías 46-51).',
     ),
     QuizQuestion(
-      text: '¿Qué señal simbólica acompaña la profecía contra Babilonia entregada a Seraías?',
+      text:
+          '¿Qué señal simbólica acompaña la profecía contra Babilonia entregada a Seraías?',
       options: <String>[
         'El rollo es arrojado al Éufrates para que se hunda',
         'Es quemado públicamente',
@@ -1473,7 +1569,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
         'Es escondido en el templo',
       ],
       correctIndex: 0,
-      explanation: 'Una imagen de la caída definitiva de Babilonia (Jeremías 51).',
+      explanation:
+          'Una imagen de la caída definitiva de Babilonia (Jeremías 51).',
     ),
     QuizQuestion(
       text: '¿Cómo termina históricamente el libro de Jeremías?',
@@ -1489,4 +1586,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC3 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesEsC3 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesEsC3 =
+    <String, List<QuizQuestion>>{};

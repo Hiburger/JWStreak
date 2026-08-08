@@ -1,10 +1,16 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesZhC7 = <String, List<QuizQuestion>>{
   '2 Thessalonians#0': <QuizQuestion>[
     QuizQuestion(
       text: '保罗怎样鼓励受迫害的帖撒罗尼迦人？',
-      options: <String>['提醒他们，上帝必会施行公正的审判', '应许他们的患难会立刻结束', '责怪他们目前的处境', '怂恿他们放弃信仰'],
+      options: <String>[
+        '提醒他们，上帝必会施行公正的审判',
+        '应许他们的患难会立刻结束',
+        '责怪他们目前的处境',
+        '怂恿他们放弃信仰',
+      ],
       correctIndex: 0,
       explanation: '对上帝公正审判的希望鼓励着他们（帖撒罗尼迦后书1章）。',
     ),
@@ -66,7 +72,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '提摩太前书4章怎样比较体格锻炼和敬神虔诚？',
-      options: <String>['敬神的虔诚在各方面都有益处，体格锻炼的益处有限', '体格锻炼更为重要', '两者都毫无价值', '只有体格锻炼才真正重要'],
+      options: <String>[
+        '敬神的虔诚在各方面都有益处，体格锻炼的益处有限',
+        '体格锻炼更为重要',
+        '两者都毫无价值',
+        '只有体格锻炼才真正重要',
+      ],
       correctIndex: 0,
       explanation: '经文清楚指出了优先次序（提摩太前书4:8）。',
     ),
@@ -108,7 +119,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '提摩太后书3章怎样论及圣经的用处？',
-      options: <String>['圣经是上帝启示的，对教导人很有用', '圣经已经过时，毫无用处', '圣经只与祭司有关', '圣经应该被忽视'],
+      options: <String>[
+        '圣经是上帝启示的，对教导人很有用',
+        '圣经已经过时，毫无用处',
+        '圣经只与祭司有关',
+        '圣经应该被忽视',
+      ],
       correctIndex: 0,
       explanation: '这是关于圣经启示来源的著名声明（提摩太后书3:16）。',
     ),
@@ -116,13 +132,23 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
   '2 Timothy#2': <QuizQuestion>[
     QuizQuestion(
       text: '保罗在第4章给提摩太作出了什么嘱咐？',
-      options: <String>['无论时机如何，都要传讲这信息', '从传道工作中隐退', '采取行动之前先等候一个凭据', '谨慎地保持缄默'],
+      options: <String>[
+        '无论时机如何，都要传讲这信息',
+        '从传道工作中隐退',
+        '采取行动之前先等候一个凭据',
+        '谨慎地保持缄默',
+      ],
       correctIndex: 0,
       explanation: '这是敦促人保持忠贞的迫切呼吁（提摩太后书4:2）。',
     ),
     QuizQuestion(
       text: '保罗在这封信结尾怎样总结自己的一生？',
-      options: <String>['我打了那场好仗，跑毕了赛程，持守了信心', '我的使命失败了', '我对自己的服事工作感到后悔', '我一事无成'],
+      options: <String>[
+        '我打了那场好仗，跑毕了赛程，持守了信心',
+        '我的使命失败了',
+        '我对自己的服事工作感到后悔',
+        '我一事无成',
+      ],
       correctIndex: 0,
       explanation: '这是对忠贞一生充满信心的总结（提摩太后书4:7）。',
     ),
@@ -212,7 +238,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '根据希伯来书8章，新约使什么成为可能？',
-      options: <String>['与上帝之间焕然一新的内心关系', '仅仅是外在仪式上的改变', '结束与上帝立的一切约', '没有任何实质的改变'],
+      options: <String>[
+        '与上帝之间焕然一新的内心关系',
+        '仅仅是外在仪式上的改变',
+        '结束与上帝立的一切约',
+        '没有任何实质的改变',
+      ],
       correctIndex: 0,
       explanation: '这是一个更优越的约的设立（希伯来书8:10）。',
     ),
@@ -232,7 +263,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '著名的第11章突显了哪些例子？',
-      options: <String>['亚伯、挪亚、亚伯拉罕，以及其他因信而蒙悦纳的人', '只是以色列的列王', '只是祭司', '没有任何具体的例子'],
+      options: <String>[
+        '亚伯、挪亚、亚伯拉罕，以及其他因信而蒙悦纳的人',
+        '只是以色列的列王',
+        '只是祭司',
+        '没有任何具体的例子',
+      ],
       correctIndex: 0,
       explanation: '这个“信心的篇章”举出了许多例子（希伯来书11章）。',
     ),
@@ -260,13 +296,23 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
   'James#1': <QuizQuestion>[
     QuizQuestion(
       text: '雅各书3章把舌头的能力比作什么？',
-      options: <String>['一点小火足以燃起熊熊大火，烧毁大片森林', '一件毫无后果的工具', '一件单纯中性的工具', '一股总是带来正面影响的力量'],
+      options: <String>[
+        '一点小火足以燃起熊熊大火，烧毁大片森林',
+        '一件毫无后果的工具',
+        '一件单纯中性的工具',
+        '一股总是带来正面影响的力量',
+      ],
       correctIndex: 0,
       explanation: '这是关于言语影响力的有力比喻（雅各书3:5）。',
     ),
     QuizQuestion(
       text: '雅各书3章怎样把从上而来的智慧和属世的智慧区分开来？',
-      options: <String>['从上而来的智慧纯洁，使人和睦', '两种智慧其实一样', '属世的智慧总是更好', '经文没有作出任何区分'],
+      options: <String>[
+        '从上而来的智慧纯洁，使人和睦',
+        '两种智慧其实一样',
+        '属世的智慧总是更好',
+        '经文没有作出任何区分',
+      ],
       correctIndex: 0,
       explanation: '经文清楚地作出了对比（雅各书3:17）。',
     ),
@@ -280,7 +326,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '根据雅各书5章，患病的人应该怎么做？',
-      options: <String>['请会众的长老怀着信心为他祷告', '独自一人苦等，不寻求帮助', '只求问算命的', '对自己的病情置之不理'],
+      options: <String>[
+        '请会众的长老怀着信心为他祷告',
+        '独自一人苦等，不寻求帮助',
+        '只求问算命的',
+        '对自己的病情置之不理',
+      ],
       correctIndex: 0,
       explanation: '这是鼓励人借助群体祈祷的话（雅各书5:14）。',
     ),
@@ -322,11 +373,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesZhC7 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '彼得前书5章要求长老们以什么态度对待羊群？',
-      options: <String>['甘心情愿、谦卑地牧养，而不是出于强迫', '以严厉的权势统治羊群', '在很大程度上忽视羊群', '图谋私利'],
+      options: <String>[
+        '甘心情愿、谦卑地牧养，而不是出于强迫',
+        '以严厉的权势统治羊群',
+        '在很大程度上忽视羊群',
+        '图谋私利',
+      ],
       correctIndex: 0,
       explanation: '经文鼓励谦卑的带领方式（彼得前书5:2，3）。',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesZhC7 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesZhC7 =
+    <String, List<QuizQuestion>>{};

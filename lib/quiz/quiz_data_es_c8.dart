@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesEsC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
       text: '¿Qué anima Pedro a añadir a la fe en 2 Pedro 1?',
@@ -23,8 +24,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Proviene de tradiciones populares',
       ],
       correctIndex: 0,
-      explanation:
-          'Una afirmación sobre la inspiración divina (2 Pedro 1:21).',
+      explanation: 'Una afirmación sobre la inspiración divina (2 Pedro 1:21).',
     ),
   ],
   '2 Peter#1': <QuizQuestion>[
@@ -63,8 +63,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Aprobarán plenamente la profecía',
       ],
       correctIndex: 0,
-      explanation:
-          'Se anuncia de antemano un escepticismo (2 Pedro 3:4).',
+      explanation: 'Se anuncia de antemano un escepticismo (2 Pedro 3:4).',
     ),
     QuizQuestion(
       text: '¿Qué promete 2 Pedro 3 después del juicio final?',
@@ -106,7 +105,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Cómo distingue 1 Juan 3 a los hijos de Dios de los hijos '
+      text:
+          '¿Cómo distingue 1 Juan 3 a los hijos de Dios de los hijos '
           'del Diablo?',
       options: <String>[
         'Por sus actos de justicia o de injusticia',
@@ -119,10 +119,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '¿Qué mandamiento central destaca 1 Juan 3?',
-      options: <String>['Amarse los unos a los otros', 'Evitar todo contacto social', 'Buscar la riqueza', 'Juzgar severamente a los demás'],
+      options: <String>[
+        'Amarse los unos a los otros',
+        'Evitar todo contacto social',
+        'Buscar la riqueza',
+        'Juzgar severamente a los demás',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una prueba esencial de la fe auténtica (1 Juan 3:11).',
+      explanation: 'Una prueba esencial de la fe auténtica (1 Juan 3:11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['obedecer', 'creer', 'servir'],
     ),
@@ -130,7 +134,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: '¿Cómo define directamente 1 Juan 4 a Dios?',
-      options: <String>['Dios es amor', 'Dios es distante', 'Dios es indiferente', 'Dios es únicamente severo'],
+      options: <String>[
+        'Dios es amor',
+        'Dios es distante',
+        'Dios es indiferente',
+        'Dios es únicamente severo',
+      ],
       correctIndex: 0,
       explanation: 'Una declaración central de la carta (1 Juan 4:8).',
       type: QuizAnswerType.wordBank,
@@ -138,14 +147,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: '¿Qué dice 1 Juan 5 sobre lo que vence al mundo?',
-      options: <String>['Nuestra fe', 'La riqueza', 'El poder humano', 'La suerte'],
+      options: <String>[
+        'Nuestra fe',
+        'La riqueza',
+        'El poder humano',
+        'La suerte',
+      ],
       correctIndex: 0,
       explanation: 'Una victoria basada en la fe (1 Juan 5:4).',
     ),
   ],
   '2 John#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Contra qué advierte 2 Juan respecto a los visitantes que '
+      text:
+          '¿Contra qué advierte 2 Juan respecto a los visitantes que '
           'enseñan?',
       options: <String>[
         'No recibir a quienes niegan que Cristo vino en la carne',
@@ -154,16 +169,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Ignorar totalmente la doctrina',
       ],
       correctIndex: 0,
-      explanation:
-          'Se pide una vigilancia doctrinal (2 Juan 1:7, 10).',
+      explanation: 'Se pide una vigilancia doctrinal (2 Juan 1:7, 10).',
     ),
     QuizQuestion(
-      text: '¿Qué mandamiento recuerda Juan como fundamental en esta '
+      text:
+          '¿Qué mandamiento recuerda Juan como fundamental en esta '
           'breve carta?',
-      options: <String>['Amarse los unos a los otros', 'Evitar toda reunión', 'Buscar la riqueza', 'Ignorar a los recién llegados'],
+      options: <String>[
+        'Amarse los unos a los otros',
+        'Evitar toda reunión',
+        'Buscar la riqueza',
+        'Ignorar a los recién llegados',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un recordatorio constante del amor fraternal (2 Juan 1:5).',
+      explanation: 'Un recordatorio constante del amor fraternal (2 Juan 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['obedecer', 'creer', 'recibir'],
     ),
@@ -191,13 +210,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Un profundo respeto por Juan',
       ],
       correctIndex: 0,
-      explanation:
-          'Se denuncia una actitud problemática (3 Juan 1:9, 10).',
+      explanation: 'Se denuncia una actitud problemática (3 Juan 1:9, 10).',
     ),
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué pide Judas a sus lectores frente a los infiltrados '
+      text:
+          '¿Qué pide Judas a sus lectores frente a los infiltrados '
           'impíos?',
       options: <String>[
         'Combatir vigorosamente por la fe',
@@ -232,21 +251,21 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Una batalla terrestre',
       ],
       correctIndex: 0,
-      explanation:
-          'Una visión impresionante abre el libro (Apocalipsis 1).',
+      explanation: 'Una visión impresionante abre el libro (Apocalipsis 1).',
     ),
     QuizQuestion(
-      text: '¿A cuántas congregaciones están dirigidas las cartas de los '
+      text:
+          '¿A cuántas congregaciones están dirigidas las cartas de los '
           'capítulos 2 y 3?',
       options: <String>['Siete', 'Doce', 'Tres', 'Solo una'],
       correctIndex: 0,
-      explanation:
-          'Se dan siete mensajes personalizados (Apocalipsis 2 y 3).',
+      explanation: 'Se dan siete mensajes personalizados (Apocalipsis 2 y 3).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
-      text: '¿Quién es hallado digno de abrir el rollo sellado en '
+      text:
+          '¿Quién es hallado digno de abrir el rollo sellado en '
           'Apocalipsis 5?',
       options: <String>[
         'El Cordero, que fue inmolado',
@@ -261,12 +280,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: '¿Contra qué lucha Miguel en la visión de Apocalipsis 12?',
-      options: <String>['El dragón (Satanás)', 'Un ejército humano', 'Un rey terrenal', 'Un simple animal'],
+      options: <String>[
+        'El dragón (Satanás)',
+        'Un ejército humano',
+        'Un rey terrenal',
+        'Un simple animal',
+      ],
       correctIndex: 0,
       explanation: 'Se describe una guerra celestial (Apocalipsis 12:7).',
     ),
     QuizQuestion(
-      text: '¿A qué representan los 144.000 mencionados junto con el '
+      text:
+          '¿A qué representan los 144.000 mencionados junto con el '
           'Cordero en Apocalipsis 14?',
       options: <String>[
         'Un grupo reunido con el Cordero en el monte Sion',
@@ -279,7 +304,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
           'Un grupo distinto asociado con el Cordero (Apocalipsis 14:1).',
     ),
     QuizQuestion(
-      text: '¿Qué contienen las siete últimas plagas anunciadas en '
+      text:
+          '¿Qué contienen las siete últimas plagas anunciadas en '
           'Apocalipsis 15?',
       options: <String>[
         'La culminación de la ira de Dios',
@@ -288,13 +314,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'Nada significativo',
       ],
       correctIndex: 0,
-      explanation:
-          'Una etapa final del juicio divino (Apocalipsis 15:1).',
+      explanation: 'Una etapa final del juicio divino (Apocalipsis 15:1).',
     ),
   ],
   'Revelation#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué le ocurre a «Babilonia la Grande» según Apocalipsis '
+      text:
+          '¿Qué le ocurre a «Babilonia la Grande» según Apocalipsis '
           '17 y 18?',
       options: <String>[
         'Es juzgada y destruida por completo',
@@ -303,8 +329,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
         'No le ocurre nada',
       ],
       correctIndex: 0,
-      explanation:
-          'Su caída se describe con lamentos (Apocalipsis 18).',
+      explanation: 'Su caída se describe con lamentos (Apocalipsis 18).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['ramera', 'bestia', 'reyes'],
     ),
@@ -323,7 +348,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
       wordBankDistractors: <String>['abismo', 'fuego', 'ángel'],
     ),
     QuizQuestion(
-      text: '¿Qué promete Apocalipsis 21 y 22 respecto al dolor y la '
+      text:
+          '¿Qué promete Apocalipsis 21 y 22 respecto al dolor y la '
           'muerte?',
       options: <String>[
         'Desaparecerán por completo',
@@ -338,4 +364,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesEsC8 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesEsC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesEsC8 =
+    <String, List<QuizQuestion>>{};

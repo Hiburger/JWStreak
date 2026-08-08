@@ -1,9 +1,11 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesItC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa incoraggia Pietro ad aggiungere alla fede in '
+      text:
+          'Che cosa incoraggia Pietro ad aggiungere alla fede in '
           '2 Pietro 1?',
       options: <String>[
         'La virtù, la conoscenza e altre qualità',
@@ -40,8 +42,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Gli anziani fedeli',
       ],
       correctIndex: 0,
-      explanation:
-          'Viene dato un avvertimento dettagliato (2 Pietro 2).',
+      explanation: 'Viene dato un avvertimento dettagliato (2 Pietro 2).',
     ),
     QuizQuestion(
       text: 'Quali esempi storici cita 2 Pietro 2 come avvertimento?',
@@ -52,13 +53,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Il regno di Salomone',
       ],
       correctIndex: 0,
-      explanation:
-          'Esempi di giudizio passato (2 Pietro 2:5, 6).',
+      explanation: 'Esempi di giudizio passato (2 Pietro 2:5, 6).',
     ),
   ],
   '2 Peter#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa diranno i beffardi degli ultimi giorni secondo '
+      text:
+          'Che cosa diranno i beffardi degli ultimi giorni secondo '
           '2 Pietro 3?',
       options: <String>[
         'Dov’è la promessa della sua presenza?',
@@ -79,13 +80,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Nessuna promessa particolare',
       ],
       correctIndex: 0,
-      explanation:
-          'Una speranza di rinnovamento (2 Pietro 3:13).',
+      explanation: 'Una speranza di rinnovamento (2 Pietro 3:13).',
     ),
   ],
   '1 John#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa dobbiamo fare secondo 1 Giovanni 1 se abbiamo '
+      text:
+          'Che cosa dobbiamo fare secondo 1 Giovanni 1 se abbiamo '
           'peccato?',
       options: <String>[
         'Confessare i nostri peccati per essere purificati',
@@ -94,11 +95,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Giustificarci senza riconoscere la colpa',
       ],
       correctIndex: 0,
-      explanation:
-          'Una sincera promessa di perdono (1 Giovanni 1:9).',
+      explanation: 'Una sincera promessa di perdono (1 Giovanni 1:9).',
     ),
     QuizQuestion(
-      text: 'Come ci mette in guardia 1 Giovanni 2 contro '
+      text:
+          'Come ci mette in guardia 1 Giovanni 2 contro '
           '“l’amore del mondo”?',
       options: <String>[
         'È incompatibile con l’amore per il Padre',
@@ -107,13 +108,13 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'È necessario per la salvezza',
       ],
       correctIndex: 0,
-      explanation:
-          'Viene chiesta una scelta chiara (1 Giovanni 2:15).',
+      explanation: 'Viene chiesta una scelta chiara (1 Giovanni 2:15).',
     ),
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Come definisce 1 Giovanni 3 i figli di Dio rispetto ai '
+      text:
+          'Come definisce 1 Giovanni 3 i figli di Dio rispetto ai '
           'figli del Diavolo?',
       options: <String>[
         'In base alle loro azioni giuste o ingiuste',
@@ -122,12 +123,16 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'In base alla loro età',
       ],
       correctIndex: 0,
-      explanation:
-          'Il comportamento rivela l’appartenenza (1 Giovanni 3:10).',
+      explanation: 'Il comportamento rivela l’appartenenza (1 Giovanni 3:10).',
     ),
     QuizQuestion(
       text: 'Quale comandamento centrale mette in evidenza 1 Giovanni 3?',
-      options: <String>['Amarsi gli uni gli altri', 'Evitare ogni contatto sociale', 'Cercare la ricchezza', 'Giudicare severamente gli altri'],
+      options: <String>[
+        'Amarsi gli uni gli altri',
+        'Evitare ogni contatto sociale',
+        'Cercare la ricchezza',
+        'Giudicare severamente gli altri',
+      ],
       correctIndex: 0,
       explanation:
           'Una prova essenziale della fede autentica (1 Giovanni 3:11).',
@@ -138,24 +143,33 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Come definisce direttamente Dio 1 Giovanni 4?',
-      options: <String>['Dio è amore', 'Dio è distante', 'Dio è indifferente', 'Dio è severo soltanto'],
+      options: <String>[
+        'Dio è amore',
+        'Dio è distante',
+        'Dio è indifferente',
+        'Dio è severo soltanto',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una dichiarazione centrale della lettera (1 Giovanni 4:8).',
+      explanation: 'Una dichiarazione centrale della lettera (1 Giovanni 4:8).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['luce', 'giudice', 'spirito'],
     ),
     QuizQuestion(
       text: 'Che cosa dice 1 Giovanni 5 su ciò che vince il mondo?',
-      options: <String>['La nostra fede', 'La ricchezza', 'Il potere umano', 'La fortuna'],
+      options: <String>[
+        'La nostra fede',
+        'La ricchezza',
+        'Il potere umano',
+        'La fortuna',
+      ],
       correctIndex: 0,
-      explanation:
-          'Una vittoria fondata sulla fede (1 Giovanni 5:4).',
+      explanation: 'Una vittoria fondata sulla fede (1 Giovanni 5:4).',
     ),
   ],
   '2 John#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Contro che cosa mette in guardia 2 Giovanni riguardo ai '
+      text:
+          'Contro che cosa mette in guardia 2 Giovanni riguardo ai '
           'visitatori che insegnano?',
       options: <String>[
         'Non accogliere chi nega che Cristo sia venuto nella carne',
@@ -168,12 +182,17 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
           'Viene chiesta una vigilanza dottrinale (2 Giovanni 1:7, 10).',
     ),
     QuizQuestion(
-      text: 'Quale comandamento ricorda Giovanni come fondamentale '
+      text:
+          'Quale comandamento ricorda Giovanni come fondamentale '
           'in questa breve lettera?',
-      options: <String>['Amarsi gli uni gli altri', 'Evitare ogni assemblea', 'Cercare la ricchezza', 'Ignorare i nuovi arrivati'],
+      options: <String>[
+        'Amarsi gli uni gli altri',
+        'Evitare ogni assemblea',
+        'Cercare la ricchezza',
+        'Ignorare i nuovi arrivati',
+      ],
       correctIndex: 0,
-      explanation:
-          'Un richiamo costante all’amore fraterno (2 Giovanni 1:5).',
+      explanation: 'Un richiamo costante all’amore fraterno (2 Giovanni 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['obbedire', 'vegliare', 'pregare'],
     ),
@@ -188,8 +207,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Il suo isolamento volontario',
       ],
       correctIndex: 0,
-      explanation:
-          'La sua generosità viene messa a esempio (3 Giovanni 1:5).',
+      explanation: 'La sua generosità viene messa a esempio (3 Giovanni 1:5).',
     ),
     QuizQuestion(
       text: 'Quale comportamento manifesta Diotrefe in questa lettera?',
@@ -207,7 +225,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa chiede Giuda ai suoi lettori di fronte agli '
+      text:
+          'Che cosa chiede Giuda ai suoi lettori di fronte agli '
           'infiltrati empi?',
       options: <String>[
         'Combattere vigorosamente per la fede',
@@ -216,8 +235,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Abbandonare ogni convinzione',
       ],
       correctIndex: 0,
-      explanation:
-          'Un fermo appello alla fedeltà (Giuda 1:3).',
+      explanation: 'Un fermo appello alla fedeltà (Giuda 1:3).',
     ),
     QuizQuestion(
       text: 'Quali esempi cita Giuda come avvertimenti storici?',
@@ -228,15 +246,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Soltanto l’uscita dall’Egitto',
       ],
       correctIndex: 0,
-      explanation:
-          'Esempi di giudizio passato (Giuda 1:6, 7).',
+      explanation: 'Esempi di giudizio passato (Giuda 1:6, 7).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Ninive', 'Egitto', 'Caino'],
     ),
   ],
   'Revelation#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa vede Giovanni all’inizio della sua visione in '
+      text:
+          'Che cosa vede Giovanni all’inizio della sua visione in '
           'Rivelazione 1?',
       options: <String>[
         'Cristo glorificato tra candelabri d’oro',
@@ -250,7 +268,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
           '(Rivelazione 1).',
     ),
     QuizQuestion(
-      text: 'A quante congregazioni sono indirizzate le lettere dei '
+      text:
+          'A quante congregazioni sono indirizzate le lettere dei '
           'capitoli 2-3?',
       options: <String>['Sette', 'Dodici', 'Tre', 'Una sola'],
       correctIndex: 0,
@@ -261,7 +280,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       acceptedAnswers: <String>['7'],
     ),
     QuizQuestion(
-      text: 'Chi solo viene trovato degno di aprire il rotolo sigillato '
+      text:
+          'Chi solo viene trovato degno di aprire il rotolo sigillato '
           'in Rivelazione 5?',
       options: <String>[
         'L’Agnello, che è stato immolato',
@@ -270,8 +290,7 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Nessuno può aprirlo',
       ],
       correctIndex: 0,
-      explanation:
-          'Solo Cristo merita questo onore (Rivelazione 5:5-9).',
+      explanation: 'Solo Cristo merita questo onore (Rivelazione 5:5-9).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['leone', 'dragone', 'anziano'],
     ),
@@ -279,15 +298,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Contro chi combatte Michele nella visione di Rivelazione 12?',
-      options: <String>['Il dragone (Satana)', 'Un esercito umano', 'Un re terrestre', 'Un semplice animale'],
+      options: <String>[
+        'Il dragone (Satana)',
+        'Un esercito umano',
+        'Un re terrestre',
+        'Un semplice animale',
+      ],
       correctIndex: 0,
-      explanation:
-          'Viene descritta una guerra celeste (Rivelazione 12:7).',
+      explanation: 'Viene descritta una guerra celeste (Rivelazione 12:7).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['dragone', 'Satana'],
     ),
     QuizQuestion(
-      text: 'Che cosa rappresentano i 144.000 menzionati insieme '
+      text:
+          'Che cosa rappresentano i 144.000 menzionati insieme '
           'all’Agnello in Rivelazione 14?',
       options: <String>[
         'Un gruppo riunito con l’Agnello sul monte Sion',
@@ -300,7 +324,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
           'Un gruppo distinto associato all’Agnello (Rivelazione 14:1).',
     ),
     QuizQuestion(
-      text: 'Che cosa contengono le sette ultime piaghe annunciate '
+      text:
+          'Che cosa contengono le sette ultime piaghe annunciate '
           'in Rivelazione 15?',
       options: <String>[
         'Il compimento dell’ira di Dio',
@@ -309,15 +334,15 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
         'Niente di significativo',
       ],
       correctIndex: 0,
-      explanation:
-          'Una tappa finale del giudizio divino (Rivelazione 15:1).',
+      explanation: 'Una tappa finale del giudizio divino (Rivelazione 15:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['coppe', 'angeli', 'trombe'],
     ),
   ],
   'Revelation#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Che cosa succede a “Babilonia la Grande” secondo '
+      text:
+          'Che cosa succede a “Babilonia la Grande” secondo '
           'Rivelazione 17-18?',
       options: <String>[
         'Viene giudicata e distrutta completamente',
@@ -346,7 +371,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
       wordBankDistractors: <String>['abisso', 'fuoco', 'trono'],
     ),
     QuizQuestion(
-      text: 'Che cosa promette Rivelazione 21-22 riguardo al dolore e '
+      text:
+          'Che cosa promette Rivelazione 21-22 riguardo al dolore e '
           'alla morte?',
       options: <String>[
         'Spariranno completamente',
@@ -362,4 +388,5 @@ const Map<String, List<QuizQuestion>> authoredQuizzesItC8 = <String, List<QuizQu
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesItC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesItC8 =
+    <String, List<QuizQuestion>>{};

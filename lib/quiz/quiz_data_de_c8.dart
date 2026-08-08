@@ -1,6 +1,7 @@
 import 'quiz_data.dart';
 
-const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQuestion>>{
+const Map<String, List<QuizQuestion>>
+authoredQuizzesDeC8 = <String, List<QuizQuestion>>{
   '2 Peter#0': <QuizQuestion>[
     QuizQuestion(
       text: 'Was ermutigt Petrus in 2. Petrus 1, dem Glauben hinzuzufügen?',
@@ -11,10 +12,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Politische Macht',
       ],
       correctIndex: 0,
-      explanation: 'Fortschreitendes geistiges Wachstum wird gefördert (2. Petrus 1:5-7).',
+      explanation:
+          'Fortschreitendes geistiges Wachstum wird gefördert (2. Petrus 1:5-7).',
     ),
     QuizQuestion(
-      text: 'Wie beschreibt 2. Petrus 1 den Ursprung der biblischen Prophezeiung?',
+      text:
+          'Wie beschreibt 2. Petrus 1 den Ursprung der biblischen Prophezeiung?',
       options: <String>[
         'Menschen redeten, geleitet vom heiligen Geist',
         'Sie stammt allein aus menschlicher Vorstellungskraft',
@@ -85,7 +88,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Uns rechtfertigen, ohne die Schuld einzugestehen',
       ],
       correctIndex: 0,
-      explanation: 'Eine aufrichtige Verheißung der Vergebung (1. Johannes 1:9).',
+      explanation:
+          'Eine aufrichtige Verheißung der Vergebung (1. Johannes 1:9).',
     ),
     QuizQuestion(
       text: 'Wie warnt uns 1. Johannes 2 vor der „Liebe zur Welt“?',
@@ -101,7 +105,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
   ],
   '1 John#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wie definiert 1. Johannes 3 Gottes Kinder im Gegensatz zu den Kindern des Teufels?',
+      text:
+          'Wie definiert 1. Johannes 3 Gottes Kinder im Gegensatz zu den Kindern des Teufels?',
       options: <String>[
         'Durch ihre gerechten oder ungerechten Taten',
         'Durch ihren Reichtum',
@@ -109,13 +114,20 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Durch ihr Alter',
       ],
       correctIndex: 0,
-      explanation: 'Das Verhalten offenbart die Zugehörigkeit (1. Johannes 3:10).',
+      explanation:
+          'Das Verhalten offenbart die Zugehörigkeit (1. Johannes 3:10).',
     ),
     QuizQuestion(
       text: 'Welches zentrale Gebot hebt 1. Johannes 3 hervor?',
-      options: <String>['Einander lieben', 'Jeden sozialen Kontakt meiden', 'Reichtum anstreben', 'Andere hart richten'],
+      options: <String>[
+        'Einander lieben',
+        'Jeden sozialen Kontakt meiden',
+        'Reichtum anstreben',
+        'Andere hart richten',
+      ],
       correctIndex: 0,
-      explanation: 'Eine wesentliche Prüfung echten Glaubens (1. Johannes 3:11).',
+      explanation:
+          'Eine wesentliche Prüfung echten Glaubens (1. Johannes 3:11).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['hassen', 'Welt', 'Wahrheit'],
     ),
@@ -123,7 +135,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
   '1 John#2': <QuizQuestion>[
     QuizQuestion(
       text: 'Wie definiert 1. Johannes 4 Gott direkt?',
-      options: <String>['Gott ist Liebe', 'Gott ist fern', 'Gott ist gleichgültig', 'Gott ist nur streng'],
+      options: <String>[
+        'Gott ist Liebe',
+        'Gott ist fern',
+        'Gott ist gleichgültig',
+        'Gott ist nur streng',
+      ],
       correctIndex: 0,
       explanation: 'Eine zentrale Aussage des Briefes (1. Johannes 4:8).',
       type: QuizAnswerType.wordBank,
@@ -131,7 +148,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
     ),
     QuizQuestion(
       text: 'Was, sagt 1. Johannes 5, besiegt die Welt?',
-      options: <String>['Unser Glaube', 'Reichtum', 'Menschliche Macht', 'Glück'],
+      options: <String>[
+        'Unser Glaube',
+        'Reichtum',
+        'Menschliche Macht',
+        'Glück',
+      ],
       correctIndex: 0,
       explanation: 'Ein Sieg, gegründet auf Glauben (1. Johannes 5:4).',
     ),
@@ -146,13 +168,21 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Ignoriert die Lehre völlig',
       ],
       correctIndex: 0,
-      explanation: 'Lehrmäßige Wachsamkeit wird gefordert (2. Johannes 1:7, 10).',
+      explanation:
+          'Lehrmäßige Wachsamkeit wird gefordert (2. Johannes 1:7, 10).',
     ),
     QuizQuestion(
-      text: 'An welches Gebot erinnert Johannes als grundlegend in diesem kurzen Brief?',
-      options: <String>['Einander lieben', 'Jede Versammlung meiden', 'Reichtum suchen', 'Neuankömmlinge ignorieren'],
+      text:
+          'An welches Gebot erinnert Johannes als grundlegend in diesem kurzen Brief?',
+      options: <String>[
+        'Einander lieben',
+        'Jede Versammlung meiden',
+        'Reichtum suchen',
+        'Neuankömmlinge ignorieren',
+      ],
       correctIndex: 0,
-      explanation: 'Eine ständige Erinnerung an die Bruderliebe (2. Johannes 1:5).',
+      explanation:
+          'Eine ständige Erinnerung an die Bruderliebe (2. Johannes 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Wahrheit', 'Antichrist', 'wandeln'],
     ),
@@ -167,7 +197,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Seine freiwillige Isolation',
       ],
       correctIndex: 0,
-      explanation: 'Seine Großzügigkeit wird als Vorbild hervorgehoben (3. Johannes 1:5).',
+      explanation:
+          'Seine Großzügigkeit wird als Vorbild hervorgehoben (3. Johannes 1:5).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Diotrephes', 'Wahrheit', 'Brief'],
     ),
@@ -180,12 +211,14 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Tiefen Respekt vor Johannes',
       ],
       correctIndex: 0,
-      explanation: 'Ein problematisches Verhalten wird aufgedeckt (3. Johannes 1:9, 10).',
+      explanation:
+          'Ein problematisches Verhalten wird aufgedeckt (3. Johannes 1:9, 10).',
     ),
   ],
   'Jude#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Worum bittet Judas seine Leser angesichts gottloser Eindringlinge?',
+      text:
+          'Worum bittet Judas seine Leser angesichts gottloser Eindringlinge?',
       options: <String>[
         'Energisch für den Glauben zu kämpfen',
         'Die Lage völlig zu ignorieren',
@@ -219,19 +252,23 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Eine Schlacht zu Land',
       ],
       correctIndex: 0,
-      explanation: 'Eine eindrucksvolle Vision eröffnet das Buch (Offenbarung 1).',
+      explanation:
+          'Eine eindrucksvolle Vision eröffnet das Buch (Offenbarung 1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Thron', 'Buchrolle', 'Sterne'],
     ),
     QuizQuestion(
-      text: 'An wie viele Versammlungen richten sich die Briefe in den Kapiteln 2-3?',
+      text:
+          'An wie viele Versammlungen richten sich die Briefe in den Kapiteln 2-3?',
       options: <String>['Sieben', 'Zwölf', 'Drei', 'Nur eine'],
       correctIndex: 0,
-      explanation: 'Sieben persönliche Botschaften werden gegeben (Offenbarung 2-3).',
+      explanation:
+          'Sieben persönliche Botschaften werden gegeben (Offenbarung 2-3).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Wer allein wird für würdig befunden, die versiegelte Buchrolle in Offenbarung 5 zu öffnen?',
+      text:
+          'Wer allein wird für würdig befunden, die versiegelte Buchrolle in Offenbarung 5 zu öffnen?',
       options: <String>[
         'Das Lamm, das geschlachtet wurde',
         'Ein mächtiger Engel',
@@ -245,12 +282,18 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
   'Revelation#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Gegen wen kämpft Michael in der Vision von Offenbarung 12?',
-      options: <String>['Den Drachen (Satan)', 'Ein menschliches Heer', 'Einen irdischen König', 'Ein bloßes Tier'],
+      options: <String>[
+        'Den Drachen (Satan)',
+        'Ein menschliches Heer',
+        'Einen irdischen König',
+        'Ein bloßes Tier',
+      ],
       correctIndex: 0,
       explanation: 'Ein Krieg im Himmel wird beschrieben (Offenbarung 12:7).',
     ),
     QuizQuestion(
-      text: 'Wofür stehen die mit dem Lamm erwähnten 144.000 in Offenbarung 14?',
+      text:
+          'Wofür stehen die mit dem Lamm erwähnten 144.000 in Offenbarung 14?',
       options: <String>[
         'Eine mit dem Lamm auf dem Berg Zion versammelte Gruppe',
         'Ein buchstäbliches militärisches Heer',
@@ -258,10 +301,12 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Ein bloßes Symbol ohne Bedeutung',
       ],
       correctIndex: 0,
-      explanation: 'Eine eigenständige Gruppe, verbunden mit dem Lamm (Offenbarung 14:1).',
+      explanation:
+          'Eine eigenständige Gruppe, verbunden mit dem Lamm (Offenbarung 14:1).',
     ),
     QuizQuestion(
-      text: 'Was enthalten die sieben letzten Plagen, die in Offenbarung 15 angekündigt werden?',
+      text:
+          'Was enthalten die sieben letzten Plagen, die in Offenbarung 15 angekündigt werden?',
       options: <String>[
         'Die Vollendung von Gottes Zorn',
         'Sofortige Segnungen',
@@ -269,7 +314,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Nichts Bedeutendes',
       ],
       correctIndex: 0,
-      explanation: 'Eine letzte Stufe des göttlichen Gerichts (Offenbarung 15:1).',
+      explanation:
+          'Eine letzte Stufe des göttlichen Gerichts (Offenbarung 15:1).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Siegel', 'Trompeten', 'Plagen'],
     ),
@@ -284,7 +330,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Mit ihr geschieht nichts',
       ],
       correctIndex: 0,
-      explanation: 'Ihr Fall wird inmitten von Wehklagen beschrieben (Offenbarung 18).',
+      explanation:
+          'Ihr Fall wird inmitten von Wehklagen beschrieben (Offenbarung 18).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Babylon', 'Dirne', 'Tier'],
     ),
@@ -297,7 +344,8 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Für ihn ändert sich nichts',
       ],
       correctIndex: 0,
-      explanation: 'Eine Zeit der Einschränkung wird ihm auferlegt (Offenbarung 20:2, 3).',
+      explanation:
+          'Eine Zeit der Einschränkung wird ihm auferlegt (Offenbarung 20:2, 3).',
     ),
     QuizQuestion(
       text: 'Was verheißen Offenbarung 21-22 bezüglich Schmerz und Tod?',
@@ -308,9 +356,11 @@ const Map<String, List<QuizQuestion>> authoredQuizzesDeC8 = <String, List<QuizQu
         'Darüber wird nichts verheißen',
       ],
       correctIndex: 0,
-      explanation: 'Eine großartige Hoffnung beschließt die Bibel (Offenbarung 21:4).',
+      explanation:
+          'Eine großartige Hoffnung beschließt die Bibel (Offenbarung 21:4).',
     ),
   ],
 };
 
-const Map<String, List<QuizQuestion>> extraQuizzesDeC8 = <String, List<QuizQuestion>>{};
+const Map<String, List<QuizQuestion>> extraQuizzesDeC8 =
+    <String, List<QuizQuestion>>{};

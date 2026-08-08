@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
@@ -85,7 +86,15 @@ class FeaturesIntroScreen extends StatelessWidget {
                                 icon: Icons.auto_stories_outlined,
                                 accent: kAccentBlue,
                                 title: l10n.onbFeatureReadingTitle,
-                                desc: l10n.onbFeatureReadingDesc,
+                                // The reading-session timer is an Android-only
+                                // notification, so promising it on iOS would
+                                // be describing something that never shows up.
+                                desc:
+                                    defaultTargetPlatform ==
+                                        TargetPlatform.android
+                                    ? '${l10n.onbFeatureReadingDesc} '
+                                          '${l10n.onbFeatureReadingSession}'
+                                    : l10n.onbFeatureReadingDesc,
                               ),
                               _FeatureCard(
                                 icon: Icons.quiz_outlined,

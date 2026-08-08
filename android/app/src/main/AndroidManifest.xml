@@ -11,6 +11,11 @@
          optimization — this lets Settings offer that exemption for the
          reading-session notification (see reading_session_service.dart). -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- Android 16+. Lets the reading-session notification be promoted to a
+         Live Update — a status bar chip with the timer running in it. Ignored
+         on older releases, where it stays an ordinary ongoing notification.
+         See ReadingSessionLiveUpdate.kt. -->
+    <uses-permission android:name="android.permission.POST_PROMOTED_NOTIFICATIONS" />
 
     <application
         android:label="JW Streak"

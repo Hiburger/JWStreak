@@ -658,6 +658,12 @@ abstract class AppLocalizations {
   /// **'One chapter a day, at your own pace. It opens in JW Library or on jw.org — your choice in settings. Mark it as read to move forward and feed your streak.'**
   String get onbFeatureReadingDesc;
 
+  /// No description provided for @onbFeatureReadingSession.
+  ///
+  /// In en, this message translates to:
+  /// **'While it\'s open, a timer sits in your status bar — tap it to come back, and JW Streak offers to mark the chapter read.'**
+  String get onbFeatureReadingSession;
+
   /// No description provided for @onbFeatureQuizTitle.
   ///
   /// In en, this message translates to:

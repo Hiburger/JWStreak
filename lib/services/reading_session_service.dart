@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'notification_service.dart';
@@ -74,12 +73,6 @@ class ReadingSessionService with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (kDebugMode) {
-      debugPrint(
-        'ReadingSessionService: lifecycle=$state active=${_active != null} '
-        'leftApp=$_leftApp',
-      );
-    }
     final ReadingSession? session = _active;
     if (session == null) {
       return;

@@ -124,4 +124,10 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+    // NotificationCompat.setRequestPromotedOngoing — the Android 16 Live
+    // Update opt-in used by ReadingSessionLiveUpdate.kt — only exists from
+    // core 1.18 on, and the version the Flutter plugins pull in transitively
+    // is older than that. Gradle resolves to the highest requested version,
+    // so asking for it here is what puts the symbol on the classpath.
+    implementation("androidx.core:core:1.18.0")
 }

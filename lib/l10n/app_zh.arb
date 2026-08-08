@@ -96,6 +96,7 @@
   "onbFeaturesSubtitle": "一些帮助你每日阅读的功能。",
   "onbFeatureReadingTitle": "每日引导阅读",
   "onbFeatureReadingDesc": "每天一章，按自己的节奏。它会在 JW Library 或 jw.org 中打开——可在设置中选择。标记为已读即可推进并延续你的连续记录。",
+  "onbFeatureReadingSession": "阅读期间，状态栏会显示一个计时器——点按即可返回，JW Streak 会提示你将该章标记为已读。",
   "onbFeatureQuizTitle": "测验和星星",
   "onbFeatureQuizDesc": "通过随阅读解锁的简短测验检验你的理解。可以选择、输入或拼词作答，并一路赚取星星。",
   "onbFeatureNotesTitle": "个人笔记",

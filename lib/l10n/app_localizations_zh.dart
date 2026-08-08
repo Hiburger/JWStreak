@@ -285,6 +285,10 @@ class AppLocalizationsZh extends AppLocalizations {
       '每天一章，按自己的节奏。它会在 JW Library 或 jw.org 中打开——可在设置中选择。标记为已读即可推进并延续你的连续记录。';
 
   @override
+  String get onbFeatureReadingSession =>
+      '阅读期间，状态栏会显示一个计时器——点按即可返回，JW Streak 会提示你将该章标记为已读。';
+
+  @override
   String get onbFeatureQuizTitle => '测验和星星';
 
   @override

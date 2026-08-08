@@ -291,6 +291,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Jeden rozdział dziennie, w twoim tempie. Otwiera się w JW Library lub na jw.org — wybór należy do ciebie, w ustawieniach. Oznacz go jako przeczytany, aby iść dalej i podtrzymać swoją passę.';
 
   @override
+  String get onbFeatureReadingSession =>
+      'Podczas czytania w pasku stanu działa stoper — dotknij go, aby wrócić, a JW Streak zaproponuje oznaczenie rozdziału jako przeczytanego.';
+
+  @override
   String get onbFeatureQuizTitle => 'Quizy i gwiazdki';
 
   @override

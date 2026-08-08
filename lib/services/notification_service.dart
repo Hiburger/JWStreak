@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,6 +44,17 @@ class NotificationService {
   static const int _reminderBaseId = 200;
   static const String _channelId = 'jwstreak_reminders';
 
+  /// The ids that are *not* daily reminders, even though they sit above
+  /// [_reminderBaseId]. [cancelAllReminders] has to skip these — see the
+  /// note there for what taking them down by mistake broke.
+  static const int _instantMessageId = 999;
+  static const Set<int> _reservedIds = <int>{
+    _streakRiskNotificationId,
+    _dailyTextNotificationId,
+    _sessionNotificationId,
+    _instantMessageId,
+  };
+
   /// Separate channel from [_channelId] so the always-present reading-session
   /// notification can be silenced (or turned off entirely) in Android's
   /// settings without also killing the daily reminders — they're different
@@ -53,22 +65,21 @@ class NotificationService {
   /// recreate it at a different importance, so bumping this forces a fresh
   /// channel for every install that already saw an older one.
   ///
-  /// This channel started at `Importance.low`, then `defaultImportance` —
-  /// both were accepted (no error, no exception) but never actually
-  /// surfaced anywhere on a real device: not in the shade, not as a status
-  /// bar icon, gone from `dumpsys notification`'s active list within
-  /// moments of being posted, confirmed via adb across many repeats even
-  /// while the app was verifiably backgrounded and the target app verifiably
-  /// focused. [Importance.high] on the exact same device, same install,
-  /// same code path, showed instantly and reliably. So: high it is,
-  /// with [AndroidNotificationDetails.silent] doing the actual job of
-  /// keeping it from peeking, buzzing or making sound — that's a property
-  /// of `silent`, not of the channel's importance tier.
+  /// The importance is [Importance.high] rather than something quieter
+  /// because this notification is the only way back to the app mid-reading,
+  /// and [AndroidNotificationDetails.silent] is what keeps it from peeking,
+  /// buzzing or making a sound — that's a property of `silent`, not of the
+  /// channel's tier, so "high" costs the user nothing here.
   static const String _sessionChannelId = 'jwstreak_reading_session_v3';
   static const int _sessionNotificationId = 700;
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
+
+  /// Matches the channel name registered in MainActivity.kt.
+  static const MethodChannel _liveUpdateChannel = MethodChannel(
+    'com.jwstreak.app/live_update',
+  );
 
   NotificationTapHandler? _onTap;
   NotificationErrorHandler? _onError;
@@ -244,7 +255,7 @@ class NotificationService {
     required String body,
   }) async {
     await _plugin.show(
-      id: 999,
+      id: _instantMessageId,
       title: title,
       body: body,
       notificationDetails: _reminderDetails,
@@ -264,6 +275,18 @@ class NotificationService {
     required String body,
   }) async {
     if (defaultTargetPlatform != TargetPlatform.android) {
+      return;
+    }
+    // Android 16 can promote this to a real Live Update — a chip in the
+    // status bar with the timer running inside it, rather than just a row in
+    // the shade. flutter_local_notifications can't ask for that (it builds
+    // its NotificationCompat.Builder internally and exposes no way to set
+    // the promotion), so it goes through a small native channel instead, and
+    // falls through to the plugin on anything older.
+    if (await _tryShowLiveUpdate(title: title, body: body)) {
+      if (kDebugMode) {
+        debugPrint('NotificationService: reading session posted as Live Update');
+      }
       return;
     }
     await _plugin.show(
@@ -300,6 +323,33 @@ class NotificationService {
     }
   }
 
+  /// Asks the platform to post the session notification as an Android 16
+  /// Live Update. Returns false — leaving the caller to fall back — on older
+  /// releases, and on any platform-side refusal.
+  Future<bool> _tryShowLiveUpdate({
+    required String title,
+    required String body,
+  }) async {
+    try {
+      final bool? posted = await _liveUpdateChannel
+          .invokeMethod<bool>('showReadingSession', <String, Object>{
+            'channelId': _sessionChannelId,
+            'notificationId': _sessionNotificationId,
+            'title': title,
+            'body': body,
+            'startedAtMillis': DateTime.now().millisecondsSinceEpoch,
+          });
+      return posted ?? false;
+    } catch (_) {
+      // MissingPluginException on a build without the native side, or
+      // anything the platform throws — either way, fall back.
+      return false;
+    }
+  }
+
+  /// Cancels the session notification, whichever way it went up: the native
+  /// Live Update is posted under the same id through the same
+  /// NotificationManager, so one cancel covers both paths.
   Future<void> endReadingSession() async {
     if (defaultTargetPlatform != TargetPlatform.android) {
       return;
@@ -371,9 +421,32 @@ class NotificationService {
     await _plugin.cancel(id: _streakRiskNotificationId);
   }
 
-  /// Cancels every scheduled reminder (used before a full resync).
+  /// Cancels the scheduled daily reminders — and only those. Used before a
+  /// full resync, so reminders the user has since deleted don't linger.
+  ///
+  /// This deliberately isn't `cancelAll()`. `cancelAll()` takes down every
+  /// notification this app owns, including the ones with their own separate
+  /// lifecycles ([_reservedIds]), and the resync it precedes runs on every
+  /// dashboard refresh — which is to say after essentially every action.
+  /// Two things that cost us:
+  ///
+  ///  - the reading-session notification was posted and then wiped by the
+  ///    refresh a few milliseconds later, so it never survived long enough
+  ///    to be seen. It looked exactly like the OS silently dropping it.
+  ///  - the daily-text reminder is only ever scheduled from the reminder
+  ///    setup screen, so once unscheduled here it stayed gone until the
+  ///    user went back in and saved it again.
+  ///
+  /// Reminders are the pending notifications at or above [_reminderBaseId]
+  /// that aren't one of the reserved singletons.
   Future<void> cancelAllReminders() async {
-    await _plugin.cancelAll();
+    final List<PendingNotificationRequest> pending = await _plugin
+        .pendingNotificationRequests();
+    for (final PendingNotificationRequest request in pending) {
+      if (request.id >= _reminderBaseId && !_reservedIds.contains(request.id)) {
+        await _plugin.cancel(id: request.id);
+      }
+    }
   }
 
   Future<AndroidScheduleMode> _resolveScheduleMode() async {

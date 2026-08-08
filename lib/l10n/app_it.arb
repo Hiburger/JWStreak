@@ -96,6 +96,7 @@
   "onbFeaturesSubtitle": "Alcune funzioni per accompagnare la tua lettura quotidiana.",
   "onbFeatureReadingTitle": "Lettura quotidiana guidata",
   "onbFeatureReadingDesc": "Un capitolo al giorno, al tuo ritmo. Si apre in JW Library o su jw.org — scegli tu nelle impostazioni. Segnalo come letto per andare avanti e alimentare la tua serie.",
+  "onbFeatureReadingSession": "Mentre leggi, un timer resta nella barra di stato: toccalo per tornare e JW Streak ti proporrà di segnare il capitolo come letto.",
   "onbFeatureQuizTitle": "Quiz e stelle",
   "onbFeatureQuizDesc": "Verifica la tua comprensione con brevi quiz che si sbloccano man mano che leggi. Rispondi scegliendo, digitando o componendo parole — e guadagna stelle.",
   "onbFeatureNotesTitle": "Note personali",

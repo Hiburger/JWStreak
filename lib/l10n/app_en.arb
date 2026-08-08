@@ -97,6 +97,7 @@
   "onbFeaturesSubtitle": "A few features to guide your daily reading.",
   "onbFeatureReadingTitle": "Guided daily reading",
   "onbFeatureReadingDesc": "One chapter a day, at your own pace. It opens in JW Library or on jw.org — your choice in settings. Mark it as read to move forward and feed your streak.",
+  "onbFeatureReadingSession": "While it's open, a timer sits in your status bar — tap it to come back, and JW Streak offers to mark the chapter read.",
   "onbFeatureQuizTitle": "Quizzes & stars",
   "onbFeatureQuizDesc": "Check your understanding with short quizzes that unlock as you read. Answer by choosing, typing, or building words — and earn stars along the way.",
   "onbFeatureNotesTitle": "Personal notes",

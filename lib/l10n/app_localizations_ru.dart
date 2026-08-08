@@ -290,6 +290,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'По одной главе в день, в твоём темпе. Она открывается в JW Library или на jw.org — выбор в настройках. Отмечай её прочитанной, чтобы двигаться дальше и поддерживать серию.';
 
   @override
+  String get onbFeatureReadingSession =>
+      'Пока ты читаешь, в строке состояния идёт таймер — нажми на него, чтобы вернуться, и JW Streak предложит отметить главу прочитанной.';
+
+  @override
   String get onbFeatureQuizTitle => 'Викторины и звёзды';
 
   @override

@@ -292,6 +292,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Um capítulo por dia, no seu ritmo. Abre no JW Library ou no jw.org — você escolhe nas configurações. Marque como lido para avançar e alimentar sua sequência.';
 
   @override
+  String get onbFeatureReadingSession =>
+      'Enquanto você lê, um cronômetro fica na sua barra de status — toque nele para voltar e o JW Streak vai sugerir marcar o capítulo como lido.';
+
+  @override
   String get onbFeatureQuizTitle => 'Quizzes e estrelas';
 
   @override

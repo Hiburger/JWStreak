@@ -20,6 +20,45 @@ RES = str(ROOT / "android/app/src/main/res")
 # transparent background, no color.
 # https://developer.android.com/develop/ui/views/notifications/custom-notification#SmallIcon
 art = Image.open(HERE / "icon_foreground_art.png").convert("RGBA")
+
+# The shared foreground art is the "JWS" lettering stacked above the flower,
+# which is right for the launcher icon but wrong here: fitted into a 24dp
+# status bar icon the lettering is far too small to read, so it lands as a
+# smudge above the glyph and steals room the flower could have used. That is
+# especially visible in Android 16's Live Update chip, which is mostly just
+# this icon. Android's own guidance is a single simple silhouette, so keep
+# only the flower — the distinctive half of the mark, and legible at 24dp.
+#
+# Found rather than hardcoded so re-exporting the art can shift it: the two
+# halves are separated by a band of fully transparent rows, and the flower is
+# whatever sits below the widest such band.
+def _flower_only(source: Image.Image) -> Image.Image:
+    width, height = source.size
+    source_alpha = source.split()[3]
+    empty_rows = [
+        y
+        for y in range(height)
+        if not source_alpha.crop((0, y, width, y + 1)).getbbox()
+    ]
+    widest_band: list[int] = []
+    current: list[int] = []
+    for y in empty_rows:
+        if current and y == current[-1] + 1:
+            current.append(y)
+        else:
+            current = [y]
+        if len(current) > len(widest_band):
+            widest_band = list(current)
+    # A band touching the top or bottom edge is just margin, not a separator,
+    # and art with no separator at all is presumably already a lone glyph.
+    if not widest_band or widest_band[0] == 0 or widest_band[-1] == height - 1:
+        return source
+    below = source.crop((0, widest_band[-1] + 1, width, height))
+    # Trim to the glyph itself so the scaling below sees no stray margin.
+    return below.crop(below.split()[3].getbbox())
+
+
+art = _flower_only(art)
 alpha = art.split()[3]
 white_art = Image.new("RGBA", art.size, (255, 255, 255, 0))
 white_art.putalpha(alpha)

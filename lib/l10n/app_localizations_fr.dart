@@ -291,6 +291,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Un chapitre par jour, à ton rythme. Il s\'ouvre dans JW Library ou sur jw.org — à toi de choisir dans les réglages. Marque-le comme lu pour avancer et nourrir ta série.';
 
   @override
+  String get onbFeatureReadingSession =>
+      'Pendant la lecture, un minuteur reste dans ta barre d\'état — touche-le pour revenir, et JW Streak te propose de marquer le chapitre lu.';
+
+  @override
   String get onbFeatureQuizTitle => 'Quiz & étoiles';
 
   @override

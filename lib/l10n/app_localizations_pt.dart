@@ -289,43 +289,43 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Um capítulo por dia, no seu ritmo. Abre no JW Library ou no jw.org — você escolhe nas configurações. Marque como lido para avançar e alimentar sua sequência.';
+      'Um capítulo por dia, no JW Library ou no jw.org. Marque como lido para avançar.';
 
   @override
   String get onbFeatureReadingSession =>
-      'Enquanto você lê, um cronômetro fica na sua barra de status — toque nele para voltar e o JW Streak vai sugerir marcar o capítulo como lido.';
+      'Um cronômetro guarda o seu caminho de volta.';
 
   @override
   String get onbFeatureQuizTitle => 'Quizzes e estrelas';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Teste sua compreensão com quizzes curtos que são desbloqueados conforme você lê. Responda escolhendo, digitando ou montando palavras — e ganhe estrelas.';
+      'Quizzes curtos são desbloqueados conforme você lê. Escolha, digite ou monte palavras — e ganhe estrelas.';
 
   @override
   String get onbFeatureNotesTitle => 'Notas pessoais';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Anote suas reflexões enquanto lê e encontre-as de novo quando quiser. Você pode até exportá-las.';
+      'Anote suas reflexões enquanto lê. Exporte quando quiser.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% privado';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Tudo fica no seu telefone. Nenhum dado é enviado e nenhuma conta é necessária.';
+      'Tudo fica no seu telefone. Nenhum dado enviado, nenhuma conta.';
 
   @override
   String get onbReminderTitle => 'Configure seu primeiro lembrete';
 
   @override
   String get onbReminderIntro =>
-      'Um pequeno lembrete diário é a melhor forma de manter sua sequência. Escolha um momento tranquilo do dia — você sempre pode adicionar mais ou alterá-los depois nas configurações.';
+      'Um pequeno lembrete diário mantém sua sequência. Escolha um momento calmo — dá para mudar depois.';
 
   @override
   String get onbReminderTip =>
-      'Dica: associe seu lembrete a um hábito que você já tem, como depois do café da manhã ou antes de dormir.';
+      'Dica: associe a um hábito — o café da manhã ou antes de dormir.';
 
   @override
   String get onbReminderFinish => 'Concluir';

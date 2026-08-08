@@ -291,43 +291,43 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Ein Kapitel pro Tag, in deinem Tempo. Es öffnet sich in JW Library oder auf jw.org — du entscheidest in den Einstellungen. Markiere es als gelesen, um weiterzukommen und deine Serie zu nähren.';
+      'Ein Kapitel pro Tag, in JW Library oder auf jw.org. Markiere es als gelesen, um weiterzukommen.';
 
   @override
   String get onbFeatureReadingSession =>
-      'Währenddessen läuft ein Timer in deiner Statusleiste — tippe ihn an, um zurückzukommen, und JW Streak bietet an, das Kapitel als gelesen zu markieren.';
+      'Ein Timer hält dir den Weg zurück offen.';
 
   @override
   String get onbFeatureQuizTitle => 'Quiz & Sterne';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Prüfe dein Verständnis mit kurzen Quiz, die sich beim Lesen freischalten. Antworte durch Auswählen, Tippen oder Zusammensetzen von Wörtern — und sammle dabei Sterne.';
+      'Kurze Quiz schalten sich beim Lesen frei. Auswählen, tippen oder Wörter bauen — und Sterne sammeln.';
 
   @override
   String get onbFeatureNotesTitle => 'Persönliche Notizen';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Halte deine Gedanken beim Lesen fest und finde sie jederzeit wieder. Du kannst sie sogar exportieren.';
+      'Halte deine Gedanken beim Lesen fest. Jederzeit exportierbar.';
 
   @override
   String get onbFeaturePrivacyTitle => '100 % privat';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Alles bleibt auf deinem Handy. Es werden keine Daten übertragen und kein Konto benötigt.';
+      'Alles bleibt auf deinem Handy. Keine Daten, kein Konto.';
 
   @override
   String get onbReminderTitle => 'Richte deine erste Erinnerung ein';
 
   @override
   String get onbReminderIntro =>
-      'Ein kleiner täglicher Anstoß ist der beste Weg, deine Serie am Laufen zu halten. Wähle einen ruhigen Moment deines Tages — du kannst später jederzeit weitere hinzufügen oder sie in den Einstellungen ändern.';
+      'Ein kleiner täglicher Anstoß hält deine Serie am Leben. Wähle einen ruhigen Moment — später änderbar.';
 
   @override
   String get onbReminderTip =>
-      'Tipp: Verknüpfe deine Erinnerung mit einer bestehenden Gewohnheit, zum Beispiel nach dem Morgenkaffee oder vor dem Schlafengehen.';
+      'Tipp: Verknüpfe ihn mit einer Gewohnheit — Morgenkaffee oder vor dem Schlafen.';
 
   @override
   String get onbReminderFinish => 'Fertig';

@@ -655,13 +655,13 @@ abstract class AppLocalizations {
   /// No description provided for @onbFeatureReadingDesc.
   ///
   /// In en, this message translates to:
-  /// **'One chapter a day, at your own pace. It opens in JW Library or on jw.org — your choice in settings. Mark it as read to move forward and feed your streak.'**
+  /// **'One chapter a day, in JW Library or on jw.org. Mark it read to move on and keep your streak.'**
   String get onbFeatureReadingDesc;
 
   /// No description provided for @onbFeatureReadingSession.
   ///
   /// In en, this message translates to:
-  /// **'While it\'s open, a timer sits in your status bar — tap it to come back, and JW Streak offers to mark the chapter read.'**
+  /// **'A timer keeps your way back while you read.'**
   String get onbFeatureReadingSession;
 
   /// No description provided for @onbFeatureQuizTitle.
@@ -673,7 +673,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbFeatureQuizDesc.
   ///
   /// In en, this message translates to:
-  /// **'Check your understanding with short quizzes that unlock as you read. Answer by choosing, typing, or building words — and earn stars along the way.'**
+  /// **'Short quizzes unlock as you read. Choose, type or build words — and earn stars.'**
   String get onbFeatureQuizDesc;
 
   /// No description provided for @onbFeatureNotesTitle.
@@ -685,7 +685,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbFeatureNotesDesc.
   ///
   /// In en, this message translates to:
-  /// **'Jot down your reflections as you read and find them again whenever you like. You can even export them.'**
+  /// **'Write your reflections as you read. Export them any time.'**
   String get onbFeatureNotesDesc;
 
   /// No description provided for @onbFeaturePrivacyTitle.
@@ -697,7 +697,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbFeaturePrivacyDesc.
   ///
   /// In en, this message translates to:
-  /// **'Everything stays on your phone. No data is sent anywhere, and no account is required.'**
+  /// **'Everything stays on your phone. No data sent, no account needed.'**
   String get onbFeaturePrivacyDesc;
 
   /// No description provided for @onbReminderTitle.
@@ -709,13 +709,13 @@ abstract class AppLocalizations {
   /// No description provided for @onbReminderIntro.
   ///
   /// In en, this message translates to:
-  /// **'A small daily nudge is the best way to keep your streak going. Pick a calm moment of your day — you can always add more or change them later in settings.'**
+  /// **'A small daily nudge keeps your streak going. Pick a calm moment — you can change it later.'**
   String get onbReminderIntro;
 
   /// No description provided for @onbReminderTip.
   ///
   /// In en, this message translates to:
-  /// **'Tip: link your reminder to an existing habit, like after your morning coffee or before bed.'**
+  /// **'Tip: tie it to an existing habit — morning coffee, or bedtime.'**
   String get onbReminderTip;
 
   /// No description provided for @onbReminderFinish.

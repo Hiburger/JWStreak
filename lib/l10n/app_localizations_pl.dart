@@ -288,43 +288,42 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Jeden rozdział dziennie, w twoim tempie. Otwiera się w JW Library lub na jw.org — wybór należy do ciebie, w ustawieniach. Oznacz go jako przeczytany, aby iść dalej i podtrzymać swoją passę.';
+      'Jeden rozdział dziennie, w JW Library lub na jw.org. Oznacz jako przeczytany, aby iść dalej.';
 
   @override
-  String get onbFeatureReadingSession =>
-      'Podczas czytania w pasku stanu działa stoper — dotknij go, aby wrócić, a JW Streak zaproponuje oznaczenie rozdziału jako przeczytanego.';
+  String get onbFeatureReadingSession => 'Stoper zachowuje ci drogę powrotną.';
 
   @override
   String get onbFeatureQuizTitle => 'Quizy i gwiazdki';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Sprawdź swoje zrozumienie krótkimi quizami, które odblokowują się w miarę czytania. Odpowiadaj, wybierając, wpisując lub układając słowa — i zdobywaj gwiazdki po drodze.';
+      'Krótkie quizy odblokowują się w trakcie czytania. Wybieraj, pisz lub układaj słowa — i zdobywaj gwiazdki.';
 
   @override
   String get onbFeatureNotesTitle => 'Osobiste notatki';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Zapisuj swoje przemyślenia podczas czytania i odnajdź je, kiedy zechcesz. Możesz je nawet wyeksportować.';
+      'Zapisuj swoje przemyślenia podczas czytania. Eksportuj je, kiedy chcesz.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% prywatności';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Wszystko zostaje na twoim telefonie. Żadne dane nigdzie nie są wysyłane i nie jest wymagane żadne konto.';
+      'Wszystko zostaje na twoim telefonie. Bez wysyłania danych, bez konta.';
 
   @override
   String get onbReminderTitle => 'Ustaw swoje pierwsze przypomnienie';
 
   @override
   String get onbReminderIntro =>
-      'Małe codzienne przypomnienie to najlepszy sposób na podtrzymanie passy. Wybierz spokojny moment dnia — zawsze możesz dodać więcej lub je zmienić później w ustawieniach.';
+      'Małe codzienne przypomnienie podtrzymuje passę. Wybierz spokojną porę — możesz ją zmienić.';
 
   @override
   String get onbReminderTip =>
-      'Wskazówka: połącz przypomnienie z istniejącym nawykiem, na przykład po porannej kawie albo przed snem.';
+      'Wskazówka: powiąż je z nawykiem — poranną kawą lub porą snu.';
 
   @override
   String get onbReminderFinish => 'Zakończ';

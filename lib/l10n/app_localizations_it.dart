@@ -288,43 +288,43 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Un capitolo al giorno, al tuo ritmo. Si apre in JW Library o su jw.org — scegli tu nelle impostazioni. Segnalo come letto per andare avanti e alimentare la tua serie.';
+      'Un capitolo al giorno, in JW Library o su jw.org. Segnalo come letto per andare avanti.';
 
   @override
   String get onbFeatureReadingSession =>
-      'Mentre leggi, un timer resta nella barra di stato: toccalo per tornare e JW Streak ti proporrà di segnare il capitolo come letto.';
+      'Un timer ti tiene la strada del ritorno.';
 
   @override
   String get onbFeatureQuizTitle => 'Quiz e stelle';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Verifica la tua comprensione con brevi quiz che si sbloccano man mano che leggi. Rispondi scegliendo, digitando o componendo parole — e guadagna stelle.';
+      'Brevi quiz si sbloccano mentre leggi. Scegli, scrivi o componi parole — e guadagna stelle.';
 
   @override
   String get onbFeatureNotesTitle => 'Note personali';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Annota le tue riflessioni mentre leggi e ritrovale quando vuoi. Puoi anche esportarle.';
+      'Annota le tue riflessioni mentre leggi. Esportale quando vuoi.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% privato';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Tutto resta sul tuo telefono. Nessun dato viene inviato e non serve alcun account.';
+      'Tutto resta sul tuo telefono. Nessun dato inviato, nessun account.';
 
   @override
   String get onbReminderTitle => 'Imposta il tuo primo promemoria';
 
   @override
   String get onbReminderIntro =>
-      'Un piccolo promemoria quotidiano è il modo migliore per mantenere la tua serie. Scegli un momento tranquillo della giornata — potrai sempre aggiungerne altri o modificarli dopo nelle impostazioni.';
+      'Un piccolo promemoria quotidiano mantiene la tua serie. Scegli un momento tranquillo: potrai cambiarlo.';
 
   @override
   String get onbReminderTip =>
-      'Consiglio: collega il promemoria a un\'abitudine che hai già, come dopo il caffè del mattino o prima di dormire.';
+      'Consiglio: collegalo a un\'abitudine — il caffè del mattino o prima di dormire.';
 
   @override
   String get onbReminderFinish => 'Fine';

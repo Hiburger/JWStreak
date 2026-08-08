@@ -289,43 +289,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'One chapter a day, at your own pace. It opens in JW Library or on jw.org — your choice in settings. Mark it as read to move forward and feed your streak.';
+      'One chapter a day, in JW Library or on jw.org. Mark it read to move on and keep your streak.';
 
   @override
   String get onbFeatureReadingSession =>
-      'While it\'s open, a timer sits in your status bar — tap it to come back, and JW Streak offers to mark the chapter read.';
+      'A timer keeps your way back while you read.';
 
   @override
   String get onbFeatureQuizTitle => 'Quizzes & stars';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Check your understanding with short quizzes that unlock as you read. Answer by choosing, typing, or building words — and earn stars along the way.';
+      'Short quizzes unlock as you read. Choose, type or build words — and earn stars.';
 
   @override
   String get onbFeatureNotesTitle => 'Personal notes';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Jot down your reflections as you read and find them again whenever you like. You can even export them.';
+      'Write your reflections as you read. Export them any time.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% private';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Everything stays on your phone. No data is sent anywhere, and no account is required.';
+      'Everything stays on your phone. No data sent, no account needed.';
 
   @override
   String get onbReminderTitle => 'Set your first reminder';
 
   @override
   String get onbReminderIntro =>
-      'A small daily nudge is the best way to keep your streak going. Pick a calm moment of your day — you can always add more or change them later in settings.';
+      'A small daily nudge keeps your streak going. Pick a calm moment — you can change it later.';
 
   @override
   String get onbReminderTip =>
-      'Tip: link your reminder to an existing habit, like after your morning coffee or before bed.';
+      'Tip: tie it to an existing habit — morning coffee, or bedtime.';
 
   @override
   String get onbReminderFinish => 'Finish';

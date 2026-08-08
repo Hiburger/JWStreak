@@ -282,39 +282,37 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      '每天一章，按自己的节奏。它会在 JW Library 或 jw.org 中打开——可在设置中选择。标记为已读即可推进并延续你的连续记录。';
+      '每天一章，在 JW Library 或 jw.org 中阅读。标记为已读即可继续。';
 
   @override
-  String get onbFeatureReadingSession =>
-      '阅读期间，状态栏会显示一个计时器——点按即可返回，JW Streak 会提示你将该章标记为已读。';
+  String get onbFeatureReadingSession => '计时器为你留着回来的路。';
 
   @override
   String get onbFeatureQuizTitle => '测验和星星';
 
   @override
-  String get onbFeatureQuizDesc => '通过随阅读解锁的简短测验检验你的理解。可以选择、输入或拼词作答，并一路赚取星星。';
+  String get onbFeatureQuizDesc => '随着阅读解锁简短测验。选择、输入或拼词，赚取星星。';
 
   @override
   String get onbFeatureNotesTitle => '个人笔记';
 
   @override
-  String get onbFeatureNotesDesc => '在阅读时记下你的思考，随时都能再找到它们。你甚至可以导出它们。';
+  String get onbFeatureNotesDesc => '边读边记下你的想法，随时可以导出。';
 
   @override
   String get onbFeaturePrivacyTitle => '100% 隐私';
 
   @override
-  String get onbFeaturePrivacyDesc => '一切都留在你的手机上。不会发送任何数据，也无需账户。';
+  String get onbFeaturePrivacyDesc => '一切都留在你的手机上。不发送数据，无需账户。';
 
   @override
   String get onbReminderTitle => '设置你的第一个提醒';
 
   @override
-  String get onbReminderIntro =>
-      '每天一个小提醒是延续连续记录的最好方法。选一天中安静的时刻——你随时可以在设置中添加更多或修改它们。';
+  String get onbReminderIntro => '每天一个小提醒就能延续连续记录。选个安静的时刻——之后可以更改。';
 
   @override
-  String get onbReminderTip => '小贴士：把提醒和你已有的习惯绑定，比如早咖啡后或睡前。';
+  String get onbReminderTip => '小贴士：把它和已有习惯绑定——早咖啡后，或睡前。';
 
   @override
   String get onbReminderFinish => '完成';

@@ -288,43 +288,43 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Un chapitre par jour, à ton rythme. Il s\'ouvre dans JW Library ou sur jw.org — à toi de choisir dans les réglages. Marque-le comme lu pour avancer et nourrir ta série.';
+      'Un chapitre par jour, dans JW Library ou sur jw.org. Marque-le lu pour avancer et nourrir ta série.';
 
   @override
   String get onbFeatureReadingSession =>
-      'Pendant la lecture, un minuteur reste dans ta barre d\'état — touche-le pour revenir, et JW Streak te propose de marquer le chapitre lu.';
+      'Un minuteur garde le chemin du retour pendant ta lecture.';
 
   @override
   String get onbFeatureQuizTitle => 'Quiz & étoiles';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Vérifie ta compréhension avec de petits quiz qui se débloquent à mesure que tu lis. Réponds en choisissant, en tapant ou en assemblant des mots — et gagne des étoiles.';
+      'Des quiz courts se débloquent au fil de ta lecture. Choisis, écris ou assemble — et gagne des étoiles.';
 
   @override
   String get onbFeatureNotesTitle => 'Notes personnelles';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Note tes réflexions au fil de ta lecture et retrouve-les quand tu veux. Tu peux même les exporter.';
+      'Note tes réflexions en lisant. Exporte-les quand tu veux.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% privé';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Tout reste sur ton téléphone. Aucune donnée n\'est envoyée, aucun compte requis.';
+      'Tout reste sur ton téléphone. Aucune donnée envoyée, aucun compte.';
 
   @override
   String get onbReminderTitle => 'Programme ton premier rappel';
 
   @override
   String get onbReminderIntro =>
-      'Un petit rappel quotidien est le meilleur moyen de tenir ta série. Choisis un moment calme de ta journée — tu pourras toujours en ajouter ou les modifier plus tard dans les réglages.';
+      'Un petit rappel quotidien entretient ta série. Choisis un moment calme — modifiable plus tard.';
 
   @override
   String get onbReminderTip =>
-      'Astuce : associe ton rappel à une habitude existante, comme après le café du matin ou avant de dormir.';
+      'Astuce : associe-le à une habitude — le café du matin, ou le coucher.';
 
   @override
   String get onbReminderFinish => 'Terminer';

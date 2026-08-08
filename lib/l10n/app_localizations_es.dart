@@ -287,43 +287,43 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onbFeatureReadingDesc =>
-      'Un capítulo al día, a tu ritmo. Se abre en JW Library o en jw.org, tú eliges en los ajustes. Márcalo como leído para avanzar y alimentar tu racha.';
+      'Un capítulo al día, en JW Library o en jw.org. Márcalo como leído para avanzar.';
 
   @override
   String get onbFeatureReadingSession =>
-      'Mientras lees, un temporizador se queda en tu barra de estado: tócalo para volver y JW Streak te propondrá marcar el capítulo como leído.';
+      'Un temporizador te guarda el camino de vuelta.';
 
   @override
   String get onbFeatureQuizTitle => 'Cuestionarios y estrellas';
 
   @override
   String get onbFeatureQuizDesc =>
-      'Comprueba tu comprensión con cuestionarios cortos que se desbloquean a medida que lees. Responde eligiendo, escribiendo o formando palabras, y gana estrellas.';
+      'Cuestionarios cortos se desbloquean al leer. Elige, escribe o forma palabras, y gana estrellas.';
 
   @override
   String get onbFeatureNotesTitle => 'Notas personales';
 
   @override
   String get onbFeatureNotesDesc =>
-      'Anota tus reflexiones mientras lees y vuelve a encontrarlas cuando quieras. Incluso puedes exportarlas.';
+      'Anota tus reflexiones mientras lees. Expórtalas cuando quieras.';
 
   @override
   String get onbFeaturePrivacyTitle => '100% privado';
 
   @override
   String get onbFeaturePrivacyDesc =>
-      'Todo permanece en tu teléfono. No se envía ningún dato y no hace falta ninguna cuenta.';
+      'Todo se queda en tu teléfono. Sin datos enviados, sin cuenta.';
 
   @override
   String get onbReminderTitle => 'Programa tu primer recordatorio';
 
   @override
   String get onbReminderIntro =>
-      'Un pequeño aviso diario es la mejor forma de mantener tu racha. Elige un momento tranquilo del día; siempre podrás añadir más o cambiarlos luego en los ajustes.';
+      'Un pequeño recordatorio diario mantiene tu racha. Elige un momento tranquilo: podrás cambiarlo.';
 
   @override
   String get onbReminderTip =>
-      'Consejo: vincula tu recordatorio a un hábito que ya tengas, como después del café de la mañana o antes de dormir.';
+      'Consejo: enlázalo con un hábito, como el café de la mañana o antes de dormir.';
 
   @override
   String get onbReminderFinish => 'Finalizar';

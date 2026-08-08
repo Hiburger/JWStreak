@@ -9,6 +9,8 @@ import '../services/app_lock_service.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
+import '../theme/app_icons.dart';
+import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
@@ -49,6 +51,8 @@ class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
     required this.currentThemePreference,
     required this.onThemePreferenceChanged,
+    required this.currentAppSkin,
+    required this.onAppSkinChanged,
     required this.notificationService,
     this.useDynamicColor = false,
     this.onUseDynamicColorChanged,
@@ -59,6 +63,8 @@ class SettingsScreen extends StatefulWidget {
 
   final ThemePreference currentThemePreference;
   final Future<void> Function(ThemePreference value) onThemePreferenceChanged;
+  final AppSkin currentAppSkin;
+  final Future<void> Function(AppSkin value)? onAppSkinChanged;
   final NotificationService notificationService;
   final bool useDynamicColor;
   final Future<void> Function(bool value)? onUseDynamicColorChanged;
@@ -73,6 +79,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   late ThemePreference _selectedTheme;
+  late AppSkin _selectedSkin;
   late bool _useDynamicColor;
   late String? _selectedLocaleCode;
   bool? _notificationsEnabled;
@@ -152,6 +159,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     super.initState();
     _selectedTheme = widget.currentThemePreference;
+    _selectedSkin = widget.currentAppSkin;
     _useDynamicColor = widget.useDynamicColor;
     _selectedLocaleCode = widget.currentLocaleCode;
     _loadMetadata();
@@ -209,6 +217,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
     try {
       await widget.onThemePreferenceChanged(preference);
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      _showError(error);
+    }
+  }
+
+  Future<void> _changeSkin(AppSkin skin) async {
+    final Future<void> Function(AppSkin value)? callback =
+        widget.onAppSkinChanged;
+    if (callback == null) {
+      return;
+    }
+    setState(() {
+      _selectedSkin = skin;
+    });
+    try {
+      await callback(skin);
     } catch (error) {
       if (!mounted) {
         return;
@@ -473,33 +500,99 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Card.filled(
               shape: sectionShape,
               child: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: ThemePreference.values
-                      .map(
-                        (ThemePreference preference) => ChoiceChip(
-                          shape: chipShape,
-                          label: Text(preference.label(context)),
-                          selected: _selectedTheme == preference,
-                          selectedColor: cs.primary,
-                          checkmarkColor: cs.onPrimary,
-                          labelStyle: TextStyle(
-                            color: _selectedTheme == preference
-                                ? cs.onPrimary
-                                : cs.onSurface,
-                            fontWeight: FontWeight.w600,
+                padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      l10n.settingsThemeStyle,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // A named list of styles tells you nothing — "Parchment"
+                    // could be anything. Each one paints itself instead, so
+                    // the choice is made by looking rather than by guessing
+                    // and then undoing.
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: AppSkin.values
+                          .map(
+                            (AppSkin skin) => _SkinSwatch(
+                              skin: skin,
+                              selected: _selectedSkin == skin,
+                              onTap: widget.onAppSkinChanged == null
+                                  ? null
+                                  : () => _changeSkin(skin),
+                            ),
+                          )
+                          .toList(growable: false),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      l10n.settingsThemeBrightness,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: ThemePreference.values
+                          .map(
+                            (ThemePreference preference) => ChoiceChip(
+                              shape: chipShape,
+                              label: Text(preference.label(context)),
+                              selected: _selectedTheme == preference,
+                              selectedColor: cs.primary,
+                              checkmarkColor: cs.onPrimary,
+                              labelStyle: TextStyle(
+                                color: _selectedTheme == preference
+                                    ? cs.onPrimary
+                                    : cs.onSurface,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              side: BorderSide(
+                                color: _selectedTheme == preference
+                                    ? cs.primary
+                                    : cs.outlineVariant,
+                              ),
+                              // A dark-only style overrides this anyway, so
+                              // the chips go inert rather than silently
+                              // accepting a choice that changes nothing.
+                              onSelected: _selectedSkin.forcesDark
+                                  ? null
+                                  : (_) => _changeTheme(preference),
+                            ),
+                          )
+                          .toList(growable: false),
+                    ),
+                    if (_selectedSkin.forcesDark) ...<Widget>[
+                      const SizedBox(height: 10),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(
+                            Icons.info_outline,
+                            size: 16,
+                            color: cs.onSurfaceVariant,
                           ),
-                          side: BorderSide(
-                            color: _selectedTheme == preference
-                                ? cs.primary
-                                : cs.outlineVariant,
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              l10n.settingsThemeStyleDarkOnly,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(color: cs.onSurfaceVariant),
+                            ),
                           ),
-                          onSelected: (_) => _changeTheme(preference),
-                        ),
-                      )
-                      .toList(growable: false),
+                        ],
+                      ),
+                    ],
+                    const SizedBox(height: 8),
+                  ],
                 ),
               ),
             ),
@@ -515,12 +608,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: SwitchListTile(
                   title: Text(l10n.settingsDynamicColor),
                   subtitle: Text(
-                    _useDynamicColor
+                    // A style *is* a palette, so wallpaper colors and a skin
+                    // would be two settings fighting over the same pixels —
+                    // say why it's off rather than just greying it out.
+                    !_selectedSkin.supportsDynamicColor
+                        ? l10n.settingsDynamicColorClassicOnly
+                        : _useDynamicColor
                         ? l10n.settingsDynamicColorOn
                         : l10n.settingsDynamicColorOff,
                   ),
-                  value: _useDynamicColor,
-                  onChanged: widget.onUseDynamicColorChanged == null
+                  value: _useDynamicColor && _selectedSkin.supportsDynamicColor,
+                  onChanged:
+                      widget.onUseDynamicColorChanged == null ||
+                          !_selectedSkin.supportsDynamicColor
                       ? null
                       : _changeUseDynamicColor,
                 ),
@@ -862,6 +962,119 @@ class _LocaleSwitchLoadingScreen extends StatelessWidget {
             strokeWidth: 6,
             constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// One entry in the style gallery: a miniature of the app painted in that
+/// skin's own palette and drawn with that skin's own icons.
+///
+/// Names alone don't carry a theme — "Parchment" could be anything, and
+/// picking blind means applying a style just to see it and then undoing it.
+/// Rendering each option in its own colors makes the choice a glance instead
+/// of a trial run.
+class _SkinSwatch extends StatelessWidget {
+  const _SkinSwatch({
+    required this.skin,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final AppSkin skin;
+  final bool selected;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+    // Asks for the current brightness so the previews sit consistently next
+    // to the live UI; a dark-only skin ignores that and hands back its dark
+    // palette anyway, which is exactly what it'll look like once picked.
+    final ColorScheme preview = skin.scheme(theme.brightness);
+    final AppIcons icons = skin.icons;
+
+    return Semantics(
+      selected: selected,
+      button: true,
+      label: skin.label(context),
+      child: SizedBox(
+        width: 96,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Material(
+              color: preview.surface,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(
+                  color: selected ? cs.primary : cs.outlineVariant,
+                  width: selected ? 2 : 1,
+                ),
+              ),
+              child: InkWell(
+                onTap: onTap,
+                child: SizedBox(
+                  height: 62,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      // Stands in for the app bar, so the miniature reads as
+                      // a screen rather than as an abstract color chip.
+                      Container(height: 16, color: preview.primary),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Icon(icons.flame, size: 16, color: preview.primary),
+                            Icon(
+                              icons.book,
+                              size: 16,
+                              color: preview.secondary,
+                            ),
+                            Icon(icons.star, size: 16, color: preview.tertiary),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            // Fixed height so a two-line name ("Coucher de soleil") doesn't
+            // shove its row of swatches out of alignment with the others.
+            SizedBox(
+              height: 32,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  if (selected) ...<Widget>[
+                    Icon(Icons.check_rounded, size: 14, color: cs.primary),
+                    const SizedBox(width: 2),
+                  ],
+                  Flexible(
+                    child: Text(
+                      skin.label(context),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: selected
+                            ? FontWeight.w700
+                            : FontWeight.w500,
+                        color: selected ? cs.primary : cs.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

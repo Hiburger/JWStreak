@@ -21,6 +21,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themeOled => 'OLED Dark';
 
   @override
+  String get settingsThemeStyle => 'Style';
+
+  @override
+  String get settingsThemeBrightness => 'Brightness';
+
+  @override
+  String get settingsThemeStyleDarkOnly => 'This style is always dark.';
+
+  @override
+  String get settingsDynamicColorClassicOnly =>
+      'Available with the Classic style only';
+
+  @override
+  String get themeSkinClassic => 'Classic';
+
+  @override
+  String get themeSkinMatrix => 'Matrix';
+
+  @override
+  String get themeSkinParchment => 'Parchment';
+
+  @override
+  String get themeSkinOcean => 'Ocean';
+
+  @override
+  String get themeSkinSunset => 'Sunset';
+
+  @override
+  String get themeSkinForest => 'Forest';
+
+  @override
+  String get themeSkinAmethyst => 'Amethyst';
+
+  @override
   String get noteUntitled => 'Untitled';
 
   @override
@@ -966,6 +1000,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeWriteNoteSubtitle => 'Keep your reflections';
+
+  @override
+  String get homeWriteReflectionButton => 'Write a reflection';
 
   @override
   String get homeMyNotesTitle => 'My notes';

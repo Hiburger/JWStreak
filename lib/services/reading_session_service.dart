@@ -27,9 +27,18 @@ class ReadingSessionService with WidgetsBindingObserver {
 
   final NotificationService _notifications = NotificationService();
 
+  /// How long the user has to have actually been away before a return counts
+  /// as "back from reading" and prompts to mark the chapter read. Below
+  /// this, the pause/resume was too quick to have been real reading — a
+  /// stray tap, the launcher animation bouncing straight back, or someone
+  /// just checking what "Open" does — so the session quietly ends instead of
+  /// asking "finished already?" over something that lasted five seconds.
+  static const Duration _minimumAwayDuration = Duration(seconds: 10);
+
   ReadingSession? _active;
   void Function(ReadingSession session)? _onReturn;
   bool _leftApp = false;
+  DateTime? _leftAppAt;
 
   /// Whether a chapter is currently open elsewhere.
   bool get isActive => _active != null;
@@ -55,6 +64,7 @@ class ReadingSessionService with WidgetsBindingObserver {
     _active = ReadingSession(book: book, chapter: chapter);
     _onReturn = onReturn;
     _leftApp = false;
+    _leftAppAt = null;
     await _notifications.startReadingSession(title: title, body: body);
   }
 
@@ -68,6 +78,7 @@ class ReadingSessionService with WidgetsBindingObserver {
     _active = null;
     _onReturn = null;
     _leftApp = false;
+    _leftAppAt = null;
     await _notifications.endReadingSession();
   }
 
@@ -84,6 +95,10 @@ class ReadingSessionService with WidgetsBindingObserver {
       // is just this app regaining focus (a permission dialog closing, say)
       // and must not be read as the user having finished reading.
       _leftApp = true;
+      // paused then hidden (or vice versa) can both fire for the same trip
+      // out — keep the first timestamp so a second event doesn't shrink how
+      // long they were actually away.
+      _leftAppAt ??= DateTime.now();
       return;
     }
 
@@ -91,14 +106,25 @@ class ReadingSessionService with WidgetsBindingObserver {
       return;
     }
 
+    final DateTime? leftAppAt = _leftAppAt;
+    final bool wasAwayLongEnough =
+        leftAppAt != null &&
+        DateTime.now().difference(leftAppAt) >= _minimumAwayDuration;
+
     final void Function(ReadingSession session)? onReturn = _onReturn;
     WidgetsBinding.instance.removeObserver(this);
     _active = null;
     _onReturn = null;
     _leftApp = false;
+    _leftAppAt = null;
     // Fire-and-forget: the notification is gone either way, and the caller's
     // prompt shouldn't wait on the platform channel.
     _notifications.endReadingSession();
-    onReturn?.call(session);
+    // A round trip shorter than this can't have been real reading — a stray
+    // tap, or the OS bouncing straight back — so it ends quietly instead of
+    // asking "finished already?" about something that lasted a few seconds.
+    if (wasAwayLongEnough) {
+      onReturn?.call(session);
+    }
   }
 }

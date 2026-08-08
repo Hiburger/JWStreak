@@ -6,6 +6,7 @@ import '../achievements_data.dart';
 import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
+import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 
 class ReminderSettings {
@@ -901,6 +902,18 @@ class LocalDbService {
     return themePreferenceFromStorage(rawValue);
   }
 
+  /// The visual style (palette + signature icons + typeface), independent of
+  /// the light/dark preference above.
+  Future<void> saveAppSkin(AppSkin skin) async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'app_skin', skin.storageValue);
+  }
+
+  Future<AppSkin> getAppSkin() async {
+    final Database db = await _getDb();
+    return appSkinFromStorage(await _getSetting(db, 'app_skin'));
+  }
+
   Future<void> saveUseDynamicColor(bool value) async {
     final Database db = await _getDb();
     await db.insert('settings', <String, Object>{
@@ -1219,6 +1232,22 @@ class LocalDbService {
     return rows.map((Map<String, Object?> r) => r['id'] as String).toSet();
   }
 
+  /// How many achievements were unlocked the last time the achievements
+  /// screen was actually opened — compared against the current unlocked
+  /// count, this is what decides whether the trophy icon gets a "new" dot.
+  /// A count rather than the id set: simpler, and the badge only needs to
+  /// know "is there something to see," not which ones.
+  Future<void> saveAchievementsSeenCount(int count) async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'achievements_seen_count', '$count');
+  }
+
+  Future<int> getAchievementsSeenCount() async {
+    final Database db = await _getDb();
+    final String? value = await _getSetting(db, 'achievements_seen_count');
+    return int.tryParse(value ?? '') ?? 0;
+  }
+
   /// Records that the user found the given secret (see [kEasterEggIds]).
   /// Idempotent — retriggering an already-found egg is a no-op.
   Future<void> markEasterEggFound(String id) async {
@@ -1255,7 +1284,9 @@ class LocalDbService {
     // of one round-trip at a time — Future.value wraps an already-known
     // value so it lines up with the rest of the list without an extra query.
     final List<dynamic> fetched = await Future.wait<dynamic>(<Future<dynamic>>[
-      readKeys != null ? Future<Set<String>>.value(readKeys) : getReadChapterKeys(),
+      readKeys != null
+          ? Future<Set<String>>.value(readKeys)
+          : getReadChapterKeys(),
       quizResults != null
           ? Future<Map<String, QuizResult>>.value(quizResults)
           : getAllQuizResults(),

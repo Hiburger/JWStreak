@@ -21,6 +21,40 @@ class AppLocalizationsRu extends AppLocalizations {
   String get themeOled => 'Тёмная OLED';
 
   @override
+  String get settingsThemeStyle => 'Стиль';
+
+  @override
+  String get settingsThemeBrightness => 'Яркость';
+
+  @override
+  String get settingsThemeStyleDarkOnly => 'Этот стиль всегда тёмный.';
+
+  @override
+  String get settingsDynamicColorClassicOnly =>
+      'Доступно только со стилем «Классический»';
+
+  @override
+  String get themeSkinClassic => 'Классический';
+
+  @override
+  String get themeSkinMatrix => 'Матрица';
+
+  @override
+  String get themeSkinParchment => 'Пергамент';
+
+  @override
+  String get themeSkinOcean => 'Океан';
+
+  @override
+  String get themeSkinSunset => 'Закат';
+
+  @override
+  String get themeSkinForest => 'Лес';
+
+  @override
+  String get themeSkinAmethyst => 'Аметист';
+
+  @override
   String get noteUntitled => 'Без названия';
 
   @override
@@ -637,14 +671,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get reminderEditTime => 'Изменить время';
 
   @override
-  String get reminderDailyTextTitle => 'Текст дня';
+  String get reminderDailyTextTitle => 'Писание дня';
 
   @override
   String get reminderDailyTextSubtitle =>
       'Дополнительно: мягкое напоминание о тексте дня на jw.org.';
 
   @override
-  String get notifDailyTextTitle => 'JW Streak · Текст дня';
+  String get notifDailyTextTitle => 'JW Streak · Писание дня';
 
   @override
   String get notifDailyTextBody => 'Текст дня ждёт вас на jw.org.';
@@ -959,7 +993,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeBibleBrowsed => 'Библия просмотрена';
 
   @override
-  String get homeDailyTextTitle => 'Текст дня';
+  String get homeDailyTextTitle => 'Писание дня';
 
   @override
   String get homeDailyTextSubtitle => 'Мысль на сегодня';
@@ -969,6 +1003,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeWriteNoteSubtitle => 'Сохрани свои размышления';
+
+  @override
+  String get homeWriteReflectionButton => 'Написать размышление';
 
   @override
   String get homeMyNotesTitle => 'Мои заметки';

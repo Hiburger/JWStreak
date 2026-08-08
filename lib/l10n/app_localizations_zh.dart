@@ -21,6 +21,39 @@ class AppLocalizationsZh extends AppLocalizations {
   String get themeOled => 'OLED 深色';
 
   @override
+  String get settingsThemeStyle => '风格';
+
+  @override
+  String get settingsThemeBrightness => '亮度';
+
+  @override
+  String get settingsThemeStyleDarkOnly => '此风格始终为深色。';
+
+  @override
+  String get settingsDynamicColorClassicOnly => '仅适用于经典风格';
+
+  @override
+  String get themeSkinClassic => '经典';
+
+  @override
+  String get themeSkinMatrix => '黑客帝国';
+
+  @override
+  String get themeSkinParchment => '羊皮纸';
+
+  @override
+  String get themeSkinOcean => '海洋';
+
+  @override
+  String get themeSkinSunset => '日落';
+
+  @override
+  String get themeSkinForest => '森林';
+
+  @override
+  String get themeSkinAmethyst => '紫水晶';
+
+  @override
   String get noteUntitled => '无标题';
 
   @override
@@ -921,6 +954,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeWriteNoteSubtitle => '记录你的思考';
+
+  @override
+  String get homeWriteReflectionButton => '写下感想';
 
   @override
   String get homeMyNotesTitle => '我的笔记';

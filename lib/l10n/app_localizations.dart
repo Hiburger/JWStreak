@@ -136,6 +136,72 @@ abstract class AppLocalizations {
   /// **'OLED Dark'**
   String get themeOled;
 
+  /// No description provided for @settingsThemeStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Style'**
+  String get settingsThemeStyle;
+
+  /// No description provided for @settingsThemeBrightness.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness'**
+  String get settingsThemeBrightness;
+
+  /// No description provided for @settingsThemeStyleDarkOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'This style is always dark.'**
+  String get settingsThemeStyleDarkOnly;
+
+  /// No description provided for @settingsDynamicColorClassicOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Available with the Classic style only'**
+  String get settingsDynamicColorClassicOnly;
+
+  /// No description provided for @themeSkinClassic.
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get themeSkinClassic;
+
+  /// No description provided for @themeSkinMatrix.
+  ///
+  /// In en, this message translates to:
+  /// **'Matrix'**
+  String get themeSkinMatrix;
+
+  /// No description provided for @themeSkinParchment.
+  ///
+  /// In en, this message translates to:
+  /// **'Parchment'**
+  String get themeSkinParchment;
+
+  /// No description provided for @themeSkinOcean.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get themeSkinOcean;
+
+  /// No description provided for @themeSkinSunset.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunset'**
+  String get themeSkinSunset;
+
+  /// No description provided for @themeSkinForest.
+  ///
+  /// In en, this message translates to:
+  /// **'Forest'**
+  String get themeSkinForest;
+
+  /// No description provided for @themeSkinAmethyst.
+  ///
+  /// In en, this message translates to:
+  /// **'Amethyst'**
+  String get themeSkinAmethyst;
+
   /// No description provided for @noteUntitled.
   ///
   /// In en, this message translates to:
@@ -1821,6 +1887,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep your reflections'**
   String get homeWriteNoteSubtitle;
+
+  /// No description provided for @homeWriteReflectionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a reflection'**
+  String get homeWriteReflectionButton;
 
   /// No description provided for @homeMyNotesTitle.
   ///

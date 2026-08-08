@@ -4,7 +4,20 @@ import '../achievements_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../widgets/circular_back_button.dart';
+import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
+
+/// One accent per category rather than per individual achievement — 21
+/// distinct colors would stop reading as "grouped" and start reading as
+/// random. Reuses the same palette onboarding and the home screen's quick
+/// actions already use, so a color means the same thing everywhere it shows
+/// up instead of every screen inventing its own.
+OnboardingAccent _accentFor(AchievementCategory category) => switch (category) {
+  AchievementCategory.reading => kAccentBlue,
+  AchievementCategory.quizzes => kAccentAmber,
+  AchievementCategory.streak => kAccentOrange,
+  AchievementCategory.other => kAccentPurple,
+};
 
 /// Localized title/description for one achievement id. Kept separate from
 /// [kAchievementDefs] since that list is plain data (no BuildContext).
@@ -282,6 +295,17 @@ class _AchievementTile extends StatelessWidget {
     final int? goal = def.goal;
     final int? progress = def.progress?.call(stats);
 
+    final OnboardingAccent accent = _accentFor(def.category);
+    // Locked stays the neutral grey/padlock treatment — the category color
+    // is part of what unlocking actually earns, same as the star-reward
+    // badge dimming until then.
+    final Color iconBackground = unlocked
+        ? accent.background(context)
+        : cs.surfaceContainerHighest;
+    final Color iconForeground = unlocked
+        ? accent.foreground(context)
+        : cs.onSurfaceVariant;
+
     return Card.filled(
       margin: const EdgeInsets.only(bottom: 10),
       // Matches the trophy banner above — Material 3's own Card default
@@ -298,14 +322,17 @@ class _AchievementTile extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: unlocked
-                    ? cs.tertiaryContainer
-                    : cs.surfaceContainerHighest,
+                color: iconBackground,
                 borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: unlocked
+                      ? iconForeground.withValues(alpha: 0.25)
+                      : cs.outlineVariant,
+                ),
               ),
               child: Icon(
                 unlocked ? def.icon : Icons.lock_outline,
-                color: unlocked ? cs.onTertiaryContainer : cs.onSurfaceVariant,
+                color: iconForeground,
                 size: 22,
               ),
             ),

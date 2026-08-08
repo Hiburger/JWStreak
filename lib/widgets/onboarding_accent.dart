@@ -62,3 +62,13 @@ const OnboardingAccent kAccentPurple = OnboardingAccent(
   darkBg: Color(0xFF48305F),
   darkFg: Color(0xFFE4C9FA),
 );
+
+/// Matches the deepOrange used for the streak flame elsewhere (home screen's
+/// stat tile, the "streak fire" easter egg) — for streak achievements, so
+/// the color means the same thing wherever it shows up.
+const OnboardingAccent kAccentOrange = OnboardingAccent(
+  lightBg: Color(0xFFFFDBC7),
+  lightFg: Color(0xFF8A3900),
+  darkBg: Color(0xFF6B3300),
+  darkFg: Color(0xFFFFB88A),
+);

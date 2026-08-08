@@ -21,6 +21,40 @@ class AppLocalizationsDe extends AppLocalizations {
   String get themeOled => 'OLED-Dunkel';
 
   @override
+  String get settingsThemeStyle => 'Stil';
+
+  @override
+  String get settingsThemeBrightness => 'Helligkeit';
+
+  @override
+  String get settingsThemeStyleDarkOnly => 'Dieser Stil ist immer dunkel.';
+
+  @override
+  String get settingsDynamicColorClassicOnly =>
+      'Nur mit dem Stil „Klassisch“ verfügbar';
+
+  @override
+  String get themeSkinClassic => 'Klassisch';
+
+  @override
+  String get themeSkinMatrix => 'Matrix';
+
+  @override
+  String get themeSkinParchment => 'Pergament';
+
+  @override
+  String get themeSkinOcean => 'Ozean';
+
+  @override
+  String get themeSkinSunset => 'Sonnenuntergang';
+
+  @override
+  String get themeSkinForest => 'Wald';
+
+  @override
+  String get themeSkinAmethyst => 'Amethyst';
+
+  @override
   String get noteUntitled => 'Ohne Titel';
 
   @override
@@ -642,14 +676,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get reminderEditTime => 'Uhrzeit ändern';
 
   @override
-  String get reminderDailyTextTitle => 'Tagestext';
+  String get reminderDailyTextTitle => 'Schriftwort des Tages';
 
   @override
   String get reminderDailyTextSubtitle =>
       'Als kleines Extra: eine sanfte Erinnerung an den Tagestext auf jw.org.';
 
   @override
-  String get notifDailyTextTitle => 'JW Streak · Tagestext';
+  String get notifDailyTextTitle => 'JW Streak · Schriftwort des Tages';
 
   @override
   String get notifDailyTextBody => 'Der Tagestext wartet auf jw.org.';
@@ -964,7 +998,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeBibleBrowsed => 'Bibel gelesen';
 
   @override
-  String get homeDailyTextTitle => 'Tagestext';
+  String get homeDailyTextTitle => 'Schriftwort des Tages';
 
   @override
   String get homeDailyTextSubtitle => 'Der Gedanke für heute';
@@ -974,6 +1008,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get homeWriteNoteSubtitle => 'Halte deine Gedanken fest';
+
+  @override
+  String get homeWriteReflectionButton => 'Reflexion schreiben';
 
   @override
   String get homeMyNotesTitle => 'Meine Notizen';

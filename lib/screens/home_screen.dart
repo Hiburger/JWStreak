@@ -13,10 +13,13 @@ import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../services/reading_session_service.dart';
+import '../theme/app_icons.dart';
+import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/guided_tour.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
 import '../widgets/tap_easter_egg.dart';
 import 'achievements_screen.dart';
@@ -35,6 +38,8 @@ class HomeScreen extends StatefulWidget {
     this.skipBootstrap = false,
     this.currentThemePreference = ThemePreference.system,
     this.onThemePreferenceChanged,
+    this.currentAppSkin = AppSkin.classic,
+    this.onAppSkinChanged,
     this.useDynamicColor = false,
     this.onUseDynamicColorChanged,
     this.currentLocaleCode,
@@ -44,6 +49,8 @@ class HomeScreen extends StatefulWidget {
   final bool skipBootstrap;
   final ThemePreference currentThemePreference;
   final Future<void> Function(ThemePreference value)? onThemePreferenceChanged;
+  final AppSkin currentAppSkin;
+  final Future<void> Function(AppSkin value)? onAppSkinChanged;
   final bool useDynamicColor;
   final Future<void> Function(bool value)? onUseDynamicColorChanged;
 
@@ -86,6 +93,18 @@ class _HomeScreenState extends State<HomeScreen> {
   // for it again.
   _ChapterRef? _nextChapter;
   Checkpoint? _pendingCheckpoint;
+
+  /// Set the moment "Open" is tapped for the chapter on the reading card, so
+  /// "Mark as read" can stay disabled until the user has actually gone to
+  /// read it at least once. Compared against [_nextChapter] rather than kept
+  /// as a bare bool: once that chapter changes (marked read, or a fresh
+  /// unread one loads), the comparison naturally fails again without any
+  /// extra reset logic.
+  String? _openedChapterKey;
+
+  /// Whether an achievement unlocked since the achievements screen was last
+  /// actually opened — what puts the small dot on the trophy icon.
+  bool _hasNewAchievement = false;
 
   // Targets for the guided tour. Adding a step is just: declare a key here,
   // attach it below, and add one entry to _tourSteps().
@@ -277,6 +296,10 @@ class _HomeScreenState extends State<HomeScreen> {
     // alone, while what's shown on the home screen is everything earned.
     final int displayedStars =
         totalStars + achievementBonusStars(unlockedAchievementIds);
+    final int achievementsSeenCount = await _dbService
+        .getAchievementsSeenCount();
+    final bool hasNewAchievement =
+        unlockedAchievementIds.length > achievementsSeenCount;
 
     if (!mounted) {
       return;
@@ -318,6 +341,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _readKeys = readKeys;
       _completedQuiz = completedQuiz;
       _totalStars = displayedStars;
+      _hasNewAchievement = hasNewAchievement;
       _isLoading = false;
       _recomputeDerived();
     });
@@ -402,6 +426,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// Opens a chapter in JW Library (or on jw.org) and puts up the ongoing
   /// reading-session notification, which stays until the user comes back.
+  ///
+  /// Deliberately doesn't touch [_openedChapterKey] itself — that only
+  /// flips once the user is actually back (see [_promptMarkRead]). Enabling
+  /// it here, the instant Open is tapped, meant the button visibly changed
+  /// right on this screen in the sliver of time before the OS finished
+  /// switching to JW Library, which read as a glitch rather than a feature.
   Future<void> _launchChapter(String book, int chapter) async {
     final String languageCode = Localizations.localeOf(context).languageCode;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -432,6 +462,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) {
       return;
     }
+    // This is the actual "they're back" signal — see the note on
+    // _launchChapter for why the reading card's "Mark as read" waits for
+    // this instead of unlocking the moment Open was tapped.
+    setState(() {
+      _openedChapterKey = bibleChapterKey(session.book, session.chapter);
+    });
     // It may already have been marked while they were away — from the Bible
     // browser, or by tapping "Mark as read" before opening it.
     if (_readKeys.contains(bibleChapterKey(session.book, session.chapter))) {
@@ -448,7 +484,29 @@ class _HomeScreenState extends State<HomeScreen> {
           context: context,
           builder: (BuildContext dialogContext) => AlertDialog(
             title: Text(l10n.readingSessionDoneTitle(reference)),
-            content: Text(l10n.readingSessionDoneBody),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(l10n.readingSessionDoneBody),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  onPressed: () {
+                    // Pops as "not yet" rather than "read": writing a
+                    // reflection isn't the same as confirming the chapter
+                    // was actually finished, so it shouldn't silently mark it
+                    // read on the way there.
+                    Navigator.of(dialogContext).pop(false);
+                    _openNotesEditor(
+                      book: session.book,
+                      chapter: session.chapter,
+                    );
+                  },
+                  icon: Icon(AppIcons.of(context).notes, size: 18),
+                  label: Text(l10n.homeWriteReflectionButton),
+                ),
+              ],
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(dialogContext).pop(false),
@@ -598,20 +656,24 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _openNotesEditor() async {
-    // No noteId: opens the editor on a brand-new note. Linked to today's
-    // chapter (the same one shown on the "continue reading" card) rather
-    // than always Genesis 1 — a note written from the home screen should be
-    // about whatever the user is actually reading, not a hardcoded default.
-    // Only falls back to Genesis 1 when the whole Bible is already read,
-    // since there's no "next chapter" left to attach it to at that point.
+  /// No noteId: opens the editor on a brand-new note. Defaults to today's
+  /// chapter (the same one shown on the "continue reading" card) rather than
+  /// always Genesis 1 — a note written from the home screen should be about
+  /// whatever the user is actually reading, not a hardcoded default. Only
+  /// falls back to Genesis 1 when the whole Bible is already read, since
+  /// there's no "next chapter" left to attach it to at that point.
+  ///
+  /// [book]/[chapter] let a caller link the note to a specific reading
+  /// instead — the "write a reflection" prompt shown after a reading session
+  /// needs that chapter, not whatever is next once it's marked read.
+  Future<void> _openNotesEditor({String? book, int? chapter}) async {
     final _ChapterRef? current = _nextChapter;
     final bool? changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
         builder: (_) => NotesScreen(
           dbService: _dbService,
-          book: current?.book.id ?? kDefaultBook,
-          chapter: current?.chapter ?? kDefaultChapter,
+          book: book ?? current?.book.id ?? kDefaultBook,
+          chapter: chapter ?? current?.chapter ?? kDefaultChapter,
         ),
       ),
     );
@@ -626,6 +688,15 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (_) => AchievementsScreen(dbService: _dbService),
       ),
     );
+    if (!mounted) {
+      return;
+    }
+    // Whatever's unlocked now has been seen — clears the trophy's dot even
+    // if nothing else on the dashboard changed.
+    final Set<String> unlockedIds = await _dbService
+        .getUnlockedAchievementIds();
+    await _dbService.saveAchievementsSeenCount(unlockedIds.length);
+    await _refreshDashboard();
   }
 
   Future<void> _openStreakDetail() async {
@@ -669,6 +740,8 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (_) => SettingsScreen(
           currentThemePreference: widget.currentThemePreference,
           onThemePreferenceChanged: onThemePreferenceChanged,
+          currentAppSkin: widget.currentAppSkin,
+          onAppSkinChanged: widget.onAppSkinChanged,
           useDynamicColor: widget.useDynamicColor,
           onUseDynamicColorChanged: widget.onUseDynamicColorChanged,
           currentLocaleCode: widget.currentLocaleCode,
@@ -726,7 +799,12 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             key: _tourAchievementsKey,
             onPressed: _openAchievements,
-            icon: const Icon(Icons.emoji_events_outlined),
+            icon: Badge(
+              // No label: an empty Badge renders as a small dot rather than
+              // a numbered pill — all this needs to say is "something's new".
+              isLabelVisible: _hasNewAchievement,
+              child: Icon(AppIcons.of(context).trophy),
+            ),
             tooltip: l10n.homeAchievementsTooltip,
           ),
           IconButton(
@@ -772,11 +850,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     key: _tourReadingKey,
                     reference:
                         '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
+                    canMarkRead:
+                        _openedChapterKey ==
+                        bibleChapterKey(
+                          nextChapter.book.id,
+                          nextChapter.chapter,
+                        ),
                     onOpen: () =>
                         _openChapter(nextChapter.book.id, nextChapter.chapter),
                     onMarkRead: () => _markChapterRead(
                       nextChapter.book.id,
                       nextChapter.chapter,
+                    ),
+                    onWriteReflection: () => _openNotesEditor(
+                      book: nextChapter.book.id,
+                      chapter: nextChapter.chapter,
                     ),
                   )
                 else
@@ -1123,7 +1211,11 @@ class _FreezePill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.whatshot_rounded, size: 16, color: cs.onPrimaryContainer),
+          Icon(
+            AppIcons.of(context).flame,
+            size: 16,
+            color: cs.onPrimaryContainer,
+          ),
           const SizedBox(width: 6),
           Text(
             '$freezes',
@@ -1375,8 +1467,8 @@ class _StreakBadgeState extends State<_StreakBadge>
                     },
                     child: Icon(
                       _frozen
-                          ? Icons.ac_unit_rounded
-                          : Icons.local_fire_department_rounded,
+                          ? AppIcons.of(context).frozen
+                          : AppIcons.of(context).flame,
                       size: _frozen ? 78 : 92,
                       color: Colors.white,
                     ),
@@ -1563,13 +1655,21 @@ class _ContinueReadingCard extends StatelessWidget {
   const _ContinueReadingCard({
     super.key,
     required this.reference,
+    required this.canMarkRead,
     required this.onOpen,
     required this.onMarkRead,
+    required this.onWriteReflection,
   });
 
   final String reference;
+
+  /// Whether "Open" has been tapped for this exact chapter yet — until it
+  /// has, "Mark as read" stays disabled rather than letting someone tick a
+  /// chapter off without having actually gone to read it.
+  final bool canMarkRead;
   final VoidCallback onOpen;
   final VoidCallback onMarkRead;
+  final VoidCallback onWriteReflection;
 
   @override
   Widget build(BuildContext context) {
@@ -1582,95 +1682,121 @@ class _ContinueReadingCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: cs.outlineVariant),
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onOpen,
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: cs.primaryContainer,
-                      // 44/14 is the leading-icon size used by every other
-                      // list-item card in the app (achievements, quick
-                      // actions) — matches that instead of its own one-off.
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Icon(
-                      Icons.auto_stories_outlined,
-                      color: cs.onPrimaryContainer,
-                      size: 22,
-                    ),
+      // No card-wide onTap: it used to open the chapter from anywhere on the
+      // card, but that put a tappable ancestor behind the "Mark as read"
+      // button — when that button is disabled (no tap recognizer of its
+      // own), the tap fell through to this ancestor and fired onOpen
+      // instead of doing nothing. Three explicit buttons already cover
+      // every action the card offers, so the whole-card shortcut isn't
+      // worth that failure mode.
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: cs.primaryContainer,
+                    // 44/14 is the leading-icon size used by every other
+                    // list-item card in the app (achievements, quick
+                    // actions) — matches that instead of its own one-off.
+                    borderRadius: BorderRadius.circular(14),
                   ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          l10n.homeToRead,
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: cs.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
+                  child: Icon(
+                    AppIcons.of(context).reading,
+                    color: cs.onPrimaryContainer,
+                    size: 22,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        l10n.homeToRead,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: cs.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
                         ),
-                        const SizedBox(height: 2),
-                        Text(
-                          reference,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        reference,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
                         ),
-                      ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: onOpen,
+                    icon: Icon(AppIcons.of(context).book, size: 18),
+                    // Some translations ("Segna come letto") don't fit this
+                    // half-width slot on one line at full size; scaling
+                    // down instead of wrapping keeps it on a single line
+                    // without cutting any of it off like ellipsis would.
+                    label: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(l10n.homeOpenButton, maxLines: 1),
                     ),
                   ),
-                ],
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: FilledButton.tonalIcon(
+                    // Disabled until "Open" has been tapped for this
+                    // chapter — otherwise there's nothing stopping a
+                    // chapter being ticked off without ever having been
+                    // read.
+                    onPressed: canMarkRead ? onMarkRead : null,
+                    icon: const Icon(Icons.check_circle_outline, size: 18),
+                    label: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(l10n.homeMarkReadButton, maxLines: 1),
+                    ),
+                    // The default tonal secondaryContainer pairing reads too
+                    // faint sitting on this card's own light-blue tint;
+                    // secondary/onSecondary is the same family but a solid,
+                    // higher-contrast step darker. Standard Material
+                    // disabled-state opacities (12%/38%) substitute in by
+                    // hand since a flat color here isn't state-aware on its
+                    // own the way the theme's default would be.
+                    style: FilledButton.styleFrom(
+                      backgroundColor: canMarkRead
+                          ? cs.secondary
+                          : cs.onSurface.withValues(alpha: 0.12),
+                      foregroundColor: canMarkRead
+                          ? cs.onSecondary
+                          : cs.onSurface.withValues(alpha: 0.38),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: onWriteReflection,
+                icon: Icon(AppIcons.of(context).notes, size: 18),
+                label: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(l10n.homeWriteReflectionButton, maxLines: 1),
+                ),
               ),
-              const SizedBox(height: 14),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: FilledButton.icon(
-                      onPressed: onOpen,
-                      icon: const Icon(Icons.menu_book_outlined, size: 18),
-                      // Some translations ("Segna come letto") don't fit this
-                      // half-width slot on one line at full size; scaling
-                      // down instead of wrapping keeps it on a single line
-                      // without cutting any of it off like ellipsis would.
-                      label: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(l10n.homeOpenButton, maxLines: 1),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: FilledButton.tonalIcon(
-                      onPressed: onMarkRead,
-                      icon: const Icon(Icons.check_circle_outline, size: 18),
-                      label: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(l10n.homeMarkReadButton, maxLines: 1),
-                      ),
-                      // The default tonal secondaryContainer pairing reads too
-                      // faint sitting on this card's own light-blue tint;
-                      // secondary/onSecondary is the same family but a solid,
-                      // higher-contrast step darker.
-                      style: FilledButton.styleFrom(
-                        backgroundColor: cs.secondary,
-                        foregroundColor: cs.onSecondary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -1691,7 +1817,7 @@ class _AllReadCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: <Widget>[
-            Icon(Icons.emoji_events_outlined, color: cs.onPrimaryContainer),
+            Icon(AppIcons.of(context).trophy, color: cs.onPrimaryContainer),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
@@ -1771,7 +1897,7 @@ class _StreakAtRiskBanner extends StatelessWidget {
               width: double.infinity,
               child: FilledButton.tonalIcon(
                 onPressed: onEarnFreeze,
-                icon: const Icon(Icons.whatshot_rounded, size: 18),
+                icon: Icon(AppIcons.of(context).flame, size: 18),
                 label: Text(l10n.homeEarnFreezeButton),
               ),
             ),
@@ -1838,7 +1964,7 @@ class _CheckpointBannerState extends State<_CheckpointBanner>
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(
-                  Icons.workspace_premium_rounded,
+                  AppIcons.of(context).quiz,
                   color: cs.onTertiary,
                   size: 22,
                 ),
@@ -1993,48 +2119,68 @@ class _ProgressCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: _StatTile(
-                // Matches the hero badge above: a live streak is a flame, a
-                // streak of zero is frozen rather than "still on fire at 0".
-                icon: streak > 0
-                    ? Icons.local_fire_department_rounded
-                    : Icons.ac_unit_rounded,
-                value: '$streak',
-                label: streak != 1
-                    ? l10n.homeStatStreakDaysPlural
-                    : l10n.homeStatStreakDaySingular,
-                color: streak > 0 ? cs.tertiary : Colors.lightBlue,
-                onTap: onOpenStreak,
+        // IntrinsicHeight: a plain Row doesn't stretch siblings to match each
+        // other, only to fill it in the cross axis if told to — so a label
+        // that wraps to two lines in one locale ("giorni di serie" in
+        // Italian) used to make just that tile taller than the other two
+        // instead of all three growing together.
+        IntrinsicHeight(
+          child: Row(
+            // IntrinsicHeight only makes the Row itself as tall as its
+            // tallest child — Row's own default (center) then leaves the
+            // shorter tiles floating in the middle of that height instead of
+            // filling it, which is what actually looked like a size
+            // mismatch: the tall tile flush at the top, the other two
+            // vertically centered with blank space above and below.
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: _StatTile(
+                  // Matches the hero badge above: a live streak is a flame, a
+                  // streak of zero is frozen rather than "still on fire at 0".
+                  icon: streak > 0
+                      ? AppIcons.of(context).flame
+                      : AppIcons.of(context).frozen,
+                  value: '$streak',
+                  label: streak != 1
+                      ? l10n.homeStatStreakDaysPlural
+                      : l10n.homeStatStreakDaySingular,
+                  // A literal fire color rather than cs.tertiary: this app's
+                  // seed color generates a muted mauve tertiary, nowhere
+                  // near the orange/red a flame needs to read at a glance.
+                  // deepOrange also matches the flame gradient used on the
+                  // easter-egg icon above, so the two stay in the same
+                  // family instead of picking a fresh color.
+                  color: streak > 0 ? Colors.deepOrange : Colors.lightBlue,
+                  onTap: onOpenStreak,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _StatTile(
-                icon: Icons.menu_book_rounded,
-                value: '$totalReadings',
-                label: totalReadings != 1
-                    ? l10n.homeStatReadingsPlural
-                    : l10n.homeStatReadingSingular,
-                color: cs.primary,
-                onTap: onOpenReadings,
+              const SizedBox(width: 12),
+              Expanded(
+                child: _StatTile(
+                  icon: AppIcons.of(context).book,
+                  value: '$totalReadings',
+                  label: totalReadings != 1
+                      ? l10n.homeStatReadingsPlural
+                      : l10n.homeStatReadingSingular,
+                  color: cs.primary,
+                  onTap: onOpenReadings,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: _StatTile(
-                icon: Icons.star_rounded,
-                value: '$totalStars',
-                label: totalStars != 1
-                    ? l10n.homeStatStarsPlural
-                    : l10n.homeStatStarSingular,
-                color: Colors.amber,
-                onTap: onOpenStars,
+              const SizedBox(width: 12),
+              Expanded(
+                child: _StatTile(
+                  icon: AppIcons.of(context).star,
+                  value: '$totalStars',
+                  label: totalStars != 1
+                      ? l10n.homeStatStarsPlural
+                      : l10n.homeStatStarSingular,
+                  color: Colors.amber,
+                  onTap: onOpenStars,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         const SizedBox(height: 12),
         _BibleProgressIndicator(
@@ -2156,51 +2302,66 @@ class _StatTile extends StatelessWidget {
   /// trying — so they lead somewhere instead of being flattened to look inert.
   final VoidCallback onTap;
 
+  static const BorderRadius _radius = BorderRadius.all(Radius.circular(20));
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     return Material(
-      color: cs.secondaryContainer.withValues(alpha: 0.35),
-      borderRadius: BorderRadius.circular(20),
+      color: cs.surfaceContainerHigh,
+      shape: RoundedRectangleBorder(
+        borderRadius: _radius,
+        side: BorderSide(color: cs.outlineVariant),
+      ),
+      // Clips the banner below to the card's own rounded corners — without
+      // this its top corners would be square and poke past the card's
+      // outline.
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: cs.outlineVariant),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.16),
-                  // Matches the 44/14 leading-icon convention used everywhere
-                  // else in the app (achievements, quick actions, reading card).
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: color, size: 22),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // A solid, edge-to-edge color block reads as a much clearer
+            // signal for "this tile is about fire/reading/stars" than the
+            // small 16%-tinted icon square this replaces — that washed out
+            // against the card instead of standing out.
+            Container(
+              height: 52,
+              width: double.infinity,
+              color: color,
+              alignment: Alignment.center,
+              child: Icon(icon, color: Colors.white, size: 26),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    value,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    label,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    // A step up from bodySmall and a touch heavier — same
+                    // layout, just easier to read at a glance.
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: cs.onSurfaceVariant,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                value,
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(
-                label,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: cs.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -2226,13 +2387,19 @@ class _QuickActions extends StatelessWidget {
       children: <Widget>[
         _QuickActionTile(
           icon: Icons.wb_sunny_outlined,
+          // Same palette as onboarding (OnboardingAccent) rather than a new
+          // one — these three tiles used to share one flat secondaryContainer
+          // tint, which read as one indistinct block instead of three
+          // separate actions.
+          accent: kAccentAmber,
           title: l10n.homeDailyTextTitle,
           subtitle: l10n.homeDailyTextSubtitle,
           onTap: onOpenDailyText,
         ),
         const SizedBox(height: 10),
         _QuickActionTile(
-          icon: Icons.edit_note_outlined,
+          icon: AppIcons.of(context).notes,
+          accent: kAccentTeal,
           title: l10n.homeWriteNoteTitle,
           subtitle: l10n.homeWriteNoteSubtitle,
           onTap: onWriteNote,
@@ -2240,6 +2407,7 @@ class _QuickActions extends StatelessWidget {
         const SizedBox(height: 10),
         _QuickActionTile(
           icon: Icons.menu_book_outlined,
+          accent: kAccentPurple,
           title: l10n.homeMyNotesTitle,
           subtitle: l10n.homeMyNotesSubtitle,
           onTap: onReadNotes,
@@ -2252,12 +2420,14 @@ class _QuickActions extends StatelessWidget {
 class _QuickActionTile extends StatelessWidget {
   const _QuickActionTile({
     required this.icon,
+    required this.accent,
     required this.title,
     required this.subtitle,
     required this.onTap,
   });
 
   final IconData icon;
+  final OnboardingAccent accent;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
@@ -2283,10 +2453,13 @@ class _QuickActionTile extends StatelessWidget {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                  color: cs.secondaryContainer,
+                  color: accent.background(context),
                   borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: accent.foreground(context).withValues(alpha: 0.25),
+                  ),
                 ),
-                child: Icon(icon, color: cs.onSecondaryContainer, size: 22),
+                child: Icon(icon, color: accent.foreground(context), size: 22),
               ),
               const SizedBox(width: 14),
               Expanded(

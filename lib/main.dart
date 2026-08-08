@@ -8,6 +8,7 @@ import 'screens/reminder_onboarding_screen.dart';
 import 'screens/streak_info_screen.dart';
 import 'screens/welcome_screen.dart';
 import 'services/local_db_service.dart';
+import 'theme/app_skin.dart';
 import 'theme/theme_preference.dart';
 import 'widgets/app_lock_gate.dart';
 
@@ -37,6 +38,7 @@ class DailyJwApp extends StatefulWidget {
 class _DailyJwAppState extends State<DailyJwApp> {
   final LocalDbService _dbService = LocalDbService();
   ThemePreference _themePreference = ThemePreference.system;
+  AppSkin _appSkin = AppSkin.classic;
   bool _useDynamicColor = false;
 
   /// null means "follow system language".
@@ -71,24 +73,27 @@ class _DailyJwAppState extends State<DailyJwApp> {
   Future<void> _loadThemePreference() async {
     try {
       await _dbService.initialize();
-      // These 4 reads don't depend on each other — run them concurrently
-      // instead of paying 4 separate method-channel round-trips back to
+      // These 5 reads don't depend on each other — run them concurrently
+      // instead of paying 5 separate method-channel round-trips back to
       // back, so the skeleton below is on screen as briefly as possible.
       final List<Object?> results = await Future.wait(<Future<Object?>>[
         _dbService.getThemePreference(),
         _dbService.getUseDynamicColor(),
         _dbService.getAppLocale(),
         _dbService.isOnboardingDone(),
+        _dbService.getAppSkin(),
       ]);
       final ThemePreference preference = results[0] as ThemePreference;
       final bool useDynamicColor = results[1]! as bool;
       final String? localeCode = results[2] as String?;
       final bool onboardingDone = results[3]! as bool;
+      final AppSkin skin = results[4]! as AppSkin;
       if (!mounted) {
         return;
       }
       setState(() {
         _themePreference = preference;
+        _appSkin = skin;
         _useDynamicColor = useDynamicColor;
         _localeCode = localeCode;
         _showWelcome = !onboardingDone;
@@ -212,6 +217,16 @@ class _DailyJwAppState extends State<DailyJwApp> {
     });
   }
 
+  Future<void> _updateAppSkin(AppSkin value) async {
+    await _dbService.saveAppSkin(value);
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _appSkin = value;
+    });
+  }
+
   Future<void> _updateUseDynamicColor(bool value) async {
     await _dbService.saveUseDynamicColor(value);
     if (!mounted) {
@@ -240,39 +255,50 @@ class _DailyJwAppState extends State<DailyJwApp> {
     const Widget loading = SizedBox.shrink();
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        // Material You reads the palette off the wallpaper, which is exactly
+        // what picking a skin overrides — so the wallpaper only gets a say
+        // while the (skin-less by design) Classic style is selected.
+        final bool dynamicAllowed =
+            _useDynamicColor && _appSkin.supportsDynamicColor;
         final ColorScheme lightScheme =
-            (_useDynamicColor ? lightDynamic : null) ??
-            ColorScheme.fromSeed(seedColor: const Color(0xFF2C5A87));
-        final ColorScheme defaultDark =
-            (_useDynamicColor ? darkDynamic : null) ??
-            ColorScheme.fromSeed(
-              brightness: Brightness.dark,
-              seedColor: const Color(0xFF2C5A87),
-            );
-        final ColorScheme oledDark = defaultDark.copyWith(
-          surface: Colors.black,
-          surfaceContainerHighest: const Color(0xFF111111),
-          surfaceContainerHigh: const Color(0xFF111111),
-          surfaceContainer: const Color(0xFF080808),
-          surfaceContainerLow: const Color(0xFF060606),
-          surfaceContainerLowest: Colors.black,
-        );
+            (dynamicAllowed ? lightDynamic : null) ??
+            _appSkin.scheme(Brightness.light);
+        final ColorScheme baseDark =
+            (dynamicAllowed ? darkDynamic : null) ??
+            _appSkin.scheme(Brightness.dark);
+        // OLED stays a modifier on top of whatever the skin produced rather
+        // than a palette of its own, so "true black" keeps working for every
+        // style instead of only the default one.
+        final bool oled = _themePreference == ThemePreference.oled;
+        final ColorScheme darkScheme = oled
+            ? baseDark.copyWith(
+                surface: Colors.black,
+                surfaceContainerHighest: const Color(0xFF111111),
+                surfaceContainerHigh: const Color(0xFF111111),
+                surfaceContainer: const Color(0xFF080808),
+                surfaceContainerLow: const Color(0xFF060606),
+                surfaceContainerLowest: Colors.black,
+              )
+            : baseDark;
 
-        final ThemeData lightTheme = ThemeData(
-          useMaterial3: true,
-          colorScheme: lightScheme,
-          cardTheme: const CardThemeData(clipBehavior: Clip.antiAlias),
-        );
+        ThemeData buildTheme(ColorScheme scheme, {Color? scaffoldBackground}) {
+          return ThemeData(
+            useMaterial3: true,
+            colorScheme: scheme,
+            fontFamily: _appSkin.fontFamily,
+            fontFamilyFallback: _appSkin.fontFamilyFallback,
+            scaffoldBackgroundColor: scaffoldBackground,
+            cardTheme: const CardThemeData(clipBehavior: Clip.antiAlias),
+            // Carries the skin's signature glyphs down the tree so screens
+            // ask the theme for "the streak icon" instead of hard-coding one.
+            extensions: <ThemeExtension<dynamic>>[_appSkin.icons],
+          );
+        }
 
-        final ThemeData darkTheme = ThemeData(
-          useMaterial3: true,
-          colorScheme: _themePreference == ThemePreference.oled
-              ? oledDark
-              : defaultDark,
-          scaffoldBackgroundColor: _themePreference == ThemePreference.oled
-              ? Colors.black
-              : null,
-          cardTheme: const CardThemeData(clipBehavior: Clip.antiAlias),
+        final ThemeData lightTheme = buildTheme(lightScheme);
+        final ThemeData darkTheme = buildTheme(
+          darkScheme,
+          scaffoldBackground: oled ? Colors.black : null,
         );
 
         return MaterialApp(
@@ -280,7 +306,9 @@ class _DailyJwAppState extends State<DailyJwApp> {
           title: 'JW Streak',
           theme: lightTheme,
           darkTheme: darkTheme,
-          themeMode: _themePreference.materialThemeMode,
+          themeMode: _appSkin.forcesDark
+              ? ThemeMode.dark
+              : _themePreference.materialThemeMode,
           locale: _localeCode == null ? null : Locale(_localeCode!),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -289,35 +317,37 @@ class _DailyJwAppState extends State<DailyJwApp> {
               ? loading
               : _withAppLock(
                   PopScope(
-                  // While onboarding, the system back gesture should step
-                  // backwards through the flow instead of exiting the app —
-                  // there's no Navigator route to pop since each step just
-                  // swaps the same `home` widget.
-                  canPop: !_showWelcome || _onboardingStep == 0,
-                  onPopInvokedWithResult: (bool didPop, Object? result) {
-                    if (didPop) {
-                      return;
-                    }
-                    if (_showWelcome && _onboardingStep > 0) {
-                      _goToOnboardingStep(_onboardingStep - 1);
-                    }
-                  },
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 450),
-                    switchInCurve: Curves.easeOut,
-                    switchOutCurve: Curves.easeIn,
-                    child: _showWelcome
-                        ? _buildOnboardingPageView()
-                        : HomeScreen(
-                            key: const ValueKey<String>('home'),
-                            skipBootstrap: widget.skipBootstrap,
-                            currentThemePreference: _themePreference,
-                            onThemePreferenceChanged: _updateThemePreference,
-                            useDynamicColor: _useDynamicColor,
-                            onUseDynamicColorChanged: _updateUseDynamicColor,
-                            currentLocaleCode: _localeCode,
-                            onLocaleChanged: _updateLocale,
-                          ),
+                    // While onboarding, the system back gesture should step
+                    // backwards through the flow instead of exiting the app —
+                    // there's no Navigator route to pop since each step just
+                    // swaps the same `home` widget.
+                    canPop: !_showWelcome || _onboardingStep == 0,
+                    onPopInvokedWithResult: (bool didPop, Object? result) {
+                      if (didPop) {
+                        return;
+                      }
+                      if (_showWelcome && _onboardingStep > 0) {
+                        _goToOnboardingStep(_onboardingStep - 1);
+                      }
+                    },
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 450),
+                      switchInCurve: Curves.easeOut,
+                      switchOutCurve: Curves.easeIn,
+                      child: _showWelcome
+                          ? _buildOnboardingPageView()
+                          : HomeScreen(
+                              key: const ValueKey<String>('home'),
+                              skipBootstrap: widget.skipBootstrap,
+                              currentThemePreference: _themePreference,
+                              onThemePreferenceChanged: _updateThemePreference,
+                              currentAppSkin: _appSkin,
+                              onAppSkinChanged: _updateAppSkin,
+                              useDynamicColor: _useDynamicColor,
+                              onUseDynamicColorChanged: _updateUseDynamicColor,
+                              currentLocaleCode: _localeCode,
+                              onLocaleChanged: _updateLocale,
+                            ),
                     ),
                   ),
                 ),
@@ -334,7 +364,10 @@ class _DailyJwAppState extends State<DailyJwApp> {
   /// German, purely by being alphabetically first, was the fallback for every
   /// unsupported language. A device set to Japanese got a German UI. English
   /// is the sane fallback instead.
-  Locale? _resolveLocale(List<Locale>? deviceLocales, Iterable<Locale> supported) {
+  Locale? _resolveLocale(
+    List<Locale>? deviceLocales,
+    Iterable<Locale> supported,
+  ) {
     for (final Locale deviceLocale in deviceLocales ?? const <Locale>[]) {
       for (final Locale candidate in supported) {
         if (candidate.languageCode == deviceLocale.languageCode) {

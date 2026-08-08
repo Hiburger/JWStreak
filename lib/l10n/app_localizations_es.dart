@@ -21,6 +21,40 @@ class AppLocalizationsEs extends AppLocalizations {
   String get themeOled => 'Oscuro OLED';
 
   @override
+  String get settingsThemeStyle => 'Estilo';
+
+  @override
+  String get settingsThemeBrightness => 'Brillo';
+
+  @override
+  String get settingsThemeStyleDarkOnly => 'Este estilo siempre es oscuro.';
+
+  @override
+  String get settingsDynamicColorClassicOnly =>
+      'Solo disponible con el estilo Clásico';
+
+  @override
+  String get themeSkinClassic => 'Clásico';
+
+  @override
+  String get themeSkinMatrix => 'Matrix';
+
+  @override
+  String get themeSkinParchment => 'Pergamino';
+
+  @override
+  String get themeSkinOcean => 'Océano';
+
+  @override
+  String get themeSkinSunset => 'Atardecer';
+
+  @override
+  String get themeSkinForest => 'Bosque';
+
+  @override
+  String get themeSkinAmethyst => 'Amatista';
+
+  @override
   String get noteUntitled => 'Sin título';
 
   @override
@@ -638,14 +672,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get reminderEditTime => 'Editar hora';
 
   @override
-  String get reminderDailyTextTitle => 'Texto del día';
+  String get reminderDailyTextTitle => 'Escritura del día';
 
   @override
   String get reminderDailyTextSubtitle =>
       'Como extra, un recordatorio suave para el texto del día en jw.org.';
 
   @override
-  String get notifDailyTextTitle => 'JW Streak · Texto del día';
+  String get notifDailyTextTitle => 'JW Streak · Escritura del día';
 
   @override
   String get notifDailyTextBody => 'El texto de hoy te espera en jw.org.';
@@ -958,7 +992,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeBibleBrowsed => 'Biblia explorada';
 
   @override
-  String get homeDailyTextTitle => 'Texto del día';
+  String get homeDailyTextTitle => 'Escritura del día';
 
   @override
   String get homeDailyTextSubtitle => 'El pensamiento de hoy';
@@ -968,6 +1002,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeWriteNoteSubtitle => 'Guarda tus reflexiones';
+
+  @override
+  String get homeWriteReflectionButton => 'Escribir una reflexión';
 
   @override
   String get homeMyNotesTitle => 'Mis notas';

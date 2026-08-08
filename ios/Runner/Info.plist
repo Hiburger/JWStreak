@@ -6,7 +6,12 @@
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
-		<key>CFBundleDisplayName</key>
+		<!-- Lets the reading-session Live Activity run: without this the
+	     system refuses ActivityKit requests outright. See
+	     ios/Runner/ReadingSessionController.swift. -->
+	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>CFBundleDisplayName</key>
 		<string>JW Streak</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>

@@ -262,31 +262,30 @@ class NotificationService {
     );
   }
 
-  /// Posts the ongoing "you're reading, come back when you're done"
-  /// notification, with a chronometer counting up from now.
+  /// Puts up the "you're reading, come back when you're done" indicator, with
+  /// a timer counting up from now.
   ///
-  /// Android only: the equivalent on iOS is a Live Activity, which needs a
-  /// native widget extension rather than a local notification, so calling this
-  /// there would produce a banner that behaves nothing like the intended
-  /// thing. Silently a no-op instead of throwing — call sites shouldn't have
-  /// to platform-check something this incidental.
+  /// Three outcomes, in order of preference. Android 16 promotes it to a Live
+  /// Update — a status bar chip with the timer inside. iOS 16.2+ shows a Live
+  /// Activity on the lock screen and in the Dynamic Island. Neither is
+  /// reachable through flutter_local_notifications (the first needs a
+  /// promotion flag it doesn't expose, the second isn't a notification at
+  /// all), so both go through one native channel. Older Android falls back to
+  /// a plain ongoing notification; older iOS gets nothing, since a one-off
+  /// banner would behave nothing like the thing it's standing in for.
   Future<void> startReadingSession({
     required String title,
     required String body,
   }) async {
-    if (defaultTargetPlatform != TargetPlatform.android) {
-      return;
-    }
-    // Android 16 can promote this to a real Live Update — a chip in the
-    // status bar with the timer running inside it, rather than just a row in
-    // the shade. flutter_local_notifications can't ask for that (it builds
-    // its NotificationCompat.Builder internally and exposes no way to set
-    // the promotion), so it goes through a small native channel instead, and
-    // falls through to the plugin on anything older.
     if (await _tryShowLiveUpdate(title: title, body: body)) {
       if (kDebugMode) {
         debugPrint('NotificationService: reading session posted as Live Update');
       }
+      return;
+    }
+    // The fallback below is a notification, and only Android's is shaped like
+    // what this is standing in for.
+    if (defaultTargetPlatform != TargetPlatform.android) {
       return;
     }
     await _plugin.show(
@@ -347,10 +346,18 @@ class NotificationService {
     }
   }
 
-  /// Cancels the session notification, whichever way it went up: the native
-  /// Live Update is posted under the same id through the same
-  /// NotificationManager, so one cancel covers both paths.
+  /// Takes the session indicator down, whichever form it went up in.
+  ///
+  /// iOS needs the native call — a Live Activity isn't a notification and
+  /// nothing else ends it. Android's promoted notification is posted under
+  /// the same id through the same NotificationManager as the fallback, so
+  /// the plugin cancel below covers both of its paths.
   Future<void> endReadingSession() async {
+    try {
+      await _liveUpdateChannel.invokeMethod<void>('endReadingSession');
+    } catch (_) {
+      // No native side on this build — nothing to end.
+    }
     if (defaultTargetPlatform != TargetPlatform.android) {
       return;
     }

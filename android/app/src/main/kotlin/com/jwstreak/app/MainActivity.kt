@@ -36,6 +36,13 @@ class MainActivity : FlutterFragmentActivity() {
                     // ongoing notification when this is false.
                     result.success(posted)
                 }
+                "endReadingSession" -> {
+                    // Nothing to undo here that the Dart side doesn't already
+                    // cancel through flutter_local_notifications under the
+                    // same id — this exists so one Dart call path serves both
+                    // platforms, where iOS genuinely does need it.
+                    result.success(null)
+                }
                 else -> result.notImplemented()
             }
         }

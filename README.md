@@ -1,10 +1,10 @@
 
 # JW Streak 🫶
 
-> **Unofficial, independent project.** JW Streak is not affiliated with, endorsed by, or connected to Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal, fan-made tool that links out to JW.org / JW Library for their own content — it doesn't host, redistribute, or claim to represent that content as its own.
+> **Unofficial, independent project.** JW Streak is not affiliated with or endorsed by Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal too, mady by 2 Jehova's Witnesses, that links out to JW.org / JW Library for their own content, it does NOT host, redistribute, or claim to represent that content as its own.
 
 Hi! 
-JW Streak (JWS) is a friendly Flutter application (Android, Material 3 Expressive) that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for Jehovah’s Witnesses, anyone can use and enjoy it.
+JW Streak (JWS) is a friendly Flutter application (Android, Material 3 Expressive) that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for me and others Jehovah’s Witnesses, anyone can use and enjoy it.
 
 ## Is it safe for my faith?
 
@@ -114,16 +114,21 @@ The [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans) font is emb
 
 Hiiiii if you have something to say please do at contact@olynthe.org  
 
+## Badges  
 
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)  
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)  
+![Claude Code](https://img.shields.io/badge/Claude%20Code-D97757?style=for-the-badge&logo=claudecode&logoColor=white)  
+![MistralAI](https://img.shields.io/badge/mistralai-FA520F?style=for-the-badge&logo=mistralai&logoColor=white)  
 
-
+- - -
 
 # 🥖 Readme.md but in french 
 
 
 # JW Streak
 
-> **Projet indépendant et non officiel.** JW Streak n'est affilié à, approuvé par, ou connecté d'aucune manière aux Témoins de Jéhovah, à la Watch Tower Bible and Tract Society, ou à JW.org. C'est un outil personnel, créé par un fan, qui renvoie simplement vers JW.org / JW Library pour leur propre contenu — il ne l'héberge pas, ne le redistribue pas, et ne prétend pas le représenter.
+> **Projet indépendant et non officiel.** JW Streak n'est affilié à, ni approuvé par, les Témoins de Jéhovah, la Watch Tower Bible and Tract Society, ou à JW.org. C'est un outil personnel, créé par 2  Témoins de Jéhovah, qui renvoie simplement vers JW.org / JW Library pour leur propre contenu, il n'héberge pas, ne redistribue pas, et ne prétend pas représenter ce groupe ou organisation.
 
 Salut ! 
 JW Streak (JWS) est une application Flutter conviviale (Android, Material 3 Expressive) qui aide à maintenir une habitude de lecture quotidienne de la Bible, avec des quiz, un système de série, des succès et des notes personnelles. Tout cela **100% local, aucun compte ou serveur requis**. Bien que j'ai créé JWS pour les Témoins de Jéhovah, tout le monde peut l'utiliser et en profiter.
@@ -236,4 +241,13 @@ La police [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans) est i
 
 ## Contact
 
-Hiiiii si vous avez quelque chose à dire, veuillez le faire à contact@olynthe.org
+Hiiiii si vous avez quelque chose à dire, veuillez le faire à contact@olynthe.org 
+
+## Badges  
+
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)  
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)  
+![Claude Code](https://img.shields.io/badge/Claude%20Code-D97757?style=for-the-badge&logo=claudecode&logoColor=white)  
+![MistralAI](https://img.shields.io/badge/mistralai-FA520F?style=for-the-badge&logo=mistralai&logoColor=white)  
+
+- - -

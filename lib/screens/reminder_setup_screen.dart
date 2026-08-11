@@ -6,6 +6,7 @@ import '../services/notification_service.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/reminder_picker.dart';
+import '../widgets/time_wheel_picker.dart';
 import '../widgets/responsive_body.dart';
 
 /// Manage daily reading reminders. The user can keep several reminders at
@@ -163,9 +164,10 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen>
   }
 
   Future<void> _pickDailyTextTime() async {
-    final TimeOfDay? picked = await showTimePicker(
+    final TimeOfDay? picked = await showTimeWheelPicker(
       context: context,
       initialTime: _dailyTextTime,
+      title: AppLocalizations.of(context)!.reminderEditTime,
     );
     if (picked == null) {
       return;
@@ -175,9 +177,10 @@ class _ReminderSetupScreenState extends State<ReminderSetupScreen>
   }
 
   Future<void> _pickTime() async {
-    final TimeOfDay? picked = await showTimePicker(
+    final TimeOfDay? picked = await showTimeWheelPicker(
       context: context,
       initialTime: _picked,
+      title: AppLocalizations.of(context)!.reminderEditTime,
     );
     if (picked != null) {
       setState(() => _picked = picked);

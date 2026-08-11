@@ -55,10 +55,127 @@ class AppLocalizationsIt extends AppLocalizations {
   String get themeSkinAmethyst => 'Ametista';
 
   @override
+  String get planCanonicalTitle => 'Dall\'inizio alla fine';
+
+  @override
+  String get planCanonicalDesc =>
+      'Da Genesi a Rivelazione, nell\'ordine in cui i libri sono stampati.';
+
+  @override
+  String get planChronologicalTitle => 'Come è accaduto';
+
+  @override
+  String get planChronologicalDesc =>
+      'Più o meno l\'ordine in cui si sono svolti i fatti.';
+
+  @override
+  String get planCompletionTitle => 'Come è stato scritto';
+
+  @override
+  String get planCompletionDesc =>
+      'Più o meno l\'ordine in cui i libri sono stati completati.';
+
+  @override
+  String get planHebrewGreekTitle => 'Misto ebraico e greco';
+
+  @override
+  String get planHebrewGreekDesc =>
+      'Intreccia le Scritture Ebraiche e Greche Cristiane.';
+
+  @override
+  String get planThematicTitle => 'Per tema';
+
+  @override
+  String get planThematicDesc =>
+      'Alterna legge, storia, poesia, profezia, vangeli e lettere.';
+
+  @override
+  String get onbStartTitle => 'Da dove partiamo?';
+
+  @override
+  String get onbStartSubtitle => 'Così l\'app riprende da dove sei davvero.';
+
+  @override
+  String get onbStartQuestion => 'Hai già iniziato a leggere la Bibbia?';
+
+  @override
+  String get onbStartYes => 'Sì';
+
+  @override
+  String get onbStartNo => 'Non ancora';
+
+  @override
+  String get onbStartResumeLabel => 'Da dove vuoi riprendere?';
+
+  @override
+  String get onbStartFresh => 'Perfetto! Ti impostiamo come nuova lettura.';
+
+  @override
+  String get onbChooseToContinue => 'Scegli un\'opzione per continuare';
+
+  @override
+  String get onbPlanTitle => 'Come vuoi leggere?';
+
+  @override
+  String get onbPlanSubtitle =>
+      'C\'è più di un modo di attraversare la Bibbia. Scegli il tuo: potrai cambiarlo.';
+
+  @override
+  String get settingsReadingSection => 'Lettura';
+
+  @override
+  String get settingsReadingPlan => 'Ordine di lettura';
+
+  @override
+  String get settingsResumePoint => 'Punto di ripresa';
+
+  @override
+  String get settingsResumePointNone => 'L\'inizio del piano';
+
+  @override
+  String get settingsResumePointClear => 'Cancella';
+
+  @override
+  String get rewardChipSingular => 'chip';
+
+  @override
+  String get rewardChipsPlural => 'chip';
+
+  @override
+  String get rewardShellSingular => 'conchiglia';
+
+  @override
+  String get rewardShellsPlural => 'conchiglie';
+
+  @override
+  String get rewardSealSingular => 'sigillo';
+
+  @override
+  String get rewardSealsPlural => 'sigilli';
+
+  @override
+  String get rewardEmberSingular => 'brace';
+
+  @override
+  String get rewardEmbersPlural => 'braci';
+
+  @override
+  String get rewardAcornSingular => 'ghianda';
+
+  @override
+  String get rewardAcornsPlural => 'ghiande';
+
+  @override
+  String get rewardGemSingular => 'gemma';
+
+  @override
+  String get rewardGemsPlural => 'gemme';
+
+  @override
   String get noteUntitled => 'Senza titolo';
 
   @override
-  String get noteExportMultiTitle => 'Le mie note — JW Streak';
+  String get noteExportMultiTitle => 'Le mie note - JW Streak';
 
   @override
   String noteExportedOn(String date) {
@@ -333,7 +450,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get onbFeatureQuizDesc =>
-      'Brevi quiz si sbloccano mentre leggi. Scegli, scrivi o componi parole — e guadagna stelle.';
+      'Brevi quiz si sbloccano mentre leggi. Scegli, scrivi o componi parole, e guadagna stelle.';
 
   @override
   String get onbFeatureNotesTitle => 'Note personali';
@@ -358,7 +475,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get onbReminderTip =>
-      'Consiglio: collegalo a un\'abitudine — il caffè del mattino o prima di dormire.';
+      'Consiglio: collegalo a un\'abitudine, come il caffè del mattino o prima di dormire.';
 
   @override
   String get onbReminderFinish => 'Fine';
@@ -429,7 +546,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tourSettingsBody =>
-      'Tema, lingua, promemoria — e questo tour, se vuoi rivederlo.';
+      'Tema, lingua, promemoria, e questo tour, se vuoi rivederlo.';
 
   @override
   String get settingsReplayTour => 'Rivedi il tour guidato';
@@ -446,7 +563,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsAppLockOn =>
-      'Chiede la tua impronta, il tuo volto o il PIN prima di aprire le tue note — a meno che tu torni entro 10 minuti.';
+      'Chiede la tua impronta, il tuo volto o il PIN prima di aprire le tue note, a meno che tu torni entro 10 minuti.';
 
   @override
   String get settingsAppLockOff =>
@@ -487,7 +604,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get streakInfoSubtitle =>
-      'La tua serie cresce ogni giorno in cui resti attivo — e torna a zero se resti assente troppo a lungo.';
+      'La tua serie cresce ogni giorno in cui resti attivo, e torna a zero se resti assente troppo a lungo.';
 
   @override
   String get streakInfoRow1Title => 'Resta attivo ogni giorno';
@@ -519,6 +636,32 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Impostazioni';
+
+  @override
+  String get settingsCatPersonalization => 'Personalizzazione';
+
+  @override
+  String get settingsCatPersonalizationDesc => 'Stile, luminosità, lingua';
+
+  @override
+  String get settingsCatReadingDesc =>
+      'Ordine di lettura, punto di ripresa, apertura dei capitoli';
+
+  @override
+  String get settingsCatNotifications => 'Notifiche';
+
+  @override
+  String get settingsCatNotificationsDesc =>
+      'Autorizzazioni necessarie per i promemoria';
+
+  @override
+  String get settingsCatPrivacyDesc => 'Blocco dell\'app';
+
+  @override
+  String get settingsCatAbout => 'Aiuto e informazioni';
+
+  @override
+  String get settingsCatAboutDesc => 'Tour guidato, versione, codice sorgente';
 
   @override
   String get settingsAppearance => 'Aspetto';
@@ -556,9 +699,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsLanguageSystem => 'Sistema';
 
   @override
-  String get settingsPermissions => 'Permessi';
-
-  @override
   String get settingsNotifPermTitle => 'Permessi di notifica';
 
   @override
@@ -584,17 +724,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsExactAlarmsOff =>
       'Non consentiti. I promemoria potrebbero essere ritardati.';
-
-  @override
-  String get settingsBatteryOptimization => 'Ottimizzazione della batteria';
-
-  @override
-  String get settingsBatteryOptimizationOn =>
-      'Esente. La notifica della sessione di lettura può restare attiva.';
-
-  @override
-  String get settingsBatteryOptimizationOff =>
-      'Non esente. Il dispositivo potrebbe rimuovere quella notifica in anticipo.';
 
   @override
   String get settingsAllow => 'Consenti';
@@ -770,7 +899,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'La tua serie è tornata a zero — nessun problema, ricominciamo insieme 💪';
+      'La tua serie è tornata a zero. Nessun problema, ricominciamo insieme 💪';
 
   @override
   String get homeExactAlarmDialogTitle => 'Promemoria all\'ora esatta';
@@ -1105,6 +1234,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get bibleMarkRead => 'Segna come letto';
+
+  @override
+  String get bibleCoveredHint =>
+      'Conteggiato come già letto, dal punto in cui hai detto di voler riprendere.';
 
   @override
   String get bibleChaptersHeader => 'Capitoli';
@@ -1458,7 +1591,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get notifStreakRiskBody =>
-      'Non sei stato ancora attivo oggi — leggi un capitolo o fai un quiz per mantenerla.';
+      'Non sei stato ancora attivo oggi. Leggi un capitolo o fai un quiz per mantenerla.';
 
   @override
   String get easterEggHeartBody => 'Anch\'io ti voglio bene :)';
@@ -1468,7 +1601,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get easterEggVersionBody =>
-      'Qui non c\'è nessuna modalità nascosta, mi spiace. Solo un grazie per aver cercato così a fondo — questa app è nata una sera dopo l\'altra, e fa piacere sapere che qualcuno curiosa.';
+      'Qui non c\'è nessuna modalità nascosta, mi spiace. Solo un grazie per aver cercato così a fondo. Questa app è nata una sera dopo l\'altra, e fa piacere sapere che qualcuno curiosa.';
 
   @override
   String get easterEggVersionButton => 'Resta tra noi';

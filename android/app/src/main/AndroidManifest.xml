@@ -5,12 +5,6 @@
     <!-- Optional app lock (settings). Not a runtime permission: it only lets
          the app ask the system to show its own fingerprint/face/PIN prompt. -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <!-- Some OEM battery managers (observed on both a LineageOS build and
-         Huawei/EMUI) silently drop notifications posted by an app the
-         instant it backgrounds unless the app is exempt from battery
-         optimization — this lets Settings offer that exemption for the
-         reading-session notification (see reading_session_service.dart). -->
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <!-- Android 16+. Lets the reading-session notification be promoted to a
          Live Update — a status bar chip with the timer running in it. Ignored
          on older releases, where it stays an ordinary ongoing notification.

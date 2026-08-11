@@ -71,16 +71,20 @@ extension AppSkinX on AppSkin {
 
   AppIcons get icons {
     switch (this) {
+      case AppSkin.classic:
+        return kClassicIcons;
       case AppSkin.matrix:
         return kMatrixIcons;
       case AppSkin.parchment:
         return kParchmentIcons;
-      case AppSkin.classic:
       case AppSkin.ocean:
+        return kOceanIcons;
       case AppSkin.sunset:
+        return kSunsetIcons;
       case AppSkin.forest:
+        return kForestIcons;
       case AppSkin.amethyst:
-        return kClassicIcons;
+        return kAmethystIcons;
     }
   }
 

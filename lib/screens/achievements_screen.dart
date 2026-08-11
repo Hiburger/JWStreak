@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../achievements_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
+import '../theme/app_icons.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
@@ -222,18 +223,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                               // card's pastel gradient — onPrimaryContainer
                               // is the same tone as the text next to it, so
                               // it's guaranteed to actually stand out here.
-                              Icon(
-                                Icons.star_rounded,
-                                color: cs.onPrimaryContainer,
-                                size: 22,
-                              ),
+                              AppIcons.of(
+                                context,
+                              ).reward(size: 22, color: cs.onPrimaryContainer),
                               const SizedBox(width: 6),
                               Text(
                                 // The leading "+" is what marks this as a
                                 // bonus rather than a restatement of the
-                                // home screen's own star total.
+                                // home screen's own reward total.
                                 '+$bonusStars '
-                                '${bonusStars != 1 ? l10n.homeStatStarsPlural : l10n.homeStatStarSingular}',
+                                '${AppIcons.of(context).rewardNoun(context, plural: bonusStars != 1)}',
                                 style: theme.textTheme.titleSmall?.copyWith(
                                   color: cs.onPrimaryContainer,
                                   fontWeight: FontWeight.w700,
@@ -296,14 +295,25 @@ class _AchievementTile extends StatelessWidget {
     final int? progress = def.progress?.call(stats);
 
     final OnboardingAccent accent = _accentFor(def.category);
-    // Locked stays the neutral grey/padlock treatment — the category color
-    // is part of what unlocking actually earns, same as the star-reward
-    // badge dimming until then.
+    // stars_20/stars_40 are filed under the "quizzes" category for grouping
+    // purposes, so accent.foreground(context) here would be that category's
+    // amber — not the theme's actual reward color. Under Ocean that meant a
+    // coral shell drawn in quiz-amber: right shape, wrong color, still a
+    // mismatch. These two use the reward's own color pair instead, so the
+    // tile's tint agrees with the icon it's tinting.
+    final bool isStarsAchievement =
+        def.id == 'stars_20' || def.id == 'stars_40';
+    final Color rewardColor = AppIcons.of(context).rewardColor;
+    // Locked stays the neutral grey/padlock treatment — the color here is
+    // part of what unlocking actually earns, same as the reward badge
+    // dimming until then.
     final Color iconBackground = unlocked
-        ? accent.background(context)
+        ? (isStarsAchievement
+              ? rewardColor.withValues(alpha: 0.18)
+              : accent.background(context))
         : cs.surfaceContainerHighest;
     final Color iconForeground = unlocked
-        ? accent.foreground(context)
+        ? (isStarsAchievement ? rewardColor : accent.foreground(context))
         : cs.onSurfaceVariant;
 
     return Card.filled(
@@ -330,11 +340,18 @@ class _AchievementTile extends StatelessWidget {
                       : cs.outlineVariant,
                 ),
               ),
-              child: Icon(
-                unlocked ? def.icon : Icons.lock_outline,
-                color: iconForeground,
-                size: 22,
-              ),
+              // The two star-total achievements (stars_20/stars_40) show the
+              // theme's actual reward shape here instead of their stored
+              // IconData — a "Star Collector" badge drawn as a plain star
+              // even under a skin whose reward is a shell would look like a
+              // mismatch between what you collect and what you unlocked.
+              child: unlocked && isStarsAchievement
+                  ? AppIcons.of(context).reward(size: 22, color: iconForeground)
+                  : Icon(
+                      unlocked ? def.icon : Icons.lock_outline,
+                      color: iconForeground,
+                      size: 22,
+                    ),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -408,8 +425,17 @@ class _AchievementTile extends StatelessWidget {
   }
 }
 
-/// Small "+N ⭐" pill next to an achievement, previewing (locked) or
-/// confirming (unlocked) the bonus stars that achievement is worth.
+/// A readable foreground tone for a reward color sitting on a light
+/// container — matches what `Colors.amber.shade800` gave the original
+/// star, without assuming every skin's reward color has a MaterialColor
+/// swatch to pull a shade from.
+Color _darken(Color color, [double amount = 0.25]) {
+  final HSLColor hsl = HSLColor.fromColor(color);
+  return hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0)).toColor();
+}
+
+/// Small "+N" pill next to an achievement, previewing (locked) or
+/// confirming (unlocked) the bonus reward that achievement is worth.
 class _StarRewardBadge extends StatelessWidget {
   const _StarRewardBadge({required this.count, required this.active});
 
@@ -421,19 +447,20 @@ class _StarRewardBadge extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
-    final Color fg = active ? Colors.amber.shade800 : cs.onSurfaceVariant;
+    final Color rewardColor = AppIcons.of(context).rewardColor;
+    final Color fg = active ? _darken(rewardColor) : cs.onSurfaceVariant;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: active
-            ? Colors.amber.withValues(alpha: 0.18)
+            ? rewardColor.withValues(alpha: 0.18)
             : cs.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(Icons.star_rounded, color: fg, size: 18),
+          AppIcons.of(context).reward(size: 18, color: fg),
           const SizedBox(width: 3),
           Text(
             l10n.achievementStarReward(count),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/answer_validator.dart';
+import '../theme/app_icons.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/responsive_body.dart';
 
@@ -478,10 +479,16 @@ class _QuizScreenState extends State<QuizScreen> {
                   builder: (BuildContext context, double v, Widget? child) {
                     return Transform.scale(scale: 0.6 + 0.4 * v, child: child);
                   },
-                  child: Icon(
-                    filled ? Icons.star_rounded : Icons.star_outline_rounded,
+                  // Same shape either way, only the color changes — the
+                  // theme's reward isn't guaranteed to have a separate
+                  // outline glyph the way a plain star does (a hand-painted
+                  // shell or acorn doesn't), so "not earned yet" is muted
+                  // color rather than a hollow variant.
+                  child: AppIcons.of(context).reward(
                     size: 56,
-                    color: filled ? Colors.amber : cs.outlineVariant,
+                    color: filled
+                        ? AppIcons.of(context).rewardColor
+                        : cs.outlineVariant,
                   ),
                 );
               }),

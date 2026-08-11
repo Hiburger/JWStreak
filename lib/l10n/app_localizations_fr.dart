@@ -55,10 +55,129 @@ class AppLocalizationsFr extends AppLocalizations {
   String get themeSkinAmethyst => 'Améthyste';
 
   @override
+  String get planCanonicalTitle => 'D\'un bout à l\'autre';
+
+  @override
+  String get planCanonicalDesc =>
+      'De la Genèse à la Révélation, dans l\'ordre d\'impression des livres.';
+
+  @override
+  String get planChronologicalTitle => 'Dans l\'ordre des événements';
+
+  @override
+  String get planChronologicalDesc =>
+      'À peu près l\'ordre dans lequel les faits se sont produits.';
+
+  @override
+  String get planCompletionTitle => 'Dans l\'ordre de rédaction';
+
+  @override
+  String get planCompletionDesc =>
+      'À peu près l\'ordre dans lequel les livres ont été achevés.';
+
+  @override
+  String get planHebrewGreekTitle => 'Mélange hébreu / grec';
+
+  @override
+  String get planHebrewGreekDesc =>
+      'Entremêle les Écritures hébraïques et grecques chrétiennes.';
+
+  @override
+  String get planThematicTitle => 'Par thème';
+
+  @override
+  String get planThematicDesc =>
+      'Alterne loi, histoire, poésie, prophétie, évangiles et lettres.';
+
+  @override
+  String get onbStartTitle => 'Où commence-t-on ?';
+
+  @override
+  String get onbStartSubtitle =>
+      'Pour que l\'app reprenne là où tu en es vraiment.';
+
+  @override
+  String get onbStartQuestion => 'As-tu déjà commencé à lire la Bible ?';
+
+  @override
+  String get onbStartYes => 'Oui';
+
+  @override
+  String get onbStartNo => 'Pas encore';
+
+  @override
+  String get onbStartResumeLabel => 'Où veux-tu reprendre ?';
+
+  @override
+  String get onbStartFresh =>
+      'Parfait ! On te configure comme une nouvelle lecture.';
+
+  @override
+  String get onbChooseToContinue => 'Choisis une option pour continuer';
+
+  @override
+  String get onbPlanTitle => 'Comment veux-tu lire ?';
+
+  @override
+  String get onbPlanSubtitle =>
+      'Il y a plusieurs façons de traverser la Bible. Choisis la tienne, modifiable plus tard.';
+
+  @override
+  String get settingsReadingSection => 'Lecture';
+
+  @override
+  String get settingsReadingPlan => 'Ordre de lecture';
+
+  @override
+  String get settingsResumePoint => 'Point de reprise';
+
+  @override
+  String get settingsResumePointNone => 'Le début du plan';
+
+  @override
+  String get settingsResumePointClear => 'Effacer';
+
+  @override
+  String get rewardChipSingular => 'puce';
+
+  @override
+  String get rewardChipsPlural => 'puces';
+
+  @override
+  String get rewardShellSingular => 'coquillage';
+
+  @override
+  String get rewardShellsPlural => 'coquillages';
+
+  @override
+  String get rewardSealSingular => 'cachet';
+
+  @override
+  String get rewardSealsPlural => 'cachets';
+
+  @override
+  String get rewardEmberSingular => 'braise';
+
+  @override
+  String get rewardEmbersPlural => 'braises';
+
+  @override
+  String get rewardAcornSingular => 'gland';
+
+  @override
+  String get rewardAcornsPlural => 'glands';
+
+  @override
+  String get rewardGemSingular => 'gemme';
+
+  @override
+  String get rewardGemsPlural => 'gemmes';
+
+  @override
   String get noteUntitled => 'Sans titre';
 
   @override
-  String get noteExportMultiTitle => 'Mes notes — JW Streak';
+  String get noteExportMultiTitle => 'Mes notes - JW Streak';
 
   @override
   String noteExportedOn(String date) {
@@ -333,7 +452,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onbFeatureQuizDesc =>
-      'Des quiz courts se débloquent au fil de ta lecture. Choisis, écris ou assemble — et gagne des étoiles.';
+      'Des quiz courts se débloquent au fil de ta lecture. Choisis, écris ou assemble, et gagne des étoiles.';
 
   @override
   String get onbFeatureNotesTitle => 'Notes personnelles';
@@ -354,11 +473,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onbReminderIntro =>
-      'Un petit rappel quotidien entretient ta série. Choisis un moment calme — modifiable plus tard.';
+      'Un petit rappel quotidien entretient ta série. Choisis un moment calme, modifiable plus tard.';
 
   @override
   String get onbReminderTip =>
-      'Astuce : associe-le à une habitude — le café du matin, ou le coucher.';
+      'Astuce : associe-le à une habitude, comme le café du matin ou le coucher.';
 
   @override
   String get onbReminderFinish => 'Terminer';
@@ -429,7 +548,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get tourSettingsBody =>
-      'Thème, langue, rappels — et ce tour guidé, si tu veux le revoir.';
+      'Thème, langue, rappels, et ce tour guidé, si tu veux le revoir.';
 
   @override
   String get settingsReplayTour => 'Revoir le tour guidé';
@@ -446,7 +565,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsAppLockOn =>
-      'Demande ton empreinte, ton visage ou ton code avant d\'ouvrir tes notes — sauf si tu reviens dans les 10 minutes.';
+      'Demande ton empreinte, ton visage ou ton code avant d\'ouvrir tes notes, sauf si tu reviens dans les 10 minutes.';
 
   @override
   String get settingsAppLockOff => 'Tes notes s\'ouvrent sans rien demander.';
@@ -486,7 +605,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get streakInfoSubtitle =>
-      'Ta série grandit chaque jour où tu restes actif — et se remet à zéro si tu t’absentes trop longtemps.';
+      'Ta série grandit chaque jour où tu restes actif, et se remet à zéro si tu t’absentes trop longtemps.';
 
   @override
   String get streakInfoRow1Title => 'Reste actif chaque jour';
@@ -518,6 +637,32 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Paramètres';
+
+  @override
+  String get settingsCatPersonalization => 'Personnalisation';
+
+  @override
+  String get settingsCatPersonalizationDesc => 'Style, luminosité, langue';
+
+  @override
+  String get settingsCatReadingDesc =>
+      'Ordre de lecture, point de reprise, ouverture des chapitres';
+
+  @override
+  String get settingsCatNotifications => 'Notifications';
+
+  @override
+  String get settingsCatNotificationsDesc =>
+      'Autorisations nécessaires aux rappels';
+
+  @override
+  String get settingsCatPrivacyDesc => 'Verrouillage de l\'app';
+
+  @override
+  String get settingsCatAbout => 'Aide et à propos';
+
+  @override
+  String get settingsCatAboutDesc => 'Visite guidée, version, code source';
 
   @override
   String get settingsAppearance => 'Apparence';
@@ -555,9 +700,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLanguageSystem => 'Système';
 
   @override
-  String get settingsPermissions => 'Permissions';
-
-  @override
   String get settingsNotifPermTitle => 'Permissions de Notification';
 
   @override
@@ -583,17 +725,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsExactAlarmsOff =>
       'Non autorisées. Les rappels peuvent être retardés.';
-
-  @override
-  String get settingsBatteryOptimization => 'Optimisation de la batterie';
-
-  @override
-  String get settingsBatteryOptimizationOn =>
-      'Exemptée. La notification de session de lecture peut rester affichée.';
-
-  @override
-  String get settingsBatteryOptimizationOff =>
-      'Non exemptée. L’appareil peut supprimer cette notification prématurément.';
 
   @override
   String get settingsAllow => 'Autoriser';
@@ -769,7 +900,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Ta série est repartie de zéro — pas grave, on recommence ensemble 💪';
+      'Ta série est repartie de zéro. Pas grave, on recommence ensemble 💪';
 
   @override
   String get homeExactAlarmDialogTitle => 'Rappel à l’heure exacte';
@@ -1103,6 +1234,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get bibleMarkRead => 'Marquer comme lu';
+
+  @override
+  String get bibleCoveredHint =>
+      'Compté comme déjà lu, depuis l\'endroit où tu as dit vouloir reprendre.';
 
   @override
   String get bibleChaptersHeader => 'Chapitres';
@@ -1457,7 +1592,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get notifStreakRiskBody =>
-      'Tu n\'as pas encore été actif aujourd\'hui — lis un chapitre ou fais un quiz pour la garder.';
+      'Tu n\'as pas encore été actif aujourd\'hui. Lis un chapitre ou fais un quiz pour la garder.';
 
   @override
   String get easterEggHeartBody => 'Moi aussi je t\'aime :)';
@@ -1467,7 +1602,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get easterEggVersionBody =>
-      'Pas de mode secret ici, désolé. Juste un merci d\'avoir cherché aussi loin — cette application a été écrite un soir après l\'autre, et ça fait plaisir de savoir que quelqu\'un fouille.';
+      'Pas de mode secret ici, désolé. Juste un merci d\'avoir cherché aussi loin. Cette application a été écrite un soir après l\'autre, et ça fait plaisir de savoir que quelqu\'un fouille.';
 
   @override
   String get easterEggVersionButton => 'Ça reste entre nous';

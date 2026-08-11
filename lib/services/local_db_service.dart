@@ -6,6 +6,7 @@ import '../achievements_data.dart';
 import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
+import '../reading_plan.dart';
 import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 
@@ -900,6 +901,38 @@ class LocalDbService {
       );
     }
     return themePreferenceFromStorage(rawValue);
+  }
+
+  /// The order chapters are handed out in.
+  Future<void> saveReadingPlan(ReadingPlan plan) async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'reading_plan', plan.storageValue);
+  }
+
+  Future<ReadingPlan> getReadingPlan() async {
+    final Database db = await _getDb();
+    return readingPlanFromStorage(await _getSetting(db, 'reading_plan'));
+  }
+
+  /// Where in the plan the reader said they'd pick up, as a chapter key.
+  ///
+  /// Stored as the chapter itself rather than an index into the plan, so
+  /// switching orders later moves the resume point along with the reader
+  /// instead of leaving it pointing at whatever book now sits at that index.
+  ///
+  /// Deliberately does *not* mark everything before it as read: the reader is
+  /// telling us where to resume, not claiming they read those chapters in
+  /// this app. Fabricating those rows would invent reading dates and hand out
+  /// streaks and achievements nobody earned.
+  Future<void> savePlanStartKey(String? key) async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'plan_start_key', key ?? '');
+  }
+
+  Future<String?> getPlanStartKey() async {
+    final Database db = await _getDb();
+    final String? value = await _getSetting(db, 'plan_start_key');
+    return (value == null || value.isEmpty) ? null : value;
   }
 
   /// The visual style (palette + signature icons + typeface), independent of

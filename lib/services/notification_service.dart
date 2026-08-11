@@ -535,38 +535,6 @@ class NotificationService {
     }
   }
 
-  /// Android only. Some OEM battery managers kill or suppress notifications
-  /// posted by a backgrounded, non-exempt app outright — confirmed on both a
-  /// LineageOS build and Huawei's EMUI, both by design rather than a bug in
-  /// what gets posted. This is what the reading-session notification
-  /// (see reading_session_service.dart) needs to actually survive.
-  Future<bool> isIgnoringBatteryOptimizations() async {
-    if (defaultTargetPlatform != TargetPlatform.android) {
-      return true;
-    }
-    try {
-      return await Permission.ignoreBatteryOptimizations.isGranted;
-    } catch (_) {
-      return true;
-    }
-  }
-
-  /// Opens the system's "ignore battery optimizations" dialog. Returns
-  /// `true` if the exemption is granted afterward.
-  Future<bool> requestIgnoreBatteryOptimizations() async {
-    if (defaultTargetPlatform != TargetPlatform.android) {
-      return true;
-    }
-    try {
-      final PermissionStatus status = await Permission
-          .ignoreBatteryOptimizations
-          .request();
-      return status.isGranted;
-    } catch (_) {
-      return false;
-    }
-  }
-
   Future<void> _safelyHandlePayload(String? rawPayload) async {
     try {
       // Reminder notifications carry no payload — tapping simply opens the app

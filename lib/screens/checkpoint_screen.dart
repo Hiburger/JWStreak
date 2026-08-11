@@ -4,6 +4,7 @@ import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/local_db_service.dart';
 import '../widgets/circular_back_button.dart';
+import '../theme/app_icons.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'quiz_screen.dart';
@@ -18,15 +19,14 @@ class _StarRow extends StatelessWidget {
     final int stars = result.total == 0
         ? 0
         : ((result.score / result.total) * 3).ceil().clamp(1, 3);
+    final AppIcons icons = AppIcons.of(context);
+    final ColorScheme cs = Theme.of(context).colorScheme;
     return Row(
       children: List<Widget>.generate(3, (int i) {
         final bool filled = i < stars;
-        return Icon(
-          filled ? Icons.star_rounded : Icons.star_outline_rounded,
-          color: filled
-              ? Colors.amber
-              : Theme.of(context).colorScheme.outlineVariant,
+        return icons.reward(
           size: 26,
+          color: filled ? icons.rewardColor : cs.outlineVariant,
         );
       }),
     );

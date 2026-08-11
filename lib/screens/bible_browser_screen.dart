@@ -5,11 +5,13 @@ import 'package:intl/intl.dart';
 
 import '../app_constants.dart';
 import '../bible_data.dart';
+import '../reading_plan.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/reading_session_service.dart';
+import '../theme/app_icons.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/freeze_earned_dialog.dart';
 import '../widgets/message_dialog.dart';
@@ -29,7 +31,11 @@ class BibleBrowserScreen extends StatefulWidget {
 }
 
 class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
-  Set<String> _readKeys = const <String>{};
+  // Coverage, not just genuine reads — this class only ever uses it for the
+  // per-book display count below, never to gate a quiz or an achievement,
+  // so declared-as-already-read chapters belong in it. Named to match, so
+  // it can't get reused somewhere that needs the stricter, genuine-only set.
+  Set<String> _coveredKeys = const <String>{};
   Map<String, int> _starsByBook = const <String, int>{};
   bool _isLoading = true;
 
@@ -43,9 +49,14 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
     final Set<String> keys = await widget.dbService.getReadChapterKeys();
     final Map<String, int> stars = await widget.dbService
         .getEarnedStarsByBook();
+    // These counts are pure display, so they show coverage: a reader who
+    // told onboarding they'd already reached Exodus sees those books filled
+    // in rather than an empty shelf they'd have to tick off by hand.
+    final String? startKey = await widget.dbService.getPlanStartKey();
+    final Set<String> before = chaptersBeforeStart(startKey);
     if (mounted) {
       setState(() {
-        _readKeys = keys;
+        _coveredKeys = before.isEmpty ? keys : <String>{...keys, ...before};
         _starsByBook = stars;
         _isLoading = false;
       });
@@ -55,7 +66,7 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
   int _readCount(BibleBook book) {
     int count = 0;
     for (int c = 1; c <= book.chapters; c++) {
-      if (_readKeys.contains(bibleChapterKey(book.id, c))) {
+      if (_coveredKeys.contains(bibleChapterKey(book.id, c))) {
         count++;
       }
     }
@@ -195,8 +206,8 @@ class _TotalStarsBanner extends StatelessWidget {
                         backgroundColor: cs.onTertiaryContainer.withValues(
                           alpha: 0.15,
                         ),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Colors.amber,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppIcons.of(context).rewardColor,
                         ),
                       ),
                     ),
@@ -255,11 +266,9 @@ class _GlowingStarState extends State<_GlowingStar>
       child: RepaintBoundary(
         child: AnimatedBuilder(
           animation: _controller,
-          child: Icon(
-            Icons.star_rounded,
-            size: widget.size,
-            color: Colors.amber,
-          ),
+          child: AppIcons.of(
+            context,
+          ).reward(size: widget.size, color: AppIcons.of(context).rewardColor),
           builder: (BuildContext context, Widget? child) {
             // Integer multiples of the base loop, so every wave is back at
             // its starting value when the controller wraps to 0 and the
@@ -277,8 +286,10 @@ class _GlowingStarState extends State<_GlowingStar>
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: <Color>[
-                        Colors.amber.withValues(alpha: 0.30 + 0.25 * glow),
-                        Colors.amber.withValues(alpha: 0),
+                        AppIcons.of(
+                          context,
+                        ).rewardColor.withValues(alpha: 0.30 + 0.25 * glow),
+                        AppIcons.of(context).rewardColor.withValues(alpha: 0),
                       ],
                     ),
                   ),
@@ -404,10 +415,11 @@ class _BookTile extends StatelessWidget {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Icon(
-                      Icons.star_rounded,
+                    AppIcons.of(context).reward(
                       size: 24,
-                      color: stars > 0 ? Colors.amber : cs.outlineVariant,
+                      color: stars > 0
+                          ? AppIcons.of(context).rewardColor
+                          : cs.outlineVariant,
                     ),
                     Text(
                       AppLocalizations.of(
@@ -449,7 +461,15 @@ class BibleChaptersScreen extends StatefulWidget {
 class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
   final DeepLinkService _deepLinkService = DeepLinkService();
   final ReadingSessionService _readingSession = ReadingSessionService();
+
+  /// Chapters genuinely marked here. Gates the checkpoint quizzes, so it
+  /// must never include chapters that were merely declared as already read
+  /// during onboarding — those earned nothing.
   Set<int> _readChapters = const <int>{};
+
+  /// What the grid paints: [_readChapters] plus anything before the resume
+  /// point.
+  Set<int> _coveredChapters = const <int>{};
   Map<String, QuizResult> _quizResults = const <String, QuizResult>{};
   Set<String> _answeredReflections = const <String>{};
   bool _isLoading = true;
@@ -491,15 +511,23 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
         .getAllQuizResults();
     final Set<String> reflections = await widget.dbService
         .getAnsweredReflectionIds();
+    final String? startKey = await widget.dbService.getPlanStartKey();
+    final Set<String> before = chaptersBeforeStart(startKey);
     final Set<int> read = <int>{};
+    final Set<int> covered = <int>{};
     for (int c = 1; c <= widget.book.chapters; c++) {
-      if (keys.contains(bibleChapterKey(widget.book.id, c))) {
+      final String key = bibleChapterKey(widget.book.id, c);
+      if (keys.contains(key)) {
         read.add(c);
+      }
+      if (keys.contains(key) || before.contains(key)) {
+        covered.add(c);
       }
     }
     if (mounted) {
       setState(() {
         _readChapters = read;
+        _coveredChapters = covered;
         _quizResults = quiz;
         _answeredReflections = reflections;
         _isLoading = false;
@@ -507,14 +535,12 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
     }
   }
 
-  bool _isCheckpointUnlocked(Checkpoint cp) {
-    for (int c = 1; c <= cp.afterChapter; c++) {
-      if (!_readChapters.contains(c)) {
-        return false;
-      }
-    }
-    return true;
-  }
+  bool _isCheckpointUnlocked(Checkpoint cp) => isCheckpointAvailable(
+    checkpoint: cp,
+    checkpointsInBook: _checkpoints,
+    isChapterCovered: (int c) => _coveredChapters.contains(c),
+    isQuizDone: (String id) => _quizResults.containsKey(id),
+  );
 
   // A checkpoint moves to "Terminés" once its primary gate is cleared: the
   // quiz if it has one, otherwise the reflection. The reflection remains a
@@ -686,6 +712,12 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
 
   void _onChapterTap(int chapter) {
     final bool isRead = _readChapters.contains(chapter);
+    // Covered without being genuinely read: declared as already read back
+    // in onboarding, not tracked as a real row yet. The sheet says so
+    // explicitly instead of quietly offering "Mark as read" on a chapter
+    // that's already painted as read in the grid above it — that
+    // contradiction is exactly what looked like a bug.
+    final bool isCoveredOnly = !isRead && _coveredChapters.contains(chapter);
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -701,6 +733,9 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
+                subtitle: isCoveredOnly
+                    ? Text(AppLocalizations.of(context)!.bibleCoveredHint)
+                    : null,
               ),
               ListTile(
                 leading: const Icon(Icons.open_in_new),
@@ -746,7 +781,9 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
               padding: const EdgeInsets.only(right: 16),
               child: Row(
                 children: <Widget>[
-                  const Icon(Icons.star_rounded, color: Colors.amber, size: 20),
+                  AppIcons.of(
+                    context,
+                  ).reward(size: 20, color: AppIcons.of(context).rewardColor),
                   const SizedBox(width: 4),
                   Text(
                     '${_bookStars()}/${bookMaxStars(widget.book)}',
@@ -792,6 +829,7 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
                         return _ChapterCell(
                           chapter: chapter,
                           isRead: _readChapters.contains(chapter),
+                          isCovered: _coveredChapters.contains(chapter),
                           onTap: () => _onChapterTap(chapter),
                           cs: cs,
                         );
@@ -1087,11 +1125,8 @@ class _MiniStars extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: List<Widget>.generate(3, (int i) {
         final bool filled = i < stars;
-        return Icon(
-          filled ? Icons.star_rounded : Icons.star_outline_rounded,
-          size: 15,
-          color: filled ? Colors.amber : out,
-        );
+        final AppIcons icons = AppIcons.of(context);
+        return icons.reward(size: 15, color: filled ? icons.rewardColor : out);
       }),
     );
   }
@@ -1241,36 +1276,63 @@ class _ChapterCell extends StatelessWidget {
   const _ChapterCell({
     required this.chapter,
     required this.isRead,
+    required this.isCovered,
     required this.onTap,
     required this.cs,
   });
 
   final int chapter;
+
+  /// Genuinely marked read in this app.
   final bool isRead;
+
+  /// Read, or before the reader's declared starting point. A superset of
+  /// [isRead] — every read chapter is also covered.
+  final bool isCovered;
+
   final VoidCallback onTap;
   final ColorScheme cs;
 
   @override
   Widget build(BuildContext context) {
+    // Three looks, not two: a solid fill only for what was actually marked
+    // read here, a tonal one for what's merely covered by the onboarding
+    // starting point, and the plain outline for genuinely unread. Painting
+    // "covered" the same solid color as "read" was the bug — the chapter
+    // sheet says "not read yet" the moment you tap one of these, which read
+    // as a contradiction against a cell that looked identical to a real one.
+    final Color background = isRead
+        ? cs.primary
+        : isCovered
+        ? cs.primaryContainer
+        : cs.surfaceContainerHigh;
+    final Color foreground = isRead
+        ? cs.onPrimary
+        : isCovered
+        ? cs.onPrimaryContainer
+        : cs.onSurface;
+    final Color border = isRead
+        ? cs.primary
+        : isCovered
+        ? cs.primary.withValues(alpha: 0.4)
+        : cs.outlineVariant;
+
     return Material(
-      color: isRead ? cs.primary : cs.surfaceContainerHigh,
+      color: background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: isRead ? cs.primary : cs.outlineVariant,
-          width: 1,
-        ),
+        side: BorderSide(color: border, width: 1),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Center(
-          child: isRead
-              ? Icon(Icons.check_rounded, color: cs.onPrimary)
+          child: isCovered
+              ? Icon(Icons.check_rounded, color: foreground)
               : Text(
                   '$chapter',
                   style: TextStyle(
-                    color: cs.onSurface,
+                    color: foreground,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),

@@ -55,10 +55,128 @@ class AppLocalizationsRu extends AppLocalizations {
   String get themeSkinAmethyst => 'Аметист';
 
   @override
+  String get planCanonicalTitle => 'От начала до конца';
+
+  @override
+  String get planCanonicalDesc =>
+      'От Бытия до Откровения, в порядке печати книг.';
+
+  @override
+  String get planChronologicalTitle => 'По событиям';
+
+  @override
+  String get planChronologicalDesc =>
+      'Примерно в том порядке, в каком происходили события.';
+
+  @override
+  String get planCompletionTitle => 'По написанию';
+
+  @override
+  String get planCompletionDesc =>
+      'Примерно в том порядке, в каком книги были завершены.';
+
+  @override
+  String get planHebrewGreekTitle => 'Еврейские и греческие';
+
+  @override
+  String get planHebrewGreekDesc =>
+      'Чередует Еврейские и Христианские Греческие Писания.';
+
+  @override
+  String get planThematicTitle => 'По темам';
+
+  @override
+  String get planThematicDesc =>
+      'Чередует закон, историю, поэзию, пророчества, евангелия и письма.';
+
+  @override
+  String get onbStartTitle => 'Откуда начнём?';
+
+  @override
+  String get onbStartSubtitle =>
+      'Чтобы приложение продолжило с вашего реального места.';
+
+  @override
+  String get onbStartQuestion => 'Вы уже начали читать Библию?';
+
+  @override
+  String get onbStartYes => 'Да';
+
+  @override
+  String get onbStartNo => 'Ещё нет';
+
+  @override
+  String get onbStartResumeLabel => 'С какого места продолжить?';
+
+  @override
+  String get onbStartFresh => 'Отлично! Настроим всё как для нового чтения.';
+
+  @override
+  String get onbChooseToContinue => 'Выберите вариант, чтобы продолжить';
+
+  @override
+  String get onbPlanTitle => 'Как вы хотите читать?';
+
+  @override
+  String get onbPlanSubtitle =>
+      'Читать Библию можно по-разному. Выберите свой вариант, его можно сменить позже.';
+
+  @override
+  String get settingsReadingSection => 'Чтение';
+
+  @override
+  String get settingsReadingPlan => 'Порядок чтения';
+
+  @override
+  String get settingsResumePoint => 'Точка продолжения';
+
+  @override
+  String get settingsResumePointNone => 'Начало плана';
+
+  @override
+  String get settingsResumePointClear => 'Очистить';
+
+  @override
+  String get rewardChipSingular => 'чип';
+
+  @override
+  String get rewardChipsPlural => 'чипы';
+
+  @override
+  String get rewardShellSingular => 'ракушка';
+
+  @override
+  String get rewardShellsPlural => 'ракушки';
+
+  @override
+  String get rewardSealSingular => 'печать';
+
+  @override
+  String get rewardSealsPlural => 'печати';
+
+  @override
+  String get rewardEmberSingular => 'уголёк';
+
+  @override
+  String get rewardEmbersPlural => 'угольки';
+
+  @override
+  String get rewardAcornSingular => 'жёлудь';
+
+  @override
+  String get rewardAcornsPlural => 'жёлуди';
+
+  @override
+  String get rewardGemSingular => 'самоцвет';
+
+  @override
+  String get rewardGemsPlural => 'самоцветы';
+
+  @override
   String get noteUntitled => 'Без названия';
 
   @override
-  String get noteExportMultiTitle => 'Мои заметки — JW Streak';
+  String get noteExportMultiTitle => 'Мои заметки - JW Streak';
 
   @override
   String noteExportedOn(String date) {
@@ -331,7 +449,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onbFeatureQuizDesc =>
-      'Короткие квизы открываются по мере чтения. Выбирай, печатай или собирай слова — и зарабатывай звёзды.';
+      'Короткие квизы открываются по мере чтения. Выбирай, печатай или собирай слова, и зарабатывай звёзды.';
 
   @override
   String get onbFeatureNotesTitle => 'Личные заметки';
@@ -352,11 +470,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onbReminderIntro =>
-      'Небольшое ежедневное напоминание держит серию. Выбери спокойное время — потом можно изменить.';
+      'Небольшое ежедневное напоминание держит серию. Выбери спокойное время, потом можно изменить.';
 
   @override
   String get onbReminderTip =>
-      'Совет: привяжи его к привычке — к утреннему кофе или ко сну.';
+      'Совет: привяжи его к привычке, например к утреннему кофе или ко сну.';
 
   @override
   String get onbReminderFinish => 'Готово';
@@ -399,14 +517,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tourProgressBody =>
-      'Чтения, звёзды и недавняя активность — всё в одном месте.';
+      'Чтения, звёзды и недавняя активность: всё в одном месте.';
 
   @override
   String get tourQuickActionsTitle => 'Быстрые действия';
 
   @override
   String get tourQuickActionsBody =>
-      'Текст на каждый день и твои заметки — всегда в одно касание.';
+      'Текст на каждый день и твои заметки: всегда в одно касание.';
 
   @override
   String get tourAchievementsTitle => 'Достижения';
@@ -427,7 +545,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tourSettingsBody =>
-      'Тема, язык, напоминания — и этот тур, если захочешь посмотреть его снова.';
+      'Тема, язык, напоминания, и этот тур, если захочешь посмотреть его снова.';
 
   @override
   String get settingsReplayTour => 'Пройти обучение заново';
@@ -444,7 +562,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsAppLockOn =>
-      'Запрашивает отпечаток, лицо или PIN-код перед открытием заметок — если вы не вернётесь в течение 10 минут.';
+      'Запрашивает отпечаток, лицо или PIN-код перед открытием заметок, если вы не вернётесь в течение 10 минут.';
 
   @override
   String get settingsAppLockOff => 'Заметки открываются без запроса.';
@@ -484,7 +602,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get streakInfoSubtitle =>
-      'Твоя серия растёт каждый день, когда ты активен — и обнуляется, если ты отсутствуешь слишком долго.';
+      'Твоя серия растёт каждый день, когда ты активен, и обнуляется, если ты отсутствуешь слишком долго.';
 
   @override
   String get streakInfoRow1Title => 'Будь активен каждый день';
@@ -516,6 +634,32 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Настройки';
+
+  @override
+  String get settingsCatPersonalization => 'Персонализация';
+
+  @override
+  String get settingsCatPersonalizationDesc => 'Стиль, яркость, язык';
+
+  @override
+  String get settingsCatReadingDesc =>
+      'Порядок чтения, точка продолжения, открытие глав';
+
+  @override
+  String get settingsCatNotifications => 'Уведомления';
+
+  @override
+  String get settingsCatNotificationsDesc =>
+      'Разрешения, нужные для напоминаний';
+
+  @override
+  String get settingsCatPrivacyDesc => 'Блокировка приложения';
+
+  @override
+  String get settingsCatAbout => 'Помощь и о программе';
+
+  @override
+  String get settingsCatAboutDesc => 'Обзор, версия, исходный код';
 
   @override
   String get settingsAppearance => 'Внешний вид';
@@ -553,9 +697,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguageSystem => 'Системный';
 
   @override
-  String get settingsPermissions => 'Разрешения';
-
-  @override
   String get settingsNotifPermTitle => 'Разрешения на уведомления';
 
   @override
@@ -583,17 +724,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не разрешено. Напоминания могут задерживаться.';
 
   @override
-  String get settingsBatteryOptimization => 'Оптимизация батареи';
-
-  @override
-  String get settingsBatteryOptimizationOn =>
-      'Исключено. Уведомление о сессии чтения может оставаться активным.';
-
-  @override
-  String get settingsBatteryOptimizationOff =>
-      'Не исключено. Устройство может удалить это уведомление раньше времени.';
-
-  @override
   String get settingsAllow => 'Разрешить';
 
   @override
@@ -610,7 +740,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsLicenseLegalese =>
-      'JW Streak — свободное программное обеспечение под лицензией GNU General Public License v3. Приведённые ниже лицензии относятся к компонентам с открытым исходным кодом, из которых оно состоит.';
+      'JW Streak: свободное программное обеспечение под лицензией GNU General Public License v3. Приведённые ниже лицензии относятся к компонентам с открытым исходным кодом, из которых оно состоит.';
 
   @override
   String get settingsQuestion => 'Есть вопрос?';
@@ -621,7 +751,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsUnaffiliated =>
-      'JW Streak — независимый неофициальный проект, не связанный со Свидетелями Иеговы, Watch Tower Bible and Tract Society или JW.org.';
+      'JW Streak: независимый неофициальный проект, не связанный со Свидетелями Иеговы, Watch Tower Bible and Tract Society или JW.org.';
 
   @override
   String settingsError(String error) {
@@ -767,7 +897,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Твоя серия обнулилась — не переживай, начнём заново вместе 💪';
+      'Твоя серия обнулилась. Не переживай, начнём заново вместе 💪';
 
   @override
   String get homeExactAlarmDialogTitle => 'Напоминание в точное время';
@@ -1104,6 +1234,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get bibleMarkRead => 'Отметить как прочитанное';
+
+  @override
+  String get bibleCoveredHint =>
+      'Учтено как уже прочитанное, начиная с места, где вы указали, что продолжите.';
 
   @override
   String get bibleChaptersHeader => 'Главы';
@@ -1454,7 +1588,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notifStreakRiskBody =>
-      'Ты ещё не был(а) активен(на) сегодня — прочитай главу или пройди викторину, чтобы сохранить её.';
+      'Ты ещё не был(а) активен(на) сегодня. Прочитай главу или пройди викторину, чтобы сохранить её.';
 
   @override
   String get easterEggHeartBody => 'Я тоже тебя люблю :)';
@@ -1464,7 +1598,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get easterEggVersionBody =>
-      'Здесь нет скрытого режима, увы. Просто спасибо, что искали так далеко — это приложение писалось вечер за вечером, и приятно знать, что кто-то заглядывает.';
+      'Здесь нет скрытого режима, увы. Просто спасибо, что искали так далеко. Это приложение писалось вечер за вечером, и приятно знать, что кто-то заглядывает.';
 
   @override
   String get easterEggVersionButton => 'Останется между нами';

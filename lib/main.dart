@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'l10n/app_localizations.dart';
+import 'reading_plan.dart';
 import 'screens/features_intro_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/reading_plan_onboarding_screen.dart';
+import 'screens/reading_start_onboarding_screen.dart';
 import 'screens/reminder_onboarding_screen.dart';
 import 'screens/streak_info_screen.dart';
 import 'screens/welcome_screen.dart';
@@ -45,8 +48,23 @@ class _DailyJwAppState extends State<DailyJwApp> {
   String? _localeCode;
   bool _isThemeLoading = true;
   bool _showWelcome = false;
-  // Onboarding pages: 0 = welcome, 1 = features, 2 = streak, 3 = reminders.
-  static const int _onboardingStepCount = 4;
+  // Onboarding pages: 0 = welcome, 1 = features, 2 = streak,
+  // 3 = starting point, 4 = reading order, 5 = reminders.
+  static const int _onboardingStepCount = 6;
+
+  // Held here rather than written straight to the DB from each page, so
+  // swiping back and forth through onboarding doesn't persist a half-made
+  // choice; both land together when onboarding completes.
+  ReadingPlan _onboardingPlan = ReadingPlan.canonical;
+  String? _onboardingStartKey;
+
+  // Both default to false so the pages they gate can't be swiped or
+  // tapped past before the reader has actually made a choice — [selected]
+  // on the plan page always has a value (it defaults to canonical), so
+  // "has a value" alone can't tell "picked on purpose" apart from
+  // "never touched this page".
+  bool _onboardingStartAnswered = false;
+  bool _onboardingPlanChosen = false;
   int _onboardingStep = 0;
   final PageController _onboardingController = PageController();
   // True only while the user is actively dragging the onboarding PageView
@@ -109,6 +127,43 @@ class _DailyJwAppState extends State<DailyJwApp> {
     }
   }
 
+  /// Whether the reader is done with [step] and may move past it — the
+  /// "starting point" and "reading order" pages must be answered first.
+  bool _canLeaveOnboardingStep(int step) {
+    switch (step) {
+      case 3:
+        return _onboardingStartAnswered;
+      case 4:
+        return _onboardingPlanChosen;
+      default:
+        return true;
+    }
+  }
+
+  /// A swipe reaches the same "skip past an unanswered page" result the
+  /// Continue button already blocks, just via a different gesture so it
+  /// gets blocked the same way: if the page being left still needs an
+  /// answer, bounce back to it instead of accepting the new page.
+  void _onOnboardingPageChanged(int page) {
+    final int from = _onboardingStep;
+    if (page > from && !_canLeaveOnboardingStep(from)) {
+      // PageView has already settled on `page` by the time this fires;
+      // animating back now (rather than mid-callback) avoids fighting the
+      // transition that's still wrapping up.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _onboardingController.animateToPage(
+            from,
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeOut,
+          );
+        }
+      });
+      return;
+    }
+    setState(() => _onboardingStep = page);
+  }
+
   Future<void> _goToOnboardingStep(int step) async {
     await _onboardingController.animateToPage(
       step,
@@ -146,7 +201,7 @@ class _DailyJwAppState extends State<DailyJwApp> {
       child: PageView(
         key: const ValueKey<String>('onboarding-flow'),
         controller: _onboardingController,
-        onPageChanged: (int page) => setState(() => _onboardingStep = page),
+        onPageChanged: _onOnboardingPageChanged,
         children: <Widget>[
           // Each page gets its own compositing layer so dragging the
           // PageView just repositions cached rasters instead of repainting
@@ -178,12 +233,44 @@ class _DailyJwAppState extends State<DailyJwApp> {
             ),
           ),
           RepaintBoundary(
+            child: ReadingStartOnboardingScreen(
+              stepCount: _onboardingStepCount,
+              stepIndex: 3,
+              initialStartKey: _onboardingStartKey,
+              onStartKeyChanged: (String? key) => _onboardingStartKey = key,
+              onAnswered: () => setState(() => _onboardingStartAnswered = true),
+              canContinue: _onboardingStartAnswered,
+              onNext: () => _goToOnboardingStep(4),
+              onBack: () => _goToOnboardingStep(2),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+          RepaintBoundary(
+            child: ReadingPlanOnboardingScreen(
+              stepCount: _onboardingStepCount,
+              stepIndex: 4,
+              // Only shown as chosen once the reader has actually tapped an
+              // option — _onboardingPlan itself defaults to canonical from
+              // the start (that's what gets saved if they never touch this
+              // page), but the page shouldn't claim it was picked.
+              selected: _onboardingPlanChosen ? _onboardingPlan : null,
+              onPlanChanged: (ReadingPlan plan) => setState(() {
+                _onboardingPlan = plan;
+                _onboardingPlanChosen = true;
+              }),
+              canContinue: _onboardingPlanChosen,
+              onNext: () => _goToOnboardingStep(5),
+              onBack: () => _goToOnboardingStep(3),
+              hideActionButton: _isOnboardingDragging,
+            ),
+          ),
+          RepaintBoundary(
             child: ReminderOnboardingScreen(
               dbService: _dbService,
               stepCount: _onboardingStepCount,
-              stepIndex: 3,
+              stepIndex: 5,
               onDone: _completeOnboarding,
-              onBack: () => _goToOnboardingStep(2),
+              onBack: () => _goToOnboardingStep(4),
               hideActionButton: _isOnboardingDragging,
             ),
           ),
@@ -194,6 +281,8 @@ class _DailyJwAppState extends State<DailyJwApp> {
 
   Future<void> _completeOnboarding() async {
     try {
+      await _dbService.saveReadingPlan(_onboardingPlan);
+      await _dbService.savePlanStartKey(_onboardingStartKey);
       await _dbService.setOnboardingDone();
     } catch (_) {
       // Even if persisting fails, let the user through; the welcome
@@ -249,9 +338,6 @@ class _DailyJwAppState extends State<DailyJwApp> {
 
   @override
   Widget build(BuildContext context) {
-    // The native splash (see main()) covers the whole _loadThemePreference
-    // window, so this never actually gets painted under normal timing — kept
-    // blank rather than a spinner so that IS true on the rare frame it does.
     const Widget loading = SizedBox.shrink();
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {

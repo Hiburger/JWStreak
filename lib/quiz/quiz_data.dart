@@ -9192,6 +9192,48 @@ List<Checkpoint> checkpointsForBook(BibleBook book, {String? languageCode}) {
   return result;
 }
 
+/// Whether [checkpoint] is available to take right now.
+///
+/// Two gates apply. First, its own content must be covered — every chapter
+/// from the book's start through [Checkpoint.afterChapter] — using coverage
+/// rather than strictly genuine reads, so a reader who told onboarding
+/// they'd already reached, say, Exodus 5 can still eventually unlock
+/// Genesis's quizzes instead of finding them locked forever. Second, for a
+/// quiz checkpoint, every earlier quiz checkpoint *in the same book* must
+/// already be completed: quizzes open one at a time. Without this, "I've
+/// already read the whole book" would dump every one of that book's
+/// checkpoint quizzes on the reader in a single go — the same one-at-a-time
+/// pacing a normal reader gets anyway, since they'd rarely read ten
+/// chapters ahead of the quiz they haven't taken yet.
+///
+/// Reflection-only checkpoints (no quiz) sit outside that chain: they only
+/// need coverage, not "the previous quiz is done" — a reflection was never
+/// gated on quiz order before, and there's no reason to start now.
+bool isCheckpointAvailable({
+  required Checkpoint checkpoint,
+  required List<Checkpoint> checkpointsInBook,
+  required bool Function(int chapter) isChapterCovered,
+  required bool Function(String checkpointId) isQuizDone,
+}) {
+  for (int c = 1; c <= checkpoint.afterChapter; c++) {
+    if (!isChapterCovered(c)) {
+      return false;
+    }
+  }
+  if (!checkpoint.hasQuiz) {
+    return true;
+  }
+  for (final Checkpoint earlier in checkpointsInBook) {
+    if (earlier.afterChapter >= checkpoint.afterChapter) {
+      continue;
+    }
+    if (earlier.hasQuiz && !isQuizDone(earlier.id)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /// Builds a mixed "review" quiz drawing questions from every authored quiz the
 /// user has already unlocked (i.e. whose chapters are all read). Used to let a
 /// user earn back a streak freeze. Returns up to [count] questions in random

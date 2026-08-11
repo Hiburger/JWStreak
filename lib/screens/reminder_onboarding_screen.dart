@@ -8,6 +8,7 @@ import '../widgets/message_dialog.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/onboarding_progress.dart';
 import '../widgets/reminder_picker.dart';
+import '../widgets/time_wheel_picker.dart';
 import '../widgets/responsive_body.dart';
 
 /// Final onboarding page: helps the user set up their first daily reminder(s)
@@ -107,9 +108,10 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
       _reminders.any((Reminder r) => r.hour == hour && r.minute == minute);
 
   Future<void> _pickTime() async {
-    final TimeOfDay? picked = await showTimePicker(
+    final TimeOfDay? picked = await showTimeWheelPicker(
       context: context,
       initialTime: _picked,
+      title: AppLocalizations.of(context)!.reminderEditTime,
     );
     if (picked != null) {
       setState(() => _picked = picked);

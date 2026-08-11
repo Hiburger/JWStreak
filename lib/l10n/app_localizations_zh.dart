@@ -54,10 +54,121 @@ class AppLocalizationsZh extends AppLocalizations {
   String get themeSkinAmethyst => '紫水晶';
 
   @override
+  String get planCanonicalTitle => '从头到尾';
+
+  @override
+  String get planCanonicalDesc => '从创世记到启示录，按各卷印刷顺序。';
+
+  @override
+  String get planChronologicalTitle => '按事件顺序';
+
+  @override
+  String get planChronologicalDesc => '大致按事件发生的先后顺序。';
+
+  @override
+  String get planCompletionTitle => '按成书顺序';
+
+  @override
+  String get planCompletionDesc => '大致按各卷写成的先后顺序。';
+
+  @override
+  String get planHebrewGreekTitle => '希伯来语与希腊语交替';
+
+  @override
+  String get planHebrewGreekDesc => '将希伯来语圣经与基督希腊语圣经交织。';
+
+  @override
+  String get planThematicTitle => '按主题';
+
+  @override
+  String get planThematicDesc => '在律法、历史、诗歌、预言、福音书和信件之间轮换。';
+
+  @override
+  String get onbStartTitle => '我们从哪里开始？';
+
+  @override
+  String get onbStartSubtitle => '让应用从你实际所在的位置继续。';
+
+  @override
+  String get onbStartQuestion => '你已经开始读圣经了吗？';
+
+  @override
+  String get onbStartYes => '是';
+
+  @override
+  String get onbStartNo => '还没有';
+
+  @override
+  String get onbStartResumeLabel => '你想从哪里继续？';
+
+  @override
+  String get onbStartFresh => '很好！我们会把你设置为全新开始阅读。';
+
+  @override
+  String get onbChooseToContinue => '选择一个选项以继续';
+
+  @override
+  String get onbPlanTitle => '你想怎么读？';
+
+  @override
+  String get onbPlanSubtitle => '读圣经不只一种方式。选一个适合你的，以后可以改。';
+
+  @override
+  String get settingsReadingSection => '阅读';
+
+  @override
+  String get settingsReadingPlan => '阅读顺序';
+
+  @override
+  String get settingsResumePoint => '续读位置';
+
+  @override
+  String get settingsResumePointNone => '计划的开头';
+
+  @override
+  String get settingsResumePointClear => '清除';
+
+  @override
+  String get rewardChipSingular => '芯片';
+
+  @override
+  String get rewardChipsPlural => '芯片';
+
+  @override
+  String get rewardShellSingular => '贝壳';
+
+  @override
+  String get rewardShellsPlural => '贝壳';
+
+  @override
+  String get rewardSealSingular => '蜡封';
+
+  @override
+  String get rewardSealsPlural => '蜡封';
+
+  @override
+  String get rewardEmberSingular => '余烬';
+
+  @override
+  String get rewardEmbersPlural => '余烬';
+
+  @override
+  String get rewardAcornSingular => '橡子';
+
+  @override
+  String get rewardAcornsPlural => '橡子';
+
+  @override
+  String get rewardGemSingular => '宝石';
+
+  @override
+  String get rewardGemsPlural => '宝石';
+
+  @override
   String get noteUntitled => '无标题';
 
   @override
-  String get noteExportMultiTitle => '我的笔记 — JW Streak';
+  String get noteExportMultiTitle => '我的笔记 - JW Streak';
 
   @override
   String noteExportedOn(String date) {
@@ -342,10 +453,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onbReminderTitle => '设置你的第一个提醒';
 
   @override
-  String get onbReminderIntro => '每天一个小提醒就能延续连续记录。选个安静的时刻——之后可以更改。';
+  String get onbReminderIntro => '每天一个小提醒就能延续连续记录。选个安静的时刻，之后可以更改。';
 
   @override
-  String get onbReminderTip => '小贴士：把它和已有习惯绑定——早咖啡后，或睡前。';
+  String get onbReminderTip => '小贴士：把它和已有习惯绑定，比如早咖啡后，或睡前。';
 
   @override
   String get onbReminderFinish => '完成';
@@ -408,7 +519,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tourSettingsTitle => '设置';
 
   @override
-  String get tourSettingsBody => '主题、语言、提醒——还有这个导览，想再看一次都行。';
+  String get tourSettingsBody => '主题、语言、提醒，还有这个导览，想再看一次都行。';
 
   @override
   String get settingsReplayTour => '重新观看导览';
@@ -423,7 +534,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsAppLockTitle => '锁定应用';
 
   @override
-  String get settingsAppLockOn => '打开笔记前需要指纹、面容或 PIN 码——除非你在 10 分钟内返回。';
+  String get settingsAppLockOn => '打开笔记前需要指纹、面容或 PIN 码，除非你在 10 分钟内返回。';
 
   @override
   String get settingsAppLockOff => '笔记无需验证即可打开。';
@@ -459,7 +570,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get streakInfoTitle => '让你的连续记录持续下去';
 
   @override
-  String get streakInfoSubtitle => '只要你每天保持活跃，连续记录就会增长——但如果太久没打卡，就会清零哦。';
+  String get streakInfoSubtitle => '只要你每天保持活跃，连续记录就会增长，但如果太久没打卡，就会清零哦。';
 
   @override
   String get streakInfoRow1Title => '每天保持活跃';
@@ -487,6 +598,30 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsTitle => '设置';
+
+  @override
+  String get settingsCatPersonalization => '个性化';
+
+  @override
+  String get settingsCatPersonalizationDesc => '样式、亮度、语言';
+
+  @override
+  String get settingsCatReadingDesc => '阅读顺序、续读位置、章节打开方式';
+
+  @override
+  String get settingsCatNotifications => '通知';
+
+  @override
+  String get settingsCatNotificationsDesc => '提醒所需的权限';
+
+  @override
+  String get settingsCatPrivacyDesc => '应用锁';
+
+  @override
+  String get settingsCatAbout => '帮助与关于';
+
+  @override
+  String get settingsCatAboutDesc => '导览、版本、源代码';
 
   @override
   String get settingsAppearance => '外观';
@@ -523,9 +658,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLanguageSystem => '跟随系统';
 
   @override
-  String get settingsPermissions => '权限';
-
-  @override
   String get settingsNotifPermTitle => '通知权限';
 
   @override
@@ -548,15 +680,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsExactAlarmsOff => '未获授权。提醒可能会延迟。';
-
-  @override
-  String get settingsBatteryOptimization => '电池优化';
-
-  @override
-  String get settingsBatteryOptimizationOn => '已豁免。阅读会话通知可以保持显示。';
-
-  @override
-  String get settingsBatteryOptimizationOff => '未豁免。设备可能会提前移除该通知。';
 
   @override
   String get settingsAllow => '允许';
@@ -728,7 +851,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get checkpointSave => '保存';
 
   @override
-  String get homeStreakLostMessage => '你的连续记录清零了——别担心，我们一起重新开始 💪';
+  String get homeStreakLostMessage => '你的连续记录清零了。别担心，我们一起重新开始 💪';
 
   @override
   String get homeExactAlarmDialogTitle => '准时提醒';
@@ -1055,6 +1178,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get bibleMarkRead => '标记为已读';
+
+  @override
+  String get bibleCoveredHint => '从你选择的续读位置起，已计为已读。';
 
   @override
   String get bibleChaptersHeader => '章节';
@@ -1397,7 +1523,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notifStreakRiskTitle => '你的连续记录岌岌可危 🔥';
 
   @override
-  String get notifStreakRiskBody => '你今天还没有活动过——读一章或做一次测验来保持它。';
+  String get notifStreakRiskBody => '你今天还没有活动过。读一章或做一次测验来保持它。';
 
   @override
   String get easterEggHeartBody => '我也爱你 :)';
@@ -1407,7 +1533,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get easterEggVersionBody =>
-      '这里没有隐藏模式，抱歉。只是想说声谢谢，谢谢你找到这么深的地方——这个应用是一个又一个夜晚写出来的，知道有人在翻看，真让人高兴。';
+      '这里没有隐藏模式，抱歉。只是想说声谢谢，谢谢你找到这么深的地方。这个应用是一个又一个夜晚写出来的，知道有人在翻看，真让人高兴。';
 
   @override
   String get easterEggVersionButton => '这是我们的秘密';

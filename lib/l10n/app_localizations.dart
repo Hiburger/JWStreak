@@ -202,6 +202,228 @@ abstract class AppLocalizations {
   /// **'Amethyst'**
   String get themeSkinAmethyst;
 
+  /// No description provided for @planCanonicalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover to cover'**
+  String get planCanonicalTitle;
+
+  /// No description provided for @planCanonicalDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Genesis to Revelation, in the order the books are printed.'**
+  String get planCanonicalDesc;
+
+  /// No description provided for @planChronologicalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'As it happened'**
+  String get planChronologicalTitle;
+
+  /// No description provided for @planChronologicalDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Roughly the order the events took place.'**
+  String get planChronologicalDesc;
+
+  /// No description provided for @planCompletionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'As it was written'**
+  String get planCompletionTitle;
+
+  /// No description provided for @planCompletionDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Roughly the order the books were completed.'**
+  String get planCompletionDesc;
+
+  /// No description provided for @planHebrewGreekTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hebrew & Greek mix'**
+  String get planHebrewGreekTitle;
+
+  /// No description provided for @planHebrewGreekDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Weaves the Hebrew and Christian Greek Scriptures together.'**
+  String get planHebrewGreekDesc;
+
+  /// No description provided for @planThematicTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'By theme'**
+  String get planThematicTitle;
+
+  /// No description provided for @planThematicDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotates between law, history, poetry, prophecy, gospels and letters.'**
+  String get planThematicDesc;
+
+  /// No description provided for @onbStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where do we start?'**
+  String get onbStartTitle;
+
+  /// No description provided for @onbStartSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'So the app picks up where you actually are.'**
+  String get onbStartSubtitle;
+
+  /// No description provided for @onbStartQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Have you already started reading the Bible?'**
+  String get onbStartQuestion;
+
+  /// No description provided for @onbStartYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get onbStartYes;
+
+  /// No description provided for @onbStartNo.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get onbStartNo;
+
+  /// No description provided for @onbStartResumeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Where would you like to resume?'**
+  String get onbStartResumeLabel;
+
+  /// No description provided for @onbStartFresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect! We\'ll set you up as a fresh start.'**
+  String get onbStartFresh;
+
+  /// No description provided for @onbChooseToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an option to continue'**
+  String get onbChooseToContinue;
+
+  /// No description provided for @onbPlanTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How would you like to read?'**
+  String get onbPlanTitle;
+
+  /// No description provided for @onbPlanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'There\'s more than one way through the Bible. Pick what fits you. You can change it later.'**
+  String get onbPlanSubtitle;
+
+  /// No description provided for @settingsReadingSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get settingsReadingSection;
+
+  /// No description provided for @settingsReadingPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading order'**
+  String get settingsReadingPlan;
+
+  /// No description provided for @settingsResumePoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume point'**
+  String get settingsResumePoint;
+
+  /// No description provided for @settingsResumePointNone.
+  ///
+  /// In en, this message translates to:
+  /// **'The start of the plan'**
+  String get settingsResumePointNone;
+
+  /// No description provided for @settingsResumePointClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get settingsResumePointClear;
+
+  /// No description provided for @rewardChipSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'chip'**
+  String get rewardChipSingular;
+
+  /// No description provided for @rewardChipsPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'chips'**
+  String get rewardChipsPlural;
+
+  /// No description provided for @rewardShellSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'shell'**
+  String get rewardShellSingular;
+
+  /// No description provided for @rewardShellsPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'shells'**
+  String get rewardShellsPlural;
+
+  /// No description provided for @rewardSealSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'seal'**
+  String get rewardSealSingular;
+
+  /// No description provided for @rewardSealsPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'seals'**
+  String get rewardSealsPlural;
+
+  /// No description provided for @rewardEmberSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'ember'**
+  String get rewardEmberSingular;
+
+  /// No description provided for @rewardEmbersPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'embers'**
+  String get rewardEmbersPlural;
+
+  /// No description provided for @rewardAcornSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'acorn'**
+  String get rewardAcornSingular;
+
+  /// No description provided for @rewardAcornsPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'acorns'**
+  String get rewardAcornsPlural;
+
+  /// No description provided for @rewardGemSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'gem'**
+  String get rewardGemSingular;
+
+  /// No description provided for @rewardGemsPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'gems'**
+  String get rewardGemsPlural;
+
   /// No description provided for @noteUntitled.
   ///
   /// In en, this message translates to:
@@ -211,7 +433,7 @@ abstract class AppLocalizations {
   /// No description provided for @noteExportMultiTitle.
   ///
   /// In en, this message translates to:
-  /// **'My notes — JW Streak'**
+  /// **'My notes - JW Streak'**
   String get noteExportMultiTitle;
 
   /// No description provided for @noteExportedOn.
@@ -739,7 +961,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbFeatureQuizDesc.
   ///
   /// In en, this message translates to:
-  /// **'Short quizzes unlock as you read. Choose, type or build words — and earn stars.'**
+  /// **'Short quizzes unlock as you read. Choose, type or build words, and earn stars.'**
   String get onbFeatureQuizDesc;
 
   /// No description provided for @onbFeatureNotesTitle.
@@ -775,13 +997,13 @@ abstract class AppLocalizations {
   /// No description provided for @onbReminderIntro.
   ///
   /// In en, this message translates to:
-  /// **'A small daily nudge keeps your streak going. Pick a calm moment — you can change it later.'**
+  /// **'A small daily nudge keeps your streak going. Pick a calm moment. You can change it later.'**
   String get onbReminderIntro;
 
   /// No description provided for @onbReminderTip.
   ///
   /// In en, this message translates to:
-  /// **'Tip: tie it to an existing habit — morning coffee, or bedtime.'**
+  /// **'Tip: tie it to an existing habit, like morning coffee, or bedtime.'**
   String get onbReminderTip;
 
   /// No description provided for @onbReminderFinish.
@@ -907,7 +1129,7 @@ abstract class AppLocalizations {
   /// No description provided for @tourSettingsBody.
   ///
   /// In en, this message translates to:
-  /// **'Theme, language, reminders — and this tour, if you want to see it again.'**
+  /// **'Theme, language, reminders, and this tour, if you want to see it again.'**
   String get tourSettingsBody;
 
   /// No description provided for @settingsReplayTour.
@@ -937,7 +1159,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAppLockOn.
   ///
   /// In en, this message translates to:
-  /// **'Asks for your fingerprint, face or PIN before opening your notes — unless you come back within 10 minutes.'**
+  /// **'Asks for your fingerprint, face or PIN before opening your notes, unless you come back within 10 minutes.'**
   String get settingsAppLockOn;
 
   /// No description provided for @settingsAppLockOff.
@@ -1009,7 +1231,7 @@ abstract class AppLocalizations {
   /// No description provided for @streakInfoSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Your streak grows every day you stay active — and resets to zero if you\'re away too long.'**
+  /// **'Your streak grows every day you stay active, and resets to zero if you\'re away too long.'**
   String get streakInfoSubtitle;
 
   /// No description provided for @streakInfoRow1Title.
@@ -1065,6 +1287,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
+
+  /// No description provided for @settingsCatPersonalization.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalization'**
+  String get settingsCatPersonalization;
+
+  /// No description provided for @settingsCatPersonalizationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Style, brightness, language'**
+  String get settingsCatPersonalizationDesc;
+
+  /// No description provided for @settingsCatReadingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading order, resume point, how chapters open'**
+  String get settingsCatReadingDesc;
+
+  /// No description provided for @settingsCatNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsCatNotifications;
+
+  /// No description provided for @settingsCatNotificationsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Permissions needed for reminders'**
+  String get settingsCatNotificationsDesc;
+
+  /// No description provided for @settingsCatPrivacyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock the app'**
+  String get settingsCatPrivacyDesc;
+
+  /// No description provided for @settingsCatAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & about'**
+  String get settingsCatAbout;
+
+  /// No description provided for @settingsCatAboutDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided tour, version, source code'**
+  String get settingsCatAboutDesc;
 
   /// No description provided for @settingsAppearance.
   ///
@@ -1132,12 +1402,6 @@ abstract class AppLocalizations {
   /// **'System'**
   String get settingsLanguageSystem;
 
-  /// No description provided for @settingsPermissions.
-  ///
-  /// In en, this message translates to:
-  /// **'Permissions'**
-  String get settingsPermissions;
-
   /// No description provided for @settingsNotifPermTitle.
   ///
   /// In en, this message translates to:
@@ -1185,24 +1449,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not allowed. Reminders may be delayed.'**
   String get settingsExactAlarmsOff;
-
-  /// No description provided for @settingsBatteryOptimization.
-  ///
-  /// In en, this message translates to:
-  /// **'Battery optimization'**
-  String get settingsBatteryOptimization;
-
-  /// No description provided for @settingsBatteryOptimizationOn.
-  ///
-  /// In en, this message translates to:
-  /// **'Exempt. The reading-session notification can stay up.'**
-  String get settingsBatteryOptimizationOn;
-
-  /// No description provided for @settingsBatteryOptimizationOff.
-  ///
-  /// In en, this message translates to:
-  /// **'Not exempt. The device may remove that notification early.'**
-  String get settingsBatteryOptimizationOff;
 
   /// No description provided for @settingsAllow.
   ///
@@ -1255,7 +1501,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsUnaffiliated.
   ///
   /// In en, this message translates to:
-  /// **'JW Streak is an independent, unofficial project — not affiliated with Jehovah\'s Witnesses, the Watch Tower Bible and Tract Society, or JW.org.'**
+  /// **'JW Streak is an independent, unofficial project, not affiliated with Jehovah\'s Witnesses, the Watch Tower Bible and Tract Society, or JW.org.'**
   String get settingsUnaffiliated;
 
   /// No description provided for @settingsError.
@@ -1513,7 +1759,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeStreakLostMessage.
   ///
   /// In en, this message translates to:
-  /// **'Your streak reset to zero — no worries, let\'s start again together 💪'**
+  /// **'Your streak reset to zero. No worries, let\'s start again together 💪'**
   String get homeStreakLostMessage;
 
   /// No description provided for @homeExactAlarmDialogTitle.
@@ -2061,6 +2307,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mark as read'**
   String get bibleMarkRead;
+
+  /// No description provided for @bibleCoveredHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Counted as already read, from where you said you\'d resume.'**
+  String get bibleCoveredHint;
 
   /// No description provided for @bibleChaptersHeader.
   ///
@@ -2676,7 +2928,7 @@ abstract class AppLocalizations {
   /// No description provided for @notifStreakRiskBody.
   ///
   /// In en, this message translates to:
-  /// **'You haven\'t been active today yet — read a chapter or take a quiz to keep it.'**
+  /// **'You haven\'t been active today yet. Read a chapter or take a quiz to keep it.'**
   String get notifStreakRiskBody;
 
   /// No description provided for @easterEggHeartBody.
@@ -2694,7 +2946,7 @@ abstract class AppLocalizations {
   /// No description provided for @easterEggVersionBody.
   ///
   /// In en, this message translates to:
-  /// **'No hidden mode here, sorry. Just a thank you for looking this far — this app was written one evening at a time, and it\'s nice to know someone\'s poking around.'**
+  /// **'No hidden mode here, sorry. Just a thank you for looking this far. This app was written one evening at a time, and it\'s nice to know someone\'s poking around.'**
   String get easterEggVersionBody;
 
   /// No description provided for @easterEggVersionButton.

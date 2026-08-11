@@ -13,7 +13,10 @@ import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
 import '../services/reading_session_service.dart';
+import '../reading_plan.dart';
 import '../theme/app_icons.dart';
+import '../widgets/matchstick_icon.dart';
+import '../widgets/marquee_text.dart';
 import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/freeze_earned_dialog.dart';
@@ -81,6 +84,21 @@ class _HomeScreenState extends State<HomeScreen> {
   List<DateTime> _recentReadingDays = const <DateTime>[];
   Set<String> _frozenDays = const <String>{};
   Set<String> _readKeys = const <String>{};
+
+  /// Which order chapters come in, and where in it the reader said they'd
+  /// pick up. Both feed [_nextUnread] — the reading card is the only place
+  /// the plan is visible, since everything else works off chapter keys.
+  ReadingPlan _readingPlan = ReadingPlan.canonical;
+  String? _planStartKey;
+
+  /// [_readKeys] plus everything before the resume point.
+  ///
+  /// Kept separate because the two answer different questions. _readKeys is
+  /// what was genuinely read here, and is the only thing streaks, totals,
+  /// quiz checkpoints and achievements are allowed to see. This one is how
+  /// much of the Bible the reader has covered, which is what the progress
+  /// bar means and what deciding the next chapter needs.
+  Set<String> _coveredKeys = const <String>{};
   Set<String> _completedQuiz = const <String>{};
   int _totalStars = 0;
   bool _isLoading = true;
@@ -249,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _refreshDashboard() async {
-    // These 9 reads don't depend on each other — was one round-trip after
+    // These 11 reads don't depend on each other — was one round-trip after
     // another, now all in flight at once.
     final List<dynamic> fetched = await Future.wait<dynamic>(<Future<dynamic>>[
       _dbService.getReminders(),
@@ -264,6 +282,8 @@ class _HomeScreenState extends State<HomeScreen> {
       _dbService.getCompletedQuizIds(),
       _dbService.getEarnedStarsByBook(),
       _dbService.getFrozenDays(),
+      _dbService.getReadingPlan(),
+      _dbService.getPlanStartKey(),
     ]);
     final List<Reminder> reminders = fetched[0] as List<Reminder>;
     final DateTime? lastReadAt = fetched[1] as DateTime?;
@@ -271,6 +291,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final int totalReadings = fetched[3] as int;
     final List<DateTime> recentReadingDays = fetched[4] as List<DateTime>;
     final Set<String> readKeys = fetched[5] as Set<String>;
+    final ReadingPlan readingPlan = fetched[9] as ReadingPlan;
+    final String? planStartKey = fetched[10] as String?;
     final Set<String> completedQuiz = fetched[6] as Set<String>;
     final Map<String, int> starsByBook = fetched[7] as Map<String, int>;
     final int totalStars = starsByBook.values.fold<int>(
@@ -339,6 +361,11 @@ class _HomeScreenState extends State<HomeScreen> {
       _recentReadingDays = recentReadingDays;
       _frozenDays = frozenDays;
       _readKeys = readKeys;
+      _readingPlan = readingPlan;
+      _planStartKey = planStartKey;
+      _coveredKeys = planStartKey == null
+          ? readKeys
+          : <String>{...readKeys, ...chaptersBeforeStart(planStartKey)};
       _completedQuiz = completedQuiz;
       _totalStars = displayedStars;
       _hasNewAchievement = hasNewAchievement;
@@ -470,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     // It may already have been marked while they were away — from the Bible
     // browser, or by tapping "Mark as read" before opening it.
-    if (_readKeys.contains(bibleChapterKey(session.book, session.chapter))) {
+    if (_coveredKeys.contains(bibleChapterKey(session.book, session.chapter))) {
       return;
     }
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -560,24 +587,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   /// First chapter (canonical order) that hasn't been read yet, or null when
   /// the whole Bible is done.
+  /// The next chapter to offer, in the reader's chosen order.
+  ///
+  /// Used to walk kBibleBooks directly, which quietly assumed everyone reads
+  /// Genesis to Revelation. The sequence now comes from the plan, and the
+  /// resume point decides where in it to start looking.
   _ChapterRef? _nextUnread() {
-    for (final BibleBook book in kBibleBooks) {
-      for (int c = 1; c <= book.chapters; c++) {
-        if (!_readKeys.contains(bibleChapterKey(book.id, c))) {
-          return _ChapterRef(book, c);
-        }
-      }
-    }
-    return null;
-  }
-
-  bool _checkpointUnlocked(BibleBook book, Checkpoint cp) {
-    for (int c = 1; c <= cp.afterChapter; c++) {
-      if (!_readKeys.contains(bibleChapterKey(book.id, c))) {
-        return false;
-      }
-    }
-    return true;
+    final PlanChapter? next = nextChapterInPlan(
+      plan: _readingPlan,
+      readKeys: _coveredKeys,
+      startKey: _planStartKey,
+    );
+    return next == null ? null : _ChapterRef(next.book, next.chapter);
   }
 
   /// Earliest unlocked checkpoint whose quiz hasn't been taken yet.
@@ -586,14 +607,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Checkpoint? _pendingQuizCheckpoint() {
     final String languageCode = Localizations.localeOf(context).languageCode;
     for (final BibleBook book in kBibleBooks) {
-      for (final Checkpoint cp in checkpointsForBook(
+      final List<Checkpoint> checkpoints = checkpointsForBook(
         book,
         languageCode: languageCode,
-      )) {
-        if (!cp.hasQuiz) {
+      );
+      for (final Checkpoint cp in checkpoints) {
+        if (!cp.hasQuiz || _completedQuiz.contains(cp.id)) {
           continue;
         }
-        if (_checkpointUnlocked(book, cp) && !_completedQuiz.contains(cp.id)) {
+        final bool unlocked = isCheckpointAvailable(
+          checkpoint: cp,
+          checkpointsInBook: checkpoints,
+          isChapterCovered: (int c) =>
+              _coveredKeys.contains(bibleChapterKey(book.id, c)),
+          isQuizDone: (String id) => _completedQuiz.contains(id),
+        );
+        if (unlocked) {
           return cp;
         }
       }
@@ -781,7 +810,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ? l10n.homeReminderAt(_reminders.first.label)
         : l10n.homeRemindersActive(_reminders.length);
     final _ChapterRef? nextChapter = _nextChapter;
-    final int chaptersRead = _readKeys.length;
+    final int chaptersRead = _coveredKeys.length;
     final Checkpoint? pendingCheckpoint = _pendingCheckpoint;
 
     return Scaffold(
@@ -1110,9 +1139,15 @@ class _StreakHero extends StatelessWidget {
                         ),
                         const SizedBox(width: 6),
                         Expanded(
-                          child: Text(
-                            greeting,
-                            overflow: TextOverflow.ellipsis,
+                          // A plain Text here just ellipsizes when a longer
+                          // greeting variant, in some language, at some
+                          // system font size, doesn't fit — quietly cutting
+                          // off the one thing this line exists to say.
+                          // MarqueeText only starts scrolling when that
+                          // actually happens; otherwise it behaves exactly
+                          // like the Text it replaced.
+                          child: MarqueeText(
+                            text: greeting,
                             style: theme.textTheme.titleMedium?.copyWith(
                               color: cs.onPrimaryContainer.withValues(
                                 alpha: 0.85,
@@ -1211,11 +1246,7 @@ class _FreezePill extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(
-            AppIcons.of(context).flame,
-            size: 16,
-            color: cs.onPrimaryContainer,
-          ),
+          MatchstickIcon(size: 16, color: cs.onPrimaryContainer),
           const SizedBox(width: 6),
           Text(
             '$freezes',
@@ -1336,9 +1367,7 @@ class _StreakFireEasterEggState extends State<_StreakFireEasterEgg> {
 
   @override
   Widget build(BuildContext context) {
-    final int displayedStreak = _pranked
-        ? (widget.streak <= 0 ? -100 : 0)
-        : widget.streak;
+    final int displayedStreak = _pranked ? -100 : widget.streak;
     return _StreakBadge(
       streak: displayedStreak,
       onIconTapEasterEgg: () {
@@ -1449,19 +1478,26 @@ class _StreakBadgeState extends State<_StreakBadge>
                   // instead of being rebuilt on every one of the ~60 ticks/sec.
                   child: ShaderMask(
                     shaderCallback: (Rect rect) {
+                      final Color activeColor = AppIcons.of(
+                        context,
+                      ).activeColor;
                       return LinearGradient(
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
+                        // A 3-stop ramp lightening toward white, generated
+                        // from the skin's own activeColor rather than a
+                        // fixed orange/amber pair — otherwise a wave or a
+                        // sparkle would still get painted like fire.
                         colors: _frozen
                             ? const <Color>[
                                 Color(0xFF2196F3), // blue
                                 Color(0xFF4FC3F7), // light blue
                                 Color(0xFFB3E5FC), // near-white ice
                               ]
-                            : const <Color>[
-                                Colors.deepOrange,
-                                Colors.orange,
-                                Colors.amber,
+                            : <Color>[
+                                activeColor,
+                                Color.lerp(activeColor, Colors.white, 0.35)!,
+                                Color.lerp(activeColor, Colors.white, 0.65)!,
                               ],
                       ).createShader(rect);
                     },
@@ -1477,7 +1513,7 @@ class _StreakBadgeState extends State<_StreakBadge>
                     final double t = _controller.value * 2 * math.pi;
                     return _frozen
                         ? _buildFrost(t, child!)
-                        : _buildFlame(t, child!);
+                        : _buildActive(context, t, child!);
                   },
                 ),
               ),
@@ -1501,16 +1537,14 @@ class _StreakBadgeState extends State<_StreakBadge>
     );
   }
 
-  /// Fire: fast, irregular, always leaning. Frequencies must be integer
-  /// multiples of the base loop so every sine wave lands back exactly where
-  /// it started when the controller wraps from 1.0 to 0.0 — otherwise the
-  /// loop restart shows a visible jump.
-  Widget _buildFlame(double t, Widget icon) {
+  /// The glow halo is shared by every skin — only its color and the icon's
+  /// own motion (see [AppIcons.activeMotion]) actually vary. Frequencies in
+  /// the glow pulse are integer multiples of the base loop so it lands back
+  /// exactly where it started when the controller wraps from 1.0 to 0.0 —
+  /// otherwise the loop restart shows a visible jump.
+  Widget _buildActive(BuildContext context, double t, Widget icon) {
+    final Color activeColor = AppIcons.of(context).activeColor;
     final double glow = 0.5 + 0.5 * math.sin(t * 2);
-    final double scale =
-        1.0 + 0.05 * math.sin(t * 3) + 0.02 * math.sin(t * 5 + 0.6);
-    final double skew = 0.05 * math.sin(t * 2 + 1.0);
-    final double bob = 1.5 * math.sin(t * 3 + 0.5);
 
     return Stack(
       alignment: Alignment.center,
@@ -1522,23 +1556,13 @@ class _StreakBadgeState extends State<_StreakBadge>
             shape: BoxShape.circle,
             gradient: RadialGradient(
               colors: <Color>[
-                Colors.deepOrange.withValues(alpha: 0.35 * glow),
-                Colors.deepOrange.withValues(alpha: 0),
+                activeColor.withValues(alpha: 0.35 * glow),
+                activeColor.withValues(alpha: 0),
               ],
             ),
           ),
         ),
-        Transform.translate(
-          offset: Offset(0, bob),
-          child: Transform(
-            alignment: Alignment.bottomCenter,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateZ(skew)
-              ..scaleByDouble(scale, scale, 1, 1),
-            child: icon,
-          ),
-        ),
+        AppIcons.of(context).activeMotion(t, icon),
       ],
     );
   }
@@ -2138,9 +2162,13 @@ class _ProgressCard extends StatelessWidget {
                 child: _StatTile(
                   // Matches the hero badge above: a live streak is a flame, a
                   // streak of zero is frozen rather than "still on fire at 0".
-                  icon: streak > 0
-                      ? AppIcons.of(context).flame
-                      : AppIcons.of(context).frozen,
+                  icon: ({required double size, required Color color}) => Icon(
+                    streak > 0
+                        ? AppIcons.of(context).flame
+                        : AppIcons.of(context).frozen,
+                    size: size,
+                    color: color,
+                  ),
                   value: '$streak',
                   label: streak != 1
                       ? l10n.homeStatStreakDaysPlural
@@ -2158,7 +2186,8 @@ class _ProgressCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _StatTile(
-                  icon: AppIcons.of(context).book,
+                  icon: ({required double size, required Color color}) =>
+                      Icon(AppIcons.of(context).book, size: size, color: color),
                   value: '$totalReadings',
                   label: totalReadings != 1
                       ? l10n.homeStatReadingsPlural
@@ -2170,12 +2199,13 @@ class _ProgressCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _StatTile(
-                  icon: AppIcons.of(context).star,
+                  icon: ({required double size, required Color color}) =>
+                      AppIcons.of(context).reward(size: size, color: color),
                   value: '$totalStars',
-                  label: totalStars != 1
-                      ? l10n.homeStatStarsPlural
-                      : l10n.homeStatStarSingular,
-                  color: Colors.amber,
+                  label: AppIcons.of(
+                    context,
+                  ).rewardNoun(context, plural: totalStars != 1),
+                  color: AppIcons.of(context).rewardColor,
                   onTap: onOpenStars,
                 ),
               ),
@@ -2292,7 +2322,7 @@ class _StatTile extends StatelessWidget {
     required this.onTap,
   });
 
-  final IconData icon;
+  final Widget Function({required double size, required Color color}) icon;
   final String value;
   final String label;
   final Color color;
@@ -2333,7 +2363,7 @@ class _StatTile extends StatelessWidget {
               width: double.infinity,
               color: color,
               alignment: Alignment.center,
-              child: Icon(icon, color: Colors.white, size: 26),
+              child: icon(size: 26, color: Colors.white),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),

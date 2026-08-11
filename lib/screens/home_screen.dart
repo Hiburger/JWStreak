@@ -782,6 +782,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) {
       return;
     }
+    // Settings loads and saves the reading plan and resume point on its own
+    // (they're not lifted into main.dart like the theme/skin/locale are), so
+    // without this the dashboard kept showing whatever it had cached from
+    // before the trip to Settings — a plan or resume-point change looked
+    // like it did nothing until the app was restarted.
+    await _refreshDashboard();
     // Settings can clear the tour flag ("replay the guided tour"), so re-check
     // it once we're back on the home screen the tour actually points at.
     await _maybeShowGuidedTour();

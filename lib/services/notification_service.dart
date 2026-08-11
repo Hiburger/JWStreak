@@ -473,18 +473,28 @@ class NotificationService {
   }
 
   Future<bool> requestNotificationPermission() async {
-    final IOSFlutterLocalNotificationsPlugin? ios = _iosPlugin;
-    if (ios != null) {
-      final bool? granted = await ios.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      return granted ?? false;
+    try {
+      final IOSFlutterLocalNotificationsPlugin? ios = _iosPlugin;
+      if (ios != null) {
+        final bool? granted = await ios.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+        return granted ?? false;
+      }
+      final bool? granted = await _androidPlugin
+          ?.requestNotificationsPermission();
+      return granted ?? true;
+    } catch (_) {
+      // A platform-level failure here (seen on an improperly code-signed
+      // iOS build, where UNUserNotificationCenter refuses the request
+      // outright) shouldn't be fatal — reminders are optional, and this
+      // runs as part of app startup (see _bootstrap in home_screen.dart),
+      // so letting it throw would block the entire dashboard from loading
+      // over something the reader can just enable later in Settings.
+      return false;
     }
-    final bool? granted = await _androidPlugin
-        ?.requestNotificationsPermission();
-    return granted ?? true;
   }
 
   /// Opens the app's system settings page. Android only shows its own

@@ -72,7 +72,7 @@ authoredQuizzesZhC6 = <String, List<QuizQuestion>>{
       explanation: '围绕不同教师形成的派系造成了问题（哥林多前书1章）。',
     ),
     QuizQuestion(
-      text: '保罗在哥林多前书第3章把教会比作什么？',
+      text: '保罗在哥林多前书第3章把会众比作什么？',
       options: <String>['上帝的圣殿', '一支军队', '一座空荡荡的建筑', '一家商业企业'],
       correctIndex: 0,
       explanation: '这个神圣的比喻突显了集体的责任（哥林多前书3:16）。',

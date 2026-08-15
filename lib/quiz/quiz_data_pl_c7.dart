@@ -16,15 +16,15 @@ authoredQuizzesPlC7 = <String, List<QuizQuestion>>{
           'Nadzieja na sprawiedliwość Boga ich zachęca (2 Tesaloniczan 1).',
     ),
     QuizQuestion(
-      text: 'Jakie zaniepokojenie Paweł koryguje w związku z dniem Pana?',
+      text: 'Za co Paweł dziękuje Bogu w związku z Tesaloniczanami?',
       options: <String>[
-        'Błędne przekonanie, że już nadszedł',
-        'Przekonanie, że nigdy nie nadejdzie',
-        'Całkowite ignorowanie tego tematu',
-        'Myśl, że modlitwa powinna ustać',
+        'Ich wiara bardzo rośnie, a miłość się powiększa',
+        'Ich bogactwo wciąż rośnie',
+        'Ich liczba co roku maleje',
+        'Przestali się spotykać',
       ],
       correctIndex: 0,
-      explanation: 'Wyjaśnione zostaje nieporozumienie (2 Tesaloniczan 2:2).',
+      explanation: 'Paweł dziękuje Bogu za ich postępy (2 Tesaloniczan 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[

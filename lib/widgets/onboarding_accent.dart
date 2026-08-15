@@ -72,3 +72,12 @@ const OnboardingAccent kAccentOrange = OnboardingAccent(
   darkBg: Color(0xFF6B3300),
   darkFg: Color(0xFFFFB88A),
 );
+
+/// Echoes the pink of the heart on the about page — used for the donations
+/// category, the other place the app talks about supporting it.
+const OnboardingAccent kAccentPink = OnboardingAccent(
+  lightBg: Color(0xFFFBDCE7),
+  lightFg: Color(0xFF8E2F52),
+  darkBg: Color(0xFF612540),
+  darkFg: Color(0xFFF8BDD2),
+);

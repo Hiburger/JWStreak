@@ -49,12 +49,12 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿Por qué anunció Samuel el rechazo de Saúl como rey?',
+      text: '¿Qué hizo Saúl en Guilgal sin esperar a Samuel?',
       options: <String>[
-        'Saúl ofreció un sacrificio sin esperar a Samuel',
-        'Saúl perdió una batalla',
-        'Saúl se negó a reinar',
-        'Saúl huyó ante el enemigo',
+        'Ofreció él mismo el sacrificio',
+        'Perdió una batalla',
+        'Se negó a reinar',
+        'Huyó ante el enemigo',
       ],
       correctIndex: 0,
       explanation:
@@ -203,7 +203,9 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
           'La parábola lleva a David a reconocer su falta (2 Samuel 12).',
     ),
     QuizQuestion(
-      text: '¿Quién se rebeló contra su padre David para tomar el trono?',
+      text:
+          '¿Qué hijo de David se hizo proclamar rey en Hebrón, '
+          'rebelándose contra él?',
       options: <String>['Absalón', 'Amnón', 'Salomón', 'Adonías'],
       correctIndex: 0,
       explanation: 'Comienza la rebelión de Absalón (2 Samuel 15).',
@@ -226,7 +228,7 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Cómo murió Absalón?',
       options: <String>[
-        'Colgado del cabello en un árbol, y muerto por Joab',
+        'Con la cabeza atrapada en un árbol, y muerto por Joab',
         'En combate singular contra David',
         'Envenenado',
         'En el exilio, de vejez',
@@ -253,7 +255,9 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Quién intentó apoderarse del trono antes de la muerte de David?',
+      text:
+          '¿Qué hijo de David se proclamó rey cuando David ya era '
+          'anciano?',
       options: <String>['Adonías', 'Absalón', 'Solo Joab', 'Natán'],
       correctIndex: 0,
       explanation:
@@ -505,7 +509,7 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Pascua'],
     ),
     QuizQuestion(
-      text: '¿Cómo termina el libro de los Reyes?',
+      text: '¿Cómo termina la historia de Judá en el libro de los Reyes?',
       options: <String>[
         'Con la caída de Jerusalén y la destrucción del templo',
         'Con la coronación de un rey justo y duradero',
@@ -593,7 +597,9 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué canto compuso Asaf con motivo de la instalación del Arca?',
+      text:
+          '¿Qué canto confió David a Asaf con motivo de la instalación '
+          'del Arca?',
       options: <String>[
         'Un canto de alabanza y acción de gracias',
         'Un canto fúnebre',
@@ -899,7 +905,8 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
       text:
           '¿Qué reacción mezclada siguió a la colocación de los cimientos del nuevo templo?',
       options: <String>[
-        'Alegría de los jóvenes, llanto de los ancianos que recordaban el primero',
+        'Alegría de muchos, llanto de los ancianos que habían visto el '
+            'primer templo',
         'Indiferencia general',
         'Ira unánime',
         'Huida del pueblo',
@@ -1081,7 +1088,9 @@ authoredQuizzesEsC2 = <String, List<QuizQuestion>>{
       explanation: 'Dos coros recorren la muralla cantando (Nehemías 12).',
     ),
     QuizQuestion(
-      text: '¿Qué reforma impuso Nehemías a su regreso de un segundo mandato?',
+      text:
+          '¿Qué reforma impuso Nehemías durante su segunda estancia en '
+          'Jerusalén?',
       options: <String>[
         'El estricto respeto del sábado y la expulsión de Tobías',
         'La abolición del templo',

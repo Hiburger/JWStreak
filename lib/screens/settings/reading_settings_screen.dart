@@ -285,20 +285,51 @@ class _ReadingSettingsScreenState extends State<ReadingSettingsScreen> {
         const SizedBox(height: 8),
         Card.filled(
           shape: sectionShape,
-          child: SwitchListTile(
-            secondary: Icon(
-              _openInJwLibrary
-                  ? Icons.menu_book_outlined
-                  : Icons.language_outlined,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                // A plain caption here, same as "settingsReadingPlan" above,
+                // rather than the SwitchListTile's own title: now that this
+                // sentence covers both the Bible and the daily text it runs
+                // long in several languages, and a caption wraps to two
+                // lines cleanly where a ListTile title just looks broken.
+                Text(
+                  l10n.settingsBibleTargetTitle,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: cs.onSurfaceVariant,
+                  ),
+                ),
+                // Theme override rather than a SwitchListTile param: it has
+                // no direct way to opt out of the tap ripple/highlight, only
+                // the ambient InkWell colors it paints with — flattening
+                // those to nothing is the standard way around that.
+                Theme(
+                  data: theme.copyWith(
+                    splashFactory: NoSplash.splashFactory,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                  ),
+                  child: SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    secondary: Icon(
+                      _openInJwLibrary
+                          ? Icons.menu_book_outlined
+                          : Icons.language_outlined,
+                    ),
+                    title: Text(
+                      _openInJwLibrary
+                          ? l10n.settingsBibleTargetJwLibrary
+                          : l10n.settingsBibleTargetWeb,
+                    ),
+                    value: _openInJwLibrary,
+                    onChanged: _changeBibleTarget,
+                  ),
+                ),
+              ],
             ),
-            title: Text(l10n.settingsBibleTargetTitle),
-            subtitle: Text(
-              _openInJwLibrary
-                  ? l10n.settingsBibleTargetJwLibrary
-                  : l10n.settingsBibleTargetWeb,
-            ),
-            value: _openInJwLibrary,
-            onChanged: _changeBibleTarget,
           ),
         ),
       ],

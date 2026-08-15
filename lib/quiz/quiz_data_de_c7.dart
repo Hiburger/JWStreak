@@ -16,16 +16,16 @@ authoredQuizzesDeC7 = <String, List<QuizQuestion>>{
           'Die Hoffnung auf Gottes Gerechtigkeit ermutigt sie (2. Thessalonicher 1).',
     ),
     QuizQuestion(
-      text: 'Welche Sorge korrigiert Paulus bezüglich des Tages des Herrn?',
+      text: 'Wofür dankt Paulus Gott im Zusammenhang mit den Thessalonichern?',
       options: <String>[
-        'Den irrtümlichen Glauben, dass er bereits gekommen sei',
-        'Den Glauben, dass er nie kommen würde',
-        'Das völlige Ignorieren des Themas',
-        'Die Annahme, dass das Beten aufhören sollte',
+        'Ihr Glaube wächst sehr und ihre Liebe nimmt zu',
+        'Ihr Reichtum nimmt ständig zu',
+        'Ihre Zahl geht jedes Jahr zurück',
+        'Sie kommen nicht mehr zusammen',
       ],
       correctIndex: 0,
       explanation:
-          'Ein Missverständnis wird klargestellt (2. Thessalonicher 2:2).',
+          'Paulus dankt Gott für ihre Fortschritte (2. Thessalonicher 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[

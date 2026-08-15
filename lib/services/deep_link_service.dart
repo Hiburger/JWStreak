@@ -51,9 +51,8 @@ class DeepLinkService {
     );
   }
 
-  /// Opens a Bible chapter on jw.org in a Chrome Custom Tab (same App Link
-  /// hand-off avoidance as [openDailyText]), falling back to an external
-  /// browser launch if no Custom Tabs provider is available.
+  /// Opens a Bible chapter on jw.org in a Chrome Custom Tab, falling back to
+  /// an external browser launch if no Custom Tabs provider is available.
   Future<void> _openChapterOnWeb({
     required String book,
     required int chapter,
@@ -83,15 +82,34 @@ class DeepLinkService {
     }
   }
 
-  /// Opens the official daily text in a real browser tab — never embedded
-  /// in-app, since jw.org's Terms of Use prohibit framing their content.
-  ///
-  /// Uses a Chrome Custom Tab rather than a plain external ACTION_VIEW: the
-  /// daily text URL is also a registered Android App Link for JW Library, so
-  /// a plain external launch gets handed off to that app instead of a
-  /// browser. A Custom Tab is still just Chrome (full browser UI, no
-  /// embedding) but isn't subject to that App Link hand-off.
+  /// Opens the official daily text — in the JW Library app when the reader
+  /// prefers it (see [openReference]'s same toggle), falling back to a real
+  /// browser tab if that fails or isn't wanted. Never embedded in-app either
+  /// way, since jw.org's Terms of Use prohibit framing their content.
   Future<void> openDailyText({String? languageCode}) async {
+    final bool openOnWeb = await LocalDbService().getOpenBibleOnWeb();
+    if (!openOnWeb) {
+      final Uri deepLink = Uri.parse(
+        jwLibraryDailyTextDeepLink(DateTime.now(), languageCode: languageCode),
+      );
+      final bool openedInApp = await launchUrl(
+        deepLink,
+        mode: LaunchMode.externalApplication,
+      );
+      if (openedInApp) {
+        return;
+      }
+    }
+
+    // Reader prefers the web, or JW Library isn't installed (or refused the
+    // link) — land on jw.org's daily text page instead.
+    await _openDailyTextOnWeb(languageCode: languageCode);
+  }
+
+  /// Opens the daily text on jw.org in a Chrome Custom Tab (same reasoning
+  /// as [_openChapterOnWeb]), falling back to an external browser launch if
+  /// no Custom Tabs provider is available.
+  Future<void> _openDailyTextOnWeb({String? languageCode}) async {
     final Uri uri = Uri.parse(dailyTextUrlFor(languageCode));
     try {
       final bool opened = await launchUrl(

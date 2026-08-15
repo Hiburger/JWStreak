@@ -38,13 +38,16 @@ String wtLocaleFor(String? languageCode) =>
 // wol.jw.org's per-language URL segments. `path` is the language folder,
 // `r`/`lp` are jw.org's internal library identifiers. These build both the
 // daily-text page (`/wol/h/{r}/{lp}`) and Bible chapters
-// (`/wol/b/{r}/{lp}/nwtsty/{book}/{chapter}`). We use these final wol.jw.org
-// URLs (rather than the jw.org/finder aliases) and open them in a Chrome Custom
-// Tab: jw.org registers wol.jw.org as an Android App Link for JW Library, so a
-// plain external ACTION_VIEW intent would be handed to that app instead of a
-// browser. A Custom Tab is still a real browser (jw.org's Terms of Use prohibit
-// embedding their content in-app) but isn't subject to that hand-off. French is
-// the fallback for any unmapped locale.
+// (`/wol/b/{r}/{lp}/nwtsty/{book}/{chapter}`), used as the web fallback and
+// opened in a Chrome Custom Tab — still a real browser (jw.org's Terms of
+// Use prohibit embedding their content in-app), just nicer than a full
+// external browser hop. wol.jw.org is *not* one of JW Library's registered
+// App Link domains (checked against the app's own installed manifest —
+// only `https://www.jw.org/finder` is, autoVerify=true), so this URL never
+// gets handed off to the app regardless of launch mode; reaching the app on
+// purpose goes through jwLibraryChapterDeepLink/jwLibraryDailyTextDeepLink's
+// `jwlibrary://` scheme instead. French is the fallback for any unmapped
+// locale.
 class _WolLanguage {
   const _WolLanguage(this.path, this.r, this.lp);
   final String path;
@@ -81,6 +84,22 @@ String jwOrgChapterUrlFor(int bookNumber, int chapter, String? languageCode) {
   final _WolLanguage wol = _wolFor(languageCode);
   return 'https://wol.jw.org/${wol.path}/wol/b/${wol.r}/${wol.lp}'
       '/nwtsty/$bookNumber/$chapter';
+}
+
+/// The JW Library `jwlibrary://` deep link for [date]'s daily text. Mirrors
+/// the link JW Library's own in-app Share button produces for the daily
+/// text — `https://www.jw.org/finder?srcid=jwlshare&wtlocale=E&prefer=lang
+/// &alias=daily-text&date=YYYYMMDD` — just over the custom scheme instead of
+/// that https App Link, for the same reason [jwLibraryChapterDeepLink] does:
+/// it only needs the app installed, not a verified App Link.
+String jwLibraryDailyTextDeepLink(DateTime date, {String? languageCode}) {
+  final String yyyymmdd =
+      '${date.year.toString().padLeft(4, '0')}'
+      '${date.month.toString().padLeft(2, '0')}'
+      '${date.day.toString().padLeft(2, '0')}';
+  return 'jwlibrary:///finder?srcid=jwlshare'
+      '&wtlocale=${wtLocaleFor(languageCode)}'
+      '&prefer=lang&alias=daily-text&date=$yyyymmdd';
 }
 
 const String kGithubRepoUrl = 'https://github.com/Hiburger/JWStreak';

@@ -1,11 +1,9 @@
 {
   "@@locale": "en",
-
   "themeSystem": "Follow system",
   "themeLight": "Light",
   "themeDark": "Dark",
   "themeOled": "OLED Dark",
-
   "settingsThemeStyle": "Style",
   "settingsThemeBrightness": "Brightness",
   "settingsThemeStyleDarkOnly": "This style is always dark.",
@@ -17,7 +15,6 @@
   "themeSkinSunset": "Sunset",
   "themeSkinForest": "Forest",
   "themeSkinAmethyst": "Amethyst",
-
   "planCanonicalTitle": "Cover to cover",
   "planCanonicalDesc": "Genesis to Revelation, in the order the books are printed.",
   "planChronologicalTitle": "As it happened",
@@ -55,12 +52,16 @@
   "rewardAcornsPlural": "acorns",
   "rewardGemSingular": "gem",
   "rewardGemsPlural": "gems",
-
   "noteUntitled": "Untitled",
   "noteExportMultiTitle": "My notes - JW Streak",
   "noteExportedOn": "Exported on {date}",
-  "@noteExportedOn": { "placeholders": { "date": { "type": "String" } } },
-
+  "@noteExportedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "reflectionPrompt0": "What does this passage teach you about Jehovah?",
   "reflectionPrompt1": "What quality shown here would you like to imitate?",
   "reflectionPrompt2": "How could you apply this teaching this week?",
@@ -69,7 +70,6 @@
   "reflectionPrompt5": "How does this strengthen your faith?",
   "reflectionPrompt6": "What would you like to remember from these chapters?",
   "reflectionPrompt7": "How would you talk about this passage with someone?",
-
   "bookGenesis": "Genesis",
   "bookExodus": "Exodus",
   "bookLeviticus": "Leviticus",
@@ -136,7 +136,6 @@
   "book3John": "3 John",
   "bookJude": "Jude",
   "bookRevelation": "Revelation",
-
   "welcomeTagline": "Your daily Bible reading,\none day at a time.",
   "welcomeButton": "Welcome!",
   "welcomeLogoGreeting": "Hi!",
@@ -180,7 +179,6 @@
   "tourSettingsBody": "Theme, language, reminders, and this tour, if you want to see it again.",
   "settingsReplayTour": "Replay the guided tour",
   "settingsReplayTourSubtitle": "See the home screen walkthrough again",
-
   "settingsPrivacy": "Privacy",
   "settingsAppLockTitle": "Lock the app",
   "settingsAppLockOn": "Asks for your fingerprint, face or PIN before opening your notes, unless you come back within 10 minutes.",
@@ -194,7 +192,6 @@
   "appLockUnlockButton": "Unlock",
   "onbReminderPermissionMissing": "Notifications are off, so this reminder won't ring. Turn them on to get notified.",
   "onbReminderPermissionEnable": "Enable",
-
   "streakInfoTitle": "Keep your streak alive",
   "streakInfoSubtitle": "Your streak grows every day you stay active, and resets to zero if you're away too long.",
   "streakInfoRow1Title": "Stay active every day",
@@ -205,36 +202,54 @@
   "streakInfoRow3Text": "Out of matches? Pass a review quiz (a mix of your readings) to earn one back.",
   "streakInfoRow4Title": "We'll warn you",
   "streakInfoRow4Text": "If your streak is at risk, a warning appears and an evening reminder can nudge you.",
-
   "settingsTitle": "Settings",
   "settingsCatPersonalization": "Personalization",
   "settingsCatPersonalizationDesc": "Style, brightness, language",
   "settingsCatReadingDesc": "Reading order, resume point, how chapters open",
   "settingsCatNotifications": "Notifications",
-  "settingsCatNotificationsDesc": "Permissions needed for reminders",
+  "settingsCatNotificationsDesc": "Whether reminders can reach you",
   "settingsCatPrivacyDesc": "Lock the app",
+  "settingsCatDonations": "Donations",
+  "settingsCatDonationsDesc": "Supporting JW Streak",
   "settingsCatAbout": "Help & about",
   "settingsCatAboutDesc": "Guided tour, version, source code",
+  "donationsHeadline": "We're not taking donations yet",
+  "donationsLead": "JW Streak is free, and right now there's no way to donate. That's on purpose, we simply haven't set anything up. We may open it later, and we'd rather tell you plainly than surprise you with it one day.",
+  "donationsRow1Title": "It does cost something",
+  "donationsRow1Text": "Store accounts, test devices and the odd subscription all have to be paid for, and the app gets built on evenings and weekends. Some of those evenings are genuinely hard.",
+  "donationsRow2Title": "What won't change",
+  "donationsRow2Text": "JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. If donations ever open, giving will be entirely optional.",
+  "donationsRow3Title": "Free ways to help",
+  "donationsRow3Text": "Tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.",
+  "donationsThanks": "Thank you for being here 💛",
   "settingsAppearance": "Appearance",
   "settingsDynamicColor": "Dynamic colors",
   "settingsDynamicColorOn": "Uses the colors from your wallpaper (Material You)",
   "settingsDynamicColorOff": "Uses the app's brand color",
-  "settingsBibleTargetTitle": "Open the Bible with",
+  "settingsBibleTargetTitle": "Open the Bible & daily text with",
   "settingsBibleTargetJwLibrary": "JW Library app",
   "settingsBibleTargetWeb": "jw.org (browser)",
-  "settingsBibleTargetJwLibraryMissing": "The JW Library app is required to open the Bible this way. Would you like to install it?",
+  "settingsBibleTargetJwLibraryMissing": "The JW Library app is required to open the Bible or the daily text this way. Would you like to install it?",
   "settingsBibleTargetInstall": "Install",
   "settingsLanguage": "Language",
   "settingsLanguageSystem": "System",
-  "settingsNotifPermTitle": "Notification permissions",
   "settingsChecking": "Checking...",
-  "settingsNotifActive": "Permission active.",
-  "settingsNotifMissing": "Permission missing. Enable it to receive reminders.",
-  "settingsVerify": "Check",
-  "settingsExactAlarms": "Exact alarms",
-  "settingsExactAlarmsOn": "Reminders fire at the exact time.",
   "settingsExactAlarmsOff": "Not allowed. Reminders may be delayed.",
-  "settingsAllow": "Allow",
+  "notifStatusReadyTitle": "Reminders are all set",
+  "notifStatusReadyBody": "They'll arrive at the time you picked.",
+  "notifStatusBlockedTitle": "Reminders can't reach you",
+  "notifStatusBlockedBody": "JW Streak isn't allowed to send notifications, so no reminder will show up.",
+  "notifStatusDelayedTitle": "Reminders may arrive late",
+  "notifStatusDelayedBody": "They'll still come, but Android can hold them back a few minutes to save battery.",
+  "notifPermRowTitle": "Send notifications",
+  "notifPermRowBody": "Without this, a reminder can't appear at all.",
+  "notifExactRowTitle": "Precise timing",
+  "notifExactRowBody": "Lets a reminder go off at the exact minute you chose, rather than whenever Android gets around to it.",
+  "notifRowAllowed": "Allowed",
+  "notifRowNotAllowed": "Not allowed",
+  "notifActionTurnOn": "Turn on",
+  "notifActionOpen": "Open settings",
+  "notifRemindersHint": "Reminder times are set from the bell on the home screen.",
   "settingsInfo": "Information",
   "settingsVersionLabel": "JW Streak version",
   "settingsSourceCode": "View source code",
@@ -244,8 +259,13 @@
   "settingsFooter": "Made with brotherly love, from Switzerland.\nThis app is Free, Libre, and Open Source.",
   "settingsUnaffiliated": "JW Streak is an independent, unofficial project, not affiliated with Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org.",
   "settingsError": "Error: {error}",
-  "@settingsError": { "placeholders": { "error": { "type": "String" } } },
-
+  "@settingsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "reminderPresetMorning": "Morning",
   "reminderPresetNoon": "Noon",
   "reminderPresetEvening": "Evening",
@@ -256,7 +276,13 @@
   "reminderMine": "My reminders",
   "reminderEmpty": "No reminders yet.\nPick a time and add it.",
   "reminderLimitReached": "Limit of {max} reminders reached. Delete one to add a new one.",
-  "@reminderLimitReached": { "placeholders": { "max": { "type": "int" } } },
+  "@reminderLimitReached": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "reminderDeleteTooltip": "Delete",
   "reminderNewTime": "New time",
   "reminderEditTime": "Edit time",
@@ -264,9 +290,17 @@
   "reminderDailyTextSubtitle": "As a bonus, a gentle reminder for jw.org's daily text.",
   "notifDailyTextTitle": "JW Streak · Daily text",
   "notifDailyTextBody": "Today's text is waiting on jw.org.",
-
   "quizQuestionCounter": "Question {index} / {total}",
-  "@quizQuestionCounter": { "placeholders": { "index": { "type": "int" }, "total": { "type": "int" } } },
+  "@quizQuestionCounter": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "quizNext": "Next",
   "quizSeeScore": "See score",
   "quizTypeAnswerHint": "Type your answer",
@@ -274,19 +308,60 @@
   "quizWordBankInstruction": "Tap the words in the right order",
   "quizClearAnswer": "Clear",
   "quizCorrectAnswerWas": "Answer: {answer}",
-  "@quizCorrectAnswerWas": { "placeholders": { "answer": { "type": "String" } } },
+  "@quizCorrectAnswerWas": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
   "quizPerfect": "Perfect!",
   "quizWellDone": "Well done!",
   "quizScore": "Score: {score} / {total}",
-  "@quizScore": { "placeholders": { "score": { "type": "int" }, "total": { "type": "int" } } },
+  "@quizScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "quizFinish": "Finish",
-
+  "quizFunFactLabel": "Did you know?",
+  "quizReviewTitle": "{count, plural, =1{1 to look back on} other{{count} to look back on}}",
+  "@quizReviewTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizReviewSubtitle": "No rush, just a quick look at what didn't land.",
+  "quizReviewYourAnswer": "You answered",
+  "quizReviewCorrectAnswer": "The answer was",
   "checkpointAppBarTitle": "Step",
   "checkpointQuizLabel": "Quiz",
   "checkpointQuestionCount": "{count} questions",
-  "@checkpointQuestionCount": { "placeholders": { "count": { "type": "int" } } },
+  "@checkpointQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "checkpointBestScore": "Best score: {score}/{total}",
-  "@checkpointBestScore": { "placeholders": { "score": { "type": "int" }, "total": { "type": "int" } } },
+  "@checkpointBestScore": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "checkpointStart": "Start",
   "checkpointRedoQuiz": "Retake quiz",
   "checkpointPersonalReflection": "Personal reflection",
@@ -295,7 +370,6 @@
   "checkpointReflectionAppBarTitle": "Reflection",
   "checkpointReflectionHint": "Write your reflection…",
   "checkpointSave": "Save",
-
   "homeStreakLostMessage": "Your streak reset to zero. No worries, let's start again together 💪",
   "homeExactAlarmDialogTitle": "Reminder at the exact time",
   "homeExactAlarmDialogContent": "To receive the reminder precisely at the chosen time, Android asks to allow \"alarms & reminders\". Without this permission, the notification may be delayed.",
@@ -306,12 +380,30 @@
   "homeReviewQuizEarned": "Well done! You earned back a match 🔥",
   "homeReviewQuizFailed": "You needed at least 60% correct answers. Try again!",
   "homeGenericError": "Error: {error}",
-  "@homeGenericError": { "placeholders": { "error": { "type": "String" } } },
+  "@homeGenericError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "homeReminderConfigure": "Set up a reminder",
   "homeReminderAt": "Reminder at {label}",
-  "@homeReminderAt": { "placeholders": { "label": { "type": "String" } } },
+  "@homeReminderAt": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
   "homeRemindersActive": "{count} active reminders",
-  "@homeRemindersActive": { "placeholders": { "count": { "type": "int" } } },
+  "@homeRemindersActive": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeNotesLibraryTooltip": "Notes library",
   "homeSettingsTooltip": "Settings",
   "homeSectionReadingTitle": "Your reading",
@@ -320,7 +412,13 @@
   "homeSectionQuickActions": "Quick actions",
   "homeStreakStartToday": "Start your streak today",
   "homeStreakDayCount": "{count, plural, one{Streak of {count} day} other{Streak of {count} days}}",
-  "@homeStreakDayCount": { "placeholders": { "count": { "type": "int" } } },
+  "@homeStreakDayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeGreetingNight1": "Good night",
   "homeGreetingNight2": "Still up?",
   "homeGreetingMorning1": "Good morning",
@@ -336,26 +434,61 @@
   "homeToReadToday": "To read today",
   "homeFreezesNone": "no matches left",
   "homeFreezesRemaining": "{count, plural, one{{count} match left} other{{count} matches left}}",
-  "@homeFreezesRemaining": { "placeholders": { "count": { "type": "int" } } },
+  "@homeFreezesRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeStreakAtRiskTitle": "Your streak is at risk",
   "homeStreakAtRiskSubtitle": "Read a chapter or take a quiz today · {freezeLabel}",
-  "@homeStreakAtRiskSubtitle": { "placeholders": { "freezeLabel": { "type": "String" } } },
+  "@homeStreakAtRiskSubtitle": {
+    "placeholders": {
+      "freezeLabel": {
+        "type": "String"
+      }
+    }
+  },
   "homeEarnFreezeButton": "Earn back a match (review quiz)",
   "homeNewQuizUnlocked": "New quiz unlocked",
   "homeToRead": "To read",
   "homeOpenButton": "Open",
   "homeMarkReadButton": "Mark as read",
   "readingSessionTitle": "Reading {reference}",
-  "@readingSessionTitle": { "placeholders": { "reference": { "type": "String" } } },
+  "@readingSessionTitle": {
+    "placeholders": {
+      "reference": {
+        "type": "String"
+      }
+    }
+  },
   "readingSessionBody": "Tap to come back to JW Streak when you're done.",
   "readingSessionDoneTitle": "Finished {reference}?",
-  "@readingSessionDoneTitle": { "placeholders": { "reference": { "type": "String" } } },
+  "@readingSessionDoneTitle": {
+    "placeholders": {
+      "reference": {
+        "type": "String"
+      }
+    }
+  },
   "readingSessionDoneBody": "Mark it as read to keep your streak going.",
   "readingSessionNotYet": "Not yet",
   "homeAllRead": "Well done! You've read the whole Bible.",
   "homeBrowseBible": "Browse the Bible",
   "homeChaptersReadCount": "{read} / {total} chapters",
-  "@homeChaptersReadCount": { "placeholders": { "read": { "type": "int", "format": "decimalPattern" }, "total": { "type": "int", "format": "decimalPattern" } } },
+  "@homeChaptersReadCount": {
+    "placeholders": {
+      "read": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "homeStatStreakDaysPlural": "day streak",
   "homeStatStreakDaySingular": "day streak",
   "homeStatReadingsPlural": "readings",
@@ -363,7 +496,13 @@
   "homeStatStarsPlural": "stars",
   "homeStatStarSingular": "star",
   "homeLastReadAt": "Last read: {date}",
-  "@homeLastReadAt": { "placeholders": { "date": { "type": "String" } } },
+  "@homeLastReadAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "homeBibleBrowsed": "Bible browsed",
   "homeDailyTextTitle": "Text of the day",
   "homeDailyTextSubtitle": "Today's thought",
@@ -374,9 +513,21 @@
   "homeMyNotesSubtitle": "Reread your library",
   "homeRecentActivity": "Recent activity",
   "homeActiveDaysPlural": "{count} active days",
-  "@homeActiveDaysPlural": { "placeholders": { "count": { "type": "int" } } },
+  "@homeActiveDaysPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeActiveDaysSingular": "{count} active day",
-  "@homeActiveDaysSingular": { "placeholders": { "count": { "type": "int" } } },
+  "@homeActiveDaysSingular": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeCalendarPreviousWeek": "Previous week",
   "homeCalendarNextWeek": "Next week",
   "homeWeekdayMon": "M",
@@ -386,114 +537,260 @@
   "homeWeekdayFri": "F",
   "homeWeekdaySat": "S",
   "homeWeekdaySun": "S",
-
   "bibleAppTitle": "The Bible",
   "bibleHebrewScriptures": "Hebrew Scriptures",
   "bibleGreekScriptures": "Christian Greek Scriptures",
   "bibleStarsEarnedLabel": "Stars earned",
   "bibleStarsFraction": "{earned} / {max}",
-  "@bibleStarsFraction": { "placeholders": { "earned": { "type": "int" }, "max": { "type": "int" } } },
+  "@bibleStarsFraction": {
+    "placeholders": {
+      "earned": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "bibleBookStarsFraction": "{stars}/{maxStars}",
-  "@bibleBookStarsFraction": { "placeholders": { "stars": { "type": "int" }, "maxStars": { "type": "int" } } },
+  "@bibleBookStarsFraction": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      },
+      "maxStars": {
+        "type": "int"
+      }
+    }
+  },
   "bibleChaptersReadCount": "{readCount} / {chapters} chapters",
-  "@bibleChaptersReadCount": { "placeholders": { "readCount": { "type": "int" }, "chapters": { "type": "int" } } },
+  "@bibleChaptersReadCount": {
+    "placeholders": {
+      "readCount": {
+        "type": "int"
+      },
+      "chapters": {
+        "type": "int"
+      }
+    }
+  },
   "bibleTodoHeader": "To do",
   "bibleDoneHeader": "Done",
   "bibleUnlockHint": "Read {title} to unlock this quiz!",
-  "@bibleUnlockHint": { "placeholders": { "title": { "type": "String" } } },
+  "@bibleUnlockHint": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "bibleErrorGeneric": "Error: {error}",
-  "@bibleErrorGeneric": { "placeholders": { "error": { "type": "String" } } },
+  "@bibleErrorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "bibleOpenInJwLibrary": "Open in JW Library",
   "bibleMarkUnread": "Mark as unread",
   "bibleMarkRead": "Mark as read",
   "bibleCoveredHint": "Counted as already read, from where you said you'd resume.",
   "bibleChaptersHeader": "Chapters",
   "bibleFullQuizTitle": "Full quiz · {bookName}",
-  "@bibleFullQuizTitle": { "placeholders": { "bookName": { "type": "String" } } },
+  "@bibleFullQuizTitle": {
+    "placeholders": {
+      "bookName": {
+        "type": "String"
+      }
+    }
+  },
   "bibleFullBookQuizTitle": "Full book quiz",
   "bibleFullBookQuizSubtitle": "All the questions, in one challenge",
   "bibleReflectionToWriteSuffix": " · reflection to write",
   "bibleCheckpointScoreDate": "{score}/{total} · {date}{suffix}",
-  "@bibleCheckpointScoreDate": { "placeholders": { "score": { "type": "int" }, "total": { "type": "int" }, "date": { "type": "String" }, "suffix": { "type": "String" } } },
+  "@bibleCheckpointScoreDate": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      },
+      "suffix": {
+        "type": "String"
+      }
+    }
+  },
   "bibleReflectionSaved": "Reflection saved",
   "bibleLocked": "Locked",
   "bibleQuizAndReflection": "Quiz + reflection",
   "bibleReflectionOnly": "Reflection",
-
   "noteEditorTitleErrorHint": "Add a title to save.",
   "noteEditorErrorSnackbar": "Error: {error}",
-  "@noteEditorErrorSnackbar": { "placeholders": { "error": { "type": "String" } } },
+  "@noteEditorErrorSnackbar": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "noteEditorTitleNew": "New note",
   "noteEditorTitleEdit": "Edit note",
   "noteEditorSaveButton": "Save",
   "noteEditorTitleHint": "Title",
+  "noteEditorLinkedChapter": "Linked chapter",
+  "@noteEditorLinkedChapter": {
+    "description": "Title of the sheet for picking which Bible chapter a note is attached to."
+  },
   "noteEditorBodyHint": "Write your thoughts, reflections, research points...",
-  "noteEditorMarkdownHelpTitle": "Markdown supported",
-  "noteEditorTipBold": "● Bold: **your_text**",
-  "noteEditorTipItalic": "● Italic: *your_text*",
-  "noteEditorTipStrikethrough": "● Strikethrough: ~~your_text~~",
-  "noteEditorTipHeading": "● Heading: # Your title",
-  "noteEditorTipList": "● List: - item",
-
   "notesLibraryDeleteDialogTitle": "Delete?",
   "notesLibraryCancel": "Cancel",
   "notesLibraryDelete": "Delete",
   "notesLibraryDeleteConfirmSingular": "\"{title}\" will be permanently deleted.",
-  "@notesLibraryDeleteConfirmSingular": { "placeholders": { "title": { "type": "String" } } },
+  "@notesLibraryDeleteConfirmSingular": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "notesLibraryDeleteConfirmPlural": "These {count} notes will be permanently deleted from your device.",
-  "@notesLibraryDeleteConfirmPlural": { "placeholders": { "count": { "type": "int" } } },
+  "@notesLibraryDeleteConfirmPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "notesLibraryErrorMessage": "Error: {error}",
-  "@notesLibraryErrorMessage": { "placeholders": { "error": { "type": "String" } } },
+  "@notesLibraryErrorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "notesLibraryNewNote": "New note",
   "notesLibrarySearchHint": "Search by title, content, or passage",
   "notesLibraryTitle": "Notes library",
   "notesLibraryCancelSelectionTooltip": "Cancel selection",
   "notesLibrarySelectedCountSingular": "{count} selected",
-  "@notesLibrarySelectedCountSingular": { "placeholders": { "count": { "type": "int" } } },
+  "@notesLibrarySelectedCountSingular": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "notesLibrarySelectedCountPlural": "{count} selected",
-  "@notesLibrarySelectedCountPlural": { "placeholders": { "count": { "type": "int" } } },
+  "@notesLibrarySelectedCountPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "notesLibraryShareTooltip": "Share",
   "notesLibraryExportAllTooltip": "Export my notes",
+  "settingsExportNotesDesc": "Save every note to a ZIP file you can keep or share",
+  "@settingsExportNotesDesc": {
+    "description": "Subtitle of the export-notes row in privacy settings."
+  },
   "notesLibraryDeleteTooltip": "Delete",
   "notesLibraryJustNow": "just now",
   "notesLibraryMinutesAgo": "{minutes} min ago",
-  "@notesLibraryMinutesAgo": { "placeholders": { "minutes": { "type": "int" } } },
+  "@notesLibraryMinutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "notesLibraryHoursAgo": "{hours} h ago",
-  "@notesLibraryHoursAgo": { "placeholders": { "hours": { "type": "int" } } },
+  "@notesLibraryHoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
   "notesLibraryYesterday": "yesterday",
   "notesLibraryEmptyNoResults": "No results",
   "notesLibraryEmptyTitle": "No notes yet",
   "notesLibraryEmptySearchHint": "Try different keywords, or check your spelling.",
   "notesLibraryEmptySubtitle": "Write your first thought using the \"New note\" button.",
-
   "noteReaderDeleteTitle": "Delete this note?",
   "noteReaderDeleteContent": "\"{title}\" will be permanently deleted from your device.",
-  "@noteReaderDeleteContent": { "placeholders": { "title": { "type": "String" } } },
+  "@noteReaderDeleteContent": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "noteReaderCancel": "Cancel",
   "noteReaderDelete": "Delete",
   "noteReaderError": "Error: {error}",
-  "@noteReaderError": { "placeholders": { "error": { "type": "String" } } },
+  "@noteReaderError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "noteReaderTitle": "Note",
   "noteReaderShare": "Share",
   "noteReaderEdit": "Edit",
   "noteReaderNoteGone": "This note no longer exists.",
   "noteReaderUpdatedAt": "Last edited on {date}",
-  "@noteReaderUpdatedAt": { "placeholders": { "date": { "type": "String" } } },
+  "@noteReaderUpdatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "noteReaderEmpty": "This note is empty.",
-
   "homeAchievementsTooltip": "Achievements",
   "achievementsTitle": "Achievements",
   "achievementsUnlockedCount": "{unlocked} of {total} unlocked",
-  "@achievementsUnlockedCount": { "placeholders": { "unlocked": { "type": "int" }, "total": { "type": "int" } } },
+  "@achievementsUnlockedCount": {
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "achievementsProgressFraction": "{current} / {goal}",
-  "@achievementsProgressFraction": { "placeholders": { "current": { "type": "int" }, "goal": { "type": "int" } } },
+  "@achievementsProgressFraction": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "achievementStarReward": "+{count}",
-  "@achievementStarReward": { "placeholders": { "count": { "type": "int" } } },
+  "@achievementStarReward": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "achievementsSectionReading": "Reading",
   "achievementsSectionQuizzes": "Quizzes",
   "achievementsSectionStreak": "Streak",
   "achievementsSectionOther": "More",
-
   "achievementFirstChapterTitle": "First Steps",
   "achievementFirstChapterDesc": "Read your first chapter.",
   "achievementChapters10Title": "Getting Started",
@@ -526,7 +823,6 @@
   "achievementFirstNoteDesc": "Write your first note.",
   "achievementReminderTitle": "Stay on Track",
   "achievementReminderDesc": "Set up a daily reminder.",
-
   "notifReminderTitle": "JW Streak · Bible reading",
   "notifReminderBody": "Time for your reading. Tap to continue 📖",
   "notifStreakRiskTitle": "Your streak is at risk 🔥",
@@ -535,7 +831,6 @@
   "easterEggVersionTitle": "Seven taps, really",
   "easterEggVersionBody": "No hidden mode here, sorry. Just a thank you for looking this far. This app was written one evening at a time, and it's nice to know someone's poking around.",
   "easterEggVersionButton": "Stays between us",
-
   "achievementQuizzes40Title": "Quiz Legend",
   "achievementQuizzes40Desc": "Complete 40 quizzes.",
   "achievementStars40Title": "Galaxy Collector",
@@ -546,11 +841,9 @@
   "achievementNotes10Desc": "Write 10 notes.",
   "achievementEasterEggsTitle": "Secret Hunter",
   "achievementEasterEggsDesc": "Discover every hidden secret in the app.",
-
   "freezeEarnedTitle": "New match earned!",
   "freezeEarnedBody": "You've completed 3 new quizzes. A match keeps your streak alight if you miss a day.",
   "freezeEarnedButton": "Nice!",
-
   "commonOk": "OK",
   "commonCancel": "Cancel"
 }

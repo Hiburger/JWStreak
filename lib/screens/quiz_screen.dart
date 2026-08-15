@@ -7,16 +7,18 @@ import '../quiz/quiz_data.dart';
 import '../services/answer_validator.dart';
 import '../theme/app_icons.dart';
 import '../widgets/circular_back_button.dart';
+import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an
-/// explanation, then a final score. [onCompleted] is called once with the
+/// explanation, then a round-up. [onCompleted] is called once with the
 /// final score/total so the caller can persist a result, award a freeze, etc.
 class QuizScreen extends StatefulWidget {
   const QuizScreen({
     required this.title,
     required this.questions,
     required this.onCompleted,
+    this.funFact,
     super.key,
   });
 
@@ -24,8 +26,32 @@ class QuizScreen extends StatefulWidget {
   final List<QuizQuestion> questions;
   final Future<void> Function(int score, int total) onCompleted;
 
+  /// "Did you know" note for this quiz's checkpoint, shown on the round-up.
+  /// Null for quizzes with nothing authored yet (and for the mixed review
+  /// quiz, which spans no single passage) — the card is simply left out.
+  final String? funFact;
+
   @override
   State<QuizScreen> createState() => _QuizScreenState();
+}
+
+/// What the reader did on one question, kept so the round-up can walk back
+/// through the ones they missed. Recorded at answer time rather than
+/// reconstructed afterwards: the typed text and the shuffled option order
+/// are both gone by the time the quiz ends.
+class _AnswerRecord {
+  const _AnswerRecord({
+    required this.question,
+    required this.givenAnswer,
+    required this.correct,
+  });
+
+  final QuizQuestion question;
+
+  /// Exactly what the reader picked or typed, empty if they somehow
+  /// submitted nothing.
+  final String givenAnswer;
+  final bool correct;
 }
 
 class _QuizScreenState extends State<QuizScreen> {
@@ -40,6 +66,9 @@ class _QuizScreenState extends State<QuizScreen> {
   bool _lastAnswerCorrect = false;
   int _score = 0;
   bool _finished = false;
+
+  /// One entry per answered question, in the order they were played.
+  final List<_AnswerRecord> _answers = <_AnswerRecord>[];
 
   /// Word chips currently placed in the answer row (word-bank questions).
   List<String> _pickedWords = <String>[];
@@ -124,6 +153,15 @@ class _QuizScreenState extends State<QuizScreen> {
       if (_lastAnswerCorrect) {
         _score++;
       }
+      _answers.add(
+        _AnswerRecord(
+          question: _current,
+          givenAnswer: i >= 0 && i < _current.options.length
+              ? _current.options[i]
+              : '',
+          correct: _lastAnswerCorrect,
+        ),
+      );
     });
   }
 
@@ -146,6 +184,13 @@ class _QuizScreenState extends State<QuizScreen> {
       if (_lastAnswerCorrect) {
         _score++;
       }
+      _answers.add(
+        _AnswerRecord(
+          question: _current,
+          givenAnswer: input.trim(),
+          correct: _lastAnswerCorrect,
+        ),
+      );
     });
   }
 
@@ -453,6 +498,10 @@ class _QuizScreenState extends State<QuizScreen> {
     return _OptionState.idle;
   }
 
+  /// The round-up: stars, then the note for this passage, then every
+  /// question that was missed. Scrollable rather than centred now that it
+  /// carries a review — a perfect run still reads as a short, celebratory
+  /// page, since the review section is simply absent.
   Widget _buildResult() {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
@@ -461,66 +510,268 @@ class _QuizScreenState extends State<QuizScreen> {
         ? 0
         : ((_score / _questions.length) * 3).ceil().clamp(1, 3);
     final bool perfect = _score == _questions.length;
+    final List<_AnswerRecord> missed = _answers
+        .where((_AnswerRecord r) => !r.correct)
+        .toList(growable: false);
+    final String? funFact = widget.funFact;
 
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List<Widget>.generate(3, (int i) {
-                final bool filled = i < stars;
-                return TweenAnimationBuilder<double>(
-                  tween: Tween<double>(begin: 0, end: filled ? 1 : 0),
-                  duration: Duration(milliseconds: 300 + i * 150),
-                  curve: Curves.elasticOut,
-                  builder: (BuildContext context, double v, Widget? child) {
-                    return Transform.scale(scale: 0.6 + 0.4 * v, child: child);
-                  },
-                  // Same shape either way, only the color changes — the
-                  // theme's reward isn't guaranteed to have a separate
-                  // outline glyph the way a plain star does (a hand-painted
-                  // shell or acorn doesn't), so "not earned yet" is muted
-                  // color rather than a hollow variant.
-                  child: AppIcons.of(context).reward(
-                    size: 56,
-                    color: filled
-                        ? AppIcons.of(context).rewardColor
-                        : cs.outlineVariant,
-                  ),
-                );
-              }),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 32),
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List<Widget>.generate(3, (int i) {
+            final bool filled = i < stars;
+            return TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0, end: filled ? 1 : 0),
+              duration: Duration(milliseconds: 300 + i * 150),
+              curve: Curves.elasticOut,
+              builder: (BuildContext context, double v, Widget? child) {
+                return Transform.scale(scale: 0.6 + 0.4 * v, child: child);
+              },
+              // Same shape either way, only the color changes — the
+              // theme's reward isn't guaranteed to have a separate
+              // outline glyph the way a plain star does (a hand-painted
+              // shell or acorn doesn't), so "not earned yet" is muted
+              // color rather than a hollow variant.
+              child: AppIcons.of(context).reward(
+                size: 56,
+                color: filled
+                    ? AppIcons.of(context).rewardColor
+                    : cs.outlineVariant,
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          perfect ? l10n.quizPerfect : l10n.quizWellDone,
+          textAlign: TextAlign.center,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          l10n.quizScore(_score, _questions.length),
+          textAlign: TextAlign.center,
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: cs.onSurfaceVariant,
+          ),
+        ),
+        if (funFact != null) ...<Widget>[
+          const SizedBox(height: 24),
+          _FunFactCard(text: funFact),
+        ],
+        if (missed.isNotEmpty) ...<Widget>[
+          const SizedBox(height: 28),
+          Text(
+            l10n.quizReviewTitle(missed.length),
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
             ),
-            const SizedBox(height: 20),
-            Text(
-              perfect ? l10n.quizPerfect : l10n.quizWellDone,
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w800,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.quizReviewSubtitle,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: cs.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 12),
+          for (final _AnswerRecord record in missed)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: _MissedQuestionCard(record: record),
+            ),
+        ],
+        const SizedBox(height: 24),
+        Center(
+          child: FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size(200, 52),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
               ),
             ),
-            const SizedBox(height: 8),
+            child: Text(l10n.quizFinish),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// The "did you know" note for the passage the quiz covered.
+class _FunFactCard extends StatelessWidget {
+  const _FunFactCard({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: kAccentPurple.background(context),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: kAccentPurple.foreground(context).withValues(alpha: 0.35),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Icon(
+            Icons.lightbulb_outline_rounded,
+            size: 22,
+            color: kAccentPurple.foreground(context),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  l10n.quizFunFactLabel,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: kAccentPurple.foreground(context),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  text,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: kAccentPurple.foreground(context),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// One missed question: what was asked, what the reader answered, what the
+/// answer actually was, and why. The wrong answer is shown struck through
+/// rather than just red — color alone wouldn't separate the two lines for a
+/// reader who can't distinguish them.
+class _MissedQuestionCard extends StatelessWidget {
+  const _MissedQuestionCard({required this.record});
+
+  final _AnswerRecord record;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: cs.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            record.question.text,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 12),
+          if (record.givenAnswer.isNotEmpty)
+            _AnswerLine(
+              icon: Icons.close_rounded,
+              color: cs.error,
+              label: l10n.quizReviewYourAnswer,
+              answer: record.givenAnswer,
+              strikeThrough: true,
+            ),
+          if (record.givenAnswer.isNotEmpty) const SizedBox(height: 8),
+          _AnswerLine(
+            icon: Icons.check_rounded,
+            color: kAccentTeal.foreground(context),
+            label: l10n.quizReviewCorrectAnswer,
+            answer: record.question.correctAnswer,
+            strikeThrough: false,
+          ),
+          if (record.question.explanation.isNotEmpty) ...<Widget>[
+            const SizedBox(height: 12),
             Text(
-              l10n.quizScore(_score, _questions.length),
-              style: theme.textTheme.titleMedium?.copyWith(
+              record.question.explanation,
+              style: theme.textTheme.bodySmall?.copyWith(
                 color: cs.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: 24),
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(200, 52),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _AnswerLine extends StatelessWidget {
+  const _AnswerLine({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.answer,
+    required this.strikeThrough,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final String answer;
+  final bool strikeThrough;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Icon(icon, size: 18, color: color),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                label,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: cs.onSurfaceVariant,
                 ),
               ),
-              child: Text(l10n.quizFinish),
-            ),
-          ],
+              Text(
+                answer,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                  decoration: strikeThrough
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                  decorationColor: color,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

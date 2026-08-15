@@ -105,7 +105,7 @@ authoredQuizzesEsC6 = <String, List<QuizQuestion>>{
           'causaban problemas (1 Corintios 1).',
     ),
     QuizQuestion(
-      text: '¿Con qué compara Pablo a la iglesia en 1 Corintios 3?',
+      text: '¿Con qué compara Pablo a la congregación en 1 Corintios 3?',
       options: <String>[
         'Con el templo de Dios',
         'Con un ejército',

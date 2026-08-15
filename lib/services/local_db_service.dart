@@ -547,12 +547,23 @@ class LocalDbService {
     return streak;
   }
 
+  /// Days that count as "active" — the same two things that keep a streak
+  /// alive, marking a chapter read *or* finishing a quiz.
+  ///
+  /// Both are unioned here because `_recordStreakActivity` is called from
+  /// [markChapterRead] and [saveQuizResult] alike. Reading only the
+  /// `readings` table made the streak calendar disagree with the streak
+  /// itself: a day spent on quizzes counted toward the number at the top of
+  /// the screen but showed as missed on the grid below it.
   Future<List<DateTime>> getRecentReadingDays({int limit = 14}) async {
     final Database db = await _getDb();
     final List<Map<String, Object?>> rows = await db.rawQuery(
       '''
-      SELECT DISTINCT substr(readAt, 1, 10) AS readingDay
-      FROM readings
+      SELECT readingDay FROM (
+        SELECT substr(readAt, 1, 10) AS readingDay FROM readings
+        UNION
+        SELECT substr(passedAt, 1, 10) AS readingDay FROM quiz_results
+      )
       ORDER BY readingDay DESC
       LIMIT ?
       ''',
@@ -727,10 +738,15 @@ class LocalDbService {
     });
   }
 
+  /// [book]/[chapter] are optional so callers that only edit the text leave
+  /// the note's reading link untouched; the editor passes them when the
+  /// reader re-points a note at a different chapter.
   Future<void> updateNote({
     required int id,
     required String title,
     required String content,
+    String? book,
+    int? chapter,
   }) async {
     final Database db = await _getDb();
     await db.update(
@@ -738,6 +754,8 @@ class LocalDbService {
       <String, Object>{
         'title': title,
         'content': content,
+        'book': ?book,
+        'chapter': ?chapter,
         'updatedAt': DateTime.now().toIso8601String(),
       },
       where: 'id = ?',

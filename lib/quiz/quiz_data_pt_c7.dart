@@ -16,15 +16,16 @@ authoredQuizzesPtC7 = <String, List<QuizQuestion>>{
           'Uma esperança de justiça divina os encoraja (2 Tessalonicenses 1).',
     ),
     QuizQuestion(
-      text: 'Que preocupação Paulo corrige a respeito do dia do Senhor?',
+      text: 'Pelo que Paulo agradece a Deus a respeito dos tessalonicenses?',
       options: <String>[
-        'A crença equivocada de que ele já havia chegado',
-        'A crença de que ele nunca chegaria',
-        'Ignorar totalmente o assunto',
-        'Achar que era preciso parar de orar',
+        'A fé deles cresce muito e o amor deles aumenta',
+        'A riqueza deles não para de crescer',
+        'O número deles diminui a cada ano',
+        'Eles deixaram de se reunir',
       ],
       correctIndex: 0,
-      explanation: 'Uma confusão é esclarecida (2 Tessalonicenses 2:2).',
+      explanation:
+          'Paulo agradece a Deus pelo progresso deles (2 Tessalonicenses 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[

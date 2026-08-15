@@ -652,16 +652,53 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get settingsCatNotificationsDesc =>
-      'Uprawnienia potrzebne do przypomnień';
+      'Czy przypomnienia do Ciebie dotrą';
 
   @override
   String get settingsCatPrivacyDesc => 'Blokada aplikacji';
+
+  @override
+  String get settingsCatDonations => 'Darowizny';
+
+  @override
+  String get settingsCatDonationsDesc => 'Wsparcie JW Streak';
 
   @override
   String get settingsCatAbout => 'Pomoc i informacje';
 
   @override
   String get settingsCatAboutDesc => 'Przewodnik, wersja, kod źródłowy';
+
+  @override
+  String get donationsHeadline => 'Na razie nie przyjmujemy darowizn';
+
+  @override
+  String get donationsLead =>
+      'JW Streak jest darmowa i obecnie nie da się przekazać darowizny. To celowe, po prostu niczego nie przygotowaliśmy. Może otworzymy to później, a wolimy powiedzieć o tym wprost, niż kiedyś Cię tym zaskoczyć.';
+
+  @override
+  String get donationsRow1Title => 'To jednak kosztuje';
+
+  @override
+  String get donationsRow1Text =>
+      'Konta deweloperskie, urządzenia testowe i kilka subskrypcji trzeba opłacić, a aplikacja powstaje wieczorami i w weekendy. Niektóre z tych wieczorów są naprawdę trudne.';
+
+  @override
+  String get donationsRow2Title => 'Co się nie zmieni';
+
+  @override
+  String get donationsRow2Text =>
+      'JW Streak pozostanie darmowa, otwartoźródłowa i w pełni offline. Bez reklam, bez śledzenia, bez zablokowanych rozdziałów i płatnych funkcji. Jeśli kiedyś ruszą darowizny, wpłata będzie całkowicie dobrowolna.';
+
+  @override
+  String get donationsRow3Title => 'Pomoc, która nic nie kosztuje';
+
+  @override
+  String get donationsRow3Text =>
+      'Powiedz o niej komuś, komu może się spodobać, zgłoś błąd w quizie lub usterkę albo po prostu czytaj dalej. Szczerze, to już bardzo dużo znaczy.';
+
+  @override
+  String get donationsThanks => 'Dziękujemy, że jesteś 💛';
 
   @override
   String get settingsAppearance => 'Wygląd';
@@ -677,7 +714,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsDynamicColorOff => 'Używa koloru marki aplikacji';
 
   @override
-  String get settingsBibleTargetTitle => 'Otwieraj Biblię za pomocą';
+  String get settingsBibleTargetTitle =>
+      'Otwieraj Biblię i myśl dnia za pomocą';
 
   @override
   String get settingsBibleTargetJwLibrary => 'Aplikacji JW Library';
@@ -687,7 +725,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get settingsBibleTargetJwLibraryMissing =>
-      'Aby otworzyć Biblię w ten sposób, potrzebna jest aplikacja JW Library. Chcesz ją zainstalować?';
+      'Aby otworzyć Biblię lub myśl dnia w ten sposób, potrzebna jest aplikacja JW Library. Chcesz ją zainstalować?';
 
   @override
   String get settingsBibleTargetInstall => 'Zainstaluj';
@@ -699,34 +737,62 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsLanguageSystem => 'Systemowy';
 
   @override
-  String get settingsNotifPermTitle => 'Uprawnienia powiadomień';
-
-  @override
   String get settingsChecking => 'Sprawdzanie...';
-
-  @override
-  String get settingsNotifActive => 'Uprawnienie aktywne.';
-
-  @override
-  String get settingsNotifMissing =>
-      'Brak uprawnienia. Włącz je, aby otrzymywać przypomnienia.';
-
-  @override
-  String get settingsVerify => 'Sprawdź';
-
-  @override
-  String get settingsExactAlarms => 'Dokładne alarmy';
-
-  @override
-  String get settingsExactAlarmsOn =>
-      'Przypomnienia uruchamiają się o dokładnej godzinie.';
 
   @override
   String get settingsExactAlarmsOff =>
       'Niedozwolone. Przypomnienia mogą być opóźnione.';
 
   @override
-  String get settingsAllow => 'Zezwól';
+  String get notifStatusReadyTitle => 'Przypomnienia są gotowe';
+
+  @override
+  String get notifStatusReadyBody => 'Przyjdą o godzinie, którą wybrałeś.';
+
+  @override
+  String get notifStatusBlockedTitle => 'Przypomnienia do Ciebie nie dotrą';
+
+  @override
+  String get notifStatusBlockedBody =>
+      'JW Streak nie ma zgody na wysyłanie powiadomień, więc żadne przypomnienie się nie pojawi.';
+
+  @override
+  String get notifStatusDelayedTitle =>
+      'Przypomnienia mogą przyjść z opóźnieniem';
+
+  @override
+  String get notifStatusDelayedBody =>
+      'I tak przyjdą, ale Android może je przytrzymać kilka minut, żeby oszczędzać baterię.';
+
+  @override
+  String get notifPermRowTitle => 'Wysyłanie powiadomień';
+
+  @override
+  String get notifPermRowBody =>
+      'Bez tego przypomnienie w ogóle się nie pojawi.';
+
+  @override
+  String get notifExactRowTitle => 'Dokładna godzina';
+
+  @override
+  String get notifExactRowBody =>
+      'Pozwala przypomnieniu zadziałać dokładnie o wybranej minucie, a nie wtedy, gdy Android znajdzie na to czas.';
+
+  @override
+  String get notifRowAllowed => 'Dozwolone';
+
+  @override
+  String get notifRowNotAllowed => 'Niedozwolone';
+
+  @override
+  String get notifActionTurnOn => 'Włącz';
+
+  @override
+  String get notifActionOpen => 'Otwórz ustawienia';
+
+  @override
+  String get notifRemindersHint =>
+      'Godziny przypomnień ustawisz dzwonkiem na ekranie głównym.';
 
   @override
   String get settingsInfo => 'Informacje';
@@ -855,6 +921,32 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get quizFinish => 'Zakończ';
+
+  @override
+  String get quizFunFactLabel => 'Czy wiesz, że...?';
+
+  @override
+  String quizReviewTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count do powtórki',
+      many: '$count do powtórki',
+      few: '$count do powtórki',
+      one: '1 do powtórki',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizReviewSubtitle =>
+      'Bez pośpiechu, tylko szybkie spojrzenie na to, co nie wyszło.';
+
+  @override
+  String get quizReviewYourAnswer => 'Twoja odpowiedź';
+
+  @override
+  String get quizReviewCorrectAnswer => 'Poprawna odpowiedź';
 
   @override
   String get checkpointAppBarTitle => 'Etap';
@@ -1298,26 +1390,11 @@ class AppLocalizationsPl extends AppLocalizations {
   String get noteEditorTitleHint => 'Tytuł';
 
   @override
+  String get noteEditorLinkedChapter => 'Powiązany rozdział';
+
+  @override
   String get noteEditorBodyHint =>
       'Zapisz swoje myśli, refleksje, punkty do zbadania...';
-
-  @override
-  String get noteEditorMarkdownHelpTitle => 'Obsługiwany Markdown';
-
-  @override
-  String get noteEditorTipBold => '● Pogrubienie: **twój_tekst**';
-
-  @override
-  String get noteEditorTipItalic => '● Kursywa: *twój_tekst*';
-
-  @override
-  String get noteEditorTipStrikethrough => '● Przekreślenie: ~~twój_tekst~~';
-
-  @override
-  String get noteEditorTipHeading => '● Nagłówek: # Twój tytuł';
-
-  @override
-  String get noteEditorTipList => '● Lista: - element';
 
   @override
   String get notesLibraryDeleteDialogTitle => 'Usunąć?';
@@ -1371,6 +1448,10 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get notesLibraryExportAllTooltip => 'Eksportuj moje notatki';
+
+  @override
+  String get settingsExportNotesDesc =>
+      'Zapisz wszystkie notatki w pliku ZIP, żeby je zachować lub udostępnić';
 
   @override
   String get notesLibraryDeleteTooltip => 'Usuń';

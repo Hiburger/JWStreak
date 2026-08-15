@@ -141,8 +141,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          'En combien de jours de création la Bible décrit-elle '
-          'l’œuvre de Dieu ?',
+          'Combien de jours de création la Genèse décrit-elle avant '
+          'que Dieu se repose ?',
       options: <String>[
         'Six jours',
         'Sept jours',
@@ -256,7 +256,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           '(Exode 2).',
     ),
     QuizQuestion(
-      text: 'Comment Dieu est-il apparu à Moïse au mont Horeb ?',
+      text: 'Comment Jéhovah est-il apparu à Moïse au mont Horeb ?',
       options: <String>[
         'Un buisson en feu qui ne se consume pas',
         'Une colonne de nuée',
@@ -322,7 +322,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Jéthro'],
     ),
     QuizQuestion(
-      text: 'Où Dieu a-t-il donné les Dix Commandements ?',
+      text: 'Où Jéhovah a-t-il donné les Dix Commandements ?',
       options: <String>['Au mont Sinaï', 'Au mont Nébo', 'À Cadès', 'À Béthel'],
       correctIndex: 0,
       explanation: 'La loi est donnée au mont Sinaï (Exode 19-20).',
@@ -396,14 +396,14 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Qui a fini par tailler de nouvelles tables de pierre après '
           'que Moïse a brisé les premières ?',
       options: <String>[
-        'Moïse, sur ordre de Dieu',
+        'Moïse, sur ordre de Jéhovah',
         'Aaron',
         'Josué',
         'Betsaléel',
       ],
       correctIndex: 0,
       explanation:
-          'Dieu ordonne à Moïse de tailler deux nouvelles tables '
+          'Jéhovah ordonne à Moïse de tailler deux nouvelles tables '
           '(Exode 34).',
     ),
   ],
@@ -438,8 +438,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Les Béatitudes commencent par les pauvres en esprit '
-          '(Matthieu 5:3).',
+          'Les Béatitudes commencent par ceux qui sont conscients de '
+          'leur pauvreté spirituelle (Matthieu 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -614,14 +614,14 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Comment Jésus se décrit-il en Jean 10 ?',
       options: <String>[
-        'Le bon berger',
+        'L’excellent berger',
         'Le lion',
         'Le grand prêtre',
         'Le juge',
       ],
       correctIndex: 0,
       explanation:
-          'Jésus se présente comme le bon berger qui donne sa vie pour '
+          'Jésus se présente comme l’excellent berger qui donne sa vie pour '
           'ses brebis (Jean 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['porte', 'pasteur', 'brebis'],
@@ -764,8 +764,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quelle affection cutanée est examinée en détail par les '
-          'prêtres dans ces chapitres ?',
+          'Quelle maladie les prêtres devaient-ils examiner en détail '
+          'dans ces chapitres ?',
       options: <String>[
         'La lèpre',
         'La variole',
@@ -797,9 +797,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'l’an (Lévitique 16).',
     ),
     QuizQuestion(
-      text:
-          'Quel commandement bien connu apparaît dans le « code de '
-          'sainteté » de Lévitique 19 ?',
+      text: 'Quel commandement bien connu se trouve en Lévitique 19 ?',
       options: <String>[
         'Aime ton prochain comme toi-même',
         'Ne vole pas de bétail',
@@ -920,7 +918,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   'Numbers#1': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Qui Dieu a-t-il chargé d’aider Moïse à porter le fardeau '
+          'Qui Jéhovah a-t-il chargé d’aider Moïse à porter le fardeau '
           'du peuple ?',
       options: <String>[
         '70 anciens',
@@ -937,7 +935,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Que sont devenus Miriam et Aaron après avoir critiqué '
+          'Que s’est-il passé après que Miriam et Aaron ont critiqué '
           'Moïse ?',
       options: <String>[
         'Miriam a été frappée de lèpre',
@@ -999,8 +997,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Moïse frappe le rocher par colère, sans respecter la '
-          'sainteté de Dieu (Nombres 20).',
+          'Moïse frappe le rocher par colère, sans honorer la sainteté '
+          'de Jéhovah (Nombres 20).',
     ),
   ],
   'Numbers#3': <QuizQuestion>[
@@ -1023,7 +1021,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Qui Moïse a-t-il désigné comme son successeur ?',
+      text: 'Qui Jéhovah a-t-il désigné comme successeur de Moïse ?',
       options: <String>['Josué', 'Caleb', 'Éléazar', 'Phinéas'],
       correctIndex: 0,
       explanation:
@@ -1043,9 +1041,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['les Madianites'],
     ),
     QuizQuestion(
-      text:
-          'Quelles tribus ont demandé à s’installer à l’est du '
-          'Jourdain ?',
+      text: 'Quelles tribus se sont installées à l’est du Jourdain ?',
       options: <String>[
         'Ruben, Gad et la moitié de Manassé',
         'Juda et Benjamin',
@@ -1060,7 +1056,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Que devaient être les villes de refuge ?',
       options: <String>[
-        'Des lieux où fuir en cas de meurtre involontaire',
+        'Des lieux où fuir en cas d’homicide involontaire',
         'Des capitales régionales',
         'Des centres commerciaux',
         'Des lieux de culte uniquement',
@@ -1089,7 +1085,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Que rappelle Moïse au sujet des dix commandements dans '
+          'Que rappelle Moïse au sujet des Dix Commandements dans '
           'ces chapitres ?',
       options: <String>[
         'Il les répète au peuple avant l’entrée en Canaan',
@@ -1098,7 +1094,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
         'Il les réserve aux prêtres',
       ],
       correctIndex: 0,
-      explanation: 'Moïse redonne les dix commandements (Deutéronome 5).',
+      explanation: 'Moïse redonne les Dix Commandements (Deutéronome 5).',
     ),
     QuizQuestion(
       text:
@@ -1122,13 +1118,14 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Que devait rappeler à Israël le souvenir de la manne au '
           'désert ?',
       options: <String>[
-        'Que l’homme ne vit pas de pain seul, mais de la parole de Dieu',
+        'Que l’homme ne vit pas de pain seul, mais de toute parole '
+            'sortant de la bouche de Jéhovah',
         'Que Dieu punit toujours',
         'Que le désert est maudit',
         'Que la nourriture n’a pas d’importance',
       ],
       correctIndex: 0,
-      explanation: 'Deutéronome 8:3, citée plus tard par Jésus.',
+      explanation: 'Deutéronome 8:3, cité plus tard par Jésus.',
     ),
     QuizQuestion(
       text:
@@ -1174,11 +1171,9 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       explanation: 'L’année de relâche efface les dettes (Deutéronome 15).',
     ),
     QuizQuestion(
-      text:
-          'Quel prophète futur, semblable à Moïse, est annoncé en '
-          'Deutéronome 18 ?',
+      text: 'Qu’annonce Deutéronome 18 au sujet d’un futur prophète ?',
       options: <String>[
-        'Un prophète que Dieu susciterait',
+        'Que Jéhovah en susciterait un semblable à Moïse',
         'Un roi étranger',
         'Un ange',
         'Un juge unique',
@@ -1188,7 +1183,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Cette prophétie est appliquée au Christ dans les Écritures '
           'grecques (Deutéronome 18).',
       type: QuizAnswerType.wordBank,
-      wordBankDistractors: <String>['roi', 'Moïse', 'Messie'],
+      wordBankDistractors: <String>['roi', 'ange', 'Messie'],
     ),
     QuizQuestion(
       text:
@@ -1226,7 +1221,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Que devaient faire les Israélites en entrant à Canaan, '
+          'Que devaient faire les Israélites en entrant en Canaan, '
           'sur le mont Ébal ?',
       options: <String>[
         'Ériger un autel et proclamer bénédictions et malédictions',
@@ -1257,9 +1252,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   ],
   'Deuteronomy#4': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Que promettent les chapitres 28 en cas de fidélité à '
-          'l’alliance ?',
+      text: 'Que promet le chapitre 28 en cas de fidélité à l’alliance ?',
       options: <String>[
         'Des bénédictions ; la désobéissance entraîne des malédictions',
         'Rien de concret',
@@ -1425,7 +1418,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Quel cycle se répète tout au long du livre des Juges ?',
       options: <String>[
-        'Infidélité, oppression, appel à Dieu, délivrance',
+        'Infidélité, oppression, appel à Jéhovah, délivrance',
         'Paix perpétuelle',
         'Guerre civile continue',
         'Migration constante',
@@ -1434,7 +1427,9 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       explanation: 'Ce cycle structure tout le livre (Juges 2).',
     ),
     QuizQuestion(
-      text: 'Qui a vaincu Sisera avec l’aide de Débora ?',
+      text:
+          'Qui a mené l’armée d’Israël contre Sisera, avec l’aide de '
+          'Débora ?',
       options: <String>['Baraq', 'Éhud', 'Othniel', 'Guédéon'],
       correctIndex: 0,
       explanation: 'Débora et Baraq mènent Israël à la victoire (Juges 4).',
@@ -1455,9 +1450,9 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Qu’est-il arrivé après qu’Abimélek se soit proclamé roi ?',
+      text: 'Comment s’est terminé le règne d’Abimélek ?',
       options: <String>[
-        'Il a massacré ses frères puis a péri lui-même',
+        'Il a péri, frappé par une meule jetée par une femme',
         'Il a régné en paix longtemps',
         'Il a été chassé sans violence',
         'Il a fondé une dynastie durable',
@@ -1512,13 +1507,13 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       text:
           'Qui a livré le secret de la force de Samson aux '
           'Philistins ?',
-      options: <String>['Delila', 'Sa mère', 'Un juge rival', 'Un prêtre'],
+      options: <String>['Dalila', 'Sa mère', 'Un juge rival', 'Un prêtre'],
       correctIndex: 0,
       explanation:
-          'Delila découvre que sa force vient de ses cheveux '
+          'Dalila découvre que sa force vient de ses cheveux '
           '(Juges 16).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['Dalila'],
+      acceptedAnswers: <String>['Delila'],
     ),
     QuizQuestion(
       text: 'Quelle phrase résume l’état d’Israël à la fin du livre ?',
@@ -1676,7 +1671,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Le peuple rejette le gouvernement direct de Dieu '
+          'Le peuple rejette le gouvernement direct de Jéhovah '
           '(1 Samuel 8).',
     ),
   ],
@@ -1691,14 +1686,12 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text:
-          'Pourquoi Samuel a-t-il annoncé le rejet de Saül comme '
-          'roi ?',
+      text: 'Qu’a fait Saül à Guilgal, sans attendre Samuel ?',
       options: <String>[
-        'Saül a offert un sacrifice sans attendre Samuel',
-        'Saül a perdu une bataille',
-        'Saül a refusé de régner',
-        'Saül a fui devant l’ennemi',
+        'Il a offert lui-même le sacrifice',
+        'Il a perdu une bataille',
+        'Il a refusé de régner',
+        'Il a fui devant l’ennemi',
       ],
       correctIndex: 0,
       explanation:
@@ -1797,7 +1790,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Qui Saül et Jonathan meurent-ils dans la bataille finale '
+          'Où Saül et Jonathan meurent-ils dans la bataille finale '
           'du livre ?',
       options: <String>[
         'Sur le mont Guilboa contre les Philistins',
@@ -1880,8 +1873,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Qui s’est révolté contre son père David pour prendre le '
-          'trône ?',
+          'Quel fils de David s’est fait proclamer roi à Hébron, se '
+          'révoltant contre lui ?',
       options: <String>['Absalom', 'Amnon', 'Salomon', 'Adonija'],
       correctIndex: 0,
       explanation: 'La rébellion d’Absalom commence (2 Samuel 15).',
@@ -1905,7 +1898,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Comment Absalom est-il mort ?',
       options: <String>[
-        'Suspendu par les cheveux à un arbre, tué par Joab',
+        'La tête prise dans les branches d’un arbre, tué par Joab',
         'Au combat singulier contre David',
         'Empoisonné',
         'En exil, de vieillesse',
@@ -1927,7 +1920,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Le recensement déplaît à Dieu et une peste s’ensuit '
+          'Le recensement déplaît à Jéhovah et une peste s’ensuit '
           '(2 Samuel 24).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['peste', 'ange', 'autel'],
@@ -1936,8 +1929,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Qui a tenté de s’emparer du trône avant la mort de '
-          'David ?',
+          'Quel fils de David s’est proclamé roi alors que David était '
+          'devenu vieux ?',
       options: <String>['Adonija', 'Absalom', 'Joab seul', 'Nathan'],
       correctIndex: 0,
       explanation:
@@ -1957,7 +1950,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Salomon demande la sagesse, ce qui plaît à Dieu '
+          'Salomon demande la sagesse, ce qui plaît à Jéhovah '
           '(1 Rois 3).',
     ),
     QuizQuestion(
@@ -2028,9 +2021,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       text: 'Qui a annoncé une sécheresse punitive au roi Achab ?',
       options: <String>['Élie', 'Élisée', 'Michée', 'Abdias'],
       correctIndex: 0,
-      explanation:
-          'Élie annonce l’absence de pluie ni rosée '
-          '(1 Rois 17).',
+      explanation: 'Élie annonce qu’il n’y aura ni rosée ni pluie (1 Rois 17).',
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
@@ -2111,10 +2102,10 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Comment le siège de Samarie a-t-il été levé de façon '
           'inattendue ?',
       options: <String>[
-        'L’armée aramééenne a fui, effrayée par un bruit',
+        'L’armée araméenne a fui, effrayée par un bruit',
         'Une armée alliée est arrivée',
         'Une trêve a été signée',
-        'Le roi aramééen est mort au combat',
+        'Le roi araméen est mort au combat',
       ],
       correctIndex: 0,
       explanation:
@@ -2229,7 +2220,9 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Pâque'],
     ),
     QuizQuestion(
-      text: 'Comment le livre des Rois se termine-t-il ?',
+      text:
+          'Comment se termine l’histoire de Juda dans le livre des '
+          'Rois ?',
       options: <String>[
         'Par la chute de Jérusalem et la destruction du temple',
         'Par le couronnement d’un roi juste et durable',
@@ -2328,8 +2321,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Quel chant Asaph a-t-il composé lors de l’installation '
-          'de l’Arche ?',
+          'Quel chant David a-t-il confié à Asaph lors de '
+          'l’installation de l’Arche ?',
       options: <String>[
         'Un chant de louange et d’action de grâce',
         'Un chant de deuil',
@@ -2426,7 +2419,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Sa demande plaît à Dieu qui lui donne aussi la richesse '
+          'Sa demande plaît à Jéhovah, qui lui donne aussi la richesse '
           '(2 Chroniques 1).',
     ),
     QuizQuestion(
@@ -2503,7 +2496,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   '2 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Quelle maladie a frappé Asa après qu’il ait négligé de '
+          'Quelle maladie a frappé Asa après qu’il a négligé de '
           'chercher Jéhovah ?',
       options: <String>[
         'Une grave maladie aux pieds',
@@ -2513,7 +2506,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Il consulte les médecins plutôt que Dieu '
+          'Il consulte les médecins plutôt que Jéhovah '
           '(2 Chroniques 16).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['lèpre', 'mains', 'yeux'],
@@ -2612,7 +2605,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Que s’est-il passé après que Manassé se soit repenti en '
+          'Que s’est-il passé après que Manassé s’est repenti en '
           'captivité ?',
       options: <String>[
         'Jéhovah l’a ramené à Jérusalem et il a fait des réformes',
@@ -2674,7 +2667,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Quelle réaction mêlée a suivi la pose des fondations du '
           'nouveau temple ?',
       options: <String>[
-        'Joie des jeunes, pleurs des anciens qui se souvenaient du premier',
+        'Joie de beaucoup, pleurs des anciens qui avaient vu le '
+            'premier temple',
         'Indifférence générale',
         'Colère unanime',
         'Fuite du peuple',
@@ -2701,8 +2695,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Qui a encouragé la reprise des travaux du temple par '
-          'leurs prophéties ?',
+          'Quels prophètes ont encouragé la reprise des travaux du '
+          'temple ?',
       options: <String>[
         'Aggée et Zacharie',
         'Ézéchiel et Daniel',
@@ -2862,7 +2856,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Qu’a fait le peuple après la lecture de la Loi et la '
           'confession nationale ?',
       options: <String>[
-        'Il a signé un engagement écrit à obéir à Dieu',
+        'Il a signé un engagement écrit à obéir à Jéhovah',
         'Il a quitté Jérusalem',
         'Il a aboli les fêtes',
         'Il a exilé les prêtres',
@@ -2887,8 +2881,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quelle réforme Néhémie a-t-il imposée à son retour '
-          'd’un second mandat ?',
+          'Quelle réforme Néhémie a-t-il imposée lors de son second '
+          'séjour à Jérusalem ?',
       options: <String>[
         'Le respect strict du sabbat et l’expulsion de Tobiya',
         'L’abolition du temple',
@@ -2903,7 +2897,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   ],
   'Esther#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Pourquoi la reine Vashti a-t-elle été destituée ?',
+      text: 'Pourquoi la reine Vasti a-t-elle été destituée ?',
       options: <String>[
         'Elle a refusé de paraître devant le roi et ses invités',
         'Elle a comploté contre le roi',
@@ -3021,7 +3015,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
   ],
   'Job#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quel défi Satan lance-t-il à Dieu au sujet de Job ?',
+      text: 'Quel défi Satan lance-t-il à Jéhovah au sujet de Job ?',
       options: <String>[
         'Job ne servirait Dieu que par intérêt personnel',
         'Job n’existe pas vraiment',
@@ -3211,7 +3205,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Qui est Élihu, qui prend la parole après les trois '
           'amis ?',
       options: <String>[
-        'Un jeune homme qui s’estime porteur de sagesse',
+        'Un homme plus jeune, qui avait attendu par respect avant de '
+            'parler',
         'Un ange envoyé par Dieu',
         'Un quatrième ami âgé',
         'Le fils de Job',
@@ -3486,7 +3481,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       explanation: 'Un appel joyeux à la louange collective (Psaume 100).',
     ),
     QuizQuestion(
-      text: 'Que rappelle le Psaume 103 sur le pardon de Dieu ?',
+      text: 'Que rappelle le Psaume 103 sur le pardon de Jéhovah ?',
       options: <String>[
         'Il pardonne toutes nos fautes, comme un père compatit',
         'Il ne pardonne jamais',
@@ -3585,7 +3580,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Quel appel conclut le tout dernier psaume, le Psaume '
           '150 ?',
       options: <String>[
-        'Que tout ce qui respire loue Yah',
+        'Que tout ce qui respire loue Jah',
         'Que tout se taise à jamais',
         'Que seuls les rois louent Dieu',
         'Que la musique soit interdite',
@@ -3843,7 +3838,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Que recommande Ecclésiaste 8 envers l’autorité '
           'établie ?',
       options: <String>[
-        'Obéir sagement, sans précipitation à contester',
+        'Obéir sagement, sans se précipiter pour contester',
         'Toujours défier les dirigeants',
         'Ignorer complètement la loi',
         'Fuir toute responsabilité civile',
@@ -3911,7 +3906,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
         'Un jugement royal',
       ],
       correctIndex: 0,
-      explanation: 'Le livre célèbre l’amour conjugal sincère (Cantique 1).',
+      explanation: 'Le livre célèbre un amour fidèle et exclusif (Cantique 1).',
     ),
     QuizQuestion(
       text: 'Que fait la Shulamite dans son rêve au chapitre 3 ?',
@@ -3931,7 +3926,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Comment la Shulamite exprime-t-elle son attachement '
           'exclusif ?',
       options: <String>[
-        '« Je suis à mon bien-aimé, et mon bien-aimé est à moi »',
+        '« Mon bien-aimé est à moi, et moi je suis à lui »',
         '« Je préfère la richesse à l’amour »',
         '« L’amour n’a pas d’importance pour moi »',
         '« Je resterai seule pour toujours »',
@@ -4163,13 +4158,13 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Que promet Ésaïe 26 à celui dont l’esprit s’appuie sur '
           'Dieu ?',
       options: <String>[
-        'Une paix parfaite',
+        'Une paix continuelle',
         'Une richesse immédiate',
         'Une armée invincible',
         'Une longévité garantie',
       ],
       correctIndex: 0,
-      explanation: '« Tu garderas dans une paix parfaite » (Ésaïe 26:3).',
+      explanation: '« Tu leur donneras une paix continuelle » (Ésaïe 26:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['confiance', 'esprit', 'rocher'],
     ),
@@ -4206,7 +4201,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Que deviendra le désert selon la promesse d’Ésaïe 35 ?',
       options: <String>[
-        'Il fleurira comme une rose',
+        'Il fleurira comme le safran',
         'Il restera stérile pour toujours',
         'Il deviendra une mer',
         'Il sera abandonné définitivement',
@@ -4350,7 +4345,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
           'Quelle déclaration d’Ésaïe 61 Jésus a-t-il lue dans la '
           'synagogue de Nazareth ?',
       options: <String>[
-        '« L’esprit du Souverain Seigneur est sur moi »',
+        '« L’esprit du Souverain Seigneur Jéhovah est sur moi »',
         '« Je viendrai juger le monde entier »',
         '« Le temple sera détruit »',
         '« Personne ne sera sauvé »',
@@ -4450,17 +4445,19 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['ceinture', 'lin', 'Euphrate'],
     ),
     QuizQuestion(
-      text: 'Que révèle Jérémie 17 sur le cœur humain ?',
+      text:
+          'Que reconnaît Jérémie au chapitre 10 au sujet de la '
+          'conduite humaine ?',
       options: <String>[
-        'Il est trompeur plus que toute autre chose',
-        'Il est naturellement bon',
-        'Il ne change jamais',
-        'Il est sans importance pour Dieu',
+        'L’homme qui marche ne peut pas diriger lui-même ses pas',
+        'L’homme maîtrise parfaitement son avenir',
+        'La conduite humaine n’a aucune importance',
+        'Seuls les rois décident de leur voie',
       ],
       correctIndex: 0,
       explanation:
-          'Une évaluation franche de la nature humaine '
-          '(Jérémie 17:9).',
+          '« Il n’appartient pas à l’homme qui marche de diriger ses '
+          'pas » (Jérémie 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[
@@ -6244,7 +6241,8 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
         'Rien d’inhabituel',
       ],
       correctIndex: 0,
-      explanation: 'La résurrection est annoncée par un ange (Marc 16).',
+      explanation:
+          'Un jeune homme vêtu de blanc leur annonce la résurrection (Marc 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[
@@ -6644,7 +6642,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'À quoi Paul compare-t-il l’église dans 1 Corinthiens 3 '
+          'À quoi Paul compare-t-il la congrégation dans 1 Corinthiens 3 '
           '?',
       options: <String>[
         'Au temple de Dieu',
@@ -7287,16 +7285,17 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quelle inquiétude Paul corrige-t-il concernant le '
-          'jour du Seigneur ?',
+          'De quoi Paul remercie-t-il Dieu au sujet des '
+          'Thessaloniciens ?',
       options: <String>[
-        'Croire à tort qu’il était déjà arrivé',
-        'Croire qu’il n’arriverait jamais',
-        'Ignorer totalement le sujet',
-        'Penser qu’il fallait cesser de prier',
+        'Leur foi grandit beaucoup et leur amour augmente',
+        'Leur richesse ne cesse de croître',
+        'Leur nombre diminue chaque année',
+        'Ils ont cessé de se réunir',
       ],
       correctIndex: 0,
-      explanation: 'Une confusion est clarifiée (2 Thessaloniciens 2:2).',
+      explanation:
+          'Paul remercie Dieu de leurs progrès (2 Thessaloniciens 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[
@@ -7661,7 +7660,7 @@ _authoredQuizzes = <String, List<QuizQuestion>>{
         'Il propose de la prendre à son propre compte',
         'Il exige que Philémon l’efface sans discussion',
         'Il ignore totalement la question',
-        'Il demande à l’Église de payer',
+        'Il demande à la congrégation de payer',
       ],
       correctIndex: 0,
       explanation: 'Un geste personnel de médiation (Philémon 1:18, 19).',
@@ -8386,12 +8385,10 @@ const Map<String, List<QuizQuestion>>
 _extraQuizzes = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Quel arbre, au milieu du jardin d’Éden, était interdit à '
-          'Adam et Ève ?',
+      text: 'Quel arbre du jardin d’Éden était interdit à Adam et Ève ?',
       options: <String>[
         'L’arbre de la connaissance du bon et du mauvais',
-        'L’arbre de vie uniquement',
+        'L’arbre de vie',
         'Un figuier',
         'Un olivier',
       ],
@@ -8420,8 +8417,8 @@ _extraQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Qui a béni Abram, étant roi de Salem et prêtre du Dieu '
-          'Très-Haut ?',
+          'Qui, roi de Salem et prêtre du Dieu Très-Haut, a béni '
+          'Abram ?',
       options: <String>['Melchisédek', 'Lot', 'Pharaon', 'Isaac'],
       correctIndex: 0,
       explanation: 'Melchisédek bénit Abram après une victoire (Genèse 14).',
@@ -8497,7 +8494,7 @@ _extraQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Qu’a vu Jacob en rêve à Béthel ?',
       options: <String>[
-        'Une échelle atteignant le ciel avec des anges',
+        'Un escalier atteignant le ciel avec des anges',
         'Une mer déchaînée',
         'Un buisson en feu',
         'Une ville en ruine',
@@ -8568,7 +8565,7 @@ _extraQuizzes = <String, List<QuizQuestion>>{
           'Qu’a interprété Joseph pour Pharaon, annonçant sept '
           'années de famine ?',
       options: <String>[
-        'Ses rêves',
+        'Les rêves de Pharaon',
         'Un livre ancien',
         'Les étoiles',
         'Un oracle',
@@ -8576,7 +8573,14 @@ _extraQuizzes = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'Joseph interprète les rêves de Pharaon (Genèse 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['rêves', 'les songes', 'des songes'],
+      acceptedAnswers: <String>[
+        'rêves',
+        'les rêves',
+        'ses rêves',
+        'songes',
+        'les songes',
+        'des songes',
+      ],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -8635,16 +8639,18 @@ _extraQuizzes = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Par quel nom Dieu s’est-il désigné à Moïse au buisson '
+          'Par quel nom Jéhovah s’est-il désigné à Moïse au buisson '
           'ardent ?',
       options: <String>[
         '« Je serai ce que je serai »',
-        '« Le Tout-Puissant seul »',
+        '« Le Dieu sans nom »',
         '« Le Dieu caché »',
         '« Le roi des rois »',
       ],
       correctIndex: 0,
-      explanation: 'Dieu révèle la signification de son nom (Exode 3:14).',
+      explanation:
+          'Jéhovah explique la signification de son nom, puis le donne '
+          'à Moïse (Exode 3:14, 15).',
     ),
   ],
   'Exodus#1': <QuizQuestion>[

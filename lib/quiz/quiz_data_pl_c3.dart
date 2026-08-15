@@ -292,7 +292,8 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Kim jest Elihu, który przemawia po trzech przyjaciołach?',
       options: <String>[
-        'Młodym mężczyzną, który uważa się za mądrego',
+        'Młodszym mężczyzną, który z szacunku czekał, zanim zabrał '
+            'głos',
         'Aniołem posłanym przez Boga',
         'Czwartym, starszym przyjacielem',
         'Synem Hioba',
@@ -916,7 +917,7 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
         'Królewski wyrok',
       ],
       correctIndex: 0,
-      explanation: 'Księga celebruje szczerą miłość małżeńską (Pieśń 1).',
+      explanation: 'Księga celebruje wierną i wyłączną miłość (Pieśń 1).',
     ),
     QuizQuestion(
       text: 'Co robi Szulamitka w swoim śnie w rozdziale 3?',
@@ -932,7 +933,7 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Jak Szulamitka wyraża swoje wyłączne oddanie?',
       options: <String>[
-        '„Jestem mojego ukochanego, a mój ukochany jest mój”',
+        '„Mój ukochany jest mój, a ja jestem jego”',
         '„Wolę bogactwo od miłości”',
         '„Miłość nie ma dla mnie znaczenia”',
         '„Pozostanę sama na zawsze”',
@@ -1129,7 +1130,7 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Co obiecuje Izajasza 26 temu, którego umysł polega na Bogu?',
       options: <String>[
-        'Doskonały pokój',
+        'Nieustanny pokój',
         'Natychmiastowe bogactwo',
         'Niezwyciężone wojsko',
         'Gwarantowane długie życie',
@@ -1167,7 +1168,7 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Czym stanie się pustynia według obietnicy z Izajasza 35?',
       options: <String>[
-        'Zakwitnie jak róża',
+        'Zakwitnie jak szafran',
         'Na zawsze pozostanie jałowa',
         'Stanie się morzem',
         'Zostanie ostatecznie opuszczona',
@@ -1291,7 +1292,7 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
       text:
           'Jakie stwierdzenie z Izajasza 61 odczytał Jezus w synagodze w Nazarecie?',
       options: <String>[
-        '„Duch Wszechwładnego Pana jest na mnie”',
+        '„Duch Wszechwładnego Pana Jehowy jest na mnie”',
         '„Przyszedłem, aby sądzić cały świat”',
         '„Świątynia zostanie zniszczona”',
         '„Nikt nie zostanie wybawiony”',
@@ -1378,15 +1379,16 @@ authoredQuizzesPlC3 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['pas', 'len', 'rzeka'],
     ),
     QuizQuestion(
-      text: 'Co Jeremiasza 17 ujawnia o ludzkim sercu?',
+      text: 'Co Jeremiasz przyznaje w rozdziale 10 o postępowaniu człowieka?',
       options: <String>[
-        'Jest zdradliwe bardziej niż cokolwiek innego',
+        'Człowiek, który idzie, nie może sam kierować swoim krokiem',
         'Jest z natury dobre',
         'Nigdy się nie zmienia',
         'Nie ma znaczenia dla Boga',
       ],
       correctIndex: 0,
-      explanation: 'Szczera ocena ludzkiej natury (Jeremiasza 17:9).',
+      explanation:
+          '„Nie należy do człowieka, który idzie, kierowanie swoim krokiem” (Jeremiasza 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

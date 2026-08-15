@@ -9,6 +9,7 @@ import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
+import '../quiz/quiz_facts.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/notification_service.dart';
@@ -652,12 +653,20 @@ class _HomeScreenState extends State<HomeScreen> {
       showMessageDialog(context, message: l10n.homeReviewQuizLocked);
       return;
     }
+    // A mixed quiz has no checkpoint of its own. Drawing only from quizzes
+    // already completed keeps the fact relevant and, more importantly, stops
+    // the round-up spoiling a book the reader hasn't got to yet.
+    final String? funFact = randomCheckpointFact(
+      _completedQuiz,
+      languageCode: Localizations.localeOf(context).languageCode,
+    );
     bool earned = false;
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (_) => QuizScreen(
           title: l10n.homeReviewQuizTitle,
           questions: questions,
+          funFact: funFact,
           onCompleted: (int score, int total) async {
             if (score * 100 >= total * 60) {
               await _dbService.addStreakFreeze();
@@ -1681,7 +1690,7 @@ class _SectionCard extends StatelessWidget {
   }
 }
 
-class _ContinueReadingCard extends StatelessWidget {
+class _ContinueReadingCard extends StatefulWidget {
   const _ContinueReadingCard({
     super.key,
     required this.reference,
@@ -1700,6 +1709,34 @@ class _ContinueReadingCard extends StatelessWidget {
   final VoidCallback onOpen;
   final VoidCallback onMarkRead;
   final VoidCallback onWriteReflection;
+
+  @override
+  State<_ContinueReadingCard> createState() => _ContinueReadingCardState();
+}
+
+class _ContinueReadingCardState extends State<_ContinueReadingCard>
+    with SingleTickerProviderStateMixin {
+  /// Nudges "Open" when someone taps "Mark as read" too early. Disabling the
+  /// button alone gives no feedback at all — the tap just does nothing, which
+  /// reads as broken rather than as "read it first".
+  late final AnimationController _openNudge = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 500),
+  );
+
+  @override
+  void dispose() {
+    _openNudge.dispose();
+    super.dispose();
+  }
+
+  void _nudgeOpen() => _openNudge.forward(from: 0);
+
+  /// A few quick oscillations that fade out — enough to catch the eye and
+  /// point at "Open" without turning into an alarm. Amplitude decays with
+  /// the animation so it settles exactly back to 0.
+  static double _nudgeOffset(double t) =>
+      t == 0 ? 0 : math.sin(t * math.pi * 6) * 6 * (1 - t);
 
   @override
   Widget build(BuildContext context) {
@@ -1755,7 +1792,7 @@ class _ContinueReadingCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        reference,
+                        widget.reference,
                         style: theme.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w800,
                         ),
@@ -1769,46 +1806,68 @@ class _ContinueReadingCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: FilledButton.icon(
-                    onPressed: onOpen,
-                    icon: Icon(AppIcons.of(context).book, size: 18),
-                    // Some translations ("Segna come letto") don't fit this
-                    // half-width slot on one line at full size; scaling
-                    // down instead of wrapping keeps it on a single line
-                    // without cutting any of it off like ellipsis would.
-                    label: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(l10n.homeOpenButton, maxLines: 1),
+                  // Transform.translate only moves paint, never layout, so
+                  // the shake can't disturb the row it sits in.
+                  child: AnimatedBuilder(
+                    key: const Key('homeOpenNudge'),
+                    animation: _openNudge,
+                    builder: (BuildContext context, Widget? child) =>
+                        Transform.translate(
+                          offset: Offset(_nudgeOffset(_openNudge.value), 0),
+                          child: child,
+                        ),
+                    child: FilledButton.icon(
+                      onPressed: widget.onOpen,
+                      icon: Icon(AppIcons.of(context).book, size: 18),
+                      // Some translations ("Segna come letto") don't fit this
+                      // half-width slot on one line at full size; scaling
+                      // down instead of wrapping keeps it on a single line
+                      // without cutting any of it off like ellipsis would.
+                      label: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(l10n.homeOpenButton, maxLines: 1),
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: FilledButton.tonalIcon(
-                    // Disabled until "Open" has been tapped for this
-                    // chapter — otherwise there's nothing stopping a
-                    // chapter being ticked off without ever having been
-                    // read.
-                    onPressed: canMarkRead ? onMarkRead : null,
-                    icon: const Icon(Icons.check_circle_outline, size: 18),
-                    label: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(l10n.homeMarkReadButton, maxLines: 1),
-                    ),
-                    // The default tonal secondaryContainer pairing reads too
-                    // faint sitting on this card's own light-blue tint;
-                    // secondary/onSecondary is the same family but a solid,
-                    // higher-contrast step darker. Standard Material
-                    // disabled-state opacities (12%/38%) substitute in by
-                    // hand since a flat color here isn't state-aware on its
-                    // own the way the theme's default would be.
-                    style: FilledButton.styleFrom(
-                      backgroundColor: canMarkRead
-                          ? cs.secondary
-                          : cs.onSurface.withValues(alpha: 0.12),
-                      foregroundColor: canMarkRead
-                          ? cs.onSecondary
-                          : cs.onSurface.withValues(alpha: 0.38),
+                  // A disabled button swallows the tap silently. Catching it
+                  // here is what lets the early tap answer back by pointing
+                  // at "Open" instead of appearing to do nothing.
+                  child: GestureDetector(
+                    // Transparent once the button is live: deferToChild with
+                    // no callback leaves hit-testing exactly as it was.
+                    behavior: widget.canMarkRead
+                        ? HitTestBehavior.deferToChild
+                        : HitTestBehavior.opaque,
+                    onTap: widget.canMarkRead ? null : _nudgeOpen,
+                    child: FilledButton.tonalIcon(
+                      // Disabled until "Open" has been tapped for this
+                      // chapter — otherwise there's nothing stopping a
+                      // chapter being ticked off without ever having been
+                      // read.
+                      onPressed: widget.canMarkRead ? widget.onMarkRead : null,
+                      icon: const Icon(Icons.check_circle_outline, size: 18),
+                      label: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(l10n.homeMarkReadButton, maxLines: 1),
+                      ),
+                      // The default tonal secondaryContainer pairing reads too
+                      // faint sitting on this card's own light-blue tint;
+                      // secondary/onSecondary is the same family but a solid,
+                      // higher-contrast step darker. Standard Material
+                      // disabled-state opacities (12%/38%) substitute in by
+                      // hand since a flat color here isn't state-aware on its
+                      // own the way the theme's default would be.
+                      style: FilledButton.styleFrom(
+                        backgroundColor: widget.canMarkRead
+                            ? cs.secondary
+                            : cs.onSurface.withValues(alpha: 0.12),
+                        foregroundColor: widget.canMarkRead
+                            ? cs.onSecondary
+                            : cs.onSurface.withValues(alpha: 0.38),
+                      ),
                     ),
                   ),
                 ),
@@ -1818,7 +1877,7 @@ class _ContinueReadingCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
-                onPressed: onWriteReflection,
+                onPressed: widget.onWriteReflection,
                 icon: Icon(AppIcons.of(context).notes, size: 18),
                 label: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -2145,7 +2204,6 @@ class _ProgressCard extends StatelessWidget {
     final double progress = totalChapters == 0
         ? 0
         : chaptersRead / totalChapters;
-    final int percent = (progress * 100).round();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -2220,7 +2278,6 @@ class _ProgressCard extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _BibleProgressIndicator(
-          percent: percent,
           progress: progress,
           chaptersRead: chaptersRead,
           totalChapters: totalChapters,
@@ -2232,13 +2289,11 @@ class _ProgressCard extends StatelessWidget {
 
 class _BibleProgressIndicator extends StatelessWidget {
   const _BibleProgressIndicator({
-    required this.percent,
     required this.progress,
     required this.chaptersRead,
     required this.totalChapters,
   });
 
-  final int percent;
   final double progress;
   final int chaptersRead;
   final int totalChapters;
@@ -2283,7 +2338,12 @@ class _BibleProgressIndicator extends StatelessWidget {
                 ),
               ),
               Text(
-                '$percent %',
+                // One decimal place so early progress isn't stuck at "0 %"
+                // for dozens of chapters — 1,189 total means each single
+                // chapter only moves the rounded integer every ~12 of them.
+                // Locale-aware separator: a comma in French, a dot in
+                // English, rather than hardcoding either.
+                '${NumberFormat('#,##0.0', Localizations.localeOf(context).toString()).format(progress * 100)} %',
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: cs.primary,

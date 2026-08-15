@@ -612,16 +612,53 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsCatNotifications => '通知';
 
   @override
-  String get settingsCatNotificationsDesc => '提醒所需的权限';
+  String get settingsCatNotificationsDesc => '提醒能否送达';
 
   @override
   String get settingsCatPrivacyDesc => '应用锁';
+
+  @override
+  String get settingsCatDonations => '捐款';
+
+  @override
+  String get settingsCatDonationsDesc => '支持 JW Streak';
 
   @override
   String get settingsCatAbout => '帮助与关于';
 
   @override
   String get settingsCatAboutDesc => '导览、版本、源代码';
+
+  @override
+  String get donationsHeadline => '我们暂时不接受捐款';
+
+  @override
+  String get donationsLead =>
+      'JW Streak 是免费的，目前也没有任何捐款方式。这是有意为之，我们还没有设置。以后也许会开放，我们想坦白地先说清楚，而不是哪天突然让你意外。';
+
+  @override
+  String get donationsRow1Title => '不过确实有成本';
+
+  @override
+  String get donationsRow1Text =>
+      '开发者账号、测试设备和一些订阅都需要付费，而这个应用是在晚上和周末做出来的。有些夜晚确实不轻松。';
+
+  @override
+  String get donationsRow2Title => '不会改变的事';
+
+  @override
+  String get donationsRow2Text =>
+      'JW Streak 会一直免费、开源、完全离线。没有广告，没有追踪，没有锁定的章节或付费功能。就算将来开放捐款，也完全是自愿的。';
+
+  @override
+  String get donationsRow3Title => '不花钱也能帮忙';
+
+  @override
+  String get donationsRow3Text =>
+      '把它推荐给可能喜欢的人，报告测验中的错误或程序缺陷，或者只是继续你的阅读。说真的，这已经意义重大。';
+
+  @override
+  String get donationsThanks => '谢谢你在这里 💛';
 
   @override
   String get settingsAppearance => '外观';
@@ -636,7 +673,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsDynamicColorOff => '使用应用的品牌配色';
 
   @override
-  String get settingsBibleTargetTitle => '打开圣经的方式';
+  String get settingsBibleTargetTitle => '打开圣经和每日经文的方式';
 
   @override
   String get settingsBibleTargetJwLibrary => 'JW Library 应用';
@@ -646,7 +683,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsBibleTargetJwLibraryMissing =>
-      '以这种方式打开圣经需要 JW Library 应用。要安装吗？';
+      '以这种方式打开圣经或每日经文需要 JW Library 应用。要安装吗？';
 
   @override
   String get settingsBibleTargetInstall => '安装';
@@ -658,31 +695,55 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsLanguageSystem => '跟随系统';
 
   @override
-  String get settingsNotifPermTitle => '通知权限';
-
-  @override
   String get settingsChecking => '检查中…';
-
-  @override
-  String get settingsNotifActive => '权限已开启。';
-
-  @override
-  String get settingsNotifMissing => '缺少权限。开启后才能收到提醒。';
-
-  @override
-  String get settingsVerify => '检查';
-
-  @override
-  String get settingsExactAlarms => '精确闹钟';
-
-  @override
-  String get settingsExactAlarmsOn => '提醒会在准确的时间触发。';
 
   @override
   String get settingsExactAlarmsOff => '未获授权。提醒可能会延迟。';
 
   @override
-  String get settingsAllow => '允许';
+  String get notifStatusReadyTitle => '提醒已准备就绪';
+
+  @override
+  String get notifStatusReadyBody => '它们会在你选择的时间送达。';
+
+  @override
+  String get notifStatusBlockedTitle => '提醒无法送达';
+
+  @override
+  String get notifStatusBlockedBody => 'JW Streak 没有发送通知的权限，所以不会出现任何提醒。';
+
+  @override
+  String get notifStatusDelayedTitle => '提醒可能会迟到';
+
+  @override
+  String get notifStatusDelayedBody => '提醒仍会送达，但安卓可能为了省电而延后几分钟。';
+
+  @override
+  String get notifPermRowTitle => '发送通知';
+
+  @override
+  String get notifPermRowBody => '没有这项权限，提醒根本无法出现。';
+
+  @override
+  String get notifExactRowTitle => '精确时间';
+
+  @override
+  String get notifExactRowBody => '让提醒在你选定的那一分钟准时响起，而不是等安卓有空才发。';
+
+  @override
+  String get notifRowAllowed => '已允许';
+
+  @override
+  String get notifRowNotAllowed => '未允许';
+
+  @override
+  String get notifActionTurnOn => '开启';
+
+  @override
+  String get notifActionOpen => '打开设置';
+
+  @override
+  String get notifRemindersHint => '提醒时间可在主屏幕的铃铛中设置。';
 
   @override
   String get settingsInfo => '信息';
@@ -809,6 +870,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get quizFinish => '完成';
+
+  @override
+  String get quizFunFactLabel => '你知道吗？';
+
+  @override
+  String quizReviewTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 题可以回顾',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizReviewSubtitle => '不用着急，看看哪里没答对就好。';
+
+  @override
+  String get quizReviewYourAnswer => '你的答案';
+
+  @override
+  String get quizReviewCorrectAnswer => '正确答案';
 
   @override
   String get checkpointAppBarTitle => '步骤';
@@ -1242,25 +1325,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get noteEditorTitleHint => '标题';
 
   @override
+  String get noteEditorLinkedChapter => '关联的章节';
+
+  @override
   String get noteEditorBodyHint => '写下你的想法、思考、研究要点...';
-
-  @override
-  String get noteEditorMarkdownHelpTitle => '支持 Markdown 格式';
-
-  @override
-  String get noteEditorTipBold => '● 加粗：**你的文字**';
-
-  @override
-  String get noteEditorTipItalic => '● 斜体：*你的文字*';
-
-  @override
-  String get noteEditorTipStrikethrough => '● 删除线：~~你的文字~~';
-
-  @override
-  String get noteEditorTipHeading => '● 标题：# 你的标题';
-
-  @override
-  String get noteEditorTipList => '● 列表：- 项目';
 
   @override
   String get notesLibraryDeleteDialogTitle => '删除吗？';
@@ -1313,6 +1381,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notesLibraryExportAllTooltip => '导出我的笔记';
+
+  @override
+  String get settingsExportNotesDesc => '把所有笔记保存成一个 ZIP 文件，方便保存或分享';
 
   @override
   String get notesLibraryDeleteTooltip => '删除';

@@ -285,7 +285,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Who is Elihu, who speaks after the three friends?',
       options: <String>[
-        'A young man who considers himself wise',
+        'A younger man who had waited out of respect before speaking',
         'An angel sent by God',
         'A fourth, older friend',
         'Job\'s son',
@@ -622,7 +622,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'What call concludes the very last psalm, Psalm 150?',
       options: <String>[
-        'Let everything that breathes praise Yah',
+        'Let everything that breathes praise Jah',
         'Let everything fall silent forever',
         'Let only kings praise God',
         'Let music be forbidden',
@@ -912,7 +912,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'The book celebrates sincere married love (Song of Solomon 1).',
+          'The book celebrates sincere faithful, exclusive love (Song of Solomon 1).',
     ),
     QuizQuestion(
       text: 'What does the Shulammite do in her dream in chapter 3?',
@@ -929,7 +929,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'How does the Shulammite express her exclusive devotion?',
       options: <String>[
-        '"I am my beloved\'s, and my beloved is mine"',
+        '"My beloved is mine, and I am his"',
         '"I prefer wealth to love"',
         '"Love does not matter to me"',
         '"I will remain alone forever"',
@@ -1136,13 +1136,13 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'What does Isaiah 26 promise to the one whose mind relies on God?',
       options: <String>[
-        'Perfect peace',
+        'Continuous peace',
         'Immediate wealth',
         'An invincible army',
         'Guaranteed long life',
       ],
       correctIndex: 0,
-      explanation: '"You will keep in perfect peace" (Isaiah 26:3).',
+      explanation: '"You will give them continuous peace" (Isaiah 26:3).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['peace'],
     ),
@@ -1176,7 +1176,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
       text:
           'What will the desert become according to the promise of Isaiah 35?',
       options: <String>[
-        'It will blossom like a rose',
+        'It will blossom like the saffron',
         'It will remain barren forever',
         'It will become a sea',
         'It will be abandoned for good',
@@ -1297,7 +1297,7 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
       text:
           'What statement from Isaiah 61 did Jesus read in the synagogue at Nazareth?',
       options: <String>[
-        '"The spirit of the Sovereign Lord is upon me"',
+        '"The spirit of the Sovereign Lord Jehovah is upon me"',
         '"I will come to judge the whole world"',
         '"The temple will be destroyed"',
         '"No one will be saved"',
@@ -1385,15 +1385,16 @@ authoredQuizzesEnC3 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['belt', 'linen', 'river'],
     ),
     QuizQuestion(
-      text: 'What does Jeremiah 17 reveal about the human heart?',
+      text: 'What does Jeremiah acknowledge in chapter 10 about human conduct?',
       options: <String>[
-        'It is deceptive more than anything else',
+        'A man who is walking cannot direct his own step',
         'It is naturally good',
         'It never changes',
         'It is of no importance to God',
       ],
       correctIndex: 0,
-      explanation: 'A frank assessment of human nature (Jeremiah 17:9).',
+      explanation:
+          '"It does not belong to man who is walking even to direct his step" (Jeremiah 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

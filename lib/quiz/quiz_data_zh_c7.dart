@@ -15,10 +15,15 @@ authoredQuizzesZhC7 = <String, List<QuizQuestion>>{
       explanation: '对上帝公正审判的希望鼓励着他们（帖撒罗尼迦后书1章）。',
     ),
     QuizQuestion(
-      text: '保罗纠正了他们对主的日子的什么误解？',
-      options: <String>['错误地以为主的日子已经来到', '认为主的日子永不会来到', '完全忽略这个话题', '认为应该停止祈祷'],
+      text: '保罗为帖撒罗尼迦人的什么事感谢上帝？',
+      options: <String>[
+        '他们的信心大大增长，爱心也不断增加',
+        '他们的财富不断增加',
+        '他们的人数逐年减少',
+        '他们已经停止聚会',
+      ],
       correctIndex: 0,
-      explanation: '一个误解得到了澄清（帖撒罗尼迦后书2:2）。',
+      explanation: '保罗为他们的进步感谢上帝（帖撒罗尼迦后书1:3）。',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[

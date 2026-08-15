@@ -1,10 +1,39 @@
 
 # JW Streak 🫶
 
-> **Unofficial, independent project.** JW Streak is not affiliated with or endorsed by Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal too, mady by 2 Jehova's Witnesses, that links out to JW.org / JW Library for their own content, it does NOT host, redistribute, or claim to represent that content as its own.
+> **Unofficial, independent project.** JW Streak is not affiliated with or endorsed by Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal tool, made by 2 Jehovah's Witnesses, that links out to JW.org / JW Library for their own content, it does NOT host, redistribute, or claim to represent that content as its own.
 
 Hi! 
 JW Streak (JWS) is a friendly Flutter application (Android, Material 3 Expressive) that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for me and others Jehovah’s Witnesses, anyone can use and enjoy it.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="store_assets/ios/6.9in/01_home.png" alt="Home screen with the streak and today's chapter" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/02_progress.png" alt="Reading progress across the whole Bible" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/03_achievements.png" alt="Achievements" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/04_bible_browser.png" alt="Bible browser" width="200"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Home</sub></td>
+    <td align="center"><sub>Progress</sub></td>
+    <td align="center"><sub>Achievements</sub></td>
+    <td align="center"><sub>Bible browser</sub></td>
+  </tr>
+  <tr>
+    <td><img src="store_assets/ios/6.9in/05_chapter_grid.png" alt="Chapter grid for a book" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/06_settings.png" alt="Settings" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/07_themes.png" alt="Theme picker" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/08_home_amethyst.png" alt="Home screen in the Amethyst theme" width="200"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Chapters</sub></td>
+    <td align="center"><sub>Settings</sub></td>
+    <td align="center"><sub>Themes</sub></td>
+    <td align="center"><sub>Amethyst theme</sub></td>
+  </tr>
+</table>
 
 ## Is it safe for my faith?
 
@@ -19,7 +48,7 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 - **Personal Notes**: Linked to a passage, viewable and exportable from a dedicated library
 - **Configurable Daily Reminders**: Simple notifications
 - **Onboarding**: 4 steps + a **guided tour** replayable from settings
-- **7 Languages**: French (reference language), English, German, Spanish, Italian, Portuguese, Russian, Simplified Chinese. More to come
+- **9 Languages**: French (reference language), English, German, Spanish, Italian, Polish, Portuguese, Russian, Simplified Chinese. More to come
 - **Theme**: Follow system / light / dark / dark OLED, with optional dynamic color (Material 3 E.). More themes on the way
 
 ## Privacy

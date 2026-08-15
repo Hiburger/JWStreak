@@ -652,16 +652,53 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsCatNotificationsDesc =>
-      'Autorizzazioni necessarie per i promemoria';
+      'Se i promemoria possono raggiungerti';
 
   @override
   String get settingsCatPrivacyDesc => 'Blocco dell\'app';
+
+  @override
+  String get settingsCatDonations => 'Donazioni';
+
+  @override
+  String get settingsCatDonationsDesc => 'Sostenere JW Streak';
 
   @override
   String get settingsCatAbout => 'Aiuto e informazioni';
 
   @override
   String get settingsCatAboutDesc => 'Tour guidato, versione, codice sorgente';
+
+  @override
+  String get donationsHeadline => 'Non accettiamo ancora donazioni';
+
+  @override
+  String get donationsLead =>
+      'JW Streak è gratuita e per ora non c\'è modo di donare. È voluto, semplicemente non abbiamo predisposto nulla. Forse lo faremo più avanti, e preferiamo dirtelo apertamente invece di sorprenderti un giorno.';
+
+  @override
+  String get donationsRow1Title => 'Un costo però c\'è';
+
+  @override
+  String get donationsRow1Text =>
+      'Account sviluppatore, dispositivi di prova e qualche abbonamento vanno pagati, e l\'app nasce di sera e nei fine settimana. Certe di quelle sere sono davvero faticose.';
+
+  @override
+  String get donationsRow2Title => 'Cosa non cambierà';
+
+  @override
+  String get donationsRow2Text =>
+      'JW Streak resterà gratuita, open source e completamente offline. Niente pubblicità, niente tracciamento, nessun capitolo bloccato né funzioni a pagamento. Se un giorno apriremo alle donazioni, donare sarà del tutto facoltativo.';
+
+  @override
+  String get donationsRow3Title => 'Aiutare senza spendere';
+
+  @override
+  String get donationsRow3Text =>
+      'Parlane a qualcuno a cui potrebbe piacere, segnala un errore in un quiz o un bug, o semplicemente continua a leggere. Sinceramente, è già tanto.';
+
+  @override
+  String get donationsThanks => 'Grazie di essere qui 💛';
 
   @override
   String get settingsAppearance => 'Aspetto';
@@ -677,7 +714,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsDynamicColorOff => 'Usa il colore del brand dell\'app';
 
   @override
-  String get settingsBibleTargetTitle => 'Apri la Bibbia con';
+  String get settingsBibleTargetTitle =>
+      'Apri la Bibbia e la Scrittura del giorno con';
 
   @override
   String get settingsBibleTargetJwLibrary => 'App JW Library';
@@ -687,7 +725,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsBibleTargetJwLibraryMissing =>
-      'L\'app JW Library è necessaria per aprire la Bibbia in questo modo. Vuoi installarla?';
+      'L\'app JW Library è necessaria per aprire la Bibbia o la Scrittura del giorno in questo modo. Vuoi installarla?';
 
   @override
   String get settingsBibleTargetInstall => 'Installa';
@@ -699,34 +737,62 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsLanguageSystem => 'Sistema';
 
   @override
-  String get settingsNotifPermTitle => 'Permessi di notifica';
-
-  @override
   String get settingsChecking => 'Verifica in corso...';
-
-  @override
-  String get settingsNotifActive => 'Permesso attivo.';
-
-  @override
-  String get settingsNotifMissing =>
-      'Permesso mancante. Attivalo per ricevere i promemoria.';
-
-  @override
-  String get settingsVerify => 'Verifica';
-
-  @override
-  String get settingsExactAlarms => 'Allarmi esatti';
-
-  @override
-  String get settingsExactAlarmsOn =>
-      'I promemoria si attivano all\'ora esatta.';
 
   @override
   String get settingsExactAlarmsOff =>
       'Non consentiti. I promemoria potrebbero essere ritardati.';
 
   @override
-  String get settingsAllow => 'Consenti';
+  String get notifStatusReadyTitle => 'I promemoria sono pronti';
+
+  @override
+  String get notifStatusReadyBody => 'Arriveranno all\'ora che hai scelto.';
+
+  @override
+  String get notifStatusBlockedTitle => 'I promemoria non possono raggiungerti';
+
+  @override
+  String get notifStatusBlockedBody =>
+      'JW Streak non ha il permesso di inviare notifiche, quindi non comparirà nessun promemoria.';
+
+  @override
+  String get notifStatusDelayedTitle =>
+      'I promemoria potrebbero arrivare in ritardo';
+
+  @override
+  String get notifStatusDelayedBody =>
+      'Arriveranno lo stesso, ma Android può trattenerli qualche minuto per risparmiare batteria.';
+
+  @override
+  String get notifPermRowTitle => 'Inviare notifiche';
+
+  @override
+  String get notifPermRowBody =>
+      'Senza questo, un promemoria non può proprio comparire.';
+
+  @override
+  String get notifExactRowTitle => 'Orario preciso';
+
+  @override
+  String get notifExactRowBody =>
+      'Permette a un promemoria di scattare al minuto esatto che hai scelto, invece che quando capita ad Android.';
+
+  @override
+  String get notifRowAllowed => 'Consentito';
+
+  @override
+  String get notifRowNotAllowed => 'Non consentito';
+
+  @override
+  String get notifActionTurnOn => 'Attiva';
+
+  @override
+  String get notifActionOpen => 'Apri le impostazioni';
+
+  @override
+  String get notifRemindersHint =>
+      'Gli orari dei promemoria si impostano dalla campanella nella schermata principale.';
 
   @override
   String get settingsInfo => 'Informazioni';
@@ -856,6 +922,30 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get quizFinish => 'Termina';
+
+  @override
+  String get quizFunFactLabel => 'Lo sapevi?';
+
+  @override
+  String quizReviewTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count da rivedere',
+      one: '1 da rivedere',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizReviewSubtitle =>
+      'Con calma, solo un\'occhiata a ciò che non è andato.';
+
+  @override
+  String get quizReviewYourAnswer => 'La tua risposta';
+
+  @override
+  String get quizReviewCorrectAnswer => 'La risposta era';
 
   @override
   String get checkpointAppBarTitle => 'Tappa';
@@ -1300,26 +1390,11 @@ class AppLocalizationsIt extends AppLocalizations {
   String get noteEditorTitleHint => 'Titolo';
 
   @override
+  String get noteEditorLinkedChapter => 'Capitolo collegato';
+
+  @override
   String get noteEditorBodyHint =>
       'Scrivi i tuoi pensieri, riflessioni, spunti di ricerca...';
-
-  @override
-  String get noteEditorMarkdownHelpTitle => 'Markdown supportato';
-
-  @override
-  String get noteEditorTipBold => '● Grassetto: **tuo_testo**';
-
-  @override
-  String get noteEditorTipItalic => '● Corsivo: *tuo_testo*';
-
-  @override
-  String get noteEditorTipStrikethrough => '● Barrato: ~~tuo_testo~~';
-
-  @override
-  String get noteEditorTipHeading => '● Titolo: # Il tuo titolo';
-
-  @override
-  String get noteEditorTipList => '● Elenco: - elemento';
 
   @override
   String get notesLibraryDeleteDialogTitle => 'Eliminare?';
@@ -1372,6 +1447,10 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get notesLibraryExportAllTooltip => 'Esporta le mie note';
+
+  @override
+  String get settingsExportNotesDesc =>
+      'Salva tutte le note in un file ZIP da conservare o condividere';
 
   @override
   String get notesLibraryDeleteTooltip => 'Elimina';

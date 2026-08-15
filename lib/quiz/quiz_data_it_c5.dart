@@ -30,7 +30,7 @@ authoredQuizzesItC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Le Beatitudini iniziano con i poveri in spirito (Matteo 5:3).',
+          'Le Beatitudini iniziano con quelli che sono consapevoli del loro bisogno spirituale (Matteo 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -203,14 +203,14 @@ authoredQuizzesItC5 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Come si descrive Gesù in Giovanni 10?',
       options: <String>[
-        'Il buon pastore',
+        'Il pastore eccellente',
         'Il leone',
         'Il sommo sacerdote',
         'Il giudice',
       ],
       correctIndex: 0,
       explanation:
-          'Gesù si presenta come il buon pastore che dà la vita per le '
+          'Gesù si presenta come il pastore eccellente che dà la vita per le '
           'sue pecore (Giovanni 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['porta', 'vite', 'luce'],
@@ -381,7 +381,8 @@ authoredQuizzesItC5 = <String, List<QuizQuestion>>{
         'Niente di insolito',
       ],
       correctIndex: 0,
-      explanation: 'La risurrezione è annunciata da un angelo (Marco 16).',
+      explanation:
+          'Un giovane vestito di bianco annuncia loro la risurrezione (Marco 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

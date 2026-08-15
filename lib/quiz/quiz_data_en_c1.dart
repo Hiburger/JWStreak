@@ -5,8 +5,8 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Over how many days of creation does the Bible describe '
-          'God’s work?',
+          'How many days of creation does Genesis describe before '
+          'God rests?',
       options: <String>['Six days', 'Seven days', 'Three days', 'Forty days'],
       correctIndex: 0,
       explanation:
@@ -108,7 +108,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
           '(Exodus 2).',
     ),
     QuizQuestion(
-      text: 'How did God appear to Moses at Mount Horeb?',
+      text: 'How did Jehovah appear to Moses at Mount Horeb?',
       options: <String>[
         'A bush on fire but not burning up',
         'A pillar of cloud',
@@ -177,7 +177,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Jethro'],
     ),
     QuizQuestion(
-      text: 'Where did God give the Ten Commandments?',
+      text: 'Where did Jehovah give the Ten Commandments?',
       options: <String>[
         'At Mount Sinai',
         'At Mount Nebo',
@@ -257,7 +257,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
           'Who eventually cut new stone tablets after Moses broke '
           'the first ones?',
       options: <String>[
-        'Moses, at God’s command',
+        'Moses, at Jehovah’s command',
         'Aaron',
         'Joshua',
         'Bezalel',
@@ -338,7 +338,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'What skin condition is examined in detail by the priests '
+          'What disease were the priests to examine in detail '
           'in these chapters?',
       options: <String>['Leprosy', 'Smallpox', 'Burns only', 'Acne'],
       correctIndex: 0,
@@ -365,9 +365,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
           '(Leviticus 16).',
     ),
     QuizQuestion(
-      text:
-          'Which well-known commandment appears in the “holiness '
-          'code” of Leviticus 19?',
+      text: 'Which well-known commandment is found in Leviticus 19?',
       options: <String>[
         'Love your neighbor as yourself',
         'Do not steal livestock',
@@ -500,9 +498,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
           '(Numbers 11).',
     ),
     QuizQuestion(
-      text:
-          'What happened to Miriam and Aaron after they criticized '
-          'Moses?',
+      text: 'What happened after Miriam and Aaron criticized Moses?',
       options: <String>[
         'Miriam was struck with leprosy',
         'They were permanently banished',
@@ -580,7 +576,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
       explanation: 'Phinehas intervenes and the plague stops (Numbers 25).',
     ),
     QuizQuestion(
-      text: 'Whom did Moses appoint as his successor?',
+      text: 'Whom did Jehovah appoint as Moses’ successor?',
       options: <String>['Joshua', 'Caleb', 'Eleazar', 'Phinehas'],
       correctIndex: 0,
       explanation:
@@ -598,7 +594,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Which tribes asked to settle east of the Jordan?',
+      text: 'Which tribes settled east of the Jordan?',
       options: <String>[
         'Reuben, Gad, and half of Manasseh',
         'Judah and Benjamin',
@@ -673,7 +669,8 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
           'What was the memory of the manna in the wilderness meant '
           'to remind Israel of?',
       options: <String>[
-        'That man does not live on bread alone, but on the word of God',
+        'That man does not live on bread alone, but on every '
+            'expression from Jehovah\'s mouth',
         'That God always punishes',
         'That the wilderness is cursed',
         'That food does not matter',
@@ -724,11 +721,9 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
       explanation: 'The year of release wipes out debts (Deuteronomy 15).',
     ),
     QuizQuestion(
-      text:
-          'Which future prophet, like Moses, is foretold in '
-          'Deuteronomy 18?',
+      text: 'What does Deuteronomy 18 foretell about a future prophet?',
       options: <String>[
-        'A prophet whom God would raise up',
+        'That Jehovah would raise up one like Moses',
         'A foreign king',
         'An angel',
         'A single judge',
@@ -977,7 +972,7 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
       explanation: 'This cycle structures the whole book (Judges 2).',
     ),
     QuizQuestion(
-      text: 'Who defeated Sisera with Deborah’s help?',
+      text: 'Who led Israel’s army against Sisera, with Deborah’s help?',
       options: <String>['Barak', 'Ehud', 'Othniel', 'Gideon'],
       correctIndex: 0,
       explanation: 'Deborah and Barak lead Israel to victory (Judges 4).',
@@ -997,9 +992,9 @@ authoredQuizzesEnC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'What happened after Abimelech proclaimed himself king?',
+      text: 'How did Abimelech’s reign end?',
       options: <String>[
-        'He massacred his brothers and later perished himself',
+        'He perished, struck by a millstone thrown by a woman',
         'He reigned in peace for a long time',
         'He was driven out without violence',
         'He founded a lasting dynasty',
@@ -1190,12 +1185,10 @@ const Map<String, List<QuizQuestion>>
 extraQuizzesEnC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Which tree in the middle of the garden of Eden was '
-          'forbidden to Adam and Eve?',
+      text: 'Which tree in the garden of Eden was forbidden to Adam and Eve?',
       options: <String>[
         'The tree of the knowledge of good and bad',
-        'The tree of life only',
+        'The tree of life',
         'A fig tree',
         'An olive tree',
       ],
@@ -1223,8 +1216,8 @@ extraQuizzesEnC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Who blessed Abram, being king of Salem and priest of the '
-          'Most High God?',
+          'Who, king of Salem and priest of the Most High God, '
+          'blessed Abram?',
       options: <String>['Melchizedek', 'Lot', 'Pharaoh', 'Isaac'],
       correctIndex: 0,
       explanation: 'Melchizedek blesses Abram after a victory (Genesis 14).',
@@ -1349,7 +1342,7 @@ extraQuizzesEnC1 = <String, List<QuizQuestion>>{
           'What did Joseph interpret for Pharaoh, foretelling seven '
           'years of famine?',
       options: <String>[
-        'His dreams',
+        'Pharaoh’s dreams',
         'An ancient book',
         'The stars',
         'An oracle',
@@ -1357,7 +1350,7 @@ extraQuizzesEnC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'Joseph interprets Pharaoh’s dreams (Genesis 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['dreams'],
+      acceptedAnswers: <String>['dreams', 'the dreams', 'his dreams'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1411,16 +1404,17 @@ extraQuizzesEnC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'By what name did God identify himself to Moses at the '
+          'By what name did Jehovah identify himself to Moses at the '
           'burning bush?',
       options: <String>[
         '“I Will Become What I Choose to Become”',
-        '“The Almighty alone”',
+        '“The nameless God”',
         '“The hidden God”',
         '“The King of kings”',
       ],
       correctIndex: 0,
-      explanation: 'God reveals the meaning of his name (Exodus 3:14).',
+      explanation:
+          'Jehovah explains the meaning of his name, then gives it to Moses (Exodus 3:14, 15).',
     ),
   ],
   'Exodus#1': <QuizQuestion>[

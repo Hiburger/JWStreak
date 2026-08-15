@@ -16,15 +16,15 @@ authoredQuizzesEnC7 = <String, List<QuizQuestion>>{
           'Hope in God\'s justice encourages them (2 Thessalonians 1).',
     ),
     QuizQuestion(
-      text: 'What concern does Paul correct regarding the day of the Lord?',
+      text: 'What does Paul thank God for regarding the Thessalonians?',
       options: <String>[
-        'The mistaken belief that it had already arrived',
-        'The belief that it would never arrive',
-        'Ignoring the subject entirely',
-        'Thinking that prayer should stop',
+        'Their faith is growing greatly and their love is increasing',
+        'Their wealth keeps increasing',
+        'Their numbers fall every year',
+        'They have stopped meeting together',
       ],
       correctIndex: 0,
-      explanation: 'A misunderstanding is clarified (2 Thessalonians 2:2).',
+      explanation: 'Paul thanks God for their progress (2 Thessalonians 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[

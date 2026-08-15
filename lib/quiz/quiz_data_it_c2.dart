@@ -48,12 +48,12 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Perché Samuele annunciò il rigetto di Saul come re?',
+      text: 'Cosa fece Saul a Ghilgal senza aspettare Samuele?',
       options: <String>[
-        'Saul offrì un sacrificio senza aspettare Samuele',
-        'Saul perse una battaglia',
-        'Saul rifiutò di regnare',
-        'Saul fuggì davanti al nemico',
+        'Offrì lui stesso il sacrificio',
+        'Perse una battaglia',
+        'Rifiutò di regnare',
+        'Fuggì davanti al nemico',
       ],
       correctIndex: 0,
       explanation:
@@ -204,7 +204,9 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
           'La parabola spinge Davide a riconoscere la sua colpa (2 Samuele 12).',
     ),
     QuizQuestion(
-      text: 'Chi si ribellò contro suo padre Davide per prendere il trono?',
+      text:
+          'Quale figlio di Davide si fece proclamare re a Ebron, '
+          'ribellandosi a lui?',
       options: <String>['Absalom', 'Amnon', 'Salomone', 'Adonia'],
       correctIndex: 0,
       explanation: 'Inizia la ribellione di Absalom (2 Samuele 15).',
@@ -228,7 +230,7 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Come morì Absalom?',
       options: <String>[
-        'Rimasto appeso per i capelli a un albero, ucciso da Ioab',
+        'Rimasto con la testa impigliata in un albero, ucciso da Ioab',
         'In duello contro Davide',
         'Avvelenato',
         'In esilio, di vecchiaia',
@@ -255,7 +257,9 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Chi tentò di impadronirsi del trono prima della morte di Davide?',
+      text:
+          'Quale figlio di Davide si proclamò re quando Davide era ormai '
+          'vecchio?',
       options: <String>['Adonia', 'Absalom', 'Solo Ioab', 'Natan'],
       correctIndex: 0,
       explanation:
@@ -498,7 +502,7 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Pasqua'],
     ),
     QuizQuestion(
-      text: 'Come termina il libro dei Re?',
+      text: 'Come finisce la storia di Giuda nel libro dei Re?',
       options: <String>[
         'Con la caduta di Gerusalemme e la distruzione del tempio',
         'Con l’incoronazione di un re giusto e duraturo',
@@ -586,7 +590,8 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Quale canto compose Asaf in occasione della collocazione dell’Arca?',
+          'Quale canto affidò Davide ad Asaf in occasione della '
+          'collocazione dell’Arca?',
       options: <String>[
         'Un canto di lode e di ringraziamento',
         'Un canto di lutto',
@@ -884,7 +889,8 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
       text:
           'Quale reazione mista seguì la posa delle fondamenta del nuovo tempio?',
       options: <String>[
-        'Gioia dei giovani, pianto degli anziani che ricordavano il primo',
+        'Gioia di molti, pianto degli anziani che avevano visto il '
+            'primo tempio',
         'Indifferenza generale',
         'Collera unanime',
         'Fuga del popolo',
@@ -908,7 +914,8 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Chi incoraggiò la ripresa dei lavori del tempio con le loro profezie?',
+          'Quali profeti incoraggiarono la ripresa dei lavori del '
+          'tempio?',
       options: <String>[
         'Aggeo e Zaccaria',
         'Ezechiele e Daniele',
@@ -1067,7 +1074,9 @@ authoredQuizzesItC2 = <String, List<QuizQuestion>>{
       explanation: 'Due cori percorrono la muraglia cantando (Neemia 12).',
     ),
     QuizQuestion(
-      text: 'Quale riforma impose Neemia al suo ritorno da un secondo mandato?',
+      text:
+          'Quale riforma impose Neemia durante il suo secondo soggiorno a '
+          'Gerusalemme?',
       options: <String>[
         'Il rispetto rigoroso del sabato e l’espulsione di Tobia',
         'L’abolizione del tempio',

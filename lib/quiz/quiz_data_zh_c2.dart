@@ -30,8 +30,8 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
       explanation: '撒母耳暗中膏立扫罗为王（撒母耳记上9-10章）。',
     ),
     QuizQuestion(
-      text: '撒母耳为什么宣布扫罗被废黜王位？',
-      options: <String>['扫罗没有等撒母耳就擅自献祭', '扫罗打了败仗', '扫罗拒绝执政', '扫罗在敌人面前逃跑'],
+      text: '扫罗在吉甲没有等撒母耳，做了什么？',
+      options: <String>['他擅自献上祭物', '扫罗打了败仗', '扫罗拒绝执政', '扫罗在敌人面前逃跑'],
       correctIndex: 0,
       explanation: '扫罗违命，擅自献祭（撒母耳记上13章）。',
     ),
@@ -116,7 +116,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
       explanation: '这个比喻促使大卫承认自己的过错（撒母耳记下12章）。',
     ),
     QuizQuestion(
-      text: '谁背叛了父亲大卫，企图夺取王位？',
+      text: '大卫的哪个儿子在希伯仑自立为王，背叛了父亲？',
       options: <String>['押沙龙', '暗嫩', '所罗门', '亚多尼雅'],
       correctIndex: 0,
       explanation: '押沙龙的叛乱开始了（撒母耳记下15章）。',
@@ -131,7 +131,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text: '押沙龙是怎么死的？',
-      options: <String>['头发被树枝缠住悬吊，被约押杀死', '在与大卫的单打独斗中丧命', '被毒死', '在流亡中年老而死'],
+      options: <String>['头被树枝缠住悬吊，被约押杀死', '在与大卫的单打独斗中丧命', '被毒死', '在流亡中年老而死'],
       correctIndex: 0,
       explanation: '押沙龙被悬挂在树上，约押刺死了他（撒母耳记下18章）。',
     ),
@@ -144,7 +144,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: '在大卫去世之前，谁企图夺取王位？',
+      text: '大卫年老的时候，他的哪个儿子自立为王？',
       options: <String>['亚多尼雅', '押沙龙', '单独的约押', '拿单'],
       correctIndex: 0,
       explanation: '亚多尼雅未经大卫同意就自立为王（列王纪上1章）。',
@@ -286,7 +286,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
       explanation: '人们庆祝了一次令人难忘的逾越节（列王纪下23章）。',
     ),
     QuizQuestion(
-      text: '列王纪这本书是怎样结束的？',
+      text: '列王纪中犹大国的历史是怎样结束的？',
       options: <String>[
         '以耶路撒冷的陷落和圣殿被毁告终',
         '以一位公正而长久在位的王加冕告终',
@@ -339,7 +339,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: '约柜安放之时，亚萨作了一首什么样的歌？',
+      text: '约柜安放之时，大卫把一首什么样的歌交给亚萨？',
       options: <String>['一首赞美感恩的歌', '一首哀悼的歌', '一则预言灾祸的信息', '一首战歌'],
       correctIndex: 0,
       explanation: '这首赞美诗交由亚萨负责（历代志上16章）。',
@@ -502,7 +502,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text: '新圣殿的根基奠定之后，引发了什么复杂的反应？',
-      options: <String>['年轻人欢喜快乐，记得旧圣殿的老年人却哭泣', '普遍的冷漠', '一致的愤怒', '民众四散逃离'],
+      options: <String>['许多人欢呼，见过第一座圣殿的老年人却哭泣', '普遍的冷漠', '一致的愤怒', '民众四散逃离'],
       correctIndex: 0,
       explanation: '与所罗门圣殿的对比使老年人深受触动（以斯拉记3章）。',
     ),
@@ -515,7 +515,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
       explanation: '政治上的反对使工程陷入停顿（以斯拉记4章）。',
     ),
     QuizQuestion(
-      text: '谁凭着他们的预言鼓励人们重新开工建造圣殿？',
+      text: '哪些先知凭着预言鼓励人们重新开工建造圣殿？',
       options: <String>['哈该和撒迦利亚', '以西结和但以理', '以赛亚和耶利米', '何西阿和阿摩司'],
       correctIndex: 0,
       explanation: '他们的信息使建造工程得以重新展开（以斯拉记5章）。',
@@ -606,7 +606,7 @@ authoredQuizzesZhC2 = <String, List<QuizQuestion>>{
       explanation: '两支歌咏队一边唱歌一边绕城墙而行（尼希米记12章）。',
     ),
     QuizQuestion(
-      text: '尼希米第二次上任回来后，推行了什么改革？',
+      text: '尼希米第二次在耶路撒冷期间推行了什么改革？',
       options: <String>['严格遵守安息日，并把多比雅赶走', '废除圣殿', '进行新的人口普查', '建造一座宫殿'],
       correctIndex: 0,
       explanation: '尼希米纠正了他离开期间死灰复燃的种种弊端（尼希米记13章）。',

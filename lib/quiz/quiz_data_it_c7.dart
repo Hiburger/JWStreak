@@ -17,17 +17,16 @@ authoredQuizzesItC7 = <String, List<QuizQuestion>>{
           '(2 Tessalonicesi 1).',
     ),
     QuizQuestion(
-      text:
-          'Quale preoccupazione corregge Paolo riguardo al giorno del '
-          'Signore?',
+      text: 'Di che cosa ringrazia Dio Paolo riguardo ai Tessalonicesi?',
       options: <String>[
-        'Credere erroneamente che fosse già arrivato',
-        'Credere che non sarebbe mai arrivato',
-        'Ignorare del tutto l’argomento',
-        'Pensare che bisognasse smettere di pregare',
+        'La loro fede cresce molto e il loro amore aumenta',
+        'La loro ricchezza continua a crescere',
+        'Il loro numero cala ogni anno',
+        'Hanno smesso di radunarsi',
       ],
       correctIndex: 0,
-      explanation: 'Una confusione viene chiarita (2 Tessalonicesi 2:2).',
+      explanation:
+          'Paolo ringrazia Dio per i loro progressi (2 Tessalonicesi 1:3).',
     ),
   ],
   '2 Thessalonians#1': <QuizQuestion>[
@@ -384,7 +383,7 @@ authoredQuizzesItC7 = <String, List<QuizQuestion>>{
         'Propone di metterlo sul proprio conto',
         'Esige che Filemone lo cancelli senza discussione',
         'Ignora completamente la questione',
-        'Chiede alla Chiesa di pagare',
+        'Chiede alla congregazione di pagare',
       ],
       correctIndex: 0,
       explanation: 'Un gesto personale di mediazione (Filemone 1:18, 19).',

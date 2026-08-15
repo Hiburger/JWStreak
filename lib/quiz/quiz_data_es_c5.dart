@@ -29,7 +29,7 @@ authoredQuizzesEsC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Las Bienaventuranzas comienzan con los pobres en espíritu (Mateo 5:3).',
+          'Las Bienaventuranzas comienzan con los que son conscientes de su necesidad espiritual (Mateo 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -198,14 +198,14 @@ authoredQuizzesEsC5 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Cómo se describe Jesús a sí mismo en Juan 10?',
       options: <String>[
-        'El buen pastor',
+        'El pastor excelente',
         'El león',
         'El sumo sacerdote',
         'El juez',
       ],
       correctIndex: 0,
       explanation:
-          'Jesús se presenta como el buen pastor que da su vida por sus ovejas (Juan 10).',
+          'Jesús se presenta como el pastor excelente que da su vida por sus ovejas (Juan 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['puerta', 'ovejas', 'luz'],
     ),
@@ -373,7 +373,8 @@ authoredQuizzesEsC5 = <String, List<QuizQuestion>>{
         'Nada fuera de lo común',
       ],
       correctIndex: 0,
-      explanation: 'La resurrección es anunciada por un ángel (Marcos 16).',
+      explanation:
+          'Un joven vestido de blanco les anuncia la resurrección (Marcos 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

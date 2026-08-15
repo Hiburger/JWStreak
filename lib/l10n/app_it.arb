@@ -1,11 +1,9 @@
 {
   "@@locale": "it",
-
   "themeSystem": "Segui il sistema",
   "themeLight": "Chiaro",
   "themeDark": "Scuro",
   "themeOled": "Scuro OLED",
-
   "settingsThemeStyle": "Stile",
   "settingsThemeBrightness": "Luminosità",
   "settingsThemeStyleDarkOnly": "Questo stile è sempre scuro.",
@@ -17,7 +15,6 @@
   "themeSkinSunset": "Tramonto",
   "themeSkinForest": "Foresta",
   "themeSkinAmethyst": "Ametista",
-
   "planCanonicalTitle": "Dall'inizio alla fine",
   "planCanonicalDesc": "Da Genesi a Rivelazione, nell'ordine in cui i libri sono stampati.",
   "planChronologicalTitle": "Come è accaduto",
@@ -55,11 +52,9 @@
   "rewardAcornsPlural": "ghiande",
   "rewardGemSingular": "gemma",
   "rewardGemsPlural": "gemme",
-
   "noteUntitled": "Senza titolo",
   "noteExportMultiTitle": "Le mie note - JW Streak",
   "noteExportedOn": "Esportato il {date}",
-
   "reflectionPrompt0": "Cosa ti insegna questo passo su Geova?",
   "reflectionPrompt1": "Quale qualità mostrata qui vorresti imitare?",
   "reflectionPrompt2": "Come potresti mettere in pratica questo insegnamento questa settimana?",
@@ -68,7 +63,6 @@
   "reflectionPrompt5": "In che modo questo rafforza la tua fede?",
   "reflectionPrompt6": "Cosa vorresti ricordare di questi capitoli?",
   "reflectionPrompt7": "Come parleresti di questo passo a qualcuno?",
-
   "bookGenesis": "Genesi",
   "bookExodus": "Esodo",
   "bookLeviticus": "Levitico",
@@ -135,7 +129,6 @@
   "book3John": "3 Giovanni",
   "bookJude": "Giuda",
   "bookRevelation": "Rivelazione",
-
   "welcomeTagline": "La tua lettura biblica quotidiana,\nun giorno alla volta.",
   "welcomeButton": "Benvenuto!",
   "welcomeLogoGreeting": "Ciao!",
@@ -179,7 +172,6 @@
   "tourSettingsBody": "Tema, lingua, promemoria, e questo tour, se vuoi rivederlo.",
   "settingsReplayTour": "Rivedi il tour guidato",
   "settingsReplayTourSubtitle": "Mostra di nuovo la presentazione della schermata iniziale",
-
   "settingsPrivacy": "Privacy",
   "settingsAppLockTitle": "Blocca l'applicazione",
   "settingsAppLockOn": "Chiede la tua impronta, il tuo volto o il PIN prima di aprire le tue note, a meno che tu torni entro 10 minuti.",
@@ -193,7 +185,6 @@
   "appLockUnlockButton": "Sblocca",
   "onbReminderPermissionMissing": "Le notifiche sono disattivate, quindi questo promemoria non suonerà. Attivale per ricevere gli avvisi.",
   "onbReminderPermissionEnable": "Attiva",
-
   "streakInfoTitle": "Mantieni viva la tua serie",
   "streakInfoSubtitle": "La tua serie cresce ogni giorno in cui resti attivo, e torna a zero se resti assente troppo a lungo.",
   "streakInfoRow1Title": "Resta attivo ogni giorno",
@@ -204,36 +195,54 @@
   "streakInfoRow3Text": "Finiti i fiammiferi? Supera un quiz di ripasso (un mix delle tue letture) per riguadagnarne uno.",
   "streakInfoRow4Title": "Ti avviseremo",
   "streakInfoRow4Text": "Se la tua serie è a rischio, appare un avviso e un promemoria serale può darti una spinta.",
-
   "settingsTitle": "Impostazioni",
   "settingsCatPersonalization": "Personalizzazione",
   "settingsCatPersonalizationDesc": "Stile, luminosità, lingua",
   "settingsCatReadingDesc": "Ordine di lettura, punto di ripresa, apertura dei capitoli",
   "settingsCatNotifications": "Notifiche",
-  "settingsCatNotificationsDesc": "Autorizzazioni necessarie per i promemoria",
+  "settingsCatNotificationsDesc": "Se i promemoria possono raggiungerti",
   "settingsCatPrivacyDesc": "Blocco dell'app",
+  "settingsCatDonations": "Donazioni",
+  "settingsCatDonationsDesc": "Sostenere JW Streak",
+  "donationsHeadline": "Non accettiamo ancora donazioni",
+  "donationsLead": "JW Streak è gratuita e per ora non c'è modo di donare. È voluto, semplicemente non abbiamo predisposto nulla. Forse lo faremo più avanti, e preferiamo dirtelo apertamente invece di sorprenderti un giorno.",
+  "donationsRow1Title": "Un costo però c'è",
+  "donationsRow1Text": "Account sviluppatore, dispositivi di prova e qualche abbonamento vanno pagati, e l'app nasce di sera e nei fine settimana. Certe di quelle sere sono davvero faticose.",
+  "donationsRow2Title": "Cosa non cambierà",
+  "donationsRow2Text": "JW Streak resterà gratuita, open source e completamente offline. Niente pubblicità, niente tracciamento, nessun capitolo bloccato né funzioni a pagamento. Se un giorno apriremo alle donazioni, donare sarà del tutto facoltativo.",
+  "donationsRow3Title": "Aiutare senza spendere",
+  "donationsRow3Text": "Parlane a qualcuno a cui potrebbe piacere, segnala un errore in un quiz o un bug, o semplicemente continua a leggere. Sinceramente, è già tanto.",
+  "donationsThanks": "Grazie di essere qui 💛",
   "settingsCatAbout": "Aiuto e informazioni",
   "settingsCatAboutDesc": "Tour guidato, versione, codice sorgente",
   "settingsAppearance": "Aspetto",
   "settingsDynamicColor": "Colori dinamici",
   "settingsDynamicColorOn": "Usa i colori del tuo sfondo (Material You)",
   "settingsDynamicColorOff": "Usa il colore del brand dell'app",
-  "settingsBibleTargetTitle": "Apri la Bibbia con",
+  "settingsBibleTargetTitle": "Apri la Bibbia e la Scrittura del giorno con",
   "settingsBibleTargetJwLibrary": "App JW Library",
   "settingsBibleTargetWeb": "jw.org (browser)",
-  "settingsBibleTargetJwLibraryMissing": "L'app JW Library è necessaria per aprire la Bibbia in questo modo. Vuoi installarla?",
+  "settingsBibleTargetJwLibraryMissing": "L'app JW Library è necessaria per aprire la Bibbia o la Scrittura del giorno in questo modo. Vuoi installarla?",
   "settingsBibleTargetInstall": "Installa",
   "settingsLanguage": "Lingua",
   "settingsLanguageSystem": "Sistema",
-  "settingsNotifPermTitle": "Permessi di notifica",
   "settingsChecking": "Verifica in corso...",
-  "settingsNotifActive": "Permesso attivo.",
-  "settingsNotifMissing": "Permesso mancante. Attivalo per ricevere i promemoria.",
-  "settingsVerify": "Verifica",
-  "settingsExactAlarms": "Allarmi esatti",
-  "settingsExactAlarmsOn": "I promemoria si attivano all'ora esatta.",
   "settingsExactAlarmsOff": "Non consentiti. I promemoria potrebbero essere ritardati.",
-  "settingsAllow": "Consenti",
+  "notifStatusReadyTitle": "I promemoria sono pronti",
+  "notifStatusReadyBody": "Arriveranno all'ora che hai scelto.",
+  "notifStatusBlockedTitle": "I promemoria non possono raggiungerti",
+  "notifStatusBlockedBody": "JW Streak non ha il permesso di inviare notifiche, quindi non comparirà nessun promemoria.",
+  "notifStatusDelayedTitle": "I promemoria potrebbero arrivare in ritardo",
+  "notifStatusDelayedBody": "Arriveranno lo stesso, ma Android può trattenerli qualche minuto per risparmiare batteria.",
+  "notifPermRowTitle": "Inviare notifiche",
+  "notifPermRowBody": "Senza questo, un promemoria non può proprio comparire.",
+  "notifExactRowTitle": "Orario preciso",
+  "notifExactRowBody": "Permette a un promemoria di scattare al minuto esatto che hai scelto, invece che quando capita ad Android.",
+  "notifRowAllowed": "Consentito",
+  "notifRowNotAllowed": "Non consentito",
+  "notifActionTurnOn": "Attiva",
+  "notifActionOpen": "Apri le impostazioni",
+  "notifRemindersHint": "Gli orari dei promemoria si impostano dalla campanella nella schermata principale.",
   "settingsInfo": "Informazioni",
   "settingsVersionLabel": "Versione di JW Streak",
   "settingsSourceCode": "Visualizza codice sorgente",
@@ -243,7 +252,6 @@
   "settingsFooter": "Realizzata con amore fraterno, dalla Svizzera.\nQuesta app è Gratuita, Libera e Open Source.",
   "settingsUnaffiliated": "JW Streak è un progetto indipendente e non ufficiale, senza alcuna affiliazione con i testimoni di Geova, la Watch Tower Bible and Tract Society, o JW.org.",
   "settingsError": "Errore: {error}",
-
   "reminderPresetMorning": "Mattina",
   "reminderPresetNoon": "Mezzogiorno",
   "reminderPresetEvening": "Sera",
@@ -261,7 +269,6 @@
   "reminderDailyTextSubtitle": "In più, un piccolo promemoria per il testo del giorno su jw.org.",
   "notifDailyTextTitle": "JW Streak · Scrittura del giorno",
   "notifDailyTextBody": "Il testo di oggi ti aspetta su jw.org.",
-
   "quizQuestionCounter": "Domanda {index} / {total}",
   "quizNext": "Avanti",
   "quizSeeScore": "Vedi il punteggio",
@@ -274,7 +281,18 @@
   "quizWellDone": "Ben fatto!",
   "quizScore": "Punteggio: {score} / {total}",
   "quizFinish": "Termina",
-
+  "quizFunFactLabel": "Lo sapevi?",
+  "quizReviewTitle": "{count, plural, =1{1 da rivedere} other{{count} da rivedere}}",
+  "@quizReviewTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizReviewSubtitle": "Con calma, solo un'occhiata a ciò che non è andato.",
+  "quizReviewYourAnswer": "La tua risposta",
+  "quizReviewCorrectAnswer": "La risposta era",
   "checkpointAppBarTitle": "Tappa",
   "checkpointQuizLabel": "Quiz",
   "checkpointQuestionCount": "{count} domande",
@@ -287,7 +305,6 @@
   "checkpointReflectionAppBarTitle": "Riflessione",
   "checkpointReflectionHint": "Scrivi la tua riflessione…",
   "checkpointSave": "Salva",
-
   "homeStreakLostMessage": "La tua serie è tornata a zero. Nessun problema, ricominciamo insieme 💪",
   "homeExactAlarmDialogTitle": "Promemoria all'ora esatta",
   "homeExactAlarmDialogContent": "Per ricevere il promemoria esattamente all'ora scelta, Android chiede di consentire \"allarmi e promemoria\". Senza questo permesso, la notifica potrebbe essere ritardata.",
@@ -366,7 +383,6 @@
   "homeWeekdayFri": "V",
   "homeWeekdaySat": "S",
   "homeWeekdaySun": "D",
-
   "bibleAppTitle": "La Bibbia",
   "bibleHebrewScriptures": "Scritture Ebraiche",
   "bibleGreekScriptures": "Scritture Greche Cristiane",
@@ -392,21 +408,14 @@
   "bibleLocked": "Bloccato",
   "bibleQuizAndReflection": "Quiz + riflessione",
   "bibleReflectionOnly": "Riflessione",
-
   "noteEditorTitleErrorHint": "Aggiungi un titolo per salvare.",
   "noteEditorErrorSnackbar": "Errore: {error}",
   "noteEditorTitleNew": "Nuova nota",
   "noteEditorTitleEdit": "Modifica nota",
   "noteEditorSaveButton": "Salva",
   "noteEditorTitleHint": "Titolo",
+  "noteEditorLinkedChapter": "Capitolo collegato",
   "noteEditorBodyHint": "Scrivi i tuoi pensieri, riflessioni, spunti di ricerca...",
-  "noteEditorMarkdownHelpTitle": "Markdown supportato",
-  "noteEditorTipBold": "● Grassetto: **tuo_testo**",
-  "noteEditorTipItalic": "● Corsivo: *tuo_testo*",
-  "noteEditorTipStrikethrough": "● Barrato: ~~tuo_testo~~",
-  "noteEditorTipHeading": "● Titolo: # Il tuo titolo",
-  "noteEditorTipList": "● Elenco: - elemento",
-
   "notesLibraryDeleteDialogTitle": "Eliminare?",
   "notesLibraryCancel": "Annulla",
   "notesLibraryDelete": "Elimina",
@@ -421,6 +430,7 @@
   "notesLibrarySelectedCountPlural": "{count} selezionate",
   "notesLibraryShareTooltip": "Condividi",
   "notesLibraryExportAllTooltip": "Esporta le mie note",
+  "settingsExportNotesDesc": "Salva tutte le note in un file ZIP da conservare o condividere",
   "notesLibraryDeleteTooltip": "Elimina",
   "notesLibraryJustNow": "proprio ora",
   "notesLibraryMinutesAgo": "{minutes} min fa",
@@ -430,7 +440,6 @@
   "notesLibraryEmptyTitle": "Ancora nessuna nota",
   "notesLibraryEmptySearchHint": "Prova altre parole chiave o controlla l'ortografia.",
   "notesLibraryEmptySubtitle": "Scrivi il tuo primo pensiero con il pulsante \"Nuova nota\".",
-
   "noteReaderDeleteTitle": "Eliminare questa nota?",
   "noteReaderDeleteContent": "\"{title}\" verrà eliminata definitivamente dal tuo dispositivo.",
   "noteReaderCancel": "Annulla",
@@ -442,7 +451,6 @@
   "noteReaderNoteGone": "Questa nota non esiste più.",
   "noteReaderUpdatedAt": "Ultima modifica il {date}",
   "noteReaderEmpty": "Questa nota è vuota.",
-
   "homeAchievementsTooltip": "Obiettivi",
   "achievementsTitle": "Obiettivi",
   "achievementsUnlockedCount": "{unlocked} di {total} sbloccati",
@@ -452,7 +460,6 @@
   "achievementsSectionQuizzes": "Quiz",
   "achievementsSectionStreak": "Serie",
   "achievementsSectionOther": "Altro",
-
   "achievementFirstChapterTitle": "Primi passi",
   "achievementFirstChapterDesc": "Leggi il tuo primo capitolo.",
   "achievementChapters10Title": "Ben avviato",
@@ -485,7 +492,6 @@
   "achievementFirstNoteDesc": "Scrivi la tua prima nota.",
   "achievementReminderTitle": "Resta in carreggiata",
   "achievementReminderDesc": "Configura un promemoria giornaliero.",
-
   "notifReminderTitle": "JW Streak · Lettura biblica",
   "notifReminderBody": "È ora della tua lettura. Tocca per continuare 📖",
   "notifStreakRiskTitle": "La tua serie è a rischio 🔥",
@@ -494,7 +500,6 @@
   "easterEggVersionTitle": "Sette volte, davvero",
   "easterEggVersionBody": "Qui non c'è nessuna modalità nascosta, mi spiace. Solo un grazie per aver cercato così a fondo. Questa app è nata una sera dopo l'altra, e fa piacere sapere che qualcuno curiosa.",
   "easterEggVersionButton": "Resta tra noi",
-
   "achievementQuizzes40Title": "Leggenda dei quiz",
   "achievementQuizzes40Desc": "Completa 40 quiz.",
   "achievementStars40Title": "Collezionista di galassie",
@@ -505,11 +510,9 @@
   "achievementNotes10Desc": "Scrivi 10 note.",
   "achievementEasterEggsTitle": "Cacciatore di segreti",
   "achievementEasterEggsDesc": "Scopri tutti i segreti nascosti dell'app.",
-
   "freezeEarnedTitle": "Nuovo fiammifero ottenuto!",
   "freezeEarnedBody": "Hai completato 3 nuovi quiz. Un fiammifero tiene accesa la tua serie se salti un giorno.",
   "freezeEarnedButton": "Fantastico!",
-
   "commonOk": "OK",
   "commonCancel": "Annulla"
 }

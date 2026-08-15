@@ -319,7 +319,8 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Chi è Eliu, che prende la parola dopo i tre amici?',
       options: <String>[
-        'Un giovane che si ritiene portatore di saggezza',
+        'Un uomo più giovane, che aveva atteso per rispetto prima di '
+            'parlare',
         'Un angelo mandato da Dio',
         'Un quarto amico anziano',
         'Il figlio di Giobbe',
@@ -686,7 +687,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Quale appello conclude l’ultimissimo salmo, il Salmo 150?',
       options: <String>[
-        'Che tutto ciò che respira lodi Yah',
+        'Che tutto ciò che respira lodi Iah',
         'Che tutto taccia per sempre',
         'Che solo i re lodino Dio',
         'Che la musica sia proibita',
@@ -1005,7 +1006,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
         'Un giudizio regale',
       ],
       correctIndex: 0,
-      explanation: 'Il libro celebra l’amore coniugale sincero (Cantico 1).',
+      explanation: 'Il libro celebra l’amore fedele ed esclusivo (Cantico 1).',
     ),
     QuizQuestion(
       text: 'Che cosa fa la Sulammita nel suo sogno al capitolo 3?',
@@ -1022,7 +1023,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Come esprime la Sulammita il suo attaccamento esclusivo?',
       options: <String>[
-        '«Io sono del mio amato, e il mio amato è mio»',
+        '«Il mio amato è mio, e io sono sua»',
         '«Preferisco la ricchezza all’amore»',
         '«L’amore non ha importanza per me»',
         '«Resterò sola per sempre»',
@@ -1251,7 +1252,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
           'Che cosa promette Isaia 26 a chi appoggia il proprio spirito '
           'su Dio?',
       options: <String>[
-        'Una pace perfetta',
+        'Una pace continua',
         'Una ricchezza immediata',
         'Un esercito invincibile',
         'Una longevità garantita',
@@ -1294,7 +1295,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
           'Che cosa diventerà il deserto secondo la promessa di '
           'Isaia 35?',
       options: <String>[
-        'Fiorirà come una rosa',
+        'Fiorirà come lo zafferano',
         'Resterà sterile per sempre',
         'Diventerà un mare',
         'Sarà abbandonato definitivamente',
@@ -1432,7 +1433,7 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
           'Quale dichiarazione di Isaia 61 lesse Gesù nella sinagoga '
           'di Nazaret?',
       options: <String>[
-        '«Lo spirito del Sovrano Signore è su di me»',
+        '«Lo spirito del Sovrano Signore Geova è su di me»',
         '«Verrò a giudicare il mondo intero»',
         '«Il tempio sarà distrutto»',
         '«Nessuno sarà salvato»',
@@ -1527,16 +1528,16 @@ authoredQuizzesItC3 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['cintura', 'lino', 'Eufrate'],
     ),
     QuizQuestion(
-      text: 'Che cosa rivela Geremia 17 riguardo al cuore umano?',
+      text: 'Cosa riconosce Geremia nel capitolo 10 sulla condotta umana?',
       options: <String>[
-        'È ingannevole più di ogni altra cosa',
+        'L’uomo che cammina non può dirigere i propri passi',
         'È naturalmente buono',
         'Non cambia mai',
         'Non ha alcuna importanza per Dio',
       ],
       correctIndex: 0,
       explanation:
-          'Una valutazione schietta della natura umana (Geremia 17:9).',
+          '«Non appartiene all’uomo che cammina dirigere i suoi passi» (Geremia 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

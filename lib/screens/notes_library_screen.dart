@@ -239,23 +239,6 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     }
   }
 
-  /// Unlike [_shareSelected], fetches every note unfiltered — "export all"
-  /// shouldn't silently only export whatever an active search happens to
-  /// currently be showing.
-  Future<void> _exportAll() async {
-    try {
-      final List<NoteEntry> allNotes = await widget.dbService.getAllNotes();
-      if (!mounted || allNotes.isEmpty) {
-        return;
-      }
-      await exportAllNotesAsZip(context, allNotes);
-    } catch (error) {
-      if (mounted) {
-        _showError(error);
-      }
-    }
-  }
-
   void _onSearchChanged(String value) {
     setState(() {
       _query = value;
@@ -331,29 +314,6 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                     colorScheme.surfaceTint,
                   ),
                 ),
-                if (!_selectionMode &&
-                    !_isLoading &&
-                    _notes.isNotEmpty) ...<Widget>[
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton.tonalIcon(
-                      onPressed: _exportAll,
-                      icon: const Icon(Icons.ios_share_rounded, size: 20),
-                      label: Text(
-                        AppLocalizations.of(
-                          context,
-                        )!.notesLibraryExportAllTooltip,
-                      ),
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(48),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
                 const SizedBox(height: 12),
                 Expanded(
                   child: AnimatedSwitcher(
@@ -459,13 +419,16 @@ class _NoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final String preview = _plainPreview(note.content);
+    final String preview = plainNotePreview(note.content);
 
     final Widget card = Card.filled(
       margin: EdgeInsets.zero,
       color: selected ? colorScheme.secondaryContainer : null,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(28)),
+      ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(28),
         onTap: onTap,
         onLongPress: onLongPress,
         child: Padding(
@@ -576,15 +539,19 @@ class _NoteCard extends StatelessWidget {
       child: card,
     );
   }
+}
 
-  /// Strips Markdown markers for a clean, readable card preview.
-  String _plainPreview(String content) {
-    return content
-        .replaceAll(RegExp(r'^#{1,6}\s*', multiLine: true), '')
-        .replaceAll(RegExp(r'^\s*[-*>]\s+', multiLine: true), '')
-        .replaceAll(RegExp(r'\*\*|\*|~~|`'), '')
-        .trim();
-  }
+/// Strips Markdown markers for a clean, readable card preview.
+///
+/// The whitespace classes are deliberately `[ \t]` and not `\s`: `\s` also
+/// matches newlines, so stripping a list marker used to swallow the blank
+/// line before it and the preview came out with lines missing.
+String plainNotePreview(String content) {
+  return content
+      .replaceAll(RegExp(r'^#{1,6}[ \t]*', multiLine: true), '')
+      .replaceAll(RegExp(r'^[ \t]*[-*>][ \t]+', multiLine: true), '')
+      .replaceAll(RegExp(r'\*\*|\*|~~|`'), '')
+      .trim();
 }
 
 /// "il y a 5 min", "il y a 3 h", "hier", else short date.

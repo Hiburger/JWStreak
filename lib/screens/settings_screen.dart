@@ -8,13 +8,14 @@ import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
 import 'settings/about_settings_screen.dart';
+import 'settings/donations_settings_screen.dart';
 import 'settings/notification_settings_screen.dart';
 import 'settings/personalization_settings_screen.dart';
 import 'settings/privacy_settings_screen.dart';
 import 'settings/reading_settings_screen.dart';
 import 'settings/settings_common.dart';
 
-/// The settings hub: five doors, nothing else.
+/// The settings hub: a handful of doors, nothing else.
 ///
 /// Everything used to live on this one page — styles, brightness, dynamic
 /// color, how the Bible opens, reading order, resume point, language, app
@@ -124,6 +125,15 @@ class SettingsScreen extends StatelessWidget {
             ),
             _CategoryTile(
               shape: sectionShape,
+              icon: Icons.volunteer_activism_outlined,
+              accent: kAccentPink,
+              title: l10n.settingsCatDonations,
+              subtitle: l10n.settingsCatDonationsDesc,
+              onTap: () =>
+                  _open(context, (_) => const DonationsSettingsScreen()),
+            ),
+            _CategoryTile(
+              shape: sectionShape,
               icon: Icons.help_outline_rounded,
               accent: kAccentOrange,
               title: l10n.settingsCatAbout,
@@ -154,10 +164,10 @@ class _CategoryTile extends StatelessWidget {
   final RoundedRectangleBorder shape;
   final IconData icon;
 
-  /// A distinct color per category — five identical primary-container
-  /// circles all told the eye "these are the same kind of thing," which
-  /// worked when there was one list to scan but fights against five doors
-  /// meant to be told apart at a glance.
+  /// A distinct color per category — identical primary-container circles
+  /// all told the eye "these are the same kind of thing," which worked when
+  /// there was one list to scan but fights against a row of doors meant to
+  /// be told apart at a glance.
   final OnboardingAccent accent;
   final String title;
   final String subtitle;

@@ -47,12 +47,12 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Por que Samuel anunciou a rejeição de Saul como rei?',
+      text: 'O que Saul fez em Gilgal sem esperar por Samuel?',
       options: <String>[
-        'Saul ofereceu um sacrifício sem esperar por Samuel',
-        'Saul perdeu uma batalha',
-        'Saul se recusou a reinar',
-        'Saul fugiu diante do inimigo',
+        'Ele mesmo ofereceu o sacrifício',
+        'Perdeu uma batalha',
+        'Recusou-se a reinar',
+        'Fugiu diante do inimigo',
       ],
       correctIndex: 0,
       explanation:
@@ -197,7 +197,9 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
       explanation: 'A parábola leva Davi a reconhecer sua culpa (2 Samuel 12).',
     ),
     QuizQuestion(
-      text: 'Quem se rebelou contra seu pai Davi para tomar o trono?',
+      text:
+          'Que filho de Davi se fez proclamar rei em Hebrom, '
+          'rebelando-se contra ele?',
       options: <String>['Absalão', 'Amnom', 'Salomão', 'Adonias'],
       correctIndex: 0,
       explanation: 'Começa a rebelião de Absalão (2 Samuel 15).',
@@ -219,7 +221,7 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Como Absalão morreu?',
       options: <String>[
-        'Preso pelos cabelos numa árvore, morto por Joabe',
+        'Com a cabeça presa numa árvore, morto por Joabe',
         'Em combate individual contra Davi',
         'Envenenado',
         'No exílio, de velhice',
@@ -245,7 +247,9 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Quem tentou se apoderar do trono antes da morte de Davi?',
+      text:
+          'Que filho de Davi se proclamou rei quando Davi já estava '
+          'velho?',
       options: <String>['Adonias', 'Absalão', 'Apenas Joabe', 'Natã'],
       correctIndex: 0,
       explanation:
@@ -489,7 +493,7 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Páscoa'],
     ),
     QuizQuestion(
-      text: 'Como termina o livro de Reis?',
+      text: 'Como termina a história de Judá no livro de Reis?',
       options: <String>[
         'Com a queda de Jerusalém e a destruição do templo',
         'Com a coroação de um rei justo e duradouro',
@@ -575,7 +579,9 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Que cântico Asafe compôs na ocasião em que a Arca foi instalada?',
+      text:
+          'Que cântico Davi confiou a Asafe quando a Arca foi '
+          'instalada?',
       options: <String>[
         'Um cântico de louvor e ação de graças',
         'Um cântico de luto',
@@ -874,7 +880,8 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
       text:
           'Que reação mista se seguiu ao lançamento dos alicerces do novo templo?',
       options: <String>[
-        'Alegria dos jovens, choro dos idosos que se lembravam do primeiro',
+        'Alegria de muitos, choro dos anciãos que tinham visto o '
+            'primeiro templo',
         'Indiferença geral',
         'Raiva unânime',
         'Fuga do povo',
@@ -898,7 +905,8 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quem incentivou a retomada dos trabalhos do templo com suas profecias?',
+          'Que profetas incentivaram a retomada dos trabalhos do '
+          'templo?',
       options: <String>[
         'Ageu e Zacarias',
         'Ezequiel e Daniel',
@@ -1059,7 +1067,9 @@ authoredQuizzesPtC2 = <String, List<QuizQuestion>>{
       explanation: 'Dois coros percorrem a muralha cantando (Neemias 12).',
     ),
     QuizQuestion(
-      text: 'Que reforma Neemias impôs ao voltar de um segundo mandato?',
+      text:
+          'Que reforma Neemias impôs durante a sua segunda estadia em '
+          'Jerusalém?',
       options: <String>[
         'O respeito rigoroso ao sábado e a expulsão de Tobias',
         'A abolição do templo',

@@ -11,6 +11,34 @@ import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'notes_screen.dart';
 
+/// Renders a note with exactly the line structure its writer typed.
+///
+/// Markdown works against us twice here. It folds two consecutive lines into
+/// one paragraph, so a single Enter vanishes; and it treats *any* run of blank
+/// lines as one paragraph break, so pressing Enter five times looks identical
+/// to pressing it once. (`MarkdownBody.softLineBreak` does not help — by the
+/// time it is consulted the newline has already become a space.)
+///
+/// Notes are free text rather than authored Markdown, so fidelity wins: every
+/// line ends in a hard break (two trailing spaces, Markdown's "break here"),
+/// and every blank line carries a non-breaking space so it survives as a real
+/// empty line instead of being read as whitespace and dropped.
+///
+/// Markdown itself still works: headings and lists are allowed to interrupt a
+/// paragraph, so `# Titre` and `- item` render as before.
+String withHardLineBreaks(String content) {
+  final List<String> lines = content.split('\n');
+  for (int i = 0; i < lines.length; i++) {
+    if (lines[i].trim().isEmpty) {
+      lines[i] = '\u00A0';
+    }
+    if (i != lines.length - 1) {
+      lines[i] = '${lines[i]}  ';
+    }
+  }
+  return lines.join('\n');
+}
+
 class NoteReaderScreen extends StatefulWidget {
   const NoteReaderScreen({
     required this.dbService,
@@ -179,6 +207,12 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          // Flat bar: no Material 'scrolled under' tint or shadow when
+          // content passes beneath it.
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: theme.scaffoldBackgroundColor,
           leading: const CircularBackButton(),
           title: Text(
             note?.displayTitle(context) ??
@@ -209,79 +243,87 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
               ? Center(
                   child: Text(AppLocalizations.of(context)!.noteReaderNoteGone),
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 4,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 14,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: colorScheme.secondaryContainer,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              displayReference(
-                                context,
-                                note.book,
-                                note.chapter,
+              // ResponsiveBody centres its child, which used to be invisible
+              // because the card filled the height. Now that the card hugs
+              // its content, expanding here keeps the note pinned to the top
+              // instead of floating in the middle of the page.
+              : SizedBox.expand(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 4,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 8,
                               ),
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                color: colorScheme.onSecondaryContainer,
-                                fontWeight: FontWeight.w600,
+                              decoration: BoxDecoration(
+                                color: colorScheme.secondaryContainer,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                displayReference(
+                                  context,
+                                  note.book,
+                                  note.chapter,
+                                ),
+                                style: theme.textTheme.titleSmall?.copyWith(
+                                  color: colorScheme.onSecondaryContainer,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            AppLocalizations.of(context)!.noteReaderUpdatedAt(
-                              '${DateFormat('dd/MM/yyyy').format(note.updatedAt)} · '
-                              '${DateFormat('HH:mm').format(note.updatedAt)}',
+                            Text(
+                              AppLocalizations.of(context)!.noteReaderUpdatedAt(
+                                '${DateFormat('dd/MM/yyyy').format(note.updatedAt)} · '
+                                '${DateFormat('HH:mm').format(note.updatedAt)}',
+                              ),
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             ),
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child: Card.filled(
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        // The card hugs the note instead of stretching to the
+                        // bottom of the screen, so a two-line note reads as a
+                        // short card rather than a mostly-empty page. Long
+                        // notes push past the viewport and the page scrolls.
+                        Card.filled(
                           margin: EdgeInsets.zero,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(28)),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: SizedBox(
                               width: double.infinity,
-                              child: SingleChildScrollView(
-                                child: note.content.trim().isEmpty
-                                    ? Text(
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.noteReaderEmpty,
-                                        style: theme.textTheme.bodyMedium
-                                            ?.copyWith(
-                                              color:
-                                                  colorScheme.onSurfaceVariant,
-                                            ),
-                                      )
-                                    : MarkdownBody(
-                                        data: note.content,
-                                        selectable: true,
-                                        styleSheet: _readerMarkdownStyle(theme),
-                                      ),
-                              ),
+                              child: note.content.trim().isEmpty
+                                  ? Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.noteReaderEmpty,
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                    )
+                                  : MarkdownBody(
+                                      data: withHardLineBreaks(note.content),
+                                      selectable: true,
+                                      styleSheet: _readerMarkdownStyle(theme),
+                                    ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
         ),

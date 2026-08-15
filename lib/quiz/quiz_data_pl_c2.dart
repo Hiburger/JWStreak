@@ -46,12 +46,12 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Dlaczego Samuel ogłosił odrzucenie Saula jako króla?',
+      text: 'Co Saul zrobił w Gilgal, nie czekając na Samuela?',
       options: <String>[
-        'Saul złożył ofiarę, nie czekając na Samuela',
-        'Saul przegrał bitwę',
-        'Saul odmówił panowania',
-        'Saul uciekł przed wrogiem',
+        'Sam złożył ofiarę',
+        'Przegrał bitwę',
+        'Odmówił panowania',
+        'Uciekł przed wrogiem',
       ],
       correctIndex: 0,
       explanation:
@@ -199,7 +199,8 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Kto zbuntował się przeciw swojemu ojcu Dawidowi, aby przejąć tron?',
+          'Który syn Dawida kazał się ogłosić królem w Hebronie, '
+          'buntując się przeciw niemu?',
       options: <String>['Absalom', 'Amnon', 'Salomon', 'Adoniasz'],
       correctIndex: 0,
       explanation: 'Rozpoczyna się bunt Absaloma (2 Samuela 15).',
@@ -221,7 +222,7 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Jak zginął Absalom?',
       options: <String>[
-        'Zawisł włosami na drzewie, zabity przez Joaba',
+        'Zawisł, gdy jego głowa utkwiła w drzewie, zabity przez Joaba',
         'W pojedynku z Dawidem',
         'Otruty',
         'Na wygnaniu, ze starości',
@@ -247,7 +248,9 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Kto próbował przejąć tron przed śmiercią Dawida?',
+      text:
+          'Który syn Dawida ogłosił się królem, gdy Dawid był już '
+          'stary?',
       options: <String>['Adoniasz', 'Absalom', 'Sam Joab', 'Natan'],
       correctIndex: 0,
       explanation: 'Adoniasz ogłasza się królem bez zgody Dawida (1 Królów 1).',
@@ -495,7 +498,7 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Pascha'],
     ),
     QuizQuestion(
-      text: 'Jak kończy się Księga Królów?',
+      text: 'Jak kończy się historia Judy w Księdze Królów?',
       options: <String>[
         'Upadkiem Jerozolimy i zniszczeniem świątyni',
         'Koronacją sprawiedliwego, trwałego króla',
@@ -579,7 +582,7 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Jaką pieśń ułożył Asaf, gdy ustawiono Arkę?',
+      text: 'Jaką pieśń Dawid powierzył Asafowi, gdy ustawiono Arkę?',
       options: <String>[
         'Pieśń chwały i dziękczynienia',
         'Pieśń żałobną',
@@ -875,7 +878,8 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
       text:
           'Jaka mieszana reakcja towarzyszyła położeniu fundamentu nowej świątyni?',
       options: <String>[
-        'Radość u młodych, płacz u starszych, którzy pamiętali pierwszą',
+        'Radość u wielu, płacz u starców, którzy widzieli pierwszą '
+            'świątynię',
         'Ogólna obojętność',
         'Jednomyślny gniew',
         'Lud uciekł',
@@ -1056,7 +1060,9 @@ authoredQuizzesPlC2 = <String, List<QuizQuestion>>{
       explanation: 'Dwa chóry obchodzą mur, śpiewając (Nehemiasza 12).',
     ),
     QuizQuestion(
-      text: 'Jaką reformę wprowadził Nehemiasz po powrocie z drugiej kadencji?',
+      text:
+          'Jaką reformę wprowadził Nehemiasz podczas swojego drugiego '
+          'pobytu w Jerozolimie?',
       options: <String>[
         'Ścisłe przestrzeganie szabatu i wygnanie Tobiasza',
         'Zniesienie świątyni',

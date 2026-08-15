@@ -290,3 +290,12 @@ int _easterEggsProgress(AchievementStats s) => s.easterEggsFound;
 int achievementBonusStars(Set<String> unlockedIds) => kAchievementDefs
     .where((AchievementDef def) => unlockedIds.contains(def.id))
     .fold(0, (int sum, AchievementDef def) => sum + def.starReward);
+
+/// Sum of every [AchievementDef.starReward], i.e. the bonus total a user
+/// would have if every star-rewarding achievement were unlocked. Lets a
+/// "stars earned" display add its max alongside [achievementBonusStars]'s
+/// earned, instead of only widening the numerator and never the denominator.
+int maxAchievementBonusStars() => kAchievementDefs.fold(
+  0,
+  (int sum, AchievementDef def) => sum + def.starReward,
+);

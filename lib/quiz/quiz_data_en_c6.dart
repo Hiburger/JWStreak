@@ -101,7 +101,7 @@ authoredQuizzesEnC6 = <String, List<QuizQuestion>>{
           'problems (1 Corinthians 1).',
     ),
     QuizQuestion(
-      text: 'What does Paul compare the church to in 1 Corinthians 3?',
+      text: 'What does Paul compare the congregation to in 1 Corinthians 3?',
       options: <String>[
         'The temple of God',
         'An army',

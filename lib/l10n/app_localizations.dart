@@ -1315,7 +1315,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsCatNotificationsDesc.
   ///
   /// In en, this message translates to:
-  /// **'Permissions needed for reminders'**
+  /// **'Whether reminders can reach you'**
   String get settingsCatNotificationsDesc;
 
   /// No description provided for @settingsCatPrivacyDesc.
@@ -1323,6 +1323,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lock the app'**
   String get settingsCatPrivacyDesc;
+
+  /// No description provided for @settingsCatDonations.
+  ///
+  /// In en, this message translates to:
+  /// **'Donations'**
+  String get settingsCatDonations;
+
+  /// No description provided for @settingsCatDonationsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Supporting JW Streak'**
+  String get settingsCatDonationsDesc;
 
   /// No description provided for @settingsCatAbout.
   ///
@@ -1335,6 +1347,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Guided tour, version, source code'**
   String get settingsCatAboutDesc;
+
+  /// No description provided for @donationsHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re not taking donations yet'**
+  String get donationsHeadline;
+
+  /// No description provided for @donationsLead.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak is free, and right now there\'s no way to donate. That\'s on purpose, we simply haven\'t set anything up. We may open it later, and we\'d rather tell you plainly than surprise you with it one day.'**
+  String get donationsLead;
+
+  /// No description provided for @donationsRow1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'It does cost something'**
+  String get donationsRow1Title;
+
+  /// No description provided for @donationsRow1Text.
+  ///
+  /// In en, this message translates to:
+  /// **'Store accounts, test devices and the odd subscription all have to be paid for, and the app gets built on evenings and weekends. Some of those evenings are genuinely hard.'**
+  String get donationsRow1Text;
+
+  /// No description provided for @donationsRow2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'What won\'t change'**
+  String get donationsRow2Title;
+
+  /// No description provided for @donationsRow2Text.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. If donations ever open, giving will be entirely optional.'**
+  String get donationsRow2Text;
+
+  /// No description provided for @donationsRow3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Free ways to help'**
+  String get donationsRow3Title;
+
+  /// No description provided for @donationsRow3Text.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.'**
+  String get donationsRow3Text;
+
+  /// No description provided for @donationsThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for being here 💛'**
+  String get donationsThanks;
 
   /// No description provided for @settingsAppearance.
   ///
@@ -1363,7 +1429,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsBibleTargetTitle.
   ///
   /// In en, this message translates to:
-  /// **'Open the Bible with'**
+  /// **'Open the Bible & daily text with'**
   String get settingsBibleTargetTitle;
 
   /// No description provided for @settingsBibleTargetJwLibrary.
@@ -1381,7 +1447,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsBibleTargetJwLibraryMissing.
   ///
   /// In en, this message translates to:
-  /// **'The JW Library app is required to open the Bible this way. Would you like to install it?'**
+  /// **'The JW Library app is required to open the Bible or the daily text this way. Would you like to install it?'**
   String get settingsBibleTargetJwLibraryMissing;
 
   /// No description provided for @settingsBibleTargetInstall.
@@ -1402,47 +1468,11 @@ abstract class AppLocalizations {
   /// **'System'**
   String get settingsLanguageSystem;
 
-  /// No description provided for @settingsNotifPermTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Notification permissions'**
-  String get settingsNotifPermTitle;
-
   /// No description provided for @settingsChecking.
   ///
   /// In en, this message translates to:
   /// **'Checking...'**
   String get settingsChecking;
-
-  /// No description provided for @settingsNotifActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Permission active.'**
-  String get settingsNotifActive;
-
-  /// No description provided for @settingsNotifMissing.
-  ///
-  /// In en, this message translates to:
-  /// **'Permission missing. Enable it to receive reminders.'**
-  String get settingsNotifMissing;
-
-  /// No description provided for @settingsVerify.
-  ///
-  /// In en, this message translates to:
-  /// **'Check'**
-  String get settingsVerify;
-
-  /// No description provided for @settingsExactAlarms.
-  ///
-  /// In en, this message translates to:
-  /// **'Exact alarms'**
-  String get settingsExactAlarms;
-
-  /// No description provided for @settingsExactAlarmsOn.
-  ///
-  /// In en, this message translates to:
-  /// **'Reminders fire at the exact time.'**
-  String get settingsExactAlarmsOn;
 
   /// No description provided for @settingsExactAlarmsOff.
   ///
@@ -1450,11 +1480,95 @@ abstract class AppLocalizations {
   /// **'Not allowed. Reminders may be delayed.'**
   String get settingsExactAlarmsOff;
 
-  /// No description provided for @settingsAllow.
+  /// No description provided for @notifStatusReadyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Allow'**
-  String get settingsAllow;
+  /// **'Reminders are all set'**
+  String get notifStatusReadyTitle;
+
+  /// No description provided for @notifStatusReadyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'They\'ll arrive at the time you picked.'**
+  String get notifStatusReadyBody;
+
+  /// No description provided for @notifStatusBlockedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders can\'t reach you'**
+  String get notifStatusBlockedTitle;
+
+  /// No description provided for @notifStatusBlockedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'JW Streak isn\'t allowed to send notifications, so no reminder will show up.'**
+  String get notifStatusBlockedBody;
+
+  /// No description provided for @notifStatusDelayedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders may arrive late'**
+  String get notifStatusDelayedTitle;
+
+  /// No description provided for @notifStatusDelayedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'They\'ll still come, but Android can hold them back a few minutes to save battery.'**
+  String get notifStatusDelayedBody;
+
+  /// No description provided for @notifPermRowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send notifications'**
+  String get notifPermRowTitle;
+
+  /// No description provided for @notifPermRowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Without this, a reminder can\'t appear at all.'**
+  String get notifPermRowBody;
+
+  /// No description provided for @notifExactRowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise timing'**
+  String get notifExactRowTitle;
+
+  /// No description provided for @notifExactRowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Lets a reminder go off at the exact minute you chose, rather than whenever Android gets around to it.'**
+  String get notifExactRowBody;
+
+  /// No description provided for @notifRowAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Allowed'**
+  String get notifRowAllowed;
+
+  /// No description provided for @notifRowNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not allowed'**
+  String get notifRowNotAllowed;
+
+  /// No description provided for @notifActionTurnOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on'**
+  String get notifActionTurnOn;
+
+  /// No description provided for @notifActionOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get notifActionOpen;
+
+  /// No description provided for @notifRemindersHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder times are set from the bell on the home screen.'**
+  String get notifRemindersHint;
 
   /// No description provided for @settingsInfo.
   ///
@@ -1683,6 +1797,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish'**
   String get quizFinish;
+
+  /// No description provided for @quizFunFactLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Did you know?'**
+  String get quizFunFactLabel;
+
+  /// No description provided for @quizReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 to look back on} other{{count} to look back on}}'**
+  String quizReviewTitle(int count);
+
+  /// No description provided for @quizReviewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No rush, just a quick look at what didn\'t land.'**
+  String get quizReviewSubtitle;
+
+  /// No description provided for @quizReviewYourAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'You answered'**
+  String get quizReviewYourAnswer;
+
+  /// No description provided for @quizReviewCorrectAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'The answer was'**
+  String get quizReviewCorrectAnswer;
 
   /// No description provided for @checkpointAppBarTitle.
   ///
@@ -2415,47 +2559,17 @@ abstract class AppLocalizations {
   /// **'Title'**
   String get noteEditorTitleHint;
 
+  /// Title of the sheet for picking which Bible chapter a note is attached to.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked chapter'**
+  String get noteEditorLinkedChapter;
+
   /// No description provided for @noteEditorBodyHint.
   ///
   /// In en, this message translates to:
   /// **'Write your thoughts, reflections, research points...'**
   String get noteEditorBodyHint;
-
-  /// No description provided for @noteEditorMarkdownHelpTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Markdown supported'**
-  String get noteEditorMarkdownHelpTitle;
-
-  /// No description provided for @noteEditorTipBold.
-  ///
-  /// In en, this message translates to:
-  /// **'● Bold: **your_text**'**
-  String get noteEditorTipBold;
-
-  /// No description provided for @noteEditorTipItalic.
-  ///
-  /// In en, this message translates to:
-  /// **'● Italic: *your_text*'**
-  String get noteEditorTipItalic;
-
-  /// No description provided for @noteEditorTipStrikethrough.
-  ///
-  /// In en, this message translates to:
-  /// **'● Strikethrough: ~~your_text~~'**
-  String get noteEditorTipStrikethrough;
-
-  /// No description provided for @noteEditorTipHeading.
-  ///
-  /// In en, this message translates to:
-  /// **'● Heading: # Your title'**
-  String get noteEditorTipHeading;
-
-  /// No description provided for @noteEditorTipList.
-  ///
-  /// In en, this message translates to:
-  /// **'● List: - item'**
-  String get noteEditorTipList;
 
   /// No description provided for @notesLibraryDeleteDialogTitle.
   ///
@@ -2540,6 +2654,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export my notes'**
   String get notesLibraryExportAllTooltip;
+
+  /// Subtitle of the export-notes row in privacy settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Save every note to a ZIP file you can keep or share'**
+  String get settingsExportNotesDesc;
 
   /// No description provided for @notesLibraryDeleteTooltip.
   ///

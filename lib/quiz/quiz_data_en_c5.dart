@@ -390,7 +390,8 @@ authoredQuizzesEnC5 = <String, List<QuizQuestion>>{
         'Nothing unusual',
       ],
       correctIndex: 0,
-      explanation: 'The resurrection is announced by an angel (Mark 16).',
+      explanation:
+          'A young man in a white robe announces the resurrection to them (Mark 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

@@ -29,7 +29,7 @@ authoredQuizzesPtC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'As Bem-aventuranças começam com os pobres em espírito (Mateus 5:3).',
+          'As Bem-aventuranças começam com os que têm consciência da sua necessidade espiritual (Mateus 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -193,10 +193,15 @@ authoredQuizzesPtC5 = <String, List<QuizQuestion>>{
   'John#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Como Jesus se descreve em João 10?',
-      options: <String>['O bom pastor', 'O leão', 'O sumo sacerdote', 'O juiz'],
+      options: <String>[
+        'O pastor excelente',
+        'O leão',
+        'O sumo sacerdote',
+        'O juiz',
+      ],
       correctIndex: 0,
       explanation:
-          'Jesus se apresenta como o bom pastor que dá a vida por suas ovelhas (João 10).',
+          'Jesus se apresenta como o pastor excelente que dá a vida por suas ovelhas (João 10).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['porta', 'videira', 'luz'],
     ),
@@ -361,7 +366,8 @@ authoredQuizzesPtC5 = <String, List<QuizQuestion>>{
         'Nada de incomum',
       ],
       correctIndex: 0,
-      explanation: 'A ressurreição é anunciada por um anjo (Marcos 16).',
+      explanation:
+          'Um jovem vestido de branco anuncia-lhes a ressurreição (Marcos 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

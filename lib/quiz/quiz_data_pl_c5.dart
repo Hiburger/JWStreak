@@ -29,7 +29,7 @@ authoredQuizzesPlC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Błogosławieństwa zaczynają się od ubogich w duchu (Mateusza 5:3).',
+          'Błogosławieństwa zaczynają się od tych, którzy są świadomi swojej potrzeby duchowej (Mateusza 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -352,7 +352,8 @@ authoredQuizzesPlC5 = <String, List<QuizQuestion>>{
         'Nic niezwykłego',
       ],
       correctIndex: 0,
-      explanation: 'Zmartwychwstanie ogłasza anioł (Marka 16).',
+      explanation:
+          'Młody mężczyzna w białej szacie oznajmia im zmartwychwstanie (Marka 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

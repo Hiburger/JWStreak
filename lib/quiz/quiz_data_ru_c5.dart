@@ -184,10 +184,10 @@ authoredQuizzesRuC5 = <String, List<QuizQuestion>>{
   'John#1': <QuizQuestion>[
     QuizQuestion(
       text: 'Как Иисус описывает себя в Иоанна 10?',
-      options: <String>['Хороший пастырь', 'Лев', 'Первосвященник', 'Судья'],
+      options: <String>['Хороший пастух', 'Лев', 'Первосвященник', 'Судья'],
       correctIndex: 0,
       explanation:
-          'Иисус представляет себя как хорошего пастыря, отдающего жизнь '
+          'Иисус представляет себя как хорошего пастуха, отдающего жизнь '
           'за своих овец (Иоанна 10).',
     ),
     QuizQuestion(
@@ -347,7 +347,8 @@ authoredQuizzesRuC5 = <String, List<QuizQuestion>>{
         'Ничего необычного',
       ],
       correctIndex: 0,
-      explanation: 'О воскресении возвещает ангел (Марка 16).',
+      explanation:
+          'Юноша в белой одежде возвещает им о воскресении (Марка 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
+import '../quiz/quiz_facts.dart';
 import '../services/local_db_service.dart';
 import '../widgets/circular_back_button.dart';
 import '../theme/app_icons.dart';
@@ -77,12 +78,17 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
 
   Future<void> _startQuiz() async {
     final Checkpoint cp = widget.checkpoint;
+    final String? funFact = checkpointFactFor(
+      cp.id,
+      languageCode: Localizations.localeOf(context).languageCode,
+    );
     bool freezeEarned = false;
     await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
         builder: (_) => QuizScreen(
           title: localizedCheckpointTitle(context, cp),
           questions: cp.questions,
+          funFact: funFact,
           onCompleted: (int score, int total) async {
             freezeEarned = await widget.dbService.saveQuizResult(
               quizId: cp.id,

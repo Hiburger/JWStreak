@@ -5,8 +5,8 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          'An wie vielen Schöpfungstagen beschreibt die Bibel Gottes '
-          'Wirken?',
+          'Wie viele Schöpfungstage beschreibt 1. Mose, bevor Gott '
+          'ruht?',
       options: <String>[
         'Sechs Tage',
         'Sieben Tage',
@@ -116,7 +116,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
           '(2. Mose 2).',
     ),
     QuizQuestion(
-      text: 'Wie erschien Gott Mose am Berg Horeb?',
+      text: 'Wie erschien Jehova Mose am Berg Horeb?',
       options: <String>[
         'Als Dornbusch, der brannte, aber nicht verbrannte',
         'Als Wolkensäule',
@@ -186,7 +186,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Jethro'],
     ),
     QuizQuestion(
-      text: 'Wo gab Gott die Zehn Gebote?',
+      text: 'Wo gab Jehova die Zehn Gebote?',
       options: <String>[
         'Am Berg Sinai',
         'Am Berg Nebo',
@@ -346,7 +346,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Welche Hautkrankheit wird in diesen Kapiteln von den '
+          'Welche Krankheit sollten die Priester in diesen Kapiteln '
           'Priestern genau untersucht?',
       options: <String>['Aussatz', 'Pocken', 'Nur Verbrennungen', 'Akne'],
       correctIndex: 0,
@@ -373,9 +373,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
           '(3. Mose 16).',
     ),
     QuizQuestion(
-      text:
-          'Welches bekannte Gebot steht im „Heiligkeitsgesetz“ von '
-          '3. Mose 19?',
+      text: 'Welches bekannte Gebot steht in 3. Mose 19?',
       options: <String>[
         'Liebe deinen Nächsten wie dich selbst',
         'Stiehl kein Vieh',
@@ -506,8 +504,8 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Was geschah mit Mirjam und Aaron, nachdem sie Mose '
-          'kritisiert hatten?',
+          'Was geschah, nachdem Mirjam und Aaron Mose kritisiert '
+          'hatten?',
       options: <String>[
         'Mirjam wurde aussätzig',
         'Sie wurden für immer verbannt',
@@ -589,7 +587,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
       explanation: 'Pinehas greift ein und die Plage hört auf (4. Mose 25).',
     ),
     QuizQuestion(
-      text: 'Wen setzte Mose als seinen Nachfolger ein?',
+      text: 'Wen setzte Jehova als Nachfolger Moses ein?',
       options: <String>['Josua', 'Kaleb', 'Eleasar', 'Pinehas'],
       correctIndex: 0,
       explanation:
@@ -607,9 +605,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text:
-          'Welche Stämme baten darum, sich östlich des Jordan '
-          'niederzulassen?',
+      text: 'Welche Stämme ließen sich östlich des Jordan nieder?',
       options: <String>[
         'Ruben, Gad und der halbe Stamm Manasse',
         'Juda und Benjamin',
@@ -685,7 +681,8 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
           'Woran sollte die Erinnerung an das Manna in der Wüste '
           'Israel erinnern?',
       options: <String>[
-        'Dass der Mensch nicht von Brot allein lebt, sondern vom Wort Gottes',
+        'Dass der Mensch nicht von Brot allein lebt, sondern von '
+            'jeder Äußerung aus Jehovas Mund',
         'Dass Gott immer straft',
         'Dass die Wüste verflucht ist',
         'Dass Essen keine Rolle spielt',
@@ -736,11 +733,9 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
       explanation: 'Das Erlassjahr tilgt die Schulden (5. Mose 15).',
     ),
     QuizQuestion(
-      text:
-          'Welcher künftige Prophet wie Mose wird in 5. Mose 18 '
-          'vorausgesagt?',
+      text: 'Was sagt 5. Mose 18 über einen künftigen Propheten voraus?',
       options: <String>[
-        'Ein Prophet, den Gott erwecken würde',
+        'Dass Jehova einen wie Mose erwecken würde',
         'Ein fremder König',
         'Ein Engel',
         'Ein einzelner Richter',
@@ -991,7 +986,7 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
       explanation: 'Dieser Kreislauf strukturiert das ganze Buch (Richter 2).',
     ),
     QuizQuestion(
-      text: 'Wer besiegte Sisera mit Deboras Hilfe?',
+      text: 'Wer führte Israels Heer mit Deboras Hilfe gegen Sisera?',
       options: <String>['Barak', 'Ehud', 'Otniel', 'Gideon'],
       correctIndex: 0,
       explanation: 'Debora und Barak führen Israel zum Sieg (Richter 4).',
@@ -1011,11 +1006,9 @@ authoredQuizzesDeC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Was geschah, nachdem Abimelech sich zum König ausgerufen '
-          'hatte?',
+      text: 'Wie endete die Herrschaft Abimelechs?',
       options: <String>[
-        'Er ermordete seine Brüder und kam später selbst um',
+        'Er kam um, von einem Mühlstein einer Frau getroffen',
         'Er regierte lange in Frieden',
         'Er wurde ohne Gewalt vertrieben',
         'Er gründete eine dauerhafte Dynastie',
@@ -1217,12 +1210,10 @@ const Map<String, List<QuizQuestion>>
 extraQuizzesDeC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Welcher Baum in der Mitte des Gartens Eden war Adam und '
-          'Eva verboten?',
+      text: 'Welcher Baum im Garten Eden war Adam und Eva verboten?',
       options: <String>[
         'Der Baum der Erkenntnis von Gut und Böse',
-        'Nur der Baum des Lebens',
+        'Der Baum des Lebens',
         'Ein Feigenbaum',
         'Ein Olivenbaum',
       ],
@@ -1249,8 +1240,8 @@ extraQuizzesDeC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Wer segnete Abram als König von Salem und Priester des '
-          'höchsten Gottes?',
+          'Wer segnete Abram, der König von Salem und Priester des '
+          'höchsten Gottes war?',
       options: <String>['Melchisedek', 'Lot', 'Pharao', 'Isaak'],
       correctIndex: 0,
       explanation: 'Melchisedek segnet Abram nach einem Sieg (1. Mose 14).',
@@ -1397,7 +1388,7 @@ extraQuizzesDeC1 = <String, List<QuizQuestion>>{
           'Was deutete Josef dem Pharao und sagte damit sieben '
           'Hungerjahre voraus?',
       options: <String>[
-        'Seine Träume',
+        'Die Träume des Pharaos',
         'Ein altes Buch',
         'Die Sterne',
         'Ein Orakel',
@@ -1405,7 +1396,7 @@ extraQuizzesDeC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'Josef deutet die Träume des Pharao (1. Mose 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['Träume'],
+      acceptedAnswers: <String>['Träume', 'die Träume', 'seine Träume'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1461,11 +1452,11 @@ extraQuizzesDeC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Mit welchem Namen stellte sich Gott Mose am brennenden '
+          'Mit welchem Namen stellte sich Jehova Mose am brennenden '
           'Dornbusch vor?',
       options: <String>[
         '„Ich werde werden, was ich werden will“',
-        '„Allein der Allmächtige“',
+        '„Der namenlose Gott“',
         '„Der verborgene Gott“',
         '„Der König der Könige“',
       ],

@@ -172,7 +172,7 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text: '在三个朋友之后发言的以利户是谁？',
-      options: <String>['一个自认为拥有智慧的年轻人', '上帝差来的天使', '第四位年长的朋友', '约伯的儿子'],
+      options: <String>['一个出于尊重而等到最后才发言的年轻人', '上帝差来的天使', '第四位年长的朋友', '约伯的儿子'],
       correctIndex: 0,
       explanation: '因为几位长者都没能说服约伯，以利户便出面发言（约伯记32章）。',
     ),
@@ -557,7 +557,7 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
       text: '雅歌开篇洋溢着什么样的情感？',
       options: <String>['书拉密女子和她所爱的人之间炽热的爱情', '家庭纠纷', '商业谈判', '王室的审判'],
       correctIndex: 0,
-      explanation: '这卷书歌颂了真挚的夫妻之爱（雅歌1章）。',
+      explanation: '这卷书歌颂了真挚的忠贞专一的爱（雅歌1章）。',
     ),
     QuizQuestion(
       text: '书拉密女子在第3章的梦里做了什么？',
@@ -568,7 +568,7 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '书拉密女子怎样表达她对爱人专一的心意？',
       options: <String>[
-        '“我属于我的爱人，我的爱人也属于我”',
+        '“我的爱人属于我，我也属于他”',
         '“我宁可要财富也不要爱情”',
         '“爱情对我来说无关紧要”',
         '“我要孤单一辈子”',
@@ -695,7 +695,7 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
   'Isaiah#3': <QuizQuestion>[
     QuizQuestion(
       text: '以赛亚书26章应许，凡心意倚靠上帝的人会得到什么？',
-      options: <String>['完全的平安', '立刻的财富', '一支所向无敌的军队', '有保证的长寿'],
+      options: <String>['持续的平安', '立刻的财富', '一支所向无敌的军队', '有保证的长寿'],
       correctIndex: 0,
       explanation: '“你必保守他极其平安”（以赛亚书26:3）。',
     ),
@@ -720,7 +720,7 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
   'Isaiah#4': <QuizQuestion>[
     QuizQuestion(
       text: '根据以赛亚书35章的应许，沙漠将会变成什么样子？',
-      options: <String>['像玫瑰一样开花', '永远保持荒芜', '变成海洋', '被永远弃置不顾'],
+      options: <String>['像番红花一样开花', '永远保持荒芜', '变成海洋', '被永远弃置不顾'],
       correctIndex: 0,
       explanation: '这里应许了一个令人欢欣的转变（以赛亚书35:1）。',
     ),
@@ -856,10 +856,10 @@ authoredQuizzesZhC3 = <String, List<QuizQuestion>>{
       explanation: '这是道德败坏的一个视觉性征兆（耶利米书13章）。',
     ),
     QuizQuestion(
-      text: '耶利米书17章揭示了人心的什么本质？',
-      options: <String>['人心比什么都诡诈', '人心天生善良', '人心永远不会改变', '人心在上帝眼中无关紧要'],
+      text: '耶利米书10章承认人的行为怎样？',
+      options: <String>['人走路的时候无法自己指引脚步', '人心天生善良', '人心永远不会改变', '人心在上帝眼中无关紧要'],
       correctIndex: 0,
-      explanation: '这是对人性坦率的评价（耶利米书17:9）。',
+      explanation: '「人走路的时候，无法自己指引脚步」（耶利米书10:23）。',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

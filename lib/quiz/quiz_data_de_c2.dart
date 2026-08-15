@@ -47,12 +47,12 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Warum kündigte Samuel Sauls Verwerfung als König an?',
+      text: 'Was tat Saul in Gilgal, ohne auf Samuel zu warten?',
       options: <String>[
-        'Saul opferte, ohne auf Samuel zu warten',
-        'Saul verlor eine Schlacht',
-        'Saul weigerte sich zu regieren',
-        'Saul floh vor dem Feind',
+        'Er brachte das Opfer selbst dar',
+        'Er verlor eine Schlacht',
+        'Er weigerte sich zu regieren',
+        'Er floh vor dem Feind',
       ],
       correctIndex: 0,
       explanation:
@@ -229,8 +229,8 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Wer lehnte sich gegen seinen Vater David auf, um den Thron '
-          'an sich zu reißen?',
+          'Welcher Sohn Davids ließ sich in Hebron zum König ausrufen '
+          'und lehnte sich gegen ihn auf?',
       options: <String>['Absalom', 'Amnon', 'Salomo', 'Adonija'],
       correctIndex: 0,
       explanation: 'Absaloms Aufstand beginnt (2. Samuel 15).',
@@ -253,7 +253,7 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Wie starb Absalom?',
       options: <String>[
-        'Mit den Haaren in einem Baum hängen geblieben, von Joab getötet',
+        'Mit dem Kopf in einem Baum hängen geblieben, von Joab getötet',
         'Im Zweikampf gegen David',
         'Durch Gift',
         'Im Exil, an Altersschwäche',
@@ -282,7 +282,9 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Wer versuchte vor Davids Tod, den Thron an sich zu reißen?',
+      text:
+          'Welcher Sohn Davids rief sich zum König aus, als David alt '
+          'geworden war?',
       options: <String>['Adonija', 'Absalom', 'Nur Joab', 'Nathan'],
       correctIndex: 0,
       explanation:
@@ -548,7 +550,7 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Passah'],
     ),
     QuizQuestion(
-      text: 'Wie endet das Buch der Könige?',
+      text: 'Wie endet die Geschichte Judas im Buch der Könige?',
       options: <String>[
         'Mit dem Fall Jerusalems und der Zerstörung des Tempels',
         'Mit der Krönung eines gerechten, dauerhaften Königs',
@@ -640,7 +642,9 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'Welches Lied verfasste Asaph, als die Lade aufgestellt wurde?',
+      text:
+          'Welches Lied vertraute David Asaph an, als die Lade '
+          'aufgestellt wurde?',
       options: <String>[
         'Ein Lied des Lobes und des Dankes',
         'Ein Trauerlied',
@@ -969,8 +973,8 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
           'Welche gemischte Reaktion folgte auf die Grundsteinlegung '
           'des neuen Tempels?',
       options: <String>[
-        'Freude bei den Jungen, Weinen bei den Alten, die sich an den '
-            'ersten erinnerten',
+        'Freude bei vielen, Weinen bei den Alten, die den ersten '
+            'Tempel gesehen hatten',
         'Allgemeine Gleichgültigkeit',
         'Einhelliger Zorn',
         'Das Volk floh',
@@ -1166,8 +1170,8 @@ authoredQuizzesDeC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Welche Reform setzte Nehemia nach seiner Rückkehr aus einer '
-          'zweiten Amtszeit durch?',
+          'Welche Reform setzte Nehemia während seines zweiten '
+          'Aufenthalts in Jerusalem durch?',
       options: <String>[
         'Strenge Sabbatbeachtung und die Ausweisung Tobijas',
         'Die Abschaffung des Tempels',

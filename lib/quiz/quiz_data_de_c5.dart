@@ -31,7 +31,7 @@ authoredQuizzesDeC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Die Seligpreisungen beginnen mit den geistig Armen (Matthäus 5:3).',
+          'Die Seligpreisungen beginnen mit denen, die sich ihres geistigen Bedürfnisses bewusst sind (Matthäus 5:3).',
     ),
   ],
   'Matthew#1': <QuizQuestion>[
@@ -381,7 +381,7 @@ authoredQuizzesDeC5 = <String, List<QuizQuestion>>{
       ],
       correctIndex: 0,
       explanation:
-          'Die Auferstehung wird von einem Engel verkündet (Markus 16).',
+          'Ein junger Mann in weißem Gewand verkündet ihnen die Auferstehung (Markus 16:5, 6).',
     ),
   ],
   'Luke#0': <QuizQuestion>[

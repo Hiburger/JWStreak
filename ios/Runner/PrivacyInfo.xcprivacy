@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The app sends nothing anywhere: no analytics, no ads, no accounts,
+	     no network calls beyond url_launcher opening jw.org/JW Library in an
+	     external app the user already trusts. Everything it stores (notes,
+	     streaks, settings) stays in the local SQLite database. -->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<!-- Required as of Apple's 2024 privacy-manifest policy: any app whose
+	     dependency graph touches these API categories must declare why, even
+	     when the app itself never calls them directly. Both are triggered
+	     indirectly here — UserDefaults by the Flutter engine and several
+	     plugins' internal state, file timestamps by sqflite (the local
+	     database) and the pdf/archive/share_plus packages writing temp files
+	     for note export — all of it confined to this app's own sandbox. -->
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>C617.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

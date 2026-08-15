@@ -4,7 +4,9 @@ const Map<String, List<QuizQuestion>>
 authoredQuizzesItC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'In quanti giorni di creazione descrive la Bibbia l’opera di Dio?',
+      text:
+          'Quanti giorni di creazione descrive Genesi prima che Dio si '
+          'riposi?',
       options: <String>[
         'Sei giorni',
         'Sette giorni',
@@ -110,7 +112,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['barca', 'fiume', 'papiro'],
     ),
     QuizQuestion(
-      text: 'Come apparve Dio a Mosè sul monte Oreb?',
+      text: 'Come apparve Geova a Mosè sul monte Oreb?',
       options: <String>[
         'Un roveto in fiamme che non si consuma',
         'Una colonna di nuvola',
@@ -173,7 +175,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Ietro'],
     ),
     QuizQuestion(
-      text: 'Dove diede Dio i Dieci Comandamenti?',
+      text: 'Dove diede Geova i Dieci Comandamenti?',
       options: <String>[
         'Sul monte Sinai',
         'Sul monte Nebo',
@@ -337,7 +339,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quale malattia della pelle viene esaminata in dettaglio dai '
+          'Quale malattia dovevano esaminare in dettaglio i '
           'sacerdoti in questi capitoli?',
       options: <String>['La lebbra', 'Il vaiolo', 'Solo le ustioni', 'L’acne'],
       correctIndex: 0,
@@ -365,9 +367,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
           'all’anno (Levitico 16).',
     ),
     QuizQuestion(
-      text:
-          'Quale comandamento ben noto compare nel "codice di santità" '
-          'di Levitico 19?',
+      text: 'Quale comandamento ben noto si trova in Levitico 19?',
       options: <String>[
         'Ama il tuo prossimo come te stesso',
         'Non rubare il bestiame',
@@ -496,7 +496,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['settanta anziani', '70'],
     ),
     QuizQuestion(
-      text: 'Cosa accadde a Miriam e Aaronne dopo aver criticato Mosè?',
+      text: 'Cosa accadde dopo che Miriam e Aaronne criticarono Mosè?',
       options: <String>[
         'Miriam fu colpita dalla lebbra',
         'Furono banditi definitivamente',
@@ -579,7 +579,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Chi designò Mosè come suo successore?',
+      text: 'Chi designò Geova come successore di Mosè?',
       options: <String>['Giosuè', 'Caleb', 'Eleazaro', 'Fineas'],
       correctIndex: 0,
       explanation:
@@ -597,7 +597,7 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['madianiti', 'i madianiti'],
     ),
     QuizQuestion(
-      text: 'Quali tribù chiesero di stabilirsi a est del Giordano?',
+      text: 'Quali tribù si stabilirono a est del Giordano?',
       options: <String>[
         'Ruben, Gad e metà di Manasse',
         'Giuda e Beniamino',
@@ -674,7 +674,8 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
           'Cosa doveva ricordare a Israele il ricordo della manna nel '
           'deserto?',
       options: <String>[
-        'Che l’uomo non vive di solo pane, ma della parola di Dio',
+        'Che l’uomo non vive di solo pane, ma di ogni parola che '
+            'esce dalla bocca di Geova',
         'Che Dio punisce sempre',
         'Che il deserto è maledetto',
         'Che il cibo non ha importanza',
@@ -727,11 +728,9 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       explanation: 'L’anno di remissione cancella i debiti (Deuteronomio 15).',
     ),
     QuizQuestion(
-      text:
-          'Quale futuro profeta, simile a Mosè, viene annunciato in '
-          'Deuteronomio 18?',
+      text: 'Cosa annuncia Deuteronomio 18 riguardo a un futuro profeta?',
       options: <String>[
-        'Un profeta che Dio avrebbe suscitato',
+        'Che Geova ne avrebbe suscitato uno simile a Mosè',
         'Un re straniero',
         'Un angelo',
         'Un unico giudice',
@@ -971,7 +970,9 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
       explanation: 'Questo ciclo struttura tutto il libro (Giudici 2).',
     ),
     QuizQuestion(
-      text: 'Chi sconfisse Sisera con l’aiuto di Debora?',
+      text:
+          'Chi guidò l’esercito d’Israele contro Sisera, con l’aiuto di '
+          'Debora?',
       options: <String>['Barac', 'Eud', 'Otniel', 'Gedeone'],
       correctIndex: 0,
       explanation: 'Debora e Barac guidano Israele alla vittoria (Giudici 4).',
@@ -991,9 +992,9 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Cosa accadde dopo che Abimelec si proclamò re?',
+      text: 'Come finì il regno di Abimelec?',
       options: <String>[
-        'Massacrò i suoi fratelli e poi perì lui stesso',
+        'Perì, colpito da una macina lanciata da una donna',
         'Regnò in pace a lungo',
         'Fu cacciato senza violenza',
         'Fondò una dinastia duratura',
@@ -1185,11 +1186,11 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          'Quale albero, in mezzo al giardino di Eden, era proibito ad '
-          'Adamo ed Eva?',
+          'Quale albero del giardino di Eden era proibito ad Adamo '
+          'ed Eva?',
       options: <String>[
         'L’albero della conoscenza del bene e del male',
-        'Solo l’albero della vita',
+        'L’albero della vita',
         'Un fico',
         'Un ulivo',
       ],
@@ -1217,8 +1218,8 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Chi benedisse Abramo, essendo re di Salem e sacerdote del '
-          'Dio Altissimo?',
+          'Chi, re di Salem e sacerdote del Dio Altissimo, benedisse '
+          'Abramo?',
       options: <String>['Melchisedec', 'Lot', 'Il faraone', 'Isacco'],
       correctIndex: 0,
       explanation: 'Melchisedec benedice Abramo dopo una vittoria (Genesi 14).',
@@ -1358,7 +1359,7 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
           'Cosa interpretò Giuseppe per il faraone, annunciando sette '
           'anni di carestia?',
       options: <String>[
-        'I suoi sogni',
+        'I sogni del faraone',
         'Un antico libro',
         'Le stelle',
         'Un oracolo',
@@ -1366,7 +1367,7 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'Giuseppe interpreta i sogni del faraone (Genesi 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['sogni', 'i sogni'],
+      acceptedAnswers: <String>['sogni', 'i sogni', 'i suoi sogni'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1419,10 +1420,10 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Con quale nome si presentò Dio a Mosè al roveto ardente?',
+      text: 'Con quale nome si presentò Geova a Mosè al roveto ardente?',
       options: <String>[
         '"Io sarò ciò che sarò"',
-        '"Il solo Onnipotente"',
+        '"Il Dio senza nome"',
         '"Il Dio nascosto"',
         '"Il re dei re"',
       ],

@@ -45,6 +45,13 @@
 		<string>????</string>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<!-- The app only ever calls out over standard HTTPS (url_launcher
+		     opening jw.org / JW Library) — no custom or proprietary
+		     encryption. Declaring this here skips the encryption-compliance
+		     question App Store Connect otherwise asks on every single
+		     upload. -->
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 		<!-- iOS hides other apps' URL schemes unless they're declared here: without
 	     this, canLaunchUrl('jwlibrary://') always returns false and the app
 	     would think JW Library is never installed, silently falling back to

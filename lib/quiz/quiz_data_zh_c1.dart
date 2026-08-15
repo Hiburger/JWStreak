@@ -4,7 +4,7 @@ const Map<String, List<QuizQuestion>>
 authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: '圣经描述上帝的创造工作经历了多少天？',
+      text: '创世记描述上帝安息之前，经历了多少个创造日？',
       options: <String>['六天', '七天', '三天', '四十天'],
       correctIndex: 0,
       explanation: '创世记描述了六个创造日；到了第七天上帝就安息了（创世记1、2章）。',
@@ -170,7 +170,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '洁净的动物会反刍，蹄子也分趾（利未记11章）。',
     ),
     QuizQuestion(
-      text: '祭司在这几章仔细检验的是哪种皮肤病？',
+      text: '祭司在这几章要仔细检验的是哪种疾病？',
       options: <String>['麻风病', '天花', '仅仅是烧伤', '粉刺'],
       correctIndex: 0,
       explanation: '祭司要检验皮肤、衣服和房屋上出现的麻风病症状（利未记13-14章）。',
@@ -184,7 +184,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '大祭司每年一次为全国人民赎罪（利未记16章）。',
     ),
     QuizQuestion(
-      text: '利未记19章的“圣洁法典”里有一条广为人知的诫命，是什么？',
+      text: '利未记19章里有一条广为人知的诫命，是什么？',
       options: <String>['要爱人如己', '不可偷牲畜', '每七年要休息一次', '要尊敬国王'],
       correctIndex: 0,
       explanation: '利未记19:18后来被耶稣本人引用过。',
@@ -295,7 +295,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '非尼哈采取行动，瘟疫随即止住（民数记25章）。',
     ),
     QuizQuestion(
-      text: '摩西指定了谁作自己的继任人？',
+      text: '耶和华指定了谁作摩西的继任人？',
       options: <String>['约书亚', '迦勒', '以利亚撒', '非尼哈'],
       correctIndex: 0,
       explanation: '约书亚在以利亚撒和全会众面前被立为继任人（民数记27章）。',
@@ -309,7 +309,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '对米甸的战争在这里有记载（民数记31章）。',
     ),
     QuizQuestion(
-      text: '哪些支派要求定居在约旦河东边？',
+      text: '哪些支派定居在约旦河东边？',
       options: <String>['吕便、迦得和玛拿西半个支派', '犹大和便雅悯', '利未和西缅', '只有以法莲'],
       correctIndex: 0,
       explanation: '这些支派获准在河东定居，条件是协助其他支派征服迦南（民数记32章）。',
@@ -345,7 +345,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '旷野吗哪的经历要提醒以色列人什么道理？',
       options: <String>[
-        '人活着不是单靠食物，而是靠上帝口中所出的话',
+        '人活着不是单靠食物，而是靠耶和华口中所出的每一句话',
         '上帝总是施行惩罚',
         '旷野是受咒诅的',
         '食物并不重要',
@@ -374,8 +374,8 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '豁免年会免除债务（申命记15章）。',
     ),
     QuizQuestion(
-      text: '申命记18章预告了一位怎样的先知，与摩西相似？',
-      options: <String>['上帝将要兴起的一位先知', '一位外邦君王', '一位天使', '独一无二的士师'],
+      text: '申命记18章预告了关于未来一位先知的什么事？',
+      options: <String>['耶和华将要兴起一位像摩西的先知', '一位外邦君王', '一位天使', '独一无二的士师'],
       correctIndex: 0,
       explanation: '这个预言后来被应用在基督身上（申命记18章）。',
     ),
@@ -494,7 +494,7 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
       explanation: '这个循环贯穿了整本书（士师记2章）。',
     ),
     QuizQuestion(
-      text: '谁在底波拉的协助下打败了西西拉？',
+      text: '谁在底波拉的协助下率领以色列军队对抗西西拉？',
       options: <String>['巴拉', '以笏', '俄陀聂', '基甸'],
       correctIndex: 0,
       explanation: '底波拉和巴拉带领以色列取得胜利（士师记4章）。',
@@ -508,9 +508,9 @@ authoredQuizzesZhC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: '亚比米勒自立为王之后发生了什么事？',
+      text: '亚比米勒的统治是怎样结束的？',
       options: <String>[
-        '他屠杀了自己的兄弟，最后自己也丧命',
+        '他被一个妇人抛下的磨石砸中而死',
         '他长久太平地统治',
         '他毫无冲突地被赶下台',
         '他建立了一个长久的王朝',
@@ -632,8 +632,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesZhC1 =
     <String, List<QuizQuestion>>{
       'Genesis#0': <QuizQuestion>[
         QuizQuestion(
-          text: '伊甸园中央的哪棵树是亚当和夏娃不可吃的？',
-          options: <String>['分辨善恶的树', '只有生命树', '一棵无花果树', '一棵橄榄树'],
+          text: '伊甸园里的哪棵树是亚当和夏娃不可吃的？',
+          options: <String>['分辨善恶的树', '生命树', '一棵无花果树', '一棵橄榄树'],
           correctIndex: 0,
           explanation: '上帝只禁止吃这一棵树的果子（创世记2:17）。',
         ),
@@ -776,8 +776,8 @@ const Map<String, List<QuizQuestion>> extraQuizzesZhC1 =
           explanation: '亚伦代替摩西向百姓说话（出埃及记4章）。',
         ),
         QuizQuestion(
-          text: '上帝在燃烧的荆棘那里用什么名字向摩西介绍自己？',
-          options: <String>['“我要成为我所要成为的”', '“唯独全能者”', '“隐藏的神”', '“万王之王”'],
+          text: '耶和华在燃烧的荆棘那里用什么名字向摩西介绍自己？',
+          options: <String>['“我要成为我所要成为的”', '“没有名字的神”', '“隐藏的神”', '“万王之王”'],
           correctIndex: 0,
           explanation: '上帝向摩西揭示了自己名字的含义（出埃及记3:14）。',
         ),

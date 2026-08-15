@@ -4,7 +4,9 @@ const Map<String, List<QuizQuestion>>
 authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Em quantos dias de criação a Bíblia descreve a obra de Deus?',
+      text:
+          'Quantos dias de criação Gênesis descreve antes de Deus '
+          'descansar?',
       options: <String>['Seis dias', 'Sete dias', 'Três dias', 'Quarenta dias'],
       correctIndex: 0,
       explanation:
@@ -319,7 +321,7 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Que afecção de pele é examinada em detalhe pelos sacerdotes '
+          'Que doença deviam os sacerdotes examinar em detalhe '
           'nesses capítulos?',
       options: <String>['A lepra', 'A varíola', 'Apenas queimaduras', 'A acne'],
       correctIndex: 0,
@@ -347,9 +349,7 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
           '(Levítico 16).',
     ),
     QuizQuestion(
-      text:
-          'Que mandamento bem conhecido aparece no “código de '
-          'santidade” de Levítico 19?',
+      text: 'Que mandamento bem conhecido se encontra em Levítico 19?',
       options: <String>[
         'Ame o seu próximo como a si mesmo',
         'Não roube gado',
@@ -480,7 +480,7 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'O que aconteceu com Miriã e Arão depois que criticaram '
+          'O que aconteceu depois que Miriã e Arão criticaram '
           'Moisés?',
       options: <String>[
         'Miriã foi ferida com lepra',
@@ -558,7 +558,7 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Quem Moisés designou como seu sucessor?',
+      text: 'Quem Jeová designou como sucessor de Moisés?',
       options: <String>['Josué', 'Calebe', 'Eleazar', 'Fineias'],
       correctIndex: 0,
       explanation:
@@ -575,7 +575,7 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Que tribos pediram para se estabelecer a leste do Jordão?',
+      text: 'Que tribos se estabeleceram a leste do Jordão?',
       options: <String>[
         'Rúben, Gade e a metade de Manassés',
         'Judá e Benjamim',
@@ -648,7 +648,8 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
           'O que a lembrança do maná no deserto devia recordar a '
           'Israel?',
       options: <String>[
-        'Que o homem não vive só de pão, mas de toda palavra de Deus',
+        'Que o homem não vive só de pão, mas de toda palavra que '
+            'sai da boca de Jeová',
         'Que Deus sempre castiga',
         'Que o deserto é amaldiçoado',
         'Que a comida não tem importância',
@@ -700,11 +701,9 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
       explanation: 'O ano de remissão cancela as dívidas (Deuteronômio 15).',
     ),
     QuizQuestion(
-      text:
-          'Que futuro profeta, semelhante a Moisés, é anunciado em '
-          'Deuteronômio 18?',
+      text: 'O que Deuteronômio 18 anuncia sobre um futuro profeta?',
       options: <String>[
-        'Um profeta que Deus levantaria',
+        'Que Jeová levantaria um semelhante a Moisés',
         'Um rei estrangeiro',
         'Um anjo',
         'Um juiz único',
@@ -939,7 +938,9 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
       explanation: 'Esse ciclo estrutura todo o livro (Juízes 2).',
     ),
     QuizQuestion(
-      text: 'Quem venceu Sísera com a ajuda de Débora?',
+      text:
+          'Quem liderou o exército de Israel contra Sísera, com a ajuda '
+          'de Débora?',
       options: <String>['Baraque', 'Eúde', 'Otniel', 'Gideão'],
       correctIndex: 0,
       explanation: 'Débora e Baraque levam Israel à vitória (Juízes 4).',
@@ -959,9 +960,10 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'O que aconteceu depois que Abimeleque se proclamou rei?',
+      text: 'Como terminou o reinado de Abimeleque?',
       options: <String>[
-        'Ele massacrou seus irmãos e depois morreu também',
+        'Pereceu, atingido por uma pedra de moinho atirada por uma '
+            'mulher',
         'Reinou em paz por muito tempo',
         'Foi expulso sem violência',
         'Fundou uma dinastia duradoura',
@@ -1145,12 +1147,10 @@ const Map<String, List<QuizQuestion>>
 extraQuizzesPtC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text:
-          'Que árvore, no meio do jardim do Éden, era proibida a Adão '
-          'e Eva?',
+      text: 'Que árvore do jardim do Éden era proibida a Adão e Eva?',
       options: <String>[
         'A árvore do conhecimento do bem e do mal',
-        'Somente a árvore da vida',
+        'A árvore da vida',
         'Uma figueira',
         'Uma oliveira',
       ],
@@ -1177,8 +1177,8 @@ extraQuizzesPtC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Quem abençoou Abrão, sendo rei de Salém e sacerdote do '
-          'Deus Altíssimo?',
+          'Quem, rei de Salém e sacerdote do Deus Altíssimo, '
+          'abençoou Abrão?',
       options: <String>['Melquisedeque', 'Ló', 'Faraó', 'Isaque'],
       correctIndex: 0,
       explanation:
@@ -1314,7 +1314,7 @@ extraQuizzesPtC1 = <String, List<QuizQuestion>>{
           'O que José interpretou para Faraó, anunciando sete anos '
           'de fome?',
       options: <String>[
-        'Seus sonhos',
+        'Os sonhos de Faraó',
         'Um livro antigo',
         'As estrelas',
         'Um oráculo',
@@ -1322,7 +1322,7 @@ extraQuizzesPtC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'José interpreta os sonhos de Faraó (Gênesis 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['sonhos'],
+      acceptedAnswers: <String>['sonhos', 'os sonhos', 'seus sonhos'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1375,10 +1375,12 @@ extraQuizzesPtC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Com que nome Deus se identificou a Moisés na sarça ardente?',
+      text:
+          'Com que nome Jeová se identificou a Moisés na sarça '
+          'ardente?',
       options: <String>[
         '“Eu serei o que eu serei”',
-        '“Somente o Todo-Poderoso”',
+        '“O Deus sem nome”',
         '“O Deus oculto”',
         '“O rei dos reis”',
       ],

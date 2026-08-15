@@ -93,7 +93,7 @@ authoredQuizzesPtC6 = <String, List<QuizQuestion>>{
           'Facções em torno de diferentes instrutores causavam problemas (1 Coríntios 1).',
     ),
     QuizQuestion(
-      text: 'A que Paulo compara a igreja em 1 Coríntios 3?',
+      text: 'A que Paulo compara a congregação em 1 Coríntios 3?',
       options: <String>[
         'Ao templo de Deus',
         'A um exército',

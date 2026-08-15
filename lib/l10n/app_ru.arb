@@ -1,11 +1,9 @@
 {
   "@@locale": "ru",
-
   "themeSystem": "Как в системе",
   "themeLight": "Светлая",
   "themeDark": "Тёмная",
   "themeOled": "Тёмная OLED",
-
   "settingsThemeStyle": "Стиль",
   "settingsThemeBrightness": "Яркость",
   "settingsThemeStyleDarkOnly": "Этот стиль всегда тёмный.",
@@ -17,7 +15,6 @@
   "themeSkinSunset": "Закат",
   "themeSkinForest": "Лес",
   "themeSkinAmethyst": "Аметист",
-
   "planCanonicalTitle": "От начала до конца",
   "planCanonicalDesc": "От Бытия до Откровения, в порядке печати книг.",
   "planChronologicalTitle": "По событиям",
@@ -55,11 +52,9 @@
   "rewardAcornsPlural": "жёлуди",
   "rewardGemSingular": "самоцвет",
   "rewardGemsPlural": "самоцветы",
-
   "noteUntitled": "Без названия",
   "noteExportMultiTitle": "Мои заметки - JW Streak",
   "noteExportedOn": "Экспортировано {date}",
-
   "reflectionPrompt0": "Чему этот отрывок учит тебя об Иегове?",
   "reflectionPrompt1": "Какое качество, показанное здесь, ты хотел(а) бы перенять?",
   "reflectionPrompt2": "Как ты мог(ла) бы применить это на этой неделе?",
@@ -68,7 +63,6 @@
   "reflectionPrompt5": "Как это укрепляет твою веру?",
   "reflectionPrompt6": "Что бы ты хотел(а) запомнить из этих глав?",
   "reflectionPrompt7": "Как бы ты рассказал(а) об этом отрывке кому-то?",
-
   "bookGenesis": "Бытие",
   "bookExodus": "Исход",
   "bookLeviticus": "Левит",
@@ -135,7 +129,6 @@
   "book3John": "3 Иоанна",
   "bookJude": "Иуды",
   "bookRevelation": "Откровение",
-
   "welcomeTagline": "Твоё ежедневное чтение Библии,\nдень за днём.",
   "welcomeButton": "Добро пожаловать!",
   "welcomeLogoGreeting": "Привет!",
@@ -179,7 +172,6 @@
   "tourSettingsBody": "Тема, язык, напоминания, и этот тур, если захочешь посмотреть его снова.",
   "settingsReplayTour": "Пройти обучение заново",
   "settingsReplayTourSubtitle": "Снова показать знакомство с главным экраном",
-
   "settingsPrivacy": "Конфиденциальность",
   "settingsAppLockTitle": "Заблокировать приложение",
   "settingsAppLockOn": "Запрашивает отпечаток, лицо или PIN-код перед открытием заметок, если вы не вернётесь в течение 10 минут.",
@@ -193,7 +185,6 @@
   "appLockUnlockButton": "Разблокировать",
   "onbReminderPermissionMissing": "Уведомления отключены, поэтому это напоминание не сработает. Включи их, чтобы получать оповещения.",
   "onbReminderPermissionEnable": "Включить",
-
   "streakInfoTitle": "Поддерживай свою серию",
   "streakInfoSubtitle": "Твоя серия растёт каждый день, когда ты активен, и обнуляется, если ты отсутствуешь слишком долго.",
   "streakInfoRow1Title": "Будь активен каждый день",
@@ -204,36 +195,54 @@
   "streakInfoRow3Text": "Закончились спички? Пройди контрольный квиз (смесь твоих чтений), чтобы вернуть одну.",
   "streakInfoRow4Title": "Мы тебя предупредим",
   "streakInfoRow4Text": "Если твоя серия под угрозой, появится предупреждение, а вечернее напоминание подтолкнёт тебя.",
-
   "settingsTitle": "Настройки",
   "settingsCatPersonalization": "Персонализация",
   "settingsCatPersonalizationDesc": "Стиль, яркость, язык",
   "settingsCatReadingDesc": "Порядок чтения, точка продолжения, открытие глав",
   "settingsCatNotifications": "Уведомления",
-  "settingsCatNotificationsDesc": "Разрешения, нужные для напоминаний",
+  "settingsCatNotificationsDesc": "Дойдут ли до вас напоминания",
   "settingsCatPrivacyDesc": "Блокировка приложения",
+  "settingsCatDonations": "Пожертвования",
+  "settingsCatDonationsDesc": "Поддержать JW Streak",
+  "donationsHeadline": "Мы пока не принимаем пожертвования",
+  "donationsLead": "JW Streak бесплатна, и сейчас пожертвовать никак нельзя. Это намеренно, мы просто ничего не настраивали. Возможно, откроем позже, и нам хочется сказать об этом честно, а не удивить вас однажды.",
+  "donationsRow1Title": "Но это всё же стоит денег",
+  "donationsRow1Text": "Аккаунты разработчика, тестовые устройства и пара подписок требуют оплаты, а приложение делается по вечерам и выходным. Некоторые из этих вечеров правда тяжёлые.",
+  "donationsRow2Title": "Что не изменится",
+  "donationsRow2Text": "JW Streak останется бесплатной, с открытым кодом и полностью офлайн. Без рекламы, без слежки, без закрытых глав и платных функций. Если пожертвования когда-нибудь появятся, они будут полностью добровольными.",
+  "donationsRow3Title": "Как помочь бесплатно",
+  "donationsRow3Text": "Расскажите о ней тому, кому она может пригодиться, сообщите об ошибке в тесте или о баге или просто продолжайте читать. Честно, это уже очень много значит.",
+  "donationsThanks": "Спасибо, что вы здесь 💛",
   "settingsCatAbout": "Помощь и о программе",
   "settingsCatAboutDesc": "Обзор, версия, исходный код",
   "settingsAppearance": "Внешний вид",
   "settingsDynamicColor": "Динамические цвета",
   "settingsDynamicColorOn": "Использует цвета твоих обоев (Material You)",
   "settingsDynamicColorOff": "Использует фирменный цвет приложения",
-  "settingsBibleTargetTitle": "Открывать Библию через",
+  "settingsBibleTargetTitle": "Открывать Библию и писание дня через",
   "settingsBibleTargetJwLibrary": "Приложение JW Library",
   "settingsBibleTargetWeb": "jw.org (браузер)",
-  "settingsBibleTargetJwLibraryMissing": "Для открытия Библии таким способом требуется приложение JW Library. Установить его?",
+  "settingsBibleTargetJwLibraryMissing": "Для открытия Библии или писания дня таким способом требуется приложение JW Library. Установить его?",
   "settingsBibleTargetInstall": "Установить",
   "settingsLanguage": "Язык",
   "settingsLanguageSystem": "Системный",
-  "settingsNotifPermTitle": "Разрешения на уведомления",
   "settingsChecking": "Проверка...",
-  "settingsNotifActive": "Разрешение активно.",
-  "settingsNotifMissing": "Разрешение отсутствует. Включи его, чтобы получать напоминания.",
-  "settingsVerify": "Проверить",
-  "settingsExactAlarms": "Точные будильники",
-  "settingsExactAlarmsOn": "Напоминания срабатывают точно в указанное время.",
   "settingsExactAlarmsOff": "Не разрешено. Напоминания могут задерживаться.",
-  "settingsAllow": "Разрешить",
+  "notifStatusReadyTitle": "Напоминания настроены",
+  "notifStatusReadyBody": "Они придут в выбранное вами время.",
+  "notifStatusBlockedTitle": "Напоминания до вас не дойдут",
+  "notifStatusBlockedBody": "У JW Streak нет разрешения отправлять уведомления, поэтому ни одно напоминание не появится.",
+  "notifStatusDelayedTitle": "Напоминания могут прийти с опозданием",
+  "notifStatusDelayedBody": "Они всё равно придут, но Android может задержать их на несколько минут ради экономии заряда.",
+  "notifPermRowTitle": "Отправлять уведомления",
+  "notifPermRowBody": "Без этого напоминание вообще не появится.",
+  "notifExactRowTitle": "Точное время",
+  "notifExactRowBody": "Позволяет напоминанию сработать ровно в выбранную минуту, а не тогда, когда до него дойдёт очередь у Android.",
+  "notifRowAllowed": "Разрешено",
+  "notifRowNotAllowed": "Не разрешено",
+  "notifActionTurnOn": "Включить",
+  "notifActionOpen": "Открыть настройки",
+  "notifRemindersHint": "Время напоминаний настраивается через колокольчик на главном экране.",
   "settingsInfo": "Информация",
   "settingsVersionLabel": "Версия JW Streak",
   "settingsSourceCode": "Посмотреть исходный код",
@@ -243,7 +252,6 @@
   "settingsFooter": "Сделано с братской любовью, в Швейцарии.\nЭто приложение бесплатное, свободное и с открытым исходным кодом.",
   "settingsUnaffiliated": "JW Streak: независимый неофициальный проект, не связанный со Свидетелями Иеговы, Watch Tower Bible and Tract Society или JW.org.",
   "settingsError": "Ошибка: {error}",
-
   "reminderPresetMorning": "Утро",
   "reminderPresetNoon": "День",
   "reminderPresetEvening": "Вечер",
@@ -261,7 +269,6 @@
   "reminderDailyTextSubtitle": "Дополнительно: мягкое напоминание о тексте дня на jw.org.",
   "notifDailyTextTitle": "JW Streak · Писание дня",
   "notifDailyTextBody": "Текст дня ждёт вас на jw.org.",
-
   "quizQuestionCounter": "Вопрос {index} / {total}",
   "quizNext": "Далее",
   "quizSeeScore": "Посмотреть результат",
@@ -274,7 +281,18 @@
   "quizWellDone": "Молодец!",
   "quizScore": "Результат: {score} / {total}",
   "quizFinish": "Завершить",
-
+  "quizFunFactLabel": "А вы знали?",
+  "quizReviewTitle": "{count, plural, =1{1 к повторению} few{{count} к повторению} many{{count} к повторению} other{{count} к повторению}}",
+  "@quizReviewTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizReviewSubtitle": "Без спешки, просто взгляд на то, что не получилось.",
+  "quizReviewYourAnswer": "Ваш ответ",
+  "quizReviewCorrectAnswer": "Правильный ответ",
   "checkpointAppBarTitle": "Этап",
   "checkpointQuizLabel": "Квиз",
   "checkpointQuestionCount": "{count} вопросов",
@@ -287,7 +305,6 @@
   "checkpointReflectionAppBarTitle": "Размышление",
   "checkpointReflectionHint": "Напиши своё размышление…",
   "checkpointSave": "Сохранить",
-
   "homeStreakLostMessage": "Твоя серия обнулилась. Не переживай, начнём заново вместе 💪",
   "homeExactAlarmDialogTitle": "Напоминание в точное время",
   "homeExactAlarmDialogContent": "Чтобы получать напоминание точно в выбранное время, Android просит разрешить «будильники и напоминания». Без этого разрешения уведомление может задерживаться.",
@@ -366,7 +383,6 @@
   "homeWeekdayFri": "Пт",
   "homeWeekdaySat": "Сб",
   "homeWeekdaySun": "Вс",
-
   "bibleAppTitle": "Библия",
   "bibleHebrewScriptures": "Еврейские Писания",
   "bibleGreekScriptures": "Христианские греческие Писания",
@@ -392,21 +408,14 @@
   "bibleLocked": "Заблокировано",
   "bibleQuizAndReflection": "Квиз + размышление",
   "bibleReflectionOnly": "Размышление",
-
   "noteEditorTitleErrorHint": "Добавь заголовок, чтобы сохранить.",
   "noteEditorErrorSnackbar": "Ошибка: {error}",
   "noteEditorTitleNew": "Новая заметка",
   "noteEditorTitleEdit": "Изменить заметку",
   "noteEditorSaveButton": "Сохранить",
   "noteEditorTitleHint": "Заголовок",
+  "noteEditorLinkedChapter": "Связанная глава",
   "noteEditorBodyHint": "Запиши свои мысли, размышления, заметки для исследования...",
-  "noteEditorMarkdownHelpTitle": "Поддерживается Markdown",
-  "noteEditorTipBold": "● Жирный: **твой_текст**",
-  "noteEditorTipItalic": "● Курсив: *твой_текст*",
-  "noteEditorTipStrikethrough": "● Зачёркнутый: ~~твой_текст~~",
-  "noteEditorTipHeading": "● Заголовок: # Твой заголовок",
-  "noteEditorTipList": "● Список: - пункт",
-
   "notesLibraryDeleteDialogTitle": "Удалить?",
   "notesLibraryCancel": "Отмена",
   "notesLibraryDelete": "Удалить",
@@ -421,6 +430,7 @@
   "notesLibrarySelectedCountPlural": "Выбрано: {count}",
   "notesLibraryShareTooltip": "Поделиться",
   "notesLibraryExportAllTooltip": "Экспортировать мои заметки",
+  "settingsExportNotesDesc": "Сохраните все заметки в ZIP-файл, чтобы хранить или поделиться",
   "notesLibraryDeleteTooltip": "Удалить",
   "notesLibraryJustNow": "только что",
   "notesLibraryMinutesAgo": "{minutes} мин назад",
@@ -430,7 +440,6 @@
   "notesLibraryEmptyTitle": "Пока нет заметок",
   "notesLibraryEmptySearchHint": "Попробуй другие ключевые слова или проверь орфографию.",
   "notesLibraryEmptySubtitle": "Напиши свою первую мысль с помощью кнопки «Новая заметка».",
-
   "noteReaderDeleteTitle": "Удалить эту заметку?",
   "noteReaderDeleteContent": "«{title}» будет навсегда удалена с твоего устройства.",
   "noteReaderCancel": "Отмена",
@@ -442,7 +451,6 @@
   "noteReaderNoteGone": "Эта заметка больше не существует.",
   "noteReaderUpdatedAt": "Изменено {date}",
   "noteReaderEmpty": "Эта заметка пуста.",
-
   "homeAchievementsTooltip": "Достижения",
   "achievementsTitle": "Достижения",
   "achievementsUnlockedCount": "{unlocked} из {total} открыто",
@@ -452,7 +460,6 @@
   "achievementsSectionQuizzes": "Викторины",
   "achievementsSectionStreak": "Серия",
   "achievementsSectionOther": "Другое",
-
   "achievementFirstChapterTitle": "Первые шаги",
   "achievementFirstChapterDesc": "Прочитай свою первую главу.",
   "achievementChapters10Title": "Хорошее начало",
@@ -485,7 +492,6 @@
   "achievementFirstNoteDesc": "Напиши свою первую заметку.",
   "achievementReminderTitle": "Держись курса",
   "achievementReminderDesc": "Настрой ежедневное напоминание.",
-
   "notifReminderTitle": "JW Streak · Чтение Библии",
   "notifReminderBody": "Пора читать. Нажми, чтобы продолжить 📖",
   "notifStreakRiskTitle": "Твоя серия под угрозой 🔥",
@@ -494,7 +500,6 @@
   "easterEggVersionTitle": "Семь раз, надо же",
   "easterEggVersionBody": "Здесь нет скрытого режима, увы. Просто спасибо, что искали так далеко. Это приложение писалось вечер за вечером, и приятно знать, что кто-то заглядывает.",
   "easterEggVersionButton": "Останется между нами",
-
   "achievementQuizzes40Title": "Легенда викторин",
   "achievementQuizzes40Desc": "Пройди 40 викторин.",
   "achievementStars40Title": "Коллекционер галактик",
@@ -505,11 +510,9 @@
   "achievementNotes10Desc": "Напиши 10 заметок.",
   "achievementEasterEggsTitle": "Охотник за секретами",
   "achievementEasterEggsDesc": "Найди все секреты в приложении.",
-
   "freezeEarnedTitle": "Новая спичка получена!",
   "freezeEarnedBody": "Ты прошёл(а) 3 новые викторины. Спичка не даст твоей серии погаснуть, если ты пропустишь день.",
   "freezeEarnedButton": "Здорово!",
-
   "commonOk": "Понятно",
   "commonCancel": "Отмена"
 }

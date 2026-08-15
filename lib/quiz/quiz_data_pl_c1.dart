@@ -4,7 +4,9 @@ const Map<String, List<QuizQuestion>>
 authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Przez ile dni stworzenia Biblia opisuje dzieło Boga?',
+      text:
+          'Ile dni stworzenia opisuje Księga Rodzaju, zanim Bóg '
+          'odpoczywa?',
       options: <String>[
         'Sześć dni',
         'Siedem dni',
@@ -301,7 +303,8 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Jaką dolegliwość skóry kapłani szczegółowo badają w tych rozdziałach?',
+          'Jaką chorobę kapłani mieli szczegółowo badać w tych '
+          'rozdziałach?',
       options: <String>['Trąd', 'Ospę', 'Tylko oparzenia', 'Trądzik'],
       correctIndex: 0,
       explanation:
@@ -323,8 +326,7 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
           'Arcykapłan dokonuje przebłagania za naród raz w roku (Kapłańska 16).',
     ),
     QuizQuestion(
-      text:
-          'Które dobrze znane przykazanie pojawia się w „kodeksie świętości” z Kapłańskiej 19?',
+      text: 'Które dobrze znane przykazanie znajduje się w Kapłańskiej 19?',
       options: <String>[
         'Miłuj bliźniego jak samego siebie',
         'Nie kradnij bydła',
@@ -436,7 +438,9 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
           '70 starszych otrzymuje ducha, aby dzielić odpowiedzialność (Liczb 11).',
     ),
     QuizQuestion(
-      text: 'Co spotkało Miriam i Aarona po tym, jak skrytykowali Mojżesza?',
+      text:
+          'Co się stało po tym, jak Miriam i Aaron skrytykowali '
+          'Mojżesza?',
       options: <String>[
         'Miriam została dotknięta trądem',
         'Zostali wygnani na zawsze',
@@ -508,7 +512,7 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
       explanation: 'Pinechas interweniuje i plaga ustaje (Liczb 25).',
     ),
     QuizQuestion(
-      text: 'Kogo Mojżesz wyznaczył na swojego następcę?',
+      text: 'Kogo Jehowa wyznaczył na następcę Mojżesza?',
       options: <String>['Jozuego', 'Kaleba', 'Eleazara', 'Pinechasa'],
       correctIndex: 0,
       explanation:
@@ -525,7 +529,7 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: 'Które plemiona poprosiły o osiedlenie się na wschód od Jordanu?',
+      text: 'Które plemiona osiedliły się na wschód od Jordanu?',
       options: <String>[
         'Ruben, Gad i połowa Manassesa',
         'Juda i Beniamin',
@@ -593,7 +597,8 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'O czym miała przypominać Izraelowi pamięć o mannie na pustyni?',
       options: <String>[
-        'Że człowiek żyje nie samym chlebem, lecz słowem Bożym',
+        'Że człowiek żyje nie samym chlebem, lecz każdą wypowiedzią '
+            'z ust Jehowy',
         'Że Bóg zawsze karze',
         'Że pustynia jest przeklęta',
         'Że pokarm nie ma znaczenia',
@@ -641,10 +646,9 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
       explanation: 'Rok darowania anuluje długi (Powtórzonego Prawa 15).',
     ),
     QuizQuestion(
-      text:
-          'Jaki przyszły prorok, podobny do Mojżesza, jest zapowiedziany w Powtórzonego Prawa 18?',
+      text: 'Co Powtórzonego Prawa 18 zapowiada o przyszłym proroku?',
       options: <String>[
-        'Prorok, którego Bóg wzbudzi',
+        'Że Jehowa wzbudzi kogoś podobnego do Mojżesza',
         'Obcy król',
         'Anioł',
         'Pojedynczy sędzia',
@@ -864,7 +868,7 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
       explanation: 'Ten cykl kształtuje całą księgę (Sędziów 2).',
     ),
     QuizQuestion(
-      text: 'Kto pokonał Siserę z pomocą Debory?',
+      text: 'Kto poprowadził wojsko Izraela przeciw Siserze, z pomocą Debory?',
       options: <String>['Barak', 'Ehud', 'Otniel', 'Gedeon'],
       correctIndex: 0,
       explanation: 'Debora i Barak prowadzą Izraela do zwycięstwa (Sędziów 4).',
@@ -884,9 +888,9 @@ authoredQuizzesPlC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: 'Co się stało, gdy Abimelek ogłosił się królem?',
+      text: 'Jak zakończyły się rządy Abimeleka?',
       options: <String>[
-        'Wymordował swoich braci, a później sam zginął',
+        'Zginął uderzony kamieniem młyńskim rzuconym przez kobietę',
         'Panował w pokoju przez długi czas',
         'Został wygnany bez przemocy',
         'Założył trwałą dynastię',
@@ -1063,10 +1067,10 @@ const Map<String, List<QuizQuestion>>
 extraQuizzesPlC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: 'Które drzewo pośrodku ogrodu Eden było zakazane dla Adama i Ewy?',
+      text: 'Które drzewo w ogrodzie Eden było zakazane dla Adama i Ewy?',
       options: <String>[
         'Drzewo poznania dobra i zła',
-        'Tylko drzewo życia',
+        'Drzewo życia',
         'Drzewo figowe',
         'Drzewo oliwne',
       ],
@@ -1091,7 +1095,8 @@ extraQuizzesPlC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Kto błogosławił Abramowi, będąc królem Salem i kapłanem Boga Najwyższego?',
+          'Kto, król Salem i kapłan Boga Najwyższego, pobłogosławił '
+          'Abrama?',
       options: <String>['Melchizedek', 'Lot', 'Faraon', 'Izaak'],
       correctIndex: 0,
       explanation:
@@ -1223,7 +1228,7 @@ extraQuizzesPlC1 = <String, List<QuizQuestion>>{
       text:
           'Co zinterpretował Józef dla faraona, zapowiadając siedem lat głodu?',
       options: <String>[
-        'Jego sny',
+        'Sny faraona',
         'Starożytną księgę',
         'Gwiazdy',
         'Wyrocznię',
@@ -1231,7 +1236,7 @@ extraQuizzesPlC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'Józef interpretuje sny faraona (Rodzaju 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['sny'],
+      acceptedAnswers: <String>['sny', 'jego sny', 'sny faraona'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1281,10 +1286,11 @@ extraQuizzesPlC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'Jakim imieniem Bóg przedstawił się Mojżeszowi przy płonącym krzewie?',
+          'Jakim imieniem Jehowa przedstawił się Mojżeszowi przy '
+          'płonącym krzewie?',
       options: <String>[
         '„Stanę się, kim zechcę się stać”',
-        '„Tylko Wszechmocny”',
+        '„Bóg bez imienia”',
         '„Ukryty Bóg”',
         '„Król królów”',
       ],

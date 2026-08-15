@@ -105,9 +105,9 @@ authoredQuizzesZhC5 = <String, List<QuizQuestion>>{
   'John#1': <QuizQuestion>[
     QuizQuestion(
       text: '在约翰福音10章,耶稣怎样形容自己?',
-      options: <String>['好牧人', '狮子', '大祭司', '审判官'],
+      options: <String>['优秀的牧人', '狮子', '大祭司', '审判官'],
       correctIndex: 0,
-      explanation: '耶稣把自己比作为羊舍命的好牧人(约翰福音10章)。',
+      explanation: '耶稣把自己比作为羊舍命的优秀牧人(约翰福音10章)。',
     ),
     QuizQuestion(
       text: '耶稣使谁在死了四天后从坟墓里复活?',
@@ -204,7 +204,7 @@ authoredQuizzesZhC5 = <String, List<QuizQuestion>>{
       text: '第三天来到坟墓的妇女们发现了什么?',
       options: <String>['坟墓是空的,耶稣已经复活', '耶稣的尸体还在那里', '坟墓被封住,无法进入', '没有什么异常'],
       correctIndex: 0,
-      explanation: '一位天使宣告了复活的消息(马可福音16章)。',
+      explanation: '一个身穿白袍的青年向她们宣告耶稣已经复活（马可福音16:5，6）。',
     ),
   ],
   'Luke#0': <QuizQuestion>[

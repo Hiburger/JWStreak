@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A single line of text that scrolls back and forth to reveal what
+/// A single line of text that scrolls steadily leftward to reveal what
 /// doesn't fit — only when it doesn't fit.
 ///
 /// Built for the home banner's rotating greeting ("Good afternoon", "Happy
@@ -10,26 +10,42 @@ import 'package:flutter/material.dart';
 /// reader at all. Most of the time none of that applies and the text just
 /// sits still like a normal [Text] — the animation only exists for the
 /// specific case that needed it.
+///
+/// The scroll runs one way at a constant speed and wraps around, the way
+/// marquees usually behave. A second copy of the line trails the first
+/// across a [gap]; one pass travels exactly far enough that the trailing
+/// copy lands where the leading one began, so the reset is invisible.
+///
+/// The trailing copy is painted by a [Stack] *inside* the same box the
+/// single copy used to occupy, deliberately: this widget lives in the
+/// banner's `Row > Expanded`, and anything that changes the size it reports
+/// upward (an `OverflowBox`, an unbounded `Row`) collapses the banner around
+/// it. Whatever this draws, it must measure exactly as it always did.
 class MarqueeText extends StatefulWidget {
   const MarqueeText({
     required this.text,
     this.style,
     this.pauseDuration = const Duration(milliseconds: 1200),
     this.pixelsPerSecond = 32,
+    this.gap = 48,
     super.key,
   });
 
   final String text;
   final TextStyle? style;
 
-  /// How long to sit still at each end before scrolling to the other —
-  /// long enough to actually read the visible half before it moves.
+  /// How long to sit still at the start of each pass — long enough to read
+  /// the visible part before it moves.
   final Duration pauseDuration;
 
   /// Scroll speed. Distance-based rather than a fixed duration so a barely
   /// -overflowing greeting doesn't crawl for as long as a badly overflowing
   /// one.
   final double pixelsPerSecond;
+
+  /// Blank space between the end of one copy of the line and the start of
+  /// the next, so the text never appears to run into itself.
+  final double gap;
 
   @override
   State<MarqueeText> createState() => _MarqueeTextState();
@@ -69,6 +85,12 @@ class _MarqueeTextState extends State<MarqueeText>
     final TextPainter painter = TextPainter(
       text: TextSpan(text: widget.text, style: widget.style),
       textDirection: Directionality.of(context),
+      // TextPainter defaults to no scaling, but the Text widgets below
+      // inherit the ambient text scale automatically — without matching it
+      // here, a system font size above 1x makes the real rendered line
+      // wider than this measurement, so the scroll distance computed from
+      // it falls short and the tail never scrolls into view.
+      textScaler: MediaQuery.textScalerOf(context),
       maxLines: 1,
     )..layout();
     return painter.width;
@@ -96,13 +118,17 @@ class _MarqueeTextState extends State<MarqueeText>
       return;
     }
 
-    final int scrollMs = (overflow / widget.pixelsPerSecond * 1000)
+    // A pass travels one whole copy plus the gap. At the end of it the
+    // trailing copy sits exactly where the leading one started, so snapping
+    // back to 0 looks like the scroll simply carried on.
+    final double distance = textWidth + widget.gap;
+    final int scrollMs = (distance / widget.pixelsPerSecond * 1000)
         .round()
         .clamp(400, 20000);
     final int pauseMs = widget.pauseDuration.inMilliseconds;
     final AnimationController controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: pauseMs * 2 + scrollMs * 2),
+      duration: Duration(milliseconds: pauseMs + scrollMs),
     );
     final Animation<double> offset = TweenSequence<double>(
       <TweenSequenceItem<double>>[
@@ -112,23 +138,10 @@ class _MarqueeTextState extends State<MarqueeText>
           tween: ConstantTween<double>(0),
           weight: pauseMs.toDouble(),
         ),
+        // Linear on purpose: easing would make the speed surge and settle on
+        // every pass, which reads as a stutter in a loop that never stops.
         TweenSequenceItem(
-          tween: Tween<double>(
-            begin: 0,
-            end: overflow,
-          ).chain(CurveTween(curve: Curves.easeInOut)),
-          weight: scrollMs.toDouble(),
-        ),
-        // Hold at the end so the tail isn't just glimpsed mid-scroll.
-        TweenSequenceItem(
-          tween: ConstantTween<double>(overflow),
-          weight: pauseMs.toDouble(),
-        ),
-        TweenSequenceItem(
-          tween: Tween<double>(
-            begin: overflow,
-            end: 0,
-          ).chain(CurveTween(curve: Curves.easeInOut)),
+          tween: Tween<double>(begin: 0, end: distance),
           weight: scrollMs.toDouble(),
         ),
       ],
@@ -142,6 +155,18 @@ class _MarqueeTextState extends State<MarqueeText>
       });
     }
   }
+
+  /// One copy of the scrolling line, at its natural width.
+  Widget _line() => SizedBox(
+    width: _textWidth,
+    child: Text(
+      widget.text,
+      style: widget.style,
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.visible,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -187,14 +212,18 @@ class _MarqueeTextState extends State<MarqueeText>
                   offset: Offset(-offset.value, 0),
                   child: child,
                 ),
+            // Same SizedBox the single copy always used, so the size this
+            // widget reports to the banner is unchanged. The trailing copy
+            // is a positioned child painting outside those bounds, which a
+            // Stack allows (Clip.none) without it counting toward layout.
             child: SizedBox(
               width: _textWidth,
-              child: Text(
-                widget.text,
-                style: widget.style,
-                maxLines: 1,
-                softWrap: false,
-                overflow: TextOverflow.visible,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: <Widget>[
+                  _line(),
+                  Positioned(left: _textWidth! + widget.gap, child: _line()),
+                ],
               ),
             ),
           ),

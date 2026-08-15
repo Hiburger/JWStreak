@@ -3,11 +3,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../achievements_data.dart';
 import '../app_constants.dart';
 import '../bible_data.dart';
 import '../reading_plan.dart';
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
+import '../quiz/quiz_facts.dart';
 import '../services/deep_link_service.dart';
 import '../services/local_db_service.dart';
 import '../services/reading_session_service.dart';
@@ -37,6 +39,11 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
   // it can't get reused somewhere that needs the stricter, genuine-only set.
   Set<String> _coveredKeys = const <String>{};
   Map<String, int> _starsByBook = const <String, int>{};
+  // Bonus stars from unlocked achievements, on top of quiz stars — see
+  // achievementBonusStars. Without this the banner undercounts by exactly
+  // whatever achievements have paid out, since _starsByBook only ever holds
+  // per-book quiz stars.
+  int _achievementBonusStars = 0;
   bool _isLoading = true;
 
   @override
@@ -49,6 +56,8 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
     final Set<String> keys = await widget.dbService.getReadChapterKeys();
     final Map<String, int> stars = await widget.dbService
         .getEarnedStarsByBook();
+    final Set<String> unlockedAchievementIds = await widget.dbService
+        .getUnlockedAchievementIds();
     // These counts are pure display, so they show coverage: a reader who
     // told onboarding they'd already reached Exodus sees those books filled
     // in rather than an empty shelf they'd have to tick off by hand.
@@ -58,6 +67,7 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
       setState(() {
         _coveredKeys = before.isEmpty ? keys : <String>{...keys, ...before};
         _starsByBook = stars;
+        _achievementBonusStars = achievementBonusStars(unlockedAchievementIds);
         _isLoading = false;
       });
     }
@@ -104,11 +114,13 @@ class _BibleBrowserScreenState extends State<BibleBrowserScreen> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
                 children: <Widget>[
                   _TotalStarsBanner(
-                    earned: _starsByBook.values.fold<int>(
-                      0,
-                      (int a, int b) => a + b,
-                    ),
-                    max: totalMaxStars(),
+                    earned:
+                        _starsByBook.values.fold<int>(
+                          0,
+                          (int a, int b) => a + b,
+                        ) +
+                        _achievementBonusStars,
+                    max: totalMaxStars() + maxAchievementBonusStars(),
                   ),
                   const SizedBox(height: 16),
                   _GroupHeader(
@@ -869,9 +881,17 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
   }
 
   Future<void> _openFullBookQuiz() async {
+    final String languageCode = Localizations.localeOf(context).languageCode;
     final List<QuizQuestion> questions = allQuestionsForBook(
       widget.book,
-      languageCode: Localizations.localeOf(context).languageCode,
+      languageCode: languageCode,
+    );
+    // No single checkpoint to take a fact from, so pick one from anywhere in
+    // this book — the reader has covered all of it to be doing a full-book
+    // quiz, so nothing here can spoil a passage they haven't reached.
+    final String? funFact = randomCheckpointFact(
+      checkpointsForBook(widget.book).map((Checkpoint cp) => cp.id),
+      languageCode: languageCode,
     );
     bool freezeEarned = false;
     await Navigator.of(context).push<void>(
@@ -881,6 +901,7 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
             context,
           )!.bibleFullQuizTitle(localizedBookName(context, widget.book)),
           questions: questions,
+          funFact: funFact,
           onCompleted: (int score, int total) async {
             freezeEarned = await widget.dbService.saveQuizResult(
               quizId: '${widget.book.id}#full',

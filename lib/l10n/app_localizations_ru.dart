@@ -649,17 +649,53 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsCatNotifications => 'Уведомления';
 
   @override
-  String get settingsCatNotificationsDesc =>
-      'Разрешения, нужные для напоминаний';
+  String get settingsCatNotificationsDesc => 'Дойдут ли до вас напоминания';
 
   @override
   String get settingsCatPrivacyDesc => 'Блокировка приложения';
+
+  @override
+  String get settingsCatDonations => 'Пожертвования';
+
+  @override
+  String get settingsCatDonationsDesc => 'Поддержать JW Streak';
 
   @override
   String get settingsCatAbout => 'Помощь и о программе';
 
   @override
   String get settingsCatAboutDesc => 'Обзор, версия, исходный код';
+
+  @override
+  String get donationsHeadline => 'Мы пока не принимаем пожертвования';
+
+  @override
+  String get donationsLead =>
+      'JW Streak бесплатна, и сейчас пожертвовать никак нельзя. Это намеренно, мы просто ничего не настраивали. Возможно, откроем позже, и нам хочется сказать об этом честно, а не удивить вас однажды.';
+
+  @override
+  String get donationsRow1Title => 'Но это всё же стоит денег';
+
+  @override
+  String get donationsRow1Text =>
+      'Аккаунты разработчика, тестовые устройства и пара подписок требуют оплаты, а приложение делается по вечерам и выходным. Некоторые из этих вечеров правда тяжёлые.';
+
+  @override
+  String get donationsRow2Title => 'Что не изменится';
+
+  @override
+  String get donationsRow2Text =>
+      'JW Streak останется бесплатной, с открытым кодом и полностью офлайн. Без рекламы, без слежки, без закрытых глав и платных функций. Если пожертвования когда-нибудь появятся, они будут полностью добровольными.';
+
+  @override
+  String get donationsRow3Title => 'Как помочь бесплатно';
+
+  @override
+  String get donationsRow3Text =>
+      'Расскажите о ней тому, кому она может пригодиться, сообщите об ошибке в тесте или о баге или просто продолжайте читать. Честно, это уже очень много значит.';
+
+  @override
+  String get donationsThanks => 'Спасибо, что вы здесь 💛';
 
   @override
   String get settingsAppearance => 'Внешний вид';
@@ -675,7 +711,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsDynamicColorOff => 'Использует фирменный цвет приложения';
 
   @override
-  String get settingsBibleTargetTitle => 'Открывать Библию через';
+  String get settingsBibleTargetTitle => 'Открывать Библию и писание дня через';
 
   @override
   String get settingsBibleTargetJwLibrary => 'Приложение JW Library';
@@ -685,7 +721,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsBibleTargetJwLibraryMissing =>
-      'Для открытия Библии таким способом требуется приложение JW Library. Установить его?';
+      'Для открытия Библии или писания дня таким способом требуется приложение JW Library. Установить его?';
 
   @override
   String get settingsBibleTargetInstall => 'Установить';
@@ -697,34 +733,60 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguageSystem => 'Системный';
 
   @override
-  String get settingsNotifPermTitle => 'Разрешения на уведомления';
-
-  @override
   String get settingsChecking => 'Проверка...';
-
-  @override
-  String get settingsNotifActive => 'Разрешение активно.';
-
-  @override
-  String get settingsNotifMissing =>
-      'Разрешение отсутствует. Включи его, чтобы получать напоминания.';
-
-  @override
-  String get settingsVerify => 'Проверить';
-
-  @override
-  String get settingsExactAlarms => 'Точные будильники';
-
-  @override
-  String get settingsExactAlarmsOn =>
-      'Напоминания срабатывают точно в указанное время.';
 
   @override
   String get settingsExactAlarmsOff =>
       'Не разрешено. Напоминания могут задерживаться.';
 
   @override
-  String get settingsAllow => 'Разрешить';
+  String get notifStatusReadyTitle => 'Напоминания настроены';
+
+  @override
+  String get notifStatusReadyBody => 'Они придут в выбранное вами время.';
+
+  @override
+  String get notifStatusBlockedTitle => 'Напоминания до вас не дойдут';
+
+  @override
+  String get notifStatusBlockedBody =>
+      'У JW Streak нет разрешения отправлять уведомления, поэтому ни одно напоминание не появится.';
+
+  @override
+  String get notifStatusDelayedTitle => 'Напоминания могут прийти с опозданием';
+
+  @override
+  String get notifStatusDelayedBody =>
+      'Они всё равно придут, но Android может задержать их на несколько минут ради экономии заряда.';
+
+  @override
+  String get notifPermRowTitle => 'Отправлять уведомления';
+
+  @override
+  String get notifPermRowBody => 'Без этого напоминание вообще не появится.';
+
+  @override
+  String get notifExactRowTitle => 'Точное время';
+
+  @override
+  String get notifExactRowBody =>
+      'Позволяет напоминанию сработать ровно в выбранную минуту, а не тогда, когда до него дойдёт очередь у Android.';
+
+  @override
+  String get notifRowAllowed => 'Разрешено';
+
+  @override
+  String get notifRowNotAllowed => 'Не разрешено';
+
+  @override
+  String get notifActionTurnOn => 'Включить';
+
+  @override
+  String get notifActionOpen => 'Открыть настройки';
+
+  @override
+  String get notifRemindersHint =>
+      'Время напоминаний настраивается через колокольчик на главном экране.';
 
   @override
   String get settingsInfo => 'Информация';
@@ -854,6 +916,32 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quizFinish => 'Завершить';
+
+  @override
+  String get quizFunFactLabel => 'А вы знали?';
+
+  @override
+  String quizReviewTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count к повторению',
+      many: '$count к повторению',
+      few: '$count к повторению',
+      one: '1 к повторению',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizReviewSubtitle =>
+      'Без спешки, просто взгляд на то, что не получилось.';
+
+  @override
+  String get quizReviewYourAnswer => 'Ваш ответ';
+
+  @override
+  String get quizReviewCorrectAnswer => 'Правильный ответ';
 
   @override
   String get checkpointAppBarTitle => 'Этап';
@@ -1299,26 +1387,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get noteEditorTitleHint => 'Заголовок';
 
   @override
+  String get noteEditorLinkedChapter => 'Связанная глава';
+
+  @override
   String get noteEditorBodyHint =>
       'Запиши свои мысли, размышления, заметки для исследования...';
-
-  @override
-  String get noteEditorMarkdownHelpTitle => 'Поддерживается Markdown';
-
-  @override
-  String get noteEditorTipBold => '● Жирный: **твой_текст**';
-
-  @override
-  String get noteEditorTipItalic => '● Курсив: *твой_текст*';
-
-  @override
-  String get noteEditorTipStrikethrough => '● Зачёркнутый: ~~твой_текст~~';
-
-  @override
-  String get noteEditorTipHeading => '● Заголовок: # Твой заголовок';
-
-  @override
-  String get noteEditorTipList => '● Список: - пункт';
 
   @override
   String get notesLibraryDeleteDialogTitle => 'Удалить?';
@@ -1372,6 +1445,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notesLibraryExportAllTooltip => 'Экспортировать мои заметки';
+
+  @override
+  String get settingsExportNotesDesc =>
+      'Сохраните все заметки в ZIP-файл, чтобы хранить или поделиться';
 
   @override
   String get notesLibraryDeleteTooltip => 'Удалить';

@@ -286,7 +286,8 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Quem é Eliú, que toma a palavra depois dos três amigos?',
       options: <String>[
-        'Um jovem que se considera portador de sabedoria',
+        'Um homem mais novo, que esperara por respeito antes de '
+            'falar',
         'Um anjo enviado por Deus',
         'Um quarto amigo, mais velho',
         'O filho de Jó',
@@ -907,7 +908,7 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
         'Um julgamento real',
       ],
       correctIndex: 0,
-      explanation: 'O livro celebra o amor conjugal sincero (Cântico 1).',
+      explanation: 'O livro celebra o amor fiel e exclusivo (Cântico 1).',
     ),
     QuizQuestion(
       text: 'O que a sulamita faz em seu sonho no capítulo 3?',
@@ -925,7 +926,7 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Como a sulamita expressa seu apego exclusivo?',
       options: <String>[
-        '"Eu sou do meu amado, e o meu amado é meu"',
+        '"O meu amado é meu, e eu sou dele"',
         '"Prefiro a riqueza ao amor"',
         '"O amor não tem importância para mim"',
         '"Ficarei sozinha para sempre"',
@@ -1126,7 +1127,7 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'O que Isaías 26 promete a quem apoia seu espírito em Deus?',
       options: <String>[
-        'Uma paz perfeita',
+        'Uma paz contínua',
         'Uma riqueza imediata',
         'Um exército invencível',
         'Uma longevidade garantida',
@@ -1164,7 +1165,7 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'No que o deserto se transformará segundo a promessa de Isaías 35?',
       options: <String>[
-        'Ele florescerá como uma rosa',
+        'Ele florescerá como o açafrão',
         'Ele continuará estéril para sempre',
         'Ele se tornará um mar',
         'Ele será abandonado definitivamente',
@@ -1287,7 +1288,7 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Que declaração de Isaías 61 Jesus leu na sinagoga de Nazaré?',
       options: <String>[
-        '"O espírito do Soberano Senhor está sobre mim"',
+        '"O espírito do Soberano Senhor Jeová está sobre mim"',
         '"Eu virei julgar o mundo inteiro"',
         '"O templo será destruído"',
         '"Ninguém será salvo"',
@@ -1374,15 +1375,16 @@ authoredQuizzesPtC3 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['cinto', 'linho', 'rio'],
     ),
     QuizQuestion(
-      text: 'O que Jeremias 17 revela sobre o coração humano?',
+      text: 'O que Jeremias reconhece no capítulo 10 sobre a conduta humana?',
       options: <String>[
-        'Ele é mais enganoso do que qualquer outra coisa',
+        'O homem que anda não pode dirigir os seus próprios passos',
         'Ele é naturalmente bom',
         'Ele nunca muda',
         'Ele não tem importância para Deus',
       ],
       correctIndex: 0,
-      explanation: 'Uma avaliação franca da natureza humana (Jeremias 17:9).',
+      explanation:
+          '«Não pertence ao homem que anda dirigir os seus passos» (Jeremias 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

@@ -9,6 +9,7 @@ Future<void> _pump(
   WidgetTester tester,
   List<QuizQuestion> questions, {
   required Future<void> Function(int score, int total) onCompleted,
+  String? funFact,
 }) async {
   await tester.pumpWidget(
     MaterialApp(
@@ -17,6 +18,7 @@ Future<void> _pump(
       home: QuizScreen(
         title: 'Test quiz',
         questions: questions,
+        funFact: funFact,
         onCompleted: onCompleted,
       ),
     ),
@@ -256,5 +258,61 @@ void main() {
 
     expect(score, 2);
     expect(total, 2);
+  });
+
+  testWidgets('the round-up reviews a missed question, not a correct one', (
+    WidgetTester tester,
+  ) async {
+    await _pump(
+      tester,
+      <QuizQuestion>[
+        const QuizQuestion(
+          text: 'Who killed Abel?',
+          options: <String>['Cain', 'Seth'],
+          correctIndex: 0,
+          explanation: 'Cain, out of jealousy.',
+        ),
+      ],
+      funFact: 'Genesis means origin.',
+      onCompleted: (int s, int t) async {},
+    );
+
+    await tester.tap(find.text('Seth'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('See score'));
+    await tester.pumpAndSettle();
+
+    // The question comes back with both what was picked and what was right,
+    // so the reader doesn't have to remember which was which.
+    expect(find.text('Who killed Abel?'), findsOneWidget);
+    expect(find.text('You answered'), findsOneWidget);
+    expect(find.text('Seth'), findsOneWidget);
+    expect(find.text('The answer was'), findsOneWidget);
+    expect(find.text('Cain'), findsOneWidget);
+    expect(find.text('Did you know?'), findsOneWidget);
+    expect(find.text('Genesis means origin.'), findsOneWidget);
+  });
+
+  testWidgets('a perfect run shows no review section at all', (
+    WidgetTester tester,
+  ) async {
+    await _pump(tester, <QuizQuestion>[
+      const QuizQuestion(
+        text: 'Who killed Abel?',
+        options: <String>['Cain', 'Seth'],
+        correctIndex: 0,
+        explanation: 'Cain, out of jealousy.',
+      ),
+    ], onCompleted: (int s, int t) async {});
+
+    await tester.tap(find.text('Cain'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('See score'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('You answered'), findsNothing);
+    expect(find.text('The answer was'), findsNothing);
+    // No fun fact was passed, so that card stays out too.
+    expect(find.text('Did you know?'), findsNothing);
   });
 }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../app_constants.dart';
+import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/markdown_editing_controller.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/picker_field.dart';
 import '../widgets/responsive_body.dart';
 
 /// Note editor. With [noteId] it edits an existing note; without it,
@@ -38,12 +40,37 @@ class _NotesScreenState extends State<NotesScreen> {
   bool _isSaving = false;
   String? _titleError;
 
+  /// Which chapter this note hangs off. Starts at whatever the caller passed
+  /// (the reader's current chapter for a new note, the note's own reference
+  /// when editing) and can be re-pointed from the app bar chip.
+  late String _book = widget.book;
+  late int _chapter = widget.chapter;
+
   bool get _isNew => widget.noteId == null;
 
   @override
   void initState() {
     super.initState();
     _loadNote();
+  }
+
+  Future<void> _pickChapter() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (BuildContext sheetContext) => _ChapterLinkSheet(
+        book: kBibleBooks.firstWhere(
+          (BibleBook b) => b.id == _book,
+          orElse: () => kBibleBooks.first,
+        ),
+        chapter: _chapter,
+        onChanged: (String book, int chapter) => setState(() {
+          _book = book;
+          _chapter = chapter;
+        }),
+      ),
+    );
   }
 
   @override
@@ -69,6 +96,10 @@ class _NotesScreenState extends State<NotesScreen> {
       setState(() {
         _titleController.text = note?.title ?? '';
         _contentController.text = note?.content ?? '';
+        if (note != null) {
+          _book = note.book;
+          _chapter = note.chapter;
+        }
         _isLoading = false;
       });
     } catch (error) {
@@ -111,8 +142,8 @@ class _NotesScreenState extends State<NotesScreen> {
       if (noteId == null) {
         await widget.dbService.createNote(
           title: title,
-          book: widget.book,
-          chapter: widget.chapter,
+          book: _book,
+          chapter: _chapter,
           content: content,
         );
       } else {
@@ -120,6 +151,8 @@ class _NotesScreenState extends State<NotesScreen> {
           id: noteId,
           title: title,
           content: content,
+          book: _book,
+          chapter: _chapter,
         );
       }
       if (!mounted) {
@@ -160,6 +193,12 @@ class _NotesScreenState extends State<NotesScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        // Flat bar: no Material 'scrolled under' tint or shadow when
+        // content passes beneath it.
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: theme.scaffoldBackgroundColor,
         leading: const CircularBackButton(),
         title: Text(
           _isNew
@@ -170,14 +209,27 @@ class _NotesScreenState extends State<NotesScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: Center(
-              child: Chip(
+              // Tappable: re-points the note at another chapter. The chevron
+              // is what tells the reader it opens rather than just labels.
+              child: ActionChip(
+                onPressed: _pickChapter,
+                tooltip: AppLocalizations.of(context)!.noteEditorLinkedChapter,
                 avatar: Icon(
                   Icons.auto_stories_outlined,
                   size: 20,
                   color: colorScheme.onSecondaryContainer,
                 ),
-                label: Text(
-                  displayReference(context, widget.book, widget.chapter),
+                label: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(displayReference(context, _book, _chapter)),
+                    const SizedBox(width: 2),
+                    Icon(
+                      Icons.expand_more,
+                      size: 18,
+                      color: colorScheme.onSecondaryContainer,
+                    ),
+                  ],
                 ),
                 labelStyle: theme.textTheme.titleSmall?.copyWith(
                   color: colorScheme.onSecondaryContainer,
@@ -195,84 +247,139 @@ class _NotesScreenState extends State<NotesScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _isSaving ? null : _save,
-        icon: _isSaving
-            ? SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  color: colorScheme.onPrimaryContainer,
-                ),
-              )
-            : const Icon(Icons.check),
-        label: Text(AppLocalizations.of(context)!.noteEditorSaveButton),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        backgroundColor: colorScheme.primaryContainer,
-        foregroundColor: colorScheme.onPrimaryContainer,
-        elevation: 0,
-      ),
       body: ResponsiveBody(
         child: Column(
           children: <Widget>[
+            // The title is a text zone too, so it gets the same filled card
+            // as the body rather than a bare line above a divider.
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-              child: TextField(
-                controller: _titleController,
-                textCapitalization: TextCapitalization.sentences,
-                onChanged: (_) {
-                  if (_titleError != null) {
-                    setState(() => _titleError = null);
-                  }
-                },
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
+              child: Card.filled(
+                margin: EdgeInsets.zero,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(28)),
                 ),
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.noteEditorTitleHint,
-                  hintStyle: theme.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                  child: TextField(
+                    controller: _titleController,
+                    textCapitalization: TextCapitalization.sentences,
+                    onChanged: (_) {
+                      if (_titleError != null) {
+                        setState(() => _titleError = null);
+                      }
+                    },
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: AppLocalizations.of(
+                        context,
+                      )!.noteEditorTitleHint,
+                      hintStyle: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      errorText: _titleError,
+                    ),
                   ),
-                  border: InputBorder.none,
-                  errorText: _titleError,
                 ),
               ),
             ),
-            Divider(
-              height: 1,
-              indent: 20,
-              endIndent: 20,
-              color: colorScheme.outlineVariant,
-            ),
+            // Sits outside the scroll view below, so the gap between title
+            // and body stays put instead of scrolling away and letting the
+            // two cards touch.
+            const SizedBox(height: 12),
+            // The writing area starts a few lines tall and grows with the
+            // text rather than filling the screen from the outset, so a
+            // one-line note doesn't open onto a wall of empty box. Once it
+            // reaches the available height the scrolling happens *inside*
+            // the card, so its rounded corners stay visible instead of
+            // sliding out under the app bar.
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
-                child: TextField(
-                  controller: _contentController,
-                  expands: true,
-                  maxLines: null,
-                  minLines: null,
-                  textCapitalization: TextCapitalization.sentences,
-                  textAlignVertical: TextAlignVertical.top,
-                  inputFormatters: <TextInputFormatter>[
-                    MarkdownListContinuationFormatter(),
-                  ],
-                  style: theme.textTheme.bodyLarge,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.noteEditorBodyHint,
-                    hintStyle: theme.textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant.withValues(
-                        alpha: 0.5,
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Card.filled(
+                    margin: EdgeInsets.zero,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(28)),
+                    ),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: TextField(
+                        controller: _contentController,
+                        minLines: 6,
+                        maxLines: null,
+                        textCapitalization: TextCapitalization.sentences,
+                        textAlignVertical: TextAlignVertical.top,
+                        inputFormatters: <TextInputFormatter>[
+                          MarkdownListContinuationFormatter(),
+                        ],
+                        style: theme.textTheme.bodyLarge,
+                        decoration: InputDecoration(
+                          hintText: AppLocalizations.of(
+                            context,
+                          )!.noteEditorBodyHint,
+                          hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant.withValues(
+                              alpha: 0.5,
+                            ),
+                          ),
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                        ),
                       ),
                     ),
-                    border: InputBorder.none,
                   ),
                 ),
               ),
             ),
-            const _MarkdownHelpBanner(),
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 56,
+                      child: FilledButton.icon(
+                        onPressed: _isSaving ? null : _save,
+                        icon: _isSaving
+                            ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: colorScheme.onPrimaryContainer,
+                                ),
+                              )
+                            : const Icon(Icons.check),
+                        label: Text(
+                          AppLocalizations.of(context)!.noteEditorSaveButton,
+                        ),
+                        style: FilledButton.styleFrom(
+                          backgroundColor: colorScheme.primaryContainer,
+                          foregroundColor: colorScheme.onPrimaryContainer,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -280,92 +387,96 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 }
 
-/// Collapsed-by-default Markdown syntax helper.
-class _MarkdownHelpBanner extends StatelessWidget {
-  const _MarkdownHelpBanner();
+/// Book + chapter pickers for re-pointing a note, using the same
+/// [PickerField] pair the reading-start onboarding asks its question with.
+class _ChapterLinkSheet extends StatefulWidget {
+  const _ChapterLinkSheet({
+    required this.book,
+    required this.chapter,
+    required this.onChanged,
+  });
+
+  final BibleBook book;
+  final int chapter;
+  final void Function(String book, int chapter) onChanged;
+
+  @override
+  State<_ChapterLinkSheet> createState() => _ChapterLinkSheetState();
+}
+
+class _ChapterLinkSheetState extends State<_ChapterLinkSheet> {
+  late BibleBook _book = widget.book;
+  late int _chapter = widget.chapter.clamp(1, widget.book.chapters);
+
+  void _setBook(BibleBook book) {
+    setState(() {
+      _book = book;
+      // Chapter counts vary wildly (Psalms 150, Obadiah 1), so a chapter
+      // that was valid for the old book may not exist in the new one.
+      _chapter = _chapter.clamp(1, book.chapters);
+    });
+    widget.onChanged(_book.id, _chapter);
+  }
+
+  void _setChapter(int chapter) {
+    setState(() => _chapter = chapter);
+    widget.onChanged(_book.id, _chapter);
+  }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
-    final TextStyle? tipStyle = theme.textTheme.bodySmall;
 
     return SafeArea(
-      top: false,
       child: Padding(
-        // The right inset keeps the banner (and its expand arrow) clear of
-        // the floating "Enregistrer" button.
-        padding: const EdgeInsets.fromLTRB(12, 0, 176, 8),
-        child: Card.filled(
-          margin: EdgeInsets.zero,
-          color: colorScheme.surfaceContainerHigh,
-          shape: RoundedRectangleBorder(
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            side: BorderSide(color: colorScheme.outlineVariant),
-          ),
-          child: Theme(
-            data: theme.copyWith(
-              dividerColor: Colors.transparent,
-              // No ink flash when tapping the banner: the expand/collapse
-              // motion is feedback enough.
-              splashFactory: NoSplash.splashFactory,
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              hoverColor: Colors.transparent,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              AppLocalizations.of(context)!.noteEditorLinkedChapter,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
-            child: ExpansionTile(
-              tilePadding: const EdgeInsets.symmetric(horizontal: 12),
-              childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              collapsedShape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              leading: Icon(
-                Icons.tips_and_updates_outlined,
-                color: colorScheme.primary,
-              ),
-              title: Text(
-                AppLocalizations.of(context)!.noteEditorMarkdownHelpTitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelLarge,
-              ),
+            const SizedBox(height: 16),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        AppLocalizations.of(context)!.noteEditorTipBold,
-                        style: tipStyle,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.noteEditorTipItalic,
-                        style: tipStyle,
-                      ),
-                      Text(
-                        AppLocalizations.of(
-                          context,
-                        )!.noteEditorTipStrikethrough,
-                        style: tipStyle,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.noteEditorTipHeading,
-                        style: tipStyle,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.noteEditorTipList,
-                        style: tipStyle,
-                      ),
+                Expanded(
+                  flex: 3,
+                  child: PickerField<String>(
+                    currentLabel: localizedBookName(context, _book),
+                    selectedValue: _book.id,
+                    entries: <PickerEntry<String>>[
+                      for (final BibleBook b in kBibleBooks)
+                        PickerEntry<String>(
+                          value: b.id,
+                          label: localizedBookName(context, b),
+                        ),
                     ],
+                    onChanged: (String id) => _setBook(
+                      kBibleBooks.firstWhere((BibleBook b) => b.id == id),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 2,
+                  child: PickerField<int>(
+                    currentLabel: '$_chapter',
+                    selectedValue: _chapter,
+                    entries: <PickerEntry<int>>[
+                      for (int c = 1; c <= _book.chapters; c++)
+                        PickerEntry<int>(value: c, label: '$c'),
+                    ],
+                    onChanged: _setChapter,
                   ),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

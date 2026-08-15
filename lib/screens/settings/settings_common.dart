@@ -22,7 +22,7 @@ const RoundedRectangleBorder kSettingsChipShape = RoundedRectangleBorder(
 );
 
 /// The scaffold every settings page shares: back button, title, the same
-/// width cap and padding. Written once so five sibling pages can't drift
+/// width cap and padding. Written once so the sibling pages can't drift
 /// apart in spacing or in how the back gesture looks.
 class SettingsPage extends StatelessWidget {
   const SettingsPage({required this.title, required this.children, super.key});

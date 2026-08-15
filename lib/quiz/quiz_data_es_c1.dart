@@ -4,7 +4,9 @@ const Map<String, List<QuizQuestion>>
 authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
-      text: '¿En cuántos días de creación describe la Biblia la obra de Dios?',
+      text:
+          '¿Cuántos días de creación describe Génesis antes de que Dios '
+          'descanse?',
       options: <String>[
         'Seis días',
         'Siete días',
@@ -113,7 +115,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
           '(Éxodo 2).',
     ),
     QuizQuestion(
-      text: '¿Cómo se apareció Dios a Moisés en el monte Horeb?',
+      text: '¿Cómo se apareció Jehová a Moisés en el monte Horeb?',
       options: <String>[
         'Una zarza en llamas que no se consumía',
         'Una columna de nube',
@@ -176,7 +178,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Jetró'],
     ),
     QuizQuestion(
-      text: '¿Dónde dio Dios los Diez Mandamientos?',
+      text: '¿Dónde dio Jehová los Diez Mandamientos?',
       options: <String>[
         'En el monte Sinaí',
         'En el monte Nebo',
@@ -341,7 +343,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          '¿Qué afección cutánea examinan en detalle los sacerdotes en '
+          '¿Qué enfermedad debían examinar en detalle los sacerdotes en '
           'estos capítulos?',
       options: <String>[
         'La lepra',
@@ -374,9 +376,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
           'al año (Levítico 16).',
     ),
     QuizQuestion(
-      text:
-          '¿Qué mandamiento bien conocido aparece en el «código de '
-          'santidad» de Levítico 19?',
+      text: '¿Qué mandamiento bien conocido se encuentra en Levítico 19?',
       options: <String>[
         'Ama a tu prójimo como a ti mismo',
         'No robes ganado',
@@ -510,7 +510,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          '¿Qué les sucedió a Miriam y Aarón después de criticar a '
+          '¿Qué sucedió después de que Miriam y Aarón criticaran a '
           'Moisés?',
       options: <String>[
         'Miriam quedó cubierta de lepra',
@@ -589,7 +589,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿A quién designó Moisés como su sucesor?',
+      text: '¿A quién designó Jehová como sucesor de Moisés?',
       options: <String>['A Josué', 'A Caleb', 'A Eleazar', 'A Finés'],
       correctIndex: 0,
       explanation:
@@ -605,7 +605,7 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: '¿Qué tribus pidieron establecerse al este del Jordán?',
+      text: '¿Qué tribus se establecieron al este del Jordán?',
       options: <String>[
         'Rubén, Gad y la media tribu de Manasés',
         'Judá y Benjamín',
@@ -682,7 +682,8 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Qué debía recordarle a Israel el maná del desierto?',
       options: <String>[
-        'Que el hombre no vive solo de pan, sino de la palabra de Dios',
+        'Que el hombre no vive solo de pan, sino de toda expresión '
+            'de la boca de Jehová',
         'Que Dios siempre castiga',
         'Que el desierto está maldito',
         'Que la comida no tiene importancia',
@@ -734,11 +735,9 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
       explanation: 'El año de remisión borra las deudas (Deuteronomio 15).',
     ),
     QuizQuestion(
-      text:
-          '¿Qué futuro profeta, semejante a Moisés, se anuncia en '
-          'Deuteronomio 18?',
+      text: '¿Qué anuncia Deuteronomio 18 sobre un futuro profeta?',
       options: <String>[
-        'Un profeta que Dios levantaría',
+        'Que Jehová levantaría a uno semejante a Moisés',
         'Un rey extranjero',
         'Un ángel',
         'Un juez único',
@@ -983,7 +982,9 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
       explanation: 'Este ciclo estructura todo el libro (Jueces 2).',
     ),
     QuizQuestion(
-      text: '¿Quién venció a Sísara con la ayuda de Débora?',
+      text:
+          '¿Quién dirigió el ejército de Israel contra Sísara, con la '
+          'ayuda de Débora?',
       options: <String>['Barac', 'Aod', 'Otoniel', 'Gedeón'],
       correctIndex: 0,
       explanation: 'Débora y Barac llevan a Israel a la victoria (Jueces 4).',
@@ -1005,9 +1006,10 @@ authoredQuizzesEsC1 = <String, List<QuizQuestion>>{
   ],
   'Judges#1': <QuizQuestion>[
     QuizQuestion(
-      text: '¿Qué sucedió después de que Abimélec se proclamara rey?',
+      text: '¿Cómo terminó el reinado de Abimélec?',
       options: <String>[
-        'Masacró a sus hermanos y luego él mismo pereció',
+        'Pereció, golpeado por una piedra de molino lanzada por una '
+            'mujer',
         'Reinó en paz mucho tiempo',
         'Fue expulsado sin violencia',
         'Fundó una dinastía duradera',
@@ -1193,11 +1195,11 @@ extraQuizzesEsC1 = <String, List<QuizQuestion>>{
   'Genesis#0': <QuizQuestion>[
     QuizQuestion(
       text:
-          '¿Qué árbol, en medio del jardín de Edén, estaba prohibido '
-          'para Adán y Eva?',
+          '¿Qué árbol del jardín de Edén estaba prohibido para Adán '
+          'y Eva?',
       options: <String>[
         'El árbol del conocimiento de lo bueno y lo malo',
-        'Solo el árbol de la vida',
+        'El árbol de la vida',
         'Una higuera',
         'Un olivo',
       ],
@@ -1224,8 +1226,8 @@ extraQuizzesEsC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          '¿Quién bendijo a Abrán, siendo rey de Salem y sacerdote '
-          'del Dios Altísimo?',
+          '¿Quién, rey de Salem y sacerdote del Dios Altísimo, '
+          'bendijo a Abrán?',
       options: <String>['Melquisedec', 'Lot', 'El faraón', 'Isaac'],
       correctIndex: 0,
       explanation:
@@ -1370,7 +1372,7 @@ extraQuizzesEsC1 = <String, List<QuizQuestion>>{
           '¿Qué interpretó José para el faraón, anunciando siete años '
           'de hambre?',
       options: <String>[
-        'Sus sueños',
+        'Los sueños del faraón',
         'Un libro antiguo',
         'Las estrellas',
         'Un oráculo',
@@ -1378,7 +1380,7 @@ extraQuizzesEsC1 = <String, List<QuizQuestion>>{
       correctIndex: 0,
       explanation: 'José interpreta los sueños del faraón (Génesis 41).',
       type: QuizAnswerType.freeText,
-      acceptedAnswers: <String>['sueños', 'los sueños'],
+      acceptedAnswers: <String>['sueños', 'los sueños', 'sus sueños'],
     ),
   ],
   'Genesis#6': <QuizQuestion>[
@@ -1434,11 +1436,11 @@ extraQuizzesEsC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          '¿Con qué nombre se identificó Dios ante Moisés en la '
+          '¿Con qué nombre se identificó Jehová ante Moisés en la '
           'zarza ardiente?',
       options: <String>[
         '«Seré lo que seré»',
-        '«El Todopoderoso, únicamente»',
+        '«El Dios sin nombre»',
         '«El Dios oculto»',
         '«El rey de reyes»',
       ],

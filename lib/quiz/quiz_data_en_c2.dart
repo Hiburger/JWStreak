@@ -47,12 +47,12 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
       type: QuizAnswerType.freeText,
     ),
     QuizQuestion(
-      text: "Why did Samuel announce Saul's rejection as king?",
+      text: 'What did Saul do at Gilgal without waiting for Samuel?',
       options: <String>[
-        'Saul offered a sacrifice without waiting for Samuel',
-        'Saul lost a battle',
-        'Saul refused to reign',
-        'Saul fled from the enemy',
+        'He offered up the sacrifice himself',
+        'He lost a battle',
+        'He refused to reign',
+        'He fled from the enemy',
       ],
       correctIndex: 0,
       explanation:
@@ -217,7 +217,9 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
           '(2 Samuel 12).',
     ),
     QuizQuestion(
-      text: 'Who rebelled against his father David to seize the throne?',
+      text:
+          'Which son of David had himself proclaimed king at Hebron, '
+          'rebelling against him?',
       options: <String>['Absalom', 'Amnon', 'Solomon', 'Adonijah'],
       correctIndex: 0,
       explanation: "Absalom's rebellion begins (2 Samuel 15).",
@@ -239,7 +241,7 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'How did Absalom die?',
       options: <String>[
-        'Caught by his hair in a tree, killed by Joab',
+        'His head caught fast in a tree, killed by Joab',
         'In single combat against David',
         'By poisoning',
         'In exile, of old age',
@@ -269,7 +271,9 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
   ],
   '1 Kings#0': <QuizQuestion>[
     QuizQuestion(
-      text: "Who tried to seize the throne before David's death?",
+      text:
+          'Which son of David declared himself king when David had grown '
+          'old?',
       options: <String>['Adonijah', 'Absalom', 'Joab alone', 'Nathan'],
       correctIndex: 0,
       explanation:
@@ -530,7 +534,7 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
       acceptedAnswers: <String>['Passover'],
     ),
     QuizQuestion(
-      text: 'How does the book of Kings end?',
+      text: 'How does the history of Judah end in the book of Kings?',
       options: <String>[
         'With the fall of Jerusalem and the destruction of the temple',
         'With the crowning of a just, lasting king',
@@ -622,7 +626,9 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
   ],
   '1 Chronicles#2': <QuizQuestion>[
     QuizQuestion(
-      text: 'What song did Asaph compose when the Ark was installed?',
+      text:
+          'What song did David entrust to Asaph when the Ark was '
+          'installed?',
       options: <String>[
         'A song of praise and thanksgiving',
         'A song of mourning',
@@ -943,8 +949,8 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
           "What mixed reaction followed the laying of the new temple's "
           'foundation?',
       options: <String>[
-        'Joy from the young, weeping from the elders who remembered '
-            'the first one',
+        'Joy from many, weeping from the old men who had seen the '
+            'first temple',
         'General indifference',
         'Unanimous anger',
         'The people fled',
@@ -968,9 +974,7 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
       explanation: 'Political opposition halts the project (Ezra 4).',
     ),
     QuizQuestion(
-      text:
-          'Who encouraged the resumption of the temple work through '
-          'their prophecies?',
+      text: 'Which prophets encouraged the resumption of the temple work?',
       options: <String>[
         'Haggai and Zechariah',
         'Ezekiel and Daniel',
@@ -1140,8 +1144,8 @@ authoredQuizzesEnC2 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text:
-          'What reform did Nehemiah impose upon his return from a '
-          'second term?',
+          'What reform did Nehemiah impose during his second stay in '
+          'Jerusalem?',
       options: <String>[
         'Strict observance of the Sabbath and the expulsion of Tobiah',
         'Abolishing the temple',

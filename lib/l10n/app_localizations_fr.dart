@@ -653,16 +653,53 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsCatNotificationsDesc =>
-      'Autorisations nécessaires aux rappels';
+      'Si les rappels peuvent t\'atteindre';
 
   @override
   String get settingsCatPrivacyDesc => 'Verrouillage de l\'app';
+
+  @override
+  String get settingsCatDonations => 'Dons';
+
+  @override
+  String get settingsCatDonationsDesc => 'Soutenir JW Streak';
 
   @override
   String get settingsCatAbout => 'Aide et à propos';
 
   @override
   String get settingsCatAboutDesc => 'Visite guidée, version, code source';
+
+  @override
+  String get donationsHeadline => 'On n\'accepte pas encore de dons';
+
+  @override
+  String get donationsLead =>
+      'JW Streak est gratuite, et il n\'y a pour l\'instant aucun moyen de faire un don. C\'est voulu, on n\'a tout simplement rien mis en place. Ça viendra peut-être plus tard, et on préfère te le dire franchement plutôt que de te surprendre un jour.';
+
+  @override
+  String get donationsRow1Title => 'Ça a quand même un coût';
+
+  @override
+  String get donationsRow1Text =>
+      'Les comptes développeur, les appareils de test et quelques abonnements se paient, et l\'app se construit le soir et le week-end. Certains de ces soirs sont vraiment difficiles.';
+
+  @override
+  String get donationsRow2Title => 'Ce qui ne changera pas';
+
+  @override
+  String get donationsRow2Text =>
+      'JW Streak restera gratuite, libre et 100 % hors ligne. Pas de pubs, pas de pistage, aucun chapitre verrouillé ni fonction payante. Si les dons ouvrent un jour, donner restera totalement facultatif.';
+
+  @override
+  String get donationsRow3Title => 'Aider sans rien dépenser';
+
+  @override
+  String get donationsRow3Text =>
+      'Parles-en à quelqu\'un que ça pourrait intéresser, signale une erreur de quiz ou un bug, ou continue simplement ta lecture. Franchement, ça compte déjà beaucoup.';
+
+  @override
+  String get donationsThanks => 'Merci d\'être là 💛';
 
   @override
   String get settingsAppearance => 'Apparence';
@@ -678,7 +715,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsDynamicColorOff => 'Utilise la couleur de marque de l’app';
 
   @override
-  String get settingsBibleTargetTitle => 'Ouvrir la Bible avec';
+  String get settingsBibleTargetTitle =>
+      'Ouvrir la Bible et l\'écriture du jour avec';
 
   @override
   String get settingsBibleTargetJwLibrary => 'Application JW Library';
@@ -688,7 +726,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsBibleTargetJwLibraryMissing =>
-      'L\'application JW Library est nécessaire pour ouvrir la Bible de cette manière. Voulez-vous l\'installer ?';
+      'L\'application JW Library est nécessaire pour ouvrir la Bible ou l\'écriture du jour de cette manière. Voulez-vous l\'installer ?';
 
   @override
   String get settingsBibleTargetInstall => 'Installer';
@@ -700,34 +738,63 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLanguageSystem => 'Système';
 
   @override
-  String get settingsNotifPermTitle => 'Permissions de Notification';
-
-  @override
   String get settingsChecking => 'Vérification en cours...';
-
-  @override
-  String get settingsNotifActive => 'Permission active.';
-
-  @override
-  String get settingsNotifMissing =>
-      'Permission manquante. Activez-la pour recevoir les rappels.';
-
-  @override
-  String get settingsVerify => 'Vérifier';
-
-  @override
-  String get settingsExactAlarms => 'Alarmes exactes';
-
-  @override
-  String get settingsExactAlarmsOn =>
-      'Les rappels se déclenchent à l’heure exacte.';
 
   @override
   String get settingsExactAlarmsOff =>
       'Non autorisées. Les rappels peuvent être retardés.';
 
   @override
-  String get settingsAllow => 'Autoriser';
+  String get notifStatusReadyTitle => 'Les rappels sont prêts';
+
+  @override
+  String get notifStatusReadyBody =>
+      'Ils arriveront à l\'heure que tu as choisie.';
+
+  @override
+  String get notifStatusBlockedTitle =>
+      'Les rappels ne peuvent pas t\'atteindre';
+
+  @override
+  String get notifStatusBlockedBody =>
+      'JW Streak n\'a pas l\'autorisation d\'envoyer des notifications, donc aucun rappel ne s\'affichera.';
+
+  @override
+  String get notifStatusDelayedTitle => 'Les rappels peuvent arriver en retard';
+
+  @override
+  String get notifStatusDelayedBody =>
+      'Ils arriveront quand même, mais Android peut les retenir quelques minutes pour économiser la batterie.';
+
+  @override
+  String get notifPermRowTitle => 'Envoyer des notifications';
+
+  @override
+  String get notifPermRowBody =>
+      'Sans ça, un rappel ne peut pas s\'afficher du tout.';
+
+  @override
+  String get notifExactRowTitle => 'Heure précise';
+
+  @override
+  String get notifExactRowBody =>
+      'Permet à un rappel de se déclencher à la minute exacte que tu as choisie, plutôt que quand Android s\'en occupe.';
+
+  @override
+  String get notifRowAllowed => 'Autorisé';
+
+  @override
+  String get notifRowNotAllowed => 'Non autorisé';
+
+  @override
+  String get notifActionTurnOn => 'Activer';
+
+  @override
+  String get notifActionOpen => 'Ouvrir les réglages';
+
+  @override
+  String get notifRemindersHint =>
+      'Les horaires des rappels se règlent depuis la cloche sur l\'écran d\'accueil.';
 
   @override
   String get settingsInfo => 'Informations';
@@ -857,6 +924,30 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get quizFinish => 'Terminer';
+
+  @override
+  String get quizFunFactLabel => 'Le savais-tu ?';
+
+  @override
+  String quizReviewTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count à revoir',
+      one: '1 à revoir',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizReviewSubtitle =>
+      'Sans pression, juste un coup d\'œil sur ce qui n\'est pas passé.';
+
+  @override
+  String get quizReviewYourAnswer => 'Ta réponse';
+
+  @override
+  String get quizReviewCorrectAnswer => 'La bonne réponse';
 
   @override
   String get checkpointAppBarTitle => 'Étape';
@@ -1300,26 +1391,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noteEditorTitleHint => 'Titre';
 
   @override
+  String get noteEditorLinkedChapter => 'Chapitre associé';
+
+  @override
   String get noteEditorBodyHint =>
       'Écris tes pensées, réflexions, points de recherche...';
-
-  @override
-  String get noteEditorMarkdownHelpTitle => 'Markdown supporté';
-
-  @override
-  String get noteEditorTipBold => '● Gras : **ton_texte**';
-
-  @override
-  String get noteEditorTipItalic => '● Italique : *ton_texte*';
-
-  @override
-  String get noteEditorTipStrikethrough => '● Barré : ~~ton_texte~~';
-
-  @override
-  String get noteEditorTipHeading => '● Titre : # Ton titre';
-
-  @override
-  String get noteEditorTipList => '● Liste : - élément';
 
   @override
   String get notesLibraryDeleteDialogTitle => 'Supprimer ?';
@@ -1373,6 +1449,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get notesLibraryExportAllTooltip => 'Exporter mes notes';
+
+  @override
+  String get settingsExportNotesDesc =>
+      'Enregistrez toutes vos notes dans un fichier ZIP à garder ou à partager';
 
   @override
   String get notesLibraryDeleteTooltip => 'Effacer';

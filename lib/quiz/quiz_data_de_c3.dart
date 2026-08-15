@@ -291,7 +291,8 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Wer ist Elihu, der nach den drei Freunden spricht?',
       options: <String>[
-        'Ein junger Mann, der sich für weise hält',
+        'Ein jüngerer Mann, der aus Respekt gewartet hatte, bevor er '
+            'sprach',
         'Ein von Gott gesandter Engel',
         'Ein vierter, älterer Freund',
         'Hiobs Sohn',
@@ -922,7 +923,8 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
         'Ein königliches Urteil',
       ],
       correctIndex: 0,
-      explanation: 'Das Buch feiert aufrichtige eheliche Liebe (Hohes Lied 1).',
+      explanation:
+          'Das Buch feiert aufrichtige treue, ausschließliche Liebe (Hohes Lied 1).',
     ),
     QuizQuestion(
       text: 'Was tut die Sulamith in ihrem Traum in Kapitel 3?',
@@ -938,7 +940,7 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Wie drückt die Sulamith ihre ausschließliche Hingabe aus?',
       options: <String>[
-        '„Ich gehöre meinem Geliebten, und mein Geliebter gehört mir“',
+        '„Mein Geliebter gehört mir, und ich gehöre ihm“',
         '„Ich ziehe Reichtum der Liebe vor“',
         '„Liebe bedeutet mir nichts“',
         '„Ich werde für immer allein bleiben“',
@@ -1147,13 +1149,13 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Was verheißt Jesaja 26 demjenigen, dessen Sinn auf Gott vertraut?',
       options: <String>[
-        'Vollkommenen Frieden',
+        'Beständigen Frieden',
         'Sofortigen Reichtum',
         'Ein unbesiegbares Heer',
         'Garantiertes langes Leben',
       ],
       correctIndex: 0,
-      explanation: '„Du wirst in vollkommenem Frieden bewahren“ (Jesaja 26:3).',
+      explanation: '„Du wirst ihnen beständigen Frieden geben“ (Jesaja 26:3).',
       type: QuizAnswerType.freeText,
       acceptedAnswers: <String>['Frieden'],
     ),
@@ -1187,7 +1189,7 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Was wird laut der Verheißung von Jesaja 35 aus der Wüste?',
       options: <String>[
-        'Sie wird wie eine Rose blühen',
+        'Sie wird wie der Safran blühen',
         'Sie wird für immer karg bleiben',
         'Sie wird zu einem Meer werden',
         'Sie wird endgültig verlassen',
@@ -1313,7 +1315,7 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
       text:
           'Welche Aussage aus Jesaja 61 las Jesus in der Synagoge von Nazareth vor?',
       options: <String>[
-        '„Der Geist des Souveränen Herrn ist auf mir“',
+        '„Der Geist des Souveränen Herrn Jehova ist auf mir“',
         '„Ich komme, um die ganze Welt zu richten“',
         '„Der Tempel wird zerstört werden“',
         '„Niemand wird gerettet werden“',
@@ -1401,16 +1403,17 @@ authoredQuizzesDeC3 = <String, List<QuizQuestion>>{
       wordBankDistractors: <String>['Gürtel', 'Leinen', 'Fluss'],
     ),
     QuizQuestion(
-      text: 'Was enthüllt Jeremia 17 über das menschliche Herz?',
+      text:
+          'Was erkennt Jeremia in Kapitel 10 über das menschliche Verhalten an?',
       options: <String>[
-        'Es ist trügerischer als alles andere',
+        'Ein Mensch, der geht, kann seinen Schritt nicht selbst lenken',
         'Es ist von Natur aus gut',
         'Es ändert sich nie',
         'Es ist Gott unwichtig',
       ],
       correctIndex: 0,
       explanation:
-          'Eine offene Einschätzung der menschlichen Natur (Jeremia 17:9).',
+          '„Es steht dem Menschen, der geht, nicht zu, seinen Schritt zu lenken“ (Jeremia 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

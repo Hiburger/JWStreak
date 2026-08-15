@@ -297,7 +297,8 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Quién es Eliú, que toma la palabra después de los tres amigos?',
       options: <String>[
-        'Un joven que se considera portador de sabiduría',
+        'Un hombre más joven que había esperado por respeto antes de '
+            'hablar',
         'Un ángel enviado por Dios',
         'Un cuarto amigo de edad avanzada',
         'El hijo de Job',
@@ -639,7 +640,7 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Con qué llamado concluye el último salmo, el Salmo 150?',
       options: <String>[
-        'Que todo lo que respira alabe a Yah',
+        'Que todo lo que respira alabe a Jah',
         'Que todo guarde silencio para siempre',
         'Que solo los reyes alaben a Dios',
         'Que se prohíba la música',
@@ -926,7 +927,7 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
         'Un juicio real',
       ],
       correctIndex: 0,
-      explanation: 'El libro celebra el amor conyugal sincero (Cantar 1).',
+      explanation: 'El libro celebra el amor fiel y exclusivo (Cantar 1).',
     ),
     QuizQuestion(
       text: '¿Qué hace la sulamita en su sueño en el capítulo 3?',
@@ -942,7 +943,7 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Cómo expresa la sulamita su apego exclusivo?',
       options: <String>[
-        '«Yo soy de mi amado, y mi amado es mío»',
+        '«Mi amado es mío, y yo soy suya»',
         '«Prefiero la riqueza al amor»',
         '«El amor no tiene importancia para mí»',
         '«Permaneceré sola para siempre»',
@@ -1145,13 +1146,13 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿Qué promete Isaías 26 a quien apoya su mente en Dios?',
       options: <String>[
-        'Una paz perfecta',
+        'Una paz continua',
         'Una riqueza inmediata',
         'Un ejército invencible',
         'Una longevidad garantizada',
       ],
       correctIndex: 0,
-      explanation: '«Lo guardarás en paz perfecta» (Isaías 26:3).',
+      explanation: '«Les darás paz continua» (Isaías 26:3).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['gozo', 'justicia', 'refugio'],
     ),
@@ -1183,7 +1184,7 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: '¿En qué se convertirá el desierto según la promesa de Isaías 35?',
       options: <String>[
-        'Florecerá como una rosa',
+        'Florecerá como el azafrán',
         'Seguirá siendo estéril para siempre',
         'Se convertirá en un mar',
         'Será abandonado definitivamente',
@@ -1308,7 +1309,7 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
       text:
           '¿Qué declaración de Isaías 61 leyó Jesús en la sinagoga de Nazaret?',
       options: <String>[
-        '«El espíritu del Señor Soberano está sobre mí»',
+        '«El espíritu del Señor Soberano Jehová está sobre mí»',
         '«Vendré a juzgar al mundo entero»',
         '«El templo será destruido»',
         '«Nadie será salvado»',
@@ -1394,16 +1395,17 @@ authoredQuizzesEsC3 = <String, List<QuizQuestion>>{
       explanation: 'Una señal visual de decadencia moral (Jeremías 13).',
     ),
     QuizQuestion(
-      text: '¿Qué revela Jeremías 17 sobre el corazón humano?',
+      text:
+          '¿Qué reconoce Jeremías en el capítulo 10 sobre la conducta humana?',
       options: <String>[
-        'Es engañoso más que ninguna otra cosa',
+        'El hombre que anda no puede dirigir sus propios pasos',
         'Es naturalmente bueno',
         'Nunca cambia',
         'No tiene importancia para Dios',
       ],
       correctIndex: 0,
       explanation:
-          'Una evaluación franca de la naturaleza humana (Jeremías 17:9).',
+          '«No le corresponde al hombre que anda dirigir sus pasos» (Jeremías 10:23).',
     ),
   ],
   'Jeremiah#2': <QuizQuestion>[

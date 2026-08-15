@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/app_lock_service.dart';
+import '../../services/local_db_service.dart';
+import '../../services/note_export.dart';
 import 'settings_common.dart';
 
 /// The app lock. Its own page rather than a row buried among the reminder
@@ -16,6 +18,12 @@ class PrivacySettingsScreen extends StatefulWidget {
 
 class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
   final AppLockService _lockService = AppLockService();
+  final LocalDbService _dbService = LocalDbService();
+
+  /// Drives whether the export row is tappable: exporting nothing would
+  /// hand the user an empty archive.
+  int _noteCount = 0;
+  bool _isExporting = false;
 
   // null while we're still asking the platform whether the device can
   // authenticate at all. A device with no screen lock set up never gets the
@@ -36,9 +44,16 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
       if (!mounted) {
         return;
       }
+      // Counted with COUNT(*) rather than by loading every note body: this
+      // only decides whether the export row is tappable.
+      final int noteCount = await _dbService.getNotesCount();
+      if (!mounted) {
+        return;
+      }
       setState(() {
         _appLockAvailable = available;
         _appLockEnabled = enabled;
+        _noteCount = noteCount;
       });
     } catch (error) {
       if (mounted) {
@@ -72,6 +87,27 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     }
   }
 
+  /// Same logic the notes library used to run behind its own button: fetch
+  /// every note, unfiltered, and hand them to the shared ZIP exporter.
+  Future<void> _exportNotes() async {
+    setState(() => _isExporting = true);
+    try {
+      final List<NoteEntry> notes = await _dbService.getAllNotes();
+      if (!mounted || notes.isEmpty) {
+        return;
+      }
+      await exportAllNotesAsZip(context, notes);
+    } catch (error) {
+      if (mounted) {
+        showSettingsError(context, error);
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isExporting = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -97,6 +133,22 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
             // Disabled (null) both while we're still checking and on a
             // device with no screen lock configured.
             onChanged: _appLockAvailable == true ? _changeAppLock : null,
+          ),
+        ),
+        Card.filled(
+          shape: settingsSectionShape(context),
+          child: ListTile(
+            leading: const Icon(Icons.ios_share_rounded),
+            title: Text(l10n.notesLibraryExportAllTooltip),
+            subtitle: Text(l10n.settingsExportNotesDesc),
+            trailing: _isExporting
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  )
+                : const Icon(Icons.chevron_right_rounded),
+            onTap: _noteCount == 0 || _isExporting ? null : _exportNotes,
           ),
         ),
       ],

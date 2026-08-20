@@ -410,6 +410,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeFooter => '免费、自由、开源';
 
   @override
+  String get welcomeRestoreLink => '我已经有备份了';
+
+  @override
   String get onbContinue => '继续';
 
   @override
@@ -528,7 +531,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsReplayTourSubtitle => '再次查看主屏幕介绍';
 
   @override
-  String get settingsPrivacy => '隐私';
+  String get settingsPrivacy => '隐私与数据';
 
   @override
   String get settingsAppLockTitle => '锁定应用';
@@ -630,11 +633,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsCatAboutDesc => '导览、版本、源代码';
 
   @override
-  String get donationsHeadline => '我们暂时不接受捐款';
+  String get donationsHeadline => '如果你想帮忙';
 
   @override
   String get donationsLead =>
-      'JW Streak 是免费的，目前也没有任何捐款方式。这是有意为之，我们还没有设置。以后也许会开放，我们想坦白地先说清楚，而不是哪天突然让你意外。';
+      'JW Streak 是免费的，以后也一样。开发它要花一点钱和很多个晚上，所以如果它对你有帮助，你现在可以在 GitHub 上赞助这个项目。完全看你自己——不管赞不赞助，应用都完全一样。';
 
   @override
   String get donationsRow1Title => '不过确实有成本';
@@ -648,17 +651,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get donationsRow2Text =>
-      'JW Streak 会一直免费、开源、完全离线。没有广告，没有追踪，没有锁定的章节或付费功能。就算将来开放捐款，也完全是自愿的。';
+      'JW Streak 依然免费、开源，而且完全离线。没有广告，没有追踪，没有锁住的章节或付费功能。赞助不会解锁任何东西——赞助的人用的应用和大家完全一样。';
 
   @override
   String get donationsRow3Title => '不花钱也能帮忙';
 
   @override
   String get donationsRow3Text =>
-      '把它推荐给可能喜欢的人，报告测验中的错误或程序缺陷，或者只是继续你的阅读。说真的，这已经意义重大。';
+      '给项目在 GitHub 上点个星，把它推荐给可能喜欢的人，报告测验中的错误或程序缺陷，或者只是继续你的阅读。说真的，这已经意义重大。';
 
   @override
   String get donationsThanks => '谢谢你在这里 💛';
+
+  @override
+  String get donationsSponsorButton => '在 GitHub 上赞助';
+
+  @override
+  String get donationsStarButton => '在 GitHub 上点星';
+
+  @override
+  String get donationsSponsorDisclaimer =>
+      '会在浏览器中打开 GitHub。这是支持 JW Streak 的独立开发者，不是宗教捐款，与耶和华见证人、jw.org 或任何会众都没有关系。';
 
   @override
   String get settingsAppearance => '外观';
@@ -1386,6 +1399,44 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsExportNotesDesc => '把所有笔记保存成一个 ZIP 文件，方便保存或分享';
 
   @override
+  String get settingsBackupTitle => '备份我的数据';
+
+  @override
+  String get settingsBackupDesc => '把所有内容保存成一个文件，可以在其他设备上恢复';
+
+  @override
+  String get settingsBackupWarning => '文件没有加密，请妥善保管。';
+
+  @override
+  String get settingsRestoreTitle => '从备份恢复';
+
+  @override
+  String get settingsRestoreDesc => '用备份文件里的内容替换这台设备上的所有数据';
+
+  @override
+  String get restoreConfirmTitle => '替换全部数据？';
+
+  @override
+  String restoreConfirmBody(String date, int chapters, int notes) {
+    return '$date\n\n已读章数：$chapters\n笔记数：$notes\n\n这台设备上现有的数据都会被替换，而且无法撤销。';
+  }
+
+  @override
+  String get restoreConfirmAction => '替换';
+
+  @override
+  String get restoreDone => '你的数据已经恢复了。';
+
+  @override
+  String get restoreErrorNotABackup => '这个文件不是 JW Streak 的备份。';
+
+  @override
+  String get restoreErrorTooNew => '这个备份是用更新版本的 JW Streak 做的。请先更新应用，再试一次。';
+
+  @override
+  String get restoreErrorCorrupt => '这个备份文件已损坏，无法读取。这台设备上的数据没有任何改动。';
+
+  @override
   String get notesLibraryDeleteTooltip => '删除';
 
   @override
@@ -1595,6 +1646,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notifStreakRiskBody => '你今天还没有活动过。读一章或做一次测验来保持它。';
+
+  @override
+  String get notifStreakStartTitle => '今天还有时间 ✨';
+
+  @override
+  String get notifStreakStartBody => '在午夜前读一章或做一个测验，就能开始你的连续记录。';
 
   @override
   String get easterEggHeartBody => '我也爱你 :)';

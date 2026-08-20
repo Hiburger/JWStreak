@@ -9,6 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../app_constants.dart';
+
 typedef NotificationTapHandler = Future<void> Function(ReminderPayload payload);
 typedef NotificationErrorHandler =
     void Function(Object error, StackTrace stackTrace);
@@ -32,6 +34,58 @@ class ReminderPayload {
     }
     return ReminderPayload(book: book, chapter: chapter);
   }
+}
+
+/// When a daily reminder set for [time] should next fire, given [now].
+///
+/// [skipToday] pushes it past today's occurrence. That is what stops the app
+/// reminding someone to read at 20:00 when they already read at 08:00 — the
+/// daily repeat is left in place, only the first firing moves.
+///
+/// Tomorrow is built from the calendar (`day + 1`) rather than by adding 24
+/// hours: on the night a daylight-saving change lands, adding a fixed day
+/// would shift an 08:00 reminder to 07:00 or 09:00, and it would stay
+/// shifted, because each reschedule builds on the last.
+@visibleForTesting
+tz.TZDateTime nextReminderInstance({
+  required tz.TZDateTime now,
+  required TimeOfDay time,
+  bool skipToday = false,
+}) {
+  tz.TZDateTime schedule = tz.TZDateTime(
+    now.location,
+    now.year,
+    now.month,
+    now.day,
+    time.hour,
+    time.minute,
+  );
+  if (schedule.isBefore(now)) {
+    schedule = tz.TZDateTime(
+      now.location,
+      now.year,
+      now.month,
+      now.day + 1,
+      time.hour,
+      time.minute,
+    );
+  } else if (schedule.isAtSameMomentAs(now)) {
+    schedule = schedule.add(const Duration(minutes: 1));
+  }
+  if (skipToday &&
+      schedule.year == now.year &&
+      schedule.month == now.month &&
+      schedule.day == now.day) {
+    schedule = tz.TZDateTime(
+      now.location,
+      now.year,
+      now.month,
+      now.day + 1,
+      time.hour,
+      time.minute,
+    );
+  }
+  return schedule;
 }
 
 class NotificationService {
@@ -115,6 +169,44 @@ class NotificationService {
     ),
   );
 
+  /// The device time zone this service last scheduled against, so a change
+  /// can be noticed rather than assumed.
+  String? _timeZoneName;
+
+  /// Re-reads the device time zone and points the `timezone` package at it.
+  /// Returns true when it had actually changed.
+  ///
+  /// [initialize] runs once per process, so without this `tz.local` keeps
+  /// whatever zone the app started in. Reminders are scheduled as an absolute
+  /// instant derived from that zone, so for someone who flies a lot an 08:00
+  /// reminder set in Paris kept firing at 08:00 Paris time — the middle of
+  /// the afternoon in Tokyo — until the app happened to be restarted. The
+  /// caller reschedules when this returns true.
+  Future<bool> refreshTimeZone() async {
+    // Never throws: this runs on every resume, from a dashboard refresh that
+    // has no other reason to fail. A device that reports a zone the IANA
+    // database doesn't carry (getLocation throws for those) would otherwise
+    // take the whole home screen down with it, leaving the reader looking at
+    // stale data because the setState after this never ran. Keeping the last
+    // known zone is a far better failure than that.
+    try {
+      // `.identifier` is the IANA name ("Europe/Zurich") that tz.getLocation
+      // expects; the other field on TimezoneInfo is a display name, which
+      // wouldn't resolve.
+      final String name = (await FlutterTimezone.getLocalTimezone()).identifier;
+      if (name == _timeZoneName) {
+        return false;
+      }
+      final tz.Location location = tz.getLocation(name);
+      final bool isChange = _timeZoneName != null;
+      _timeZoneName = name;
+      tz.setLocalLocation(location);
+      return isChange;
+    } catch (_) {
+      return false;
+    }
+  }
+
   Future<void> initialize({
     required NotificationTapHandler onTap,
     required NotificationErrorHandler onError,
@@ -126,12 +218,7 @@ class NotificationService {
     }
 
     tz_data.initializeTimeZones();
-    // `.identifier` is the IANA name ("Europe/Zurich") that tz.getLocation
-    // expects; the other field on TimezoneInfo is a display name, which
-    // wouldn't resolve.
-    final String timezoneName =
-        (await FlutterTimezone.getLocalTimezone()).identifier;
-    tz.setLocalLocation(tz.getLocation(timezoneName));
+    await refreshTimeZone();
 
     // The status bar only renders this icon's alpha channel (a plain white
     // silhouette), never its color — @mipmap/ic_launcher is the full-color
@@ -218,13 +305,23 @@ class NotificationService {
 
   /// Schedules one daily reminder that repeats at [time]. Each reminder uses a
   /// stable notification id derived from its database id.
+  ///
+  /// [skipToday] moves the first firing to tomorrow, leaving the daily repeat
+  /// intact. Passed when the reader has already read or taken a quiz today:
+  /// being told to keep your streak alive hours after you kept it is the kind
+  /// of reminder people mute the app over. The repeat is deliberately left
+  /// alone so someone who never opens the app still gets reminded every day.
   Future<void> scheduleReminder({
     required int id,
     required TimeOfDay time,
     required String title,
     required String body,
+    bool skipToday = false,
   }) async {
-    final tz.TZDateTime firstTrigger = _nextInstanceFor(time);
+    final tz.TZDateTime firstTrigger = _nextInstanceFor(
+      time,
+      skipToday: skipToday,
+    );
     final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
 
     await _plugin.zonedSchedule(
@@ -410,18 +507,48 @@ class NotificationService {
       now.year,
       now.month,
       now.day,
-      20,
+      kStreakRiskHour,
     );
     if (!target.isAfter(now)) {
       return; // Too late today — the in-app banner already covers this.
     }
+    // Midnight is the actual deadline the streak is measured against. Built
+    // from the calendar (day + 1) rather than by adding 24 hours so it lands
+    // on the next local midnight even across a daylight-saving change.
+    final tz.TZDateTime deadline = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day + 1,
+    );
     final AndroidScheduleMode mode = await _resolveScheduleMode();
     await _plugin.zonedSchedule(
       id: _streakRiskNotificationId,
       title: title,
       body: body,
       scheduledDate: target,
-      notificationDetails: _reminderDetails,
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          _channelId,
+          'JW Streak Reminders',
+          channelDescription: 'Daily reminders for JW Streak reading flow.',
+          importance: Importance.high,
+          priority: Priority.high,
+          // Turns the timestamp into a live "3:59:12" ticking *down* to
+          // midnight, drawn by the system — "you have until midnight" as a
+          // number that visibly shrinks rather than a sentence to work out.
+          // Android only: iOS notifications have no equivalent, so there the
+          // body text carries the whole message.
+          usesChronometer: true,
+          chronometerCountDown: true,
+          when: deadline.millisecondsSinceEpoch,
+        ),
+        iOS: const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
+      ),
       androidScheduleMode: mode,
     );
   }
@@ -573,21 +700,12 @@ class NotificationService {
     }
   }
 
-  tz.TZDateTime _nextInstanceFor(TimeOfDay time) {
-    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime schedule = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      time.hour,
-      time.minute,
+  tz.TZDateTime _nextInstanceFor(TimeOfDay time, {bool skipToday = false}) {
+    final tz.TZDateTime schedule = nextReminderInstance(
+      now: tz.TZDateTime.now(tz.local),
+      time: time,
+      skipToday: skipToday,
     );
-    if (schedule.isBefore(now)) {
-      schedule = schedule.add(const Duration(days: 1));
-    } else if (schedule.isAtSameMomentAs(now)) {
-      schedule = schedule.add(const Duration(minutes: 1));
-    }
     if (kDebugMode) {
       debugPrint(
         'NotificationService: Next trigger at ${schedule.year}-${schedule.month}-${schedule.day} ${schedule.hour}:${schedule.minute}',

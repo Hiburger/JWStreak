@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 
-/// Concise reward dialog shown the moment a streak freeze is earned — either
-/// by completing enough new quizzes (see `LocalDbService.saveQuizResult` and
-/// [kQuizzesPerFreeze]) or by passing the review quiz. [message] overrides
-/// the default "3 new quizzes" body for contexts where that wording doesn't
-/// apply (e.g. the review quiz).
 Future<void> showFreezeEarnedDialog(
   BuildContext context, {
   String? message,

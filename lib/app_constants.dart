@@ -7,10 +7,6 @@ const String kDefaultBook = 'Genesis';
 const int kDefaultChapter = 1;
 const int kDefaultReminderHour = 8;
 const int kDefaultReminderMinute = 0;
-
-/// A streak freeze is awarded every time this many *distinct* quizzes have
-/// been completed for the first time (replaying an already-completed quiz
-/// never counts again).
 const int kQuizzesPerFreeze = 3;
 
 // jw.org's own language code (`wtlocale`) for each of the app's UI languages.
@@ -102,7 +98,18 @@ String jwLibraryDailyTextDeepLink(DateTime date, {String? languageCode}) {
       '&prefer=lang&alias=daily-text&date=$yyyymmdd';
 }
 
+const int kStreakRiskHour = 20;
 const String kGithubRepoUrl = 'https://github.com/Hiburger/JWStreak';
+
+/// Where someone can sponsor the project, if they want to! ;)
+/// Must always be opened with `LaunchMode.externalApplication` (see
+/// [openExternalUri]) rather than an in-app browser view. Apple's guideline
+/// 3.2.2(iv) lets a free app raise money only "outside of the app, such as
+/// via Safari"; collecting inside the app would need in-app purchase. The
+/// same rule is why sponsoring must never unlock anything here: both stores
+/// require in-app purchase for any gift "connected to or associated at any
+/// point in time with receiving digital content".
+const String kGithubSponsorsUrl = 'https://github.com/sponsors/Hiburger';
 const String kSupportEmail = 'contact@olynthe.org';
 
 /// Store listing for the JW Library app, offered when the user picks JW

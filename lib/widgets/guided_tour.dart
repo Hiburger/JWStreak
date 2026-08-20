@@ -8,20 +8,13 @@ const Color _kGlowColor = Color(0xFFD5A5EE);
 
 /// Shape of the spotlight cut out around a tour target.
 enum TourHighlightShape {
-  /// Rounded rectangle — for cards, tiles and sections.
+  /// Rounded rectangle for cards, tiles and sections.
   roundedRect,
 
-  /// Circle — for icon buttons.
+  /// Circle for icon buttons.
   circle,
 }
 
-/// One step of a guided tour: the widget to spotlight plus the copy to show
-/// next to it.
-///
-/// Adding a step anywhere in the app is just: create a `GlobalKey`, attach it
-/// to the widget you want to highlight, and append a [TourStep] to the list
-/// you pass to [showGuidedTour]. Steps whose target isn't currently on screen
-/// (for example a conditional banner) are skipped automatically.
 class TourStep {
   const TourStep({
     required this.targetKey,
@@ -42,9 +35,6 @@ class TourStep {
 
   final TourHighlightShape shape;
 
-  /// For [TourHighlightShape.roundedRect] steps: how rounded the spotlight
-  /// cutout is. Match the target widget's own corner radius so the highlight
-  /// reads as tracing its actual shape rather than a generic box.
   final double cornerRadius;
 }
 
@@ -62,11 +52,6 @@ class TourLabels {
   final String done;
 }
 
-/// Shows [steps] as a spotlight walkthrough over the current screen.
-///
-/// Each step scrolls its target into view, dims everything else, and shows a
-/// small card with the copy. Tapping anywhere advances; the last step closes
-/// the tour. Returns once the tour is finished or skipped.
 Future<void> showGuidedTour(
   BuildContext context, {
   required List<TourStep> steps,
@@ -127,23 +112,13 @@ class _GuidedTourView extends StatefulWidget {
 class _GuidedTourViewState extends State<_GuidedTourView>
     with SingleTickerProviderStateMixin {
   static const double _holePadding = 8;
-  // Icon buttons (achievements/notes/settings) get a tighter ring — the
-  // default padding made those circles feel oversized next to a small icon.
   static const double _circleHolePadding = -4;
   static const double _cardGap = 16;
   static const double _cardMargin = 20;
-  // Caps the card's width on tablets — without it the card stretched edge to
-  // edge on an iPad, turning a couple of sentences into one absurdly long
-  // line. On a phone the screen is already narrower than this, so it's a
-  // no-op there, same idea as ResponsiveBody elsewhere in the app.
   static const double _maxCardWidth = 420;
 
   int _index = 0;
-  // True while a scroll-into-view is in flight. The spotlight is measured
-  // fresh every frame regardless (see `build`), so its size and position
-  // morph continuously as the page scrolls — this is what makes it resize
-  // *during* the move instead of only before or after. The card is hidden
-  // meanwhile since it isn't worth animating along for a fast scroll.
+
   bool _isNavigating = true;
   late final AnimationController _glowController;
 
@@ -164,7 +139,7 @@ class _GuidedTourViewState extends State<_GuidedTourView>
   }
 
   /// Scrolls step [index]'s target into view. The spotlight tracks it live
-  /// (see `build`) for the whole duration, so no explicit "wait then measure
+  /// (see build) for the whole duration, so no explicit "wait then measure
   /// once" step is needed here.
   Future<void> _goTo(int index) async {
     final BuildContext? target = widget.steps[index].targetKey.currentContext;
@@ -288,14 +263,6 @@ class _GuidedTourViewState extends State<_GuidedTourView>
                 final Rect inflated = step.shape == TourHighlightShape.circle
                     ? Rect.fromCircle(center: hole.center, radius: padding)
                     : hole.inflate(padding);
-                // Place the card on whichever side actually has more room —
-                // a target near the top or bottom edge can leave very little
-                // space on one side no matter where its center falls — then
-                // hard-cap the card to that room. A fixed "is there enough
-                // space" threshold isn't enough on its own: the card's real
-                // height depends on how long the translated copy is, so the
-                // cap (with a scroll fallback) is what actually guarantees it
-                // never renders past the screen edge.
                 final double spaceAbove =
                     inflated.top - _cardGap - safe.top - _cardMargin;
                 final double spaceBelow =
@@ -405,10 +372,6 @@ class _TourCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Only the copy scrolls when the caller's maxHeight clamp runs
-            // out of room (unusually long translated text on a cramped
-            // target) — the action row below stays pinned so the button that
-            // advances the tour is never what scrolls out of view.
             Flexible(
               child: SingleChildScrollView(
                 child: Column(

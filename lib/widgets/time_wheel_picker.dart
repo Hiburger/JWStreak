@@ -15,16 +15,25 @@ import 'package:flutter/services.dart';
 /// reads its colors from [ColorScheme], so it follows whichever skin is
 /// active (see AppSkin) without knowing skins exist. A packaged picker
 /// carrying its own palette would be the one screen that ignores them.
+/// [confirmLabel] names what confirming will actually do. Left off, the
+/// button reads "OK", which is right when the picker only edits a value the
+/// caller already owns. Where confirming commits something — adding a
+/// reminder to the list — say so instead: "OK" gives no hint that a reminder
+/// is about to be created.
 Future<TimeOfDay?> showTimeWheelPicker({
   required BuildContext context,
   required TimeOfDay initialTime,
   required String title,
+  String? confirmLabel,
 }) {
   return showModalBottomSheet<TimeOfDay>(
     context: context,
     showDragHandle: true,
-    builder: (BuildContext sheetContext) =>
-        _TimeWheelSheet(initialTime: initialTime, title: title),
+    builder: (BuildContext sheetContext) => _TimeWheelSheet(
+      initialTime: initialTime,
+      title: title,
+      confirmLabel: confirmLabel,
+    ),
   );
 }
 
@@ -42,10 +51,17 @@ int hour24From12({required int displayHour, required bool isPm}) =>
     (displayHour % 12) + (isPm ? 12 : 0);
 
 class _TimeWheelSheet extends StatefulWidget {
-  const _TimeWheelSheet({required this.initialTime, required this.title});
+  const _TimeWheelSheet({
+    required this.initialTime,
+    required this.title,
+    this.confirmLabel,
+  });
 
   final TimeOfDay initialTime;
   final String title;
+
+  /// Null falls back to the platform's "OK".
+  final String? confirmLabel;
 
   @override
   State<_TimeWheelSheet> createState() => _TimeWheelSheetState();
@@ -254,7 +270,8 @@ class _TimeWheelSheetState extends State<_TimeWheelSheet> {
                       ),
                     ),
                     child: Text(
-                      material.okButtonLabel,
+                      widget.confirmLabel ?? material.okButtonLabel,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),

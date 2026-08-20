@@ -97,14 +97,15 @@ authoredQuizzesPtC1 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Onde a mãe de Moisés escondeu o bebê?',
       options: <String>[
-        'Um cesto de junco no Nilo',
+        'Um cesto no Nilo',
         'Uma caverna',
         'Uma tenda',
         'Um poço',
       ],
       correctIndex: 0,
       explanation:
-          'Moisés é colocado num cesto de junco entre os juncos (Êxodo 2).',
+          'O cesto era de junco e revestido de betume e piche, escondido '
+          'entre os juncos do Nilo (Êxodo 2).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['barco', 'palácio', 'deserto'],
     ),

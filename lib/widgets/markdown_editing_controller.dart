@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// A [TextEditingController] that renders lightweight Markdown **live** inside
+/// A [TextEditingController] that renders lightweight Markdown live inside
 /// the text field. Formatting (bold / italic / strikethrough / headings) is
 /// applied as the user types, and the Markdown markers themselves are hidden
-/// once the caret leaves the token — they reappear only when the caret is on
+/// once the caret leaves the token, they reappear only when the caret is on
 /// (or next to) that token, so editing stays predictable while the result
-/// looks clean, à la Obsidian live preview.
+/// looks clean
 class MarkdownEditingController extends TextEditingController {
   MarkdownEditingController({super.text});
 
@@ -97,11 +97,6 @@ class MarkdownEditingController extends TextEditingController {
       final int start = baseGlobal + m.start;
       final int end = baseGlobal + m.end;
       final bool reveal = caret >= start && caret <= end;
-
-      // Determine the marker kind from *which alternative matched* (group
-      // index), not by inspecting the captured text — a run like "***" can
-      // match the italic alternative while still starting with "**", which
-      // would misclassify it as bold and compute a wrong marker length.
       final int markerLen;
       final TextStyle tokenStyle;
       if (m.group(1) != null) {
@@ -145,22 +140,12 @@ class MarkdownEditingController extends TextEditingController {
     return out;
   }
 
-  // Renders marker characters with (near) zero size so they collapse visually
-  // while still occupying their real offsets in the model. A negative
-  // letterSpacing here would shrink the *measured* line width below what the
-  // visible glyphs actually need, which clips the last pixels of the
-  // preceding word — so width is only ever reduced via fontSize, never via
-  // letterSpacing.
   TextSpan _hidden(String text, TextStyle base) => TextSpan(
     text: text,
     style: base.copyWith(fontSize: 0.01, color: const Color(0x00000000)),
   );
 }
 
-/// Continues a `- ` list automatically: pressing Enter on a non-empty list
-/// line inserts a new `- ` marker on the next line; pressing Enter on an
-/// empty list line removes the marker instead (exits the list), matching
-/// common Markdown editors.
 class MarkdownListContinuationFormatter extends TextInputFormatter {
   static final RegExp _listLine = RegExp(r'^(\s*)([-*])\s+(.*)$');
 
@@ -169,7 +154,6 @@ class MarkdownListContinuationFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    // Only handle a single '\n' being inserted at the caret.
     if (newValue.text.length != oldValue.text.length + 1) {
       return newValue;
     }

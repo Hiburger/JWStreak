@@ -1,10 +1,10 @@
 
 # JW Streak 🫶
 
-> **Unofficial, independent project.** JW Streak is not affiliated with or endorsed by Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal tool, made by 2 Jehovah's Witnesses, that links out to JW.org / JW Library for their own content, it does NOT host, redistribute, or claim to represent that content as its own.
+> **Unofficial, independent project.** JW Streak is not affiliated with or endorsed by Jehovah's Witnesses, the Watch Tower Bible and Tract Society, or JW.org in any way. It's a personal tool, made by a Jehovah's Witnesse, that links out to JW.org / JW Library for their own content, it does NOT host, redistribute, or claim to represent that content as its own !
 
 Hi! 
-JW Streak (JWS) is a friendly Flutter application (Android, Material 3 Expressive) that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for me and others Jehovah’s Witnesses, anyone can use and enjoy it.
+JW Streak (JWS) is a friendly Flutter application that helps maintain a daily Bible reading habit, with quizzes, a streak system, achievements, and personal notes. All of this **100% local, no account or server required**. While I made JWS for me and others Jehovah’s Witnesses, anyone can use and enjoy it. JWS works on Android, iOS and iPadOS.
 
 ## Screenshots
 
@@ -46,6 +46,7 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 - **Streak & Matches**: The streak grows each active day; "matches" (earned by completing quizzes) automatically cover missed days
 - **Achievements**: Milestones unlocked through reading, quizzes, and streaks
 - **Personal Notes**: Linked to a passage, viewable and exportable from a dedicated library
+- **Backup & Restore**: Save everything to one readable file and bring it back on another device
 - **Configurable Daily Reminders**: Simple notifications
 - **Onboarding**: 4 steps + a **guided tour** replayable from settings
 - **9 Languages**: French (reference language), English, German, Spanish, Italian, Polish, Portuguese, Russian, Simplified Chinese. More to come
@@ -58,6 +59,29 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 - All data (readings, notes, settings, streaks) is stored locally in a cute SQLite db.
 - No fonts or resources are loaded from a server at runtime ; everything is embedded in the APK.
 
+## Backup & restore
+
+Everything the app knows lives in one local SQLite database, so a backup is
+simply that database written out as JSON.
+
+- **Back up my data** (Settings → Privacy) writes every table; readings,
+  notes, quizzes, reflections, reminders, streak, achievements and settings
+  to a single dated file and hands it to the share sheet. Where it goes is
+  entirely your choice; the app never uploads anything by itself.
+- **Restore from a backup** replaces everything on the device with the contents
+  of that file.
+- Setting up a new phone? Tap **I already have a backup** on the very first
+  screen. Your settings travel with the backup, so you land straight on your
+  own dashboard instead of going through onboarding for data you already have.
+
+The file is plain, readable JSON on purpose. This app's promise is that your
+data never leaves the device unless you send it somewhere, and a file you can
+open in a text editor is the only version of that promise you can check for
+yourself. It also means your notes outlive the app: they are recoverable with
+nothing more than a text editor.
+
+It is **not encrypted** and it contains your notes (assuming you wrote something). Keep it somewhere you trust ! 
+
 ## Technical Stack
 
 - Flutter / Dart
@@ -65,7 +89,8 @@ Absolutely! The app works **hand in hand with the organisation's content and mat
 - `flutter_local_notifications` + `permission_handler` : daily reminders and permissions
 - `url_launcher` : JW Library deep link, web fallback jw.org
 - `dynamic_color` : optional Material You palette
-- `flutter_markdown`, `pdf`, `share_plus` : note sharing 
+- `flutter_markdown`, `pdf`, `share_plus` : note sharing
+- `file_selector` : picking a backup file to restore
 
 ## Project Layout
 
@@ -173,9 +198,10 @@ Absolument ! L'application fonctionne **en parfaite harmonie avec le contenu et 
 - **Série & Matchs** : La série augmente chaque jour actif ; les « matchs » (gagnés en complétant les quiz) couvrent automatiquement les jours manqués.
 - **Succès** : Jalons débloqués grâce à la lecture, aux quiz et aux séries.
 - **Notes personnelles** : Liées à un passage, consultables et exportables depuis une bibliothèque dédiée.
+- **Sauvegarde et restauration** : Enregistrez tout dans un seul fichier lisible et récupérez-le sur un autre appareil.
 - **Rappels quotidiens configurables** : Notifications simples.
 - **Onboarding** : 4 étapes + un **guide de découverte** rejouable depuis les paramètres.
-- **7 langues** : Français (langue de référence), Anglais, Allemand, Espagnol, Italien, Portugais, Russe, Chinois simplifié. D'autres à venir.
+- **9 langues** : Français (langue de référence), Anglais, Allemand, Espagnol, Italien, Polonais, Portugais, Russe, Chinois simplifié. D'autres à venir.
 - **Thème** : Suit le système / clair / sombre / sombre OLED, avec couleur dynamique optionnelle (Material 3 E.). D'autres thèmes en route.
 
 ## Confidentialité
@@ -185,6 +211,32 @@ Absolument ! L'application fonctionne **en parfaite harmonie avec le contenu et 
 - Toutes les données (lectures, notes, paramètres, séries) sont stockées localement dans une mignonne base de données SQLite.
 - Aucune police ou ressource n'est chargée depuis un serveur à l'exécution ; tout est intégré dans l'APK.
 
+## Sauvegarde et restauration
+
+Tout ce que l'application connaît tient dans une seule base SQLite locale : une
+sauvegarde, c'est simplement cette base écrite en JSON.
+
+- **Sauvegarder mes données** (Paramètres → Confidentialité) écrit toutes les
+  tables — lectures, notes, quiz, réflexions, rappels, série, succès et
+  réglages — dans un seul fichier daté, puis le passe au menu de partage. Où il
+  atterrit ne dépend que de vous ; l'application n'envoie rien d'elle-même.
+- **Restaurer une sauvegarde** remplace tout ce qui se trouve sur l'appareil par
+  le contenu de ce fichier. Elle vous montre d'abord ce que le fichier contient
+  (date, chapitres lus, notes), et toute la restauration se fait dans une seule
+  transaction : un fichier endommagé laisse donc vos données intactes au lieu de
+  les remplacer à moitié.
+- Nouveau téléphone ? Touchez **J'ai déjà une sauvegarde** dès le premier écran.
+  Vos réglages voyagent avec la sauvegarde, vous arrivez donc directement sur
+  votre tableau de bord au lieu de refaire l'onboarding.
+
+Le fichier est du JSON lisible, et c'est volontaire. La promesse de cette
+application, c'est que vos données ne quittent l'appareil que si vous les
+envoyez quelque part : un fichier que vous pouvez ouvrir dans un éditeur de
+texte est la seule version de cette promesse que vous puissiez vérifier
+vous-même. Cela veut aussi dire que vos notes survivent à l'application.
+
+Il n'est **pas chiffré** et contient vos notes. Conservez-le dans un endroit sûr.
+
 ## Stack technique
 
 - Flutter / Dart
@@ -193,6 +245,7 @@ Absolument ! L'application fonctionne **en parfaite harmonie avec le contenu et 
 - `url_launcher` : lien profond JW Library, repli web jw.org
 - `dynamic_color` : palette Material You optionnelle
 - `flutter_markdown`, `pdf`, `share_plus` : partage de notes
+- `file_selector` : choix du fichier de sauvegarde à restaurer
 
 ## Organisation du projet
 

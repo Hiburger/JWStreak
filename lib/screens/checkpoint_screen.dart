@@ -382,46 +382,59 @@ class _ReflectionScreenState extends State<ReflectionScreen> {
       body: ResponsiveBody(
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
-            : ListView(
-                padding: const EdgeInsets.all(20),
+            : Column(
                 children: <Widget>[
-                  Text(
-                    localizedReflectionPrompt(context, widget.checkpoint),
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.all(20),
+                      children: <Widget>[
+                        Text(
+                          localizedReflectionPrompt(context, widget.checkpoint),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        TextField(
+                          controller: _controller,
+                          autofocus: true,
+                          minLines: 6,
+                          maxLines: null,
+                          textCapitalization: TextCapitalization.sentences,
+                          decoration: InputDecoration(
+                            hintText: l10n.checkpointReflectionHint,
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: _controller,
-                    autofocus: true,
-                    minLines: 6,
-                    maxLines: null,
-                    textCapitalization: TextCapitalization.sentences,
-                    decoration: InputDecoration(
-                      hintText: l10n.checkpointReflectionHint,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
+                  // Inside the body rather than Scaffold.bottomNavigationBar:
+                  // that slot is pinned to the bottom of the screen and gets
+                  // no keyboard inset, so with the field focused the keyboard
+                  // covered Save completely and there was no way to finish a
+                  // reflection. The body *is* resized for the keyboard, so
+                  // sitting at the end of this column keeps Save just above it.
+                  SafeArea(
+                    top: false,
+                    minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    child: FilledButton.icon(
+                      onPressed: _save,
+                      icon: const Icon(Icons.check),
+                      label: Text(l10n.checkpointSave),
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size.fromHeight(54),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-      ),
-      bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: FilledButton.icon(
-          onPressed: _isLoading ? null : _save,
-          icon: const Icon(Icons.check),
-          label: Text(l10n.checkpointSave),
-          style: FilledButton.styleFrom(
-            minimumSize: const Size.fromHeight(54),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18),
-            ),
-          ),
-        ),
       ),
     );
   }

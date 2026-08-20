@@ -132,12 +132,20 @@ class ReminderPresetChip extends StatelessWidget {
     required this.preset,
     required this.selected,
     required this.onTap,
+    this.enabled = true,
     super.key,
   });
 
   final ReminderTimePreset preset;
+
+  /// Whether this time is currently set as a reminder. Tapping turns it off
+  /// again, so this is a state, not a highlight of the last thing tapped.
   final bool selected;
   final VoidCallback onTap;
+
+  /// False when the reminder limit is reached and this chip isn't already
+  /// on: it stops responding rather than swallowing taps that can't work.
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -145,46 +153,49 @@ class ReminderPresetChip extends StatelessWidget {
     final ColorScheme cs = theme.colorScheme;
     final Color bg = selected ? cs.secondaryContainer : cs.surfaceContainerHigh;
     final Color fg = selected ? cs.onSecondaryContainer : cs.onSurfaceVariant;
-    return Material(
-      color: bg,
-      borderRadius: BorderRadius.circular(18),
-      child: InkWell(
+    return Opacity(
+      opacity: enabled ? 1 : 0.4,
+      child: Material(
+        color: bg,
         borderRadius: BorderRadius.circular(18),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(
-              color: selected ? cs.secondary : Colors.transparent,
-              width: 1.5,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: enabled ? onTap : null,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(
+                color: selected ? cs.secondary : Colors.transparent,
+                width: 1.5,
+              ),
             ),
-          ),
-          child: Column(
-            children: <Widget>[
-              Icon(preset.icon, color: fg, size: 22),
-              const SizedBox(height: 6),
-              // Some translations ("Mezzogiorno", "Południe", "Mediodía")
-              // run noticeably longer than the English source; without a
-              // line cap they'd wrap to two lines, left-aligned inside this
-              // centered chip, which reads as a ragged, awkward break rather
-              // than a deliberate one.
-              Text(
-                preset.label,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: fg,
-                  fontWeight: FontWeight.w700,
+            child: Column(
+              children: <Widget>[
+                Icon(preset.icon, color: fg, size: 22),
+                const SizedBox(height: 6),
+                // Some translations ("Mezzogiorno", "Południe", "Mediodía")
+                // run noticeably longer than the English source; without a
+                // line cap they'd wrap to two lines, left-aligned inside this
+                // centered chip, which reads as a ragged, awkward break rather
+                // than a deliberate one.
+                Text(
+                  preset.label,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: fg,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              Text(
-                '${preset.hour.toString().padLeft(2, '0')}:'
-                '${preset.minute.toString().padLeft(2, '0')}',
-                style: theme.textTheme.bodySmall?.copyWith(color: fg),
-              ),
-            ],
+                Text(
+                  '${preset.hour.toString().padLeft(2, '0')}:'
+                  '${preset.minute.toString().padLeft(2, '0')}',
+                  style: theme.textTheme.bodySmall?.copyWith(color: fg),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -192,18 +203,30 @@ class ReminderPresetChip extends StatelessWidget {
   }
 }
 
-/// A row of the three preset chips, wired to update the picked time.
+/// A row of the three preset chips, each one a switch for that reminder.
+///
+/// Tapping a chip sets that reminder; tapping it again removes it. The chips
+/// used to only stage a time that a separate "Add this reminder" button then
+/// committed — two taps and a trip down the page to say one thing, and the
+/// highlight showed the last chip touched rather than what was actually set.
 class ReminderPresetRow extends StatelessWidget {
   const ReminderPresetRow({
     required this.presets,
-    required this.picked,
-    required this.onPick,
+    required this.isActive,
+    required this.onToggle,
+    this.canAdd = true,
     super.key,
   });
 
   final List<ReminderTimePreset> presets;
-  final TimeOfDay picked;
-  final ValueChanged<ReminderTimePreset> onPick;
+
+  /// Whether a reminder already exists at this preset's time.
+  final bool Function(ReminderTimePreset preset) isActive;
+  final ValueChanged<ReminderTimePreset> onToggle;
+
+  /// False at the reminder limit. Chips already on stay tappable so they can
+  /// be turned off; the rest go quiet instead of failing silently.
+  final bool canAdd;
 
   @override
   Widget build(BuildContext context) {
@@ -211,12 +234,16 @@ class ReminderPresetRow extends StatelessWidget {
       children: <Widget>[
         for (int i = 0; i < presets.length; i++) ...<Widget>[
           Expanded(
-            child: ReminderPresetChip(
-              preset: presets[i],
-              selected:
-                  picked.hour == presets[i].hour &&
-                  picked.minute == presets[i].minute,
-              onTap: () => onPick(presets[i]),
+            child: Builder(
+              builder: (BuildContext context) {
+                final bool active = isActive(presets[i]);
+                return ReminderPresetChip(
+                  preset: presets[i],
+                  selected: active,
+                  enabled: active || canAdd,
+                  onTap: () => onToggle(presets[i]),
+                );
+              },
             ),
           ),
           if (i != presets.length - 1) const SizedBox(width: 10),

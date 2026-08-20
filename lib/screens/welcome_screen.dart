@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
 import '../l10n/app_localizations.dart';
+import '../widgets/restore_backup_flow.dart';
 import '../widgets/onboarding_progress.dart';
 import '../widgets/responsive_body.dart';
 
@@ -276,7 +277,34 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 4),
+                  // Someone setting up a replacement phone shouldn't have to
+                  // invent a reading position and a reminder first, only for
+                  // the restore to overwrite both. Restoring here also lands
+                  // them straight on their own dashboard: the backup carries
+                  // onboarding_done, which the app re-reads afterwards.
+                  _staggered(
+                    from: 0.65,
+                    to: 1,
+                    child: AnimatedOpacity(
+                      opacity: widget.hideActionButton ? 0 : 1,
+                      duration: const Duration(milliseconds: 150),
+                      child: IgnorePointer(
+                        ignoring: widget.hideActionButton,
+                        child: TextButton.icon(
+                          onPressed: () => pickAndRestoreBackup(context),
+                          icon: const Icon(
+                            Icons.settings_backup_restore,
+                            size: 18,
+                          ),
+                          label: Text(
+                            AppLocalizations.of(context)!.welcomeRestoreLink,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   _staggered(
                     from: 0.7,
                     to: 1,

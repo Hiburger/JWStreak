@@ -104,26 +104,52 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
     _notificationsReady = true;
   }
 
+  /// Turns a suggested time on, or off again if it is already set.
+  ///
+  /// The whole interaction now: no staging step, and the chip's highlight is
+  /// the state itself, so what shows as on is exactly what will ring.
+  Future<void> _togglePreset(ReminderTimePreset preset) async {
+    for (final Reminder r in _reminders) {
+      if (r.hour == preset.hour && r.minute == preset.minute) {
+        await _deleteReminder(r);
+        return;
+      }
+    }
+    await _addReminder(TimeOfDay(hour: preset.hour, minute: preset.minute));
+  }
+
   bool _alreadyExists(int hour, int minute) =>
       _reminders.any((Reminder r) => r.hour == hour && r.minute == minute);
 
   Future<void> _pickTime() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    // At the limit nothing can be added, so don't promise it: the button
+    // falls back to "OK" and the picker just edits the shown time.
+    final bool canAdd = _reminders.length < _maxReminders;
     final TimeOfDay? picked = await showTimeWheelPicker(
       context: context,
       initialTime: _picked,
-      title: AppLocalizations.of(context)!.reminderEditTime,
+      title: l10n.reminderEditTime,
+      confirmLabel: canAdd ? l10n.reminderAddButton : null,
     );
-    if (picked != null) {
-      setState(() => _picked = picked);
+    if (picked == null || !mounted) {
+      return;
+    }
+    setState(() => _picked = picked);
+    // Confirming the sheet is the reader saying "this one" — going back to
+    // the page to press a second button was a step that did nothing except
+    // repeat the decision they had just made.
+    if (canAdd) {
+      await _addReminder(picked);
     }
   }
 
-  Future<void> _addReminder() async {
+  Future<void> _addReminder(TimeOfDay time) async {
     if (_reminders.length >= _maxReminders) {
       return;
     }
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    if (_alreadyExists(_picked.hour, _picked.minute)) {
+    if (_alreadyExists(time.hour, time.minute)) {
       showMessageDialog(context, message: l10n.reminderAlreadyExists);
       return;
     }
@@ -148,12 +174,12 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
       return;
     }
     final Reminder added = await widget.dbService.addReminder(
-      hour: _picked.hour,
-      minute: _picked.minute,
+      hour: time.hour,
+      minute: time.minute,
     );
     await _notifications.scheduleReminder(
       id: added.id,
-      time: _picked,
+      time: time,
       title: l10n.notifReminderTitle,
       body: l10n.notifReminderBody,
     );
@@ -276,42 +302,22 @@ class _ReminderOnboardingScreenState extends State<ReminderOnboardingScreen>
                                       const SizedBox(height: 12),
                                       ReminderPresetRow(
                                         presets: presets,
-                                        picked: _picked,
-                                        onPick: (ReminderTimePreset p) =>
-                                            setState(
-                                              () => _picked = TimeOfDay(
-                                                hour: p.hour,
-                                                minute: p.minute,
-                                              ),
-                                            ),
+                                        isActive: (ReminderTimePreset p) =>
+                                            _alreadyExists(p.hour, p.minute),
+                                        canAdd:
+                                            _reminders.length < _maxReminders,
+                                        onToggle: _togglePreset,
                                       ),
-                                      const SizedBox(height: 16),
-                                      if (_reminders.length >= _maxReminders)
-                                        ReminderLimitNote(max: _maxReminders)
-                                      else
-                                        FilledButton.icon(
-                                          onPressed: _addReminder,
-                                          icon: const Icon(
-                                            Icons.add_alarm_rounded,
-                                            size: 22,
-                                          ),
-                                          label: Text(
-                                            l10n.reminderAddButton,
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          style: FilledButton.styleFrom(
-                                            minimumSize: const Size.fromHeight(
-                                              56,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(18),
-                                            ),
-                                          ),
-                                        ),
+                                      // No "add" button: a suggestion chip
+                                      // sets its own reminder and the picker
+                                      // commits a custom time, so the only
+                                      // thing left to say is when nothing
+                                      // more fits.
+                                      if (_reminders.length >=
+                                          _maxReminders) ...<Widget>[
+                                        const SizedBox(height: 16),
+                                        ReminderLimitNote(max: _maxReminders),
+                                      ],
                                       if (_notificationsEnabled ==
                                           false) ...<Widget>[
                                         const SizedBox(height: 16),

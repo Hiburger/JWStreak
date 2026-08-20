@@ -33,7 +33,17 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: const CircularBackButton(), title: Text(title)),
+      appBar: AppBar(
+        leading: const CircularBackButton(),
+        // Some translated section titles ("Конфиденциальность и данные")
+        // don't fit the app bar at full size and used to get cut off with
+        // an ellipsis; scaling down instead keeps every word on screen.
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(title, maxLines: 1),
+        ),
+      ),
       body: ResponsiveBody(
         child: ListView(padding: const EdgeInsets.all(16), children: children),
       ),

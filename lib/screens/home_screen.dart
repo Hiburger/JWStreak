@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
@@ -66,7 +67,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   final LocalDbService _dbService = LocalDbService();
   final NotificationService _notificationService = NotificationService();
   final DeepLinkService _deepLinkService = DeepLinkService();
@@ -106,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Derived from _readKeys / _completedQuiz, which only change in
   // _refreshDashboard — so they're computed there, once, rather than in
-  // build(). Both walk all 66 books (and _pendingQuizCheckpoint additionally
-  // rebuilds every book's checkpoint list), which is far too much to redo on
+  // build(). _nextUnread walks the reading plan and _pendingQuizCheckpoint
+  // rebuilds a book's checkpoint list, which is far too much to redo on
   // every rebuild: a scroll, a theme change or a tour step would each pay
   // for it again.
   _ChapterRef? _nextChapter;
@@ -136,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey _tourNotesKey = GlobalKey();
   final GlobalKey _tourSettingsKey = GlobalKey();
   bool _isTourRunning = false;
+  Timer? _riskCardTimer;
 
   @override
   void initState() {
@@ -144,7 +146,52 @@ class _HomeScreenState extends State<HomeScreen> {
       _isLoading = false;
       return;
     }
+    WidgetsBinding.instance.addObserver(this);
     _bootstrap();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _riskCardTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Wakes the screen up at [kStreakRiskHour] so the at-risk card appears on
+  /// its own.
+  ///
+  /// Without this, someone sitting on the home screen at 19:58 would still be
+  /// looking at a calm dashboard at 20:05 — the card only shows up on a
+  /// rebuild, and nothing else forces one while the app stays open.
+  void _scheduleRiskCardRefresh() {
+    _riskCardTimer?.cancel();
+    final DateTime now = DateTime.now();
+    if (now.hour >= kStreakRiskHour) {
+      return; // Already past it; the card is either up or not needed today.
+    }
+    final DateTime threshold = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      kStreakRiskHour,
+    );
+    _riskCardTimer = Timer(threshold.difference(now), () {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Coming back from the background is the moment a traveller actually
+    // opens the app after landing: the date may have moved, the time zone
+    // may have changed, and neither initState nor a route pop will fire
+    // here. Refreshing rebuilds the streak view and reschedules reminders
+    // against the current zone.
+    if (state == AppLifecycleState.resumed && !_isLoading) {
+      _refreshDashboard();
+    }
   }
 
   @override
@@ -161,6 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
   /// changes (_refreshDashboard) or the locale does (didChangeDependencies) —
   /// never from build().
   void _recomputeDerived() {
+    // _nextChapter first: _pendingQuizCheckpoint reads it to find the
+    // reader's current book.
     _nextChapter = _nextUnread();
     _pendingCheckpoint = _pendingQuizCheckpoint();
   }
@@ -328,8 +377,13 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    // Keep the OS schedule in sync with the stored reminders.
+    // Keep the OS schedule in sync with the stored reminders. The time zone
+    // is re-read first: reminders are scheduled as an absolute instant in
+    // whatever zone the app started in, so without this a reader who has
+    // flown keeps getting yesterday's country's reminder times.
+    // Read from context before the await, so the gap can't invalidate it.
     final AppLocalizations notifL10n = AppLocalizations.of(context)!;
+    await _notificationService.refreshTimeZone();
     await _notificationService.cancelAllReminders();
     for (final Reminder reminder in reminders) {
       await _notificationService.scheduleReminder(
@@ -337,15 +391,27 @@ class _HomeScreenState extends State<HomeScreen> {
         time: TimeOfDay(hour: reminder.hour, minute: reminder.minute),
         title: notifL10n.notifReminderTitle,
         body: notifL10n.notifReminderBody,
+        // Already read or quizzed today: today's remaining reminders would
+        // be nagging about something already done, so the first firing moves
+        // to tomorrow. The daily repeat is untouched.
+        skipToday: streakState.activeToday,
       );
     }
 
-    // Evening warning if the streak is still inactive today; cancelled as
-    // soon as the user is active again.
-    if (streakState.count > 0 && !streakState.activeToday) {
+    // Evening nudge whenever today is still empty; cancelled the moment the
+    // reader is active. It used to require an existing streak, which meant
+    // the one person who most needed the nudge — someone at zero, who hasn't
+    // started — was the only one who never got it. The wording differs
+    // because "your streak is at risk" is meaningless with no streak to lose.
+    if (!streakState.activeToday) {
+      final bool hasStreak = streakState.count > 0;
       await _notificationService.scheduleStreakRiskCheck(
-        title: notifL10n.notifStreakRiskTitle,
-        body: notifL10n.notifStreakRiskBody,
+        title: hasStreak
+            ? notifL10n.notifStreakRiskTitle
+            : notifL10n.notifStreakStartTitle,
+        body: hasStreak
+            ? notifL10n.notifStreakRiskBody
+            : notifL10n.notifStreakStartBody,
       );
     } else {
       await _notificationService.cancelStreakRiskCheck();
@@ -354,6 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) {
       return;
     }
+    _scheduleRiskCardRefresh();
     setState(() {
       _reminders = reminders;
       _lastReadAt = lastReadAt;
@@ -602,34 +669,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return next == null ? null : _ChapterRef(next.book, next.chapter);
   }
 
-  /// Earliest unlocked checkpoint whose quiz hasn't been taken yet.
-  /// Reflection-only checkpoints (no quiz) never trigger this banner — it's
-  /// specifically the "new quiz unlocked" notice.
-  Checkpoint? _pendingQuizCheckpoint() {
-    final String languageCode = Localizations.localeOf(context).languageCode;
-    for (final BibleBook book in kBibleBooks) {
-      final List<Checkpoint> checkpoints = checkpointsForBook(
-        book,
-        languageCode: languageCode,
-      );
-      for (final Checkpoint cp in checkpoints) {
-        if (!cp.hasQuiz || _completedQuiz.contains(cp.id)) {
-          continue;
-        }
-        final bool unlocked = isCheckpointAvailable(
-          checkpoint: cp,
-          checkpointsInBook: checkpoints,
-          isChapterCovered: (int c) =>
-              _coveredKeys.contains(bibleChapterKey(book.id, c)),
-          isQuizDone: (String id) => _completedQuiz.contains(id),
-        );
-        if (unlocked) {
-          return cp;
-        }
-      }
-    }
-    return null;
-  }
+  /// The "new quiz unlocked" banner's checkpoint, scoped to the reader's
+  /// current book — see [pendingQuizCheckpointFor] for why. Reflection-only
+  /// checkpoints (no quiz) never trigger this banner.
+  Checkpoint? _pendingQuizCheckpoint() => pendingQuizCheckpointFor(
+    currentBook: _nextChapter?.book,
+    coveredKeys: _coveredKeys,
+    completedQuizIds: _completedQuiz,
+    languageCode: Localizations.localeOf(context).languageCode,
+  );
 
   Future<void> _openCheckpoint(Checkpoint cp) async {
     await Navigator.of(context).push<void>(
@@ -818,7 +866,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     final bool readToday = _streakState.activeToday;
-    final bool streakAtRisk = _streak > 0 && !_streakState.activeToday;
+    final bool streakAtRisk = shouldWarnStreakAtRisk(
+      streak: _streak,
+      activeToday: _streakState.activeToday,
+      now: DateTime.now(),
+    );
     final String reminderLabel = _reminders.isEmpty
         ? l10n.homeReminderConfigure
         : _reminders.length == 1
@@ -1088,6 +1140,22 @@ class _SkeletonBlock extends StatelessWidget {
     );
   }
 }
+
+/// Whether the home screen should be showing the "streak at risk" card.
+///
+/// The time of day is the point. A streak is only genuinely at risk once the
+/// day is nearly gone, so warning at breakfast about a day with sixteen hours
+/// left in it is noise — and a red card that is up every morning is one the
+/// reader learns to look past by the evening, when it finally matters.
+///
+/// Uses the same [kStreakRiskHour] as the evening notification, so the card
+/// appearing and the notification arriving mean the same thing.
+@visibleForTesting
+bool shouldWarnStreakAtRisk({
+  required int streak,
+  required bool activeToday,
+  required DateTime now,
+}) => streak > 0 && !activeToday && now.hour >= kStreakRiskHour;
 
 class _ChapterRef {
   const _ChapterRef(this.book, this.chapter);

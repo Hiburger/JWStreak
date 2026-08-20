@@ -11,9 +11,6 @@ void main() {
   ) async {
     await tester.pumpWidget(const DailyJwApp(skipBootstrap: true));
 
-    // skipBootstrap never loads a saved locale, so the app falls back to the
-    // test harness's default locale (en_US) — assert against English, not
-    // the French authoring-language strings.
     expect(find.text('JW Streak'), findsOneWidget);
     expect(find.text('Mark as read'), findsOneWidget);
     expect(find.text('Set up a reminder'), findsOneWidget);
@@ -25,9 +22,6 @@ void main() {
     bool continued = false;
     await tester.pumpWidget(
       MaterialApp(
-        // The bare MaterialApp in this test (unlike DailyJwApp) doesn't wire
-        // up localization on its own — AppLocalizations.of(context) would
-        // return null and crash on the bang in welcome_screen.dart otherwise.
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: WelcomeScreen(
@@ -40,7 +34,7 @@ void main() {
       ),
     );
 
-    // Let the staggered entrance animations play out.
+    // Let the staggered entrance animations play out
     await tester.pump(const Duration(seconds: 2));
 
     expect(find.text('Welcome!'), findsOneWidget);

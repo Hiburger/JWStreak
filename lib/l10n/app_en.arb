@@ -140,6 +140,7 @@
   "welcomeButton": "Welcome!",
   "welcomeLogoGreeting": "Hi!",
   "welcomeFooter": "Free, libre, and open source",
+  "welcomeRestoreLink": "I already have a backup",
   "onbContinue": "Continue",
   "onbBack": "Back",
   "onbFeaturesTitle": "What you can do",
@@ -179,7 +180,7 @@
   "tourSettingsBody": "Theme, language, reminders, and this tour, if you want to see it again.",
   "settingsReplayTour": "Replay the guided tour",
   "settingsReplayTourSubtitle": "See the home screen walkthrough again",
-  "settingsPrivacy": "Privacy",
+  "settingsPrivacy": "Your privacy & data",
   "settingsAppLockTitle": "Lock the app",
   "settingsAppLockOn": "Asks for your fingerprint, face or PIN before opening your notes, unless you come back within 10 minutes.",
   "settingsAppLockOff": "Your notes open without asking for anything.",
@@ -213,15 +214,18 @@
   "settingsCatDonationsDesc": "Supporting JW Streak",
   "settingsCatAbout": "Help & about",
   "settingsCatAboutDesc": "Guided tour, version, source code",
-  "donationsHeadline": "We're not taking donations yet",
-  "donationsLead": "JW Streak is free, and right now there's no way to donate. That's on purpose, we simply haven't set anything up. We may open it later, and we'd rather tell you plainly than surprise you with it one day.",
+  "donationsHeadline": "If you’d like to help",
+  "donationsLead": "JW Streak is free and stays free. Building it costs a little money and a lot of evenings, so if it has been useful to you, you can now sponsor the project on GitHub. Only if you want to — the app works exactly the same either way.",
   "donationsRow1Title": "It does cost something",
   "donationsRow1Text": "Store accounts, test devices and the odd subscription all have to be paid for, and the app gets built on evenings and weekends. Some of those evenings are genuinely hard.",
   "donationsRow2Title": "What won't change",
-  "donationsRow2Text": "JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. If donations ever open, giving will be entirely optional.",
+  "donationsRow2Text": "JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. Sponsoring unlocks nothing at all — supporters get exactly the same app as everyone else.",
   "donationsRow3Title": "Free ways to help",
-  "donationsRow3Text": "Tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.",
+  "donationsRow3Text": "Give the project a star on GitHub, tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.",
   "donationsThanks": "Thank you for being here 💛",
+  "donationsSponsorButton": "Sponsor on GitHub",
+  "donationsStarButton": "Star the project on GitHub",
+  "donationsSponsorDisclaimer": "Opens GitHub in your browser. This supports the independent developer of JW Streak. It is not a religious donation and has no connection to Jehovah’s Witnesses, jw.org or any congregation.",
   "settingsAppearance": "Appearance",
   "settingsDynamicColor": "Dynamic colors",
   "settingsDynamicColorOn": "Uses the colors from your wallpaper (Material You)",
@@ -697,6 +701,31 @@
   "notesLibraryShareTooltip": "Share",
   "notesLibraryExportAllTooltip": "Export my notes",
   "settingsExportNotesDesc": "Save every note to a ZIP file you can keep or share",
+  "settingsBackupTitle": "Back up my data",
+  "settingsBackupDesc": "Save everything to one file you can restore later",
+  "settingsBackupWarning": "Not encrypted — keep it somewhere safe.",
+  "settingsRestoreTitle": "Restore from a backup",
+  "settingsRestoreDesc": "Replace everything on this device with the contents of a backup file",
+  "restoreConfirmTitle": "Replace everything?",
+  "restoreConfirmBody": "{date}\n\nChapters read: {chapters}\nNotes: {notes}\n\nEverything currently on this device will be replaced. This cannot be undone.",
+  "@restoreConfirmBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "chapters": {
+        "type": "int"
+      },
+      "notes": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreConfirmAction": "Replace",
+  "restoreDone": "Your data has been restored.",
+  "restoreErrorNotABackup": "That file isn’t a JW Streak backup.",
+  "restoreErrorTooNew": "This backup was made by a newer version of JW Streak. Update the app, then try again.",
+  "restoreErrorCorrupt": "This backup file is damaged and can’t be read. Nothing on this device was changed.",
   "@settingsExportNotesDesc": {
     "description": "Subtitle of the export-notes row in privacy settings."
   },
@@ -827,6 +856,8 @@
   "notifReminderBody": "Time for your reading. Tap to continue 📖",
   "notifStreakRiskTitle": "Your streak is at risk 🔥",
   "notifStreakRiskBody": "You haven't been active today yet. Read a chapter or take a quiz to keep it.",
+  "notifStreakStartTitle": "There’s still time today ✨",
+  "notifStreakStartBody": "Read a chapter or take a quiz before midnight to start your streak.",
   "easterEggHeartBody": "I love you too :)",
   "easterEggVersionTitle": "Seven taps, really",
   "easterEggVersionBody": "No hidden mode here, sorry. Just a thank you for looking this far. This app was written one evening at a time, and it's nice to know someone's poking around.",

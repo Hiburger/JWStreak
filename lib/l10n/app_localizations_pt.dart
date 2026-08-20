@@ -425,6 +425,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get welcomeFooter => 'Gratuito, livre e de código aberto';
 
   @override
+  String get welcomeRestoreLink => 'Já tenho uma cópia de segurança';
+
+  @override
   String get onbContinue => 'Continuar';
 
   @override
@@ -559,7 +562,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'Mostrar novamente a apresentação da tela inicial';
 
   @override
-  String get settingsPrivacy => 'Privacidade';
+  String get settingsPrivacy => 'Privacidade e dados';
 
   @override
   String get settingsAppLockTitle => 'Bloquear a aplicação';
@@ -672,11 +675,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsCatAboutDesc => 'Visita guiada, versão, código-fonte';
 
   @override
-  String get donationsHeadline => 'Ainda não aceitamos doações';
+  String get donationsHeadline => 'Se quiser ajudar';
 
   @override
   String get donationsLead =>
-      'O JW Streak é gratuito e, por enquanto, não há forma de doar. É de propósito, simplesmente não preparámos nada. Talvez venhamos a abrir mais tarde, e preferimos dizer-te isto com franqueza em vez de te surpreender um dia.';
+      'O JW Streak é gratuito e continuará a sê-lo. Desenvolvê-lo custa algum dinheiro e muitas noites, por isso, se lhe tem sido útil, pode agora apoiar o projeto no GitHub. Só se quiser — a aplicação funciona exatamente da mesma forma nos dois casos.';
 
   @override
   String get donationsRow1Title => 'Mesmo assim tem um custo';
@@ -690,17 +693,27 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get donationsRow2Text =>
-      'O JW Streak continuará gratuito, de código aberto e totalmente offline. Sem anúncios, sem rastreio, sem capítulos bloqueados nem funcionalidades pagas. Se um dia as doações abrirem, doar será totalmente opcional.';
+      'O JW Streak continua gratuito, de código aberto e totalmente offline. Sem anúncios, sem rastreio, sem capítulos bloqueados nem funcionalidades pagas. Apoiar não desbloqueia absolutamente nada: quem apoia tem exatamente a mesma aplicação que toda a gente.';
 
   @override
   String get donationsRow3Title => 'Ajudar sem gastar nada';
 
   @override
   String get donationsRow3Text =>
-      'Fala dele a alguém que possa gostar, comunica um erro num quiz ou uma falha, ou simplesmente continua a tua leitura. Sinceramente, isso já significa muito.';
+      'Dá uma estrela ao projeto no GitHub, fala dele a alguém que possa gostar, comunica um erro num quiz ou uma falha, ou simplesmente continua a tua leitura. Sinceramente, isso já significa muito.';
 
   @override
   String get donationsThanks => 'Obrigado por estares aqui 💛';
+
+  @override
+  String get donationsSponsorButton => 'Apoiar no GitHub';
+
+  @override
+  String get donationsStarButton => 'Dar uma estrela no GitHub';
+
+  @override
+  String get donationsSponsorDisclaimer =>
+      'Abre o GitHub no seu navegador. Isto apoia o programador independente do JW Streak. Não é um donativo religioso e não tem qualquer ligação às Testemunhas de Jeová, ao jw.org ou a qualquer congregação.';
 
   @override
   String get settingsAppearance => 'Aparência';
@@ -1454,6 +1467,50 @@ class AppLocalizationsPt extends AppLocalizations {
       'Guarde todas as suas notas num ficheiro ZIP para manter ou partilhar';
 
   @override
+  String get settingsBackupTitle => 'Fazer uma cópia dos meus dados';
+
+  @override
+  String get settingsBackupDesc =>
+      'Guarde tudo num ficheiro que pode restaurar mais tarde';
+
+  @override
+  String get settingsBackupWarning =>
+      'Não está cifrado: guarde-o num local seguro.';
+
+  @override
+  String get settingsRestoreTitle => 'Restaurar a partir de uma cópia';
+
+  @override
+  String get settingsRestoreDesc =>
+      'Substitua tudo o que está neste dispositivo pelo conteúdo de um ficheiro de cópia';
+
+  @override
+  String get restoreConfirmTitle => 'Substituir tudo?';
+
+  @override
+  String restoreConfirmBody(String date, int chapters, int notes) {
+    return '$date\n\nCapítulos lidos: $chapters\nNotas: $notes\n\nTudo o que está agora neste dispositivo será substituído. Não é possível anular.';
+  }
+
+  @override
+  String get restoreConfirmAction => 'Substituir';
+
+  @override
+  String get restoreDone => 'Os seus dados foram restaurados.';
+
+  @override
+  String get restoreErrorNotABackup =>
+      'Esse ficheiro não é uma cópia do JW Streak.';
+
+  @override
+  String get restoreErrorTooNew =>
+      'Esta cópia foi feita por uma versão mais recente do JW Streak. Atualize a aplicação e tente de novo.';
+
+  @override
+  String get restoreErrorCorrupt =>
+      'Este ficheiro de cópia está danificado e não pode ser lido. Nada foi alterado neste dispositivo.';
+
+  @override
   String get notesLibraryDeleteTooltip => 'Excluir';
 
   @override
@@ -1671,6 +1728,13 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get notifStreakRiskBody =>
       'Você ainda não esteve ativo hoje. Leia um capítulo ou faça um questionário para mantê-la.';
+
+  @override
+  String get notifStreakStartTitle => 'Ainda tens tempo hoje ✨';
+
+  @override
+  String get notifStreakStartBody =>
+      'Lê um capítulo ou faz um quiz antes da meia-noite para começares a tua sequência.';
 
   @override
   String get easterEggHeartBody => 'Eu também te amo :)';

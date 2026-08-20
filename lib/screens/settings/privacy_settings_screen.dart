@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/app_lock_service.dart';
+import '../../services/backup_service.dart';
 import '../../services/local_db_service.dart';
 import '../../services/note_export.dart';
+import '../../widgets/restore_backup_flow.dart';
 import 'settings_common.dart';
 
 /// The app lock. Its own page rather than a row buried among the reminder
@@ -24,6 +31,8 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
   /// hand the user an empty archive.
   int _noteCount = 0;
   bool _isExporting = false;
+  bool _isBackingUp = false;
+  bool _isRestoring = false;
 
   // null while we're still asking the platform whether the device can
   // authenticate at all. A device with no screen lock set up never gets the
@@ -108,6 +117,61 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
     }
   }
 
+  /// Writes the whole database to a JSON file and hands it to the share
+  /// sheet. The file never goes anywhere on its own — where it lands is
+  /// entirely the reader's choice, which is the point.
+  Future<void> _backupData() async {
+    setState(() => _isBackingUp = true);
+    try {
+      final BackupService backup = BackupService();
+      final PackageInfo info = await PackageInfo.fromPlatform();
+      final String json = await backup.exportToJson(
+        appVersion: '${info.version}+${info.buildNumber}',
+      );
+      final Directory dir = await getTemporaryDirectory();
+      final File file = File(
+        '${dir.path}/${backup.fileNameFor(DateTime.now())}',
+      );
+      await file.writeAsString(json);
+      if (!mounted) {
+        return;
+      }
+      await SharePlus.instance.share(
+        ShareParams(
+          files: <XFile>[XFile(file.path, mimeType: 'application/json')],
+        ),
+      );
+    } catch (error) {
+      if (mounted) {
+        showSettingsError(context, error);
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isBackingUp = false);
+      }
+    }
+  }
+
+  Future<void> _restoreData() async {
+    setState(() => _isRestoring = true);
+    try {
+      if (await pickAndRestoreBackup(context)) {
+        final int noteCount = await _dbService.getNotesCount();
+        if (mounted) {
+          setState(() => _noteCount = noteCount);
+        }
+      }
+    } catch (error) {
+      if (mounted) {
+        showSettingsError(context, error);
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isRestoring = false);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
@@ -149,6 +213,41 @@ class _PrivacySettingsScreenState extends State<PrivacySettingsScreen> {
                   )
                 : const Icon(Icons.chevron_right_rounded),
             onTap: _noteCount == 0 || _isExporting ? null : _exportNotes,
+          ),
+        ),
+        Card.filled(
+          shape: settingsSectionShape(context),
+          child: ListTile(
+            leading: const Icon(Icons.backup_outlined),
+            title: Text(l10n.settingsBackupTitle),
+            subtitle: Text(
+              '${l10n.settingsBackupDesc}\n\n${l10n.settingsBackupWarning}',
+            ),
+            isThreeLine: true,
+            trailing: _isBackingUp
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  )
+                : const Icon(Icons.chevron_right_rounded),
+            onTap: _isBackingUp ? null : _backupData,
+          ),
+        ),
+        Card.filled(
+          shape: settingsSectionShape(context),
+          child: ListTile(
+            leading: const Icon(Icons.settings_backup_restore),
+            title: Text(l10n.settingsRestoreTitle),
+            subtitle: Text(l10n.settingsRestoreDesc),
+            trailing: _isRestoring
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  )
+                : const Icon(Icons.chevron_right_rounded),
+            onTap: _isRestoring ? null : _restoreData,
           ),
         ),
       ],

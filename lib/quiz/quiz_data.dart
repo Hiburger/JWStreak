@@ -8602,13 +8602,13 @@ _extraQuizzes = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'Où Jacob et sa famille se sont-ils installés en Égypte ?',
       options: <String>[
-        'Au pays de Goshen',
+        'Au pays de Goshèn',
         'À Memphis',
         'À Thèbes',
         'Au Sinaï',
       ],
       correctIndex: 0,
-      explanation: 'Pharaon leur donne la région de Goshen (Genèse 47).',
+      explanation: 'Pharaon leur donne la région de Goshèn (Genèse 47).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Canaan', 'Ramsès', 'Sichem'],
     ),
@@ -9238,6 +9238,48 @@ bool isCheckpointAvailable({
     }
   }
   return true;
+}
+
+/// Earliest unlocked, not-yet-taken quiz checkpoint in [currentBook] — the
+/// book the reader is currently working through, not the whole Bible.
+///
+/// Scoped to that one book on purpose: searching every book from Genesis for
+/// the first unlocked-but-untaken quiz means someone who read on to (say)
+/// Joshua but never got around to the Genesis 1-7 quiz keeps being offered
+/// "Genesis 1-7" — a quiz with nothing to do with what they're reading
+/// today. This returns null (no quiz to suggest) once [currentBook] itself
+/// has no quiz ready yet, rather than reaching for an unrelated book's.
+///
+/// [currentBook] null (the whole Bible finished) also returns null.
+Checkpoint? pendingQuizCheckpointFor({
+  required BibleBook? currentBook,
+  required Set<String> coveredKeys,
+  required Set<String> completedQuizIds,
+  String? languageCode,
+}) {
+  if (currentBook == null) {
+    return null;
+  }
+  final List<Checkpoint> checkpoints = checkpointsForBook(
+    currentBook,
+    languageCode: languageCode,
+  );
+  for (final Checkpoint cp in checkpoints) {
+    if (!cp.hasQuiz || completedQuizIds.contains(cp.id)) {
+      continue;
+    }
+    final bool unlocked = isCheckpointAvailable(
+      checkpoint: cp,
+      checkpointsInBook: checkpoints,
+      isChapterCovered: (int c) =>
+          coveredKeys.contains(bibleChapterKey(currentBook.id, c)),
+      isQuizDone: (String id) => completedQuizIds.contains(id),
+    );
+    if (unlocked) {
+      return cp;
+    }
+  }
+  return null;
 }
 
 /// Builds a mixed "review" quiz drawing questions from every authored quiz the

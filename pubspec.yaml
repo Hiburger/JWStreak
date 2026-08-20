@@ -24,7 +24,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # The build number after the "+" must increase on every release built for
 # distribution, even a rebuild of the same version name; it is never shown to
 # the user, only Android uses it to tell two builds apart.
-version: 1.6.2+13
+version: 1.7.0+14
 
 environment:
   sdk: ^3.12.2
@@ -58,6 +58,7 @@ dependencies:
   permission_handler: ^11.3.1
   local_auth: ^3.0.2
   archive: ^4.0.9
+  file_selector: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ dev_dependencies:
   # the values*/styles.xml splash themes) — nothing in app code calls its
   # Dart API, so it doesn't need to ship in the app itself.
   flutter_native_splash: ^2.4.8
+  sqflite_common_ffi: ^2.4.2+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

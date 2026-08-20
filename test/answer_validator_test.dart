@@ -55,6 +55,38 @@ void main() {
       expect(validator.matches('该隐。', <String>['该隐']), isTrue);
     });
 
+    test('a leading article the question did not ask for', () {
+      expect(validator.matches('Una colomba', <String>['colomba']), isTrue);
+      expect(validator.matches('La colomba', <String>['colomba']), isTrue);
+      expect(validator.matches('the dove', <String>['dove']), isTrue);
+      expect(validator.matches('el arca', <String>['arca']), isTrue);
+    });
+
+    test('an answer phrased as a sentence around the expected words', () {
+      expect(
+        validator.matches('interpretò i sogni', <String>['i sogni']),
+        isTrue,
+      );
+      expect(
+        validator.matches('he interpreted the dreams', <String>['dreams']),
+        isTrue,
+      );
+    });
+
+    test('extra words plus a typo still counts', () {
+      expect(validator.matches('una colmba', <String>['colomba']), isTrue);
+    });
+
+    test('a name without the word introducing it', () {
+      expect(validator.matches('Sinaï', <String>['Au mont Sinaï']), isTrue);
+      expect(validator.matches('Séba', <String>['La reine de Séba']), isTrue);
+      expect(validator.matches('Juda', <String>['la tribu de Juda']), isTrue);
+      expect(
+        validator.matches('Elijah', <String>['the prophet Elijah']),
+        isTrue,
+      );
+    });
+
     test('Cyrillic ё typed as е', () {
       expect(validator.matches('Ноев', <String>['Ноёв']), isTrue);
     });
@@ -76,6 +108,50 @@ void main() {
       expect(validator.matches('Moise', <String>['Abraham']), isFalse);
     });
 
+    test('a partial answer that drops an expected word', () {
+      // Leniency runs one way only: extra words are forgiven, missing ones
+      // are not, or "Adam" would pass for "Adam and Eve" !
+      expect(validator.matches('Adam', <String>['Adam et Ève']), isFalse);
+      expect(
+        validator.matches('la tour', <String>['la tour de Babel']),
+        isFalse,
+      );
+    });
+
+    test('a wall of text that happens to contain the answer', () {
+      expect(
+        validator.matches(
+          'honestly I have no idea but maybe it was the dove or something',
+          <String>['dove'],
+        ),
+        isFalse,
+      );
+    });
+
+    test('filler words alone are not an answer', () {
+      expect(validator.matches('la', <String>['la colomba']), isFalse);
+      expect(validator.matches('the of and', <String>['the dove']), isFalse);
+    });
+
+    test('the introducing word on its own', () {
+      expect(
+        validator.matches('la reine', <String>['La reine de Séba']),
+        isFalse,
+      );
+      expect(validator.matches('le mont', <String>['Au mont Sinaï']), isFalse);
+    });
+
+    test('a different name after the same introducing word', () {
+      expect(
+        validator.matches('mont Nébo', <String>['Au mont Sinaï']),
+        isFalse,
+      );
+    });
+
+    test('an answer that really is just a title still needs saying', () {
+      expect(validator.matches('Salomon', <String>['le roi']), isFalse);
+    });
+
     test('too many typos', () {
       expect(validator.matches('Abrhm', <String>['Abraham']), isFalse);
     });
@@ -89,6 +165,30 @@ void main() {
     test('leaves Cyrillic and CJK letters intact', () {
       expect(FuzzyAnswerValidator.normalize('Каин'), 'каин');
       expect(FuzzyAnswerValidator.normalize('该隐'), '该隐');
+    });
+  });
+
+  group('word-bank answers get no latitude for extra words', () {
+    test('selecting the answer plus a distractor is wrong', () {
+      expect(
+        validator.matches('Adam et Ève Caïn', <String>[
+          'Adam et Ève',
+        ], allowExtraWords: false),
+        isFalse,
+      );
+    });
+
+    test('the exact answer still passes', () {
+      expect(
+        validator.matches('Adam et Ève', <String>[
+          'Adam et Ève',
+        ], allowExtraWords: false),
+        isTrue,
+      );
+    });
+
+    test('typed answers keep their latitude', () {
+      expect(validator.matches('Una colomba', <String>['colomba']), isTrue);
     });
   });
 }

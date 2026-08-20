@@ -99,17 +99,17 @@ authoredQuizzesItC1 = <String, List<QuizQuestion>>{
     QuizQuestion(
       text: 'In cosa nascose la madre di Mosè il bambino?',
       options: <String>[
-        'Un cesto di giunchi sul Nilo',
+        'Un cesto sul Nilo',
         'Una grotta',
         'Una tenda',
         'Un pozzo',
       ],
       correctIndex: 0,
       explanation:
-          'Mosè viene deposto in un cesto di giunchi tra le canne '
-          '(Esodo 2).',
+          'Il cesto era fatto di giunchi e spalmato di bitume e pece, '
+          'nascosto tra le canne del Nilo (Esodo 2).',
       type: QuizAnswerType.wordBank,
-      wordBankDistractors: <String>['barca', 'fiume', 'papiro'],
+      wordBankDistractors: <String>['barca', 'grotta', 'palazzo'],
     ),
     QuizQuestion(
       text: 'Come apparve Geova a Mosè sul monte Oreb?',
@@ -1386,14 +1386,9 @@ extraQuizzesItC1 = <String, List<QuizQuestion>>{
     ),
     QuizQuestion(
       text: 'Dove si stabilirono Giacobbe e la sua famiglia in Egitto?',
-      options: <String>[
-        'Nel paese di Goscen',
-        'A Menfi',
-        'A Tebe',
-        'Nel Sinai',
-      ],
+      options: <String>['Nel paese di Gòsen', 'A Menfi', 'A Tebe', 'Nel Sinai'],
       correctIndex: 0,
-      explanation: 'Il faraone dà loro la regione di Goscen (Genesi 47).',
+      explanation: 'Il faraone dà loro la regione di Gòsen (Genesi 47).',
       type: QuizAnswerType.wordBank,
       wordBankDistractors: <String>['Egitto', 'Canaan', 'Nilo'],
     ),

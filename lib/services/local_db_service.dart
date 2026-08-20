@@ -117,6 +117,50 @@ class QuizResult {
   int get stars => total == 0 ? 0 : ((score / total) * 3).ceil().clamp(1, 3);
 }
 
+/// The streak count after a day of activity, or null when there is nothing
+/// to record.
+///
+/// Null covers two cases that both mean "leave the streak alone": activity
+/// was already counted today, and the stored chain sits *ahead* of today.
+///
+/// A chain in the future is what happens to someone who travels. Crossing
+/// westward over enough longitude moves the local date backwards, so a
+/// reading logged yesterday in Tokyo can be dated tomorrow once they land in
+/// Los Angeles. This used to fall through to `count = 1`: the difference came
+/// out negative, missed the "exactly one day" branch, and silently reset a
+/// long streak to 1 the moment a traveller opened the app after a flight.
+///
+/// The conservative reading is that the reader has done nothing wrong, so the
+/// streak is held where it is until the local date catches up with the chain.
+@visibleForTesting
+int? nextStreakCount({
+  required String? chainKey,
+  required DateTime today,
+  required int currentCount,
+}) {
+  if (chainKey == null) {
+    return 1; // First ever activity.
+  }
+  // tryParse, not parse: this value can come back from a restored backup,
+  // and a hand-edited or truncated file would otherwise throw here — inside
+  // the path that records a chapter as read. Losing the chain costs the
+  // reader a streak; throwing costs them the ability to mark anything read
+  // at all.
+  final DateTime? chain = DateTime.tryParse(chainKey);
+  if (chain == null) {
+    return 1;
+  }
+  final int gap = DateTime(
+    today.year,
+    today.month,
+    today.day,
+  ).difference(DateTime(chain.year, chain.month, chain.day)).inDays;
+  if (gap <= 0) {
+    return null;
+  }
+  return gap == 1 ? currentCount + 1 : 1;
+}
+
 class LocalDbService {
   LocalDbService._internal();
 
@@ -133,6 +177,79 @@ class LocalDbService {
   Future<Database> _getDb() async {
     _database ??= await _openDatabase();
     return _database!;
+  }
+
+  /// Closes and forgets the cached connection so a test can start from a
+  /// clean database. Production code never needs this — the singleton is
+  /// meant to live for the whole life of the process.
+  @visibleForTesting
+  Future<void> resetForTesting() async {
+    await _database?.close();
+    _database = null;
+  }
+
+  /// Every table a backup covers, in the order a restore must write them.
+  /// Order matters only for readability here — none of these carry foreign
+  /// keys — but keeping one list means a table added later gets backed up by
+  /// changing a single line rather than three functions.
+  static const List<String> backupTables = <String>[
+    'readings',
+    'notes',
+    'quiz_results',
+    'reflections',
+    'reminders',
+    'frozen_days',
+    'achievements',
+    'easter_eggs',
+    'settings',
+  ];
+
+  /// The schema version a backup file records, so a later app version can
+  /// tell how to read it.
+  static const int schemaVersion = 7;
+
+  /// Raw rows of [table], for the backup serializer. Deliberately not a
+  /// general-purpose query hatch: it accepts only the known backup tables,
+  /// so a caller can't reach arbitrary SQL through it.
+  Future<List<Map<String, Object?>>> readBackupTable(String table) async {
+    assert(backupTables.contains(table), 'unknown backup table: $table');
+    final Database db = await _getDb();
+    return db.query(table);
+  }
+
+  /// Replaces the whole database with [tables] in one transaction: either
+  /// every table is swapped or none is, so a file that turns out to be bad
+  /// partway through can't leave the reader with half their data gone.
+  ///
+  /// Columns this build doesn't know are dropped instead of throwing. That
+  /// is what lets a backup taken on a newer version still restore here — it
+  /// brings back everything the two versions have in common rather than
+  /// being refused outright.
+  Future<void> replaceAllData(
+    Map<String, List<Map<String, Object?>>> tables,
+  ) async {
+    final Database db = await _getDb();
+    await db.transaction((Transaction txn) async {
+      for (final String table in backupTables) {
+        final Set<String> columns = <String>{
+          for (final Map<String, Object?> column in await txn.rawQuery(
+            'PRAGMA table_info($table)',
+          ))
+            column['name']! as String,
+        };
+        await txn.delete(table);
+        for (final Map<String, Object?> row
+            in tables[table] ?? const <Map<String, Object?>>[]) {
+          final Map<String, Object?> known = <String, Object?>{
+            for (final MapEntry<String, Object?> cell in row.entries)
+              if (columns.contains(cell.key)) cell.key: cell.value,
+          };
+          if (known.isNotEmpty) {
+            await txn.insert(table, known);
+          }
+        }
+      }
+    });
   }
 
   static const String _createNotesTableSql = '''
@@ -1206,20 +1323,21 @@ class LocalDbService {
     await _reconcileStreak(db);
 
     final DateTime today = _dateOnly(DateTime.now());
-    final String todayKey = _dayKey(today);
     final String? chain = await _getSetting(db, 'streak_chain');
-    if (chain == todayKey) {
-      return; // Already counted today.
+    final int current =
+        int.tryParse(await _getSetting(db, 'streak_count') ?? '0') ?? 0;
+
+    final int? count = nextStreakCount(
+      chainKey: chain,
+      today: today,
+      currentCount: current,
+    );
+    if (count == null) {
+      return; // Nothing to record — see nextStreakCount.
     }
 
-    int count = int.tryParse(await _getSetting(db, 'streak_count') ?? '0') ?? 0;
-    if (chain != null && today.difference(DateTime.parse(chain)).inDays == 1) {
-      count += 1;
-    } else {
-      count = 1;
-    }
     await _setSetting(db, 'streak_count', count.toString());
-    await _setSetting(db, 'streak_chain', todayKey);
+    await _setSetting(db, 'streak_chain', _dayKey(today));
     await _setSetting(db, 'streak_lost', '0');
   }
 

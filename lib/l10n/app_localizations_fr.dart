@@ -424,6 +424,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get welcomeFooter => 'Gratuite, libre et open source';
 
   @override
+  String get welcomeRestoreLink => 'J’ai déjà une sauvegarde';
+
+  @override
   String get onbContinue => 'Continuer';
 
   @override
@@ -558,7 +561,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Réafficher la visite de l\'écran d\'accueil';
 
   @override
-  String get settingsPrivacy => 'Confidentialité';
+  String get settingsPrivacy => 'Confidentialité et données';
 
   @override
   String get settingsAppLockTitle => 'Verrouiller l\'application';
@@ -671,11 +674,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsCatAboutDesc => 'Visite guidée, version, code source';
 
   @override
-  String get donationsHeadline => 'On n\'accepte pas encore de dons';
+  String get donationsHeadline => 'Si vous souhaitez aider';
 
   @override
   String get donationsLead =>
-      'JW Streak est gratuite, et il n\'y a pour l\'instant aucun moyen de faire un don. C\'est voulu, on n\'a tout simplement rien mis en place. Ça viendra peut-être plus tard, et on préfère te le dire franchement plutôt que de te surprendre un jour.';
+      'JW Streak est gratuit et le restera. Le développer coûte un peu d’argent et beaucoup de soirées : si l’application vous est utile, vous pouvez désormais soutenir le projet sur GitHub. Uniquement si vous le voulez — l’application fonctionne exactement pareil dans les deux cas.';
 
   @override
   String get donationsRow1Title => 'Ça a quand même un coût';
@@ -689,17 +692,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get donationsRow2Text =>
-      'JW Streak restera gratuite, libre et 100 % hors ligne. Pas de pubs, pas de pistage, aucun chapitre verrouillé ni fonction payante. Si les dons ouvrent un jour, donner restera totalement facultatif.';
+      'JW Streak reste gratuite, open source et entièrement hors ligne. Pas de publicité, pas de traçage, aucun chapitre verrouillé ni fonctionnalité payante. Soutenir ne débloque absolument rien : les donateurs ont exactement la même application que tout le monde.';
 
   @override
   String get donationsRow3Title => 'Aider sans rien dépenser';
 
   @override
   String get donationsRow3Text =>
-      'Parles-en à quelqu\'un que ça pourrait intéresser, signale une erreur de quiz ou un bug, ou continue simplement ta lecture. Franchement, ça compte déjà beaucoup.';
+      'Mets une étoile au projet sur GitHub, parles-en à quelqu’un que ça pourrait intéresser, signale une erreur de quiz ou un bug, ou continue simplement ta lecture. Franchement, ça compte déjà beaucoup.';
 
   @override
   String get donationsThanks => 'Merci d\'être là 💛';
+
+  @override
+  String get donationsSponsorButton => 'Soutenir sur GitHub';
+
+  @override
+  String get donationsStarButton => 'Mettre une étoile sur GitHub';
+
+  @override
+  String get donationsSponsorDisclaimer =>
+      'Ouvre GitHub dans votre navigateur. Cela soutient le développeur indépendant de JW Streak. Ce n’est pas un don religieux et cela n’a aucun lien avec les Témoins de Jéhovah, jw.org ou une congrégation.';
 
   @override
   String get settingsAppearance => 'Apparence';
@@ -1455,6 +1468,50 @@ class AppLocalizationsFr extends AppLocalizations {
       'Enregistrez toutes vos notes dans un fichier ZIP à garder ou à partager';
 
   @override
+  String get settingsBackupTitle => 'Sauvegarder mes données';
+
+  @override
+  String get settingsBackupDesc =>
+      'Enregistrez tout dans un fichier à restaurer sur un autre appareil';
+
+  @override
+  String get settingsBackupWarning =>
+      'Il n’est pas chiffré : conservez-le en lieu sûr.';
+
+  @override
+  String get settingsRestoreTitle => 'Restaurer une sauvegarde';
+
+  @override
+  String get settingsRestoreDesc =>
+      'Remplacez tout ce qui se trouve sur cet appareil par le contenu d’un fichier de sauvegarde';
+
+  @override
+  String get restoreConfirmTitle => 'Tout remplacer ?';
+
+  @override
+  String restoreConfirmBody(String date, int chapters, int notes) {
+    return '$date\n\nChapitres lus : $chapters\nNotes : $notes\n\nTout ce qui se trouve actuellement sur cet appareil sera remplacé. C’est irréversible.';
+  }
+
+  @override
+  String get restoreConfirmAction => 'Remplacer';
+
+  @override
+  String get restoreDone => 'Vos données ont été restaurées.';
+
+  @override
+  String get restoreErrorNotABackup =>
+      'Ce fichier n’est pas une sauvegarde JW Streak.';
+
+  @override
+  String get restoreErrorTooNew =>
+      'Cette sauvegarde a été créée par une version plus récente de JW Streak. Mettez l’application à jour, puis réessayez.';
+
+  @override
+  String get restoreErrorCorrupt =>
+      'Ce fichier de sauvegarde est endommagé et illisible. Rien n’a été modifié sur cet appareil.';
+
+  @override
   String get notesLibraryDeleteTooltip => 'Effacer';
 
   @override
@@ -1673,6 +1730,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get notifStreakRiskBody =>
       'Tu n\'as pas encore été actif aujourd\'hui. Lis un chapitre ou fais un quiz pour la garder.';
+
+  @override
+  String get notifStreakStartTitle => 'Il te reste du temps aujourd’hui ✨';
+
+  @override
+  String get notifStreakStartBody =>
+      'Lis un chapitre ou fais un quiz avant minuit pour lancer ta série.';
 
   @override
   String get easterEggHeartBody => 'Moi aussi je t\'aime :)';

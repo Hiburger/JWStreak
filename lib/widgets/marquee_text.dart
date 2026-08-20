@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A single line of text that scrolls steadily leftward to reveal what
-/// doesn't fit — only when it doesn't fit.
-///
-/// Built for the home banner's rotating greeting ("Good afternoon", "Happy
-/// reading", …): some of the greeting variants, in some languages, at some
-/// system font-size settings, run wider than the banner has room for, and an
-/// ellipsis quietly throws away the part that made it worth greeting the
-/// reader at all. Most of the time none of that applies and the text just
-/// sits still like a normal [Text] — the animation only exists for the
-/// specific case that needed it.
-///
-/// The scroll runs one way at a constant speed and wraps around, the way
-/// marquees usually behave. A second copy of the line trails the first
-/// across a [gap]; one pass travels exactly far enough that the trailing
-/// copy lands where the leading one began, so the reset is invisible.
-///
-/// The trailing copy is painted by a [Stack] *inside* the same box the
-/// single copy used to occupy, deliberately: this widget lives in the
-/// banner's `Row > Expanded`, and anything that changes the size it reports
-/// upward (an `OverflowBox`, an unbounded `Row`) collapses the banner around
-/// it. Whatever this draws, it must measure exactly as it always did.
 class MarqueeText extends StatefulWidget {
   const MarqueeText({
     required this.text,

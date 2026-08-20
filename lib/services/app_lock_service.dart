@@ -33,8 +33,21 @@ class AppLockService {
   /// Defaults to "not locked" if the setting can't be read. A database that
   /// won't open is already a broken app; turning that into a permanent
   /// lockout with no way back in would be the worse of the two failures.
+  ///
+  /// The same reasoning is why [isAvailable] is checked first. The lock
+  /// screen's only way out is the device credential prompt, so on a phone
+  /// with no screen lock configured the setting would strand the reader
+  /// outside their own data with no route back to the switch that turns it
+  /// off. That is not hypothetical: the setting travels in a backup, and
+  /// restoring onto a freshly wiped phone — before its owner has set up a
+  /// screen lock — is exactly the moment this feature is used. The stored
+  /// preference is left untouched, so the lock returns by itself once the
+  /// device can authenticate again.
   Future<bool> isEnabled() async {
     try {
+      if (!await isAvailable()) {
+        return false;
+      }
       return await _dbService.getAppLockEnabled();
     } catch (_) {
       return false;

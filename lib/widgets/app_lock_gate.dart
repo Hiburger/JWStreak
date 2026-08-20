@@ -8,7 +8,7 @@ import '../services/app_lock_service.dart';
 ///
 /// Re-locks when the app has been in the background longer than
 /// [_backgroundGrace]. That grace period exists because this app's main loop
-/// is "tap a chapter, read it in JW Library, come back" — re-authenticating on
+/// is "tap a chapter, read it in JW Library, come back" re-authenticating on
 /// every single return would make the feature the first thing anyone turns
 /// off. Coming back to a phone left alone for a while still asks again.
 class AppLockGate extends StatefulWidget {
@@ -29,9 +29,6 @@ class AppLockGateState extends State<AppLockGate> with WidgetsBindingObserver {
 
   bool _locked = false;
   bool _checking = true;
-  // True while the system's own biometric sheet is up. That sheet backgrounds
-  // the Flutter activity, so without this flag the resume it causes would be
-  // read as "user came back from elsewhere" and start a second prompt.
   bool _authenticating = false;
   DateTime? _leftAt;
 
@@ -81,21 +78,9 @@ class AppLockGateState extends State<AppLockGate> with WidgetsBindingObserver {
         DateTime.now().difference(leftAt) < _backgroundGrace) {
       return;
     }
-    // Only re-show the lock screen here, without auto-firing the system
-    // prompt: the Activity has just this instant come back to the
-    // foreground, and asking BiometricPrompt to appear in that exact window
-    // is unreliable — it can silently fail to attach. Left to a real tap on
-    // the Unlock button (a later frame, unambiguously foregrounded), it
-    // shows every time.
     _lockIfEnabled(promptImmediately: false);
   }
 
-  /// Shows the system prompt. Staying locked on failure is deliberate: the
-  /// user can retry from the button, and there is no in-app passcode fallback
-  /// to fall down to. The whole body runs in a finally so _authenticating
-  /// always clears — the button reads "does nothing" forever if any
-  /// exception here (not just local_auth's own PlatformException) left it
-  /// stuck true.
   Future<void> _promptUnlock() async {
     if (_authenticating || !mounted) {
       return;

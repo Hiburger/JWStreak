@@ -180,6 +180,10 @@ class _QuizScreenState extends State<QuizScreen> {
       _lastAnswerCorrect = _validator.matches(
         input,
         _current.allAcceptedAnswers,
+        // Word-bank answers are built from a fixed set of chips, so an extra
+        // word means the reader picked wrongly — not that they phrased it
+        // their own way. Only typed answers get that latitude.
+        allowExtraWords: _current.type != QuizAnswerType.wordBank,
       );
       if (_lastAnswerCorrect) {
         _score++;

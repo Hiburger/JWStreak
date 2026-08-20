@@ -2,6 +2,77 @@
 
 All notable changes to JW Streak are recorded here. Dates are release dates.
 
+## [1.7.0] — 2026-08-20
+
+### Added
+
+- **Back up and restore your data.** Settings → Your privacy & data writes
+  everything — chapters read, notes, reflections, quiz results, streak,
+  reminders, achievements and every setting — to a single JSON file, and
+  hands it to the share sheet. Where it goes is entirely your choice; nothing
+  is uploaded. Restoring shows you what the file holds (its date, and how many
+  chapters and notes) before anything is replaced, and the whole swap happens
+  in one transaction, so a file that turns out to be bad cannot leave you with
+  half your data gone. The file is plain readable JSON on purpose: your notes
+  stay recoverable with a text editor even if this app disappears.
+- **Restore from the welcome screen**, so setting up a replacement phone
+  doesn't mean inventing a reading position and a reminder first, only for the
+  restore to overwrite both. The backup carries your onboarding state, so you
+  land straight on your own dashboard.
+- **Support the project.** The Donations page now links to GitHub Sponsors,
+  and makes the point that starring the repository is a way to help that costs
+  nothing. Sponsoring unlocks nothing in the app and never will.
+- **An evening nudge with a live countdown.** If the day is still empty at
+  20:00, the notification carries a timer ticking down to midnight rather than
+  a sentence you have to work out. People with no streak yet get it too, worded
+  for them — they were previously the only ones who never got reminded.
+
+### Changed
+
+- **Reminders no longer nag you about something you have already done.** Read
+  or take a quiz today and the rest of today's reminders stay quiet; the daily
+  repeat is untouched.
+- **Reminder suggestions are toggles.** Tap one to set it, tap again to remove
+  it. The separate Add button is gone, and confirming a time now says what it
+  will do instead of "OK".
+- **The "streak at risk" card waits until the evening.** It used to be up from
+  the moment you opened the app, warning at breakfast about a day with sixteen
+  hours left in it.
+- **The home screen only offers quizzes for the book you are actually reading**
+  instead of any unlocked checkpoint anywhere in the Bible.
+- **Typed quiz answers are read more generously.** Answering in a whole phrase
+  where a single word was expected now counts. Answers assembled from word
+  chips are unaffected — there, an extra word really is a wrong answer.
+- Settings page titles scale down to fit rather than being cut off, which
+  affected longer translations.
+- Privacy settings renamed **Your privacy & data**.
+
+### Fixed
+
+- **Travelling could silently reset your streak.** Flying west far enough moves
+  the local date backwards, and a streak of any length dropped to 1 the moment
+  the app was opened after landing. The streak is now held until the date
+  catches up.
+- **Reminders kept the times of the country you left.** They are now
+  rescheduled against the current time zone whenever the app comes back to the
+  foreground. Reminder times are also worked out by the calendar rather than by
+  adding 24 hours, so a daylight-saving change no longer drifts them by an hour.
+- **The save button on a reflection was hidden behind the keyboard**, which
+  made it impossible to save what you had just written.
+- **The app lock could strand you.** Turning it on and then restoring onto a
+  phone with no screen lock configured left no way in, because the only control
+  on the lock screen is a credential prompt that device cannot show. The lock
+  now stands aside until the device can authenticate again; your setting is
+  kept.
+
+### Quiz content
+
+- The Italian question about where Moses' mother hid him offered "fiume" as a
+  wrong word while the answer read "sul Nilo" — natural Italian was marked
+  wrong. The answer is shorter now, and what the basket was made of moved to
+  the fact shown afterwards. The Portuguese version had the same shape.
+- Goshen corrected to "Gòsen" in Italian.
+
 ## [1.6.2] — 2026-08-15
 
 ### Added

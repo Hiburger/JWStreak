@@ -910,6 +910,12 @@ abstract class AppLocalizations {
   /// **'Free, libre, and open source'**
   String get welcomeFooter;
 
+  /// No description provided for @welcomeRestoreLink.
+  ///
+  /// In en, this message translates to:
+  /// **'I already have a backup'**
+  String get welcomeRestoreLink;
+
   /// No description provided for @onbContinue.
   ///
   /// In en, this message translates to:
@@ -1147,7 +1153,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPrivacy.
   ///
   /// In en, this message translates to:
-  /// **'Privacy'**
+  /// **'Your privacy & data'**
   String get settingsPrivacy;
 
   /// No description provided for @settingsAppLockTitle.
@@ -1351,13 +1357,13 @@ abstract class AppLocalizations {
   /// No description provided for @donationsHeadline.
   ///
   /// In en, this message translates to:
-  /// **'We\'re not taking donations yet'**
+  /// **'If you’d like to help'**
   String get donationsHeadline;
 
   /// No description provided for @donationsLead.
   ///
   /// In en, this message translates to:
-  /// **'JW Streak is free, and right now there\'s no way to donate. That\'s on purpose, we simply haven\'t set anything up. We may open it later, and we\'d rather tell you plainly than surprise you with it one day.'**
+  /// **'JW Streak is free and stays free. Building it costs a little money and a lot of evenings, so if it has been useful to you, you can now sponsor the project on GitHub. Only if you want to — the app works exactly the same either way.'**
   String get donationsLead;
 
   /// No description provided for @donationsRow1Title.
@@ -1381,7 +1387,7 @@ abstract class AppLocalizations {
   /// No description provided for @donationsRow2Text.
   ///
   /// In en, this message translates to:
-  /// **'JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. If donations ever open, giving will be entirely optional.'**
+  /// **'JW Streak stays free, open source and fully offline. No ads, no tracking, no locked chapters or paid features. Sponsoring unlocks nothing at all — supporters get exactly the same app as everyone else.'**
   String get donationsRow2Text;
 
   /// No description provided for @donationsRow3Title.
@@ -1393,7 +1399,7 @@ abstract class AppLocalizations {
   /// No description provided for @donationsRow3Text.
   ///
   /// In en, this message translates to:
-  /// **'Tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.'**
+  /// **'Give the project a star on GitHub, tell someone who might like it, report a quiz mistake or a bug, or simply keep up your reading. Honestly, that already means a lot.'**
   String get donationsRow3Text;
 
   /// No description provided for @donationsThanks.
@@ -1401,6 +1407,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thank you for being here 💛'**
   String get donationsThanks;
+
+  /// No description provided for @donationsSponsorButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sponsor on GitHub'**
+  String get donationsSponsorButton;
+
+  /// No description provided for @donationsStarButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Star the project on GitHub'**
+  String get donationsStarButton;
+
+  /// No description provided for @donationsSponsorDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens GitHub in your browser. This supports the independent developer of JW Streak. It is not a religious donation and has no connection to Jehovah’s Witnesses, jw.org or any congregation.'**
+  String get donationsSponsorDisclaimer;
 
   /// No description provided for @settingsAppearance.
   ///
@@ -2661,6 +2685,78 @@ abstract class AppLocalizations {
   /// **'Save every note to a ZIP file you can keep or share'**
   String get settingsExportNotesDesc;
 
+  /// No description provided for @settingsBackupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up my data'**
+  String get settingsBackupTitle;
+
+  /// No description provided for @settingsBackupDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Save everything to one file you can restore later'**
+  String get settingsBackupDesc;
+
+  /// No description provided for @settingsBackupWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Not encrypted — keep it somewhere safe.'**
+  String get settingsBackupWarning;
+
+  /// No description provided for @settingsRestoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore from a backup'**
+  String get settingsRestoreTitle;
+
+  /// No description provided for @settingsRestoreDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace everything on this device with the contents of a backup file'**
+  String get settingsRestoreDesc;
+
+  /// No description provided for @restoreConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace everything?'**
+  String get restoreConfirmTitle;
+
+  /// No description provided for @restoreConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}\n\nChapters read: {chapters}\nNotes: {notes}\n\nEverything currently on this device will be replaced. This cannot be undone.'**
+  String restoreConfirmBody(String date, int chapters, int notes);
+
+  /// No description provided for @restoreConfirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get restoreConfirmAction;
+
+  /// No description provided for @restoreDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data has been restored.'**
+  String get restoreDone;
+
+  /// No description provided for @restoreErrorNotABackup.
+  ///
+  /// In en, this message translates to:
+  /// **'That file isn’t a JW Streak backup.'**
+  String get restoreErrorNotABackup;
+
+  /// No description provided for @restoreErrorTooNew.
+  ///
+  /// In en, this message translates to:
+  /// **'This backup was made by a newer version of JW Streak. Update the app, then try again.'**
+  String get restoreErrorTooNew;
+
+  /// No description provided for @restoreErrorCorrupt.
+  ///
+  /// In en, this message translates to:
+  /// **'This backup file is damaged and can’t be read. Nothing on this device was changed.'**
+  String get restoreErrorCorrupt;
+
   /// No description provided for @notesLibraryDeleteTooltip.
   ///
   /// In en, this message translates to:
@@ -3050,6 +3146,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You haven\'t been active today yet. Read a chapter or take a quiz to keep it.'**
   String get notifStreakRiskBody;
+
+  /// No description provided for @notifStreakStartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'There’s still time today ✨'**
+  String get notifStreakStartTitle;
+
+  /// No description provided for @notifStreakStartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Read a chapter or take a quiz before midnight to start your streak.'**
+  String get notifStreakStartBody;
 
   /// No description provided for @easterEggHeartBody.
   ///

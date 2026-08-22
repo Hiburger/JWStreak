@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 
-/// Replaces the app's old SnackBar-based feedback (errors, guard messages
-/// like "read more first" or "this reminder already exists") with a small
-/// modal the user explicitly dismisses. A transient bottom banner is easy to
-/// miss — especially while scrolling — and this app has already established
-/// the "small dialog with an icon" pattern for these kinds of things (see
-/// freeze_earned_dialog.dart).
 Future<void> showMessageDialog(
   BuildContext context, {
   required String message,

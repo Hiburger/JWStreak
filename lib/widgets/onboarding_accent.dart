@@ -4,14 +4,6 @@
 
 import 'package:flutter/material.dart';
 
-/// A small, deliberately chosen palette of background/foreground pairs for
-/// onboarding icons. Material 3's automatic primary/secondary/tertiary
-/// containers, under this app's blue brand seed, produce two nearly
-/// identical pale blues plus one odd pink — inconsistent and hard to read as
-/// distinct categories. These fixed pairs are chosen to be clearly
-/// distinguishable and to echo colors already used elsewhere in the app
-/// (amber for quizzes/streak matches, purple for the logo), while still
-/// adapting between light and dark themes.
 class OnboardingAccent {
   const OnboardingAccent({
     required Color lightBg,

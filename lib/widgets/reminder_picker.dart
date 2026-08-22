@@ -204,11 +204,7 @@ class ReminderPresetChip extends StatelessWidget {
 }
 
 /// A row of the three preset chips, each one a switch for that reminder.
-///
-/// Tapping a chip sets that reminder; tapping it again removes it. The chips
-/// used to only stage a time that a separate "Add this reminder" button then
-/// committed — two taps and a trip down the page to say one thing, and the
-/// highlight showed the last chip touched rather than what was actually set.
+/// tap -> enable | tap again -> disable
 class ReminderPresetRow extends StatelessWidget {
   const ReminderPresetRow({
     required this.presets,
@@ -223,9 +219,6 @@ class ReminderPresetRow extends StatelessWidget {
   /// Whether a reminder already exists at this preset's time.
   final bool Function(ReminderTimePreset preset) isActive;
   final ValueChanged<ReminderTimePreset> onToggle;
-
-  /// False at the reminder limit. Chips already on stay tappable so they can
-  /// be turned off; the rest go quiet instead of failing silently.
   final bool canAdd;
 
   @override

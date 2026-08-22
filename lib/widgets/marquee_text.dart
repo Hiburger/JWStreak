@@ -170,9 +170,6 @@ class _MarqueeTextState extends State<MarqueeText>
 
         final Animation<double>? offset = _offset;
         if (offset == null) {
-          // Either it fits, or the animation hasn't spun up for this frame
-          // yet — either way, a plain clipped line is always a safe thing
-          // to show, never a frame of raw overflow.
           return Text(
             widget.text,
             style: widget.style,

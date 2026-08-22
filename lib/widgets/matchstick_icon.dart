@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A single lit matchstick, hand-drawn: Material's icon font has no glyph
-/// for one.
-///
-/// Used for the freeze count in the home screen's streak banner. That badge
-/// used to borrow the streak's own flame glyph outright, which meant "your
-/// streak is lit" and "how many freezes you're holding" looked identical —
-/// a spare match reads as its own thing: something kept in reserve to
-/// relight the streak if it goes out, not the fire itself. It keeps a small
-/// flame of its own (unlike the plain unlit stick tried first, which read as
-/// a pin) because that's the one feature that makes "matchstick" unambiguous
-/// at a 16dp badge size — a bare stick-with-a-bump could be almost anything.
 class MatchstickIcon extends StatelessWidget {
   const MatchstickIcon({required this.color, this.size = 16, super.key});
 

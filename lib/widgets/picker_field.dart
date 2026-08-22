@@ -10,14 +10,6 @@ class PickerEntry<T> {
 
 /// A single-choice field styled to match the card it sits in: flat outline,
 /// tap to open, tap an entry to pick.
-///
-/// Opens a [PickerSheet] rather than a dropdown menu. [DropdownMenu] (tried
-/// first) draws its popup as a plain, non-virtualized `SingleChildScrollView`
-/// internally — every entry gets built and kept alive whether it's on screen
-/// or not. Fine for a handful of options, but the book list is 66 entries
-/// and some chapter lists run past 100 (Psalms is 150), and scrolling all of
-/// them live is what made the previous version stutter. A bottom sheet over
-/// a real `ListView.builder` only ever builds what's actually visible.
 class PickerField<T> extends StatelessWidget {
   const PickerField({
     required this.currentLabel,

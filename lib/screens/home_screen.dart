@@ -38,6 +38,9 @@ import 'reminder_setup_screen.dart';
 import 'settings_screen.dart';
 import 'streak_detail_screen.dart';
 
+final RouteObserver<PageRoute<dynamic>> kHomeRouteObserver =
+    RouteObserver<PageRoute<dynamic>>();
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
@@ -68,7 +71,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
+class _HomeScreenState extends State<HomeScreen>
+    with WidgetsBindingObserver, RouteAware {
   final LocalDbService _dbService = LocalDbService();
   final NotificationService _notificationService = NotificationService();
   final DeepLinkService _deepLinkService = DeepLinkService();
@@ -88,47 +92,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Set<String> _frozenDays = const <String>{};
   Set<String> _readKeys = const <String>{};
 
-  /// Which order chapters come in, and where in it the reader said they'd
-  /// pick up. Both feed [_nextUnread] — the reading card is the only place
-  /// the plan is visible, since everything else works off chapter keys.
+  int _statsEntranceToken = 0;
+
   ReadingPlan _readingPlan = ReadingPlan.canonical;
   String? _planStartKey;
 
-  /// [_readKeys] plus everything before the resume point.
-  ///
-  /// Kept separate because the two answer different questions. _readKeys is
-  /// what was genuinely read here, and is the only thing streaks, totals,
-  /// quiz checkpoints and achievements are allowed to see. This one is how
-  /// much of the Bible the reader has covered, which is what the progress
-  /// bar means and what deciding the next chapter needs.
   Set<String> _coveredKeys = const <String>{};
   Set<String> _completedQuiz = const <String>{};
   int _totalStars = 0;
   bool _isLoading = true;
 
-  // Derived from _readKeys / _completedQuiz, which only change in
-  // _refreshDashboard — so they're computed there, once, rather than in
-  // build(). _nextUnread walks the reading plan and _pendingQuizCheckpoint
-  // rebuilds a book's checkpoint list, which is far too much to redo on
-  // every rebuild: a scroll, a theme change or a tour step would each pay
-  // for it again.
   _ChapterRef? _nextChapter;
   Checkpoint? _pendingCheckpoint;
-
-  /// Set the moment "Open" is tapped for the chapter on the reading card, so
-  /// "Mark as read" can stay disabled until the user has actually gone to
-  /// read it at least once. Compared against [_nextChapter] rather than kept
-  /// as a bare bool: once that chapter changes (marked read, or a fresh
-  /// unread one loads), the comparison naturally fails again without any
-  /// extra reset logic.
   String? _openedChapterKey;
 
-  /// Whether an achievement unlocked since the achievements screen was last
-  /// actually opened — what puts the small dot on the trophy icon.
   bool _hasNewAchievement = false;
 
-  // Targets for the guided tour. Adding a step is just: declare a key here,
-  // attach it below, and add one entry to _tourSteps().
   final GlobalKey _tourStreakKey = GlobalKey();
   final GlobalKey _tourReadingKey = GlobalKey();
   final GlobalKey _tourBrowseKey = GlobalKey();
@@ -154,16 +133,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    kHomeRouteObserver.unsubscribe(this);
     _riskCardTimer?.cancel();
     super.dispose();
   }
 
-  /// Wakes the screen up at [kStreakRiskHour] so the at-risk card appears on
-  /// its own.
-  ///
-  /// Without this, someone sitting on the home screen at 19:58 would still be
-  /// looking at a calm dashboard at 20:05 — the card only shows up on a
-  /// rebuild, and nothing else forces one while the app stays open.
   void _scheduleRiskCardRefresh() {
     _riskCardTimer?.cancel();
     final DateTime now = DateTime.now();
@@ -185,29 +159,30 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Coming back from the background is the moment a traveller actually
-    // opens the app after landing: the date may have moved, the time zone
-    // may have changed, and neither initState nor a route pop will fire
-    // here. Refreshing rebuilds the streak view and reschedules reminders
-    // against the current zone.
     if (state == AppLifecycleState.resumed && !_isLoading) {
+      setState(() => _statsEntranceToken++);
       _refreshDashboard();
+    }
+  }
+
+  @override
+  void didPopNext() {
+    if (mounted) {
+      setState(() => _statsEntranceToken++);
     }
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // _pendingCheckpoint holds quiz content in the current language, so it
-    // has to be rebuilt when the locale changes — this widget survives that
-    // change (it's keyed) and would otherwise keep showing the old language.
+    kHomeRouteObserver.subscribe(
+      this,
+      ModalRoute.of(context) as PageRoute<dynamic>,
+    );
+
     _recomputeDerived();
   }
 
-  /// Recomputes the two expensive, data-derived values behind the "continue
-  /// reading" card and the "new quiz unlocked" banner. Called when the data
-  /// changes (_refreshDashboard) or the locale does (didChangeDependencies) —
-  /// never from build().
   void _recomputeDerived() {
     // _nextChapter first: _pendingQuizCheckpoint reads it to find the
     // reader's current book.
@@ -239,10 +214,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   /// Steps of the home-screen walkthrough, in the order they're shown.
   List<TourStep> _tourSteps(AppLocalizations l10n) => <TourStep>[
-    // Corner radii match each target's own decoration (see _StreakHero,
-    // _ContinueReadingCard/_AllReadCard, _BrowseBibleTile, _ProgressCard,
-    // _QuickActionTile) so the highlight traces the actual shape instead of
-    // a generic box.
     TourStep(
       targetKey: _tourStreakKey,
       title: l10n.tourStreakTitle,
@@ -351,10 +322,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       (int a, int b) => a + b,
     );
     final Set<String> frozenDays = fetched[8] as Set<String>;
-    // Achievement stats independently re-read several of the same things
-    // (readKeys, starsByBook, streakState, reminders) — hand over what's
-    // already sitting right here instead of paying for a second copy of
-    // each query.
     final AchievementStats achievementStats = await _dbService
         .getAchievementStats(
           readKeys: readKeys,
@@ -954,17 +921,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               children: <Widget>[
                 _ProgressCard(
                   key: _tourProgressKey,
+                  entranceReplayToken: _statsEntranceToken,
                   streak: _streak,
                   totalReadings: _totalReadings,
                   totalStars: _totalStars,
                   chaptersRead: chaptersRead,
                   totalChapters: kTotalBibleChapters,
                   onOpenStreak: _openStreakDetail,
-                  // The browser is where "readings" actually live — it marks
-                  // every chapter already read.
                   onOpenReadings: _openBibleBrowser,
-                  // Stars come from quizzes, and the achievements screen is
-                  // where star milestones are tracked.
                   onOpenStars: _openAchievements,
                 ),
               ],
@@ -985,12 +949,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 }
 
-/// Placeholder shown while [_HomeScreenState._bootstrap] is still running,
-/// shaped like the real dashboard (hero, section cards, quick actions) with
-/// a light sweeping across it — communicates "this is what's coming and
-/// it's already working on it" rather than a blank spinner, and reaching the
-/// screen's actual outline this fast is what keeps Android's own splash
-/// screen from deciding the app is slow to start (see main.dart).
 class _HomeScreenSkeleton extends StatefulWidget {
   const _HomeScreenSkeleton();
 
@@ -2217,7 +2175,7 @@ class _BrowseBibleTile extends StatelessWidget {
   }
 }
 
-class _ProgressCard extends StatelessWidget {
+class _ProgressCard extends StatefulWidget {
   const _ProgressCard({
     super.key,
     required this.streak,
@@ -2228,6 +2186,7 @@ class _ProgressCard extends StatelessWidget {
     required this.onOpenStreak,
     required this.onOpenReadings,
     required this.onOpenStars,
+    this.entranceReplayToken = 0,
   });
 
   final int streak;
@@ -2239,11 +2198,64 @@ class _ProgressCard extends StatelessWidget {
   final VoidCallback onOpenReadings;
   final VoidCallback onOpenStars;
 
+  final int entranceReplayToken;
+
+  @override
+  State<_ProgressCard> createState() => _ProgressCardState();
+}
+
+class _ProgressCardState extends State<_ProgressCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _entrance;
+
+  @override
+  void initState() {
+    super.initState();
+    _entrance = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..forward();
+  }
+
+  @override
+  void didUpdateWidget(covariant _ProgressCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.entranceReplayToken != oldWidget.entranceReplayToken) {
+      _entrance.forward(from: 0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _entrance.dispose();
+    super.dispose();
+  }
+
+  Animation<double> _entranceFor(int index) {
+    final double step = 0.12;
+    return CurvedAnimation(
+      parent: _entrance,
+      curve: Interval(
+        step * index,
+        (step * index + 0.7).clamp(0, 1),
+        curve: Curves.easeOutCubic,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final int streak = widget.streak;
+    final int totalReadings = widget.totalReadings;
+    final int totalStars = widget.totalStars;
+    final int chaptersRead = widget.chaptersRead;
+    final int totalChapters = widget.totalChapters;
+    final VoidCallback onOpenStreak = widget.onOpenStreak;
+    final VoidCallback onOpenReadings = widget.onOpenReadings;
+    final VoidCallback onOpenStars = widget.onOpenStars;
     final double progress = totalChapters == 0
         ? 0
         : chaptersRead / totalChapters;
@@ -2280,13 +2292,8 @@ class _ProgressCard extends StatelessWidget {
                   label: streak != 1
                       ? l10n.homeStatStreakDaysPlural
                       : l10n.homeStatStreakDaySingular,
-                  // A literal fire color rather than cs.tertiary: this app's
-                  // seed color generates a muted mauve tertiary, nowhere
-                  // near the orange/red a flame needs to read at a glance.
-                  // deepOrange also matches the flame gradient used on the
-                  // easter-egg icon above, so the two stay in the same
-                  // family instead of picking a fresh color.
                   color: streak > 0 ? Colors.deepOrange : Colors.lightBlue,
+                  entrance: _entranceFor(0),
                   onTap: onOpenStreak,
                 ),
               ),
@@ -2300,6 +2307,7 @@ class _ProgressCard extends StatelessWidget {
                       ? l10n.homeStatReadingsPlural
                       : l10n.homeStatReadingSingular,
                   color: cs.primary,
+                  entrance: _entranceFor(1),
                   onTap: onOpenReadings,
                 ),
               ),
@@ -2313,6 +2321,7 @@ class _ProgressCard extends StatelessWidget {
                     context,
                   ).rewardNoun(context, plural: totalStars != 1),
                   color: AppIcons.of(context).rewardColor,
+                  entrance: _entranceFor(2),
                   onTap: onOpenStars,
                 ),
               ),
@@ -2322,6 +2331,7 @@ class _ProgressCard extends StatelessWidget {
         const SizedBox(height: 12),
         _BibleProgressIndicator(
           progress: progress,
+          entranceReplayToken: widget.entranceReplayToken,
           chaptersRead: chaptersRead,
           totalChapters: totalChapters,
         ),
@@ -2330,94 +2340,140 @@ class _ProgressCard extends StatelessWidget {
   }
 }
 
-class _BibleProgressIndicator extends StatelessWidget {
+class _BibleProgressIndicator extends StatefulWidget {
   const _BibleProgressIndicator({
     required this.progress,
     required this.chaptersRead,
     required this.totalChapters,
+    this.entranceReplayToken = 0,
   });
 
   final double progress;
   final int chaptersRead;
   final int totalChapters;
 
+  final int entranceReplayToken;
+
+  @override
+  State<_BibleProgressIndicator> createState() =>
+      _BibleProgressIndicatorState();
+}
+
+class _BibleProgressIndicatorState extends State<_BibleProgressIndicator>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1200),
+  );
+  late Tween<double> _tween = Tween<double>(begin: 0, end: widget.progress);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.forward();
+  }
+
+  @override
+  void didUpdateWidget(covariant _BibleProgressIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.entranceReplayToken != oldWidget.entranceReplayToken) {
+      _tween = Tween<double>(begin: 0, end: widget.progress);
+      _controller.forward(from: 0);
+    } else if (widget.progress != oldWidget.progress) {
+      _tween = Tween<double>(begin: _tween.end, end: widget.progress);
+      _controller.forward(from: 0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: cs.secondaryContainer.withValues(alpha: 0.35),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: cs.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (BuildContext context, Widget? child) {
+        final double progress = _tween.transform(
+          Curves.easeOutCubic.transform(_controller.value),
+        );
+        return Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: cs.secondaryContainer.withValues(alpha: 0.35),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: cs.outlineVariant),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: cs.primaryContainer,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  Icons.travel_explore_rounded,
-                  color: cs.onPrimaryContainer,
-                  size: 18,
-                ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: cs.primaryContainer,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.travel_explore_rounded,
+                      color: cs.onPrimaryContainer,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      l10n.homeBibleBrowsed,
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '${NumberFormat('#,##0.0', Localizations.localeOf(context).toString()).format(progress * 100)} %',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: cs.primary,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  l10n.homeBibleBrowsed,
-                  style: theme.textTheme.labelLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
+              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(color: cs.outlineVariant),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(999),
+                  child: LinearProgressIndicator(
+                    value: progress.clamp(0, 1),
+                    minHeight: 8,
+                    backgroundColor: cs.surfaceContainerHighest,
                   ),
                 ),
               ),
+              const SizedBox(height: 6),
               Text(
-                // One decimal place so early progress isn't stuck at "0 %"
-                // for dozens of chapters — 1,189 total means each single
-                // chapter only moves the rounded integer every ~12 of them.
-                // Locale-aware separator: a comma in French, a dot in
-                // English, rather than hardcoding either.
-                '${NumberFormat('#,##0.0', Localizations.localeOf(context).toString()).format(progress * 100)} %',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: cs.primary,
+                l10n.homeChaptersReadCount(
+                  widget.chaptersRead,
+                  widget.totalChapters,
+                ),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: cs.onSurfaceVariant,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(999),
-              border: Border.all(color: cs.outlineVariant),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 8,
-                backgroundColor: cs.surfaceContainerHighest,
-              ),
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            l10n.homeChaptersReadCount(chaptersRead, totalChapters),
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: cs.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -2429,16 +2485,14 @@ class _StatTile extends StatelessWidget {
     required this.label,
     required this.color,
     required this.onTap,
+    this.entrance,
   });
 
   final Widget Function({required double size, required Color color}) icon;
   final String value;
   final String label;
   final Color color;
-
-  /// Each stat opens the screen that number comes from. These tiles already
-  /// looked tappable (they share the app's card shape), and people kept
-  /// trying — so they lead somewhere instead of being flattened to look inert.
+  final Animation<double>? entrance;
   final VoidCallback onTap;
 
   static const BorderRadius _radius = BorderRadius.all(Radius.circular(20));
@@ -2453,9 +2507,7 @@ class _StatTile extends StatelessWidget {
         borderRadius: _radius,
         side: BorderSide(color: cs.outlineVariant),
       ),
-      // Clips the banner below to the card's own rounded corners — without
-      // this its top corners would be square and poke past the card's
-      // outline.
+
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
@@ -2463,41 +2515,55 @@ class _StatTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            // A solid, edge-to-edge color block reads as a much clearer
-            // signal for "this tile is about fire/reading/stars" than the
-            // small 16%-tinted icon square this replaces — that washed out
-            // against the card instead of standing out.
             Container(
-              height: 52,
               width: double.infinity,
               color: color,
-              alignment: Alignment.center,
-              child: icon(size: 26, color: Colors.white),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 9),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    value,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
+                  icon(size: 26, color: Colors.white),
+                  const SizedBox(height: 3),
                   Text(
                     label,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    // A step up from bodySmall and a touch heavier — same
-                    // layout, just easier to read at a glance.
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: cs.onSurfaceVariant,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white.withValues(alpha: 0.95),
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+              child: FadeTransition(
+                opacity: entrance ?? const AlwaysStoppedAnimation<double>(1),
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0, 0.35),
+                        end: Offset.zero,
+                      ).animate(
+                        entrance ?? const AlwaysStoppedAnimation<double>(1),
+                      ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontFamily: 'PlusJakartaSans',
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.5,
+                        height: 1,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -2526,10 +2592,6 @@ class _QuickActions extends StatelessWidget {
       children: <Widget>[
         _QuickActionTile(
           icon: Icons.wb_sunny_outlined,
-          // Same palette as onboarding (OnboardingAccent) rather than a new
-          // one — these three tiles used to share one flat secondaryContainer
-          // tint, which read as one indistinct block instead of three
-          // separate actions.
           accent: kAccentAmber,
           title: l10n.homeDailyTextTitle,
           subtitle: l10n.homeDailyTextSubtitle,
@@ -2613,9 +2675,6 @@ class _QuickActionTile extends StatelessWidget {
                     ),
                     Text(
                       subtitle,
-                      // Matches _AchievementTile's and ReminderRow's subtitle
-                      // size — this screen had drifted to one size smaller
-                      // for what's structurally the same list-row shape.
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurfaceVariant,
                       ),

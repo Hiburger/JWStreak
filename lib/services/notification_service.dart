@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,16 +35,6 @@ class ReminderPayload {
   }
 }
 
-/// When a daily reminder set for [time] should next fire, given [now].
-///
-/// [skipToday] pushes it past today's occurrence. That is what stops the app
-/// reminding someone to read at 20:00 when they already read at 08:00 — the
-/// daily repeat is left in place, only the first firing moves.
-///
-/// Tomorrow is built from the calendar (`day + 1`) rather than by adding 24
-/// hours: on the night a daylight-saving change lands, adding a fixed day
-/// would shift an 08:00 reminder to 07:00 or 09:00, and it would stay
-/// shifted, because each reschedule builds on the last.
 @visibleForTesting
 tz.TZDateTime nextReminderInstance({
   required tz.TZDateTime now,
@@ -88,6 +77,16 @@ tz.TZDateTime nextReminderInstance({
   return schedule;
 }
 
+@visibleForTesting
+tz.TZDateTime followingDayInstance(tz.TZDateTime date) => tz.TZDateTime(
+  date.location,
+  date.year,
+  date.month,
+  date.day + 1,
+  date.hour,
+  date.minute,
+);
+
 class NotificationService {
   NotificationService._internal();
 
@@ -97,6 +96,7 @@ class NotificationService {
   // Each reminder gets notification id = _reminderBaseId + reminder.id.
   static const int _reminderBaseId = 200;
   static const String _channelId = 'jwstreak_reminders';
+  static const int _skipCompanionOffset = 10000;
 
   /// The ids that are *not* daily reminders, even though they sit above
   /// [_reminderBaseId]. [cancelAllReminders] has to skip these — see the
@@ -109,21 +109,6 @@ class NotificationService {
     _instantMessageId,
   };
 
-  /// Separate channel from [_channelId] so the always-present reading-session
-  /// notification can be silenced (or turned off entirely) in Android's
-  /// settings without also killing the daily reminders — they're different
-  /// enough in kind that sharing one channel would make that impossible.
-  ///
-  /// `_v3`: channel importance is locked in by the OS the first time a
-  /// channel is created and stays there even if the app later asks to
-  /// recreate it at a different importance, so bumping this forces a fresh
-  /// channel for every install that already saw an older one.
-  ///
-  /// The importance is [Importance.high] rather than something quieter
-  /// because this notification is the only way back to the app mid-reading,
-  /// and [AndroidNotificationDetails.silent] is what keeps it from peeking,
-  /// buzzing or making a sound — that's a property of `silent`, not of the
-  /// channel's tier, so "high" costs the user nothing here.
   static const String _sessionChannelId = 'jwstreak_reading_session_v3';
   static const int _sessionNotificationId = 700;
 
@@ -144,16 +129,11 @@ class NotificationService {
         AndroidFlutterLocalNotificationsPlugin
       >();
 
-  /// Non-null only on iOS/iPadOS, the same way [_androidPlugin] is non-null
-  /// only on Android — every call site below picks whichever one exists.
   IOSFlutterLocalNotificationsPlugin? get _iosPlugin => _plugin
       .resolvePlatformSpecificImplementation<
         IOSFlutterLocalNotificationsPlugin
       >();
 
-  /// Every notification this app sends is a reminder, so they all share one
-  /// presentation. Kept in a single constant so the Android and iOS sides
-  /// can't quietly drift apart as reminders get added.
   static const NotificationDetails _reminderDetails = NotificationDetails(
     android: AndroidNotificationDetails(
       _channelId,
@@ -173,26 +153,8 @@ class NotificationService {
   /// can be noticed rather than assumed.
   String? _timeZoneName;
 
-  /// Re-reads the device time zone and points the `timezone` package at it.
-  /// Returns true when it had actually changed.
-  ///
-  /// [initialize] runs once per process, so without this `tz.local` keeps
-  /// whatever zone the app started in. Reminders are scheduled as an absolute
-  /// instant derived from that zone, so for someone who flies a lot an 08:00
-  /// reminder set in Paris kept firing at 08:00 Paris time — the middle of
-  /// the afternoon in Tokyo — until the app happened to be restarted. The
-  /// caller reschedules when this returns true.
   Future<bool> refreshTimeZone() async {
-    // Never throws: this runs on every resume, from a dashboard refresh that
-    // has no other reason to fail. A device that reports a zone the IANA
-    // database doesn't carry (getLocation throws for those) would otherwise
-    // take the whole home screen down with it, leaving the reader looking at
-    // stale data because the setState after this never ran. Keeping the last
-    // known zone is a far better failure than that.
     try {
-      // `.identifier` is the IANA name ("Europe/Zurich") that tz.getLocation
-      // expects; the other field on TimezoneInfo is a display name, which
-      // wouldn't resolve.
       final String name = (await FlutterTimezone.getLocalTimezone()).identifier;
       if (name == _timeZoneName) {
         return false;
@@ -220,17 +182,8 @@ class NotificationService {
     tz_data.initializeTimeZones();
     await refreshTimeZone();
 
-    // The status bar only renders this icon's alpha channel (a plain white
-    // silhouette), never its color — @mipmap/ic_launcher is the full-color
-    // square app icon, which is why using it here used to show up as a
-    // solid dark blob. ic_stat_notify (tool/icons/generate_notification_icon.py)
-    // is the isolated glyph, already prepared for that.
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('ic_stat_notify');
-    // iOS has no notification-channel concept and uses the app icon in the
-    // banner, so there's nothing to point at here. Permissions are all left
-    // false so initialize() stays silent: requestNotificationPermission()
-    // below owns the prompt, on both platforms.
     const DarwinInitializationSettings iosSettings =
         DarwinInitializationSettings(
           requestAlertPermission: false,
@@ -248,9 +201,6 @@ class NotificationService {
     );
 
     await _createNotificationChannel();
-    // A reading-session notification outlives the process that posted it, so
-    // one can survive Android killing us mid-session. Nothing can legitimately
-    // be in progress at app start, so clear any leftover.
     await endReadingSession();
     await requestNotificationPermission();
 
@@ -303,14 +253,6 @@ class NotificationService {
     }
   }
 
-  /// Schedules one daily reminder that repeats at [time]. Each reminder uses a
-  /// stable notification id derived from its database id.
-  ///
-  /// [skipToday] moves the first firing to tomorrow, leaving the daily repeat
-  /// intact. Passed when the reader has already read or taken a quiz today:
-  /// being told to keep your streak alive hours after you kept it is the kind
-  /// of reminder people mute the app over. The repeat is deliberately left
-  /// alone so someone who never opens the app still gets reminded every day.
   Future<void> scheduleReminder({
     required int id,
     required TimeOfDay time,
@@ -323,6 +265,32 @@ class NotificationService {
       skipToday: skipToday,
     );
     final AndroidScheduleMode scheduleMode = await _resolveScheduleMode();
+
+    if (skipToday) {
+      await _plugin.zonedSchedule(
+        id: _reminderBaseId + id,
+        title: title,
+        body: body,
+        scheduledDate: firstTrigger,
+        notificationDetails: _reminderDetails,
+        androidScheduleMode: scheduleMode,
+      );
+      await _plugin.zonedSchedule(
+        id: _reminderBaseId + id + _skipCompanionOffset,
+        title: title,
+        body: body,
+        scheduledDate: followingDayInstance(firstTrigger),
+        notificationDetails: _reminderDetails,
+        androidScheduleMode: scheduleMode,
+      );
+      if (kDebugMode) {
+        debugPrint(
+          'NotificationService: Reminder $id scheduled as two one-shots '
+          'at ${firstTrigger.hour}:${firstTrigger.minute} (mode: $scheduleMode)',
+        );
+      }
+      return;
+    }
 
     await _plugin.zonedSchedule(
       id: _reminderBaseId + id,
@@ -343,10 +311,11 @@ class NotificationService {
 
   Future<void> cancelReminder(int id) async {
     await _plugin.cancel(id: _reminderBaseId + id);
+    // skipped-day companion (see scheduleReminder).
+    await _plugin.cancel(id: _reminderBaseId + id + _skipCompanionOffset);
   }
 
-  /// Shows an immediate one-off local notification (used for small in-app
-  /// surprises like the settings heart easter egg).
+  /// Shows an immediate one-off local notification (surpise!)
   Future<void> showInstantMessage({
     required String title,
     required String body,
@@ -359,17 +328,6 @@ class NotificationService {
     );
   }
 
-  /// Puts up the "you're reading, come back when you're done" indicator, with
-  /// a timer counting up from now.
-  ///
-  /// Three outcomes, in order of preference. Android 16 promotes it to a Live
-  /// Update — a status bar chip with the timer inside. iOS 16.2+ shows a Live
-  /// Activity on the lock screen and in the Dynamic Island. Neither is
-  /// reachable through flutter_local_notifications (the first needs a
-  /// promotion flag it doesn't expose, the second isn't a notification at
-  /// all), so both go through one native channel. Older Android falls back to
-  /// a plain ongoing notification; older iOS gets nothing, since a one-off
-  /// banner would behave nothing like the thing it's standing in for.
   Future<void> startReadingSession({
     required String title,
     required String body,
@@ -406,12 +364,7 @@ class NotificationService {
           ongoing: true,
           autoCancel: false,
           silent: true,
-          // Safety net for the case that actually matters here: Android is
-          // free to kill this process while the user reads in another app,
-          // and a posted notification outlives its process. Without a
-          // timeout, an `ongoing` (so undismissable) notification could
-          // strand the user with no way to clear it short of force-stopping
-          // the app. Four hours is far past any real reading session.
+          // Safety net: Android is free to kill this process while the user reads in another app, and a posted notification outlives its process
           timeoutAfter: const Duration(hours: 4).inMilliseconds,
         ),
       ),
@@ -421,9 +374,6 @@ class NotificationService {
     }
   }
 
-  /// Asks the platform to post the session notification as an Android 16
-  /// Live Update. Returns false — leaving the caller to fall back — on older
-  /// releases, and on any platform-side refusal.
   Future<bool> _tryShowLiveUpdate({
     required String title,
     required String body,
@@ -445,12 +395,6 @@ class NotificationService {
     }
   }
 
-  /// Takes the session indicator down, whichever form it went up in.
-  ///
-  /// iOS needs the native call — a Live Activity isn't a notification and
-  /// nothing else ends it. Android's promoted notification is posted under
-  /// the same id through the same NotificationManager as the fallback, so
-  /// the plugin cancel below covers both of its paths.
   Future<void> endReadingSession() async {
     try {
       await _liveUpdateChannel.invokeMethod<void>('endReadingSession');
@@ -614,12 +558,6 @@ class NotificationService {
           ?.requestNotificationsPermission();
       return granted ?? true;
     } catch (_) {
-      // A platform-level failure here (seen on an improperly code-signed
-      // iOS build, where UNUserNotificationCenter refuses the request
-      // outright) shouldn't be fatal — reminders are optional, and this
-      // runs as part of app startup (see _bootstrap in home_screen.dart),
-      // so letting it throw would block the entire dashboard from loading
-      // over something the reader can just enable later in Settings.
       return false;
     }
   }

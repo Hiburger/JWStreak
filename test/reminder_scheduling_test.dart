@@ -128,4 +128,32 @@ void main() {
       );
     });
   });
+
+  group('the skipped-day companion one-shot', () {
+    test('is the day after the skipped occurrence, at the same time', () {
+      expect(
+        followingDayInstance(_at(2026, 8, 21, 20, 0)),
+        _at(2026, 8, 22, 20, 0),
+      );
+    });
+
+    test('rolls over a month end', () {
+      expect(
+        followingDayInstance(_at(2026, 8, 31, 20, 0)),
+        _at(2026, 9, 1, 20, 0),
+      );
+    });
+
+    test('lands on the next day even across a daylight-saving change', () {
+      // Paris leaves summer time on 2026-10-25, at 03:00: the 25th is 25
+      // hours long. Built from the calendar rather than by adding 24 hours,
+      // the companion is still the 26th at the same wall-clock time.
+      final tz.TZDateTime companion = followingDayInstance(
+        _at(2026, 10, 25, 8, 0),
+      );
+      expect(companion.month, 10);
+      expect(companion.day, 26);
+      expect(companion.hour, 8);
+    });
+  });
 }

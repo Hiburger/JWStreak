@@ -351,6 +351,10 @@ class _DailyJwAppState extends State<DailyJwApp> {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           localeListResolutionCallback: _resolveLocale,
+          // Feeds the home screen's RouteAware subscriptions (the stat
+          // tiles replay their entrance when home becomes the visible page
+          // again — see kHomeRouteObserver in home_screen.dart).
+          navigatorObservers: <NavigatorObserver>[kHomeRouteObserver],
           home: _isThemeLoading
               ? loading
               : _withAppLock(

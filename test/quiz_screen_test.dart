@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:jwstreak/l10n/app_localizations.dart';
 import 'package:jwstreak/quiz/quiz_data.dart';
 import 'package:jwstreak/screens/quiz_screen.dart';
@@ -177,11 +176,7 @@ void main() {
 
     await tester.tap(find.text('Adam'));
     await tester.pumpAndSettle();
-    // "Adam" now exists twice: the placed chip, and the invisible ghost
-    // holding its pool slot open.
     expect(find.text('Adam'), findsNWidgets(2));
-
-    // Tapping the placed chip removes it; the ghost slot fills back in.
     await tester.tap(
       find.byKey(const ValueKey<String>('word-bank-placed-Adam#1')),
     );

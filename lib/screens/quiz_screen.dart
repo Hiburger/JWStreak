@@ -399,11 +399,6 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
-  /// Key for the i-th placed chip, derived from the word itself rather than
-  /// its position, so the chips after a removed word keep their identity
-  /// instead of being rebuilt (and replaying their entrance animation) when
-  /// a neighbour is taken out mid-list. Duplicate words are told apart by
-  /// their occurrence number.
   String _placedChipKey(int i) {
     final String word = _pickedWords[i];
     int occurrence = 0;
@@ -419,9 +414,6 @@ class _QuizScreenState extends State<QuizScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final List<String> bank = _wordBankFor(_index);
-
-    // A chip is used up once it's been placed; duplicates of the same word
-    // are matched by position so repeated words still work.
     final List<bool> used = List<bool>.filled(bank.length, false);
     for (final String picked in _pickedWords) {
       for (int i = 0; i < bank.length; i++) {
@@ -458,22 +450,18 @@ class _QuizScreenState extends State<QuizScreen> {
             spacing: 8,
             runSpacing: 8,
             children: <Widget>[
-              // An empty answer still reserves a full chip row, so the
-              // area doesn't grow (and push the pool down) the moment the
-              // first word lands.
               if (_pickedWords.isEmpty)
                 Opacity(
                   opacity: 0,
                   child: _WordChip(label: '', onTap: null, filled: true),
                 ),
               for (int i = 0; i < _pickedWords.length; i++)
+                // from word bank to text zone animation
                 TweenAnimationBuilder<double>(
                   key: ValueKey<String>(_placedChipKey(i)),
                   tween: Tween<double>(begin: 0, end: 1),
                   duration: const Duration(milliseconds: 350),
                   curve: Curves.easeOutCubic,
-                  // The word settles into the answer with a soft fade and
-                  // rise rather than appearing fully formed.
                   builder: (BuildContext context, double t, Widget? child) {
                     return Opacity(
                       opacity: t,
@@ -495,11 +483,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        // The pool. A picked word leaves its chip behind as a muted, inert
-        // slot rather than leaving the Wrap, so no chip ever moves when
-        // another is tapped — a reflowing pool is what put the next word
-        // under the finger mid-tap. The live chip and its slot crossfade,
-        // so picking reads as the word dissolving into its slot.
+
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -906,10 +890,7 @@ class _StreakPill extends StatelessWidget {
 
 /// A tappable word chip used to assemble a word-bank answer. Chips in the
 /// pool are outlined; chips already placed in the answer are filled and tap
-/// to remove. A `used` chip is the muted slot a pool chip leaves behind once
-/// its word is placed — same size, so the pool never reflows, but faded and
-/// with no text or tap target, so it reads as "something was here" rather
-/// than as a tappable word.
+
 class _WordChip extends StatelessWidget {
   const _WordChip({
     super.key,
@@ -928,11 +909,6 @@ class _WordChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
-    // Picking a chip is its own feedback: the word jumps into the answer
-    // and its pool slot fades to muted, instantly. An ink splash would add
-    // nothing on top of that — and the one on the picked chip would linger
-    // on the muted slot it becomes, since the chip keeps its key and the
-    // same InkWell underneath.
     return Theme(
       data: theme.copyWith(
         splashFactory: NoSplash.splashFactory,

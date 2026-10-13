@@ -9,6 +9,7 @@ import '../theme/app_icons.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
+import 'quiz_report_screen.dart';
 
 /// Runs a quiz: one question per screen, immediate feedback with an
 /// explanation, then a round-up. [onCompleted] is called once with the
@@ -25,20 +26,12 @@ class QuizScreen extends StatefulWidget {
   final String title;
   final List<QuizQuestion> questions;
   final Future<void> Function(int score, int total) onCompleted;
-
-  /// "Did you know" note for this quiz's checkpoint, shown on the round-up.
-  /// Null for quizzes with nothing authored yet (and for the mixed review
-  /// quiz, which spans no single passage) — the card is simply left out.
   final String? funFact;
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-/// What the reader did on one question, kept so the round-up can walk back
-/// through the ones they missed. Recorded at answer time rather than
-/// reconstructed afterwards: the typed text and the shuffled option order
-/// are both gone by the time the quiz ends.
 class _AnswerRecord {
   const _AnswerRecord({
     required this.question,
@@ -222,6 +215,24 @@ class _QuizScreenState extends State<QuizScreen> {
       appBar: AppBar(
         leading: const CircularBackButton(),
         title: Text(widget.title),
+        actions: <Widget>[
+          if (!_finished)
+            IconButton(
+              tooltip: AppLocalizations.of(context)!.quizReportTitle,
+              onPressed: () => Navigator.of(context).push<void>(
+                MaterialPageRoute<void>(
+                  builder: (_) => QuizReportScreen(
+                    quizTitle: widget.title,
+                    question: _current,
+                  ),
+                ),
+              ),
+              icon: Icon(
+                Icons.flag_rounded,
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+        ],
       ),
       body: ResponsiveBody(
         child: _finished ? _buildResult() : _buildQuestion(),
@@ -635,7 +646,10 @@ class _QuizScreenState extends State<QuizScreen> {
           for (final _AnswerRecord record in missed)
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: _MissedQuestionCard(record: record),
+              child: _MissedQuestionCard(
+                record: record,
+                quizTitle: widget.title,
+              ),
             ),
         ],
         const SizedBox(height: 24),
@@ -712,14 +726,11 @@ class _FunFactCard extends StatelessWidget {
   }
 }
 
-/// One missed question: what was asked, what the reader answered, what the
-/// answer actually was, and why. The wrong answer is shown struck through
-/// rather than just red — color alone wouldn't separate the two lines for a
-/// reader who can't distinguish them.
 class _MissedQuestionCard extends StatelessWidget {
-  const _MissedQuestionCard({required this.record});
+  const _MissedQuestionCard({required this.record, required this.quizTitle});
 
   final _AnswerRecord record;
+  final String quizTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -737,11 +748,39 @@ class _MissedQuestionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            record.question.text,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  record.question.text,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 32,
+                child: IconButton(
+                  tooltip: l10n.quizReportTitle,
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute<void>(
+                      builder: (_) => QuizReportScreen(
+                        quizTitle: quizTitle,
+                        question: record.question,
+                      ),
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.flag_outlined,
+                    size: 18,
+                    color: cs.onSurfaceVariant,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           if (record.givenAnswer.isNotEmpty)

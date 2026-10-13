@@ -9166,6 +9166,43 @@ Map<String, List<QuizQuestion>> _extraQuizzesFor(String? languageCode) {
 /// translated into that language where available (falling back to French
 /// per-checkpoint for anything not yet translated). Omit it when only the
 /// checkpoint structure/count is needed (that's identical across languages).
+/// Where a question sits in the authored data: enough for a report to point
+/// the maintainer straight at the source file.
+class QuizQuestionLocation {
+  const QuizQuestionLocation(this.checkpointId, this.index, this.total);
+
+  /// The `bookId#index` key, same one the DB rows use.
+  final String checkpointId;
+
+  /// 1-based position within the checkpoint's authored question list.
+  final int index;
+  final int total;
+}
+
+/// Finds [text] (a question's own text) in the authored quiz data for
+/// [languageCode], with the same per-checkpoint French fallback the loaders
+/// apply. Matching by text rather than identity because the quiz screen
+/// shuffles options and builds new [QuizQuestion] copies. A scan over the
+/// full map, but it runs once per report — not per build. Null when no
+/// authored question matches.
+QuizQuestionLocation? locateQuizQuestion(String text, String? languageCode) {
+  for (final Map<String, List<QuizQuestion>> map
+      in <Map<String, List<QuizQuestion>>>[
+        _authoredQuizzesFor(languageCode),
+        _extraQuizzesFor(languageCode),
+      ]) {
+    for (final MapEntry<String, List<QuizQuestion>> entry in map.entries) {
+      final List<QuizQuestion> questions = entry.value;
+      for (int i = 0; i < questions.length; i++) {
+        if (questions[i].text == text) {
+          return QuizQuestionLocation(entry.key, i + 1, questions.length);
+        }
+      }
+    }
+  }
+  return null;
+}
+
 List<Checkpoint> checkpointsForBook(BibleBook book, {String? languageCode}) {
   final Map<String, List<QuizQuestion>> authored = _authoredQuizzesFor(
     languageCode,

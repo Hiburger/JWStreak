@@ -956,6 +956,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizFinish => 'Finish';
 
   @override
+  String get quizReportTitle => 'Report this quiz';
+
+  @override
+  String get quizReportTranslation => 'Translation';
+
+  @override
+  String get quizReportTranslationDesc =>
+      'Something reads wrong in my language';
+
+  @override
+  String get quizReportContent => 'Quiz content';
+
+  @override
+  String get quizReportContentDesc => 'The question or an answer is incorrect';
+
+  @override
+  String get quizReportCommentLabel => 'Your comment (optional)';
+
+  @override
+  String get quizReportCommentHint => 'What\'s wrong, and what should it say?';
+
+  @override
+  String get quizReportSend => 'Send report';
+
+  @override
+  String get quizReportNote1 =>
+      'Hello there! I\'m sorry you came across a mistake. Thank you so much for taking the time to report it. It genuinely helps me make better quizzes.';
+
+  @override
+  String get quizReportNote2 =>
+      'When you tap \"Send report\", your mail app will open with everything already filled in, depending on your device. From there, you just hit send, and I\'ll get your report as a mail from you.';
+
+  @override
   String get quizFunFactLabel => 'Did you know?';
 
   @override
@@ -1021,7 +1054,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Your streak reset to zero. No worries, let\'s start again together 💪';
+      'Your streak reset to zero. No worries, let\'s start again together';
+
+  @override
+  String get streakLostTitle => 'Your streak is lost';
+
+  @override
+  String get streakLostButton => 'Got it';
 
   @override
   String get homeExactAlarmDialogTitle => 'Reminder at the exact time';

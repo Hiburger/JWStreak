@@ -962,6 +962,41 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quizFinish => 'Terminer';
 
   @override
+  String get quizReportTitle => 'Signaler ce quiz';
+
+  @override
+  String get quizReportTranslation => 'Traduction';
+
+  @override
+  String get quizReportTranslationDesc =>
+      'Quelque chose sonne mal dans ma langue';
+
+  @override
+  String get quizReportContent => 'Contenu du quiz';
+
+  @override
+  String get quizReportContentDesc =>
+      'La question ou une réponse est incorrecte';
+
+  @override
+  String get quizReportCommentLabel => 'Ton commentaire (facultatif)';
+
+  @override
+  String get quizReportCommentHint =>
+      'Qu\'est-ce qui cloche, et que devrait-il dire ?';
+
+  @override
+  String get quizReportSend => 'Envoyer le signalement';
+
+  @override
+  String get quizReportNote1 =>
+      'Salut ! Désolé qu\'il y ait une erreur dans ce quiz. Merci beaucoup de prendre le temps de la signaler, ça m\'aide vraiment à faire de meilleurs quiz.';
+
+  @override
+  String get quizReportNote2 =>
+      'Quand tu appuies sur « Envoyer le signalement », selon ton appareil, ton application mail s\'ouvre avec tout déjà rempli. Il ne te reste plus qu\'à appuyer sur envoyer, et je recevrai ton signalement sous forme de mail.';
+
+  @override
   String get quizFunFactLabel => 'Le savais-tu ?';
 
   @override
@@ -1027,7 +1062,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Ta série est repartie de zéro. Pas grave, on recommence ensemble 💪';
+      'Ta série est repartie de zéro. Pas grave, on recommence ensemble';
+
+  @override
+  String get streakLostTitle => 'Ta série est perdue';
+
+  @override
+  String get streakLostButton => 'D\'accord';
 
   @override
   String get homeExactAlarmDialogTitle => 'Rappel à l’heure exacte';

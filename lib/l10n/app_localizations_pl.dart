@@ -959,6 +959,39 @@ class AppLocalizationsPl extends AppLocalizations {
   String get quizFinish => 'Zakończ';
 
   @override
+  String get quizReportTitle => 'Zgłoś ten quiz';
+
+  @override
+  String get quizReportTranslation => 'Tłumaczenie';
+
+  @override
+  String get quizReportTranslationDesc => 'Coś brzmi źle w moim języku';
+
+  @override
+  String get quizReportContent => 'Treść quizu';
+
+  @override
+  String get quizReportContentDesc => 'Pytanie lub odpowiedź jest błędna';
+
+  @override
+  String get quizReportCommentLabel => 'Twój komentarz (opcjonalnie)';
+
+  @override
+  String get quizReportCommentHint =>
+      'Co jest nie tak i co powinno być napisane?';
+
+  @override
+  String get quizReportSend => 'Wyślij zgłoszenie';
+
+  @override
+  String get quizReportNote1 =>
+      'Cześć! Przykro mi, że natknąłeś się na błąd. Wielkie dzięki, że poświęcasz czas, żeby go zgłosić. To naprawdę pomaga mi tworzyć lepsze quizy.';
+
+  @override
+  String get quizReportNote2 =>
+      'Po dotknięciu «Wyślij zgłoszenie», w zależności od urządzenia, otworzy się Twoja aplikacja mailowa ze wszystkim już wypełnionym. Wystarczy dotknąć wyślij, a otrzymam Twoje zgłoszenie jako mail.';
+
+  @override
   String get quizFunFactLabel => 'Czy wiesz, że...?';
 
   @override
@@ -1026,7 +1059,13 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Twoja passa wróciła do zera. Nic straconego, zaczynamy razem od nowa 💪';
+      'Twoja passa wróciła do zera. Nic straconego, zaczynamy razem od nowa';
+
+  @override
+  String get streakLostTitle => 'Twoja passa została przerwana';
+
+  @override
+  String get streakLostButton => 'Rozumiem';
 
   @override
   String get homeExactAlarmDialogTitle => 'Przypomnienie o dokładnej godzinie';

@@ -34,6 +34,7 @@ import 'notes_library_screen.dart';
 import 'quiz_screen.dart';
 import 'notes_screen.dart';
 import 'reading_return_screen.dart';
+import 'streak_lost_screen.dart';
 import 'reminder_setup_screen.dart';
 import 'settings_screen.dart';
 import 'streak_detail_screen.dart';
@@ -413,10 +414,7 @@ class _HomeScreenState extends State<HomeScreen>
     if (streakState.justLost && mounted) {
       await _dbService.acknowledgeStreakLoss();
       if (mounted) {
-        await showMessageDialog(
-          context,
-          message: AppLocalizations.of(context)!.homeStreakLostMessage,
-        );
+        await pushStreakLostScreen(context);
       }
     }
   }

@@ -1864,6 +1864,66 @@ abstract class AppLocalizations {
   /// **'Finish'**
   String get quizFinish;
 
+  /// No description provided for @quizReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report this quiz'**
+  String get quizReportTitle;
+
+  /// No description provided for @quizReportTranslation.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation'**
+  String get quizReportTranslation;
+
+  /// No description provided for @quizReportTranslationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Something reads wrong in my language'**
+  String get quizReportTranslationDesc;
+
+  /// No description provided for @quizReportContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz content'**
+  String get quizReportContent;
+
+  /// No description provided for @quizReportContentDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The question or an answer is incorrect'**
+  String get quizReportContentDesc;
+
+  /// No description provided for @quizReportCommentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your comment (optional)'**
+  String get quizReportCommentLabel;
+
+  /// No description provided for @quizReportCommentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s wrong, and what should it say?'**
+  String get quizReportCommentHint;
+
+  /// No description provided for @quizReportSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send report'**
+  String get quizReportSend;
+
+  /// No description provided for @quizReportNote1.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello there! I\'m sorry you came across a mistake. Thank you so much for taking the time to report it. It genuinely helps me make better quizzes.'**
+  String get quizReportNote1;
+
+  /// No description provided for @quizReportNote2.
+  ///
+  /// In en, this message translates to:
+  /// **'When you tap \"Send report\", your mail app will open with everything already filled in, depending on your device. From there, you just hit send, and I\'ll get your report as a mail from you.'**
+  String get quizReportNote2;
+
   /// No description provided for @quizFunFactLabel.
   ///
   /// In en, this message translates to:
@@ -1969,8 +2029,20 @@ abstract class AppLocalizations {
   /// No description provided for @homeStreakLostMessage.
   ///
   /// In en, this message translates to:
-  /// **'Your streak reset to zero. No worries, let\'s start again together 💪'**
+  /// **'Your streak reset to zero. No worries, let\'s start again together'**
   String get homeStreakLostMessage;
+
+  /// No description provided for @streakLostTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your streak is lost'**
+  String get streakLostTitle;
+
+  /// No description provided for @streakLostButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get streakLostButton;
 
   /// No description provided for @homeExactAlarmDialogTitle.
   ///

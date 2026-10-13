@@ -954,6 +954,39 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quizFinish => 'Завершить';
 
   @override
+  String get quizReportTitle => 'Сообщить об этом квизе';
+
+  @override
+  String get quizReportTranslation => 'Перевод';
+
+  @override
+  String get quizReportTranslationDesc =>
+      'Что-то звучит неправильно на моём языке';
+
+  @override
+  String get quizReportContent => 'Содержание квиза';
+
+  @override
+  String get quizReportContentDesc => 'Вопрос или ответ неверный';
+
+  @override
+  String get quizReportCommentLabel => 'Ваш комментарий (необязательно)';
+
+  @override
+  String get quizReportCommentHint => 'Что не так и как должно быть?';
+
+  @override
+  String get quizReportSend => 'Отправить сообщение';
+
+  @override
+  String get quizReportNote1 =>
+      'Привет! Жаль, что ты наткнулся на ошибку. Огромное спасибо, что готов потратить время и сообщить об этом. Это правда помогает мне делать квизы лучше.';
+
+  @override
+  String get quizReportNote2 =>
+      'Когда нажмёшь «Отправить сообщение», в зависимости от устройства, откроется твоё почтовое приложение с уже заполненным письмом. Останется только нажать отправить, и я получу твоё сообщение.';
+
+  @override
   String get quizFunFactLabel => 'А вы знали?';
 
   @override
@@ -1021,7 +1054,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeStreakLostMessage =>
-      'Твоя серия обнулилась. Не переживай, начнём заново вместе 💪';
+      'Твоя серия обнулилась. Не переживай, начнём заново вместе';
+
+  @override
+  String get streakLostTitle => 'Твоя серия прервалась';
+
+  @override
+  String get streakLostButton => 'Понятно';
 
   @override
   String get homeExactAlarmDialogTitle => 'Напоминание в точное время';

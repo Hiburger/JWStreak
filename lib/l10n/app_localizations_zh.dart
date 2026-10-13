@@ -908,6 +908,37 @@ class AppLocalizationsZh extends AppLocalizations {
   String get quizFinish => '完成';
 
   @override
+  String get quizReportTitle => '报告此测验';
+
+  @override
+  String get quizReportTranslation => '翻译';
+
+  @override
+  String get quizReportTranslationDesc => '在我的语言里读起来不对劲';
+
+  @override
+  String get quizReportContent => '测验内容';
+
+  @override
+  String get quizReportContentDesc => '题目或答案有误';
+
+  @override
+  String get quizReportCommentLabel => '你的留言（可选）';
+
+  @override
+  String get quizReportCommentHint => '哪里有问题，应该是什么？';
+
+  @override
+  String get quizReportSend => '发送报告';
+
+  @override
+  String get quizReportNote1 => '你好！很抱歉你遇到了错误。非常感谢你花时间报告它，这真的能帮我做出更好的测验。';
+
+  @override
+  String get quizReportNote2 =>
+      '点按「发送报告」后，视设备而定，你的邮件应用会打开，且内容已填好。只需点一下发送，我就会收到你的报告。';
+
+  @override
   String get quizFunFactLabel => '你知道吗？';
 
   @override
@@ -970,7 +1001,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get checkpointSave => '保存';
 
   @override
-  String get homeStreakLostMessage => '你的连续记录清零了。别担心，我们一起重新开始 💪';
+  String get homeStreakLostMessage => '你的连续记录清零了。别担心，我们一起重新开始';
+
+  @override
+  String get streakLostTitle => '你的连续记录中断了';
+
+  @override
+  String get streakLostButton => '知道了';
 
   @override
   String get homeExactAlarmDialogTitle => '准时提醒';

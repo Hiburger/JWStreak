@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../app_constants.dart';
@@ -10,6 +11,14 @@ class DeepLinkService {
   /// Android manifest so the check works on Android 11+.
   Future<bool> isJwLibraryInstalled() async {
     return canLaunchUrl(Uri.parse(kJwLibraryProbeUri));
+  }
+
+  Future<bool> _tryLaunchExternal(Uri uri) async {
+    try {
+      return await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } on PlatformException {
+      return false;
+    }
   }
 
   Future<void> openReference({
@@ -33,10 +42,7 @@ class DeepLinkService {
       chapter: chapter,
       languageCode: languageCode,
     );
-    final bool openedInApp = await launchUrl(
-      deepLink,
-      mode: LaunchMode.externalApplication,
-    );
+    final bool openedInApp = await _tryLaunchExternal(deepLink);
     if (openedInApp) {
       return;
     }
@@ -92,10 +98,7 @@ class DeepLinkService {
       final Uri deepLink = Uri.parse(
         jwLibraryDailyTextDeepLink(DateTime.now(), languageCode: languageCode),
       );
-      final bool openedInApp = await launchUrl(
-        deepLink,
-        mode: LaunchMode.externalApplication,
-      );
+      final bool openedInApp = await _tryLaunchExternal(deepLink);
       if (openedInApp) {
         return;
       }

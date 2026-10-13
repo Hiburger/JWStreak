@@ -1168,16 +1168,28 @@ class AppLocalizationsEs extends AppLocalizations {
       'Toca para volver a JW Streak cuando termines.';
 
   @override
-  String readingSessionDoneTitle(String reference) {
-    return '¿Terminaste $reference?';
-  }
-
-  @override
   String get readingSessionDoneBody =>
       'Márcalo como leído para mantener tu racha.';
 
   @override
-  String get readingSessionNotYet => 'Todavía no';
+  String readingReturnTitle(String reference) {
+    return '¿Terminaste de leer $reference ?';
+  }
+
+  @override
+  String get readingReturnNo => 'No';
+
+  @override
+  String get readingReturnNoDescription => 'Aún no he terminado';
+
+  @override
+  String get readingReturnYes => 'Sí';
+
+  @override
+  String get readingReturnYesDescription => 'Sí, márcalo como leído';
+
+  @override
+  String get readingReturnWriteNote => 'Escribir una nota sobre esto';
 
   @override
   String get homeAllRead => '¡Bien hecho! Has leído toda la Biblia.';

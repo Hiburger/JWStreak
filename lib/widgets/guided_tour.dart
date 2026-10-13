@@ -1,19 +1,11 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 /// The same purple used for the logo glow on the first onboarding page, so
 /// the tour's highlight reads as part of the same visual language.
 const Color _kGlowColor = Color(0xFFD5A5EE);
 
-/// Shape of the spotlight cut out around a tour target.
-enum TourHighlightShape {
-  /// Rounded rectangle for cards, tiles and sections.
-  roundedRect,
-
-  /// Circle for icon buttons.
-  circle,
-}
+enum TourHighlightShape { roundedRect, circle }
 
 class TourStep {
   const TourStep({
@@ -24,13 +16,8 @@ class TourStep {
     this.cornerRadius = 20,
   });
 
-  /// Key attached to the widget this step points at.
   final GlobalKey targetKey;
-
-  /// Short headline (a few words).
   final String title;
-
-  /// One or two sentences explaining what the target does.
   final String body;
 
   final TourHighlightShape shape;
@@ -38,8 +25,6 @@ class TourStep {
   final double cornerRadius;
 }
 
-/// Labels used by the tour chrome. Passed in so this widget stays free of any
-/// direct localization dependency.
 class TourLabels {
   const TourLabels({
     required this.skip,

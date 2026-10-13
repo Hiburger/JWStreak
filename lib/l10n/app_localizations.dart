@@ -2194,23 +2194,47 @@ abstract class AppLocalizations {
   /// **'Tap to come back to JW Streak when you\'re done.'**
   String get readingSessionBody;
 
-  /// No description provided for @readingSessionDoneTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Finished {reference}?'**
-  String readingSessionDoneTitle(String reference);
-
   /// No description provided for @readingSessionDoneBody.
   ///
   /// In en, this message translates to:
   /// **'Mark it as read to keep your streak going.'**
   String get readingSessionDoneBody;
 
-  /// No description provided for @readingSessionNotYet.
+  /// No description provided for @readingReturnTitle.
   ///
   /// In en, this message translates to:
-  /// **'Not yet'**
-  String get readingSessionNotYet;
+  /// **'Have you finished reading {reference} ?'**
+  String readingReturnTitle(String reference);
+
+  /// No description provided for @readingReturnNo.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get readingReturnNo;
+
+  /// No description provided for @readingReturnNoDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m not done yet'**
+  String get readingReturnNoDescription;
+
+  /// No description provided for @readingReturnYes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get readingReturnYes;
+
+  /// No description provided for @readingReturnYesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, mark it as read'**
+  String get readingReturnYesDescription;
+
+  /// No description provided for @readingReturnWriteNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a note about this'**
+  String get readingReturnWriteNote;
 
   /// No description provided for @homeAllRead.
   ///

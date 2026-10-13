@@ -468,16 +468,20 @@
     }
   },
   "readingSessionBody": "Tap to come back to JW Streak when you're done.",
-  "readingSessionDoneTitle": "Finished {reference}?",
-  "@readingSessionDoneTitle": {
+  "readingSessionDoneBody": "Mark it as read to keep your streak going.",
+  "readingReturnTitle": "Have you finished reading {reference} ?",
+  "@readingReturnTitle": {
     "placeholders": {
       "reference": {
         "type": "String"
       }
     }
   },
-  "readingSessionDoneBody": "Mark it as read to keep your streak going.",
-  "readingSessionNotYet": "Not yet",
+  "readingReturnNo": "No",
+  "readingReturnNoDescription": "I'm not done yet",
+  "readingReturnYes": "Yes",
+  "readingReturnYesDescription": "Yes, mark it as read",
+  "readingReturnWriteNote": "Write a note about this",
   "homeAllRead": "Well done! You've read the whole Bible.",
   "homeBrowseBible": "Browse the Bible",
   "homeChaptersReadCount": "{read} / {total} chapters",

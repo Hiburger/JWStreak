@@ -33,6 +33,7 @@ import 'checkpoint_screen.dart';
 import 'notes_library_screen.dart';
 import 'quiz_screen.dart';
 import 'notes_screen.dart';
+import 'reading_return_screen.dart';
 import 'reminder_setup_screen.dart';
 import 'settings_screen.dart';
 import 'streak_detail_screen.dart';
@@ -568,57 +569,31 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     if (_coveredKeys.contains(bibleChapterKey(session.book, session.chapter))) {
       return;
     }
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final String reference = displayReference(
       context,
       session.book,
       session.chapter,
     );
-    final bool confirmed =
-        await showDialog<bool>(
-          context: context,
-          builder: (BuildContext dialogContext) => AlertDialog(
-            title: Text(l10n.readingSessionDoneTitle(reference)),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(l10n.readingSessionDoneBody),
-                const SizedBox(height: 16),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    // Pops as "not yet" rather than "read": writing a
-                    // reflection isn't the same as confirming the chapter
-                    // was actually finished, so it shouldn't silently mark it
-                    // read on the way there.
-                    Navigator.of(dialogContext).pop(false);
-                    _openNotesEditor(
-                      book: session.book,
-                      chapter: session.chapter,
-                    );
-                  },
-                  icon: Icon(AppIcons.of(context).notes, size: 18),
-                  label: Text(l10n.homeWriteReflectionButton),
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(dialogContext).pop(false),
-                child: Text(l10n.readingSessionNotYet),
-              ),
-              FilledButton(
-                onPressed: () => Navigator.of(dialogContext).pop(true),
-                child: Text(l10n.homeMarkReadButton),
-              ),
-            ],
-          ),
-        ) ??
-        false;
-    if (!confirmed || !mounted) {
+    final ReadingReturnResult? result = await pushReadingReturnScreen(
+      context,
+      reference: reference,
+      showWriteNote: true,
+    );
+    if (!mounted) {
       return;
     }
-    await _markChapterRead(session.book, session.chapter);
+    switch (result) {
+      case ReadingReturnResult.markRead:
+        await _markChapterRead(session.book, session.chapter);
+      case ReadingReturnResult.writeNote:
+        // Writing a reflection isn't the same as confirming the chapter was
+        // actually finished, so it doesn't silently mark it read on the way
+        // to the editor — same as the dialog it replaces.
+        _openNotesEditor(book: session.book, chapter: session.chapter);
+      case ReadingReturnResult.notYet:
+      case null:
+        break;
+    }
   }
 
   Future<void> _handleNotificationTap(ReminderPayload payload) async {

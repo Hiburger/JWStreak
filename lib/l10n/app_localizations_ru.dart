@@ -1167,16 +1167,28 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нажми, чтобы вернуться в JW Streak, когда закончишь.';
 
   @override
-  String readingSessionDoneTitle(String reference) {
-    return 'Закончил $reference?';
-  }
-
-  @override
   String get readingSessionDoneBody =>
       'Отметь как прочитанное, чтобы сохранить свою серию.';
 
   @override
-  String get readingSessionNotYet => 'Ещё нет';
+  String readingReturnTitle(String reference) {
+    return 'Закончил читать $reference ?';
+  }
+
+  @override
+  String get readingReturnNo => 'Нет';
+
+  @override
+  String get readingReturnNoDescription => 'Я ещё читаю';
+
+  @override
+  String get readingReturnYes => 'Да';
+
+  @override
+  String get readingReturnYesDescription => 'Да, отметить как прочитанное';
+
+  @override
+  String get readingReturnWriteNote => 'Написать заметку об этом';
 
   @override
   String get homeAllRead => 'Отлично! Ты прочитал(а) всю Библию.';

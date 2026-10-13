@@ -1176,16 +1176,28 @@ class AppLocalizationsDe extends AppLocalizations {
       'Tippe, um nach dem Lesen zu JW Streak zurückzukehren.';
 
   @override
-  String readingSessionDoneTitle(String reference) {
-    return '$reference fertig gelesen?';
-  }
-
-  @override
   String get readingSessionDoneBody =>
       'Markiere es als gelesen, um deine Serie fortzusetzen.';
 
   @override
-  String get readingSessionNotYet => 'Noch nicht';
+  String readingReturnTitle(String reference) {
+    return 'Hast du $reference zu Ende gelesen ?';
+  }
+
+  @override
+  String get readingReturnNo => 'Nein';
+
+  @override
+  String get readingReturnNoDescription => 'Ich bin noch nicht fertig';
+
+  @override
+  String get readingReturnYes => 'Ja';
+
+  @override
+  String get readingReturnYesDescription => 'Ja, als gelesen markieren';
+
+  @override
+  String get readingReturnWriteNote => 'Notiz dazu schreiben';
 
   @override
   String get homeAllRead => 'Großartig! Du hast die ganze Bibel gelesen.';

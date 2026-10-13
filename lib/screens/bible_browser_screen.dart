@@ -20,6 +20,7 @@ import '../widgets/message_dialog.dart';
 import '../widgets/responsive_body.dart';
 import 'checkpoint_screen.dart';
 import 'quiz_screen.dart';
+import 'reading_return_screen.dart';
 
 /// Browse the whole Bible: books grouped by testament, each showing reading
 /// progress. Tapping a book opens its chapter grid.
@@ -671,32 +672,16 @@ class _BibleChaptersScreenState extends State<BibleChaptersScreen> {
     if (!mounted || _readChapters.contains(session.chapter)) {
       return;
     }
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
     final String reference = displayReference(
       context,
       session.book,
       session.chapter,
     );
-    final bool confirmed =
-        await showDialog<bool>(
-          context: context,
-          builder: (BuildContext dialogContext) => AlertDialog(
-            title: Text(l10n.readingSessionDoneTitle(reference)),
-            content: Text(l10n.readingSessionDoneBody),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(dialogContext).pop(false),
-                child: Text(l10n.readingSessionNotYet),
-              ),
-              FilledButton(
-                onPressed: () => Navigator.of(dialogContext).pop(true),
-                child: Text(l10n.bibleMarkRead),
-              ),
-            ],
-          ),
-        ) ??
-        false;
-    if (!confirmed || !mounted) {
+    final ReadingReturnResult? result = await pushReadingReturnScreen(
+      context,
+      reference: reference,
+    );
+    if (result != ReadingReturnResult.markRead || !mounted) {
       return;
     }
     await widget.dbService.markChapterRead(

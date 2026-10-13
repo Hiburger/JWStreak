@@ -1107,15 +1107,27 @@ class AppLocalizationsZh extends AppLocalizations {
   String get readingSessionBody => '读完后点按即可返回 JW Streak。';
 
   @override
-  String readingSessionDoneTitle(String reference) {
+  String get readingSessionDoneBody => '标记为已读以保持你的连续记录。';
+
+  @override
+  String readingReturnTitle(String reference) {
     return '读完$reference了吗？';
   }
 
   @override
-  String get readingSessionDoneBody => '标记为已读以保持你的连续记录。';
+  String get readingReturnNo => '还没有';
 
   @override
-  String get readingSessionNotYet => '还没有';
+  String get readingReturnNoDescription => '我还没读完';
+
+  @override
+  String get readingReturnYes => '读完了';
+
+  @override
+  String get readingReturnYesDescription => '是的，标记为已读';
+
+  @override
+  String get readingReturnWriteNote => '写一篇笔记';
 
   @override
   String get homeAllRead => '太厉害了！你已经读完整本圣经。';

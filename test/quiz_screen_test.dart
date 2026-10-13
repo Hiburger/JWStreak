@@ -176,16 +176,47 @@ void main() {
     ], onCompleted: (int s, int t) async {});
 
     await tester.tap(find.text('Adam'));
-    await tester.pump();
-    // "Adam" now appears twice: once as a placed chip, once (potentially)
-    // in remaining pool text if duplicated — here it's removed from the
-    // pool, so exactly one placed chip should exist.
-    expect(find.text('Adam'), findsOneWidget);
+    await tester.pumpAndSettle();
+    // "Adam" now exists twice: the placed chip, and the invisible ghost
+    // holding its pool slot open.
+    expect(find.text('Adam'), findsNWidgets(2));
 
-    // Tapping the placed chip removes it, returning it to the pool.
+    // Tapping the placed chip removes it; the ghost slot fills back in.
+    await tester.tap(
+      find.byKey(const ValueKey<String>('word-bank-placed-Adam#1')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Adam'), findsOneWidget); // back in the pool
+  });
+
+  testWidgets('word bank: picking a chip does not move the others', (
+    WidgetTester tester,
+  ) async {
+    await _pump(tester, <QuizQuestion>[
+      const QuizQuestion(
+        text: 'Who were the first man and woman?',
+        options: <String>['Adam and Eve'],
+        correctIndex: 0,
+        explanation: 'Adam and Eve.',
+        type: QuizAnswerType.wordBank,
+      ),
+    ], onCompleted: (int s, int t) async {});
+
+    final List<Offset> before = <Offset>[
+      for (int i = 0; i < 3; i++)
+        tester.getTopLeft(find.byKey(ValueKey<String>('word-bank-pool-$i'))),
+    ];
+
     await tester.tap(find.text('Adam'));
     await tester.pump();
-    expect(find.text('Adam'), findsOneWidget); // back in the pool
+
+    for (int i = 0; i < 3; i++) {
+      expect(
+        tester.getTopLeft(find.byKey(ValueKey<String>('word-bank-pool-$i'))),
+        before[i],
+        reason: 'pool chip $i must not move when another chip is picked',
+      );
+    }
   });
 
   testWidgets('scores multiple questions across a play-through', (

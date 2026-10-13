@@ -399,6 +399,22 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  /// Key for the i-th placed chip, derived from the word itself rather than
+  /// its position, so the chips after a removed word keep their identity
+  /// instead of being rebuilt (and replaying their entrance animation) when
+  /// a neighbour is taken out mid-list. Duplicate words are told apart by
+  /// their occurrence number.
+  String _placedChipKey(int i) {
+    final String word = _pickedWords[i];
+    int occurrence = 0;
+    for (int j = 0; j <= i; j++) {
+      if (_pickedWords[j] == word) {
+        occurrence++;
+      }
+    }
+    return 'word-bank-placed-$word#$occurrence';
+  }
+
   Widget _buildWordBank(AppLocalizations l10n) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
@@ -406,9 +422,14 @@ class _QuizScreenState extends State<QuizScreen> {
 
     // A chip is used up once it's been placed; duplicates of the same word
     // are matched by position so repeated words still work.
-    final List<String> remaining = List<String>.of(bank);
+    final List<bool> used = List<bool>.filled(bank.length, false);
     for (final String picked in _pickedWords) {
-      remaining.remove(picked);
+      for (int i = 0; i < bank.length; i++) {
+        if (!used[i] && bank[i] == picked) {
+          used[i] = true;
+          break;
+        }
+      }
     }
 
     return Column(
@@ -437,30 +458,74 @@ class _QuizScreenState extends State<QuizScreen> {
             spacing: 8,
             runSpacing: 8,
             children: <Widget>[
+              // An empty answer still reserves a full chip row, so the
+              // area doesn't grow (and push the pool down) the moment the
+              // first word lands.
+              if (_pickedWords.isEmpty)
+                Opacity(
+                  opacity: 0,
+                  child: _WordChip(label: '', onTap: null, filled: true),
+                ),
               for (int i = 0; i < _pickedWords.length; i++)
-                _WordChip(
-                  label: _pickedWords[i],
-                  onTap: _answered
-                      ? null
-                      : () => setState(() => _pickedWords.removeAt(i)),
-                  filled: true,
+                TweenAnimationBuilder<double>(
+                  key: ValueKey<String>(_placedChipKey(i)),
+                  tween: Tween<double>(begin: 0, end: 1),
+                  duration: const Duration(milliseconds: 350),
+                  curve: Curves.easeOutCubic,
+                  // The word settles into the answer with a soft fade and
+                  // rise rather than appearing fully formed.
+                  builder: (BuildContext context, double t, Widget? child) {
+                    return Opacity(
+                      opacity: t,
+                      child: Transform.translate(
+                        offset: Offset(0, 8 * (1 - t)),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: _WordChip(
+                    label: _pickedWords[i],
+                    onTap: _answered
+                        ? null
+                        : () => setState(() => _pickedWords.removeAt(i)),
+                    filled: true,
+                  ),
                 ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        // The remaining pool.
+        // The pool. A picked word leaves its chip behind as a muted, inert
+        // slot rather than leaving the Wrap, so no chip ever moves when
+        // another is tapped — a reflowing pool is what put the next word
+        // under the finger mid-tap. The live chip and its slot crossfade,
+        // so picking reads as the word dissolving into its slot.
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: <Widget>[
-            for (final String word in remaining)
-              _WordChip(
-                label: word,
-                onTap: _answered
-                    ? null
-                    : () => setState(() => _pickedWords.add(word)),
-                filled: false,
+            for (int i = 0; i < bank.length; i++)
+              AnimatedSwitcher(
+                key: ValueKey<String>('word-bank-pool-$i'),
+                duration: const Duration(milliseconds: 300),
+                switchInCurve: Curves.easeOut,
+                switchOutCurve: Curves.easeOut,
+                child: used[i]
+                    ? _WordChip(
+                        key: const ValueKey<String>('pool-slot-used'),
+                        label: bank[i],
+                        onTap: null,
+                        filled: false,
+                        used: true,
+                      )
+                    : _WordChip(
+                        key: const ValueKey<String>('pool-slot-active'),
+                        label: bank[i],
+                        onTap: _answered
+                            ? null
+                            : () => setState(() => _pickedWords.add(bank[i])),
+                        filled: false,
+                      ),
               ),
           ],
         ),
@@ -841,41 +906,71 @@ class _StreakPill extends StatelessWidget {
 
 /// A tappable word chip used to assemble a word-bank answer. Chips in the
 /// pool are outlined; chips already placed in the answer are filled and tap
-/// to remove.
+/// to remove. A `used` chip is the muted slot a pool chip leaves behind once
+/// its word is placed — same size, so the pool never reflows, but faded and
+/// with no text or tap target, so it reads as "something was here" rather
+/// than as a tappable word.
 class _WordChip extends StatelessWidget {
   const _WordChip({
+    super.key,
     required this.label,
     required this.onTap,
     required this.filled,
+    this.used = false,
   });
 
   final String label;
   final VoidCallback? onTap;
   final bool filled;
+  final bool used;
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme cs = Theme.of(context).colorScheme;
-    return Material(
-      color: filled ? cs.primaryContainer : cs.surfaceContainerHighest,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          color: filled ? cs.primary : cs.outlineVariant,
-          width: 1.5,
-        ),
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
+    // Picking a chip is its own feedback: the word jumps into the answer
+    // and its pool slot fades to muted, instantly. An ink splash would add
+    // nothing on top of that — and the one on the picked chip would linger
+    // on the muted slot it becomes, since the chip keeps its key and the
+    // same InkWell underneath.
+    return Theme(
+      data: theme.copyWith(
+        splashFactory: NoSplash.splashFactory,
+        highlightColor: Colors.transparent,
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-              color: filled ? cs.onPrimaryContainer : cs.onSurface,
+      child: Material(
+        color: used
+            ? cs.surfaceContainerHighest.withValues(alpha: 0.45)
+            : filled
+            ? cs.primaryContainer
+            : cs.surfaceContainerHighest,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(
+            color: used
+                ? cs.outlineVariant.withValues(alpha: 0.45)
+                : filled
+                ? cs.primary
+                : cs.outlineVariant,
+            width: 1.5,
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+                color: used
+                    ? Colors.transparent
+                    : filled
+                    ? cs.onPrimaryContainer
+                    : cs.onSurface,
+              ),
             ),
           ),
         ),

@@ -671,6 +671,29 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsCatDonationsDesc => 'JW Streak unterstützen';
 
   @override
+  String get settingsCatAppIcon => 'App-Symbol';
+
+  @override
+  String get settingsCatAppIconDesc => 'Wähle dein App-Symbol';
+
+  @override
+  String get appIconComingSoonTitle => 'Bald verfügbar';
+
+  @override
+  String get appIconComingSoonBody =>
+      'Bald kannst du das App-Symbol nach deinen Wünschen ändern — alternative Farben, besondere Designs oder den Klassiker. Dein Startbildschirm, deine Wahl.';
+
+  @override
+  String get appIconSuggestionsTitle => 'Schick deine Ideen';
+
+  @override
+  String get appIconSuggestionsBody =>
+      'Ich nehme Vorschläge für App-Symbole an. Hast du eines gestaltet, das du hier gern sehen würdest, schick es ein. Die ausgewählten Symbole erscheinen auf dieser Seite, selbstverständlich mit Namensnennung :)';
+
+  @override
+  String get appIconSuggestionsButton => 'Schreib mir eine E-Mail';
+
+  @override
   String get settingsCatAbout => 'Hilfe und Info';
 
   @override

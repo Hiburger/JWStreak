@@ -664,6 +664,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsCatDonationsDesc => 'Поддержать JW Streak';
 
   @override
+  String get settingsCatAppIcon => 'Иконка приложения';
+
+  @override
+  String get settingsCatAppIconDesc => 'Выбрать иконку приложения';
+
+  @override
+  String get appIconComingSoonTitle => 'Скоро';
+
+  @override
+  String get appIconComingSoonBody =>
+      'Скоро ты сможешь менять иконку приложения по своему вкусу — альтернативные цвета, особые дизайны или классическую. Твой домашний экран, твой выбор.';
+
+  @override
+  String get appIconSuggestionsTitle => 'Присылай свои идеи';
+
+  @override
+  String get appIconSuggestionsBody =>
+      'Я принимаю предложения по иконкам. Если ты сделал иконку, которую хотел бы здесь видеть, пришли её. Выбранные появятся на этой странице, конечно, с указанием автора :)';
+
+  @override
+  String get appIconSuggestionsButton => 'Напиши мне на почту';
+
+  @override
   String get settingsCatAbout => 'Помощь и о программе';
 
   @override

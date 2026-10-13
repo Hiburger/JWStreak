@@ -8,6 +8,7 @@ import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
 import 'settings/about_settings_screen.dart';
+import 'settings/app_icon_settings_screen.dart';
 import 'settings/donations_settings_screen.dart';
 import 'settings/notification_settings_screen.dart';
 import 'settings/personalization_settings_screen.dart';
@@ -15,21 +16,6 @@ import 'settings/privacy_settings_screen.dart';
 import 'settings/reading_settings_screen.dart';
 import 'settings/settings_common.dart';
 
-/// The settings hub: a handful of doors, nothing else.
-///
-/// Everything used to live on this one page — styles, brightness, dynamic
-/// color, how the Bible opens, reading order, resume point, language, app
-/// lock, the guided tour, three permission cards, version, source, license
-/// and the footer, all stacked in one scroll. Finding anything meant
-/// remembering roughly how far down it was, and the page mixed decisions a
-/// reader makes ("which order do I read in?") with Android plumbing they
-/// shouldn't have to think about.
-///
-/// Splitting it into named categories means the top level fits on one
-/// screen and each choice is one tap from a page that only holds related
-/// things. The grouping is by what a reader is trying to do, not by what
-/// the code touches — which is why "Open the Bible with" now sits under
-/// Reading rather than next to the color pickers.
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
     required this.currentThemePreference,
@@ -134,6 +120,14 @@ class SettingsScreen extends StatelessWidget {
             ),
             _CategoryTile(
               shape: sectionShape,
+              icon: Icons.apps_outlined,
+              accent: kAccentPurple,
+              title: l10n.settingsCatAppIcon,
+              subtitle: l10n.settingsCatAppIconDesc,
+              onTap: () => _open(context, (_) => const AppIconSettingsScreen()),
+            ),
+            _CategoryTile(
+              shape: sectionShape,
               icon: Icons.help_outline_rounded,
               accent: kAccentOrange,
               title: l10n.settingsCatAbout,
@@ -147,10 +141,6 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-/// One door on the hub. The subtitle lists what's behind it in plain words
-/// rather than describing the category again — it's the only thing standing
-/// between a reader and a wrong guess, since the titles alone ("Reading",
-/// "Notifications") don't say whether what they want is in there.
 class _CategoryTile extends StatelessWidget {
   const _CategoryTile({
     required this.shape,
@@ -163,11 +153,6 @@ class _CategoryTile extends StatelessWidget {
 
   final RoundedRectangleBorder shape;
   final IconData icon;
-
-  /// A distinct color per category — identical primary-container circles
-  /// all told the eye "these are the same kind of thing," which worked when
-  /// there was one list to scan but fights against a row of doors meant to
-  /// be told apart at a glance.
   final OnboardingAccent accent;
   final String title;
   final String subtitle;
@@ -196,9 +181,6 @@ class _CategoryTile extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: accent.background(context),
-              // The pastel fill alone read as washed-out against the
-              // card's own fill — a thin ring in the icon's own color
-              // gives each circle a crisp edge without darkening the fill.
               border: Border.all(color: accentFg.withValues(alpha: 0.4)),
             ),
             child: Icon(icon, color: accentFg, size: 20),

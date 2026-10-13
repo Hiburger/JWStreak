@@ -627,6 +627,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsCatDonationsDesc => '支持 JW Streak';
 
   @override
+  String get settingsCatAppIcon => '应用图标';
+
+  @override
+  String get settingsCatAppIconDesc => '选择应用图标';
+
+  @override
+  String get appIconComingSoonTitle => '即将推出';
+
+  @override
+  String get appIconComingSoonBody =>
+      '很快，你就可以随心更换应用图标——备选配色、特别设计或经典款。你的主屏幕，你说了算。';
+
+  @override
+  String get appIconSuggestionsTitle => '分享你的创意';
+
+  @override
+  String get appIconSuggestionsBody =>
+      '欢迎大家提供应用图标创意。如果你设计了一个想在这里看到的图标，欢迎发来。被选中的图标会出现在这个页面上，当然会注明作者 :)';
+
+  @override
+  String get appIconSuggestionsButton => '发邮件联系我';
+
+  @override
   String get settingsCatAbout => '帮助与关于';
 
   @override

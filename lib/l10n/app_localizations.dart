@@ -1342,6 +1342,48 @@ abstract class AppLocalizations {
   /// **'Supporting JW Streak'**
   String get settingsCatDonationsDesc;
 
+  /// No description provided for @settingsCatAppIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'App icon'**
+  String get settingsCatAppIcon;
+
+  /// No description provided for @settingsCatAppIconDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the launcher icon'**
+  String get settingsCatAppIconDesc;
+
+  /// No description provided for @appIconComingSoonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon'**
+  String get appIconComingSoonTitle;
+
+  /// No description provided for @appIconComingSoonBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon, you\'ll be able to change the app icon to your liking — alternate colors, special designs, or the classic one. Your home screen, your choice.'**
+  String get appIconComingSoonBody;
+
+  /// No description provided for @appIconSuggestionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send your ideas'**
+  String get appIconSuggestionsTitle;
+
+  /// No description provided for @appIconSuggestionsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m taking suggestions for app icons. If you made one you\'d like to see here, send it over. The ones that make it in will appear on this page, with credit to their creator of course :)'**
+  String get appIconSuggestionsBody;
+
+  /// No description provided for @appIconSuggestionsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reach out via mail'**
+  String get appIconSuggestionsButton;
+
   /// No description provided for @settingsCatAbout.
   ///
   /// In en, this message translates to:

@@ -667,6 +667,29 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsCatDonationsDesc => 'Wsparcie JW Streak';
 
   @override
+  String get settingsCatAppIcon => 'Ikona aplikacji';
+
+  @override
+  String get settingsCatAppIconDesc => 'Wybierz ikonę aplikacji';
+
+  @override
+  String get appIconComingSoonTitle => 'Wkrótce';
+
+  @override
+  String get appIconComingSoonBody =>
+      'Wkrótce będziesz mógł zmienić ikonę aplikacji według własnego gustu — alternatywne kolory, specjalne wzory albo klasyczną. Twój ekran główny, twój wybór.';
+
+  @override
+  String get appIconSuggestionsTitle => 'Prześlij swoje pomysły';
+
+  @override
+  String get appIconSuggestionsBody =>
+      'Przyjmuję propozycje ikon. Jeśli stworzyłeś ikonę, którą chcesz tutaj zobaczyć, prześlij ją. Wybrane pojawią się na tej stronie, oczywiście z uznaniem autora :)';
+
+  @override
+  String get appIconSuggestionsButton => 'Napisz do mnie';
+
+  @override
   String get settingsCatAbout => 'Pomoc i informacje';
 
   @override

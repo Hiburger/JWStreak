@@ -7,23 +7,13 @@ import '../../theme/app_skin.dart';
 import '../../theme/theme_preference.dart';
 import 'settings_common.dart';
 
-/// A selectable UI language. The [name] is always shown in its own
-/// language (endonym), regardless of the app's current locale — this is
-/// the standard convention for language pickers.
 class _AppLanguage {
   const _AppLanguage(this.code, this.name);
 
-  /// null means "follow system language".
   final String? code;
   final String name;
 }
 
-/// The `null`-code entry is what makes "follow the system language" — the
-/// default on a fresh install — actually selectable *and* visibly selected.
-/// Without it the picker had no chip matching a null preference, so a new
-/// user saw a correctly-translated app above a picker with nothing chosen.
-/// Its label is the only one localized rather than an endonym: it names a
-/// behaviour, not a language.
 const List<_AppLanguage> _kAppLanguages = <_AppLanguage>[
   _AppLanguage(null, ''),
   _AppLanguage('en', 'English (US)'),
@@ -37,10 +27,7 @@ const List<_AppLanguage> _kAppLanguages = <_AppLanguage>[
   _AppLanguage('zh', '中文'),
 ];
 
-/// Everything that changes how the app looks and reads: style, brightness,
-/// wallpaper colors, language. Grouped together because from a reader's side
-/// they're one question ("how do I want this to look?"), even though under
-/// the hood a theme and a locale have nothing in common.
+/// Everything that changes how the app looks and reads: style, brightness, wallpaper colors language ...
 class PersonalizationSettingsScreen extends StatefulWidget {
   const PersonalizationSettingsScreen({
     required this.currentThemePreference,
@@ -172,6 +159,47 @@ class _PersonalizationSettingsScreenState
     return SettingsPage(
       title: l10n.settingsCatPersonalization,
       children: <Widget>[
+        SettingsSectionLabel(l10n.settingsLanguage),
+        Card.filled(
+          shape: sectionShape,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _kAppLanguages
+                  .map(
+                    (_AppLanguage lang) => ChoiceChip(
+                      shape: kSettingsChipShape,
+                      label: Text(
+                        lang.code == null
+                            ? l10n.settingsLanguageSystem
+                            : lang.name,
+                      ),
+                      selected: _selectedLocaleCode == lang.code,
+                      selectedColor: cs.primary,
+                      checkmarkColor: cs.onPrimary,
+                      labelStyle: TextStyle(
+                        color: _selectedLocaleCode == lang.code
+                            ? cs.onPrimary
+                            : cs.onSurface,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      side: BorderSide(
+                        color: _selectedLocaleCode == lang.code
+                            ? cs.primary
+                            : cs.outlineVariant,
+                      ),
+                      onSelected: widget.onLocaleChanged == null
+                          ? null
+                          : (_) => _changeLocale(lang.code),
+                    ),
+                  )
+                  .toList(growable: false),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
         SettingsSectionLabel(l10n.settingsAppearance),
         Card.filled(
           shape: sectionShape,
@@ -187,10 +215,7 @@ class _PersonalizationSettingsScreenState
                   ),
                 ),
                 const SizedBox(height: 10),
-                // A named list of styles tells you nothing — "Parchment"
-                // could be anything. Each one paints itself instead, so
-                // the choice is made by looking rather than by guessing
-                // and then undoing.
+
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -273,11 +298,8 @@ class _PersonalizationSettingsScreenState
             ),
           ),
         ),
-        // Dynamic color (Material You) is an Android-only concept — it
-        // derives the palette from the device wallpaper, which iOS/iPadOS
-        // has no equivalent of. The dynamic_color package already no-ops
-        // there, but showing a toggle that can never do anything is just
-        // confusing, so the setting itself is Android-only.
+        // Dynamic color (Material You) is an Android-only concept.iOS/iPadOS
+        // has no equivalent of so the setting itself is Android-only.
         if (defaultTargetPlatform == TargetPlatform.android) ...<Widget>[
           const SizedBox(height: 8),
           Card.filled(
@@ -285,9 +307,6 @@ class _PersonalizationSettingsScreenState
             child: SwitchListTile(
               title: Text(l10n.settingsDynamicColor),
               subtitle: Text(
-                // A style *is* a palette, so wallpaper colors and a skin
-                // would be two settings fighting over the same pixels —
-                // say why it's off rather than just greying it out.
                 !_selectedSkin.supportsDynamicColor
                     ? l10n.settingsDynamicColorClassicOnly
                     : _useDynamicColor
@@ -303,55 +322,11 @@ class _PersonalizationSettingsScreenState
             ),
           ),
         ],
-        const SizedBox(height: 16),
-        SettingsSectionLabel(l10n.settingsLanguage),
-        Card.filled(
-          shape: sectionShape,
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: _kAppLanguages
-                  .map(
-                    (_AppLanguage lang) => ChoiceChip(
-                      shape: kSettingsChipShape,
-                      label: Text(
-                        lang.code == null
-                            ? l10n.settingsLanguageSystem
-                            : lang.name,
-                      ),
-                      selected: _selectedLocaleCode == lang.code,
-                      selectedColor: cs.primary,
-                      checkmarkColor: cs.onPrimary,
-                      labelStyle: TextStyle(
-                        color: _selectedLocaleCode == lang.code
-                            ? cs.onPrimary
-                            : cs.onSurface,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      side: BorderSide(
-                        color: _selectedLocaleCode == lang.code
-                            ? cs.primary
-                            : cs.outlineVariant,
-                      ),
-                      onSelected: widget.onLocaleChanged == null
-                          ? null
-                          : (_) => _changeLocale(lang.code),
-                    ),
-                  )
-                  .toList(growable: false),
-            ),
-          ),
-        ),
       ],
     );
   }
 }
 
-/// Full-screen Material loader shown while the app language switches, so the
-/// UI text doesn't visibly jump-cut from one language to another. Blocks the
-/// back gesture/button so it can't be dismissed before the switch completes.
 class _LocaleSwitchLoadingScreen extends StatelessWidget {
   const _LocaleSwitchLoadingScreen();
 
@@ -372,13 +347,6 @@ class _LocaleSwitchLoadingScreen extends StatelessWidget {
   }
 }
 
-/// One entry in the style gallery: a miniature of the app painted in that
-/// skin's own palette and drawn with that skin's own icons.
-///
-/// Names alone don't carry a theme — "Parchment" could be anything, and
-/// picking blind means applying a style just to see it and then undoing it.
-/// Rendering each option in its own colors makes the choice a glance instead
-/// of a trial run.
 class _SkinSwatch extends StatelessWidget {
   const _SkinSwatch({
     required this.skin,
@@ -439,9 +407,6 @@ class _SkinSwatch extends StatelessWidget {
                               size: 16,
                               color: preview.secondary,
                             ),
-                            // The reward's own color, not a generic tertiary
-                            // tint — the preview should show what you'll
-                            // actually get (a shell reads oddly in amber).
                             icons.reward(size: 16, color: icons.rewardColor),
                           ],
                         ),

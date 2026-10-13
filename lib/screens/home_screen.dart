@@ -1744,11 +1744,23 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    return Material(
-      color: cs.secondaryContainer.withValues(alpha: 0.35),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: cs.outlineVariant),
+    // The first onboarding page's recipe, scaled to a card: the same
+    // surface-to-primaryContainer gradient wash, the logo's rotating
+    // gradient-ring + glow around the reading glyph, the display font for
+    // the reference, and the glowing primary button. Home is where those
+    // onboarding promises have to keep being honoured visually.
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            cs.surface,
+            cs.primaryContainer.withValues(alpha: 0.35),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: cs.outlineVariant),
       ),
       // No card-wide onTap: it used to open the chapter from anywhere on the
       // card, but that put a tappable ancestor behind the "Mark as read"
@@ -1758,7 +1770,7 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
       // every action the card offers, so the whole-card shortcut isn't
       // worth that failure mode.
       child: Padding(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
             Row(
@@ -1794,8 +1806,12 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                       const SizedBox(height: 2),
                       Text(
                         widget.reference,
-                        style: theme.textTheme.titleLarge?.copyWith(
+                        style: const TextStyle(
+                          fontFamily: 'PlusJakartaSans',
+                          fontSize: 22,
                           fontWeight: FontWeight.w800,
+                          letterSpacing: -0.5,
+                          height: 1.1,
                         ),
                       ),
                     ],
@@ -1803,7 +1819,7 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                 ),
               ],
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 16),
             Row(
               children: <Widget>[
                 Expanded(
@@ -1817,16 +1833,32 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                           offset: Offset(_nudgeOffset(_openNudge.value), 0),
                           child: child,
                         ),
-                    child: FilledButton.icon(
-                      onPressed: widget.onOpen,
-                      icon: Icon(AppIcons.of(context).book, size: 18),
-                      // Some translations ("Segna come letto") don't fit this
-                      // half-width slot on one line at full size; scaling
-                      // down instead of wrapping keeps it on a single line
-                      // without cutting any of it off like ellipsis would.
-                      label: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(l10n.homeOpenButton, maxLines: 1),
+                    child: RepaintBoundary(
+                      // The card's single animated accent, and it follows
+                      // the action: the ring glows around "Open" until the
+                      // chapter has been opened, then moves to "Mark as
+                      // read" — the glow always marks the next thing to do.
+                      child: _ActionGlow(
+                        enabled: !widget.canMarkRead,
+                        color: cs.primary,
+                        borderRadius: BorderRadius.circular(999),
+                        child: FilledButton.icon(
+                          onPressed: widget.onOpen,
+                          style: FilledButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          icon: Icon(AppIcons.of(context).book, size: 18),
+                          // Some translations ("Segna come letto") don't fit
+                          // this half-width slot on one line at full size;
+                          // scaling down instead of wrapping keeps it on a
+                          // single line without cutting any of it off like
+                          // ellipsis would.
+                          label: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(l10n.homeOpenButton, maxLines: 1),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -1843,31 +1875,38 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                         ? HitTestBehavior.deferToChild
                         : HitTestBehavior.opaque,
                     onTap: widget.canMarkRead ? null : _nudgeOpen,
-                    child: FilledButton.tonalIcon(
-                      // Disabled until "Open" has been tapped for this
-                      // chapter — otherwise there's nothing stopping a
-                      // chapter being ticked off without ever having been
-                      // read.
-                      onPressed: widget.canMarkRead ? widget.onMarkRead : null,
-                      icon: const Icon(Icons.check_circle_outline, size: 18),
-                      label: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(l10n.homeMarkReadButton, maxLines: 1),
-                      ),
-                      // The default tonal secondaryContainer pairing reads too
-                      // faint sitting on this card's own light-blue tint;
-                      // secondary/onSecondary is the same family but a solid,
-                      // higher-contrast step darker. Standard Material
-                      // disabled-state opacities (12%/38%) substitute in by
-                      // hand since a flat color here isn't state-aware on its
-                      // own the way the theme's default would be.
-                      style: FilledButton.styleFrom(
-                        backgroundColor: widget.canMarkRead
-                            ? cs.secondary
-                            : cs.onSurface.withValues(alpha: 0.12),
-                        foregroundColor: widget.canMarkRead
-                            ? cs.onSecondary
-                            : cs.onSurface.withValues(alpha: 0.38),
+                    child: RepaintBoundary(
+                      child: _ActionGlow(
+                        enabled: widget.canMarkRead,
+                        color: cs.secondary,
+                        borderRadius: BorderRadius.circular(999),
+                        child: FilledButton.tonalIcon(
+                          // Disabled until "Open" has been tapped for this
+                          // chapter — otherwise there's nothing stopping a
+                          // chapter being ticked off without ever having
+                          // been read.
+                          onPressed: widget.canMarkRead
+                              ? widget.onMarkRead
+                              : null,
+                          icon: const Icon(
+                            Icons.check_circle_outline,
+                            size: 18,
+                          ),
+                          label: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(l10n.homeMarkReadButton, maxLines: 1),
+                          ),
+                          style: FilledButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            backgroundColor: widget.canMarkRead
+                                ? cs.secondary
+                                : cs.onSurface.withValues(alpha: 0.12),
+                            foregroundColor: widget.canMarkRead
+                                ? cs.onSecondary
+                                : cs.onSurface.withValues(alpha: 0.38),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -1879,6 +1918,10 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: widget.onWriteReflection,
+                style: OutlinedButton.styleFrom(
+                  shape: const StadiumBorder(),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                ),
                 icon: Icon(AppIcons.of(context).notes, size: 18),
                 label: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -1889,6 +1932,95 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ActionGlow extends StatefulWidget {
+  const _ActionGlow({
+    required this.child,
+    required this.enabled,
+    required this.borderRadius,
+    this.color,
+  });
+
+  final Widget child;
+  final bool enabled;
+  final Color? color;
+  final BorderRadius borderRadius;
+
+  @override
+  State<_ActionGlow> createState() => _ActionGlowState();
+}
+
+class _ActionGlowState extends State<_ActionGlow>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    );
+    if (widget.enabled) {
+      _controller.repeat();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant _ActionGlow oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.enabled == oldWidget.enabled) {
+      return;
+    }
+    widget.enabled ? _controller.repeat() : _controller.stop();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.enabled) {
+      return widget.child;
+    }
+    final Color base = widget.color ?? Theme.of(context).colorScheme.primary;
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (BuildContext context, Widget? child) {
+        final double angle = _controller.value * 2 * math.pi;
+        final double pulse =
+            0.5 + 0.5 * math.sin(_controller.value * 2 * math.pi);
+        return Container(
+          padding: const EdgeInsets.all(2.5),
+          decoration: BoxDecoration(
+            borderRadius: widget.borderRadius,
+            gradient: SweepGradient(
+              transform: GradientRotation(angle),
+              colors: <Color>[
+                base,
+                base.withValues(alpha: 0.35),
+                base.withValues(alpha: 0.75),
+                base,
+              ],
+            ),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: base.withValues(alpha: 0.30 + 0.25 * pulse),
+                blurRadius: 10 + 8 * pulse,
+                spreadRadius: 0.5 + 1.5 * pulse,
+              ),
+            ],
+          ),
+          child: child,
+        );
+      },
+      child: widget.child,
     );
   }
 }

@@ -170,38 +170,55 @@ class _CategoryTile extends StatelessWidget {
         shape: shape,
         clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.zero,
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          leading: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: accent.background(context),
-              border: Border.all(color: accentFg.withValues(alpha: 0.4)),
-            ),
-            child: Icon(icon, color: accentFg, size: 20),
-          ),
-          title: Text(
-            title,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
+        child: DecoratedBox(
+          // A quiet wash of the icon's own color, entering from the right
+          // and dissolving about halfway across — keeps the doors readable
+          // as a list while letting each category carry a little more of
+          // its own identity than the small leading circle alone.
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+              colors: <Color>[
+                accentFg.withValues(alpha: 0.12),
+                accentFg.withValues(alpha: 0),
+              ],
+              stops: const <double>[0, 0.45],
             ),
           ),
-          subtitle: Text(
-            subtitle,
-            style: theme.textTheme.bodySmall?.copyWith(
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            leading: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: accent.background(context),
+                border: Border.all(color: accentFg.withValues(alpha: 0.4)),
+              ),
+              child: Icon(icon, color: accentFg, size: 20),
+            ),
+            title: Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            subtitle: Text(
+              subtitle,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: cs.onSurfaceVariant,
+              ),
+            ),
+            trailing: Icon(
+              Icons.chevron_right_rounded,
               color: cs.onSurfaceVariant,
             ),
+            onTap: onTap,
           ),
-          trailing: Icon(
-            Icons.chevron_right_rounded,
-            color: cs.onSurfaceVariant,
-          ),
-          onTap: onTap,
         ),
       ),
     );

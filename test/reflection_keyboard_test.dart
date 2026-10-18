@@ -13,7 +13,7 @@ const double _kScreenWidth = 400;
 const double _kKeyboardHeight = 340;
 const double _kKeyboardTop = _kScreenHeight - _kKeyboardHeight;
 
-Finder _saveButton() => find.byWidgetPredicate((Widget w) => w is FilledButton);
+Finder _reflectionField() => find.byType(TextField);
 
 void _useScreen(WidgetTester tester, {double keyboardHeight = 0}) {
   tester.view.devicePixelRatio = 1.0;
@@ -22,7 +22,7 @@ void _useScreen(WidgetTester tester, {double keyboardHeight = 0}) {
   addTearDown(tester.view.reset);
 }
 
-Future<void> _pumpReflection(
+Future<void> _pumpCheckpoint(
   WidgetTester tester,
   Checkpoint checkpoint, {
   double keyboardHeight = 0,
@@ -32,7 +32,7 @@ Future<void> _pumpReflection(
     MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: ReflectionScreen(
+      home: CheckpointScreen(
         dbService: LocalDbService(),
         checkpoint: checkpoint,
       ),
@@ -44,11 +44,11 @@ Future<void> _pumpReflection(
       () => Future<void>.delayed(const Duration(milliseconds: 25)),
     );
     await tester.pump();
-    if (_saveButton().evaluate().isNotEmpty) {
+    if (_reflectionField().evaluate().isNotEmpty) {
       return;
     }
   }
-  fail('the reflection form never finished loading');
+  fail('the checkpoint page never finished loading');
 }
 
 void main() {
@@ -63,38 +63,65 @@ void main() {
     checkpoint = checkpointsForBook(genesis).first;
   });
 
-  testWidgets('the Save button stays above the keyboard', (
+  testWidgets('the reflection is written inline on the checkpoint page', (
     WidgetTester tester,
   ) async {
-    await _pumpReflection(tester, checkpoint, keyboardHeight: _kKeyboardHeight);
+    await _pumpCheckpoint(tester, checkpoint);
+    // No editor to push to anymore — the field is the entry, right under
+    // the reflection prompt.
+    expect(_reflectionField(), findsOneWidget);
+  });
 
-    expect(_saveButton(), findsOneWidget);
+  testWidgets('leaving the field saves the answer and confirms it', (
+    WidgetTester tester,
+  ) async {
+    await _pumpCheckpoint(tester, checkpoint);
+
+    await tester.enterText(_reflectionField(), 'I liked this passage');
+    FocusManager.instance.primaryFocus?.unfocus();
+    // The save runs through the real (ffi) database, so the event loop
+    // needs a real tick to finish it before the confirmation appears.
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    );
+    await tester.pump();
+
+    expect(find.text('Saved'), findsOneWidget);
+    // The read goes through the real (ffi) database, so like the save it
+    // needs a real-time window to complete — awaiting it straight in the
+    // fake-async test body would never resolve.
+    final String? stored = await tester.runAsync<String?>(
+      () => LocalDbService().getReflection(checkpoint.id),
+    );
+    expect(stored, 'I liked this passage');
+    // The "Saved" flash fades on a real-time timer (it is armed from the
+    // save's continuation, which completes outside fake time), so its
+    // disappearance isn't assertable here — the two assertions above are
+    // the behavior that matters.
+  });
+
+  testWidgets('the field is scrolled clear of the keyboard when focused', (
+    WidgetTester tester,
+  ) async {
+    await _pumpCheckpoint(tester, checkpoint, keyboardHeight: _kKeyboardHeight);
+
+    // Focus the field directly rather than tapping it: with the keyboard
+    // inset applied before the first frame, the field can start laid out
+    // under the keyboard, which makes where the tap lands flaky. What this
+    // guards is the aftermath of focusing — the page must scroll the field
+    // clear of the keyboard.
+    await tester.showKeyboard(_reflectionField());
+    // Fixed pumps, not pumpAndSettle: the Start button's glow ring repeats
+    // forever, so this page never settles.
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+
     expect(
-      tester.getRect(_saveButton()).bottom,
+      tester.getRect(_reflectionField()).bottom,
       lessThanOrEqualTo(_kKeyboardTop),
       reason:
-          'Save must sit above the keyboard, which starts at $_kKeyboardTop',
+          'the focused field must sit above the keyboard, which starts at '
+          '$_kKeyboardTop',
     );
-  });
-
-  testWidgets('the Save button still sits at the bottom with no keyboard', (
-    WidgetTester tester,
-  ) async {
-    await _pumpReflection(tester, checkpoint);
-
-    // It must not have floated up into the middle of the page now that it
-    // lives inside the body rather than in bottomNavigationBar.
-    expect(
-      tester.getRect(_saveButton()).bottom,
-      greaterThan(_kScreenHeight - 60),
-    );
-  });
-
-  testWidgets('the text field is not covered by the keyboard either', (
-    WidgetTester tester,
-  ) async {
-    await _pumpReflection(tester, checkpoint, keyboardHeight: _kKeyboardHeight);
-
-    expect(tester.getRect(find.byType(TextField)).top, lessThan(_kKeyboardTop));
   });
 }

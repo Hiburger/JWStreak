@@ -897,6 +897,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get quizPerfect => '满分！';
 
   @override
+  String get quizStreakMessage => '连续答对3题！';
+
+  @override
   String get quizWellDone => '做得好！';
 
   @override
@@ -999,6 +1002,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get checkpointSave => '保存';
+
+  @override
+  String get checkpointReflectionSaved => '已保存';
 
   @override
   String get homeStreakLostMessage => '你的连续记录清零了。别担心，我们一起重新开始';

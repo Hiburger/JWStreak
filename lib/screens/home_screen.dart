@@ -22,6 +22,7 @@ import '../widgets/marquee_text.dart';
 import '../theme/app_skin.dart';
 import '../theme/theme_preference.dart';
 import '../widgets/freeze_earned_dialog.dart';
+import '../widgets/action_glow.dart';
 import '../widgets/guided_tour.dart';
 import '../widgets/message_dialog.dart';
 import '../widgets/onboarding_accent.dart';
@@ -1836,7 +1837,7 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                       // the action: the ring glows around "Open" until the
                       // chapter has been opened, then moves to "Mark as
                       // read" — the glow always marks the next thing to do.
-                      child: _ActionGlow(
+                      child: ActionGlow(
                         enabled: !widget.canMarkRead,
                         color: cs.primary,
                         borderRadius: BorderRadius.circular(999),
@@ -1874,7 +1875,7 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                         : HitTestBehavior.opaque,
                     onTap: widget.canMarkRead ? null : _nudgeOpen,
                     child: RepaintBoundary(
-                      child: _ActionGlow(
+                      child: ActionGlow(
                         enabled: widget.canMarkRead,
                         color: cs.secondary,
                         borderRadius: BorderRadius.circular(999),
@@ -1930,95 +1931,6 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ActionGlow extends StatefulWidget {
-  const _ActionGlow({
-    required this.child,
-    required this.enabled,
-    required this.borderRadius,
-    this.color,
-  });
-
-  final Widget child;
-  final bool enabled;
-  final Color? color;
-  final BorderRadius borderRadius;
-
-  @override
-  State<_ActionGlow> createState() => _ActionGlowState();
-}
-
-class _ActionGlowState extends State<_ActionGlow>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 4),
-    );
-    if (widget.enabled) {
-      _controller.repeat();
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant _ActionGlow oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.enabled == oldWidget.enabled) {
-      return;
-    }
-    widget.enabled ? _controller.repeat() : _controller.stop();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (!widget.enabled) {
-      return widget.child;
-    }
-    final Color base = widget.color ?? Theme.of(context).colorScheme.primary;
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (BuildContext context, Widget? child) {
-        final double angle = _controller.value * 2 * math.pi;
-        final double pulse =
-            0.5 + 0.5 * math.sin(_controller.value * 2 * math.pi);
-        return Container(
-          padding: const EdgeInsets.all(2.5),
-          decoration: BoxDecoration(
-            borderRadius: widget.borderRadius,
-            gradient: SweepGradient(
-              transform: GradientRotation(angle),
-              colors: <Color>[
-                base,
-                base.withValues(alpha: 0.35),
-                base.withValues(alpha: 0.75),
-                base,
-              ],
-            ),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: base.withValues(alpha: 0.30 + 0.25 * pulse),
-                blurRadius: 10 + 8 * pulse,
-                spreadRadius: 0.5 + 1.5 * pulse,
-              ),
-            ],
-          ),
-          child: child,
-        );
-      },
-      child: widget.child,
     );
   }
 }

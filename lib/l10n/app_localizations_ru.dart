@@ -943,6 +943,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quizPerfect => 'Идеально!';
 
   @override
+  String get quizStreakMessage => 'Три подряд!';
+
+  @override
   String get quizWellDone => 'Молодец!';
 
   @override
@@ -1051,6 +1054,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get checkpointSave => 'Сохранить';
+
+  @override
+  String get checkpointReflectionSaved => 'Сохранено';
 
   @override
   String get homeStreakLostMessage =>

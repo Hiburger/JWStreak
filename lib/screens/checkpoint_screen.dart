@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
 import '../quiz/quiz_facts.dart';
 import '../services/local_db_service.dart';
+import '../widgets/action_glow.dart';
 import '../widgets/circular_back_button.dart';
 import '../theme/app_icons.dart';
 import '../widgets/freeze_earned_dialog.dart';
@@ -49,15 +53,49 @@ class CheckpointScreen extends StatefulWidget {
   State<CheckpointScreen> createState() => _CheckpointScreenState();
 }
 
-class _CheckpointScreenState extends State<CheckpointScreen> {
+class _CheckpointScreenState extends State<CheckpointScreen>
+    with SingleTickerProviderStateMixin {
   QuizResult? _result;
   String? _reflection;
   bool _isLoading = true;
 
+  late final AnimationController _entranceController;
+
   @override
   void initState() {
     super.initState();
+    _entranceController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1400),
+    )..forward();
     _load();
+  }
+
+  @override
+  void dispose() {
+    _entranceController.dispose();
+    super.dispose();
+  }
+
+  Widget _staggered({
+    required double from,
+    required double to,
+    required Widget child,
+  }) {
+    final CurvedAnimation animation = CurvedAnimation(
+      parent: _entranceController,
+      curve: Interval(from, to, curve: Curves.easeOutCubic),
+    );
+    return FadeTransition(
+      opacity: animation,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.18),
+          end: Offset.zero,
+        ).animate(animation),
+        child: child,
+      ),
+    );
   }
 
   Future<void> _load() async {
@@ -78,15 +116,28 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
 
   Future<void> _startQuiz() async {
     final Checkpoint cp = widget.checkpoint;
+    final String title = localizedCheckpointTitle(context, cp);
+    final String languageCode = Localizations.localeOf(context).languageCode;
     final String? funFact = checkpointFactFor(
       cp.id,
-      languageCode: Localizations.localeOf(context).languageCode,
+      languageCode: languageCode,
     );
+    try {
+      final bool hasVibrator = await Vibration.hasVibrator();
+      if (hasVibrator) {
+        await Vibration.vibrate(duration: 30);
+      }
+    } catch (_) {
+      // haptics are best-effort; shoudl never  block starting the quiz on them.
+    }
+    if (!mounted) {
+      return;
+    }
     bool freezeEarned = false;
     await Navigator.of(context).push<bool>(
       MaterialPageRoute<bool>(
         builder: (_) => QuizScreen(
-          title: localizedCheckpointTitle(context, cp),
+          title: title,
           questions: cp.questions,
           funFact: funFact,
           onCompleted: (int score, int total) async {
@@ -107,18 +158,6 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
     }
   }
 
-  Future<void> _answerReflection() async {
-    await Navigator.of(context).push<bool>(
-      MaterialPageRoute<bool>(
-        builder: (_) => ReflectionScreen(
-          dbService: widget.dbService,
-          checkpoint: widget.checkpoint,
-        ),
-      ),
-    );
-    await _load();
-  }
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -129,117 +168,143 @@ class _CheckpointScreenState extends State<CheckpointScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: const CircularBackButton(),
-        title: Text(l10n.checkpointAppBarTitle),
+        toolbarHeight: 86,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              localizedCheckpointTitle(context, cp),
+              style: const TextStyle(
+                fontFamily: 'PlusJakartaSans',
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1,
+                height: 1.15,
+              ),
+            ),
+            Text(
+              l10n.checkpointAppBarTitle,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: cs.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
       ),
-      body: ResponsiveBody(
-        child: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : ListView(
-                padding: const EdgeInsets.all(16),
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 52,
-                        height: 52,
-                        decoration: BoxDecoration(
-                          color: cs.tertiaryContainer,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Icon(
-                          Icons.workspace_premium_outlined,
-                          color: cs.onTertiaryContainer,
-                        ),
-                      ),
-                      const SizedBox(width: 14),
-                      Expanded(
-                        child: Text(
-                          localizedCheckpointTitle(context, cp),
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  if (cp.hasQuiz) ...<Widget>[
-                    _CardShell(
-                      icon: Icons.quiz_outlined,
-                      iconColor: cs.onPrimaryContainer,
-                      iconBg: cs.primaryContainer,
-                      title: l10n.checkpointQuizLabel,
-                      subtitle: _result == null
-                          ? l10n.checkpointQuestionCount(cp.questions.length)
-                          : l10n.checkpointBestScore(
-                              _result!.score,
-                              _result!.total,
-                            ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          if (_result != null) ...<Widget>[
-                            _StarRow(result: _result!),
-                            const SizedBox(height: 12),
-                          ],
-                          FilledButton.icon(
-                            onPressed: _startQuiz,
-                            icon: Icon(
-                              _result == null ? Icons.play_arrow : Icons.replay,
-                            ),
-                            label: Text(
-                              _result == null
-                                  ? l10n.checkpointStart
-                                  : l10n.checkpointRedoQuiz,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-                  _CardShell(
-                    icon: Icons.self_improvement_outlined,
-                    iconColor: cs.onSecondaryContainer,
-                    iconBg: cs.secondaryContainer,
-                    title: l10n.checkpointPersonalReflection,
-                    subtitle: localizedReflectionPrompt(context, cp),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              cs.surface,
+              cs.primaryContainer.withValues(alpha: 0.35),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          top: false,
+          child: ResponsiveBody(
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        if (_reflection != null && _reflection!.isNotEmpty) ...[
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: cs.surface,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(_reflection!),
-                          ),
-                          const SizedBox(height: 12),
-                        ],
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: FilledButton.tonalIcon(
-                            onPressed: _answerReflection,
-                            icon: Icon(
-                              _reflection == null
-                                  ? Icons.edit_outlined
-                                  : Icons.edit,
-                            ),
-                            label: Text(
-                              _reflection == null
-                                  ? l10n.checkpointAnswer
-                                  : l10n.checkpointEdit,
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                if (cp.hasQuiz) ...<Widget>[
+                                  _staggered(
+                                    from: 0,
+                                    to: 0.4,
+                                    child: _CardShell(
+                                      icon: Icons.quiz_outlined,
+                                      iconColor: cs.onPrimaryContainer,
+                                      iconBg: cs.primaryContainer,
+                                      title: l10n.checkpointQuizLabel,
+                                      subtitle: _result == null
+                                          ? l10n.checkpointQuestionCount(
+                                              cp.questions.length,
+                                            )
+                                          : l10n.checkpointBestScore(
+                                              _result!.score,
+                                              _result!.total,
+                                            ),
+                                      child: _result == null
+                                          ? null
+                                          : _StarRow(result: _result!),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                ],
+                                _staggered(
+                                  from: 0.15,
+                                  to: 0.55,
+                                  child: _CardShell(
+                                    icon: Icons.self_improvement_outlined,
+                                    iconColor: cs.onSecondaryContainer,
+                                    iconBg: cs.secondaryContainer,
+                                    title: l10n.checkpointPersonalReflection,
+                                    subtitle: localizedReflectionPrompt(
+                                      context,
+                                      cp,
+                                    ),
+                                    child: _ReflectionField(
+                                      dbService: widget.dbService,
+                                      checkpoint: cp,
+                                      initialText: _reflection ?? '',
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                        if (cp.hasQuiz) ...<Widget>[
+                          const SizedBox(height: 16),
+                          _staggered(
+                            from: 0.3,
+                            to: 0.8,
+                            child: ActionGlow(
+                              borderRadius: BorderRadius.circular(999),
+                              child: FilledButton.icon(
+                                onPressed: _startQuiz,
+                                style: FilledButton.styleFrom(
+                                  minimumSize: const Size.fromHeight(56),
+                                  shape: const StadiumBorder(),
+                                ),
+                                icon: Icon(
+                                  _result == null
+                                      ? Icons.play_arrow
+                                      : Icons.replay,
+                                ),
+                                label: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    _result == null
+                                        ? l10n.checkpointStart
+                                        : l10n.checkpointRedoQuiz,
+                                    style: const TextStyle(
+                                      fontFamily: 'PlusJakartaSans',
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
-                ],
-              ),
+          ),
+        ),
       ),
     );
   }
@@ -252,7 +317,7 @@ class _CardShell extends StatelessWidget {
     required this.iconBg,
     required this.title,
     required this.subtitle,
-    required this.child,
+    this.child,
   });
 
   final IconData icon;
@@ -260,14 +325,21 @@ class _CardShell extends StatelessWidget {
   final Color iconBg;
   final String title;
   final String subtitle;
-  final Widget child;
+
+  /// Optional body under the header; null leaves the card as a plain row.
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final Widget? body = child;
     return Card.filled(
       margin: EdgeInsets.zero,
       color: theme.colorScheme.surfaceContainerHigh,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: theme.colorScheme.outlineVariant),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -306,8 +378,7 @@ class _CardShell extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 14),
-            child,
+            if (body != null) ...<Widget>[const SizedBox(height: 14), body],
           ],
         ),
       ),
@@ -315,46 +386,47 @@ class _CardShell extends StatelessWidget {
   }
 }
 
-/// Simple editor for a checkpoint reflection answer. Stored privately.
-class ReflectionScreen extends StatefulWidget {
-  const ReflectionScreen({
+class _ReflectionField extends StatefulWidget {
+  const _ReflectionField({
     required this.dbService,
     required this.checkpoint,
-    super.key,
+    required this.initialText,
   });
 
   final LocalDbService dbService;
   final Checkpoint checkpoint;
+  final String initialText;
 
   @override
-  State<ReflectionScreen> createState() => _ReflectionScreenState();
+  State<_ReflectionField> createState() => _ReflectionFieldState();
 }
 
-class _ReflectionScreenState extends State<ReflectionScreen> {
-  final TextEditingController _controller = TextEditingController();
-  bool _isLoading = true;
+class _ReflectionFieldState extends State<_ReflectionField> {
+  late final TextEditingController _controller = TextEditingController(
+    text: widget.initialText,
+  );
+  late final FocusNode _focusNode = FocusNode();
+  Timer? _savedFlashTimer;
+  bool _showSaved = false;
 
   @override
   void initState() {
     super.initState();
-    _load();
+    _focusNode.addListener(_handleFocusChange);
   }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_handleFocusChange);
+    _focusNode.dispose();
     _controller.dispose();
+    _savedFlashTimer?.cancel();
     super.dispose();
   }
 
-  Future<void> _load() async {
-    final String? existing = await widget.dbService.getReflection(
-      widget.checkpoint.id,
-    );
-    if (mounted) {
-      setState(() {
-        _controller.text = existing ?? '';
-        _isLoading = false;
-      });
+  void _handleFocusChange() {
+    if (!_focusNode.hasFocus) {
+      _save();
     }
   }
 
@@ -365,77 +437,77 @@ class _ReflectionScreenState extends State<ReflectionScreen> {
       chapter: widget.checkpoint.afterChapter,
       answer: _controller.text.trim(),
     );
-    if (mounted) {
-      Navigator.of(context).pop(true);
+    if (!mounted) {
+      return;
     }
+
+    setState(() => _showSaved = true);
+    _savedFlashTimer?.cancel();
+    _savedFlashTimer = Timer(const Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() => _showSaved = false);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final ColorScheme cs = theme.colorScheme;
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(
-        leading: const CircularBackButton(),
-        title: Text(l10n.checkpointReflectionAppBarTitle),
-      ),
-      body: ResponsiveBody(
-        child: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: <Widget>[
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(20),
-                      children: <Widget>[
-                        Text(
-                          localizedReflectionPrompt(context, widget.checkpoint),
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextField(
-                          controller: _controller,
-                          autofocus: true,
-                          minLines: 6,
-                          maxLines: null,
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: InputDecoration(
-                            hintText: l10n.checkpointReflectionHint,
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        TextField(
+          controller: _controller,
+          focusNode: _focusNode,
+          minLines: 3,
+          maxLines: 6,
+          textCapitalization: TextCapitalization.sentences,
+          onSubmitted: (_) {
+            _focusNode.unfocus();
+          },
+          decoration: InputDecoration(
+            hintText: l10n.checkpointReflectionHint,
+            filled: true,
+            fillColor: cs.surface,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: cs.outlineVariant),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: cs.outlineVariant),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: cs.primary, width: 2),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 18,
+          child: AnimatedOpacity(
+            opacity: _showSaved ? 1 : 0,
+            duration: const Duration(milliseconds: 200),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(Icons.check_rounded, size: 16, color: cs.primary),
+                const SizedBox(width: 4),
+                Text(
+                  l10n.checkpointReflectionSaved,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: cs.primary,
+                    fontWeight: FontWeight.w600,
                   ),
-                  // Inside the body rather than Scaffold.bottomNavigationBar:
-                  // that slot is pinned to the bottom of the screen and gets
-                  // no keyboard inset, so with the field focused the keyboard
-                  // covered Save completely and there was no way to finish a
-                  // reflection. The body *is* resized for the keyboard, so
-                  // sitting at the end of this column keeps Save just above it.
-                  SafeArea(
-                    top: false,
-                    minimum: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    child: FilledButton.icon(
-                      onPressed: _save,
-                      icon: const Icon(Icons.check),
-                      label: Text(l10n.checkpointSave),
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(54),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-      ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

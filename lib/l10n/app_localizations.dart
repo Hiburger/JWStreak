@@ -1846,6 +1846,12 @@ abstract class AppLocalizations {
   /// **'Perfect!'**
   String get quizPerfect;
 
+  /// No description provided for @quizStreakMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'3 in a row!'**
+  String get quizStreakMessage;
+
   /// No description provided for @quizWellDone.
   ///
   /// In en, this message translates to:
@@ -2025,6 +2031,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get checkpointSave;
+
+  /// No description provided for @checkpointReflectionSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get checkpointReflectionSaved;
 
   /// No description provided for @homeStreakLostMessage.
   ///

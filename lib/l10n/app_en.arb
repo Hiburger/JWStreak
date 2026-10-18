@@ -327,6 +327,7 @@
     }
   },
   "quizPerfect": "Perfect!",
+  "quizStreakMessage": "3 in a row!",
   "quizWellDone": "Well done!",
   "quizScore": "Score: {score} / {total}",
   "@quizScore": {
@@ -391,6 +392,7 @@
   "checkpointReflectionAppBarTitle": "Reflection",
   "checkpointReflectionHint": "Write your reflection…",
   "checkpointSave": "Save",
+  "checkpointReflectionSaved": "Saved",
   "homeStreakLostMessage": "Your streak reset to zero. No worries, let's start again together",
   "streakLostTitle": "Your streak is lost",
   "streakLostButton": "Got it",

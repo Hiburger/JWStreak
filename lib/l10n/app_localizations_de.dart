@@ -955,6 +955,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizPerfect => 'Perfekt!';
 
   @override
+  String get quizStreakMessage => '3 richtige in Folge!';
+
+  @override
   String get quizWellDone => 'Gut gemacht!';
 
   @override
@@ -1062,6 +1065,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get checkpointSave => 'Speichern';
+
+  @override
+  String get checkpointReflectionSaved => 'Gespeichert';
 
   @override
   String get homeStreakLostMessage =>

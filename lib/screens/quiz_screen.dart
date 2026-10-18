@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 
 import '../l10n/app_localizations.dart';
 import '../quiz/quiz_data.dart';
@@ -47,6 +49,17 @@ class _AnswerRecord {
   final bool correct;
 }
 
+/// the "correct" green
+Color _streakColor(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark
+    ? const Color(0xFF8BD89C)
+    : const Color(0xFF2E7D32);
+
+Color _streakBg(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark
+    ? const Color(0xFF20391F)
+    : const Color(0xFFE3F4E6);
+
 class _QuizScreenState extends State<QuizScreen> {
   static const AnswerValidator _validator = FuzzyAnswerValidator();
 
@@ -59,16 +72,15 @@ class _QuizScreenState extends State<QuizScreen> {
   bool _lastAnswerCorrect = false;
   int _score = 0;
   bool _finished = false;
+  int _consecutiveCorrect = 0;
+  bool _showStreakFlare = false;
+  Timer? _streakFlareTimer;
 
-  /// One entry per answered question, in the order they were played.
   final List<_AnswerRecord> _answers = <_AnswerRecord>[];
 
-  /// Word chips currently placed in the answer row (word-bank questions).
   List<String> _pickedWords = <String>[];
 
-  // Shuffled once per play-through, so replaying a quiz never shows the same
-  // question order or the same option order (previously the correct answer
-  // was always authored as option 0, so it was always listed first).
+  // Shuffled once per play-through, so replaying a quiz never shows the same question order or the same option order
   late final List<QuizQuestion> _questions = _shuffledQuestions();
 
   /// Chip pool per question index, shuffled once so tapping doesn't reorder it.
@@ -78,8 +90,28 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void dispose() {
+    _streakFlareTimer?.cancel();
     _textController.dispose();
     super.dispose();
+  }
+
+  void _maybeShowStreakFlare() {
+    if (_consecutiveCorrect != 3) {
+      return;
+    }
+    _streakFlareTimer?.cancel();
+
+    try {
+      Vibration.vibrate(pattern: <int>[0, 45, 80, 65]);
+    } catch (_) {
+      // Haptics are best-effort; never block the quiz on them.
+    }
+    setState(() => _showStreakFlare = true);
+    _streakFlareTimer = Timer(const Duration(milliseconds: 2200), () {
+      if (mounted) {
+        setState(() => _showStreakFlare = false);
+      }
+    });
   }
 
   List<QuizQuestion> _shuffledQuestions() {
@@ -145,7 +177,11 @@ class _QuizScreenState extends State<QuizScreen> {
       _lastAnswerCorrect = i == _current.correctIndex;
       if (_lastAnswerCorrect) {
         _score++;
+        _consecutiveCorrect++;
+      } else {
+        _consecutiveCorrect = 0;
       }
+      _maybeShowStreakFlare();
       _answers.add(
         _AnswerRecord(
           question: _current,
@@ -173,14 +209,15 @@ class _QuizScreenState extends State<QuizScreen> {
       _lastAnswerCorrect = _validator.matches(
         input,
         _current.allAcceptedAnswers,
-        // Word-bank answers are built from a fixed set of chips, so an extra
-        // word means the reader picked wrongly — not that they phrased it
-        // their own way. Only typed answers get that latitude.
         allowExtraWords: _current.type != QuizAnswerType.wordBank,
       );
       if (_lastAnswerCorrect) {
         _score++;
+        _consecutiveCorrect++;
+      } else {
+        _consecutiveCorrect = 0;
       }
+      _maybeShowStreakFlare();
       _answers.add(
         _AnswerRecord(
           question: _current,
@@ -214,7 +251,14 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: const CircularBackButton(),
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            fontFamily: 'PlusJakartaSans',
+            fontWeight: FontWeight.bold,
+            letterSpacing: -0.5,
+          ),
+        ),
         actions: <Widget>[
           if (!_finished)
             IconButton(
@@ -234,8 +278,23 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
         ],
       ),
-      body: ResponsiveBody(
-        child: _finished ? _buildResult() : _buildQuestion(),
+
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Theme.of(context).colorScheme.surface,
+              Theme.of(
+                context,
+              ).colorScheme.primaryContainer.withValues(alpha: 0.35),
+            ],
+          ),
+        ),
+        child: ResponsiveBody(
+          child: _finished ? _buildResult() : _buildQuestion(),
+        ),
       ),
     );
   }
@@ -270,7 +329,49 @@ class _QuizScreenState extends State<QuizScreen> {
                   color: cs.onSurfaceVariant,
                 ),
               ),
-              if (_score > 0) _StreakPill(score: _score),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  IgnorePointer(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 250),
+                      switchInCurve: Curves.easeOutBack,
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: ScaleTransition(
+                                scale: Tween<double>(
+                                  begin: 0.8,
+                                  end: 1,
+                                ).animate(animation),
+                                child: child,
+                              ),
+                            );
+                          },
+                      child: _showStreakFlare
+                          ? Padding(
+                              key: const ValueKey<String>('streak-flare'),
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                l10n.quizStreakMessage,
+                                style: TextStyle(
+                                  fontFamily: 'PlusJakartaSans',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: _streakColor(context),
+                                ),
+                              ),
+                            )
+                          : const SizedBox.shrink(
+                              key: ValueKey<String>('streak-flare-empty'),
+                            ),
+                    ),
+                  ),
+                  if (_consecutiveCorrect > 0)
+                    _StreakPill(streak: _consecutiveCorrect),
+                ],
+              ),
             ],
           ),
         ),
@@ -280,8 +381,12 @@ class _QuizScreenState extends State<QuizScreen> {
             children: <Widget>[
               Text(
                 _current.text,
-                style: theme.textTheme.titleLarge?.copyWith(
+                style: const TextStyle(
+                  fontFamily: 'PlusJakartaSans',
+                  fontSize: 24,
                   fontWeight: FontWeight.w800,
+                  letterSpacing: -0.5,
+                  height: 1.2,
                 ),
               ),
               const SizedBox(height: 20),
@@ -301,7 +406,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       l10n.quizCorrectAnswerWas(_current.correctAnswer),
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: cs.primary,
+                        color: _streakColor(context),
                       ),
                     ),
                   ),
@@ -327,9 +432,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(54),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
+                shape: const StadiumBorder(),
               ),
             ),
           )
@@ -344,9 +447,7 @@ class _QuizScreenState extends State<QuizScreen> {
               label: Text(l10n.quizCheckAnswer),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(54),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
+                shape: const StadiumBorder(),
               ),
             ),
           ),
@@ -390,15 +491,15 @@ class _QuizScreenState extends State<QuizScreen> {
         filled: true,
         fillColor: cs.surfaceContainerHigh,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: cs.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: cs.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: cs.primary, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
@@ -452,7 +553,7 @@ class _QuizScreenState extends State<QuizScreen> {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: cs.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(20),
             border: Border(
               bottom: BorderSide(color: cs.outlineVariant, width: 2),
             ),
@@ -562,10 +663,6 @@ class _QuizScreenState extends State<QuizScreen> {
     return _OptionState.idle;
   }
 
-  /// The round-up: stars, then the note for this passage, then every
-  /// question that was missed. Scrollable rather than centred now that it
-  /// carries a review — a perfect run still reads as a short, celebratory
-  /// page, since the review section is simply absent.
   Widget _buildResult() {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
@@ -593,11 +690,7 @@ class _QuizScreenState extends State<QuizScreen> {
               builder: (BuildContext context, double v, Widget? child) {
                 return Transform.scale(scale: 0.6 + 0.4 * v, child: child);
               },
-              // Same shape either way, only the color changes — the
-              // theme's reward isn't guaranteed to have a separate
-              // outline glyph the way a plain star does (a hand-painted
-              // shell or acorn doesn't), so "not earned yet" is muted
-              // color rather than a hollow variant.
+
               child: AppIcons.of(context).reward(
                 size: 56,
                 color: filled
@@ -658,9 +751,7 @@ class _QuizScreenState extends State<QuizScreen> {
             onPressed: () => Navigator.of(context).pop(true),
             style: FilledButton.styleFrom(
               minimumSize: const Size(200, 52),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
+              shape: const StadiumBorder(),
             ),
             child: Text(l10n.quizFinish),
           ),
@@ -685,7 +776,7 @@ class _FunFactCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: kAccentPurple.background(context),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: kAccentPurple.foreground(context).withValues(alpha: 0.35),
         ),
@@ -742,7 +833,7 @@ class _MissedQuestionCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(color: cs.outlineVariant),
       ),
       child: Column(
@@ -895,33 +986,60 @@ class _ProgressDot extends StatelessWidget {
 }
 
 class _StreakPill extends StatelessWidget {
-  const _StreakPill({required this.score});
+  const _StreakPill({required this.streak});
 
-  final int score;
+  final int streak;
+
+  static double _shakeOffset(double t) =>
+      t == 0 ? 0 : sin(t * pi * 6) * 2.5 * (1 - t);
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme cs = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: cs.tertiaryContainer,
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.bolt_rounded, size: 14, color: cs.onTertiaryContainer),
-          const SizedBox(width: 3),
-          Text(
-            '$score',
-            style: TextStyle(
-              color: cs.onTertiaryContainer,
-              fontWeight: FontWeight.w700,
-              fontSize: 12,
+    return TweenAnimationBuilder<double>(
+      key: ValueKey<int>(streak),
+      tween: Tween<double>(begin: 1.6, end: 1),
+      duration: const Duration(milliseconds: 700),
+      curve: Curves.elasticOut,
+      builder: (BuildContext context, double scale, Widget? child) {
+        return Transform.scale(scale: scale, child: child);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: cs.tertiaryContainer,
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            TweenAnimationBuilder<double>(
+              key: ValueKey<String>('bolt-$streak'),
+              tween: Tween<double>(begin: 0, end: 1),
+              duration: const Duration(milliseconds: 500),
+              builder: (BuildContext context, double t, Widget? child) {
+                return Transform.translate(
+                  offset: Offset(_shakeOffset(t), 0),
+                  child: child,
+                );
+              },
+              child: Icon(
+                Icons.bolt_rounded,
+                size: 18,
+                color: cs.onTertiaryContainer,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 4),
+            Text(
+              '$streak',
+              style: TextStyle(
+                color: cs.onTertiaryContainer,
+                fontWeight: FontWeight.w800,
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1019,8 +1137,8 @@ class _AnimatedOption extends StatelessWidget {
         border = cs.outlineVariant;
         icon = null;
       case _OptionState.correct:
-        bg = cs.primaryContainer;
-        border = cs.primary;
+        bg = _streakBg(context);
+        border = _streakColor(context);
         icon = Icons.check_circle;
       case _OptionState.wrong:
         bg = cs.errorContainer;
@@ -1040,11 +1158,11 @@ class _AnimatedOption extends StatelessWidget {
       child: Material(
         color: bg,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           side: BorderSide(color: border, width: 1.5),
         ),
         child: InkWell(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -1075,8 +1193,8 @@ class _FeedbackBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme cs = Theme.of(context).colorScheme;
-    final Color bg = correct ? cs.primaryContainer : cs.surfaceContainerHigh;
-    final Color fg = correct ? cs.onPrimaryContainer : cs.onSurfaceVariant;
+    final Color bg = correct ? _streakBg(context) : cs.surfaceContainerHigh;
+    final Color fg = correct ? _streakColor(context) : cs.onSurfaceVariant;
     return TweenAnimationBuilder<double>(
       tween: Tween<double>(begin: 0, end: 1),
       duration: const Duration(milliseconds: 220),
@@ -1093,7 +1211,7 @@ class _FeedbackBanner extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

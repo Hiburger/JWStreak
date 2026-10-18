@@ -341,4 +341,47 @@ void main() {
     // No fun fact was passed, so that card stays out too.
     expect(find.text('Did you know?'), findsNothing);
   });
+
+  testWidgets('the streak flare appears at three in a row, then leaves', (
+    WidgetTester tester,
+  ) async {
+    await _pump(tester, <QuizQuestion>[
+      for (int i = 0; i < 4; i++)
+        QuizQuestion(
+          text: 'Question $i?',
+          options: const <String>['Right', 'Wrong'],
+          correctIndex: 0,
+          explanation: 'Always Right.',
+        ),
+    ], onCompleted: (int s, int t) async {});
+
+    // Two correct answers: pill grows, but no flare yet.
+    await tester.tap(find.text('Right'));
+    await tester.pumpAndSettle();
+    expect(find.text('1'), findsOneWidget);
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Right'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    // Third correct in a row: the flare announces the streak.
+    await tester.tap(find.text('Right'));
+    await tester.pumpAndSettle();
+    expect(find.text('3 in a row!'), findsOneWidget);
+
+    // ...and leaves on its own, without a tap (plus the fade's tail).
+    await tester.pump(const Duration(milliseconds: 2400));
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('3 in a row!'), findsNothing);
+
+    // A wrong answer ends the streak: the bolt pill goes with it.
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Wrong'));
+    await tester.pumpAndSettle();
+    expect(find.text('4'), findsNothing);
+  });
 }

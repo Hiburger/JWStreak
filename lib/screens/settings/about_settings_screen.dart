@@ -149,7 +149,7 @@ class _AboutSettingsScreenState extends State<AboutSettingsScreen> {
               ListTile(
                 leading: const Icon(Icons.info_outline),
                 title: Text(l10n.settingsVersionLabel),
-                subtitle: Text(_version),
+                subtitle: Text('v$_version - $kVersionName'),
                 onTap: _handleVersionTap,
               ),
               ListTile(

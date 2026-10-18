@@ -101,6 +101,13 @@ String jwLibraryDailyTextDeepLink(DateTime date, {String? languageCode}) {
 const int kStreakRiskHour = 20;
 const String kGithubRepoUrl = 'https://github.com/Hiburger/JWStreak';
 
+/// The name this release carries alongside its number. Versions are named
+/// after astronomical objects, in creation's own register — 1.8.0 is
+/// Pleiades, the cluster Job 38:31 asks about: "Can you tie the cords of
+/// the Pleiades?" A loose cluster of bright points felt right for a
+/// release that adds stars, streaks and celebrations.
+const String kVersionName = 'Pleiades';
+
 /// Where someone can sponsor the project, if they want to! ;)
 /// Must always be opened with `LaunchMode.externalApplication` (see
 /// [openExternalUri]) rather than an in-app browser view. Apple's guideline

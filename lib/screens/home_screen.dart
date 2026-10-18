@@ -2579,29 +2579,45 @@ class _StatTile extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-              child: FadeTransition(
-                opacity: entrance ?? const AlwaysStoppedAnimation<double>(1),
-                child: SlideTransition(
-                  position:
-                      Tween<Offset>(
-                        begin: const Offset(0, 0.35),
-                        end: Offset.zero,
-                      ).animate(
-                        entrance ?? const AlwaysStoppedAnimation<double>(1),
-                      ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      value,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontFamily: 'PlusJakartaSans',
-                        fontSize: 36,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: -0.5,
-                        height: 1,
+
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: <Color>[
+                    color.withValues(alpha: 0.12),
+                    color.withValues(alpha: 0),
+                  ],
+                  stops: const <double>[0, 0.45],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+                child: FadeTransition(
+                  opacity: entrance ?? const AlwaysStoppedAnimation<double>(1),
+                  child: SlideTransition(
+                    position:
+                        Tween<Offset>(
+                          begin: const Offset(0, 0.35),
+                          end: Offset.zero,
+                        ).animate(
+                          entrance ?? const AlwaysStoppedAnimation<double>(1),
+                        ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          value,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontFamily: 'PlusJakartaSans',
+                            fontSize: 40,
+                            letterSpacing: 1,
+                            height: 1,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -2679,53 +2695,65 @@ class _QuickActionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
+    final Color accentFg = accent.foreground(context);
     return Card.filled(
       margin: EdgeInsets.zero,
       color: cs.surfaceContainerHigh,
       // Explicit radius matching the other leading-icon list card on this
       // screen (_ContinueReadingCard) instead of Card's own implicit default.
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: accent.background(context),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                    color: accent.foreground(context).withValues(alpha: 0.25),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: <Color>[
+              accentFg.withValues(alpha: 0.12),
+              accentFg.withValues(alpha: 0),
+            ],
+            stops: const <double>[0, 0.45],
+          ),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: accent.background(context),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: accentFg.withValues(alpha: 0.25)),
+                  ),
+                  child: Icon(icon, color: accentFg, size: 22),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        subtitle,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: cs.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: Icon(icon, color: accent.foreground(context), size: 22),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Text(
-                      subtitle,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: cs.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
-            ],
+                Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
+              ],
+            ),
           ),
         ),
       ),

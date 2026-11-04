@@ -1328,6 +1328,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get homeMyNotesSubtitle => 'Przejrzyj swoją bibliotekę';
 
   @override
+  String get homeQuickFlashcardsTitle => 'Fiszki';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => 'Ćwicz swoją pamięć';
+
+  @override
+  String get homeQuickSoonTag => 'Wkrótce';
+
+  @override
   String get homeRecentActivity => 'Ostatnia aktywność';
 
   @override

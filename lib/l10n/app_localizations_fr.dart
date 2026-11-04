@@ -1330,6 +1330,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeMyNotesSubtitle => 'Relis ta bibliothèque';
 
   @override
+  String get homeQuickFlashcardsTitle => 'Cartes de révision';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => 'Entraîne ta mémoire';
+
+  @override
+  String get homeQuickSoonTag => 'Bientôt';
+
+  @override
   String get homeRecentActivity => 'Activité récente';
 
   @override

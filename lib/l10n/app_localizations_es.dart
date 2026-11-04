@@ -1326,6 +1326,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeMyNotesSubtitle => 'Vuelve a leer tu biblioteca';
 
   @override
+  String get homeQuickFlashcardsTitle => 'Tarjetas de memoria';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => 'Entrena tu memoria';
+
+  @override
+  String get homeQuickSoonTag => 'Pronto';
+
+  @override
   String get homeRecentActivity => 'Actividad reciente';
 
   @override

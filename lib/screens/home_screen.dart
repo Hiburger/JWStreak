@@ -2720,6 +2720,15 @@ class _QuickActions extends StatelessWidget {
           subtitle: l10n.homeMyNotesSubtitle,
           onTap: onReadNotes,
         ),
+        // Announced, not usable: the flashcard review is on its way, and
+        // the inert tag says so where the feature will one day live.
+        _QuickActionTile(
+          icon: Icons.style_rounded,
+          accent: kAccentBlue,
+          title: l10n.homeQuickFlashcardsTitle,
+          subtitle: l10n.homeQuickFlashcardsSubtitle,
+          soonTag: l10n.homeQuickSoonTag,
+        ),
       ],
     );
   }
@@ -2731,14 +2740,19 @@ class _QuickActionTile extends StatelessWidget {
     required this.accent,
     required this.title,
     required this.subtitle,
-    required this.onTap,
+    this.onTap,
+    this.soonTag,
   });
 
   final IconData icon;
   final OnboardingAccent accent;
   final String title;
   final String subtitle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+
+  /// When set, the tile is inert: instead of a chevron it carries this
+  /// tag — a promise of what's coming rather than a way in.
+  final String? soonTag;
 
   @override
   Widget build(BuildContext context) {
@@ -2800,7 +2814,27 @@ class _QuickActionTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
+                if (soonTag != null)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: cs.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(color: cs.outlineVariant),
+                    ),
+                    child: Text(
+                      soonTag!,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
+                  )
+                else
+                  Icon(Icons.chevron_right, color: cs.onSurfaceVariant),
               ],
             ),
           ),

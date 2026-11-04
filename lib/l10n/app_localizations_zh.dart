@@ -1262,6 +1262,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeMyNotesSubtitle => '回顾你的笔记库';
 
   @override
+  String get homeQuickFlashcardsTitle => '记忆卡片';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => '锻炼你的记忆';
+
+  @override
+  String get homeQuickSoonTag => '即将推出';
+
+  @override
   String get homeRecentActivity => '近期活动';
 
   @override

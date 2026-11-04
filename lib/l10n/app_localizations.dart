@@ -2470,6 +2470,24 @@ abstract class AppLocalizations {
   /// **'Reread your library'**
   String get homeMyNotesSubtitle;
 
+  /// No description provided for @homeQuickFlashcardsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flashcards'**
+  String get homeQuickFlashcardsTitle;
+
+  /// No description provided for @homeQuickFlashcardsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Train your memory'**
+  String get homeQuickFlashcardsSubtitle;
+
+  /// No description provided for @homeQuickSoonTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get homeQuickSoonTag;
+
   /// No description provided for @homeRecentActivity.
   ///
   /// In en, this message translates to:

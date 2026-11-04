@@ -540,6 +540,9 @@
   "homeWriteReflectionButton": "Write a reflection",
   "homeMyNotesTitle": "My notes",
   "homeMyNotesSubtitle": "Reread your library",
+  "homeQuickFlashcardsTitle": "Flashcards",
+  "homeQuickFlashcardsSubtitle": "Train your memory",
+  "homeQuickSoonTag": "Soon",
   "homeRecentActivity": "Recent activity",
   "homeActiveDaysPlural": "{count} active days",
   "@homeActiveDaysPlural": {

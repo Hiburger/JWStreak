@@ -1325,6 +1325,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeMyNotesSubtitle => 'Перечитай свою библиотеку';
 
   @override
+  String get homeQuickFlashcardsTitle => 'Карточки';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => 'Тренируй память';
+
+  @override
+  String get homeQuickSoonTag => 'Скоро';
+
+  @override
   String get homeRecentActivity => 'Недавняя активность';
 
   @override

@@ -1335,6 +1335,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeMyNotesSubtitle => 'Deine Sammlung noch einmal lesen';
 
   @override
+  String get homeQuickFlashcardsTitle => 'Lernkarten';
+
+  @override
+  String get homeQuickFlashcardsSubtitle => 'Trainiere dein Gedächtnis';
+
+  @override
+  String get homeQuickSoonTag => 'Bald';
+
+  @override
   String get homeRecentActivity => 'Letzte Aktivität';
 
   @override

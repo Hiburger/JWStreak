@@ -8,11 +8,6 @@ import '../widgets/circular_back_button.dart';
 import '../widgets/onboarding_accent.dart';
 import '../widgets/responsive_body.dart';
 
-/// One accent per category rather than per individual achievement — 21
-/// distinct colors would stop reading as "grouped" and start reading as
-/// random. Reuses the same palette onboarding and the home screen's quick
-/// actions already use, so a color means the same thing everywhere it shows
-/// up instead of every screen inventing its own.
 OnboardingAccent _accentFor(AchievementCategory category) => switch (category) {
   AchievementCategory.reading => kAccentBlue,
   AchievementCategory.quizzes => kAccentAmber,

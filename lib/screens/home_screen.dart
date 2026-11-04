@@ -2720,6 +2720,7 @@ class _QuickActions extends StatelessWidget {
           subtitle: l10n.homeMyNotesSubtitle,
           onTap: onReadNotes,
         ),
+        const SizedBox(height: 10),
         // Announced, not usable: the flashcard review is on its way, and
         // the inert tag says so where the feature will one day live.
         _QuickActionTile(

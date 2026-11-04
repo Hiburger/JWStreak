@@ -2200,7 +2200,10 @@ class _BrowseBibleTile extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Card.filled(
       margin: EdgeInsets.zero,
-      color: cs.tertiaryContainer.withValues(alpha: 0.55),
+      // The section's other cards lean on primary (the continue-reading
+      // card) — the browse tile takes the secondary container so it reads
+      // as its own thing in every skin rather than more of the same.
+      color: cs.secondaryContainer.withValues(alpha: 0.55),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: cs.outlineVariant),
@@ -2214,7 +2217,7 @@ class _BrowseBibleTile extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.travel_explore_rounded,
-                color: cs.onTertiaryContainer,
+                color: cs.onSecondaryContainer,
                 size: 24,
               ),
               const SizedBox(width: 14),
@@ -2223,11 +2226,11 @@ class _BrowseBibleTile extends StatelessWidget {
                   l10n.homeBrowseBible,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: cs.onTertiaryContainer,
+                    color: cs.onSecondaryContainer,
                   ),
                 ),
               ),
-              Icon(Icons.chevron_right, color: cs.onTertiaryContainer),
+              Icon(Icons.chevron_right, color: cs.onSecondaryContainer),
             ],
           ),
         ),

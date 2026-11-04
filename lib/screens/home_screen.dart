@@ -204,14 +204,6 @@ class _HomeScreenState extends State<HomeScreen>
     _recomputeDerived();
   }
 
-  /// Horizontal screen gutter for the sections below the hero — the hero
-  /// is the only edge-to-edge element on this screen, so everything else
-  /// asks for the margins the list used to give all of them.
-  Widget _gutter(Widget child) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    child: child,
-  );
-
   void _recomputeDerived() {
     // _nextChapter first: _pendingQuizCheckpoint reads it to find the
     // reader's current book.
@@ -887,10 +879,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: ResponsiveBody(
         child: ListView(
-          // No top or horizontal padding on the list itself: the hero is
-          // attached to the top of the screen edge-to-edge, and every
-          // section below it carries its own gutter instead.
-          padding: const EdgeInsets.only(bottom: 32),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
           children: <Widget>[
             _StreakHero(
               key: _tourStreakKey,
@@ -902,87 +891,74 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             if (streakAtRisk) ...<Widget>[
               const SizedBox(height: 12),
-              _gutter(
-                _StreakAtRiskBanner(
-                  freezes: _streakState.freezes,
-                  onEarnFreeze: _openReviewQuiz,
-                ),
+              _StreakAtRiskBanner(
+                freezes: _streakState.freezes,
+                onEarnFreeze: _openReviewQuiz,
               ),
             ],
             const SizedBox(height: 32),
-            _gutter(
-              _SectionCard(
-                title: l10n.homeSectionReadingTitle,
-                subtitle: l10n.homeSectionReadingSubtitle,
-                children: <Widget>[
-                  if (nextChapter != null)
-                    _ContinueReadingCard(
-                      key: _tourReadingKey,
-                      reference:
-                          '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
-                      canMarkRead:
-                          _openedChapterKey ==
-                          bibleChapterKey(
-                            nextChapter.book.id,
-                            nextChapter.chapter,
-                          ),
-                      onOpen: () => _openChapter(
-                        nextChapter.book.id,
-                        nextChapter.chapter,
-                      ),
-                      onMarkRead: () => _markChapterRead(
-                        nextChapter.book.id,
-                        nextChapter.chapter,
-                      ),
-                      onWriteReflection: () => _openNotesEditor(
-                        book: nextChapter.book.id,
-                        chapter: nextChapter.chapter,
-                      ),
-                    )
-                  else
-                    _AllReadCard(key: _tourReadingKey),
-                  if (pendingCheckpoint != null)
-                    _CheckpointBanner(
-                      checkpoint: pendingCheckpoint,
-                      onTap: () => _openCheckpoint(pendingCheckpoint),
+            _SectionCard(
+              title: l10n.homeSectionReadingTitle,
+              subtitle: l10n.homeSectionReadingSubtitle,
+              children: <Widget>[
+                if (nextChapter != null)
+                  _ContinueReadingCard(
+                    key: _tourReadingKey,
+                    reference:
+                        '${localizedBookName(context, nextChapter.book)} ${nextChapter.chapter}',
+                    canMarkRead:
+                        _openedChapterKey ==
+                        bibleChapterKey(
+                          nextChapter.book.id,
+                          nextChapter.chapter,
+                        ),
+                    onOpen: () =>
+                        _openChapter(nextChapter.book.id, nextChapter.chapter),
+                    onMarkRead: () => _markChapterRead(
+                      nextChapter.book.id,
+                      nextChapter.chapter,
                     ),
-                  _BrowseBibleTile(
-                    key: _tourBrowseKey,
-                    onTap: _openBibleBrowser,
+                    onWriteReflection: () => _openNotesEditor(
+                      book: nextChapter.book.id,
+                      chapter: nextChapter.chapter,
+                    ),
+                  )
+                else
+                  _AllReadCard(key: _tourReadingKey),
+                if (pendingCheckpoint != null)
+                  _CheckpointBanner(
+                    checkpoint: pendingCheckpoint,
+                    onTap: () => _openCheckpoint(pendingCheckpoint),
                   ),
-                ],
-              ),
+                _BrowseBibleTile(key: _tourBrowseKey, onTap: _openBibleBrowser),
+              ],
             ),
             const SizedBox(height: 24),
-            _gutter(
-              _SectionCard(
-                title: l10n.homeSectionProgressTitle,
-                children: <Widget>[
-                  _ProgressCard(
-                    key: _tourProgressKey,
-                    entranceReplayToken: _statsEntranceToken,
-                    streak: _streak,
-                    totalReadings: _totalReadings,
-                    totalStars: _totalStars,
-                    chaptersRead: chaptersRead,
-                    totalChapters: kTotalBibleChapters,
-                    onOpenStreak: _openStreakDetail,
-                    onOpenReadings: _openBibleBrowser,
-                    onOpenStars: _openAchievements,
-                  ),
-                ],
-              ),
+            _SectionCard(
+              title: l10n.homeSectionProgressTitle,
+              children: <Widget>[
+                _ProgressCard(
+                  key: _tourProgressKey,
+                  entranceReplayToken: _statsEntranceToken,
+                  streak: _streak,
+                  totalReadings: _totalReadings,
+                  totalStars: _totalStars,
+                  chaptersRead: chaptersRead,
+                  totalChapters: kTotalBibleChapters,
+                  onOpenStreak: _openStreakDetail,
+                  onOpenReadings: _openBibleBrowser,
+                  onOpenStars: _openAchievements,
+                ),
+              ],
             ),
             const SizedBox(height: 32),
-            _gutter(_SectionHeader(title: l10n.homeSectionQuickActions)),
+            _SectionHeader(title: l10n.homeSectionQuickActions),
             const SizedBox(height: 12),
-            _gutter(
-              _QuickActions(
-                key: _tourQuickActionsKey,
-                onOpenDailyText: _openDailyTextLink,
-                onWriteNote: _openNotesEditor,
-                onReadNotes: _openNotesLibrary,
-              ),
+            _QuickActions(
+              key: _tourQuickActionsKey,
+              onOpenDailyText: _openDailyTextLink,
+              onWriteNote: _openNotesEditor,
+              onReadNotes: _openNotesLibrary,
             ),
           ],
         ),
@@ -1174,11 +1150,7 @@ class _StreakHero extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: <Color>[cs.primaryContainer, cs.tertiaryContainer],
         ),
-        // Attached to the top of the screen edge-to-edge: the top corners
-        // are square where the banner meets the app bar, and only the
-        // bottom corners keep the card radius, where it hands over to the
-        // content below.
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(28)),
+        borderRadius: BorderRadius.circular(28),
         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.6)),
       ),
       padding: const EdgeInsets.all(20),

@@ -159,12 +159,31 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
+  /// Whether the app truly left the foreground since the last replay.
+  ///
+  /// Pulling the notification shade or Control Center only blurs the
+  /// lifecycle to `inactive` — focus lost, app still on screen — and
+  /// hands it straight back when the overlay closes, while real
+  /// departures (home, another app, the lock screen) pass through
+  /// `hidden`. The entrance replay is for real departures only:
+  /// replaying on an overlay's close would set the tiles dancing every
+  /// time the reader checked the time.
+  bool _appWasHidden = false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && !_isLoading) {
-      setState(() => _statsEntranceToken++);
-      _refreshDashboard();
+    if (state == AppLifecycleState.hidden) {
+      _appWasHidden = true;
+      return;
     }
+    if (state != AppLifecycleState.resumed || _isLoading) {
+      return;
+    }
+    if (_appWasHidden) {
+      _appWasHidden = false;
+      setState(() => _statsEntranceToken++);
+    }
+    _refreshDashboard();
   }
 
   @override

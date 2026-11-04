@@ -64,17 +64,43 @@ class _PersonalizationSettingsScreenState
   late bool _useDynamicColor = widget.useDynamicColor;
   late String? _selectedLocaleCode = widget.currentLocaleCode;
 
-  Future<void> _changeTheme(ThemePreference preference) async {
-    setState(() {
-      _selectedTheme = preference;
-    });
+  /// Covers [change] with the full-screen spinner a locale switch already
+  /// gets. Re-theming and re-localizing both repaint every surface at once,
+  /// and the brief overlay turns that into one deliberate transition
+  /// instead of an abrupt snap — the change itself is near-instant, so the
+  /// short hold is what makes the fade read as intentional rather than as
+  /// a flash.
+  Future<void> _switchWithLoadingScreen(Future<void> Function() change) async {
+    final NavigatorState navigator = Navigator.of(context);
+    navigator.push(
+      PageRouteBuilder<void>(
+        opaque: true,
+        transitionDuration: const Duration(milliseconds: 220),
+        reverseTransitionDuration: const Duration(milliseconds: 220),
+        pageBuilder: (_, _, _) => const _SettingsSwitchLoadingScreen(),
+        transitionsBuilder: (_, Animation<double> animation, _, Widget child) =>
+            FadeTransition(opacity: animation, child: child),
+      ),
+    );
     try {
-      await widget.onThemePreferenceChanged(preference);
+      await change();
+      await Future.delayed(const Duration(milliseconds: 300));
     } catch (error) {
       if (mounted) {
         showSettingsError(context, error);
       }
+    } finally {
+      navigator.pop();
     }
+  }
+
+  Future<void> _changeTheme(ThemePreference preference) async {
+    setState(() {
+      _selectedTheme = preference;
+    });
+    await _switchWithLoadingScreen(
+      () => widget.onThemePreferenceChanged(preference),
+    );
   }
 
   Future<void> _changeSkin(AppSkin skin) async {
@@ -86,13 +112,7 @@ class _PersonalizationSettingsScreenState
     setState(() {
       _selectedSkin = skin;
     });
-    try {
-      await callback(skin);
-    } catch (error) {
-      if (mounted) {
-        showSettingsError(context, error);
-      }
-    }
+    await _switchWithLoadingScreen(() => callback(skin));
   }
 
   Future<void> _changeUseDynamicColor(bool value) async {
@@ -104,13 +124,7 @@ class _PersonalizationSettingsScreenState
     if (callback == null) {
       return;
     }
-    try {
-      await callback(value);
-    } catch (error) {
-      if (mounted) {
-        showSettingsError(context, error);
-      }
-    }
+    await _switchWithLoadingScreen(() => callback(value));
   }
 
   Future<void> _changeLocale(String? code) async {
@@ -122,31 +136,7 @@ class _PersonalizationSettingsScreenState
     if (callback == null) {
       return;
     }
-    final NavigatorState navigator = Navigator.of(context);
-    navigator.push(
-      PageRouteBuilder<void>(
-        opaque: true,
-        transitionDuration: const Duration(milliseconds: 220),
-        reverseTransitionDuration: const Duration(milliseconds: 220),
-        pageBuilder: (_, _, _) => const _LocaleSwitchLoadingScreen(),
-        transitionsBuilder: (_, Animation<double> animation, _, Widget child) =>
-            FadeTransition(opacity: animation, child: child),
-      ),
-    );
-    try {
-      await callback(code);
-      // Just long enough for the fade-in/fade-out of the loading screen to
-      // read as a deliberate transition rather than a flash — the locale
-      // switch itself is near-instant, so this used to sit idle for a full
-      // extra second after everything was already done.
-      await Future.delayed(const Duration(milliseconds: 300));
-    } catch (error) {
-      if (mounted) {
-        showSettingsError(context, error);
-      }
-    } finally {
-      navigator.pop();
-    }
+    await _switchWithLoadingScreen(() => callback(code));
   }
 
   @override
@@ -327,8 +317,8 @@ class _PersonalizationSettingsScreenState
   }
 }
 
-class _LocaleSwitchLoadingScreen extends StatelessWidget {
-  const _LocaleSwitchLoadingScreen();
+class _SettingsSwitchLoadingScreen extends StatelessWidget {
+  const _SettingsSwitchLoadingScreen();
 
   @override
   Widget build(BuildContext context) {

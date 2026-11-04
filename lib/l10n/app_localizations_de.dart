@@ -979,7 +979,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Etwas klingt in meiner Sprache falsch';
 
   @override
-  String get quizReportContent => 'Quizinhalt';
+  String get quizReportContent => 'Inhalt';
 
   @override
   String get quizReportContentDesc => 'Die Frage oder eine Antwort ist falsch';

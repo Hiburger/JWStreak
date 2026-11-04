@@ -296,7 +296,7 @@
   "quizReportTitle": "Reportar este quiz",
   "quizReportTranslation": "Traducción",
   "quizReportTranslationDesc": "Algo suena mal en mi idioma",
-  "quizReportContent": "Contenido del quiz",
+  "quizReportContent": "Contenido",
   "quizReportContentDesc": "La pregunta o una respuesta es incorrecta",
   "quizReportCommentLabel": "Tu comentario (opcional)",
   "quizReportCommentHint": "¿Qué está mal y qué debería decir?",

@@ -969,7 +969,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Something reads wrong in my language';
 
   @override
-  String get quizReportContent => 'Quiz content';
+  String get quizReportContent => 'Content';
 
   @override
   String get quizReportContentDesc => 'The question or an answer is incorrect';

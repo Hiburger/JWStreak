@@ -296,7 +296,7 @@
   "quizReportTitle": "报告此测验",
   "quizReportTranslation": "翻译",
   "quizReportTranslationDesc": "在我的语言里读起来不对劲",
-  "quizReportContent": "测验内容",
+  "quizReportContent": "内容",
   "quizReportContentDesc": "题目或答案有误",
   "quizReportCommentLabel": "你的留言（可选）",
   "quizReportCommentHint": "哪里有问题，应该是什么？",

@@ -296,7 +296,7 @@
   "quizReportTitle": "Signaler ce quiz",
   "quizReportTranslation": "Traduction",
   "quizReportTranslationDesc": "Quelque chose sonne mal dans ma langue",
-  "quizReportContent": "Contenu du quiz",
+  "quizReportContent": "Contenu",
   "quizReportContentDesc": "La question ou une réponse est incorrecte",
   "quizReportCommentLabel": "Ton commentaire (facultatif)",
   "quizReportCommentHint": "Qu'est-ce qui cloche, et que devrait-il dire ?",

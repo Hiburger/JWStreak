@@ -967,7 +967,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Что-то звучит неправильно на моём языке';
 
   @override
-  String get quizReportContent => 'Содержание квиза';
+  String get quizReportContent => 'Содержание';
 
   @override
   String get quizReportContentDesc => 'Вопрос или ответ неверный';

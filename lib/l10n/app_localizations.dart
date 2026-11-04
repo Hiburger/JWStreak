@@ -1891,7 +1891,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizReportContent.
   ///
   /// In en, this message translates to:
-  /// **'Quiz content'**
+  /// **'Content'**
   String get quizReportContent;
 
   /// No description provided for @quizReportContentDesc.

@@ -972,7 +972,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get quizReportTranslationDesc => 'Algo suena mal en mi idioma';
 
   @override
-  String get quizReportContent => 'Contenido del quiz';
+  String get quizReportContent => 'Contenido';
 
   @override
   String get quizReportContentDesc =>

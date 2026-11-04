@@ -920,7 +920,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get quizReportTranslationDesc => '在我的语言里读起来不对劲';
 
   @override
-  String get quizReportContent => '测验内容';
+  String get quizReportContent => '内容';
 
   @override
   String get quizReportContentDesc => '题目或答案有误';

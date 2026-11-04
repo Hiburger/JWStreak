@@ -344,7 +344,7 @@
   "quizReportTitle": "Report this quiz",
   "quizReportTranslation": "Translation",
   "quizReportTranslationDesc": "Something reads wrong in my language",
-  "quizReportContent": "Quiz content",
+  "quizReportContent": "Content",
   "quizReportContentDesc": "The question or an answer is incorrect",
   "quizReportCommentLabel": "Your comment (optional)",
   "quizReportCommentHint": "What's wrong, and what should it say?",

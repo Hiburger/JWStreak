@@ -296,7 +296,7 @@
   "quizReportTitle": "Сообщить об этом квизе",
   "quizReportTranslation": "Перевод",
   "quizReportTranslationDesc": "Что-то звучит неправильно на моём языке",
-  "quizReportContent": "Содержание квиза",
+  "quizReportContent": "Содержание",
   "quizReportContentDesc": "Вопрос или ответ неверный",
   "quizReportCommentLabel": "Ваш комментарий (необязательно)",
   "quizReportCommentHint": "Что не так и как должно быть?",

@@ -71,7 +71,7 @@ void main() {
     expect(tester.widget<FilledButton>(send).onPressed, isNotNull);
 
     // The other kind switches the selection rather than stacking.
-    await tester.tap(find.text('Quiz content'));
+    await tester.tap(find.text('Content'));
     await tester.pump();
     expect(find.text('Translation'), findsOneWidget);
   });

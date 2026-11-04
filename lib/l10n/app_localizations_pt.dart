@@ -974,7 +974,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get quizReportTranslationDesc => 'Algo soa mal no meu idioma';
 
   @override
-  String get quizReportContent => 'Conteúdo do quiz';
+  String get quizReportContent => 'Conteúdo';
 
   @override
   String get quizReportContentDesc =>

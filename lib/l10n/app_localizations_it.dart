@@ -973,7 +973,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Qualcosa suona male nella mia lingua';
 
   @override
-  String get quizReportContent => 'Contenuto del quiz';
+  String get quizReportContent => 'Contenuto';
 
   @override
   String get quizReportContentDesc => 'La domanda o una risposta è sbagliata';

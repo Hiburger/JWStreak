@@ -975,7 +975,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Quelque chose sonne mal dans ma langue';
 
   @override
-  String get quizReportContent => 'Contenu du quiz';
+  String get quizReportContent => 'Contenu';
 
   @override
   String get quizReportContentDesc =>

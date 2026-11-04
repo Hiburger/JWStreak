@@ -2636,34 +2636,36 @@ class _StatTile extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
-                child: FadeTransition(
-                  opacity: entrance ?? const AlwaysStoppedAnimation<double>(1),
-                  child: SlideTransition(
-                    position:
-                        Tween<Offset>(
-                          begin: const Offset(0, 0.35),
-                          end: Offset.zero,
-                        ).animate(
-                          entrance ?? const AlwaysStoppedAnimation<double>(1),
-                        ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      // One value-line tall even when FittedBox has to
-                      // shrink a long number: the wash behind it keeps the
-                      // same height in every tile instead of shrinking with
-                      // the digits.
-                      height: valueSlotHeight,
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          value,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontFamily: 'PlusJakartaSans',
-                            fontSize: 40,
-                            letterSpacing: 1,
-                            height: 1,
-                          ),
+                // The value rises at full opacity, on purpose: a digit
+                // fading in over the light wash loses its thinnest ink —
+                // the top and bottom arcs — first, which reads as the
+                // number being cut off at both ends mid-animation. Solid
+                // ink from the first frame cannot read as truncated.
+                child: SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0, 0.35),
+                        end: Offset.zero,
+                      ).animate(
+                        entrance ?? const AlwaysStoppedAnimation<double>(1),
+                      ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    // One value-line tall even when FittedBox has to
+                    // shrink a long number: the wash behind it keeps the
+                    // same height in every tile instead of shrinking with
+                    // the digits.
+                    height: valueSlotHeight,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontFamily: 'PlusJakartaSans',
+                          fontSize: 40,
+                          letterSpacing: 1,
+                          height: 1,
                         ),
                       ),
                     ),

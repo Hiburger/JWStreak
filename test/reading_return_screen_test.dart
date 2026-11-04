@@ -43,10 +43,7 @@ void main() {
     WidgetTester tester,
   ) async {
     await _open(tester);
-    expect(
-      find.text('Have you finished reading Genesis 1 ?'),
-      findsOneWidget,
-    );
+    expect(find.text('Have you finished reading Genesis 1 ?'), findsOneWidget);
     expect(
       find.text('Mark it as read to keep your streak going.'),
       findsOneWidget,

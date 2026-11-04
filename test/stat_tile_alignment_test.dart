@@ -50,10 +50,16 @@ void main() {
 
     final Rect streakLabel = tester.getRect(find.text('giorni di serie'));
     final Rect readingsLabel = tester.getRect(find.text('letture'));
+    // Premise: the streak label is the long one of the three — it still
+    // occupies more width than its sibling even after scaling down.
+    expect(streakLabel.width, greaterThan(readingsLabel.width));
+    // A label too wide for its banner must shrink to a single line, not
+    // wrap: a wrapped label would render taller than its one-line sibling
+    // and stagger the sections below it.
     expect(
       streakLabel.height,
-      greaterThan(readingsLabel.height * 1.4),
-      reason: 'premise: the streak label wraps to two lines at this width',
+      lessThanOrEqualTo(readingsLabel.height * 1.05),
+      reason: 'the long label must shrink, never wrap',
     );
 
     final Rect streakBanner = tester.getRect(_bannerOf('giorni di serie'));
@@ -62,7 +68,7 @@ void main() {
     expect(
       streakBanner.height,
       readingsBanner.height,
-      reason: 'banners must be equally tall whether a label wraps or not',
+      reason: 'banners must be equally tall in every tile',
     );
     expect(starsBanner.height, readingsBanner.height);
 

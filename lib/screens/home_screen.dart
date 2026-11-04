@@ -2304,10 +2304,11 @@ class _ProgressCardState extends State<_ProgressCard>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // The three tiles are equal-height by construction now (every banner
-        // reserves two label lines, every value one value-line slot); this
-        // keeps the row locked that way even if a future change makes one
-        // tile's content diverge again.
+        // The three tiles are equal-height by construction now (every
+        // banner holds one label line — long labels shrink, never wrap —
+        // and every value one value-line slot); this keeps the row locked
+        // that way even if a future change makes one tile's content
+        // diverge again.
         IntrinsicHeight(
           child: Row(
             // IntrinsicHeight only makes the Row itself as tall as its
@@ -2554,8 +2555,7 @@ class _StatTile extends StatelessWidget {
     );
     final double labelSlotHeight =
         textScaler.scale(labelStyle?.fontSize ?? 14) *
-        (labelStyle?.height ?? 1.3) *
-        2;
+        (labelStyle?.height ?? 1.3);
     final double valueSlotHeight = textScaler.scale(40);
     return Material(
       color: cs.surfaceContainerHigh,
@@ -2580,17 +2580,19 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   icon(size: 26, color: Colors.white),
                   const SizedBox(height: 3),
-                  // Every banner reserves exactly two label lines, wrapped
-                  // or not, so a two-line label in one locale can no longer
-                  // grow only its own banner taller than its siblings' and
-                  // stagger the gradient and value below it.
+                  // One label line in every tile, whatever the locale: a
+                  // label too wide for its banner shrinks to fit instead of
+                  // wrapping, so no banner ever grows taller than its
+                  // siblings' and the gradient and value below stay
+                  // aligned.
                   SizedBox(
                     height: labelSlotHeight,
                     width: double.infinity,
-                    child: Center(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
                       child: Text(
                         label,
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: labelStyle,

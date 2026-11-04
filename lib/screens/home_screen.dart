@@ -2304,11 +2304,10 @@ class _ProgressCardState extends State<_ProgressCard>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // IntrinsicHeight: a plain Row doesn't stretch siblings to match each
-        // other, only to fill it in the cross axis if told to — so a label
-        // that wraps to two lines in one locale ("giorni di serie" in
-        // Italian) used to make just that tile taller than the other two
-        // instead of all three growing together.
+        // The three tiles are equal-height by construction now (every banner
+        // reserves two label lines, every value one value-line slot); this
+        // keeps the row locked that way even if a future change makes one
+        // tile's content diverge again.
         IntrinsicHeight(
           child: Row(
             // IntrinsicHeight only makes the Row itself as tall as its
@@ -2543,6 +2542,21 @@ class _StatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme cs = theme.colorScheme;
+    final TextScaler textScaler = MediaQuery.textScalerOf(context);
+    // Explicit line heights, not the per-font ascent/descent: the label and
+    // value slots below have to hold a predictable number of lines for every
+    // skin's typeface, or their fixed heights stop matching what the Text
+    // actually renders.
+    final TextStyle? labelStyle = theme.textTheme.bodySmall?.copyWith(
+      fontWeight: FontWeight.w700,
+      color: Colors.white.withValues(alpha: 0.95),
+      height: 1.3,
+    );
+    final double labelSlotHeight =
+        textScaler.scale(labelStyle?.fontSize ?? 14) *
+        (labelStyle?.height ?? 1.3) *
+        2;
+    final double valueSlotHeight = textScaler.scale(40);
     return Material(
       color: cs.surfaceContainerHigh,
       shape: RoundedRectangleBorder(
@@ -2566,14 +2580,21 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   icon(size: 26, color: Colors.white),
                   const SizedBox(height: 3),
-                  Text(
-                    label,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white.withValues(alpha: 0.95),
+                  // Every banner reserves exactly two label lines, wrapped
+                  // or not, so a two-line label in one locale can no longer
+                  // grow only its own banner taller than its siblings' and
+                  // stagger the gradient and value below it.
+                  SizedBox(
+                    height: labelSlotHeight,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        label,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: labelStyle,
+                      ),
                     ),
                   ),
                 ],
@@ -2606,6 +2627,11 @@ class _StatTile extends StatelessWidget {
                         ),
                     child: SizedBox(
                       width: double.infinity,
+                      // One value-line tall even when FittedBox has to
+                      // shrink a long number: the wash behind it keeps the
+                      // same height in every tile instead of shrinking with
+                      // the digits.
+                      height: valueSlotHeight,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Text(

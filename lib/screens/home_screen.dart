@@ -96,6 +96,14 @@ class _HomeScreenState extends State<HomeScreen>
 
   int _statsEntranceToken = 0;
 
+  final ScrollController _homeScroll = ScrollController();
+
+  /// Whether the list rests at the top, which is the only state in which
+  /// the app bar is transparent: the streak banner runs up behind it there,
+  /// and any scroll hands the bar its usual surface back so scrolled
+  /// content never shows through behind the title.
+  bool _bannerUnderAppBar = true;
+
   ReadingPlan _readingPlan = ReadingPlan.canonical;
   String? _planStartKey;
 
@@ -124,6 +132,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
+    _homeScroll.addListener(_handleHomeScroll);
     if (widget.skipBootstrap) {
       _isLoading = false;
       return;
@@ -137,7 +146,19 @@ class _HomeScreenState extends State<HomeScreen>
     WidgetsBinding.instance.removeObserver(this);
     kHomeRouteObserver.unsubscribe(this);
     _riskCardTimer?.cancel();
+    _homeScroll.removeListener(_handleHomeScroll);
+    _homeScroll.dispose();
     super.dispose();
+  }
+
+  void _handleHomeScroll() {
+    // Overscroll can dip pixels below zero; the bar must stay transparent
+    // through that, the same as at rest.
+    final bool atTop =
+        _homeScroll.hasClients && _homeScroll.position.pixels <= 0;
+    if (atTop != _bannerUnderAppBar) {
+      setState(() => _bannerUnderAppBar = atTop);
+    }
   }
 
   void _scheduleRiskCardRefresh() {
@@ -849,7 +870,14 @@ class _HomeScreenState extends State<HomeScreen>
     final Checkpoint? pendingCheckpoint = _pendingCheckpoint;
 
     return Scaffold(
+      // The banner runs up behind the app bar from the very top of the
+      // screen, so the body has to start behind it rather than below it.
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        // Transparent only while the banner is under it — the gradient is
+        // the bar's background. Scrolling hands the bar its usual themed
+        // surface back, so content slides under an opaque bar.
+        backgroundColor: _bannerUnderAppBar ? Colors.transparent : null,
         title: Text(
           'JW Streak',
           style: const TextStyle(
@@ -887,6 +915,7 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: ResponsiveBody(
         child: ListView(
+          controller: _homeScroll,
           // No top or horizontal padding on the list itself: the hero is
           // attached to the top of the screen edge-to-edge, and every
           // section below it carries its own gutter instead.
@@ -1175,13 +1204,21 @@ class _StreakHero extends StatelessWidget {
           colors: <Color>[cs.primaryContainer, cs.tertiaryContainer],
         ),
         // Attached to the top of the screen edge-to-edge: the top corners
-        // are square where the banner meets the app bar, and only the
-        // bottom corners keep the card radius, where it hands over to the
-        // content below.
+        // are square where the banner runs up behind the app bar, and only
+        // the bottom corners keep the card radius, where it hands over to
+        // the content below.
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(28)),
         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.6)),
       ),
-      padding: const EdgeInsets.all(20),
+      // The banner paints from the very top of the screen — status bar and
+      // app bar sit on top of it — so its content starts below the bar
+      // instead of under it.
+      padding: EdgeInsets.fromLTRB(
+        20,
+        MediaQuery.paddingOf(context).top + kToolbarHeight + 20,
+        20,
+        20,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

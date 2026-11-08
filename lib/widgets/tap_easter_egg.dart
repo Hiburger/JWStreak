@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
-/// Wraps [child] so tapping it [tapsToTrigger] times within [tapWindow] of
-/// each other fires [onTriggered], with a little shake + haptic buzz on
-/// every tap. The shared "secret gesture" behind every hidden delight in
-/// the app (the settings heart, the streak flame, ...).
 class TapEasterEgg extends StatefulWidget {
   const TapEasterEgg({
     required this.child,

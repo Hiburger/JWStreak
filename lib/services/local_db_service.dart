@@ -73,6 +73,38 @@ class NoteEntry {
   }
 }
 
+/// Sort orders for the notes library.
+enum NoteSortOrder { recentlyUpdated, recentlyCreated, titleAZ, bibleOrder }
+
+/// "Created when" buckets for the notes library filter.
+enum NoteCreatedFilter { all, today, thisWeek, thisMonth, earlier }
+
+/// Inclusive lower / exclusive upper bound on `createdAt` for [filter] at
+/// [now]. ISO-8601 strings compare lexicographically, so the bounds slot
+/// straight into a SQL WHERE.
+({DateTime? after, DateTime? before}) noteCreatedBounds(
+  NoteCreatedFilter filter,
+  DateTime now,
+) {
+  final DateTime day = DateTime(now.year, now.month, now.day);
+  switch (filter) {
+    case NoteCreatedFilter.all:
+      return (after: null, before: null);
+    case NoteCreatedFilter.today:
+      return (after: day, before: null);
+    case NoteCreatedFilter.thisWeek:
+      // ISO weeks start on Monday.
+      return (
+        after: day.subtract(Duration(days: now.weekday - 1)),
+        before: null,
+      );
+    case NoteCreatedFilter.thisMonth:
+      return (after: DateTime(now.year, now.month, 1), before: null);
+    case NoteCreatedFilter.earlier:
+      return (after: null, before: DateTime(now.year, now.month, 1));
+  }
+}
+
 class StreakState {
   const StreakState({
     required this.count,
@@ -914,27 +946,107 @@ class LocalDbService {
     return rows.map(_noteFromRow).toList(growable: false);
   }
 
-  Future<List<NoteEntry>> getAllNotes({String query = ''}) async {
+  Future<List<NoteEntry>> getAllNotes({
+    String query = '',
+    String? book,
+    NoteCreatedFilter createdFilter = NoteCreatedFilter.all,
+    NoteSortOrder sort = NoteSortOrder.recentlyUpdated,
+  }) async {
     final Database db = await _getDb();
     final String normalized = query.trim();
+    final List<String> conditions = <String>[];
+    final List<Object> args = <Object>[];
+    if (normalized.isNotEmpty) {
+      conditions.add(
+        '(title LIKE ? OR book LIKE ? OR content LIKE ? OR CAST(chapter AS TEXT) LIKE ?)',
+      );
+      args.addAll(<Object>[
+        '%$normalized%',
+        '%$normalized%',
+        '%$normalized%',
+        '%$normalized%',
+      ]);
+    }
+    if (book != null) {
+      conditions.add('book = ?');
+      args.add(book);
+    }
+    final (:DateTime? after, :DateTime? before) = noteCreatedBounds(
+      createdFilter,
+      DateTime.now(),
+    );
+    if (after != null) {
+      conditions.add('createdAt >= ?');
+      args.add(after.toIso8601String());
+    }
+    if (before != null) {
+      conditions.add('createdAt < ?');
+      args.add(before.toIso8601String());
+    }
     final List<Map<String, Object?>> rows = await db.query(
       'notes',
-      where: normalized.isEmpty
-          ? null
-          : '(title LIKE ? OR book LIKE ? OR content LIKE ? OR CAST(chapter AS TEXT) LIKE ?)',
-      whereArgs: normalized.isEmpty
-          ? null
-          : <Object>[
-              '%$normalized%',
-              '%$normalized%',
-              '%$normalized%',
-              '%$normalized%',
-            ],
-      orderBy: 'updatedAt DESC',
+      where: conditions.isEmpty ? null : conditions.join(' AND '),
+      whereArgs: args.isEmpty ? null : args,
     );
 
-    return rows.map(_noteFromRow).toList(growable: false);
+    // Sorted here rather than in SQL: Bible order needs the book's position
+    // in kBibleBooks, which the schema doesn't know about.
+    final List<NoteEntry> notes = rows.map(_noteFromRow).toList();
+    switch (sort) {
+      case NoteSortOrder.recentlyUpdated:
+        notes.sort(
+          (NoteEntry a, NoteEntry b) => b.updatedAt.compareTo(a.updatedAt),
+        );
+      case NoteSortOrder.recentlyCreated:
+        notes.sort(
+          (NoteEntry a, NoteEntry b) => b.createdAt.compareTo(a.createdAt),
+        );
+      case NoteSortOrder.titleAZ:
+        notes.sort(
+          (NoteEntry a, NoteEntry b) => _noteSortTitle(
+            a,
+          ).toLowerCase().compareTo(_noteSortTitle(b).toLowerCase()),
+        );
+      case NoteSortOrder.bibleOrder:
+        notes.sort((NoteEntry a, NoteEntry b) {
+          final int byBook = _bookNumber(a.book).compareTo(_bookNumber(b.book));
+          if (byBook != 0) {
+            return byBook;
+          }
+          final int byChapter = a.chapter.compareTo(b.chapter);
+          if (byChapter != 0) {
+            return byChapter;
+          }
+          return b.updatedAt.compareTo(a.updatedAt);
+        });
+    }
+    return List<NoteEntry>.unmodifiable(notes);
   }
+
+  /// Book ids that have at least one note, in Bible order — the notes
+  /// library's book filter offers these rather than all 66 books.
+  Future<List<String>> getNoteBookIds() async {
+    final Database db = await _getDb();
+    final List<Map<String, Object?>> rows = await db.rawQuery(
+      'SELECT DISTINCT book FROM notes',
+    );
+    final List<String> ids = rows
+        .map((Map<String, Object?> row) => row['book'] as String)
+        .toList();
+    ids.sort((String a, String b) => _bookNumber(a).compareTo(_bookNumber(b)));
+    return List<String>.unmodifiable(ids);
+  }
+
+  static String _noteSortTitle(NoteEntry note) => note.title.trim().isNotEmpty
+      ? note.title.trim()
+      : note.content
+            .trim()
+            .split('\n')
+            .first
+            .replaceAll(RegExp(r'^[#>*\-\s]+'), '')
+            .trim();
+
+  static int _bookNumber(String bookId) => bibleBookById(bookId)?.number ?? 999;
 
   NoteEntry _noteFromRow(Map<String, Object?> row) {
     final Object? id = row['id'];

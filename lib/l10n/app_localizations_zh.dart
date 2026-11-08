@@ -1461,6 +1461,45 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notesLibrarySearchHint => '按标题、内容或经文搜索';
 
   @override
+  String get notesLibraryFilterBook => '书卷';
+
+  @override
+  String get notesLibraryFilterCreated => '创建时间';
+
+  @override
+  String get notesLibraryFilterSort => '排序';
+
+  @override
+  String get notesLibraryFilterAllBooks => '所有书卷';
+
+  @override
+  String get notesLibraryFilterAllTime => '全部时间';
+
+  @override
+  String get notesLibraryFilterToday => '今天';
+
+  @override
+  String get notesLibraryFilterThisWeek => '本周';
+
+  @override
+  String get notesLibraryFilterThisMonth => '本月';
+
+  @override
+  String get notesLibraryFilterEarlier => '更早';
+
+  @override
+  String get notesLibrarySortRecentlyUpdated => '最近编辑';
+
+  @override
+  String get notesLibrarySortRecentlyCreated => '最近创建';
+
+  @override
+  String get notesLibrarySortTitleAZ => '标题 A–Z';
+
+  @override
+  String get notesLibrarySortBibleOrder => '圣经书卷顺序';
+
+  @override
   String get notesLibraryTitle => '笔记库';
 
   @override

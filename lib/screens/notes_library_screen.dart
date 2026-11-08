@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../app_constants.dart';
+import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/picker_field.dart';
 import '../widgets/responsive_body.dart';
 import 'note_reader_screen.dart';
 import 'notes_screen.dart';
@@ -40,7 +42,14 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   String _query = '';
   bool _hasChanges = false;
 
+  String? _bookFilter;
+  NoteCreatedFilter _createdFilter = NoteCreatedFilter.all;
+  NoteSortOrder _sort = NoteSortOrder.recentlyUpdated;
+
   bool get _selectionMode => _selectedIds.isNotEmpty;
+
+  bool get _hasActiveFilters =>
+      _bookFilter != null || _createdFilter != NoteCreatedFilter.all;
 
   @override
   void initState() {
@@ -58,6 +67,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     try {
       final List<NoteEntry> notes = await widget.dbService.getAllNotes(
         query: _query,
+        book: _bookFilter,
+        createdFilter: _createdFilter,
+        sort: _sort,
       );
       if (!mounted) {
         return;
@@ -247,6 +259,106 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     _loadNotes();
   }
 
+  void _reloadWithFilters() {
+    setState(() {
+      _isLoading = true;
+    });
+    _loadNotes();
+  }
+
+  // Sentinel for the book sheet's "All books" row: book ids are never empty,
+  // so popping '' can't be confused with dismissing the sheet (null).
+  static const String _allBooksValue = '';
+
+  Future<void> _pickBook() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final List<String> bookIds = await widget.dbService.getNoteBookIds();
+    if (!mounted) {
+      return;
+    }
+    final String? picked = await showModalBottomSheet<String>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (BuildContext sheetContext) => PickerSheet<String>(
+        selectedValue: _bookFilter ?? _allBooksValue,
+        entries: <PickerEntry<String>>[
+          PickerEntry<String>(
+            value: _allBooksValue,
+            label: l10n.notesLibraryFilterAllBooks,
+          ),
+          for (final String id in bookIds)
+            PickerEntry<String>(
+              value: id,
+              label: localizedBookName(context, bibleBookById(id)!),
+            ),
+        ],
+      ),
+    );
+    if (picked == null) {
+      return;
+    }
+    final String? book = picked == _allBooksValue ? null : picked;
+    if (book != _bookFilter) {
+      setState(() => _bookFilter = book);
+      _reloadWithFilters();
+    }
+  }
+
+  Future<void> _pickCreatedFilter() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final NoteCreatedFilter?
+    picked = await showModalBottomSheet<NoteCreatedFilter>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext sheetContext) => PickerSheet<NoteCreatedFilter>(
+        selectedValue: _createdFilter,
+        entries: <PickerEntry<NoteCreatedFilter>>[
+          for (final MapEntry<NoteCreatedFilter, String> e
+              in <NoteCreatedFilter, String>{
+                NoteCreatedFilter.all: l10n.notesLibraryFilterAllTime,
+                NoteCreatedFilter.today: l10n.notesLibraryFilterToday,
+                NoteCreatedFilter.thisWeek: l10n.notesLibraryFilterThisWeek,
+                NoteCreatedFilter.thisMonth: l10n.notesLibraryFilterThisMonth,
+                NoteCreatedFilter.earlier: l10n.notesLibraryFilterEarlier,
+              }.entries)
+            PickerEntry<NoteCreatedFilter>(value: e.key, label: e.value),
+        ],
+      ),
+    );
+    if (picked != null && picked != _createdFilter) {
+      setState(() => _createdFilter = picked);
+      _reloadWithFilters();
+    }
+  }
+
+  Future<void> _pickSort() async {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final NoteSortOrder? picked = await showModalBottomSheet<NoteSortOrder>(
+      context: context,
+      showDragHandle: true,
+      builder: (BuildContext sheetContext) => PickerSheet<NoteSortOrder>(
+        selectedValue: _sort,
+        entries: <PickerEntry<NoteSortOrder>>[
+          for (final MapEntry<NoteSortOrder, String> e
+              in <NoteSortOrder, String>{
+                NoteSortOrder.recentlyUpdated:
+                    l10n.notesLibrarySortRecentlyUpdated,
+                NoteSortOrder.recentlyCreated:
+                    l10n.notesLibrarySortRecentlyCreated,
+                NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
+                NoteSortOrder.bibleOrder: l10n.notesLibrarySortBibleOrder,
+              }.entries)
+            PickerEntry<NoteSortOrder>(value: e.key, label: e.value),
+        ],
+      ),
+    );
+    if (picked != null && picked != _sort) {
+      setState(() => _sort = picked);
+      _reloadWithFilters();
+    }
+  }
+
   void _showError(Object error) {
     showMessageDialog(
       context,
@@ -315,6 +427,8 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                   ),
                 ),
                 const SizedBox(height: 12),
+                _buildFilterRow(),
+                const SizedBox(height: 12),
                 Expanded(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
@@ -322,7 +436,8 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                         ? const Center(child: CircularProgressIndicator())
                         : _notes.isEmpty
                         ? _EmptyNotesState(
-                            isSearching: _query.trim().isNotEmpty,
+                            isSearching:
+                                _query.trim().isNotEmpty || _hasActiveFilters,
                           )
                         : ListView.separated(
                             padding: const EdgeInsets.only(bottom: 96),
@@ -365,6 +480,55 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     );
   }
 
+  Widget _buildFilterRow() {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final String? bookLabel = _bookFilter == null
+        ? null
+        : localizedBookName(context, bibleBookById(_bookFilter!)!);
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          _FilterChip(
+            icon: Icons.menu_book_rounded,
+            label: l10n.notesLibraryFilterBook,
+            value: bookLabel,
+            onTap: _pickBook,
+          ),
+          const SizedBox(width: 8),
+          _FilterChip(
+            icon: Icons.calendar_month_rounded,
+            label: l10n.notesLibraryFilterCreated,
+            value: _createdFilter == NoteCreatedFilter.all
+                ? null
+                : <NoteCreatedFilter, String>{
+                    NoteCreatedFilter.today: l10n.notesLibraryFilterToday,
+                    NoteCreatedFilter.thisWeek: l10n.notesLibraryFilterThisWeek,
+                    NoteCreatedFilter.thisMonth:
+                        l10n.notesLibraryFilterThisMonth,
+                    NoteCreatedFilter.earlier: l10n.notesLibraryFilterEarlier,
+                  }[_createdFilter],
+            onTap: _pickCreatedFilter,
+          ),
+          const SizedBox(width: 8),
+          _FilterChip(
+            icon: Icons.sort_rounded,
+            label: l10n.notesLibraryFilterSort,
+            value: _sort == NoteSortOrder.recentlyUpdated
+                ? null
+                : <NoteSortOrder, String>{
+                    NoteSortOrder.recentlyCreated:
+                        l10n.notesLibrarySortRecentlyCreated,
+                    NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
+                    NoteSortOrder.bibleOrder: l10n.notesLibrarySortBibleOrder,
+                  }[_sort],
+            onTap: _pickSort,
+          ),
+        ],
+      ),
+    );
+  }
+
   AppBar _buildSelectionAppBar() {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final int count = _selectedIds.length;
@@ -392,6 +556,47 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
           onPressed: _deleteSelected,
         ),
       ],
+    );
+  }
+}
+
+/// One dropdown chip of the filter row. Shows just its category at the
+/// default ("Book"); once a non-default value is picked it renders filled
+/// and reads "Book: Genesis" so active filters stay visible at a glance.
+class _FilterChip extends StatelessWidget {
+  const _FilterChip({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final String? value;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    final bool active = value != null;
+    return ActionChip(
+      avatar: Icon(
+        icon,
+        size: 18,
+        color: active ? cs.onPrimaryContainer : cs.onSurfaceVariant,
+      ),
+      label: Text(active ? '$label: $value' : label),
+      labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+        color: active ? cs.onPrimaryContainer : cs.onSurfaceVariant,
+        fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+      ),
+      backgroundColor: active
+          ? cs.primaryContainer
+          : cs.surfaceContainerHighest,
+      side: BorderSide.none,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      onPressed: onTap,
     );
   }
 }

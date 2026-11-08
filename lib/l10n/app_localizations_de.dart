@@ -1539,6 +1539,45 @@ class AppLocalizationsDe extends AppLocalizations {
       'Nach Titel, Inhalt oder Bibelstelle suchen';
 
   @override
+  String get notesLibraryFilterBook => 'Buch';
+
+  @override
+  String get notesLibraryFilterCreated => 'Erstellt';
+
+  @override
+  String get notesLibraryFilterSort => 'Sortieren';
+
+  @override
+  String get notesLibraryFilterAllBooks => 'Alle Bücher';
+
+  @override
+  String get notesLibraryFilterAllTime => 'Gesamter Zeitraum';
+
+  @override
+  String get notesLibraryFilterToday => 'Heute';
+
+  @override
+  String get notesLibraryFilterThisWeek => 'Diese Woche';
+
+  @override
+  String get notesLibraryFilterThisMonth => 'Diesen Monat';
+
+  @override
+  String get notesLibraryFilterEarlier => 'Ältere';
+
+  @override
+  String get notesLibrarySortRecentlyUpdated => 'Zuletzt bearbeitet';
+
+  @override
+  String get notesLibrarySortRecentlyCreated => 'Kürzlich erstellt';
+
+  @override
+  String get notesLibrarySortTitleAZ => 'Titel A–Z';
+
+  @override
+  String get notesLibrarySortBibleOrder => 'Bibelreihenfolge';
+
+  @override
   String get notesLibraryTitle => 'Notizsammlung';
 
   @override

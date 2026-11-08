@@ -1533,6 +1533,45 @@ class AppLocalizationsFr extends AppLocalizations {
       'Rechercher par titre, contenu ou passage';
 
   @override
+  String get notesLibraryFilterBook => 'Livre';
+
+  @override
+  String get notesLibraryFilterCreated => 'Créé le';
+
+  @override
+  String get notesLibraryFilterSort => 'Trier';
+
+  @override
+  String get notesLibraryFilterAllBooks => 'Tous les livres';
+
+  @override
+  String get notesLibraryFilterAllTime => 'Tout';
+
+  @override
+  String get notesLibraryFilterToday => 'Aujourd\'hui';
+
+  @override
+  String get notesLibraryFilterThisWeek => 'Cette semaine';
+
+  @override
+  String get notesLibraryFilterThisMonth => 'Ce mois-ci';
+
+  @override
+  String get notesLibraryFilterEarlier => 'Plus tôt';
+
+  @override
+  String get notesLibrarySortRecentlyUpdated => 'Modifié récemment';
+
+  @override
+  String get notesLibrarySortRecentlyCreated => 'Créé récemment';
+
+  @override
+  String get notesLibrarySortTitleAZ => 'Titre A–Z';
+
+  @override
+  String get notesLibrarySortBibleOrder => 'Ordre biblique';
+
+  @override
   String get notesLibraryTitle => 'Bibliothèque de notes';
 
   @override

@@ -1527,6 +1527,45 @@ class AppLocalizationsRu extends AppLocalizations {
       'Искать по заголовку, содержанию или отрывку';
 
   @override
+  String get notesLibraryFilterBook => 'Книга';
+
+  @override
+  String get notesLibraryFilterCreated => 'Создано';
+
+  @override
+  String get notesLibraryFilterSort => 'Сортировка';
+
+  @override
+  String get notesLibraryFilterAllBooks => 'Все книги';
+
+  @override
+  String get notesLibraryFilterAllTime => 'За всё время';
+
+  @override
+  String get notesLibraryFilterToday => 'Сегодня';
+
+  @override
+  String get notesLibraryFilterThisWeek => 'На этой неделе';
+
+  @override
+  String get notesLibraryFilterThisMonth => 'В этом месяце';
+
+  @override
+  String get notesLibraryFilterEarlier => 'Раньше';
+
+  @override
+  String get notesLibrarySortRecentlyUpdated => 'Недавно изменено';
+
+  @override
+  String get notesLibrarySortRecentlyCreated => 'Недавно создано';
+
+  @override
+  String get notesLibrarySortTitleAZ => 'Название А–Я';
+
+  @override
+  String get notesLibrarySortBibleOrder => 'Библейский порядок';
+
+  @override
   String get notesLibraryTitle => 'Библиотека заметок';
 
   @override

@@ -2811,6 +2811,84 @@ abstract class AppLocalizations {
   /// **'Search by title, content, or passage'**
   String get notesLibrarySearchHint;
 
+  /// No description provided for @notesLibraryFilterBook.
+  ///
+  /// In en, this message translates to:
+  /// **'Book'**
+  String get notesLibraryFilterBook;
+
+  /// No description provided for @notesLibraryFilterCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get notesLibraryFilterCreated;
+
+  /// No description provided for @notesLibraryFilterSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort'**
+  String get notesLibraryFilterSort;
+
+  /// No description provided for @notesLibraryFilterAllBooks.
+  ///
+  /// In en, this message translates to:
+  /// **'All books'**
+  String get notesLibraryFilterAllBooks;
+
+  /// No description provided for @notesLibraryFilterAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get notesLibraryFilterAllTime;
+
+  /// No description provided for @notesLibraryFilterToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get notesLibraryFilterToday;
+
+  /// No description provided for @notesLibraryFilterThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get notesLibraryFilterThisWeek;
+
+  /// No description provided for @notesLibraryFilterThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get notesLibraryFilterThisMonth;
+
+  /// No description provided for @notesLibraryFilterEarlier.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get notesLibraryFilterEarlier;
+
+  /// No description provided for @notesLibrarySortRecentlyUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last edited'**
+  String get notesLibrarySortRecentlyUpdated;
+
+  /// No description provided for @notesLibrarySortRecentlyCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Recently created'**
+  String get notesLibrarySortRecentlyCreated;
+
+  /// No description provided for @notesLibrarySortTitleAZ.
+  ///
+  /// In en, this message translates to:
+  /// **'Title A–Z'**
+  String get notesLibrarySortTitleAZ;
+
+  /// No description provided for @notesLibrarySortBibleOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Bible order'**
+  String get notesLibrarySortBibleOrder;
+
   /// No description provided for @notesLibraryTitle.
   ///
   /// In en, this message translates to:

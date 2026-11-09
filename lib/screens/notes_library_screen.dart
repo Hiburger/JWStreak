@@ -426,7 +426,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                     colorScheme.surfaceTint,
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 _buildFilterRow(),
                 const SizedBox(height: 12),
                 Expanded(
@@ -485,46 +485,50 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     final String? bookLabel = _bookFilter == null
         ? null
         : localizedBookName(context, bibleBookById(_bookFilter!)!);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          _FilterChip(
-            icon: Icons.menu_book_rounded,
-            label: l10n.notesLibraryFilterBook,
-            value: bookLabel,
-            onTap: _pickBook,
-          ),
-          const SizedBox(width: 8),
-          _FilterChip(
-            icon: Icons.calendar_month_rounded,
-            label: l10n.notesLibraryFilterCreated,
-            value: _createdFilter == NoteCreatedFilter.all
-                ? null
-                : <NoteCreatedFilter, String>{
-                    NoteCreatedFilter.today: l10n.notesLibraryFilterToday,
-                    NoteCreatedFilter.thisWeek: l10n.notesLibraryFilterThisWeek,
-                    NoteCreatedFilter.thisMonth:
-                        l10n.notesLibraryFilterThisMonth,
-                    NoteCreatedFilter.earlier: l10n.notesLibraryFilterEarlier,
-                  }[_createdFilter],
-            onTap: _pickCreatedFilter,
-          ),
-          const SizedBox(width: 8),
-          _FilterChip(
-            icon: Icons.sort_rounded,
-            label: l10n.notesLibraryFilterSort,
-            value: _sort == NoteSortOrder.recentlyUpdated
-                ? null
-                : <NoteSortOrder, String>{
-                    NoteSortOrder.recentlyCreated:
-                        l10n.notesLibrarySortRecentlyCreated,
-                    NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
-                    NoteSortOrder.bibleOrder: l10n.notesLibrarySortBibleOrder,
-                  }[_sort],
-            onTap: _pickSort,
-          ),
-        ],
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: <Widget>[
+            _FilterChip(
+              icon: Icons.menu_book_rounded,
+              label: l10n.notesLibraryFilterBook,
+              value: bookLabel,
+              onTap: _pickBook,
+            ),
+            const SizedBox(width: 8),
+            _FilterChip(
+              icon: Icons.calendar_month_rounded,
+              label: l10n.notesLibraryFilterCreated,
+              value: _createdFilter == NoteCreatedFilter.all
+                  ? null
+                  : <NoteCreatedFilter, String>{
+                      NoteCreatedFilter.today: l10n.notesLibraryFilterToday,
+                      NoteCreatedFilter.thisWeek:
+                          l10n.notesLibraryFilterThisWeek,
+                      NoteCreatedFilter.thisMonth:
+                          l10n.notesLibraryFilterThisMonth,
+                      NoteCreatedFilter.earlier: l10n.notesLibraryFilterEarlier,
+                    }[_createdFilter],
+              onTap: _pickCreatedFilter,
+            ),
+            const SizedBox(width: 8),
+            _FilterChip(
+              icon: Icons.sort_rounded,
+              label: l10n.notesLibraryFilterSort,
+              value: _sort == NoteSortOrder.recentlyUpdated
+                  ? null
+                  : <NoteSortOrder, String>{
+                      NoteSortOrder.recentlyCreated:
+                          l10n.notesLibrarySortRecentlyCreated,
+                      NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
+                      NoteSortOrder.bibleOrder: l10n.notesLibrarySortBibleOrder,
+                    }[_sort],
+              onTap: _pickSort,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -595,7 +599,7 @@ class _FilterChip extends StatelessWidget {
           ? cs.primaryContainer
           : cs.surfaceContainerHighest,
       side: BorderSide.none,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onPressed: onTap,
     );
   }

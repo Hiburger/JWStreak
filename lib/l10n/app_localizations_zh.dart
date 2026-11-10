@@ -1506,6 +1506,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notesLibraryCancelSelectionTooltip => '取消选择';
 
   @override
+  String get notesLibrarySelectTooltip => '选择笔记';
+
+  @override
   String notesLibrarySelectedCountSingular(int count) {
     return '已选择 $count 项';
   }

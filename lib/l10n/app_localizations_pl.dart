@@ -1575,6 +1575,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get notesLibraryCancelSelectionTooltip => 'Anuluj zaznaczenie';
 
   @override
+  String get notesLibrarySelectTooltip => 'Zaznacz notatki';
+
+  @override
   String notesLibrarySelectedCountSingular(int count) {
     return 'Zaznaczono: $count';
   }

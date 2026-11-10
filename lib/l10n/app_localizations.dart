@@ -2901,6 +2901,12 @@ abstract class AppLocalizations {
   /// **'Cancel selection'**
   String get notesLibraryCancelSelectionTooltip;
 
+  /// No description provided for @notesLibrarySelectTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Select notes'**
+  String get notesLibrarySelectTooltip;
+
   /// No description provided for @notesLibrarySelectedCountSingular.
   ///
   /// In en, this message translates to:

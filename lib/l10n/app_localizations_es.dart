@@ -1573,6 +1573,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get notesLibraryCancelSelectionTooltip => 'Cancelar selección';
 
   @override
+  String get notesLibrarySelectTooltip => 'Seleccionar notas';
+
+  @override
   String notesLibrarySelectedCountSingular(int count) {
     return '$count seleccionada';
   }

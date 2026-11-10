@@ -471,6 +471,7 @@
   "notesLibrarySortBibleOrder": "Kolejność biblijna",
   "notesLibraryTitle": "Biblioteka notatek",
   "notesLibraryCancelSelectionTooltip": "Anuluj zaznaczenie",
+  "notesLibrarySelectTooltip": "Zaznacz notatki",
   "notesLibrarySelectedCountSingular": "Zaznaczono: {count}",
   "notesLibrarySelectedCountPlural": "Zaznaczono: {count}",
   "notesLibraryShareTooltip": "Udostępnij",

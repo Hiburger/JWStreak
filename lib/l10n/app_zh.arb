@@ -471,6 +471,7 @@
   "notesLibrarySortBibleOrder": "圣经书卷顺序",
   "notesLibraryTitle": "笔记库",
   "notesLibraryCancelSelectionTooltip": "取消选择",
+  "notesLibrarySelectTooltip": "选择笔记",
   "notesLibrarySelectedCountSingular": "已选择 {count} 项",
   "notesLibrarySelectedCountPlural": "已选择 {count} 项",
   "notesLibraryShareTooltip": "分享",

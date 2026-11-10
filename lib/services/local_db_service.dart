@@ -45,6 +45,7 @@ class NoteEntry {
     required this.content,
     required this.createdAt,
     required this.updatedAt,
+    this.position = 0,
   });
 
   final int id;
@@ -54,6 +55,7 @@ class NoteEntry {
   final String content;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final double position;
 
   /// Title to display: explicit title, else first line of content,
   /// else a placeholder.
@@ -73,15 +75,18 @@ class NoteEntry {
   }
 }
 
-/// Sort orders for the notes library.
-enum NoteSortOrder { recentlyUpdated, recentlyCreated, titleAZ, bibleOrder }
+/// Sort orders for the notes library. [manual] is the reader's own drag order persisted in the position column
+enum NoteSortOrder {
+  recentlyUpdated,
+  recentlyCreated,
+  titleAZ,
+  bibleOrder,
+  manual,
+}
 
 /// "Created when" buckets for the notes library filter.
 enum NoteCreatedFilter { all, today, thisWeek, thisMonth, earlier }
 
-/// Inclusive lower / exclusive upper bound on `createdAt` for [filter] at
-/// [now]. ISO-8601 strings compare lexicographically, so the bounds slot
-/// straight into a SQL WHERE.
 ({DateTime? after, DateTime? before}) noteCreatedBounds(
   NoteCreatedFilter filter,
   DateTime now,
@@ -238,7 +243,7 @@ class LocalDbService {
 
   /// The schema version a backup file records, so a later app version can
   /// tell how to read it.
-  static const int schemaVersion = 7;
+  static const int schemaVersion = 8;
 
   /// Raw rows of [table], for the backup serializer. Deliberately not a
   /// general-purpose query hatch: it accepts only the known backup tables,
@@ -296,6 +301,23 @@ class LocalDbService {
           )
         ''';
 
+  /// Fresh installs get the position column straight away; existing
+  /// databases reach the same shape through the v8 upgrade below. Nullable
+  /// on purpose: a backup from before this column restores rows without it,
+  /// and those NULLs are what backfillNotePositions looks for.
+  static const String _createNotesTableV8Sql = '''
+          CREATE TABLE notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL DEFAULT '',
+            book TEXT NOT NULL,
+            chapter INTEGER NOT NULL,
+            content TEXT NOT NULL,
+            createdAt TEXT NOT NULL,
+            updatedAt TEXT NOT NULL,
+            position REAL
+          )
+        ''';
+
   static const String _createQuizResultsTableSql = '''
           CREATE TABLE quiz_results (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -349,7 +371,7 @@ class LocalDbService {
     final String dbPath = join(await getDatabasesPath(), _databaseName);
     final Database db = await openDatabase(
       dbPath,
-      version: 7,
+      version: 8,
       onCreate: (Database database, int version) async {
         await database.execute('''
           CREATE TABLE readings (
@@ -360,7 +382,7 @@ class LocalDbService {
           )
         ''');
 
-        await database.execute(_createNotesTableSql);
+        await database.execute(_createNotesTableV8Sql);
         await database.execute(_createQuizResultsTableSql);
         await database.execute(_createReflectionsTableSql);
         await database.execute(_createRemindersTableSql);
@@ -434,6 +456,12 @@ class LocalDbService {
           ''');
           await database.execute('DROP TABLE notes');
           await database.execute('ALTER TABLE notes_v2 RENAME TO notes');
+        }
+        // Last on purpose: the v2 step above recreates the notes table from
+        // the position-less schema, so the column can only be added after it.
+        if (oldVersion < 8) {
+          await database.execute('ALTER TABLE notes ADD COLUMN position REAL');
+          await _backfillNotePositions(database);
         }
       },
     );
@@ -877,6 +905,8 @@ class LocalDbService {
   }) async {
     final Database db = await _getDb();
     final String now = DateTime.now().toIso8601String();
+    // New notes land at the end of the custom order.
+    final double maxPosition = await _maxNotePosition(db) ?? 0;
     return db.insert('notes', <String, Object>{
       'title': title,
       'book': book,
@@ -884,7 +914,81 @@ class LocalDbService {
       'content': content,
       'createdAt': now,
       'updatedAt': now,
+      'position': maxPosition + 1024,
     });
+  }
+
+  static Future<double?> _maxNotePosition(Database db) async {
+    final List<Map<String, Object?>> rows = await db.rawQuery(
+      'SELECT MAX(position) AS maxPos FROM notes',
+    );
+    final Object? maxPos = rows.first['maxPos'];
+    return maxPos is num ? maxPos.toDouble() : null;
+  }
+
+  /// Persists a note's rank in the custom order. Only the moved note is
+  /// written — the drag position is fractional, so neighbours keep theirs.
+  Future<void> setNotePosition(int id, double position) async {
+    final Database db = await _getDb();
+    await db.update(
+      'notes',
+      <String, Object>{'position': position},
+      where: 'id = ?',
+      whereArgs: <Object>[id],
+    );
+  }
+
+  /// Gives a position to every note that has none (fresh migration, or a
+  /// backup taken before the column existed). Ordered by last edit so the
+  /// custom order starts out matching what the library already showed.
+  Future<void> backfillNotePositions() async {
+    await _backfillNotePositions(await _getDb());
+  }
+
+  /// The notes library's persisted view (sort + filters), so a reordered
+  /// list is still in that order the next time the screen opens.
+  Future<({NoteSortOrder sort, String? book, NoteCreatedFilter created})>
+  getNotesViewState() async {
+    final Database db = await _getDb();
+    final String? sort = await _getSetting(db, 'notes_sort');
+    final String? book = await _getSetting(db, 'notes_filter_book');
+    final String? created = await _getSetting(db, 'notes_filter_created');
+    return (
+      sort: NoteSortOrder.values.asNameMap()[sort] ?? NoteSortOrder.manual,
+      book: book == null || book.isEmpty ? null : book,
+      created:
+          NoteCreatedFilter.values.asNameMap()[created] ??
+          NoteCreatedFilter.all,
+    );
+  }
+
+  Future<void> saveNotesViewState({
+    required NoteSortOrder sort,
+    required String? book,
+    required NoteCreatedFilter created,
+  }) async {
+    final Database db = await _getDb();
+    await _setSetting(db, 'notes_sort', sort.name);
+    await _setSetting(db, 'notes_filter_book', book ?? '');
+    await _setSetting(db, 'notes_filter_created', created.name);
+  }
+
+  static Future<void> _backfillNotePositions(Database db) async {
+    double next = await _maxNotePosition(db) ?? 0;
+    final List<Map<String, Object?>> unordered = await db.query(
+      'notes',
+      where: 'position IS NULL',
+      orderBy: 'updatedAt DESC',
+    );
+    for (final Map<String, Object?> row in unordered) {
+      next += 1024;
+      await db.update(
+        'notes',
+        <String, Object>{'position': next},
+        where: 'id = ?',
+        whereArgs: <Object>[row['id']!],
+      );
+    }
   }
 
   /// [book]/[chapter] are optional so callers that only edit the text leave
@@ -950,7 +1054,7 @@ class LocalDbService {
     String query = '',
     String? book,
     NoteCreatedFilter createdFilter = NoteCreatedFilter.all,
-    NoteSortOrder sort = NoteSortOrder.recentlyUpdated,
+    NoteSortOrder sort = NoteSortOrder.manual,
   }) async {
     final Database db = await _getDb();
     final String normalized = query.trim();
@@ -1019,6 +1123,10 @@ class LocalDbService {
           }
           return b.updatedAt.compareTo(a.updatedAt);
         });
+      case NoteSortOrder.manual:
+        notes.sort(
+          (NoteEntry a, NoteEntry b) => a.position.compareTo(b.position),
+        );
     }
     return List<NoteEntry>.unmodifiable(notes);
   }
@@ -1056,6 +1164,7 @@ class LocalDbService {
     final Object? content = row['content'];
     final Object? createdAt = row['createdAt'];
     final Object? updatedAt = row['updatedAt'];
+    final Object? position = row['position'];
     if (id is! int ||
         title is! String ||
         book is! String ||
@@ -1073,6 +1182,7 @@ class LocalDbService {
       content: content,
       createdAt: DateTime.parse(createdAt),
       updatedAt: DateTime.parse(updatedAt),
+      position: position is num ? position.toDouble() : 0,
     );
   }
 

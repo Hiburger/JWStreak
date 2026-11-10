@@ -1572,6 +1572,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notesLibraryCancelSelectionTooltip => 'Отменить выбор';
 
   @override
+  String get notesLibrarySelectTooltip => 'Выбрать заметки';
+
+  @override
   String notesLibrarySelectedCountSingular(int count) {
     return 'Выбрано: $count';
   }

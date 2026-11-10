@@ -44,9 +44,11 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
 
   String? _bookFilter;
   NoteCreatedFilter _createdFilter = NoteCreatedFilter.all;
-  NoteSortOrder _sort = NoteSortOrder.recentlyUpdated;
 
-  bool get _selectionMode => _selectedIds.isNotEmpty;
+  NoteSortOrder _sort = NoteSortOrder.manual;
+
+  bool _inSelectionMode = false;
+  bool get _selectionMode => _inSelectionMode;
 
   bool get _hasActiveFilters =>
       _bookFilter != null || _createdFilter != NoteCreatedFilter.all;
@@ -54,8 +56,28 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   @override
   void initState() {
     super.initState();
-    _loadNotes();
+    _bootstrap();
   }
+
+  Future<void> _bootstrap() async {
+    // The view (sort + filters) is persisted so that a reordered library is still in that order when the reader comes back
+    final view = await widget.dbService.getNotesViewState();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _sort = view.sort;
+      _bookFilter = view.book;
+      _createdFilter = view.created;
+    });
+    await _loadNotes();
+  }
+
+  Future<void> _persistViewState() => widget.dbService.saveNotesViewState(
+    sort: _sort,
+    book: _bookFilter,
+    created: _createdFilter,
+  );
 
   @override
   void dispose() {
@@ -93,6 +115,10 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     }
   }
 
+  void _enterSelectionMode() {
+    setState(() => _inSelectionMode = true);
+  }
+
   void _toggleSelect(NoteEntry note) {
     setState(() {
       if (!_selectedIds.add(note.id)) {
@@ -102,7 +128,10 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
   }
 
   void _clearSelection() {
-    setState(_selectedIds.clear);
+    setState(() {
+      _selectedIds.clear();
+      _inSelectionMode = false;
+    });
   }
 
   List<NoteEntry> get _selectedNotes =>
@@ -263,6 +292,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     setState(() {
       _isLoading = true;
     });
+    _persistViewState();
     _loadNotes();
   }
 
@@ -290,7 +320,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
           for (final String id in bookIds)
             PickerEntry<String>(
               value: id,
-              label: localizedBookName(context, bibleBookById(id)!),
+              // A restored backup can hold a book id kBibleBooks doesn't
+              // know; show it raw rather than crashing the sheet.
+              label: _bookLabel(context, id),
             ),
         ],
       ),
@@ -439,30 +471,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
                             isSearching:
                                 _query.trim().isNotEmpty || _hasActiveFilters,
                           )
-                        : ListView.separated(
-                            padding: const EdgeInsets.only(bottom: 96),
-                            itemCount: _notes.length,
-                            separatorBuilder: (_, _) =>
-                                const SizedBox(height: 8),
-                            itemBuilder: (_, int index) {
-                              final NoteEntry note = _notes[index];
-                              return _NoteCard(
-                                note: note,
-                                selectionMode: _selectionMode,
-                                selected: _selectedIds.contains(note.id),
-                                onTap: () {
-                                  if (_selectionMode) {
-                                    _toggleSelect(note);
-                                  } else {
-                                    _openReader(note);
-                                  }
-                                },
-                                onLongPress: () => _toggleSelect(note),
-                                confirmDismiss: () => _confirmSwipeDelete(note),
-                                onDismissed: () => _removeNoteFromList(note),
-                              );
-                            },
-                          ),
+                        : _buildNotesList(),
                   ),
                 ),
               ],
@@ -473,18 +482,123 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     );
   }
 
+  Widget _buildNotesList() {
+    if (_selectionMode) {
+      return ListView.separated(
+        padding: const EdgeInsets.only(top: 8, bottom: 96),
+        itemCount: _notes.length,
+        separatorBuilder: (_, _) => const SizedBox(height: 8),
+        itemBuilder: (_, int index) => _buildNoteCard(_notes[index]),
+      );
+    }
+
+    return ClipRect(
+      child: Overlay(
+        initialEntries: <OverlayEntry>[
+          OverlayEntry(
+            builder: (_) => ReorderableListView(
+              padding: const EdgeInsets.only(top: 8, bottom: 96),
+              buildDefaultDragHandles: false,
+              onReorderItem: _onReorder,
+              // Default decorator paints a Material box behind the dragged
+              // card, which reads as a white cutout — a slight scale gives
+              // the same feedback without it.
+              proxyDecorator:
+                  (Widget child, int index, Animation<double> animation) {
+                    return AnimatedBuilder(
+                      animation: animation,
+                      builder: (BuildContext context, Widget? child) =>
+                          Transform.scale(
+                            scale: 1 + 0.02 * animation.value,
+                            child: child,
+                          ),
+                      child: child,
+                    );
+                  },
+              children: <Widget>[
+                for (int index = 0; index < _notes.length; index++)
+                  Padding(
+                    key: ValueKey<int>(_notes[index].id),
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: ReorderableDelayedDragStartListener(
+                      index: index,
+                      child: _buildNoteCard(_notes[index]),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoteCard(NoteEntry note) {
+    return _NoteCard(
+      note: note,
+      selectionMode: _selectionMode,
+      selected: _selectedIds.contains(note.id),
+      onTap: () {
+        if (_selectionMode) {
+          _toggleSelect(note);
+        } else {
+          _openReader(note);
+        }
+      },
+      confirmDismiss: () => _confirmSwipeDelete(note),
+      onDismissed: () => _removeNoteFromList(note),
+    );
+  }
+
+  Future<void> _onReorder(int oldIndex, int newIndex) async {
+    final int movedId = _notes[oldIndex].id;
+    final (:List<NoteEntry> notes, :double position) = computeReorder(
+      _notes,
+      oldIndex,
+      newIndex,
+    );
+    setState(() {
+      _notes = notes;
+      // A drag means the reader wants their own order, so the sort follows
+      // the drag instead of snapping back on the next reload.
+      _sort = NoteSortOrder.manual;
+      _hasChanges = true;
+    });
+    _persistViewState();
+    try {
+      await widget.dbService.setNotePosition(movedId, position);
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+    }
+  }
+
   AppBar _buildNormalAppBar() {
     return AppBar(
       leading: const CircularBackButton(),
       title: Text(AppLocalizations.of(context)!.notesLibraryTitle),
+      actions: <Widget>[
+        IconButton(
+          key: const ValueKey<String>('notes-library-select'),
+          icon: const Icon(Icons.checklist_rounded),
+          tooltip: AppLocalizations.of(context)!.notesLibrarySelectTooltip,
+          onPressed: _enterSelectionMode,
+        ),
+      ],
     );
+  }
+
+  static String _bookLabel(BuildContext context, String bookId) {
+    final BibleBook? book = bibleBookById(bookId);
+    return book == null ? bookId : localizedBookName(context, book);
   }
 
   Widget _buildFilterRow() {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
     final String? bookLabel = _bookFilter == null
         ? null
-        : localizedBookName(context, bibleBookById(_bookFilter!)!);
+        : _bookLabel(context, _bookFilter!);
     return Align(
       alignment: Alignment.centerLeft,
       child: SingleChildScrollView(
@@ -517,9 +631,11 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
             _FilterChip(
               icon: Icons.sort_rounded,
               label: l10n.notesLibraryFilterSort,
-              value: _sort == NoteSortOrder.recentlyUpdated
+              value: _sort == NoteSortOrder.manual
                   ? null
                   : <NoteSortOrder, String>{
+                      NoteSortOrder.recentlyUpdated:
+                          l10n.notesLibrarySortRecentlyUpdated,
                       NoteSortOrder.recentlyCreated:
                           l10n.notesLibrarySortRecentlyCreated,
                       NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
@@ -538,6 +654,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
     final int count = _selectedIds.length;
     return AppBar(
       leading: IconButton(
+        key: const ValueKey<String>('notes-library-close'),
         style: circularIconButtonStyle(context),
         icon: const Icon(Icons.close),
         tooltip: l10n.notesLibraryCancelSelectionTooltip,
@@ -549,15 +666,19 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
             : l10n.notesLibrarySelectedCountPlural(count),
       ),
       actions: <Widget>[
+        // Disabled at zero selected: with nothing to act on the buttons
+        // shouldn't even play their tap animation.
         IconButton(
+          key: const ValueKey<String>('notes-library-share'),
           icon: const Icon(Icons.ios_share),
           tooltip: l10n.notesLibraryShareTooltip,
-          onPressed: _shareSelected,
+          onPressed: _selectedIds.isEmpty ? null : _shareSelected,
         ),
         IconButton(
+          key: const ValueKey<String>('notes-library-delete'),
           icon: const Icon(Icons.delete_outline),
           tooltip: l10n.notesLibraryDeleteTooltip,
-          onPressed: _deleteSelected,
+          onPressed: _selectedIds.isEmpty ? null : _deleteSelected,
         ),
       ],
     );
@@ -611,7 +732,6 @@ class _NoteCard extends StatelessWidget {
     required this.selectionMode,
     required this.selected,
     required this.onTap,
-    required this.onLongPress,
     required this.confirmDismiss,
     required this.onDismissed,
   });
@@ -620,7 +740,6 @@ class _NoteCard extends StatelessWidget {
   final bool selectionMode;
   final bool selected;
   final VoidCallback onTap;
-  final VoidCallback onLongPress;
   final Future<bool> Function() confirmDismiss;
   final VoidCallback onDismissed;
 
@@ -634,12 +753,11 @@ class _NoteCard extends StatelessWidget {
       margin: EdgeInsets.zero,
       color: selected ? colorScheme.secondaryContainer : null,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(28)),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(20),
         onTap: onTap,
-        onLongPress: onLongPress,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
           child: Column(
@@ -748,6 +866,26 @@ class _NoteCard extends StatelessWidget {
       child: card,
     );
   }
+}
+
+({List<NoteEntry> notes, double position}) computeReorder(
+  List<NoteEntry> notes,
+  int oldIndex,
+  int newIndex,
+) {
+  final List<NoteEntry> updated = List<NoteEntry>.of(notes);
+  final NoteEntry moved = updated.removeAt(oldIndex);
+  updated.insert(newIndex, moved);
+  final double prev = newIndex > 0
+      ? updated[newIndex - 1].position
+      : double.negativeInfinity;
+  final double next = newIndex < updated.length - 1
+      ? updated[newIndex + 1].position
+      : double.infinity;
+  final double position = prev == double.negativeInfinity
+      ? (next == double.infinity ? 0 : next - 1024)
+      : (next == double.infinity ? prev + 1024 : (prev + next) / 2);
+  return (notes: updated, position: position);
 }
 
 /// Strips Markdown markers for a clean, readable card preview.

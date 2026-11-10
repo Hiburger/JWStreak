@@ -471,6 +471,7 @@
   "notesLibrarySortBibleOrder": "Библейский порядок",
   "notesLibraryTitle": "Библиотека заметок",
   "notesLibraryCancelSelectionTooltip": "Отменить выбор",
+  "notesLibrarySelectTooltip": "Выбрать заметки",
   "notesLibrarySelectedCountSingular": "Выбрано: {count}",
   "notesLibrarySelectedCountPlural": "Выбрано: {count}",
   "notesLibraryShareTooltip": "Поделиться",

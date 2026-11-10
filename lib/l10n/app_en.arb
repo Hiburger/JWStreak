@@ -723,6 +723,7 @@
   "notesLibrarySortBibleOrder": "Bible order",
   "notesLibraryTitle": "Notes library",
   "notesLibraryCancelSelectionTooltip": "Cancel selection",
+  "notesLibrarySelectTooltip": "Select notes",
   "notesLibrarySelectedCountSingular": "{count} selected",
   "@notesLibrarySelectedCountSingular": {
     "placeholders": {

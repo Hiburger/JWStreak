@@ -194,6 +194,9 @@ class BackupService {
   /// still restores what it can instead of being refused wholesale.
   Future<void> restore(BackupData data) async {
     await _db.replaceAllData(data.tables);
+    // A backup from before the position column existed restores notes with
+    // NULL positions; give them ranks so the custom order still works.
+    await _db.backfillNotePositions();
   }
 }
 

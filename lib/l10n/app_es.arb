@@ -471,6 +471,7 @@
   "notesLibrarySortBibleOrder": "Orden bíblico",
   "notesLibraryTitle": "Biblioteca de notas",
   "notesLibraryCancelSelectionTooltip": "Cancelar selección",
+  "notesLibrarySelectTooltip": "Seleccionar notas",
   "notesLibrarySelectedCountSingular": "{count} seleccionada",
   "notesLibrarySelectedCountPlural": "{count} seleccionadas",
   "notesLibraryShareTooltip": "Compartir",

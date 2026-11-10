@@ -471,6 +471,7 @@
   "notesLibrarySortBibleOrder": "Bibelreihenfolge",
   "notesLibraryTitle": "Notizsammlung",
   "notesLibraryCancelSelectionTooltip": "Auswahl aufheben",
+  "notesLibrarySelectTooltip": "Notizen auswählen",
   "notesLibrarySelectedCountSingular": "{count} ausgewählt",
   "notesLibrarySelectedCountPlural": "{count} ausgewählt",
   "notesLibraryShareTooltip": "Teilen",

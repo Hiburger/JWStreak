@@ -143,7 +143,11 @@ class NotificationService {
       priority: Priority.high,
     ),
     iOS: DarwinNotificationDetails(
+      // presentAlert only works up to iOS 14; on newer iOS the banner/list
+      // options are what actually present a foreground notification.
       presentAlert: true,
+      presentBanner: true,
+      presentList: true,
       presentBadge: true,
       presentSound: true,
     ),
@@ -489,6 +493,8 @@ class NotificationService {
         ),
         iOS: const DarwinNotificationDetails(
           presentAlert: true,
+          presentBanner: true,
+          presentList: true,
           presentBadge: true,
           presentSound: true,
         ),

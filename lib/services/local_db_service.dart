@@ -110,6 +110,23 @@ enum NoteCreatedFilter { all, today, thisWeek, thisMonth, earlier }
   }
 }
 
+/// The calendar day before [now], at local midnight. Built with the
+/// DateTime constructor's component normalisation (day 0 rolls back into
+/// the previous month) rather than by subtracting 24 hours, which across a
+/// daylight-saving change can land on the wrong day.
+DateTime yesterdayOf(DateTime now) =>
+    DateTime(now.year, now.month, now.day - 1);
+
+/// Whether [day] has no recorded activity (reading or quiz) among
+/// [activityDays] — i.e. the day was missed. Day-granular, so the time
+/// component of either side is ignored.
+bool dayWasMissed(Iterable<DateTime> activityDays, DateTime day) {
+  final DateTime d = DateTime(day.year, day.month, day.day);
+  return !activityDays.any(
+    (DateTime a) => a.year == d.year && a.month == d.month && a.day == d.day,
+  );
+}
+
 class StreakState {
   const StreakState({
     required this.count,

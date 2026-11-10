@@ -1863,6 +1863,16 @@ class AppLocalizationsRu extends AppLocalizations {
       'Прочитай главу или пройди тест до полуночи, чтобы начать серию.';
 
   @override
+  String get notifMissedYesterdayTitle => 'Вчера пропущено?';
+
+  @override
+  String get notifMissedYesterdayBody =>
+      'Вчера вы не читали — прочитайте сегодня главу, чтобы продолжить.';
+
+  @override
+  String get notifMissedYesterdayNote => 'Вчера не читали.';
+
+  @override
   String get easterEggHeartBody => 'Я тоже тебя люблю :)';
 
   @override

@@ -1783,6 +1783,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notifStreakStartBody => '在午夜前读一章或做一个测验，就能开始你的连续记录。';
 
   @override
+  String get notifMissedYesterdayTitle => '昨天没读？';
+
+  @override
+  String get notifMissedYesterdayBody => '昨天没有阅读——今天读一章，继续保持。';
+
+  @override
+  String get notifMissedYesterdayNote => '昨天没读。';
+
+  @override
   String get easterEggHeartBody => '我也爱你 :)';
 
   @override

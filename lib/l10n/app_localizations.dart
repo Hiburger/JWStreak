@@ -3411,6 +3411,24 @@ abstract class AppLocalizations {
   /// **'Read a chapter or take a quiz before midnight to start your streak.'**
   String get notifStreakStartBody;
 
+  /// No description provided for @notifMissedYesterdayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Missed yesterday?'**
+  String get notifMissedYesterdayTitle;
+
+  /// No description provided for @notifMissedYesterdayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You didn\'t read yesterday — read a chapter today to get back on track.'**
+  String get notifMissedYesterdayBody;
+
+  /// No description provided for @notifMissedYesterdayNote.
+  ///
+  /// In en, this message translates to:
+  /// **'You missed yesterday.'**
+  String get notifMissedYesterdayNote;
+
   /// No description provided for @easterEggHeartBody.
   ///
   /// In en, this message translates to:

@@ -1866,6 +1866,16 @@ class AppLocalizationsPl extends AppLocalizations {
       'Przeczytaj rozdział albo zrób quiz przed północą, żeby zacząć swoją passę.';
 
   @override
+  String get notifMissedYesterdayTitle => 'Wczoraj bez czytania?';
+
+  @override
+  String get notifMissedYesterdayBody =>
+      'Nie czytałeś wczoraj — przeczytaj dziś rozdział, aby wrócić do gry.';
+
+  @override
+  String get notifMissedYesterdayNote => 'Pominięto wczoraj.';
+
+  @override
   String get easterEggHeartBody => 'Ja ciebie też kocham :)';
 
   @override

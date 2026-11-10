@@ -373,13 +373,19 @@ class _HomeScreenState extends State<HomeScreen>
     // Read from context before the await, so the gap can't invalidate it.
     final AppLocalizations notifL10n = AppLocalizations.of(context)!;
     await _notificationService.refreshTimeZone();
+    final DateTime yesterday = yesterdayOf(DateTime.now());
+    final bool missedYesterday = dayWasMissed(recentReadingDays, yesterday);
+
     await _notificationService.cancelAllReminders();
     for (final Reminder reminder in reminders) {
       await _notificationService.scheduleReminder(
         id: reminder.id,
         time: TimeOfDay(hour: reminder.hour, minute: reminder.minute),
         title: notifL10n.notifReminderTitle,
-        body: notifL10n.notifReminderBody,
+        // After a missed day the reminder also says so.
+        body: missedYesterday
+            ? '${notifL10n.notifReminderBody} ${notifL10n.notifMissedYesterdayNote}'
+            : notifL10n.notifReminderBody,
         // Already read or quizzed today: today's remaining reminders would
         // be nagging about something already done, so the first firing moves
         // to tomorrow. The daily repeat is untouched.
@@ -394,14 +400,23 @@ class _HomeScreenState extends State<HomeScreen>
     // because "your streak is at risk" is meaningless with no streak to lose.
     if (!streakState.activeToday) {
       final bool hasStreak = streakState.count > 0;
-      await _notificationService.scheduleStreakRiskCheck(
-        title: hasStreak
-            ? notifL10n.notifStreakRiskTitle
-            : notifL10n.notifStreakStartTitle,
-        body: hasStreak
-            ? notifL10n.notifStreakRiskBody
-            : notifL10n.notifStreakStartBody,
-      );
+      if (reminders.isEmpty && missedYesterday) {
+        // No reminders to carry the message, so the evening nudge says it
+        // directly: yesterday was missed, read today.
+        await _notificationService.scheduleStreakRiskCheck(
+          title: notifL10n.notifMissedYesterdayTitle,
+          body: notifL10n.notifMissedYesterdayBody,
+        );
+      } else {
+        await _notificationService.scheduleStreakRiskCheck(
+          title: hasStreak
+              ? notifL10n.notifStreakRiskTitle
+              : notifL10n.notifStreakStartTitle,
+          body: hasStreak
+              ? notifL10n.notifStreakRiskBody
+              : notifL10n.notifStreakStartBody,
+        );
+      }
     } else {
       await _notificationService.cancelStreakRiskCheck();
     }

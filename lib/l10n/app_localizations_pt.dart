@@ -1869,6 +1869,16 @@ class AppLocalizationsPt extends AppLocalizations {
       'Lê um capítulo ou faz um quiz antes da meia-noite para começares a tua sequência.';
 
   @override
+  String get notifMissedYesterdayTitle => 'Ontem sem leitura?';
+
+  @override
+  String get notifMissedYesterdayBody =>
+      'Você não leu ontem — leia um capítulo hoje para retomar.';
+
+  @override
+  String get notifMissedYesterdayNote => 'Faltou ler ontem.';
+
+  @override
   String get easterEggHeartBody => 'Eu também te amo :)';
 
   @override

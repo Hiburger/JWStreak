@@ -1853,6 +1853,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Read a chapter or take a quiz before midnight to start your streak.';
 
   @override
+  String get notifMissedYesterdayTitle => 'Missed yesterday?';
+
+  @override
+  String get notifMissedYesterdayBody =>
+      'You didn\'t read yesterday — read a chapter today to get back on track.';
+
+  @override
+  String get notifMissedYesterdayNote => 'You missed yesterday.';
+
+  @override
   String get easterEggHeartBody => 'I love you too :)';
 
   @override

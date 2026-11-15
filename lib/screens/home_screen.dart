@@ -1939,7 +1939,10 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
             const SizedBox(height: 16),
             Row(
               children: <Widget>[
+                // "Mark as read" carries longer labels across languages,
+                // so it gets the wider share of the row.
                 Expanded(
+                  flex: 5,
                   // Transform.translate only moves paint, never layout, so
                   // the shake can't disturb the row it sits in.
                   child: AnimatedBuilder(
@@ -1982,6 +1985,7 @@ class _ContinueReadingCardState extends State<_ContinueReadingCard>
                 ),
                 const SizedBox(width: 10),
                 Expanded(
+                  flex: 6,
                   // A disabled button swallows the tap silently. Catching it
                   // here is what lets the early tap answer back by pointing
                   // at "Open" instead of appearing to do nothing.

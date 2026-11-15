@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-
 import 'l10n/app_localizations.dart';
 import 'reading_plan.dart';
 import 'screens/features_intro_screen.dart';
@@ -18,6 +18,7 @@ import 'widgets/app_lock_gate.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const DailyJwApp());
 }
 
@@ -306,9 +307,6 @@ class _DailyJwAppState extends State<DailyJwApp> {
         final ColorScheme baseDark =
             (dynamicAllowed ? darkDynamic : null) ??
             _appSkin.scheme(Brightness.dark);
-        // OLED stays a modifier on top of whatever the skin produced rather
-        // than a palette of its own, so "true black" keeps working for every
-        // style instead of only the default one.
         final bool oled = _themePreference == ThemePreference.oled;
         final ColorScheme darkScheme = oled
             ? baseDark.copyWith(
@@ -339,56 +337,77 @@ class _DailyJwAppState extends State<DailyJwApp> {
           scaffoldBackground: oled ? Colors.black : null,
         );
 
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'JW Streak',
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: _appSkin.forcesDark
-              ? ThemeMode.dark
-              : _themePreference.materialThemeMode,
-          locale: _localeCode == null ? null : Locale(_localeCode!),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          localeListResolutionCallback: _resolveLocale,
-          // Feeds the home screen's RouteAware subscriptions (the stat
-          // tiles replay their entrance when home becomes the visible page
-          // again — see kHomeRouteObserver in home_screen.dart).
-          navigatorObservers: <NavigatorObserver>[kHomeRouteObserver],
-          home: _isThemeLoading
-              ? loading
-              : _withAppLock(
-                  PopScope(
-                    canPop: !_showWelcome || _onboardingStep == 0,
-                    onPopInvokedWithResult: (bool didPop, Object? result) {
-                      if (didPop) {
-                        return;
-                      }
-                      if (_showWelcome && _onboardingStep > 0) {
-                        _goToOnboardingStep(_onboardingStep - 1);
-                      }
-                    },
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 450),
-                      switchInCurve: Curves.easeOut,
-                      switchOutCurve: Curves.easeIn,
-                      child: _showWelcome
-                          ? _buildOnboardingPageView()
-                          : HomeScreen(
-                              key: const ValueKey<String>('home'),
-                              skipBootstrap: widget.skipBootstrap,
-                              currentThemePreference: _themePreference,
-                              onThemePreferenceChanged: _updateThemePreference,
-                              currentAppSkin: _appSkin,
-                              onAppSkinChanged: _updateAppSkin,
-                              useDynamicColor: _useDynamicColor,
-                              onUseDynamicColorChanged: _updateUseDynamicColor,
-                              currentLocaleCode: _localeCode,
-                              onLocaleChanged: _updateLocale,
-                            ),
+        // I had a hard time with the silly android bottom app bar.... as you can see...
+        final bool isDark =
+            _appSkin.forcesDark ||
+            _themePreference == ThemePreference.dark ||
+            oled ||
+            (_themePreference == ThemePreference.system &&
+                MediaQuery.platformBrightnessOf(context) == Brightness.dark);
+
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: isDark
+                ? Brightness.light
+                : Brightness.dark,
+            systemNavigationBarColor: Colors.transparent,
+            systemNavigationBarContrastEnforced: false,
+            systemNavigationBarIconBrightness: isDark
+                ? Brightness.light
+                : Brightness.dark,
+          ),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'JW Streak',
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: _appSkin.forcesDark
+                ? ThemeMode.dark
+                : _themePreference.materialThemeMode,
+            locale: _localeCode == null ? null : Locale(_localeCode!),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localeListResolutionCallback: _resolveLocale,
+            // Feeds the home screen's RouteAware subscriptions
+            navigatorObservers: <NavigatorObserver>[kHomeRouteObserver],
+            home: _isThemeLoading
+                ? loading
+                : _withAppLock(
+                    PopScope(
+                      canPop: !_showWelcome || _onboardingStep == 0,
+                      onPopInvokedWithResult: (bool didPop, Object? result) {
+                        if (didPop) {
+                          return;
+                        }
+                        if (_showWelcome && _onboardingStep > 0) {
+                          _goToOnboardingStep(_onboardingStep - 1);
+                        }
+                      },
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 450),
+                        switchInCurve: Curves.easeOut,
+                        switchOutCurve: Curves.easeIn,
+                        child: _showWelcome
+                            ? _buildOnboardingPageView()
+                            : HomeScreen(
+                                key: const ValueKey<String>('home'),
+                                skipBootstrap: widget.skipBootstrap,
+                                currentThemePreference: _themePreference,
+                                onThemePreferenceChanged:
+                                    _updateThemePreference,
+                                currentAppSkin: _appSkin,
+                                onAppSkinChanged: _updateAppSkin,
+                                useDynamicColor: _useDynamicColor,
+                                onUseDynamicColorChanged:
+                                    _updateUseDynamicColor,
+                                currentLocaleCode: _localeCode,
+                                onLocaleChanged: _updateLocale,
+                              ),
+                      ),
                     ),
                   ),
-                ),
+          ),
         );
       },
     );

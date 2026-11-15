@@ -203,6 +203,66 @@
   "streakInfoRow3Text": "Out of matches? Pass a review quiz (a mix of your readings) to earn one back.",
   "streakInfoRow4Title": "We'll warn you",
   "streakInfoRow4Text": "If your streak is at risk, a warning appears and an evening reminder can nudge you.",
+  "streakInfoRow5Title": "Need a pause?",
+  "streakInfoRow5Text": "Start a break and missed days won't count. Each size is limited per year, and a cooldown runs between breaks. Use them responsibly so you don't lose the habit!",
+  "streakBreakTake": "Take a break",
+  "streakBreakSheetTitle": "Take a break",
+  "streakBreakSheetBody": "During a break, missed days don't count and no notifications are sent. Reading still counts if you do.",
+  "streakBreakMini": "Mini",
+  "streakBreakSmall": "Small",
+  "streakBreakMedium": "Medium",
+  "streakBreakBig": "Big",
+  "streakBreakTierDays": "{days, plural, =1{{days} day} other{{days} days}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "{left, plural, =1{{left} left this year} other{{left} left this year}}",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "{days, plural, =1{{days} day left} other{{days} days left}}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "No breaks of this size left this year",
+  "streakBreakActive": "On break until {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "End break now",
+  "streakBreakEndConfirmTitle": "End the break now?",
+  "streakBreakEndConfirmBody": "Days already passed stay protected. The break still counts toward this year's limit.",
+  "streakBreakWhileActive": "A break is already in progress",
+  "streakBreakReasonHint": "Reason for the break (optional)",
+  "streakBreakActiveTitle": "On break",
+  "streakBreakLogButton": "Break history",
+  "streakBreakLogTitle": "Break history",
+  "streakBreakLogEmpty": "No breaks yet.",
+  "streakBreakLogEndedEarly": "Ended early",
+  "streakBreakCooldown": "Next break available on {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Settings",
   "settingsCatPersonalization": "Personalization",
   "settingsCatPersonalizationDesc": "Style, brightness, language",
@@ -524,14 +584,6 @@
   "homeStatReadingSingular": "reading",
   "homeStatStarsPlural": "stars",
   "homeStatStarSingular": "star",
-  "homeLastReadAt": "Last read: {date}",
-  "@homeLastReadAt": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
   "homeBibleBrowsed": "Bible browsed",
   "homeDailyTextTitle": "Text of the day",
   "homeDailyTextSubtitle": "Today's thought",
@@ -544,22 +596,6 @@
   "homeQuickFlashcardsSubtitle": "Train your memory",
   "homeQuickSoonTag": "Soon",
   "homeRecentActivity": "Recent activity",
-  "homeActiveDaysPlural": "{count} active days",
-  "@homeActiveDaysPlural": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "homeActiveDaysSingular": "{count} active day",
-  "@homeActiveDaysSingular": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "homeCalendarPreviousWeek": "Previous week",
   "homeCalendarNextWeek": "Next week",
   "homeWeekdayMon": "M",
@@ -903,6 +939,8 @@
   "notifMissedYesterdayTitle": "Missed yesterday?",
   "notifMissedYesterdayBody": "You didn't read yesterday — read a chapter today to get back on track.",
   "notifMissedYesterdayNote": "You missed yesterday.",
+  "notifBreakEndingTitle": "Your break ends today",
+  "notifBreakEndingBody": "Tomorrow reading resumes — your streak is waiting.",
   "easterEggHeartBody": "I love you too :)",
   "easterEggVersionTitle": "Seven taps, really",
   "easterEggVersionBody": "No hidden mode here, sorry. Just a thank you for looking this far. This app was written one evening at a time, and it's nice to know someone's poking around.",

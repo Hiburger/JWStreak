@@ -118,14 +118,22 @@ void main() {
       expect((await db.getNoteById(notes.first.id))!.position, 42);
     });
 
-    test('a v1 database migrates all the way to v8', () async {
+    test('a v8 database gains the breaks table', () async {
+      await createLegacyDb(8);
+      final LocalDbService db = LocalDbService();
+      expect(await db.getActiveBreak(), isNull);
+      expect(await db.getAllBreaks(), isEmpty);
+      await db.startBreak(BreakTier.mini);
+      expect(await db.getActiveBreak(), isNotNull);
+    });
+
+    test('a v1 database migrates all the way to v9', () async {
       await createLegacyDb(1);
       final LocalDbService db = LocalDbService();
       final List<NoteEntry> notes = await db.getAllNotes(
         sort: NoteSortOrder.manual,
       );
       expect(notes, hasLength(1));
-      // v1 notes had no title; the v2 migration fills it with ''.
       expect(notes.first.title, '');
       expect(notes.first.content, 'legacy');
       expect(notes.first.position, greaterThan(0));

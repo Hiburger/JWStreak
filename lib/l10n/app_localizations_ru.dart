@@ -636,6 +636,109 @@ class AppLocalizationsRu extends AppLocalizations {
       'Если твоя серия под угрозой, появится предупреждение, а вечернее напоминание подтолкнёт тебя.';
 
   @override
+  String get streakInfoRow5Title => 'Нужен перерыв?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Начни перерыв, и пропущенные дни не засчитаются. У каждого размера есть годовой лимит, а между перерывами идёт отсчёт ожидания. Пользуйся ими с умом, чтобы не потерять привычку!';
+
+  @override
+  String get streakBreakTake => 'Сделать перерыв';
+
+  @override
+  String get streakBreakSheetTitle => 'Сделать перерыв';
+
+  @override
+  String get streakBreakSheetBody =>
+      'Во время перерыва пропущенные дни не учитываются, а уведомления не отправляются. Чтение всё равно засчитывается, если читаешь.';
+
+  @override
+  String get streakBreakMini => 'Мини';
+
+  @override
+  String get streakBreakSmall => 'Маленький';
+
+  @override
+  String get streakBreakMedium => 'Средний';
+
+  @override
+  String get streakBreakBig => 'Большой';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days дней',
+      few: '$days дня',
+      one: '$days день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    return 'Осталось за этот год: $left';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'Осталось $days дней',
+      few: 'Осталось $days дня',
+      one: 'Остался $days день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakBreakExhausted =>
+      'Перерывы такого размера на этот год закончились';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'Перерыв до $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Завершить перерыв сейчас';
+
+  @override
+  String get streakBreakEndConfirmTitle => 'Завершить перерыв сейчас?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'Прошедшие дни останутся защищёнными. Перерыв всё равно засчитывается в лимит этого года.';
+
+  @override
+  String get streakBreakWhileActive => 'Перерыв уже идёт';
+
+  @override
+  String get streakBreakReasonHint => 'Причина перерыва (необязательно)';
+
+  @override
+  String get streakBreakActiveTitle => 'Идёт перерыв';
+
+  @override
+  String get streakBreakLogButton => 'История перерывов';
+
+  @override
+  String get streakBreakLogTitle => 'История перерывов';
+
+  @override
+  String get streakBreakLogEmpty => 'Перерывов пока нет.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Завершён раньше срока';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Следующий перерыв доступен $date';
+  }
+
+  @override
   String get settingsTitle => 'Настройки';
 
   @override
@@ -1296,11 +1399,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeStatStarSingular => 'звезда';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Последнее чтение: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Библия просмотрена';
 
   @override
@@ -1335,16 +1433,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Недавняя активность';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count активных дней';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count активный день';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Предыдущая неделя';
@@ -1871,6 +1959,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Вчера не читали.';
+
+  @override
+  String get notifBreakEndingTitle => 'Твой перерыв заканчивается сегодня';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Завтра возвращаемся к чтению — серия ждёт.';
 
   @override
   String get easterEggHeartBody => 'Я тоже тебя люблю :)';

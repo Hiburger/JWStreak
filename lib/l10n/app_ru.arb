@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "Закончились спички? Пройди контрольный квиз (смесь твоих чтений), чтобы вернуть одну.",
   "streakInfoRow4Title": "Мы тебя предупредим",
   "streakInfoRow4Text": "Если твоя серия под угрозой, появится предупреждение, а вечернее напоминание подтолкнёт тебя.",
+  "streakInfoRow5Title": "Нужен перерыв?",
+  "streakInfoRow5Text": "Начни перерыв, и пропущенные дни не засчитаются. У каждого размера есть годовой лимит, а между перерывами идёт отсчёт ожидания. Пользуйся ими с умом, чтобы не потерять привычку!",
+  "streakBreakTake": "Сделать перерыв",
+  "streakBreakSheetTitle": "Сделать перерыв",
+  "streakBreakSheetBody": "Во время перерыва пропущенные дни не учитываются, а уведомления не отправляются. Чтение всё равно засчитывается, если читаешь.",
+  "streakBreakMini": "Мини",
+  "streakBreakSmall": "Маленький",
+  "streakBreakMedium": "Средний",
+  "streakBreakBig": "Большой",
+  "streakBreakTierDays": "{days, plural, one{{days} день} few{{days} дня} other{{days} дней}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "Осталось за этот год: {left}",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "{days, plural, one{Остался {days} день} few{Осталось {days} дня} other{Осталось {days} дней}}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "Перерывы такого размера на этот год закончились",
+  "streakBreakActive": "Перерыв до {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "Завершить перерыв сейчас",
+  "streakBreakEndConfirmTitle": "Завершить перерыв сейчас?",
+  "streakBreakEndConfirmBody": "Прошедшие дни останутся защищёнными. Перерыв всё равно засчитывается в лимит этого года.",
+  "streakBreakWhileActive": "Перерыв уже идёт",
+  "streakBreakReasonHint": "Причина перерыва (необязательно)",
+  "streakBreakActiveTitle": "Идёт перерыв",
+  "streakBreakLogButton": "История перерывов",
+  "streakBreakLogTitle": "История перерывов",
+  "streakBreakLogEmpty": "Перерывов пока нет.",
+  "streakBreakLogEndedEarly": "Завершён раньше срока",
+  "streakBreakCooldown": "Следующий перерыв доступен {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Настройки",
   "settingsCatPersonalization": "Персонализация",
   "settingsCatPersonalizationDesc": "Стиль, яркость, язык",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "прочтение",
   "homeStatStarsPlural": "звёзд",
   "homeStatStarSingular": "звезда",
-  "homeLastReadAt": "Последнее чтение: {date}",
   "homeBibleBrowsed": "Библия просмотрена",
   "homeDailyTextTitle": "Писание дня",
   "homeDailyTextSubtitle": "Мысль на сегодня",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "Тренируй память",
   "homeQuickSoonTag": "Скоро",
   "homeRecentActivity": "Недавняя активность",
-  "homeActiveDaysPlural": "{count} активных дней",
-  "homeActiveDaysSingular": "{count} активный день",
   "homeCalendarPreviousWeek": "Предыдущая неделя",
   "homeCalendarNextWeek": "Следующая неделя",
   "homeWeekdayMon": "Пн",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "Вчера пропущено?",
   "notifMissedYesterdayBody": "Вчера вы не читали — прочитайте сегодня главу, чтобы продолжить.",
   "notifMissedYesterdayNote": "Вчера не читали.",
+  "notifBreakEndingTitle": "Твой перерыв заканчивается сегодня",
+  "notifBreakEndingBody": "Завтра возвращаемся к чтению — серия ждёт.",
   "easterEggHeartBody": "Я тоже тебя люблю :)",
   "easterEggVersionTitle": "Семь раз, надо же",
   "easterEggVersionBody": "Здесь нет скрытого режима, увы. Просто спасибо, что искали так далеко. Это приложение писалось вечер за вечером, и приятно знать, что кто-то заглядывает.",

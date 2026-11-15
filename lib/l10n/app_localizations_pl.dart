@@ -638,6 +638,101 @@ class AppLocalizationsPl extends AppLocalizations {
       'Jeśli twoja passa jest zagrożona, pojawi się ostrzeżenie, a wieczorne przypomnienie może cię o tym powiadomić.';
 
   @override
+  String get streakInfoRow5Title => 'Potrzebujesz przerwy?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Rozpocznij przerwę, a pominięte dni się nie policzą. Każdy rozmiar ma limit roczny, a między przerwami obowiązuje czas oczekiwania. Korzystaj z nich rozsądnie, żeby nie stracić nawyku!';
+
+  @override
+  String get streakBreakTake => 'Zrób przerwę';
+
+  @override
+  String get streakBreakSheetTitle => 'Zrób przerwę';
+
+  @override
+  String get streakBreakSheetBody =>
+      'W czasie przerwy pominięte dni nie są liczone i nie są wysyłane powiadomienia. Czytanie nadal się liczy, jeśli czytasz.';
+
+  @override
+  String get streakBreakMini => 'Mini';
+
+  @override
+  String get streakBreakSmall => 'Mała';
+
+  @override
+  String get streakBreakMedium => 'Średnia';
+
+  @override
+  String get streakBreakBig => 'Duża';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dni',
+      one: '$days dzień',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    return 'Pozostało w tym roku: $left';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    return 'Pozostało dni: $days';
+  }
+
+  @override
+  String get streakBreakExhausted =>
+      'Przerwy tego rozmiaru wykorzystane na ten rok';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'Przerwa do $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Zakończ przerwę teraz';
+
+  @override
+  String get streakBreakEndConfirmTitle => 'Zakończyć przerwę teraz?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'Już minione dni pozostają chronione. Przerwa nadal liczy się do limitu rocznego.';
+
+  @override
+  String get streakBreakWhileActive => 'Trwa już jedna przerwa';
+
+  @override
+  String get streakBreakReasonHint => 'Powód przerwy (opcjonalnie)';
+
+  @override
+  String get streakBreakActiveTitle => 'Przerwa trwa';
+
+  @override
+  String get streakBreakLogButton => 'Historia przerw';
+
+  @override
+  String get streakBreakLogTitle => 'Historia przerw';
+
+  @override
+  String get streakBreakLogEmpty => 'Na razie bez przerw.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Zakończona wcześniej';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Następna przerwa dostępna $date';
+  }
+
+  @override
   String get settingsTitle => 'Ustawienia';
 
   @override
@@ -1299,11 +1394,6 @@ class AppLocalizationsPl extends AppLocalizations {
   String get homeStatStarSingular => 'gwiazdka';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Ostatnia lektura: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Przejrzana Biblia';
 
   @override
@@ -1338,16 +1428,6 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Ostatnia aktywność';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count aktywnych dni';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count aktywny dzień';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Poprzedni tydzień';
@@ -1874,6 +1954,13 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Pominięto wczoraj.';
+
+  @override
+  String get notifBreakEndingTitle => 'Twoja przerwa kończy się dziś';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Jutro wracasz do czytania — passa na ciebie czeka.';
 
   @override
   String get easterEggHeartBody => 'Ja ciebie też kocham :)';

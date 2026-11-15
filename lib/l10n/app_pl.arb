@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "Brak zapałek? Rozwiąż quiz powtórkowy (mieszankę twoich lektur), aby odzyskać jedną.",
   "streakInfoRow4Title": "Ostrzeżemy cię",
   "streakInfoRow4Text": "Jeśli twoja passa jest zagrożona, pojawi się ostrzeżenie, a wieczorne przypomnienie może cię o tym powiadomić.",
+  "streakInfoRow5Title": "Potrzebujesz przerwy?",
+  "streakInfoRow5Text": "Rozpocznij przerwę, a pominięte dni się nie policzą. Każdy rozmiar ma limit roczny, a między przerwami obowiązuje czas oczekiwania. Korzystaj z nich rozsądnie, żeby nie stracić nawyku!",
+  "streakBreakTake": "Zrób przerwę",
+  "streakBreakSheetTitle": "Zrób przerwę",
+  "streakBreakSheetBody": "W czasie przerwy pominięte dni nie są liczone i nie są wysyłane powiadomienia. Czytanie nadal się liczy, jeśli czytasz.",
+  "streakBreakMini": "Mini",
+  "streakBreakSmall": "Mała",
+  "streakBreakMedium": "Średnia",
+  "streakBreakBig": "Duża",
+  "streakBreakTierDays": "{days, plural, =1{{days} dzień} other{{days} dni}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "Pozostało w tym roku: {left}",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "Pozostało dni: {days}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "Przerwy tego rozmiaru wykorzystane na ten rok",
+  "streakBreakActive": "Przerwa do {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "Zakończ przerwę teraz",
+  "streakBreakEndConfirmTitle": "Zakończyć przerwę teraz?",
+  "streakBreakEndConfirmBody": "Już minione dni pozostają chronione. Przerwa nadal liczy się do limitu rocznego.",
+  "streakBreakWhileActive": "Trwa już jedna przerwa",
+  "streakBreakReasonHint": "Powód przerwy (opcjonalnie)",
+  "streakBreakActiveTitle": "Przerwa trwa",
+  "streakBreakLogButton": "Historia przerw",
+  "streakBreakLogTitle": "Historia przerw",
+  "streakBreakLogEmpty": "Na razie bez przerw.",
+  "streakBreakLogEndedEarly": "Zakończona wcześniej",
+  "streakBreakCooldown": "Następna przerwa dostępna {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Ustawienia",
   "settingsCatPersonalization": "Personalizacja",
   "settingsCatPersonalizationDesc": "Styl, jasność, język",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "lektura",
   "homeStatStarsPlural": "gwiazdek",
   "homeStatStarSingular": "gwiazdka",
-  "homeLastReadAt": "Ostatnia lektura: {date}",
   "homeBibleBrowsed": "Przejrzana Biblia",
   "homeDailyTextTitle": "Myśl dnia",
   "homeDailyTextSubtitle": "Dzisiejsza myśl",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "Ćwicz swoją pamięć",
   "homeQuickSoonTag": "Wkrótce",
   "homeRecentActivity": "Ostatnia aktywność",
-  "homeActiveDaysPlural": "{count} aktywnych dni",
-  "homeActiveDaysSingular": "{count} aktywny dzień",
   "homeCalendarPreviousWeek": "Poprzedni tydzień",
   "homeCalendarNextWeek": "Następny tydzień",
   "homeWeekdayMon": "P",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "Wczoraj bez czytania?",
   "notifMissedYesterdayBody": "Nie czytałeś wczoraj — przeczytaj dziś rozdział, aby wrócić do gry.",
   "notifMissedYesterdayNote": "Pominięto wczoraj.",
+  "notifBreakEndingTitle": "Twoja przerwa kończy się dziś",
+  "notifBreakEndingBody": "Jutro wracasz do czytania — passa na ciebie czeka.",
   "easterEggHeartBody": "Ja ciebie też kocham :)",
   "easterEggVersionTitle": "Siedem razy, serio",
   "easterEggVersionBody": "Nie ma tu żadnego ukrytego trybu, przykro mi. Po prostu dziękuję, że szukałeś tak daleko. Ta aplikacja powstawała wieczór po wieczorze i miło wiedzieć, że ktoś zagląda.",

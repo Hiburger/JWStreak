@@ -638,6 +638,112 @@ class AppLocalizationsEs extends AppLocalizations {
       'Si tu racha está en riesgo, aparece un aviso y un recordatorio nocturno puede darte un empujoncito.';
 
   @override
+  String get streakInfoRow5Title => '¿Necesitas un respiro?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Inicia una pausa y los días perdidos no cuentan. Cada tamaño tiene un límite anual, y entre dos pausas hay un tiempo de espera: úsalas con responsabilidad para no perder el hábito.';
+
+  @override
+  String get streakBreakTake => 'Tomar una pausa';
+
+  @override
+  String get streakBreakSheetTitle => 'Tomar una pausa';
+
+  @override
+  String get streakBreakSheetBody =>
+      'Durante una pausa, los días perdidos no cuentan y no se envían notificaciones. Leer sigue contando si lo haces.';
+
+  @override
+  String get streakBreakMini => 'Mini';
+
+  @override
+  String get streakBreakSmall => 'Pequeña';
+
+  @override
+  String get streakBreakMedium => 'Mediana';
+
+  @override
+  String get streakBreakBig => 'Grande';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days días',
+      one: '$days día',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: '$left quedan este año',
+      one: '$left queda este año',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days días restantes',
+      one: '$days día restante',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakBreakExhausted => 'No quedan pausas de este tamaño este año';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'En pausa hasta el $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Terminar la pausa';
+
+  @override
+  String get streakBreakEndConfirmTitle => '¿Terminar la pausa ahora?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'Los días ya pasados siguen protegidos. La pausa cuenta para el límite de este año.';
+
+  @override
+  String get streakBreakWhileActive => 'Ya hay una pausa en curso';
+
+  @override
+  String get streakBreakReasonHint => 'Motivo de la pausa (opcional)';
+
+  @override
+  String get streakBreakActiveTitle => 'En pausa';
+
+  @override
+  String get streakBreakLogButton => 'Historial de pausas';
+
+  @override
+  String get streakBreakLogTitle => 'Historial de pausas';
+
+  @override
+  String get streakBreakLogEmpty => 'Todavía sin pausas.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Terminada antes';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Próxima pausa disponible el $date';
+  }
+
+  @override
   String get settingsTitle => 'Ajustes';
 
   @override
@@ -1297,11 +1403,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeStatStarSingular => 'estrella';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Última lectura: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Biblia explorada';
 
   @override
@@ -1336,16 +1437,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Actividad reciente';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count días activos';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count día activo';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Semana anterior';
@@ -1873,6 +1964,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Olvidaste leer ayer.';
+
+  @override
+  String get notifBreakEndingTitle => 'Tu pausa termina hoy';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Mañana se vuelve a leer — tu racha te espera.';
 
   @override
   String get easterEggHeartBody => 'Yo también te quiero :)';

@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "Sem fósforos? Passe em um quiz de revisão (uma mistura das suas leituras) para recuperar um.",
   "streakInfoRow4Title": "A gente te avisa",
   "streakInfoRow4Text": "Se sua sequência estiver em risco, um aviso aparece e um lembrete à noite pode te dar um empurrãozinho.",
+  "streakInfoRow5Title": "Precisas de uma pausa?",
+  "streakInfoRow5Text": "Inicia uma pausa e os dias em falta não contam. Cada tamanho tem um limite anual, e entre duas pausas corre um tempo de espera: usa-as com responsabilidade para não perderes o hábito!",
+  "streakBreakTake": "Fazer uma pausa",
+  "streakBreakSheetTitle": "Fazer uma pausa",
+  "streakBreakSheetBody": "Durante uma pausa, os dias em falta não contam e não são enviadas notificações. Ler continua a contar se leres.",
+  "streakBreakMini": "Mini",
+  "streakBreakSmall": "Pequena",
+  "streakBreakMedium": "Média",
+  "streakBreakBig": "Grande",
+  "streakBreakTierDays": "{days, plural, =1{{days} dia} other{{days} dias}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "Restam {left} este ano",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "{days, plural, =1{{days} dia restante} other{{days} dias restantes}}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "Não há mais pausas deste tamanho este ano",
+  "streakBreakActive": "Em pausa até {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "Terminar a pausa agora",
+  "streakBreakEndConfirmTitle": "Terminar a pausa agora?",
+  "streakBreakEndConfirmBody": "Os dias já passados continuam protegidos. A pausa continua a contar para o limite deste ano.",
+  "streakBreakWhileActive": "Já há uma pausa em curso",
+  "streakBreakReasonHint": "Motivo da pausa (opcional)",
+  "streakBreakActiveTitle": "Em pausa",
+  "streakBreakLogButton": "Histórico de pausas",
+  "streakBreakLogTitle": "Histórico de pausas",
+  "streakBreakLogEmpty": "Ainda sem pausas.",
+  "streakBreakLogEndedEarly": "Terminada antes",
+  "streakBreakCooldown": "Próxima pausa disponível em {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Configurações",
   "settingsCatPersonalization": "Personalização",
   "settingsCatPersonalizationDesc": "Estilo, brilho, idioma",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "leitura",
   "homeStatStarsPlural": "estrelas",
   "homeStatStarSingular": "estrela",
-  "homeLastReadAt": "Última leitura: {date}",
   "homeBibleBrowsed": "Bíblia explorada",
   "homeDailyTextTitle": "Escritura do dia",
   "homeDailyTextSubtitle": "Pensamento de hoje",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "Treine sua memória",
   "homeQuickSoonTag": "Em breve",
   "homeRecentActivity": "Atividade recente",
-  "homeActiveDaysPlural": "{count} dias ativos",
-  "homeActiveDaysSingular": "{count} dia ativo",
   "homeCalendarPreviousWeek": "Semana anterior",
   "homeCalendarNextWeek": "Próxima semana",
   "homeWeekdayMon": "S",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "Ontem sem leitura?",
   "notifMissedYesterdayBody": "Você não leu ontem — leia um capítulo hoje para retomar.",
   "notifMissedYesterdayNote": "Faltou ler ontem.",
+  "notifBreakEndingTitle": "A tua pausa acaba hoje",
+  "notifBreakEndingBody": "Amanhã voltas a ler — a tua sequência espera por ti.",
   "easterEggHeartBody": "Eu também te amo :)",
   "easterEggVersionTitle": "Sete vezes, a sério",
   "easterEggVersionBody": "Não há nenhum modo escondido aqui, desculpa. Só um obrigado por teres procurado tão longe. Esta app foi escrita uma noite após a outra, e sabe bem saber que alguém anda a espreitar.",

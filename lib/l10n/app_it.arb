@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "Finiti i fiammiferi? Supera un quiz di ripasso (un mix delle tue letture) per riguadagnarne uno.",
   "streakInfoRow4Title": "Ti avviseremo",
   "streakInfoRow4Text": "Se la tua serie è a rischio, appare un avviso e un promemoria serale può darti una spinta.",
+  "streakInfoRow5Title": "Serve una pausa?",
+  "streakInfoRow5Text": "Avvia una pausa e i giorni saltati non contano. Ogni dimensione ha un limite annuale e tra due pause passa del tempo: usale con saggezza per non perdere l'abitudine!",
+  "streakBreakTake": "Fai una pausa",
+  "streakBreakSheetTitle": "Fai una pausa",
+  "streakBreakSheetBody": "Durante una pausa i giorni saltati non contano e non vengono inviate notifiche. Leggere conta comunque se lo fai.",
+  "streakBreakMini": "Mini",
+  "streakBreakSmall": "Piccola",
+  "streakBreakMedium": "Media",
+  "streakBreakBig": "Grande",
+  "streakBreakTierDays": "{days, plural, =1{{days} giorno} other{{days} giorni}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "{left, plural, =1{{left} rimasta quest'anno} other{{left} rimaste quest'anno}}",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "{days, plural, =1{{days} giorno rimasto} other{{days} giorni rimasti}}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "Nessuna pausa di questa dimensione rimasta quest'anno",
+  "streakBreakActive": "In pausa fino al {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "Termina la pausa",
+  "streakBreakEndConfirmTitle": "Terminare la pausa ora?",
+  "streakBreakEndConfirmBody": "I giorni già passati restano protetti. La pausa conta comunque per il limite di quest'anno.",
+  "streakBreakWhileActive": "C'è già una pausa in corso",
+  "streakBreakReasonHint": "Motivo della pausa (facoltativo)",
+  "streakBreakActiveTitle": "In pausa",
+  "streakBreakLogButton": "Cronologia delle pause",
+  "streakBreakLogTitle": "Cronologia delle pause",
+  "streakBreakLogEmpty": "Ancora nessuna pausa.",
+  "streakBreakLogEndedEarly": "Terminata in anticipo",
+  "streakBreakCooldown": "Prossima pausa disponibile il {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Impostazioni",
   "settingsCatPersonalization": "Personalizzazione",
   "settingsCatPersonalizationDesc": "Stile, luminosità, lingua",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "lettura",
   "homeStatStarsPlural": "stelle",
   "homeStatStarSingular": "stella",
-  "homeLastReadAt": "Ultima lettura: {date}",
   "homeBibleBrowsed": "Bibbia sfogliata",
   "homeDailyTextTitle": "Scrittura del giorno",
   "homeDailyTextSubtitle": "Il pensiero di oggi",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "Allena la tua memoria",
   "homeQuickSoonTag": "Presto",
   "homeRecentActivity": "Attività recente",
-  "homeActiveDaysPlural": "{count} giorni attivi",
-  "homeActiveDaysSingular": "{count} giorno attivo",
   "homeCalendarPreviousWeek": "Settimana precedente",
   "homeCalendarNextWeek": "Settimana successiva",
   "homeWeekdayMon": "L",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "Ieri saltato?",
   "notifMissedYesterdayBody": "Non hai letto ieri — leggi un capitolo oggi per riprendere.",
   "notifMissedYesterdayNote": "Non hai letto ieri.",
+  "notifBreakEndingTitle": "La tua pausa finisce oggi",
+  "notifBreakEndingBody": "Domani si riprende a leggere — la tua serie ti aspetta.",
   "easterEggHeartBody": "Anch'io ti voglio bene :)",
   "easterEggVersionTitle": "Sette volte, davvero",
   "easterEggVersionBody": "Qui non c'è nessuna modalità nascosta, mi spiace. Solo un grazie per aver cercato così a fondo. Questa app è nata una sera dopo l'altra, e fa piacere sapere che qualcuno curiosa.",

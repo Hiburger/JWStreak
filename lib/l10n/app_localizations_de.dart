@@ -643,6 +643,113 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wenn deine Serie in Gefahr ist, erscheint eine Warnung und eine Erinnerung am Abend kann dich anstupsen.';
 
   @override
+  String get streakInfoRow5Title => 'Brauchst du eine Pause?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Starte eine Pause, dann zählen verpasste Tage nicht. Jede Größe ist pro Jahr begrenzt, und zwischen zwei Pausen läuft eine Sperrfrist. Nutze sie mit Bedacht, damit du das Lesen nicht verlernst!';
+
+  @override
+  String get streakBreakTake => 'Pause machen';
+
+  @override
+  String get streakBreakSheetTitle => 'Pause machen';
+
+  @override
+  String get streakBreakSheetBody =>
+      'Während einer Pause zählen verpasste Tage nicht und es werden keine Benachrichtigungen gesendet. Lesen zählt trotzdem, wenn du liest.';
+
+  @override
+  String get streakBreakMini => 'Mini';
+
+  @override
+  String get streakBreakSmall => 'Klein';
+
+  @override
+  String get streakBreakMedium => 'Mittel';
+
+  @override
+  String get streakBreakBig => 'Groß';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days Tage',
+      one: '$days Tag',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: '$left übrig dieses Jahr',
+      one: '$left übrig dieses Jahr',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days Tage übrig',
+      one: '$days Tag übrig',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakBreakExhausted =>
+      'Keine Pausen dieser Größe mehr dieses Jahr';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'Pause bis $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Pause jetzt beenden';
+
+  @override
+  String get streakBreakEndConfirmTitle => 'Pause jetzt beenden?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'Bereits vergangene Tage bleiben geschützt. Die Pause zählt trotzdem zum Jahreslimit.';
+
+  @override
+  String get streakBreakWhileActive => 'Es läuft bereits eine Pause';
+
+  @override
+  String get streakBreakReasonHint => 'Grund für die Pause (optional)';
+
+  @override
+  String get streakBreakActiveTitle => 'In der Pause';
+
+  @override
+  String get streakBreakLogButton => 'Pausenverlauf';
+
+  @override
+  String get streakBreakLogTitle => 'Pausenverlauf';
+
+  @override
+  String get streakBreakLogEmpty => 'Noch keine Pausen.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Vorzeitig beendet';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Nächste Pause ab $date möglich';
+  }
+
+  @override
   String get settingsTitle => 'Einstellungen';
 
   @override
@@ -1306,11 +1413,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeStatStarSingular => 'Stern';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Zuletzt gelesen: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Bibel gelesen';
 
   @override
@@ -1345,16 +1447,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Letzte Aktivität';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count aktive Tage';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count aktiver Tag';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Vorherige Woche';
@@ -1883,6 +1975,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Gestern nicht gelesen.';
+
+  @override
+  String get notifBreakEndingTitle => 'Deine Pause endet heute';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Morgen geht\'s weiter mit Lesen — deine Serie wartet.';
 
   @override
   String get easterEggHeartBody => 'Ich dich auch :)';

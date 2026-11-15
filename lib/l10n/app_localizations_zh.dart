@@ -600,6 +600,92 @@ class AppLocalizationsZh extends AppLocalizations {
   String get streakInfoRow4Text => '如果你的连续记录岌岌可危，系统会发出提醒，晚间通知也会推你一把。';
 
   @override
+  String get streakInfoRow5Title => '需要休息一下？';
+
+  @override
+  String get streakInfoRow5Text =>
+      '开始休息后，漏读的日子不会计入。每种时长每年有次数限制，两次休息之间也有冷却期。请合理使用，别丢了阅读的习惯！';
+
+  @override
+  String get streakBreakTake => '休息一下';
+
+  @override
+  String get streakBreakSheetTitle => '休息一下';
+
+  @override
+  String get streakBreakSheetBody => '休息期间，漏读不计入连续记录，也不会发送通知。如果你读了，照常计入。';
+
+  @override
+  String get streakBreakMini => '迷你';
+
+  @override
+  String get streakBreakSmall => '小';
+
+  @override
+  String get streakBreakMedium => '中';
+
+  @override
+  String get streakBreakBig => '大';
+
+  @override
+  String streakBreakTierDays(int days) {
+    return '$days 天';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    return '今年还剩 $left 次';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    return '还剩 $days 天';
+  }
+
+  @override
+  String get streakBreakExhausted => '这种时长的休息今年已用完';
+
+  @override
+  String streakBreakActive(String date) {
+    return '休息至 $date';
+  }
+
+  @override
+  String get streakBreakEnd => '立即结束休息';
+
+  @override
+  String get streakBreakEndConfirmTitle => '现在结束休息？';
+
+  @override
+  String get streakBreakEndConfirmBody => '已过去的日子仍受保护。这次休息仍计入今年的限额。';
+
+  @override
+  String get streakBreakWhileActive => '已有进行中的休息';
+
+  @override
+  String get streakBreakReasonHint => '休息原因（可选）';
+
+  @override
+  String get streakBreakActiveTitle => '休息中';
+
+  @override
+  String get streakBreakLogButton => '休息记录';
+
+  @override
+  String get streakBreakLogTitle => '休息记录';
+
+  @override
+  String get streakBreakLogEmpty => '还没有休息。';
+
+  @override
+  String get streakBreakLogEndedEarly => '提前结束';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return '下次休息可于 $date 开始';
+  }
+
+  @override
   String get settingsTitle => '设置';
 
   @override
@@ -1233,11 +1319,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeStatStarSingular => '颗星';
 
   @override
-  String homeLastReadAt(String date) {
-    return '上次阅读：$date';
-  }
-
-  @override
   String get homeBibleBrowsed => '已浏览圣经';
 
   @override
@@ -1272,16 +1353,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeRecentActivity => '近期活动';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count 天活跃';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count 天活跃';
-  }
 
   @override
   String get homeCalendarPreviousWeek => '上一周';
@@ -1790,6 +1861,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => '昨天没读。';
+
+  @override
+  String get notifBreakEndingTitle => '你的休息今天结束';
+
+  @override
+  String get notifBreakEndingBody => '明天恢复阅读——连续记录等着你。';
 
   @override
   String get easterEggHeartBody => '我也爱你 :)';

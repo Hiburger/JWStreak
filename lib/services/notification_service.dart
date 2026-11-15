@@ -97,16 +97,14 @@ class NotificationService {
   static const int _reminderBaseId = 200;
   static const String _channelId = 'jwstreak_reminders';
   static const int _skipCompanionOffset = 10000;
-
-  /// The ids that are *not* daily reminders, even though they sit above
-  /// [_reminderBaseId]. [cancelAllReminders] has to skip these — see the
-  /// note there for what taking them down by mistake broke.
   static const int _instantMessageId = 999;
+  static const int _breakEndingNudgeId = 800;
   static const Set<int> _reservedIds = <int>{
     _streakRiskNotificationId,
     _dailyTextNotificationId,
     _sessionNotificationId,
     _instantMessageId,
+    _breakEndingNudgeId,
   };
 
   static const String _sessionChannelId = 'jwstreak_reading_session_v3';
@@ -505,6 +503,39 @@ class NotificationService {
 
   Future<void> cancelStreakRiskCheck() async {
     await _plugin.cancel(id: _streakRiskNotificationId);
+  }
+
+  /// One-off nudge on the last day of a break, so the reader is invited back
+  /// the day after it ends. No-op if that day's risk hour has already passed.
+  Future<void> scheduleBreakEndingNudge({
+    required DateTime endDay,
+    required String title,
+    required String body,
+  }) async {
+    final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
+    final tz.TZDateTime target = tz.TZDateTime(
+      tz.local,
+      endDay.year,
+      endDay.month,
+      endDay.day,
+      kStreakRiskHour,
+    );
+    if (!target.isAfter(now)) {
+      return;
+    }
+    final AndroidScheduleMode mode = await _resolveScheduleMode();
+    await _plugin.zonedSchedule(
+      id: _breakEndingNudgeId,
+      title: title,
+      body: body,
+      scheduledDate: target,
+      notificationDetails: _reminderDetails,
+      androidScheduleMode: mode,
+    );
+  }
+
+  Future<void> cancelBreakEndingNudge() async {
+    await _plugin.cancel(id: _breakEndingNudgeId);
   }
 
   /// Cancels the scheduled daily reminders — and only those. Used before a

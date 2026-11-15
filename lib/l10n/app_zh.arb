@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "火柴用完了？完成一次复习测验（综合你读过的内容），就能再赚回一根。",
   "streakInfoRow4Title": "我们会提醒你",
   "streakInfoRow4Text": "如果你的连续记录岌岌可危，系统会发出提醒，晚间通知也会推你一把。",
+  "streakInfoRow5Title": "需要休息一下？",
+  "streakInfoRow5Text": "开始休息后，漏读的日子不会计入。每种时长每年有次数限制，两次休息之间也有冷却期。请合理使用，别丢了阅读的习惯！",
+  "streakBreakTake": "休息一下",
+  "streakBreakSheetTitle": "休息一下",
+  "streakBreakSheetBody": "休息期间，漏读不计入连续记录，也不会发送通知。如果你读了，照常计入。",
+  "streakBreakMini": "迷你",
+  "streakBreakSmall": "小",
+  "streakBreakMedium": "中",
+  "streakBreakBig": "大",
+  "streakBreakTierDays": "{days} 天",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "今年还剩 {left} 次",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "还剩 {days} 天",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "这种时长的休息今年已用完",
+  "streakBreakActive": "休息至 {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "立即结束休息",
+  "streakBreakEndConfirmTitle": "现在结束休息？",
+  "streakBreakEndConfirmBody": "已过去的日子仍受保护。这次休息仍计入今年的限额。",
+  "streakBreakWhileActive": "已有进行中的休息",
+  "streakBreakReasonHint": "休息原因（可选）",
+  "streakBreakActiveTitle": "休息中",
+  "streakBreakLogButton": "休息记录",
+  "streakBreakLogTitle": "休息记录",
+  "streakBreakLogEmpty": "还没有休息。",
+  "streakBreakLogEndedEarly": "提前结束",
+  "streakBreakCooldown": "下次休息可于 {date} 开始",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "设置",
   "settingsCatPersonalization": "个性化",
   "settingsCatPersonalizationDesc": "样式、亮度、语言",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "次阅读",
   "homeStatStarsPlural": "颗星",
   "homeStatStarSingular": "颗星",
-  "homeLastReadAt": "上次阅读：{date}",
   "homeBibleBrowsed": "已浏览圣经",
   "homeDailyTextTitle": "每日经文",
   "homeDailyTextSubtitle": "今日感想",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "锻炼你的记忆",
   "homeQuickSoonTag": "即将推出",
   "homeRecentActivity": "近期活动",
-  "homeActiveDaysPlural": "{count} 天活跃",
-  "homeActiveDaysSingular": "{count} 天活跃",
   "homeCalendarPreviousWeek": "上一周",
   "homeCalendarNextWeek": "下一周",
   "homeWeekdayMon": "一",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "昨天没读？",
   "notifMissedYesterdayBody": "昨天没有阅读——今天读一章，继续保持。",
   "notifMissedYesterdayNote": "昨天没读。",
+  "notifBreakEndingTitle": "你的休息今天结束",
+  "notifBreakEndingBody": "明天恢复阅读——连续记录等着你。",
   "easterEggHeartBody": "我也爱你 :)",
   "easterEggVersionTitle": "居然点了七次",
   "easterEggVersionBody": "这里没有隐藏模式，抱歉。只是想说声谢谢，谢谢你找到这么深的地方。这个应用是一个又一个夜晚写出来的，知道有人在翻看，真让人高兴。",

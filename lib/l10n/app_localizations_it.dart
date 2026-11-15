@@ -638,6 +638,113 @@ class AppLocalizationsIt extends AppLocalizations {
       'Se la tua serie è a rischio, appare un avviso e un promemoria serale può darti una spinta.';
 
   @override
+  String get streakInfoRow5Title => 'Serve una pausa?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Avvia una pausa e i giorni saltati non contano. Ogni dimensione ha un limite annuale e tra due pause passa del tempo: usale con saggezza per non perdere l\'abitudine!';
+
+  @override
+  String get streakBreakTake => 'Fai una pausa';
+
+  @override
+  String get streakBreakSheetTitle => 'Fai una pausa';
+
+  @override
+  String get streakBreakSheetBody =>
+      'Durante una pausa i giorni saltati non contano e non vengono inviate notifiche. Leggere conta comunque se lo fai.';
+
+  @override
+  String get streakBreakMini => 'Mini';
+
+  @override
+  String get streakBreakSmall => 'Piccola';
+
+  @override
+  String get streakBreakMedium => 'Media';
+
+  @override
+  String get streakBreakBig => 'Grande';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days giorni',
+      one: '$days giorno',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    String _temp0 = intl.Intl.pluralLogic(
+      left,
+      locale: localeName,
+      other: '$left rimaste quest\'anno',
+      one: '$left rimasta quest\'anno',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days giorni rimasti',
+      one: '$days giorno rimasto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakBreakExhausted =>
+      'Nessuna pausa di questa dimensione rimasta quest\'anno';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'In pausa fino al $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Termina la pausa';
+
+  @override
+  String get streakBreakEndConfirmTitle => 'Terminare la pausa ora?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'I giorni già passati restano protetti. La pausa conta comunque per il limite di quest\'anno.';
+
+  @override
+  String get streakBreakWhileActive => 'C\'è già una pausa in corso';
+
+  @override
+  String get streakBreakReasonHint => 'Motivo della pausa (facoltativo)';
+
+  @override
+  String get streakBreakActiveTitle => 'In pausa';
+
+  @override
+  String get streakBreakLogButton => 'Cronologia delle pause';
+
+  @override
+  String get streakBreakLogTitle => 'Cronologia delle pause';
+
+  @override
+  String get streakBreakLogEmpty => 'Ancora nessuna pausa.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Terminata in anticipo';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Prossima pausa disponibile il $date';
+  }
+
+  @override
   String get settingsTitle => 'Impostazioni';
 
   @override
@@ -1299,11 +1406,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeStatStarSingular => 'stella';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Ultima lettura: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Bibbia sfogliata';
 
   @override
@@ -1338,16 +1440,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Attività recente';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count giorni attivi';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count giorno attivo';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Settimana precedente';
@@ -1877,6 +1969,13 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Non hai letto ieri.';
+
+  @override
+  String get notifBreakEndingTitle => 'La tua pausa finisce oggi';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Domani si riprende a leggere — la tua serie ti aspetta.';
 
   @override
   String get easterEggHeartBody => 'Anch\'io ti voglio bene :)';

@@ -110,6 +110,12 @@ enum NoteCreatedFilter { all, today, thisWeek, thisMonth, earlier }
   }
 }
 
+/// Day key (yyyy-MM-dd) for [d], matching what the streak/break tables store.
+String dayKeyOf(DateTime d) =>
+    '${d.year.toString().padLeft(4, '0')}-'
+    '${d.month.toString().padLeft(2, '0')}-'
+    '${d.day.toString().padLeft(2, '0')}';
+
 /// The calendar day before [now], at local midnight. Built with the
 /// DateTime constructor's component normalisation (day 0 rolls back into
 /// the previous month) rather than by subtracting 24 hours, which across a
@@ -215,6 +221,61 @@ int? nextStreakCount({
   return gap == 1 ? currentCount + 1 : 1;
 }
 
+/// A planned break from daily reading. Tiers differ in length, and each has
+/// a yearly usage cap (the longer the break, the fewer times per year), precaution to preserve the reading habit
+enum BreakTier {
+  mini(1, 12),
+  small(3, 6),
+  medium(7, 3),
+  big(14, 1);
+
+  const BreakTier(this.durationDays, this.yearlyCap);
+  final int durationDays;
+  final int yearlyCap;
+}
+
+/// One row of the breaks table: a break of [tier] covering [startDay]..[endDay] inclusive (yyyy-MM-dd day keys)
+class Break {
+  const Break({
+    required this.id,
+    required this.tier,
+    required this.startDay,
+    required this.endDay,
+    this.reason = '',
+  });
+
+  final int id;
+  final BreakTier tier;
+  final String startDay;
+  final String endDay;
+  final String reason;
+
+  bool covers(String dayKey) =>
+      dayKey.compareTo(startDay) >= 0 && dayKey.compareTo(endDay) <= 0;
+}
+
+/// whether [dayKey] (yyyy-MM-dd) falls inside any of [breaks]
+bool isDayInBreaks(Iterable<Break> breaks, String dayKey) =>
+    breaks.any((Break b) => b.covers(dayKey));
+
+/// After the latest break ends there's a cooldown so breaks can't be chained and abused. Not reading for a while can easily make the habit dissapear
+DateTime? nextBreakAllowedOn(Iterable<Break> breaks, DateTime today) {
+  Break? last;
+  for (final Break b in breaks) {
+    if (last == null || b.endDay.compareTo(last.endDay) > 0) {
+      last = b;
+    }
+  }
+  if (last == null) {
+    return null;
+  }
+  final DateTime end = DateTime.parse(last.endDay);
+  final int cooldown = last.tier.durationDays < 7 ? 7 : last.tier.durationDays;
+  final DateTime allowed = DateTime(end.year, end.month, end.day + cooldown);
+  final DateTime day = DateTime(today.year, today.month, today.day);
+  return allowed.isAfter(day) ? allowed : null;
+}
+
 class LocalDbService {
   LocalDbService._internal();
 
@@ -255,12 +316,13 @@ class LocalDbService {
     'frozen_days',
     'achievements',
     'easter_eggs',
+    'breaks',
     'settings',
   ];
 
   /// The schema version a backup file records, so a later app version can
   /// tell how to read it.
-  static const int schemaVersion = 8;
+  static const int schemaVersion = 9;
 
   /// Raw rows of [table], for the backup serializer. Deliberately not a
   /// general-purpose query hatch: it accepts only the known backup tables,
@@ -384,11 +446,21 @@ class LocalDbService {
           )
         ''';
 
+  static const String _createBreaksTableSql = '''
+          CREATE TABLE breaks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tier TEXT NOT NULL,
+            startDay TEXT NOT NULL,
+            endDay TEXT NOT NULL,
+            reason TEXT NOT NULL DEFAULT ''
+          )
+        ''';
+
   Future<Database> _openDatabase() async {
     final String dbPath = join(await getDatabasesPath(), _databaseName);
     final Database db = await openDatabase(
       dbPath,
-      version: 8,
+      version: 9,
       onCreate: (Database database, int version) async {
         await database.execute('''
           CREATE TABLE readings (
@@ -406,6 +478,7 @@ class LocalDbService {
         await database.execute(_createFrozenDaysTableSql);
         await database.execute(_createAchievementsTableSql);
         await database.execute(_createEasterEggsTableSql);
+        await database.execute(_createBreaksTableSql);
 
         await database.execute('''
           CREATE TABLE settings (
@@ -479,6 +552,9 @@ class LocalDbService {
         if (oldVersion < 8) {
           await database.execute('ALTER TABLE notes ADD COLUMN position REAL');
           await _backfillNotePositions(database);
+        }
+        if (oldVersion < 9) {
+          await database.execute(_createBreaksTableSql);
         }
       },
     );
@@ -644,47 +720,6 @@ class LocalDbService {
     return rows
         .map((Map<String, Object?> r) => '${r['book']}|${r['chapter']}')
         .toSet();
-  }
-
-  /// Latest reading time across every book/chapter (null if none yet).
-  Future<DateTime?> getLastReadingAt() async {
-    final Database db = await _getDb();
-    final List<Map<String, Object?>> rows = await db.query(
-      'readings',
-      columns: const <String>['readAt'],
-      orderBy: 'readAt DESC',
-      limit: 1,
-    );
-    if (rows.isEmpty) {
-      return null;
-    }
-    final Object? raw = rows.first['readAt'];
-    return raw is String ? DateTime.parse(raw) : null;
-  }
-
-  Future<DateTime?> getLastReadAt({
-    required String book,
-    required int chapter,
-  }) async {
-    final Database db = await _getDb();
-    final List<Map<String, Object?>> rows = await db.query(
-      'readings',
-      columns: const ['readAt'],
-      where: 'book = ? AND chapter = ?',
-      whereArgs: <Object>[book, chapter],
-      orderBy: 'readAt DESC',
-      limit: 1,
-    );
-
-    if (rows.isEmpty) {
-      return null;
-    }
-
-    final Object? raw = rows.first['readAt'];
-    if (raw is! String) {
-      throw const FormatException('Invalid readAt value in local database.');
-    }
-    return DateTime.parse(raw);
   }
 
   Future<int> getTotalReadings() async {
@@ -1448,6 +1483,12 @@ class LocalDbService {
   // is left to cover a gap, the streak resets to 0. Freezes refill to
   // [_monthlyFreezes] at the start of each calendar month; extra freezes can be
   // earned (e.g. a review quiz) via [addStreakFreeze].
+  // PLEASE NOTE - This comment section has been written by my IA agent, I'll keep it until this file gets refactored. Some other files have similar chunks of not very necessary comments.
+  // Activity = a chapter marked read OR a quiz completed, aggregated per day.
+  // Each missed day between two active days consumes one freeze; when no freeze
+  // is left to cover a gap, the streak resets to 0. Freezes refill to
+  // [_monthlyFreezes] at the start of each calendar month; extra freezes can be
+  // earned (e.g. a review quiz) via [addStreakFreeze]
   // ---------------------------------------------------------------------------
 
   static const int _monthlyFreezes = 4;
@@ -1528,20 +1569,29 @@ class LocalDbService {
     }
 
     final int missed = gap - 1; // full days with no activity before today
+    // Days inside a break are excused without spending a freeze.
+    final List<Break> breaks = (await db.query(
+      'breaks',
+    )).map(_breakFromRow).toList();
+    final List<String> freezeCovered = <String>[];
+    for (int i = 1; i <= missed; i++) {
+      // not +24h: across a DST change that can land on the wrong day
+      final String key = _dayKey(
+        DateTime(chainDate.year, chainDate.month, chainDate.day + i),
+      );
+      if (!isDayInBreaks(breaks, key)) {
+        freezeCovered.add(key);
+      }
+    }
     int freezes =
         int.tryParse(await _getSetting(db, 'streak_freezes') ?? '0') ?? 0;
-    if (freezes >= missed) {
-      freezes -= missed;
+    if (freezes >= freezeCovered.length) {
+      freezes -= freezeCovered.length;
       await _setSetting(db, 'streak_freezes', freezes.toString());
       // Chain is now protected through yesterday.
-      await _setSetting(
-        db,
-        'streak_chain',
-        _dayKey(today.subtract(const Duration(days: 1))),
-      );
+      await _setSetting(db, 'streak_chain', _dayKey(yesterdayOf(today)));
       // Log each covered day so the calendar can show it as "frozen".
-      for (int i = 1; i <= missed; i++) {
-        final String key = _dayKey(chainDate.add(Duration(days: i)));
+      for (final String key in freezeCovered) {
         await db.insert('frozen_days', <String, Object>{
           'day': key,
         }, conflictAlgorithm: ConflictAlgorithm.ignore);
@@ -1578,6 +1628,105 @@ class LocalDbService {
     await _setSetting(db, 'streak_count', count.toString());
     await _setSetting(db, 'streak_chain', _dayKey(today));
     await _setSetting(db, 'streak_lost', '0');
+  }
+
+  Break _breakFromRow(Map<String, Object?> row) => Break(
+    id: row['id'] as int,
+    tier: BreakTier.values.byName(row['tier'] as String),
+    startDay: row['startDay'] as String,
+    endDay: row['endDay'] as String,
+    reason: row['reason'] as String? ?? '',
+  );
+
+  Future<List<Break>> getAllBreaks() async {
+    final Database db = await _getDb();
+    final List<Map<String, Object?>> rows = await db.query(
+      'breaks',
+      orderBy: 'startDay DESC',
+    );
+    return rows.map(_breakFromRow).toList(growable: false);
+  }
+
+  Future<Break?> getActiveBreak() async {
+    final Database db = await _getDb();
+    final String today = _dayKey(_dateOnly(DateTime.now()));
+    final List<Map<String, Object?>> rows = await db.query(
+      'breaks',
+      where: 'endDay >= ?',
+      whereArgs: <Object>[today],
+      orderBy: 'endDay DESC',
+      limit: 1,
+    );
+    return rows.isEmpty ? null : _breakFromRow(rows.first);
+  }
+
+  /// How many times [tier] was used in the current calendar year.
+  Future<int> breakUsageThisYear(BreakTier tier) async {
+    final Database db = await _getDb();
+    final String year = DateTime.now().year.toString();
+    final List<Map<String, Object?>> rows = await db.rawQuery(
+      'SELECT COUNT(*) AS c FROM breaks WHERE tier = ? AND substr(startDay, 1, 4) = ?',
+      <Object>[tier.name, year],
+    );
+    return (rows.first['c'] as int?) ?? 0;
+  }
+
+  /// Testing affordance: `flutter run --dart-define=DISABLE_BREAK_LIMITS=true`
+  /// lifts the yearly caps and the cooldown so breaks can be exercised
+  /// repeatedly without wiping data. Absent in normal, test and release
+  /// builds — behavior there is untouched.
+  static const bool _breakLimitsDisabled = bool.fromEnvironment(
+    'DISABLE_BREAK_LIMITS',
+  );
+
+  /// Earliest day a new break may start (null = today), applying the
+  /// cooldown after the latest break.
+  Future<DateTime?> nextBreakAllowedDay() async {
+    if (_breakLimitsDisabled) {
+      return null;
+    }
+    return nextBreakAllowedOn(await getAllBreaks(), DateTime.now());
+  }
+
+  Future<bool> canStartBreak(BreakTier tier) async {
+    if (await getActiveBreak() != null) {
+      return false;
+    }
+    if (await nextBreakAllowedDay() != null) {
+      return false;
+    }
+    return _breakLimitsDisabled ||
+        (await breakUsageThisYear(tier)) < tier.yearlyCap;
+  }
+
+  /// Starts a [tier] break today, covering today..today+duration-1.
+  /// [reason] is the reader's optional free-text note about why.
+  Future<void> startBreak(BreakTier tier, {String reason = ''}) async {
+    final Database db = await _getDb();
+    final DateTime today = _dateOnly(DateTime.now());
+    await db.insert('breaks', <String, Object>{
+      'tier': tier.name,
+      'startDay': _dayKey(today),
+      'endDay': _dayKey(
+        DateTime(today.year, today.month, today.day + tier.durationDays - 1),
+      ),
+      'reason': reason.trim(),
+    });
+  }
+
+  /// Ends the active break early. Past days stay excused; the row is kept (with endDay moved back)
+  Future<void> cancelActiveBreak() async {
+    final Database db = await _getDb();
+    final Break? active = await getActiveBreak();
+    if (active == null) {
+      return;
+    }
+    await db.update(
+      'breaks',
+      <String, Object>{'endDay': _dayKey(yesterdayOf(DateTime.now()))},
+      where: 'id = ?',
+      whereArgs: <Object>[active.id],
+    );
   }
 
   /// Calendar days (yyyy-MM-dd) covered by a streak freeze rather than by

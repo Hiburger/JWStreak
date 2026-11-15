@@ -196,6 +196,66 @@
   "streakInfoRow3Text": "À court d'allumettes ? Réussis un quiz de révision (mélange de tes lectures) pour en récupérer une.",
   "streakInfoRow4Title": "On te préviendra",
   "streakInfoRow4Text": "Si ta série est en danger, une alerte s’affiche et un rappel du soir peut te le rappeler.",
+  "streakInfoRow5Title": "Besoin d'une pause ?",
+  "streakInfoRow5Text": "Lance une pause et les jours manqués ne compteront pas. Chaque taille est limitée par an, et un délai s'écoule entre deux pauses. Sers-t'en avec sagesse pour ne pas perdre l'habitude !",
+  "streakBreakTake": "Prendre une pause",
+  "streakBreakSheetTitle": "Prendre une pause",
+  "streakBreakSheetBody": "Pendant une pause, les jours manqués ne comptent pas et aucune notification n'est envoyée. Lire compte toujours si tu le fais.",
+  "streakBreakMini": "Mini",
+  "streakBreakSmall": "Petite",
+  "streakBreakMedium": "Moyenne",
+  "streakBreakBig": "Grande",
+  "streakBreakTierDays": "{days, plural, =1{{days} jour} other{{days} jours}}",
+  "@streakBreakTierDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakLeft": "Reste {left} cette année",
+  "@streakBreakLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakDaysLeft": "{days, plural, =1{{days} jour restant} other{{days} jours restants}}",
+  "@streakBreakDaysLeft": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakBreakExhausted": "Plus de pauses de cette taille cette année",
+  "streakBreakActive": "En pause jusqu'au {date}",
+  "@streakBreakActive": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakBreakEnd": "Terminer la pause",
+  "streakBreakEndConfirmTitle": "Terminer la pause maintenant ?",
+  "streakBreakEndConfirmBody": "Les jours déjà passés restent protégés. La pause compte quand même dans la limite de cette année.",
+  "streakBreakWhileActive": "Une pause est déjà en cours",
+  "streakBreakReasonHint": "Raison de la pause (facultatif)",
+  "streakBreakActiveTitle": "En pause",
+  "streakBreakLogButton": "Historique des pauses",
+  "streakBreakLogTitle": "Historique des pauses",
+  "streakBreakLogEmpty": "Aucune pause pour l'instant.",
+  "streakBreakLogEndedEarly": "Terminée en avance",
+  "streakBreakCooldown": "Prochaine pause disponible le {date}",
+  "@streakBreakCooldown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTitle": "Paramètres",
   "settingsCatPersonalization": "Personnalisation",
   "settingsCatPersonalizationDesc": "Style, luminosité, langue",
@@ -391,7 +451,6 @@
   "homeStatReadingSingular": "lecture",
   "homeStatStarsPlural": "étoiles",
   "homeStatStarSingular": "étoile",
-  "homeLastReadAt": "Dernière lecture : {date}",
   "homeBibleBrowsed": "Bible parcourue",
   "homeDailyTextTitle": "L'écriture du jour",
   "homeDailyTextSubtitle": "La pensée du jour",
@@ -404,8 +463,6 @@
   "homeQuickFlashcardsSubtitle": "Entraîne ta mémoire",
   "homeQuickSoonTag": "Bientôt",
   "homeRecentActivity": "Activité récente",
-  "homeActiveDaysPlural": "{count} jours actifs",
-  "homeActiveDaysSingular": "{count} jour actif",
   "homeCalendarPreviousWeek": "Semaine précédente",
   "homeCalendarNextWeek": "Semaine suivante",
   "homeWeekdayMon": "L",
@@ -559,6 +616,8 @@
   "notifMissedYesterdayTitle": "Jour manqué ?",
   "notifMissedYesterdayBody": "Tu n'as pas lu hier — lis un chapitre aujourd'hui pour repartir.",
   "notifMissedYesterdayNote": "Tu as manqué hier.",
+  "notifBreakEndingTitle": "Ta pause se termine aujourd'hui",
+  "notifBreakEndingBody": "La lecture reprend demain — ta série t'attend.",
   "easterEggHeartBody": "Moi aussi je t'aime :)",
   "easterEggVersionTitle": "Sept fois, quand même",
   "easterEggVersionBody": "Pas de mode secret ici, désolé. Juste un merci d'avoir cherché aussi loin. Cette application a été écrite un soir après l'autre, et ça fait plaisir de savoir que quelqu'un fouille.",

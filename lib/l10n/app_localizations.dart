@@ -1288,6 +1288,156 @@ abstract class AppLocalizations {
   /// **'If your streak is at risk, a warning appears and an evening reminder can nudge you.'**
   String get streakInfoRow4Text;
 
+  /// No description provided for @streakInfoRow5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Need a pause?'**
+  String get streakInfoRow5Title;
+
+  /// No description provided for @streakInfoRow5Text.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a break and missed days won\'t count. Each size is limited per year, and a cooldown runs between breaks. Use them responsibly so you don\'t lose the habit!'**
+  String get streakInfoRow5Text;
+
+  /// No description provided for @streakBreakTake.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a break'**
+  String get streakBreakTake;
+
+  /// No description provided for @streakBreakSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a break'**
+  String get streakBreakSheetTitle;
+
+  /// No description provided for @streakBreakSheetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'During a break, missed days don\'t count and no notifications are sent. Reading still counts if you do.'**
+  String get streakBreakSheetBody;
+
+  /// No description provided for @streakBreakMini.
+  ///
+  /// In en, this message translates to:
+  /// **'Mini'**
+  String get streakBreakMini;
+
+  /// No description provided for @streakBreakSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get streakBreakSmall;
+
+  /// No description provided for @streakBreakMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get streakBreakMedium;
+
+  /// No description provided for @streakBreakBig.
+  ///
+  /// In en, this message translates to:
+  /// **'Big'**
+  String get streakBreakBig;
+
+  /// No description provided for @streakBreakTierDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{{days} day} other{{days} days}}'**
+  String streakBreakTierDays(int days);
+
+  /// No description provided for @streakBreakLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{left, plural, =1{{left} left this year} other{{left} left this year}}'**
+  String streakBreakLeft(int left);
+
+  /// No description provided for @streakBreakDaysLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{{days} day left} other{{days} days left}}'**
+  String streakBreakDaysLeft(int days);
+
+  /// No description provided for @streakBreakExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'No breaks of this size left this year'**
+  String get streakBreakExhausted;
+
+  /// No description provided for @streakBreakActive.
+  ///
+  /// In en, this message translates to:
+  /// **'On break until {date}'**
+  String streakBreakActive(String date);
+
+  /// No description provided for @streakBreakEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End break now'**
+  String get streakBreakEnd;
+
+  /// No description provided for @streakBreakEndConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'End the break now?'**
+  String get streakBreakEndConfirmTitle;
+
+  /// No description provided for @streakBreakEndConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Days already passed stay protected. The break still counts toward this year\'s limit.'**
+  String get streakBreakEndConfirmBody;
+
+  /// No description provided for @streakBreakWhileActive.
+  ///
+  /// In en, this message translates to:
+  /// **'A break is already in progress'**
+  String get streakBreakWhileActive;
+
+  /// No description provided for @streakBreakReasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for the break (optional)'**
+  String get streakBreakReasonHint;
+
+  /// No description provided for @streakBreakActiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'On break'**
+  String get streakBreakActiveTitle;
+
+  /// No description provided for @streakBreakLogButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Break history'**
+  String get streakBreakLogButton;
+
+  /// No description provided for @streakBreakLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Break history'**
+  String get streakBreakLogTitle;
+
+  /// No description provided for @streakBreakLogEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No breaks yet.'**
+  String get streakBreakLogEmpty;
+
+  /// No description provided for @streakBreakLogEndedEarly.
+  ///
+  /// In en, this message translates to:
+  /// **'Ended early'**
+  String get streakBreakLogEndedEarly;
+
+  /// No description provided for @streakBreakCooldown.
+  ///
+  /// In en, this message translates to:
+  /// **'Next break available on {date}'**
+  String streakBreakCooldown(String date);
+
   /// No description provided for @settingsTitle.
   ///
   /// In en, this message translates to:
@@ -2416,12 +2566,6 @@ abstract class AppLocalizations {
   /// **'star'**
   String get homeStatStarSingular;
 
-  /// No description provided for @homeLastReadAt.
-  ///
-  /// In en, this message translates to:
-  /// **'Last read: {date}'**
-  String homeLastReadAt(String date);
-
   /// No description provided for @homeBibleBrowsed.
   ///
   /// In en, this message translates to:
@@ -2493,18 +2637,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent activity'**
   String get homeRecentActivity;
-
-  /// No description provided for @homeActiveDaysPlural.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} active days'**
-  String homeActiveDaysPlural(int count);
-
-  /// No description provided for @homeActiveDaysSingular.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} active day'**
-  String homeActiveDaysSingular(int count);
 
   /// No description provided for @homeCalendarPreviousWeek.
   ///
@@ -3428,6 +3560,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You missed yesterday.'**
   String get notifMissedYesterdayNote;
+
+  /// No description provided for @notifBreakEndingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your break ends today'**
+  String get notifBreakEndingTitle;
+
+  /// No description provided for @notifBreakEndingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow reading resumes — your streak is waiting.'**
+  String get notifBreakEndingBody;
 
   /// No description provided for @easterEggHeartBody.
   ///

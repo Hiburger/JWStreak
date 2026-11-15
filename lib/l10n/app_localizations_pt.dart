@@ -640,6 +640,107 @@ class AppLocalizationsPt extends AppLocalizations {
       'Se sua sequência estiver em risco, um aviso aparece e um lembrete à noite pode te dar um empurrãozinho.';
 
   @override
+  String get streakInfoRow5Title => 'Precisas de uma pausa?';
+
+  @override
+  String get streakInfoRow5Text =>
+      'Inicia uma pausa e os dias em falta não contam. Cada tamanho tem um limite anual, e entre duas pausas corre um tempo de espera: usa-as com responsabilidade para não perderes o hábito!';
+
+  @override
+  String get streakBreakTake => 'Fazer uma pausa';
+
+  @override
+  String get streakBreakSheetTitle => 'Fazer uma pausa';
+
+  @override
+  String get streakBreakSheetBody =>
+      'Durante uma pausa, os dias em falta não contam e não são enviadas notificações. Ler continua a contar se leres.';
+
+  @override
+  String get streakBreakMini => 'Mini';
+
+  @override
+  String get streakBreakSmall => 'Pequena';
+
+  @override
+  String get streakBreakMedium => 'Média';
+
+  @override
+  String get streakBreakBig => 'Grande';
+
+  @override
+  String streakBreakTierDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dias',
+      one: '$days dia',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String streakBreakLeft(int left) {
+    return 'Restam $left este ano';
+  }
+
+  @override
+  String streakBreakDaysLeft(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days dias restantes',
+      one: '$days dia restante',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get streakBreakExhausted =>
+      'Não há mais pausas deste tamanho este ano';
+
+  @override
+  String streakBreakActive(String date) {
+    return 'Em pausa até $date';
+  }
+
+  @override
+  String get streakBreakEnd => 'Terminar a pausa agora';
+
+  @override
+  String get streakBreakEndConfirmTitle => 'Terminar a pausa agora?';
+
+  @override
+  String get streakBreakEndConfirmBody =>
+      'Os dias já passados continuam protegidos. A pausa continua a contar para o limite deste ano.';
+
+  @override
+  String get streakBreakWhileActive => 'Já há uma pausa em curso';
+
+  @override
+  String get streakBreakReasonHint => 'Motivo da pausa (opcional)';
+
+  @override
+  String get streakBreakActiveTitle => 'Em pausa';
+
+  @override
+  String get streakBreakLogButton => 'Histórico de pausas';
+
+  @override
+  String get streakBreakLogTitle => 'Histórico de pausas';
+
+  @override
+  String get streakBreakLogEmpty => 'Ainda sem pausas.';
+
+  @override
+  String get streakBreakLogEndedEarly => 'Terminada antes';
+
+  @override
+  String streakBreakCooldown(String date) {
+    return 'Próxima pausa disponível em $date';
+  }
+
+  @override
   String get settingsTitle => 'Configurações';
 
   @override
@@ -1299,11 +1400,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeStatStarSingular => 'estrela';
 
   @override
-  String homeLastReadAt(String date) {
-    return 'Última leitura: $date';
-  }
-
-  @override
   String get homeBibleBrowsed => 'Bíblia explorada';
 
   @override
@@ -1338,16 +1434,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get homeRecentActivity => 'Atividade recente';
-
-  @override
-  String homeActiveDaysPlural(int count) {
-    return '$count dias ativos';
-  }
-
-  @override
-  String homeActiveDaysSingular(int count) {
-    return '$count dia ativo';
-  }
 
   @override
   String get homeCalendarPreviousWeek => 'Semana anterior';
@@ -1877,6 +1963,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get notifMissedYesterdayNote => 'Faltou ler ontem.';
+
+  @override
+  String get notifBreakEndingTitle => 'A tua pausa acaba hoje';
+
+  @override
+  String get notifBreakEndingBody =>
+      'Amanhã voltas a ler — a tua sequência espera por ti.';
 
   @override
   String get easterEggHeartBody => 'Eu também te amo :)';

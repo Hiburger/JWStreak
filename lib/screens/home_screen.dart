@@ -40,6 +40,8 @@ import 'reminder_setup_screen.dart';
 import 'settings_screen.dart';
 import 'streak_detail_screen.dart';
 
+// holy imports T_T
+
 final RouteObserver<PageRoute<dynamic>> kHomeRouteObserver =
     RouteObserver<PageRoute<dynamic>>();
 
@@ -81,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen>
   final ReadingSessionService _readingSession = ReadingSessionService();
 
   List<Reminder> _reminders = const <Reminder>[];
-  DateTime? _lastReadAt;
   StreakState _streakState = const StreakState(
     count: 0,
     freezes: 0,
@@ -92,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen>
   int _totalReadings = 0;
   List<DateTime> _recentReadingDays = const <DateTime>[];
   Set<String> _frozenDays = const <String>{};
+  Break? _activeBreak;
   Set<String> _readKeys = const <String>{};
 
   int _statsEntranceToken = 0;
@@ -310,11 +312,10 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Future<void> _refreshDashboard() async {
-    // These 11 reads don't depend on each other — was one round-trip after
+    // These reads don't depend on each other — was one round-trip after
     // another, now all in flight at once.
     final List<dynamic> fetched = await Future.wait<dynamic>(<Future<dynamic>>[
       _dbService.getReminders(),
-      _dbService.getLastReadingAt(),
       _dbService.getStreakState(),
       _dbService.getTotalReadings(),
       // Enough to fill the six-week grid on the streak detail screen —
@@ -327,22 +328,25 @@ class _HomeScreenState extends State<HomeScreen>
       _dbService.getFrozenDays(),
       _dbService.getReadingPlan(),
       _dbService.getPlanStartKey(),
+      _dbService.getActiveBreak(),
+      _dbService.getAllBreaks(),
     ]);
     final List<Reminder> reminders = fetched[0] as List<Reminder>;
-    final DateTime? lastReadAt = fetched[1] as DateTime?;
-    final StreakState streakState = fetched[2] as StreakState;
-    final int totalReadings = fetched[3] as int;
-    final List<DateTime> recentReadingDays = fetched[4] as List<DateTime>;
-    final Set<String> readKeys = fetched[5] as Set<String>;
-    final ReadingPlan readingPlan = fetched[9] as ReadingPlan;
-    final String? planStartKey = fetched[10] as String?;
-    final Set<String> completedQuiz = fetched[6] as Set<String>;
-    final Map<String, int> starsByBook = fetched[7] as Map<String, int>;
+    final StreakState streakState = fetched[1] as StreakState;
+    final int totalReadings = fetched[2] as int;
+    final List<DateTime> recentReadingDays = fetched[3] as List<DateTime>;
+    final Set<String> readKeys = fetched[4] as Set<String>;
+    final ReadingPlan readingPlan = fetched[8] as ReadingPlan;
+    final String? planStartKey = fetched[9] as String?;
+    final Set<String> completedQuiz = fetched[5] as Set<String>;
+    final Map<String, int> starsByBook = fetched[6] as Map<String, int>;
     final int totalStars = starsByBook.values.fold<int>(
       0,
       (int a, int b) => a + b,
     );
-    final Set<String> frozenDays = fetched[8] as Set<String>;
+    final Set<String> frozenDays = fetched[7] as Set<String>;
+    final Break? activeBreak = fetched[10] as Break?;
+    final List<Break> allBreaks = fetched[11] as List<Break>;
     final AchievementStats achievementStats = await _dbService
         .getAchievementStats(
           readKeys: readKeys,
@@ -373,24 +377,39 @@ class _HomeScreenState extends State<HomeScreen>
     // Read from context before the await, so the gap can't invalidate it.
     final AppLocalizations notifL10n = AppLocalizations.of(context)!;
     await _notificationService.refreshTimeZone();
+    // A day inside a break is excused, not missed.
     final DateTime yesterday = yesterdayOf(DateTime.now());
-    final bool missedYesterday = dayWasMissed(recentReadingDays, yesterday);
+    final bool missedYesterday =
+        dayWasMissed(recentReadingDays, yesterday) &&
+        !isDayInBreaks(allBreaks, dayKeyOf(yesterday));
 
-    await _notificationService.cancelAllReminders();
-    for (final Reminder reminder in reminders) {
-      await _notificationService.scheduleReminder(
-        id: reminder.id,
-        time: TimeOfDay(hour: reminder.hour, minute: reminder.minute),
-        title: notifL10n.notifReminderTitle,
-        // After a missed day the reminder also says so.
-        body: missedYesterday
-            ? '${notifL10n.notifReminderBody} ${notifL10n.notifMissedYesterdayNote}'
-            : notifL10n.notifReminderBody,
-        // Already read or quizzed today: today's remaining reminders would
-        // be nagging about something already done, so the first firing moves
-        // to tomorrow. The daily repeat is untouched.
-        skipToday: streakState.activeToday,
+    if (activeBreak != null) {
+      // On a break: no reminders, no nudges — except one on the last break
+      // day inviting the reader back. Everything else resumes on the next
+      // refresh after the break ends.
+      await _notificationService.cancelAllReminders();
+      await _notificationService.cancelStreakRiskCheck();
+      await _notificationService.scheduleBreakEndingNudge(
+        endDay: DateTime.parse(activeBreak.endDay),
+        title: notifL10n.notifBreakEndingTitle,
+        body: notifL10n.notifBreakEndingBody,
       );
+    } else {
+      await _notificationService.cancelBreakEndingNudge();
+      await _notificationService.cancelAllReminders();
+      for (final Reminder reminder in reminders) {
+        await _notificationService.scheduleReminder(
+          id: reminder.id,
+          time: TimeOfDay(hour: reminder.hour, minute: reminder.minute),
+          title: notifL10n.notifReminderTitle,
+          // After a missed day the reminder also says so !
+          body: missedYesterday
+              ? '${notifL10n.notifReminderBody} ${notifL10n.notifMissedYesterdayNote}'
+              : notifL10n.notifReminderBody,
+          // if you already read today, no need for a reminder again
+          skipToday: streakState.activeToday,
+        );
+      }
     }
 
     // Evening nudge whenever today is still empty; cancelled the moment the
@@ -398,7 +417,7 @@ class _HomeScreenState extends State<HomeScreen>
     // the one person who most needed the nudge — someone at zero, who hasn't
     // started — was the only one who never got it. The wording differs
     // because "your streak is at risk" is meaningless with no streak to lose.
-    if (!streakState.activeToday) {
+    if (activeBreak == null && !streakState.activeToday) {
       final bool hasStreak = streakState.count > 0;
       if (reminders.isEmpty && missedYesterday) {
         // No reminders to carry the message, so the evening nudge says it
@@ -427,8 +446,8 @@ class _HomeScreenState extends State<HomeScreen>
     _scheduleRiskCardRefresh();
     setState(() {
       _reminders = reminders;
-      _lastReadAt = lastReadAt;
       _streakState = streakState;
+      _activeBreak = activeBreak;
       _totalReadings = totalReadings;
       _recentReadingDays = recentReadingDays;
       _frozenDays = frozenDays;
@@ -764,14 +783,15 @@ class _HomeScreenState extends State<HomeScreen>
     await Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (_) => StreakDetailScreen(
+          dbService: _dbService,
           streak: _streak,
           freezes: _streakState.freezes,
           recentReadingDays: _recentReadingDays,
           frozenDays: _frozenDays,
-          lastReadAt: _lastReadAt,
         ),
       ),
     );
+    await _refreshDashboard();
   }
 
   Future<void> _openNotesLibrary() async {
@@ -841,11 +861,13 @@ class _HomeScreenState extends State<HomeScreen>
     final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     final bool readToday = _streakState.activeToday;
-    final bool streakAtRisk = shouldWarnStreakAtRisk(
-      streak: _streak,
-      activeToday: _streakState.activeToday,
-      now: DateTime.now(),
-    );
+    final bool streakAtRisk =
+        _activeBreak == null &&
+        shouldWarnStreakAtRisk(
+          streak: _streak,
+          activeToday: _streakState.activeToday,
+          now: DateTime.now(),
+        );
     final String reminderLabel = _reminders.isEmpty
         ? l10n.homeReminderConfigure
         : _reminders.length == 1
@@ -903,6 +925,8 @@ class _HomeScreenState extends State<HomeScreen>
               readToday: readToday,
               reminderLabel: reminderLabel,
               onConfigureReminder: _configureReminder,
+              activeBreak: _activeBreak,
+              onOpenDetail: _openStreakDetail,
             ),
             if (streakAtRisk) ...<Widget>[
               const SizedBox(height: 12),
@@ -1138,6 +1162,8 @@ class _StreakHero extends StatelessWidget {
     required this.readToday,
     required this.reminderLabel,
     required this.onConfigureReminder,
+    this.activeBreak,
+    this.onOpenDetail,
   });
 
   final int streak;
@@ -1145,6 +1171,10 @@ class _StreakHero extends StatelessWidget {
   final bool readToday;
   final String reminderLabel;
   final VoidCallback onConfigureReminder;
+  final Break? activeBreak;
+
+  /// The break and matches pills open the streak page — both live there.
+  final VoidCallback? onOpenDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -1216,16 +1246,22 @@ class _StreakHero extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Row(
+                    // home top banner UI clutter limits
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
                       children: <Widget>[
-                        // Flexible rather than a fixed size: "To read today"
-                        // is long enough that on a narrow phone it plus the
-                        // freeze pill next to it can overflow the card's
-                        // width — this lets the status pill's own text
-                        // ellipsize instead.
-                        Flexible(child: _StatusPill(readToday: readToday)),
-                        const SizedBox(width: 8),
-                        _FreezePill(freezes: freezes),
+                        if (activeBreak != null)
+                          GestureDetector(
+                            onTap: onOpenDetail,
+                            child: _BreakPill(activeBreak: activeBreak!),
+                          )
+                        else
+                          _StatusPill(readToday: readToday),
+                        GestureDetector(
+                          onTap: onOpenDetail,
+                          child: _FreezePill(freezes: freezes),
+                        ),
                       ],
                     ),
                   ],
@@ -1299,6 +1335,54 @@ class _FreezePill extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             '$freezes',
+            style: TextStyle(
+              color: cs.onPrimaryContainer,
+              fontWeight: FontWeight.w700,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// On-break pill in the home hero
+class _BreakPill extends StatelessWidget {
+  const _BreakPill({required this.activeBreak});
+
+  final Break activeBreak;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final DateTime end = DateTime.parse(activeBreak.endDay);
+    final DateTime today = DateTime.now();
+    final int daysLeft =
+        DateTime(
+          end.year,
+          end.month,
+          end.day,
+        ).difference(DateTime(today.year, today.month, today.day)).inDays +
+        1;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: cs.onPrimaryContainer.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(
+            Icons.pause_circle_outline_rounded,
+            size: 16,
+            color: cs.onPrimaryContainer,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            l10n.streakBreakDaysLeft(daysLeft < 0 ? 0 : daysLeft),
             style: TextStyle(
               color: cs.onPrimaryContainer,
               fontWeight: FontWeight.w700,

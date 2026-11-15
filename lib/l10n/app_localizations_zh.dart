@@ -1925,4 +1925,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get commonCancel => '取消';
+
+  @override
+  String streakBreakLogRange(String start, String end) {
+    return '$start至$end';
+  }
 }

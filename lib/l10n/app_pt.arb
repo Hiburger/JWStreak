@@ -636,5 +636,16 @@
   "freezeEarnedBody": "Você completou 3 novos questionários. Um fósforo mantém sua sequência acesa se você perder um dia.",
   "freezeEarnedButton": "Ótimo!",
   "commonOk": "OK",
-  "commonCancel": "Cancelar"
+  "commonCancel": "Cancelar",
+  "streakBreakLogRange": "{start} a {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

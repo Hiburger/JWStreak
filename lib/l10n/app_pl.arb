@@ -636,5 +636,16 @@
   "freezeEarnedBody": "Ukończyłeś 3 nowe quizy. Zapałka podtrzymuje twoją passę, jeśli opuścisz dzień.",
   "freezeEarnedButton": "Super!",
   "commonOk": "OK",
-  "commonCancel": "Anuluj"
+  "commonCancel": "Anuluj",
+  "streakBreakLogRange": "{start} do {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

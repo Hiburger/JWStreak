@@ -79,8 +79,12 @@ class BreakLogScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '${DateFormat('dd/MM/yyyy').format(start)} → '
-                            '${DateFormat('dd/MM/yyyy').format(end)}',
+                            start == end
+                                ? DateFormat('dd/MM/yyyy').format(start)
+                                : l10n.streakBreakLogRange(
+                                    DateFormat('dd/MM/yyyy').format(start),
+                                    DateFormat('dd/MM/yyyy').format(end),
+                                  ),
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: cs.onSurfaceVariant,
                             ),

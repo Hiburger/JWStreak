@@ -2021,4 +2021,9 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get commonCancel => 'Anuluj';
+
+  @override
+  String streakBreakLogRange(String start, String end) {
+    return '$start do $end';
+  }
 }

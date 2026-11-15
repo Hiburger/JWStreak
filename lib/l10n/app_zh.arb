@@ -636,5 +636,16 @@
   "freezeEarnedBody": "你完成了3次新的测验。火柴可以在你错过一天时，让你的连续记录不熄灭。",
   "freezeEarnedButton": "太棒了！",
   "commonOk": "知道了",
-  "commonCancel": "取消"
+  "commonCancel": "取消",
+  "streakBreakLogRange": "{start}至{end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

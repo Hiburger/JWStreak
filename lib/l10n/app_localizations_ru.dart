@@ -2026,4 +2026,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get commonCancel => 'Отмена';
+
+  @override
+  String streakBreakLogRange(String start, String end) {
+    return '$start до $end';
+  }
 }

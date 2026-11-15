@@ -636,5 +636,16 @@
   "freezeEarnedBody": "Has completado 3 cuestionarios nuevos. Un fósforo mantiene encendida tu racha si te saltas un día.",
   "freezeEarnedButton": "¡Genial!",
   "commonOk": "Aceptar",
-  "commonCancel": "Cancelar"
+  "commonCancel": "Cancelar",
+  "streakBreakLogRange": "{start} al {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

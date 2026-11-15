@@ -636,5 +636,16 @@
   "freezeEarnedBody": "Ты прошёл(а) 3 новые викторины. Спичка не даст твоей серии погаснуть, если ты пропустишь день.",
   "freezeEarnedButton": "Здорово!",
   "commonOk": "Понятно",
-  "commonCancel": "Отмена"
+  "commonCancel": "Отмена",
+  "streakBreakLogRange": "{start} до {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

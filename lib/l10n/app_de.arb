@@ -636,5 +636,16 @@
   "freezeEarnedBody": "Du hast 3 neue Quiz abgeschlossen. Ein Streichholz hält deine Serie am Brennen, wenn du einen Tag verpasst.",
   "freezeEarnedButton": "Super!",
   "commonOk": "OK",
-  "commonCancel": "Abbrechen"
+  "commonCancel": "Abbrechen",
+  "streakBreakLogRange": "{start} bis {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

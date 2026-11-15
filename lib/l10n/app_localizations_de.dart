@@ -2042,4 +2042,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get commonCancel => 'Abbrechen';
+
+  @override
+  String streakBreakLogRange(String start, String end) {
+    return '$start bis $end';
+  }
 }

@@ -2031,4 +2031,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get commonCancel => 'Cancelar';
+
+  @override
+  String streakBreakLogRange(String start, String end) {
+    return '$start a $end';
+  }
 }

@@ -959,5 +959,16 @@
   "freezeEarnedBody": "You've completed 3 new quizzes. A match keeps your streak alight if you miss a day.",
   "freezeEarnedButton": "Nice!",
   "commonOk": "OK",
-  "commonCancel": "Cancel"
+  "commonCancel": "Cancel",
+  "streakBreakLogRange": "{start} to {end}",
+  "@streakBreakLogRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
 }

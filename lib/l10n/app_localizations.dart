@@ -3686,6 +3686,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get commonCancel;
+
+  /// No description provided for @streakBreakLogRange.
+  ///
+  /// In en, this message translates to:
+  /// **'{start} to {end}'**
+  String streakBreakLogRange(String start, String end);
 }
 
 class _AppLocalizationsDelegate

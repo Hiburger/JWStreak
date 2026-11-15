@@ -1220,9 +1220,7 @@ class _QuizGridCellState extends State<_QuizGridCell>
         onTap: widget.onTap,
         child: Center(
           child: Icon(
-            widget.done
-                ? Icons.check_rounded
-                : widget.unlocked
+            widget.unlocked || widget.done
                 ? Icons.emoji_events_rounded
                 : Icons.lock_outline,
             size: 18,
@@ -1333,16 +1331,14 @@ class _ChapterCell extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
         child: Center(
-          child: isCovered
-              ? Icon(Icons.check_rounded, color: foreground)
-              : Text(
-                  '$chapter',
-                  style: TextStyle(
-                    color: foreground,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
+          child: Text(
+            '$chapter',
+            style: TextStyle(
+              color: foreground,
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+            ),
+          ),
         ),
       ),
     );

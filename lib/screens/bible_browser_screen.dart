@@ -1072,11 +1072,16 @@ class _CheckpointRow extends StatelessWidget {
                   _MiniStars(stars: result!.stars),
                   const SizedBox(width: 8),
                 ],
-                Icon(
-                  unlocked || done ? Icons.chevron_right : Icons.lock_outline,
-                  color: cs.onSurfaceVariant,
-                  size: 20,
-                ),
+                // The left badge already shows the lock when locked — a
+                // second lock here only duplicated it. The trailing icon is
+                // the "tap to open" affordance, so it only appears when the
+                // row is actionable.
+                if (unlocked || done)
+                  Icon(
+                    Icons.chevron_right,
+                    color: cs.onSurfaceVariant,
+                    size: 20,
+                  ),
               ],
             ),
           ),

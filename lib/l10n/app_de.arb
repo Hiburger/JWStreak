@@ -267,8 +267,6 @@
   "settingsCatDonationsDesc": "JW Streak unterstützen",
   "settingsCatAppIcon": "App-Symbol",
   "settingsCatAppIconDesc": "Wähle dein App-Symbol",
-  "appIconComingSoonTitle": "Bald verfügbar",
-  "appIconComingSoonBody": "Bald kannst du das App-Symbol nach deinen Wünschen ändern — alternative Farben, besondere Designs oder den Klassiker. Dein Startbildschirm, deine Wahl.",
   "appIconSuggestionsTitle": "Schick deine Ideen",
   "appIconSuggestionsBody": "Ich nehme Vorschläge für App-Symbole an. Hast du eines gestaltet, das du hier gern sehen würdest, schick es ein. Die ausgewählten Symbole erscheinen auf dieser Seite, selbstverständlich mit Namensnennung :)",
   "appIconSuggestionsButton": "Schreib mir eine E-Mail",
@@ -651,5 +649,15 @@
   "notesLibraryUnpinTooltip": "Lösen",
   "notesLibraryPinLimit": "Du kannst bis zu 3 Notizen anheften.",
   "notesLibraryFilterPinnedOnly": "Nur angeheftete anzeigen",
-  "notesLibraryNewChip": "Neu"
+  "notesLibraryNewChip": "Neu",
+  "appIconPickTitle": "Wähle ein JWS-Logo",
+  "appIconPickBody": "Wähle das Icon auf deinem Startbildschirm. Beim Wechsel startet die App neu. Mit Updates kommen oft neue Icons dazu.",
+  "appIconSetError": "Icon konnte nicht gewechselt werden: {error}",
+  "@appIconSetError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

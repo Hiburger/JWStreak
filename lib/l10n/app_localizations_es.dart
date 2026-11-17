@@ -779,13 +779,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsCatAppIconDesc => 'Elige el icono de la app';
 
   @override
-  String get appIconComingSoonTitle => 'Próximamente';
-
-  @override
-  String get appIconComingSoonBody =>
-      'Pronto podrás cambiar el icono de la app a tu gusto: colores alternativos, diseños especiales o el clásico. Tu pantalla de inicio, tu elección.';
-
-  @override
   String get appIconSuggestionsTitle => 'Envía tus ideas';
 
   @override
@@ -2049,4 +2042,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get notesLibraryNewChip => 'Nuevo';
+
+  @override
+  String get appIconPickTitle => 'Elige un logo JWS';
+
+  @override
+  String get appIconPickBody =>
+      'Elige el icono que muestra tu pantalla de inicio. Cambiarlo reinicia la app. Se añaden nuevos iconos a menudo con las actualizaciones.';
+
+  @override
+  String appIconSetError(String error) {
+    return 'No se pudo cambiar el icono: $error';
+  }
 }

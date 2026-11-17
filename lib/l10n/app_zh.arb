@@ -267,8 +267,6 @@
   "settingsCatDonationsDesc": "支持 JW Streak",
   "settingsCatAppIcon": "应用图标",
   "settingsCatAppIconDesc": "选择应用图标",
-  "appIconComingSoonTitle": "即将推出",
-  "appIconComingSoonBody": "很快，你就可以随心更换应用图标——备选配色、特别设计或经典款。你的主屏幕，你说了算。",
   "appIconSuggestionsTitle": "分享你的创意",
   "appIconSuggestionsBody": "欢迎大家提供应用图标创意。如果你设计了一个想在这里看到的图标，欢迎发来。被选中的图标会出现在这个页面上，当然会注明作者 :)",
   "appIconSuggestionsButton": "发邮件联系我",
@@ -651,5 +649,15 @@
   "notesLibraryUnpinTooltip": "取消置顶",
   "notesLibraryPinLimit": "最多可以置顶 3 条笔记。",
   "notesLibraryFilterPinnedOnly": "只显示置顶笔记",
-  "notesLibraryNewChip": "新建"
+  "notesLibraryNewChip": "新建",
+  "appIconPickTitle": "选择一个 JWS 标志",
+  "appIconPickBody": "选择主屏幕上显示的图标。更换图标会重启应用。更多图标会随更新陆续加入。",
+  "appIconSetError": "无法切换图标：{error}",
+  "@appIconSetError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

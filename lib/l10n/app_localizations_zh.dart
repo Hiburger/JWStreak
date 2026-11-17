@@ -719,13 +719,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsCatAppIconDesc => '选择应用图标';
 
   @override
-  String get appIconComingSoonTitle => '即将推出';
-
-  @override
-  String get appIconComingSoonBody =>
-      '很快，你就可以随心更换应用图标——备选配色、特别设计或经典款。你的主屏幕，你说了算。';
-
-  @override
   String get appIconSuggestionsTitle => '分享你的创意';
 
   @override
@@ -1942,4 +1935,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notesLibraryNewChip => '新建';
+
+  @override
+  String get appIconPickTitle => '选择一个 JWS 标志';
+
+  @override
+  String get appIconPickBody => '选择主屏幕上显示的图标。更换图标会重启应用。更多图标会随更新陆续加入。';
+
+  @override
+  String appIconSetError(String error) {
+    return '无法切换图标：$error';
+  }
 }

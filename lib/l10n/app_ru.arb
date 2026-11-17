@@ -267,8 +267,6 @@
   "settingsCatDonationsDesc": "Поддержать JW Streak",
   "settingsCatAppIcon": "Иконка приложения",
   "settingsCatAppIconDesc": "Выбрать иконку приложения",
-  "appIconComingSoonTitle": "Скоро",
-  "appIconComingSoonBody": "Скоро ты сможешь менять иконку приложения по своему вкусу — альтернативные цвета, особые дизайны или классическую. Твой домашний экран, твой выбор.",
   "appIconSuggestionsTitle": "Присылай свои идеи",
   "appIconSuggestionsBody": "Я принимаю предложения по иконкам. Если ты сделал иконку, которую хотел бы здесь видеть, пришли её. Выбранные появятся на этой странице, конечно, с указанием автора :)",
   "appIconSuggestionsButton": "Напиши мне на почту",
@@ -651,5 +649,15 @@
   "notesLibraryUnpinTooltip": "Открепить",
   "notesLibraryPinLimit": "Можно закрепить не более 3 заметок.",
   "notesLibraryFilterPinnedOnly": "Показать только закреплённые",
-  "notesLibraryNewChip": "Новая"
+  "notesLibraryNewChip": "Новая",
+  "appIconPickTitle": "Выбери логотип JWS",
+  "appIconPickBody": "Выбери иконку для главного экрана. Смена иконки перезапускает приложение. Новые иконки часто добавляются с обновлениями.",
+  "appIconSetError": "Не удалось изменить иконку: {error}",
+  "@appIconSetError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

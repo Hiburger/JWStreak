@@ -779,13 +779,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsCatAppIconDesc => 'Choose the launcher icon';
 
   @override
-  String get appIconComingSoonTitle => 'Coming soon';
-
-  @override
-  String get appIconComingSoonBody =>
-      'Soon, you\'ll be able to change the app icon to your liking — alternate colors, special designs, or the classic one. Your home screen, your choice.';
-
-  @override
   String get appIconSuggestionsTitle => 'Send your ideas';
 
   @override
@@ -2036,4 +2029,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notesLibraryNewChip => 'New';
+
+  @override
+  String get appIconPickTitle => 'Pick a JWS logo';
+
+  @override
+  String get appIconPickBody =>
+      'Pick the icon your home screen shows. Changing it restarts the app. More icons are added often with updates.';
+
+  @override
+  String appIconSetError(String error) {
+    return 'Couldn\'t switch the icon: $error';
+  }
 }

@@ -773,13 +773,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsCatAppIconDesc => 'Выбрать иконку приложения';
 
   @override
-  String get appIconComingSoonTitle => 'Скоро';
-
-  @override
-  String get appIconComingSoonBody =>
-      'Скоро ты сможешь менять иконку приложения по своему вкусу — альтернативные цвета, особые дизайны или классическую. Твой домашний экран, твой выбор.';
-
-  @override
   String get appIconSuggestionsTitle => 'Присылай свои идеи';
 
   @override
@@ -2043,4 +2036,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notesLibraryNewChip => 'Новая';
+
+  @override
+  String get appIconPickTitle => 'Выбери логотип JWS';
+
+  @override
+  String get appIconPickBody =>
+      'Выбери иконку для главного экрана. Смена иконки перезапускает приложение. Новые иконки часто добавляются с обновлениями.';
+
+  @override
+  String appIconSetError(String error) {
+    return 'Не удалось изменить иконку: $error';
+  }
 }

@@ -274,8 +274,6 @@
   "settingsCatDonationsDesc": "Supporting JW Streak",
   "settingsCatAppIcon": "App icon",
   "settingsCatAppIconDesc": "Choose the launcher icon",
-  "appIconComingSoonTitle": "Coming soon",
-  "appIconComingSoonBody": "Soon, you'll be able to change the app icon to your liking — alternate colors, special designs, or the classic one. Your home screen, your choice.",
   "appIconSuggestionsTitle": "Send your ideas",
   "appIconSuggestionsBody": "I'm taking suggestions for app icons. If you made one you'd like to see here, send it over. The ones that make it in will appear on this page, with credit to their creator of course :)",
   "appIconSuggestionsButton": "Reach out via mail",
@@ -974,5 +972,15 @@
   "notesLibraryUnpinTooltip": "Unpin",
   "notesLibraryPinLimit": "You can pin up to 3 notes.",
   "notesLibraryFilterPinnedOnly": "Show only pinned",
-  "notesLibraryNewChip": "New"
+  "notesLibraryNewChip": "New",
+  "appIconPickTitle": "Pick a JWS logo",
+  "appIconPickBody": "Pick the icon your home screen shows. Changing it restarts the app. More icons are added often with updates.",
+  "appIconSetError": "Couldn't switch the icon: {error}",
+  "@appIconSetError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

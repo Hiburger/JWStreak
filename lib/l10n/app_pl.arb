@@ -267,8 +267,6 @@
   "settingsCatDonationsDesc": "Wsparcie JW Streak",
   "settingsCatAppIcon": "Ikona aplikacji",
   "settingsCatAppIconDesc": "Wybierz ikonę aplikacji",
-  "appIconComingSoonTitle": "Wkrótce",
-  "appIconComingSoonBody": "Wkrótce będziesz mógł zmienić ikonę aplikacji według własnego gustu — alternatywne kolory, specjalne wzory albo klasyczną. Twój ekran główny, twój wybór.",
   "appIconSuggestionsTitle": "Prześlij swoje pomysły",
   "appIconSuggestionsBody": "Przyjmuję propozycje ikon. Jeśli stworzyłeś ikonę, którą chcesz tutaj zobaczyć, prześlij ją. Wybrane pojawią się na tej stronie, oczywiście z uznaniem autora :)",
   "appIconSuggestionsButton": "Napisz do mnie",
@@ -651,5 +649,15 @@
   "notesLibraryUnpinTooltip": "Odepnij",
   "notesLibraryPinLimit": "Możesz przypiąć do 3 notatek.",
   "notesLibraryFilterPinnedOnly": "Pokaż tylko przypięte",
-  "notesLibraryNewChip": "Nowa"
+  "notesLibraryNewChip": "Nowa",
+  "appIconPickTitle": "Wybierz logo JWS",
+  "appIconPickBody": "Wybierz ikonę wyświetlaną na ekranie głównym. Zmiana ikony restartuje aplikację. Nowe ikony są często dodawane wraz z aktualizacjami.",
+  "appIconSetError": "Nie udało się zmienić ikony: {error}",
+  "@appIconSetError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

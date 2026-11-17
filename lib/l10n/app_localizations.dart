@@ -1504,18 +1504,6 @@ abstract class AppLocalizations {
   /// **'Choose the launcher icon'**
   String get settingsCatAppIconDesc;
 
-  /// No description provided for @appIconComingSoonTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Coming soon'**
-  String get appIconComingSoonTitle;
-
-  /// No description provided for @appIconComingSoonBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Soon, you\'ll be able to change the app icon to your liking — alternate colors, special designs, or the classic one. Your home screen, your choice.'**
-  String get appIconComingSoonBody;
-
   /// No description provided for @appIconSuggestionsTitle.
   ///
   /// In en, this message translates to:
@@ -3716,6 +3704,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New'**
   String get notesLibraryNewChip;
+
+  /// No description provided for @appIconPickTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a JWS logo'**
+  String get appIconPickTitle;
+
+  /// No description provided for @appIconPickBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the icon your home screen shows. Changing it restarts the app. More icons are added often with updates.'**
+  String get appIconPickBody;
+
+  /// No description provided for @appIconSetError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t switch the icon: {error}'**
+  String appIconSetError(String error);
 }
 
 class _AppLocalizationsDelegate

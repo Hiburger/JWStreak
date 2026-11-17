@@ -96,6 +96,12 @@ flutter:
   # never-loaded copy inside the APK.
   assets:
     - assets/icon_onboarding.png
+    - assets/icon_global_love.png
+    - assets/icon_alpine.png
+    - assets/icon_minimalist.png
+    - assets/icon_modern.png
+    - assets/icon_small_hand.png
+    - assets/icon_white_lake.png
 
   # Bundled locally (not fetched from Google's servers at runtime like the
   # google_fonts package would) so the app never makes a network call it

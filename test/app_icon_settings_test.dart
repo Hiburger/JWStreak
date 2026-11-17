@@ -46,7 +46,7 @@ void main() {
     );
   });
 
-  testWidgets('tapping the tile opens the coming-soon page', (
+  testWidgets('tapping the tile opens the icon picker', (
     WidgetTester tester,
   ) async {
     await _pumpHub(tester);
@@ -54,13 +54,25 @@ void main() {
     await tester.tap(find.text('App icon'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Coming soon'), findsOneWidget);
-    expect(
-      find.textContaining("Soon, you'll be able to change the app icon"),
-      findsOneWidget,
-    );
+    expect(find.text('Coming soon'), findsNothing);
+    expect(find.text('Pick a JWS logo'), findsOneWidget);
+    // Both catalog entries, with the artist credited equally in every language
+    expect(find.text('Classic'), findsOneWidget);
+    expect(find.text('Global Love'), findsOneWidget);
+    expect(find.text('Sachtzart'), findsOneWidget);
+    // The official alternates ship with the catalog too
+    for (final String name in <String>[
+      'Alpine',
+      'Minimalist',
+      'Modern',
+      'Small Hand',
+      'White Lake',
+    ]) {
+      expect(find.text(name), findsOneWidget);
+    }
+    expect(find.text('Official'), findsNWidgets(6));
+    // Suggestions stay at the very bottom of the page.
     expect(find.text('Send your ideas'), findsOneWidget);
-    // The mailto affordance is a button that doesn't spell the address out.
     expect(find.text('Reach out via mail'), findsOneWidget);
     expect(find.text('contact@olynthe.org'), findsNothing);
   });

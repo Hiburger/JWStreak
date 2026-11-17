@@ -131,16 +131,6 @@ flutter:
 flutter_native_splash:
   color: "#FFFFFF"
   color_dark: "#000000"
-  image: assets/icon.png
-  # Same full logo (purple square, "JWS" + flower) as the legacy splash below
-  # — the isolated foreground glyph (tool/icons/icon_foreground_art.png) was
-  # designed to sit inside that square, not stand alone; on its own, floating
-  # on plain white, it read as a broken/disconnected shape instead of a logo.
-  android_12:
-    image: assets/icon.png
-    icon_background_color: "#FFFFFF"
-    color: "#FFFFFF"
-    color_dark: "#000000"
   android: true
   ios: true
   web: false

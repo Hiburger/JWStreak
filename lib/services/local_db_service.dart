@@ -562,21 +562,42 @@ class LocalDbService {
         // Last on purpose: the v2 step above recreates the notes table from
         // the position-less schema, so the column can only be added after it.
         if (oldVersion < 8) {
-          await database.execute('ALTER TABLE notes ADD COLUMN position REAL');
+          await _addColumnIfMissing(
+            database,
+            'notes',
+            'position',
+            'position REAL',
+          );
           await _backfillNotePositions(database);
         }
         if (oldVersion < 9) {
-          await database.execute(_createBreaksTableSql);
+          await database.execute(
+            _createBreaksTableSql.replaceFirst(
+              'CREATE TABLE breaks',
+              'CREATE TABLE IF NOT EXISTS breaks',
+            ),
+          );
         }
         if (oldVersion < 10) {
-          await database.execute(
-            'ALTER TABLE notes ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0',
+          await _addColumnIfMissing(
+            database,
+            'notes',
+            'pinned',
+            'pinned INTEGER NOT NULL DEFAULT 0',
           );
-          await database.execute('ALTER TABLE notes ADD COLUMN pinnedAt TEXT');
+          await _addColumnIfMissing(
+            database,
+            'notes',
+            'pinnedAt',
+            'pinnedAt TEXT',
+          );
         }
         if (oldVersion < 11) {
-          await database.execute(
-            "ALTER TABLE notes ADD COLUMN color TEXT NOT NULL DEFAULT ''",
+          await _addColumnIfMissing(
+            database,
+            'notes',
+            'color',
+            "color TEXT NOT NULL DEFAULT ''",
           );
         }
       },
@@ -1081,6 +1102,23 @@ class LocalDbService {
     await _setSetting(db, 'notes_sort', sort.name);
     await _setSetting(db, 'notes_filter_book', book ?? '');
     await _setSetting(db, 'notes_filter_created', created.name);
+  }
+
+  static Future<void> _addColumnIfMissing(
+    Database db,
+    String table,
+    String column,
+    String alterSql,
+  ) async {
+    final List<Map<String, Object?>> columns = await db.rawQuery(
+      'PRAGMA table_info($table)',
+    );
+    final bool present = columns.any(
+      (Map<String, Object?> row) => row['name'] == column,
+    );
+    if (!present) {
+      await db.execute('ALTER TABLE $table ADD COLUMN $alterSql');
+    }
   }
 
   static Future<void> _backfillNotePositions(Database db) async {

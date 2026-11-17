@@ -163,6 +163,42 @@ void main() {
       );
     });
 
+    test('a wedged database heals instead of failing every open', () async {
+      await createLegacyDb(9);
+      final dynamic raw = await databaseFactoryFfi.openDatabase(
+        await testDatabasePath(),
+      );
+      await raw.execute(
+        "ALTER TABLE notes ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0",
+      );
+      await raw.execute('ALTER TABLE notes ADD COLUMN pinnedAt TEXT');
+      await raw.execute(
+        "ALTER TABLE notes ADD COLUMN color TEXT NOT NULL DEFAULT ''",
+      );
+      await raw.execute(
+        'CREATE TABLE breaks (id INTEGER PRIMARY KEY AUTOINCREMENT, '
+        "tier TEXT NOT NULL, startDay TEXT NOT NULL, endDay TEXT NOT NULL, "
+        "reason TEXT NOT NULL DEFAULT '')",
+      );
+
+      final LocalDbService db = LocalDbService();
+      final int id = await db.createNote(
+        title: 'heals',
+        book: 'Genesis',
+        chapter: 1,
+        content: 'x',
+        color: 'teal',
+      );
+      expect(await db.setNotePinned(id, true), isTrue);
+      expect(
+        (await db.getAllNotes()).firstWhere((NoteEntry n) => n.id == id).color,
+        'teal',
+      );
+      expect(await db.getActiveBreak(), isNull);
+      await db.startBreak(BreakTier.mini);
+      expect(await db.getActiveBreak(), isNotNull);
+    });
+
     test('a v1 database migrates all the way to v9', () async {
       await createLegacyDb(1);
       final LocalDbService db = LocalDbService();

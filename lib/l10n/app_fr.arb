@@ -511,7 +511,6 @@
   "notesLibraryDeleteConfirmSingular": "« {title} » sera définitivement supprimée.",
   "notesLibraryDeleteConfirmPlural": "Ces {count} notes seront définitivement supprimées de ton appareil.",
   "notesLibraryErrorMessage": "Erreur: {error}",
-  "notesLibraryNewNote": "Nouvelle note",
   "notesLibrarySearchHint": "Rechercher par titre, contenu ou passage",
   "notesLibraryFilterBook": "Livre",
   "notesLibraryFilterCreated": "Créé le",
@@ -647,5 +646,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "Épingler",
+  "notesLibraryUnpinTooltip": "Détacher",
+  "notesLibraryPinLimit": "Tu peux épingler jusqu'à 3 notes.",
+  "notesLibraryFilterPinnedOnly": "Afficher seulement les épinglées",
+  "notesLibraryNewChip": "Nouveau"
 }

@@ -1608,9 +1608,6 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get notesLibraryNewNote => 'Новая заметка';
-
-  @override
   String get notesLibrarySearchHint =>
       'Искать по заголовку, содержанию или отрывку';
 
@@ -2031,4 +2028,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String streakBreakLogRange(String start, String end) {
     return '$start до $end';
   }
+
+  @override
+  String get notesLibraryPinTooltip => 'Закрепить';
+
+  @override
+  String get notesLibraryUnpinTooltip => 'Открепить';
+
+  @override
+  String get notesLibraryPinLimit => 'Можно закрепить не более 3 заметок.';
+
+  @override
+  String get notesLibraryFilterPinnedOnly => 'Показать только закреплённые';
+
+  @override
+  String get notesLibraryNewChip => 'Новая';
 }

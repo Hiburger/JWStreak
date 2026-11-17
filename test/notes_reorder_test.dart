@@ -84,8 +84,12 @@ void main() {
                 'updatedAt': '2025-01-01T00:00:00.000',
               });
             } else {
+              // v8+ schemas also carry the position column
+              final String positionColumn = version >= 8
+                  ? ', position REAL'
+                  : '';
               await db.execute(
-                'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL DEFAULT \'\', book TEXT NOT NULL, chapter INTEGER NOT NULL, content TEXT NOT NULL, createdAt TEXT NOT NULL, updatedAt TEXT NOT NULL)',
+                'CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL DEFAULT \'\', book TEXT NOT NULL, chapter INTEGER NOT NULL, content TEXT NOT NULL, createdAt TEXT NOT NULL, updatedAt TEXT NOT NULL$positionColumn)',
               );
               await db.insert('notes', <String, Object?>{
                 'title': 'legacy',
@@ -125,6 +129,38 @@ void main() {
       expect(await db.getAllBreaks(), isEmpty);
       await db.startBreak(BreakTier.mini);
       expect(await db.getActiveBreak(), isNotNull);
+    });
+
+    test('a v9 database gains the pin columns', () async {
+      await createLegacyDb(9);
+      final LocalDbService db = LocalDbService();
+      final int id = await db.createNote(
+        title: 'pinnable',
+        book: 'Genesis',
+        chapter: 1,
+        content: 'x',
+      );
+      expect(await db.setNotePinned(id, true), isTrue);
+      expect(
+        (await db.getAllNotes()).firstWhere((NoteEntry n) => n.id == id).pinned,
+        isTrue,
+      );
+    });
+
+    test('a v10 database gains the color column', () async {
+      await createLegacyDb(10);
+      final LocalDbService db = LocalDbService();
+      final int id = await db.createNote(
+        title: 'tinted',
+        book: 'Genesis',
+        chapter: 1,
+        content: 'x',
+        color: 'pink',
+      );
+      expect(
+        (await db.getAllNotes()).firstWhere((NoteEntry n) => n.id == id).color,
+        'pink',
+      );
     });
 
     test('a v1 database migrates all the way to v9', () async {

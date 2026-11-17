@@ -1,9 +1,13 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
+import '../note_colors.dart';
+import '../widgets/onboarding_accent.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
 import '../widgets/circular_back_button.dart';
@@ -47,11 +51,17 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
 
   NoteSortOrder _sort = NoteSortOrder.manual;
 
+  /// "Show only pinned", picked from the sort sheet. Session-only on
+  /// purpose: a leftover pinned-only view on reopen reads like lost notes.
+  bool _pinnedOnly = false;
+
   bool _inSelectionMode = false;
   bool get _selectionMode => _inSelectionMode;
 
   bool get _hasActiveFilters =>
-      _bookFilter != null || _createdFilter != NoteCreatedFilter.all;
+      _bookFilter != null ||
+      _createdFilter != NoteCreatedFilter.all ||
+      _pinnedOnly;
 
   @override
   void initState() {
@@ -92,6 +102,7 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
         book: _bookFilter,
         createdFilter: _createdFilter,
         sort: _sort,
+        pinnedOnly: _pinnedOnly,
       );
       if (!mounted) {
         return;
@@ -117,6 +128,29 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
 
   void _enterSelectionMode() {
     setState(() => _inSelectionMode = true);
+  }
+
+  Future<void> _togglePin(NoteEntry note) async {
+    try {
+      final bool ok = await widget.dbService.setNotePinned(
+        note.id,
+        !note.pinned,
+      );
+      if (!ok) {
+        if (mounted) {
+          showMessageDialog(
+            context,
+            message: AppLocalizations.of(context)!.notesLibraryPinLimit,
+          );
+        }
+        return;
+      }
+      await _loadNotes();
+    } catch (error) {
+      if (mounted) {
+        _showError(error);
+      }
+    }
   }
 
   void _toggleSelect(NoteEntry note) {
@@ -366,29 +400,82 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
 
   Future<void> _pickSort() async {
     final AppLocalizations l10n = AppLocalizations.of(context)!;
-    final NoteSortOrder? picked = await showModalBottomSheet<NoteSortOrder>(
+    // The sheet mixes single-choice sorts with one toggle — the sort rows pop
+    // their NoteSortOrder, the pinned one pops [null] as its own signal.
+    final dynamic picked = await showModalBottomSheet<dynamic>(
       context: context,
       showDragHandle: true,
-      builder: (BuildContext sheetContext) => PickerSheet<NoteSortOrder>(
-        selectedValue: _sort,
-        entries: <PickerEntry<NoteSortOrder>>[
-          for (final MapEntry<NoteSortOrder, String> e
-              in <NoteSortOrder, String>{
-                NoteSortOrder.recentlyUpdated:
+      builder: (BuildContext sheetContext) {
+        final ColorScheme cs = Theme.of(sheetContext).colorScheme;
+        ListTile sortTile(NoteSortOrder value, String label) => ListTile(
+          title: Text(label),
+          trailing: value == _sort
+              ? Icon(Icons.check_rounded, color: cs.primary)
+              : null,
+          selected: value == _sort,
+          selectedTileColor: cs.primaryContainer.withValues(alpha: 0.35),
+          onTap: () => Navigator.of(sheetContext).pop(value),
+        );
+        return SafeArea(
+          top: false,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(sheetContext).size.height * 0.6,
+            ),
+            child: SingleChildScrollView(
+              // Scrolls only when too tall for the space the sheet got, so
+              // short screens never get the bottom rows chopped off.
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  sortTile(
+                    NoteSortOrder.recentlyUpdated,
                     l10n.notesLibrarySortRecentlyUpdated,
-                NoteSortOrder.recentlyCreated:
+                  ),
+                  sortTile(
+                    NoteSortOrder.recentlyCreated,
                     l10n.notesLibrarySortRecentlyCreated,
-                NoteSortOrder.titleAZ: l10n.notesLibrarySortTitleAZ,
-                NoteSortOrder.bibleOrder: l10n.notesLibrarySortBibleOrder,
-              }.entries)
-            PickerEntry<NoteSortOrder>(value: e.key, label: e.value),
-        ],
-      ),
+                  ),
+                  sortTile(NoteSortOrder.titleAZ, l10n.notesLibrarySortTitleAZ),
+                  sortTile(
+                    NoteSortOrder.bibleOrder,
+                    l10n.notesLibrarySortBibleOrder,
+                  ),
+                  Divider(height: 1, color: cs.outlineVariant),
+                  ListTile(
+                    leading: Icon(Icons.push_pin_rounded, color: cs.tertiary),
+                    title: Text(l10n.notesLibraryFilterPinnedOnly),
+                    trailing: _pinnedOnly
+                        ? Icon(Icons.check_rounded, color: cs.primary)
+                        : null,
+                    selected: _pinnedOnly,
+                    selectedTileColor: cs.primaryContainer.withValues(
+                      alpha: 0.35,
+                    ),
+                    onTap: () =>
+                        Navigator.of(sheetContext).pop(const _PinnedToggle()),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
-    if (picked != null && picked != _sort) {
-      setState(() => _sort = picked);
-      _reloadWithFilters();
+    if (picked == null) {
+      return;
     }
+    if (picked is _PinnedToggle) {
+      setState(() => _pinnedOnly = !_pinnedOnly);
+    } else if (picked is NoteSortOrder) {
+      // Tapping a sort always reopens the full list with that order.
+      setState(() {
+        _sort = picked;
+        _pinnedOnly = false;
+      });
+    }
+    _reloadWithFilters();
   }
 
   void _showError(Object error) {
@@ -417,19 +504,6 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
       },
       child: Scaffold(
         appBar: _selectionMode ? _buildSelectionAppBar() : _buildNormalAppBar(),
-        floatingActionButton: _selectionMode
-            ? null
-            : FloatingActionButton.extended(
-                onPressed: _createNote,
-                icon: const Icon(Icons.add),
-                label: Text(AppLocalizations.of(context)!.notesLibraryNewNote),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                backgroundColor: colorScheme.primaryContainer,
-                foregroundColor: colorScheme.onPrimaryContainer,
-                elevation: 0,
-              ),
         body: ResponsiveBody(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -545,20 +619,54 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
           _openReader(note);
         }
       },
+      onTogglePin: () => _togglePin(note),
       confirmDismiss: () => _confirmSwipeDelete(note),
       onDismissed: () => _removeNoteFromList(note),
     );
   }
 
   Future<void> _onReorder(int oldIndex, int newIndex) async {
+    // Drags reorder within the moved note's own group — pinned among
+    // pinned, unpinned among unpinned. A cross-group drop bounces back.
+    final List<NoteEntry> pinnedBlock = _notes
+        .where((NoteEntry n) => n.pinned)
+        .toList(growable: false);
+    final List<NoteEntry> restBlock = _notes
+        .where((NoteEntry n) => !n.pinned)
+        .toList(growable: false);
+    final int pinnedCount = pinnedBlock.length;
+    final bool movedPinned = _notes[oldIndex].pinned;
+
+    // Where the drop lands in the displayed list, using the same
+    // remove-then-insert semantics computeReorder applies.
+    final List<int> sim = List<int>.generate(_notes.length, (int i) => i);
+    sim.removeAt(oldIndex);
+    sim.insert(newIndex.clamp(0, sim.length), -1);
+    final int finalDisplay = sim.indexOf(-1);
+    final bool inOwnGroup = movedPinned
+        ? finalDisplay < pinnedCount
+        : finalDisplay >= pinnedCount;
+    if (!inOwnGroup) {
+      await _loadNotes();
+      return;
+    }
+
+    final List<NoteEntry> movedGroup = movedPinned ? pinnedBlock : restBlock;
+    final int subOld = movedPinned ? oldIndex : oldIndex - pinnedCount;
+    final int subNew = movedPinned ? finalDisplay : finalDisplay - pinnedCount;
     final int movedId = _notes[oldIndex].id;
+
     final (:List<NoteEntry> notes, :double position) = computeReorder(
-      _notes,
-      oldIndex,
-      newIndex,
+      movedGroup,
+      subOld,
+      subNew,
     );
+    // New list state first, then persist: updating the list after the
+    // awaited write leaves the dropped card visibly stalled for a frame.
     setState(() {
-      _notes = notes;
+      _notes = movedPinned
+          ? <NoteEntry>[...notes, ...restBlock]
+          : <NoteEntry>[...pinnedBlock, ...notes];
       // A drag means the reader wants their own order, so the sort follows
       // the drag instead of snapping back on the next reload.
       _sort = NoteSortOrder.manual;
@@ -606,6 +714,14 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
         child: Row(
           children: <Widget>[
             _FilterChip(
+              icon: Icons.add,
+              label: l10n.notesLibraryNewChip,
+              value: null,
+              onTap: _createNote,
+              stadium: true,
+            ),
+            const SizedBox(width: 8),
+            _FilterChip(
               icon: Icons.menu_book_rounded,
               label: l10n.notesLibraryFilterBook,
               value: bookLabel,
@@ -631,7 +747,9 @@ class _NotesLibraryScreenState extends State<NotesLibraryScreen> {
             _FilterChip(
               icon: Icons.sort_rounded,
               label: l10n.notesLibraryFilterSort,
-              value: _sort == NoteSortOrder.manual
+              value: _pinnedOnly
+                  ? l10n.notesLibraryFilterPinnedOnly
+                  : _sort == NoteSortOrder.manual
                   ? null
                   : <NoteSortOrder, String>{
                       NoteSortOrder.recentlyUpdated:
@@ -694,12 +812,16 @@ class _FilterChip extends StatelessWidget {
     required this.label,
     required this.value,
     required this.onTap,
+    this.stadium = false,
   });
 
   final IconData icon;
   final String label;
   final String? value;
   final VoidCallback onTap;
+
+  /// Fully-rounded variant (the "New" action chip), same styling otherwise.
+  final bool stadium;
 
   @override
   Widget build(BuildContext context) {
@@ -720,7 +842,9 @@ class _FilterChip extends StatelessWidget {
           ? cs.primaryContainer
           : cs.surfaceContainerHighest,
       side: BorderSide.none,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(stadium ? 999 : 8),
+      ),
       onPressed: onTap,
     );
   }
@@ -734,12 +858,14 @@ class _NoteCard extends StatelessWidget {
     required this.onTap,
     required this.confirmDismiss,
     required this.onDismissed,
+    this.onTogglePin,
   });
 
   final NoteEntry note;
   final bool selectionMode;
   final bool selected;
   final VoidCallback onTap;
+  final VoidCallback? onTogglePin;
   final Future<bool> Function() confirmDismiss;
   final VoidCallback onDismissed;
 
@@ -748,24 +874,31 @@ class _NoteCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final String preview = plainNotePreview(note.content);
+    final bool showPin = !selectionMode && onTogglePin != null;
+    final OnboardingAccent? accent = noteAccent(note.color);
 
+    // The pin sits in the top-right corner as an overlay rather than in the
+    // title's row: in a row its height drags the preview down with it.
     final Widget card = Card.filled(
       margin: EdgeInsets.zero,
-      color: selected ? colorScheme.secondaryContainer : null,
+      color: selected
+          ? colorScheme.secondaryContainer
+          : accent?.background(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              // Reserves the overlay's corner so no text runs under it.
+              padding: EdgeInsets.fromLTRB(18, 12, showPin ? 60 : 18, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  if (selectionMode) ...<Widget>[
+                  if (selectionMode)
                     Icon(
                       selected
                           ? Icons.check_circle
@@ -774,73 +907,90 @@ class _NoteCard extends StatelessWidget {
                           ? colorScheme.primary
                           : colorScheme.onSurfaceVariant,
                       size: 22,
-                    ),
-                    const SizedBox(width: 12),
-                  ],
-                  Expanded(
-                    child: Text(
+                    )
+                  else
+                    Text(
                       note.displayTitle(context),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
-                  ),
-                  if (!selectionMode) ...<Widget>[
-                    const SizedBox(width: 8),
-                    Icon(
-                      Icons.chevron_right,
-                      color: colorScheme.onSurfaceVariant,
+                  if (preview.isNotEmpty) ...<Widget>[
+                    const SizedBox(height: 6),
+                    Text(
+                      preview,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                        height: 1.35,
+                      ),
                     ),
                   ],
+                  const SizedBox(height: 14),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colorScheme.secondaryContainer,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          displayReference(context, note.book, note.chapter),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: colorScheme.onSecondaryContainer,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          formatRelativeDate(context, note.updatedAt),
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              if (preview.isNotEmpty) ...<Widget>[
-                const SizedBox(height: 6),
-                Text(
-                  preview,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    height: 1.35,
+            ),
+            if (showPin)
+              Positioned(
+                top: 10,
+                right: 12,
+                child: IconButton(
+                  tooltip: note.pinned
+                      ? AppLocalizations.of(context)!.notesLibraryUnpinTooltip
+                      : AppLocalizations.of(context)!.notesLibraryPinTooltip,
+                  style: IconButton.styleFrom(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    padding: const EdgeInsets.all(9),
+                    backgroundColor: note.pinned
+                        ? colorScheme.primaryContainer
+                        : colorScheme.surfaceContainerHighest,
+                    foregroundColor: note.pinned
+                        ? colorScheme.onPrimaryContainer
+                        : colorScheme.onSurfaceVariant,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  icon: note.pinned
+                      ? _UnpinIcon(color: colorScheme.onPrimaryContainer)
+                      : const Icon(Icons.push_pin_outlined, size: 20),
+                  onPressed: onTogglePin,
                 ),
-              ],
-              const SizedBox(height: 14),
-              Row(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      displayReference(context, note.book, note.chapter),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onSecondaryContainer,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      formatRelativeDate(context, note.updatedAt),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ),
-                ],
               ),
-            ],
-          ),
+          ],
         ),
       ),
     );
@@ -975,6 +1125,42 @@ class _EmptyNotesState extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Popped by the sort sheet's pinned-only row; any non-null pop that isn't
+/// a [NoteSortOrder] is this toggle.
+class _PinnedToggle {
+  const _PinnedToggle();
+}
+
+/// A struck-through push pin: the unpin state, since Material has no
+/// dedicated "pin off" glyph.
+class _UnpinIcon extends StatelessWidget {
+  const _UnpinIcon({required this.color});
+
+  final Color color;
+  final double size = 20;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: Icon(Icons.push_pin_rounded, size: size - 2, color: color),
+          ),
+          Center(
+            child: Transform.rotate(
+              angle: math.pi / 4,
+              child: Container(width: size, height: 1.8, color: color),
+            ),
+          ),
+        ],
       ),
     );
   }

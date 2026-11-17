@@ -46,6 +46,9 @@ class NoteEntry {
     required this.createdAt,
     required this.updatedAt,
     this.position = 0,
+    this.pinned = false,
+    this.pinnedAt,
+    this.color = '',
   });
 
   final int id;
@@ -56,6 +59,11 @@ class NoteEntry {
   final DateTime createdAt;
   final DateTime updatedAt;
   final double position;
+  final bool pinned;
+  final DateTime? pinnedAt;
+
+  /// Key into the note color palette ('' = uncolored).
+  final String color;
 
   /// Title to display: explicit title, else first line of content,
   /// else a placeholder.
@@ -322,7 +330,7 @@ class LocalDbService {
 
   /// The schema version a backup file records, so a later app version can
   /// tell how to read it.
-  static const int schemaVersion = 9;
+  static const int schemaVersion = 11;
 
   /// Raw rows of [table], for the backup serializer. Deliberately not a
   /// general-purpose query hatch: it accepts only the known backup tables,
@@ -380,11 +388,12 @@ class LocalDbService {
           )
         ''';
 
-  /// Fresh installs get the position column straight away; existing
-  /// databases reach the same shape through the v8 upgrade below. Nullable
-  /// on purpose: a backup from before this column restores rows without it,
-  /// and those NULLs are what backfillNotePositions looks for.
-  static const String _createNotesTableV8Sql = '''
+  /// Note from  agent: Fresh installs get the position and pin columns straight away; existing
+  /// databases reach the same shape through the v8 and v10 upgrades below.
+  /// position is nullable on purpose: a backup from before this column
+  /// restores rows without it, and those NULLs are what
+  /// backfillNotePositions looks for.
+  static const String _createNotesTableCurrentSql = '''
           CREATE TABLE notes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL DEFAULT '',
@@ -393,7 +402,10 @@ class LocalDbService {
             content TEXT NOT NULL,
             createdAt TEXT NOT NULL,
             updatedAt TEXT NOT NULL,
-            position REAL
+            position REAL,
+            pinned INTEGER NOT NULL DEFAULT 0,
+            pinnedAt TEXT,
+            color TEXT NOT NULL DEFAULT ''
           )
         ''';
 
@@ -460,7 +472,7 @@ class LocalDbService {
     final String dbPath = join(await getDatabasesPath(), _databaseName);
     final Database db = await openDatabase(
       dbPath,
-      version: 9,
+      version: 11,
       onCreate: (Database database, int version) async {
         await database.execute('''
           CREATE TABLE readings (
@@ -471,7 +483,7 @@ class LocalDbService {
           )
         ''');
 
-        await database.execute(_createNotesTableV8Sql);
+        await database.execute(_createNotesTableCurrentSql);
         await database.execute(_createQuizResultsTableSql);
         await database.execute(_createReflectionsTableSql);
         await database.execute(_createRemindersTableSql);
@@ -555,6 +567,17 @@ class LocalDbService {
         }
         if (oldVersion < 9) {
           await database.execute(_createBreaksTableSql);
+        }
+        if (oldVersion < 10) {
+          await database.execute(
+            'ALTER TABLE notes ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0',
+          );
+          await database.execute('ALTER TABLE notes ADD COLUMN pinnedAt TEXT');
+        }
+        if (oldVersion < 11) {
+          await database.execute(
+            "ALTER TABLE notes ADD COLUMN color TEXT NOT NULL DEFAULT ''",
+          );
         }
       },
     );
@@ -954,6 +977,7 @@ class LocalDbService {
     required String book,
     required int chapter,
     required String content,
+    String color = '',
   }) async {
     final Database db = await _getDb();
     final String now = DateTime.now().toIso8601String();
@@ -967,6 +991,7 @@ class LocalDbService {
       'createdAt': now,
       'updatedAt': now,
       'position': maxPosition + 1024,
+      'color': color,
     });
   }
 
@@ -988,6 +1013,39 @@ class LocalDbService {
       where: 'id = ?',
       whereArgs: <Object>[id],
     );
+  }
+
+  static const int maxPinnedNotes = 3; // max amount of notes u can pin
+
+  Future<bool> setNotePinned(int id, bool pinned) async {
+    final Database db = await _getDb();
+    if (!pinned) {
+      await db.update(
+        'notes',
+        <String, Object?>{'pinned': 0, 'pinnedAt': null},
+        where: 'id = ?',
+        whereArgs: <Object>[id],
+      );
+      return true;
+    }
+    final int count =
+        Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM notes WHERE pinned = 1'),
+        ) ??
+        0;
+    if (count >= maxPinnedNotes) {
+      return false;
+    }
+    await db.update(
+      'notes',
+      <String, Object>{
+        'pinned': 1,
+        'pinnedAt': DateTime.now().toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: <Object>[id],
+    );
+    return true;
   }
 
   /// Gives a position to every note that has none (fresh migration, or a
@@ -1052,15 +1110,17 @@ class LocalDbService {
     required String content,
     String? book,
     int? chapter,
+    String? color,
   }) async {
     final Database db = await _getDb();
     await db.update(
       'notes',
-      <String, Object>{
+      <String, Object?>{
         'title': title,
         'content': content,
         'book': ?book,
         'chapter': ?chapter,
+        'color': ?color,
         'updatedAt': DateTime.now().toIso8601String(),
       },
       where: 'id = ?',
@@ -1107,6 +1167,7 @@ class LocalDbService {
     String? book,
     NoteCreatedFilter createdFilter = NoteCreatedFilter.all,
     NoteSortOrder sort = NoteSortOrder.manual,
+    bool pinnedOnly = false,
   }) async {
     final Database db = await _getDb();
     final String normalized = query.trim();
@@ -1126,6 +1187,9 @@ class LocalDbService {
     if (book != null) {
       conditions.add('book = ?');
       args.add(book);
+    }
+    if (pinnedOnly) {
+      conditions.add('pinned = 1');
     }
     final (:DateTime? after, :DateTime? before) = noteCreatedBounds(
       createdFilter,
@@ -1150,21 +1214,24 @@ class LocalDbService {
     final List<NoteEntry> notes = rows.map(_noteFromRow).toList();
     switch (sort) {
       case NoteSortOrder.recentlyUpdated:
-        notes.sort(
+        return _pinnedFirst(
+          notes,
           (NoteEntry a, NoteEntry b) => b.updatedAt.compareTo(a.updatedAt),
         );
       case NoteSortOrder.recentlyCreated:
-        notes.sort(
+        return _pinnedFirst(
+          notes,
           (NoteEntry a, NoteEntry b) => b.createdAt.compareTo(a.createdAt),
         );
       case NoteSortOrder.titleAZ:
-        notes.sort(
+        return _pinnedFirst(
+          notes,
           (NoteEntry a, NoteEntry b) => _noteSortTitle(
             a,
           ).toLowerCase().compareTo(_noteSortTitle(b).toLowerCase()),
         );
       case NoteSortOrder.bibleOrder:
-        notes.sort((NoteEntry a, NoteEntry b) {
+        return _pinnedFirst(notes, (NoteEntry a, NoteEntry b) {
           final int byBook = _bookNumber(a.book).compareTo(_bookNumber(b.book));
           if (byBook != 0) {
             return byBook;
@@ -1176,11 +1243,25 @@ class LocalDbService {
           return b.updatedAt.compareTo(a.updatedAt);
         });
       case NoteSortOrder.manual:
-        notes.sort(
+        return _pinnedFirst(
+          notes,
           (NoteEntry a, NoteEntry b) => a.position.compareTo(b.position),
         );
     }
-    return List<NoteEntry>.unmodifiable(notes);
+  }
+
+  static List<NoteEntry> _pinnedFirst(
+    List<NoteEntry> notes,
+    int Function(NoteEntry, NoteEntry) by,
+  ) {
+    notes.sort(by);
+    final List<NoteEntry> pinned = notes
+        .where((NoteEntry n) => n.pinned)
+        .toList(growable: false);
+    final List<NoteEntry> rest = notes
+        .where((NoteEntry n) => !n.pinned)
+        .toList(growable: false);
+    return List<NoteEntry>.unmodifiable(<NoteEntry>[...pinned, ...rest]);
   }
 
   /// Book ids that have at least one note, in Bible order — the notes
@@ -1217,6 +1298,9 @@ class LocalDbService {
     final Object? createdAt = row['createdAt'];
     final Object? updatedAt = row['updatedAt'];
     final Object? position = row['position'];
+    final Object? pinned = row['pinned'];
+    final Object? pinnedAt = row['pinnedAt'];
+    final Object? color = row['color'];
     if (id is! int ||
         title is! String ||
         book is! String ||
@@ -1235,6 +1319,9 @@ class LocalDbService {
       createdAt: DateTime.parse(createdAt),
       updatedAt: DateTime.parse(updatedAt),
       position: position is num ? position.toDouble() : 0,
+      pinned: pinned is int && pinned != 0,
+      pinnedAt: pinnedAt is String ? DateTime.parse(pinnedAt) : null,
+      color: color is String ? color : '',
     );
   }
 

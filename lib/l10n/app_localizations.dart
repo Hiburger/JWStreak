@@ -2931,12 +2931,6 @@ abstract class AppLocalizations {
   /// **'Error: {error}'**
   String notesLibraryErrorMessage(String error);
 
-  /// No description provided for @notesLibraryNewNote.
-  ///
-  /// In en, this message translates to:
-  /// **'New note'**
-  String get notesLibraryNewNote;
-
   /// No description provided for @notesLibrarySearchHint.
   ///
   /// In en, this message translates to:
@@ -3692,6 +3686,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{start} to {end}'**
   String streakBreakLogRange(String start, String end);
+
+  /// No description provided for @notesLibraryPinTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin'**
+  String get notesLibraryPinTooltip;
+
+  /// No description provided for @notesLibraryUnpinTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpin'**
+  String get notesLibraryUnpinTooltip;
+
+  /// No description provided for @notesLibraryPinLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You can pin up to 3 notes.'**
+  String get notesLibraryPinLimit;
+
+  /// No description provided for @notesLibraryFilterPinnedOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Show only pinned'**
+  String get notesLibraryFilterPinnedOnly;
+
+  /// No description provided for @notesLibraryNewChip.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get notesLibraryNewChip;
 }
 
 class _AppLocalizationsDelegate

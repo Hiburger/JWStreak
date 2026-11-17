@@ -1607,9 +1607,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get notesLibraryNewNote => 'New note';
-
-  @override
   String get notesLibrarySearchHint => 'Search by title, content, or passage';
 
   @override
@@ -2024,4 +2021,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String streakBreakLogRange(String start, String end) {
     return '$start to $end';
   }
+
+  @override
+  String get notesLibraryPinTooltip => 'Pin';
+
+  @override
+  String get notesLibraryUnpinTooltip => 'Unpin';
+
+  @override
+  String get notesLibraryPinLimit => 'You can pin up to 3 notes.';
+
+  @override
+  String get notesLibraryFilterPinnedOnly => 'Show only pinned';
+
+  @override
+  String get notesLibraryNewChip => 'New';
 }

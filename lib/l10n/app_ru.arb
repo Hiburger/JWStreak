@@ -511,7 +511,6 @@
   "notesLibraryDeleteConfirmSingular": "«{title}» будет удалена навсегда.",
   "notesLibraryDeleteConfirmPlural": "Эти {count} заметок будут навсегда удалены с твоего устройства.",
   "notesLibraryErrorMessage": "Ошибка: {error}",
-  "notesLibraryNewNote": "Новая заметка",
   "notesLibrarySearchHint": "Искать по заголовку, содержанию или отрывку",
   "notesLibraryFilterBook": "Книга",
   "notesLibraryFilterCreated": "Создано",
@@ -647,5 +646,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "Закрепить",
+  "notesLibraryUnpinTooltip": "Открепить",
+  "notesLibraryPinLimit": "Можно закрепить не более 3 заметок.",
+  "notesLibraryFilterPinnedOnly": "Показать только закреплённые",
+  "notesLibraryNewChip": "Новая"
 }

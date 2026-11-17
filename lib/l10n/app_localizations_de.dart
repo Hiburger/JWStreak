@@ -1624,9 +1624,6 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get notesLibraryNewNote => 'Neue Notiz';
-
-  @override
   String get notesLibrarySearchHint =>
       'Nach Titel, Inhalt oder Bibelstelle suchen';
 
@@ -2047,4 +2044,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String streakBreakLogRange(String start, String end) {
     return '$start bis $end';
   }
+
+  @override
+  String get notesLibraryPinTooltip => 'Anheften';
+
+  @override
+  String get notesLibraryUnpinTooltip => 'Lösen';
+
+  @override
+  String get notesLibraryPinLimit => 'Du kannst bis zu 3 Notizen anheften.';
+
+  @override
+  String get notesLibraryFilterPinnedOnly => 'Nur angeheftete anzeigen';
+
+  @override
+  String get notesLibraryNewChip => 'Neu';
 }

@@ -1613,9 +1613,6 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get notesLibraryNewNote => 'Nueva nota';
-
-  @override
   String get notesLibrarySearchHint => 'Buscar por título, contenido o pasaje';
 
   @override
@@ -2037,4 +2034,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String streakBreakLogRange(String start, String end) {
     return '$start al $end';
   }
+
+  @override
+  String get notesLibraryPinTooltip => 'Fijar';
+
+  @override
+  String get notesLibraryUnpinTooltip => 'Quitar fijación';
+
+  @override
+  String get notesLibraryPinLimit => 'Puedes fijar hasta 3 notas.';
+
+  @override
+  String get notesLibraryFilterPinnedOnly => 'Mostrar solo las fijadas';
+
+  @override
+  String get notesLibraryNewChip => 'Nuevo';
 }

@@ -511,7 +511,6 @@
   "notesLibraryDeleteConfirmSingular": "„{title}” zostanie trwale usunięta.",
   "notesLibraryDeleteConfirmPlural": "Te {count} notatki zostaną trwale usunięte z twojego urządzenia.",
   "notesLibraryErrorMessage": "Błąd: {error}",
-  "notesLibraryNewNote": "Nowa notatka",
   "notesLibrarySearchHint": "Szukaj po tytule, treści lub fragmencie",
   "notesLibraryFilterBook": "Księga",
   "notesLibraryFilterCreated": "Utworzono",
@@ -647,5 +646,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "Przypnij",
+  "notesLibraryUnpinTooltip": "Odepnij",
+  "notesLibraryPinLimit": "Możesz przypiąć do 3 notatek.",
+  "notesLibraryFilterPinnedOnly": "Pokaż tylko przypięte",
+  "notesLibraryNewChip": "Nowa"
 }

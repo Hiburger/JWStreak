@@ -511,7 +511,6 @@
   "notesLibraryDeleteConfirmSingular": "„{title}“ wird endgültig gelöscht.",
   "notesLibraryDeleteConfirmPlural": "Diese {count} Notizen werden endgültig von deinem Gerät gelöscht.",
   "notesLibraryErrorMessage": "Fehler: {error}",
-  "notesLibraryNewNote": "Neue Notiz",
   "notesLibrarySearchHint": "Nach Titel, Inhalt oder Bibelstelle suchen",
   "notesLibraryFilterBook": "Buch",
   "notesLibraryFilterCreated": "Erstellt",
@@ -647,5 +646,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "Anheften",
+  "notesLibraryUnpinTooltip": "Lösen",
+  "notesLibraryPinLimit": "Du kannst bis zu 3 Notizen anheften.",
+  "notesLibraryFilterPinnedOnly": "Nur angeheftete anzeigen",
+  "notesLibraryNewChip": "Neu"
 }

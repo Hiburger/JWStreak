@@ -29,6 +29,26 @@ Future<void> _seed(LocalDbService db) async {
   await db.setGuidedTourDone();
 }
 
+/// The per-note extras a restore must not lose: drag position, pin state,
+/// and color.
+Future<void> _seedNoteExtras(LocalDbService db) async {
+  final int first = await db.createNote(
+    title: 'première',
+    book: 'Genesis',
+    chapter: 1,
+    content: 'a',
+    color: 'teal',
+  );
+  final int second = await db.createNote(
+    title: 'seconde',
+    book: 'Genesis',
+    chapter: 2,
+    content: 'b',
+  );
+  await db.setNotePosition(first, 5000); // dragged below the second
+  await db.setNotePinned(second, true);
+}
+
 void main() {
   useTestDatabase();
 
@@ -75,6 +95,29 @@ void main() {
     expect((await db.getReminders()).single.hour, 7);
     expect(await db.getAppLocale(), 'pl');
     expect(await db.isGuidedTourDone(), isTrue);
+  });
+
+  test('drag order, pins and colors survive a backup round trip', () async {
+    final LocalDbService db = LocalDbService();
+    await _seedNoteExtras(db);
+
+    final BackupService backup = BackupService();
+    final String json = await backup.exportToJson(appVersion: 'test');
+    await db.replaceAllData(<String, List<Map<String, Object?>>>{});
+    await backup.restore(backup.parse(json));
+
+    final List<NoteEntry> notes = await db.getAllNotes();
+    // MapEntry lacks ==, so compare through a real Map.
+    expect(
+      <String, bool>{for (final NoteEntry n in notes) n.title: n.pinned},
+      <String, bool>{'première': false, 'seconde': true},
+    );
+    final NoteEntry first = notes.firstWhere(
+      (NoteEntry n) => n.title == 'première',
+    );
+    expect(first.color, 'teal');
+    expect(first.position, greaterThan(4000)); // kept its dragged rank
+    expect(first.pinned, isFalse);
   });
 
   test('restoring replaces what is already there, never merges', () async {

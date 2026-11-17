@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import '../app_constants.dart';
 import '../bible_data.dart';
 import '../l10n/app_localizations.dart';
+import '../note_colors.dart';
 import '../services/local_db_service.dart';
 import '../widgets/circular_back_button.dart';
 import '../widgets/markdown_editing_controller.dart';
 import '../widgets/message_dialog.dart';
+import '../widgets/onboarding_accent.dart';
 import '../widgets/picker_field.dart';
 import '../widgets/responsive_body.dart';
 
@@ -45,6 +47,9 @@ class _NotesScreenState extends State<NotesScreen> {
   /// when editing) and can be re-pointed from the app bar chip.
   late String _book = widget.book;
   late int _chapter = widget.chapter;
+
+  /// Palette key of the note's color ('' = uncolored).
+  String _color = '';
 
   bool get _isNew => widget.noteId == null;
 
@@ -96,6 +101,7 @@ class _NotesScreenState extends State<NotesScreen> {
       setState(() {
         _titleController.text = note?.title ?? '';
         _contentController.text = note?.content ?? '';
+        _color = note?.color ?? '';
         if (note != null) {
           _book = note.book;
           _chapter = note.chapter;
@@ -145,6 +151,7 @@ class _NotesScreenState extends State<NotesScreen> {
           book: _book,
           chapter: _chapter,
           content: content,
+          color: _color,
         );
       } else {
         await widget.dbService.updateNote(
@@ -153,6 +160,7 @@ class _NotesScreenState extends State<NotesScreen> {
           content: content,
           book: _book,
           chapter: _chapter,
+          color: _color,
         );
       }
       if (!mounted) {
@@ -308,6 +316,9 @@ class _NotesScreenState extends State<NotesScreen> {
                   alignment: Alignment.topCenter,
                   child: Card.filled(
                     margin: EdgeInsets.zero,
+                    // The writing surface wears the note's own color, matching
+                    // how the note reads in the library and the reader.
+                    color: noteAccent(_color)?.background(context),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(28)),
                     ),
@@ -339,6 +350,28 @@ class _NotesScreenState extends State<NotesScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            // The note's color, shown as a wash on its card in the library.
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+              child: SizedBox(
+                height: 38,
+                child: Row(
+                  children: <Widget>[
+                    _ColorSwatch(
+                      selected: _color.isEmpty,
+                      onTap: () => setState(() => _color = ''),
+                    ),
+                    for (final MapEntry<String, OnboardingAccent> e
+                        in kNoteAccents.entries)
+                      _ColorSwatch(
+                        accent: e.value,
+                        selected: _color == e.key,
+                        onTap: () => setState(() => _color = e.key),
+                      ),
+                  ],
                 ),
               ),
             ),
@@ -477,6 +510,51 @@ class _ChapterLinkSheetState extends State<_ChapterLinkSheet> {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// One color dot of the editor's palette: [accent] null is the "no color"
+/// swatch that clears the tint.
+class _ColorSwatch extends StatelessWidget {
+  const _ColorSwatch({
+    required this.selected,
+    required this.onTap,
+    this.accent,
+  });
+
+  final OnboardingAccent? accent;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme cs = Theme.of(context).colorScheme;
+    final OnboardingAccent? accent = this.accent;
+    final Color bg = accent?.background(context) ?? cs.surfaceContainerHighest;
+    final Color fg = accent?.foreground(context) ?? cs.onSurfaceVariant;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: 38,
+          height: 38,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: bg,
+            border: Border.all(
+              color: selected ? fg : fg.withValues(alpha: 0.4),
+              width: selected ? 2 : 1,
+            ),
+          ),
+          child: accent == null
+              ? Icon(Icons.format_color_reset, size: 20, color: fg)
+              : selected
+              ? Icon(Icons.check_rounded, size: 20, color: fg)
+              : null,
         ),
       ),
     );

@@ -742,7 +742,6 @@
       }
     }
   },
-  "notesLibraryNewNote": "New note",
   "notesLibrarySearchHint": "Search by title, content, or passage",
   "notesLibraryFilterBook": "Book",
   "notesLibraryFilterCreated": "Created",
@@ -970,5 +969,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "Pin",
+  "notesLibraryUnpinTooltip": "Unpin",
+  "notesLibraryPinLimit": "You can pin up to 3 notes.",
+  "notesLibraryFilterPinnedOnly": "Show only pinned",
+  "notesLibraryNewChip": "New"
 }

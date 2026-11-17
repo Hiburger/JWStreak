@@ -1526,9 +1526,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get notesLibraryNewNote => '新建笔记';
-
-  @override
   String get notesLibrarySearchHint => '按标题、内容或经文搜索';
 
   @override
@@ -1930,4 +1927,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String streakBreakLogRange(String start, String end) {
     return '$start至$end';
   }
+
+  @override
+  String get notesLibraryPinTooltip => '置顶';
+
+  @override
+  String get notesLibraryUnpinTooltip => '取消置顶';
+
+  @override
+  String get notesLibraryPinLimit => '最多可以置顶 3 条笔记。';
+
+  @override
+  String get notesLibraryFilterPinnedOnly => '只显示置顶笔记';
+
+  @override
+  String get notesLibraryNewChip => '新建';
 }

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../app_constants.dart';
 import '../l10n/app_localizations.dart';
+import '../note_colors.dart';
 import '../services/local_db_service.dart';
 import '../services/note_export.dart';
 import '../widgets/circular_back_button.dart';
@@ -297,6 +298,9 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
                         // notes push past the viewport and the page scrolls.
                         Card.filled(
                           margin: EdgeInsets.zero,
+                          // Reads on the note's own color, same as the library
+                          // card and the editor's writing surface.
+                          color: noteAccent(note.color)?.background(context),
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(28)),
                           ),

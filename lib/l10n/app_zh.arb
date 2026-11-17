@@ -511,7 +511,6 @@
   "notesLibraryDeleteConfirmSingular": "「{title}」将被永久删除。",
   "notesLibraryDeleteConfirmPlural": "这 {count} 篇笔记将从你的设备中永久删除。",
   "notesLibraryErrorMessage": "错误：{error}",
-  "notesLibraryNewNote": "新建笔记",
   "notesLibrarySearchHint": "按标题、内容或经文搜索",
   "notesLibraryFilterBook": "书卷",
   "notesLibraryFilterCreated": "创建时间",
@@ -647,5 +646,10 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notesLibraryPinTooltip": "置顶",
+  "notesLibraryUnpinTooltip": "取消置顶",
+  "notesLibraryPinLimit": "最多可以置顶 3 条笔记。",
+  "notesLibraryFilterPinnedOnly": "只显示置顶笔记",
+  "notesLibraryNewChip": "新建"
 }

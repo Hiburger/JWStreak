@@ -296,7 +296,6 @@ class _DailyJwAppState extends State<DailyJwApp> {
 
   @override
   Widget build(BuildContext context) {
-    const Widget loading = SizedBox.shrink();
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         final bool dynamicAllowed =
@@ -372,7 +371,7 @@ class _DailyJwAppState extends State<DailyJwApp> {
             // Feeds the home screen's RouteAware subscriptions
             navigatorObservers: <NavigatorObserver>[kHomeRouteObserver],
             home: _isThemeLoading
-                ? loading
+                ? const SizedBox.shrink()
                 : _withAppLock(
                     PopScope(
                       canPop: !_showWelcome || _onboardingStep == 0,

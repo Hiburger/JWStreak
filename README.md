@@ -13,28 +13,24 @@ JW Streak (JWS) is a friendly Flutter application that helps maintain a daily Bi
 
 <table>
   <tr>
-    <td><img src="store_assets/ios/6.9in/01_home.png" alt="Home screen with the streak and today's chapter" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/02_progress.png" alt="Reading progress across the whole Bible" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/03_achievements.png" alt="Achievements" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/04_bible_browser.png" alt="Bible browser" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/01_home.png" alt="Home screen with the streak and today's chapter" width="220"></td>
+    <td><img src="store_assets/ios/6.9in/02_streak.png" alt="Streak calendar, matches and breaks" width="220"></td>
+    <td><img src="store_assets/ios/6.9in/03_settings_notes.png" alt="Settings and the notes library" width="220"></td>
   </tr>
   <tr>
     <td align="center"><sub>Home</sub></td>
-    <td align="center"><sub>Progress</sub></td>
-    <td align="center"><sub>Achievements</sub></td>
-    <td align="center"><sub>Bible browser</sub></td>
+    <td align="center"><sub>Streak</sub></td>
+    <td align="center"><sub>Settings & notes</sub></td>
   </tr>
   <tr>
-    <td><img src="store_assets/ios/6.9in/05_chapter_grid.png" alt="Chapter grid for a book" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/06_settings.png" alt="Settings" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/07_themes.png" alt="Theme picker" width="200"></td>
-    <td><img src="store_assets/ios/6.9in/08_home_amethyst.png" alt="Home screen in the Amethyst theme" width="200"></td>
+    <td><img src="store_assets/ios/6.9in/04_themes.png" alt="Language, theme and brightness personalization" width="220"></td>
+    <td><img src="store_assets/ios/6.9in/05_reading_order.png" alt="Reading order options" width="220"></td>
+    <td><img src="store_assets/ios/6.9in/06_about.png" alt="Help & about screen" width="220"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Chapters</sub></td>
-    <td align="center"><sub>Settings</sub></td>
-    <td align="center"><sub>Themes</sub></td>
-    <td align="center"><sub>Amethyst theme</sub></td>
+    <td align="center"><sub>Personalization</sub></td>
+    <td align="center"><sub>Reading order</sub></td>
+    <td align="center"><sub>Help & about</sub></td>
   </tr>
 </table>
 
